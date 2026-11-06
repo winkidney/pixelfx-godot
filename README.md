@@ -99,7 +99,7 @@ You can also copy `godot/skills/pixelfx-godot` into `~/.claude/skills/`. Then as
   - It compares the color buffer, the light buffer and every random number drawn.
   - `./pfx parity --acts` does the same for the acted-out versions: character, target, freezes and shakes.
   - `./pfx test` checks the core against fixtures from the JS core.
-  - The only differences allowed are the last-bit ones between V8's and the C library's `sin` and `cos`, where they move
+  - The only differences allowed are the last-bit ones between V8's and the C library's `sin`, `cos` and `atan2`, where they move
     a pixel.
 - **Two buffers, as in the original.** `color` holds pixels: opaque, dithered, or truly translucent. `light` holds
   additive glow. Both are `PackedInt32Array`s with the same bytes as the JS `Uint32Array`s, so a frame is an
