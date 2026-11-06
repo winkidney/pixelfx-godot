@@ -130,6 +130,10 @@ static func hypot(a: float, b: float, c: float = NA) -> float:
 		sum = pre
 	return sqrt(sum) * mx
 
+## JS Math.log2 (C library log, so it may differ from V8 in the last bit).
+static func log2(x: float) -> float:
+	return log(x) / log(2.0)
+
 ## JS Math.sign (0 stays 0).
 static func sign(x: float) -> float:
 	return 1.0 if x > 0.0 else (-1.0 if x < 0.0 else x)
@@ -148,9 +152,17 @@ static func imul(a: Variant, b: Variant) -> int:
 	return Self.i32(Rng.imul(Rng.u32(a), Rng.u32(b)))
 
 static func _mix(h: int, n: Variant) -> int:
-	h = Rng.imul(h ^ (Rng.u32(n) if typeof(n) != TYPE_INT else (n & M32)), 0x85ebca6b)
+	var u: int
+	if typeof(n) == TYPE_INT:
+		u = n & M32
+	else:
+		var f: float = n
+		# ToInt32 is truncation then the low 32 bits: int() and & do exactly that while it fits (NaN and inf give 0)
+		u = (int(f) & M32) if (absf(f) < 9.0e18 or is_nan(f)) else Rng.u32(f)
+	var x := h ^ u
+	h = ((x * 0xca6b) + (((x * 0x85eb) & 0xFFFF) << 16)) & M32
 	h ^= h >> 13
-	h = Rng.imul(h, 0xc2b2ae35)
+	h = ((h * 0xae35) + (((h * 0xc2b2) & 0xFFFF) << 16)) & M32
 	h ^= h >> 16
 	return h
 

@@ -136,6 +136,9 @@ static func to_sprite_frames(baked: Dictionary, which: String = "combined", anim
 		var tex: Texture2D
 		if portable:
 			var p := PortableCompressedTexture2D.new()
+			# outside the editor the compressed data is dropped once uploaded unless asked to keep it, and then
+			# there would be nothing to save
+			p.keep_compressed_buffer = true
 			p.create_from_image(im, PortableCompressedTexture2D.COMPRESSION_MODE_LOSSLESS)
 			tex = p
 		else:

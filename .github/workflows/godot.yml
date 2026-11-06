@@ -1,0 +1,64 @@
+name: godot
+on:
+  push:
+    branches: [main]
+    paths: ["godot/**", "src/**", ".github/workflows/godot.yml"]
+  pull_request:
+    paths: ["godot/**", "src/**", ".github/workflows/godot.yml"]
+  schedule:
+    - cron: "17 3 * * *"
+  workflow_dispatch:
+    inputs:
+      full:
+        description: "check every effect in every variant, and every act"
+        type: boolean
+        default: true
+permissions:
+  contents: read
+env:
+  GODOT_VERSION: 4.7.2
+jobs:
+  port:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Godot (headless)
+        run: |
+          curl -fsSL -o godot.zip "https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}-stable/Godot_v${GODOT_VERSION}-stable_linux.x86_64.zip"
+          unzip -q godot.zip -d "$HOME/godot"
+          echo "GODOT=$HOME/godot/Godot_v${GODOT_VERSION}-stable_linux.x86_64" >> "$GITHUB_ENV"
+      - name: Import the project (registers the node classes)
+        run: $GODOT --headless --path godot --import || true
+      - name: Core against the JS fixtures
+        run: cd godot && ./pfx test
+      - name: Nodes and baking
+        run: $GODOT --headless --no-header --path godot -s res://tests/node_test.gd
+      - name: Upstream sync status
+        run: node godot/port/sync.mjs
+      - name: Parity and checks (one effect per category, and whatever changed)
+        if: github.event_name == 'push' || github.event_name == 'pull_request'
+        run: |
+          ids=$(ls godot/addons/pixelfx/fx | grep -v '\.gd$' | while read c; do ls godot/addons/pixelfx/fx/$c | grep -v '^_' | head -1 | sed "s|\.gd$||;s|^|$c/|"; done)
+          changed=$(git diff --name-only HEAD~1 -- godot/addons/pixelfx/fx src/fx | grep -v '/_lib' | sed -E 's#^(godot/addons/pixelfx/fx|src/fx)/##;s#\.(gd|js)$##' | grep / | sort -u || true)
+          cd godot
+          ./pfx parity $ids $changed --quiet
+          ./pfx check $ids $changed
+      - name: Parity and checks (everything)
+        if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+        run: |
+          cd godot
+          ./pfx parity --full --quiet
+          ./pfx parity --acts --quiet
+          ./pfx check
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: parity-diffs
+          path: godot/records/parity/
+          if-no-files-found: ignore

@@ -27,6 +27,9 @@ static func u32(v: Variant) -> int:
 	var f: float = v
 	if is_nan(f) or is_inf(f):
 		return 0
+	# int() truncates like ToUint32 and & keeps the low 32 bits: exact while the value fits in an int64
+	if absf(f) < 9.0e18:
+		return int(f) & M32
 	f = fmod(floorf(f) if f >= 0.0 else ceilf(f), 4294967296.0)
 	if f < 0.0:
 		f += 4294967296.0
@@ -67,8 +70,10 @@ func sign() -> int:
 	return -1 if next() < 0.5 else 1
 
 
+## A random element; like JS, an empty list still draws a number and gives null.
 func pick(list: Variant) -> Variant:
-	return list[floori(next() * list.size())]
+	var i := floori(next() * list.size())
+	return list[i] if i < list.size() else null
 
 
 ## Roughly normal, mean 0, sd 1.

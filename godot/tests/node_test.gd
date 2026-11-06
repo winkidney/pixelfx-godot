@@ -37,10 +37,14 @@ func run() -> void:
 		check(sf != null and sf.get_frame_count("default") == baked.n, id + " SpriteFrames frame count")
 		if sf:
 			check(is_equal_approx(sf.get_animation_speed("default"), meta.fps) and sf.get_animation_loop("default") == meta.loop, id + " SpriteFrames fps/loop")
-			var mid: int = baked.n / 2
-			var img := sf.get_frame_texture("default", mid).get_image()
-			img.convert(Image.FORMAT_RGBA8)
-			check(img.get_data() == (baked.combined[mid] as Image).get_data(), id + " SpriteFrames pixels survive the round trip")
+			var mid: int = baked.n >> 1
+			var tex := sf.get_frame_texture("default", mid)
+			check(tex != null and tex.get_size() == Vector2(baked.size), id + " SpriteFrames frame size")
+			# a headless run has no renderer to read a texture back from; compare pixels when there is one
+			var img: Image = tex.get_image() if tex else null
+			if img != null:
+				img.convert(Image.FORMAT_RGBA8)
+				check(img.get_data() == (baked.combined[mid] as Image).get_data(), id + " SpriteFrames pixels survive the round trip")
 		# the nodes, in a tree
 		for mode in [FxNode.Mode.BAKED, FxNode.Mode.LIVE]:
 			var fx = FxNode.new()

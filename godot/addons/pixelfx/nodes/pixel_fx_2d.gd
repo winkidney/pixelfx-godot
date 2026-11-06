@@ -246,7 +246,7 @@ func _process(delta: float) -> void:
 	var D: float = _meta.duration
 	if _inst:
 		_inst.update(dt)
-	var ended := (_t - _stop_at >= Px.Fx.FADE) or (not _meta.loop and _t >= D)
+	var ended: bool = (_t - _stop_at >= Px.Fx.FADE) or (not _meta.loop and _t >= D)
 	if ended and not _done:
 		_done = true
 		_playing = false

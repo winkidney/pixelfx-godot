@@ -2,202 +2,119 @@
   <img src="docs/readme/montage.gif" width="800" alt="A grid of pixel art effects playing at once: a campfire, a burning skull, a waterfall, a plasma ball, a portal, a tornado and more.">
 </p>
 
-# pixelfx.
+# pixelfx for Godot
 
-**<!-- count -->244<!-- /count --> pixel art effects and animations, every one a small piece of code.** Fire,
-explosions, magic, weather, UI, pickups, critters and more. Play them live, recolor and mirror them, drop them into
-a browser game, or export sprite sheets for any engine. Plus a Claude Code skill that makes new ones the way a
-picky pixel artist would: draft, render, look, refine.
+**244 pixel art effects and animations for Godot 4, every one a small piece of GDScript.** Fire, explosions, magic,
+weather, UI, pickups, critters and more. Every effect that involves a character is acted out: he winds up, lets go,
+freezes on contact and recovers, and a target takes the hit.
 
-Every effect that involves a character is **acted out**: he winds up, lets go, freezes on contact and recovers, and a
-target takes the hit. Twelve whole moves chain the effects into attacks from wind-up to recovery.
+This is a Godot port of [pixelfx](https://github.com/patch-gg/pixelfx) by [Patch](https://patch.gg). Every effect is
+ported line for line from the JavaScript original, and checked against it frame by frame: same pixels, same light, same
+random numbers. A Claude Code skill comes with it. It uses the library, and makes new effects the way a picky pixel artist
+would: draft, render, look, refine.
 
-**[open the gallery](https://patch-gg.github.io/pixelfx/)** · [catalog](docs/CATALOG.md) · [acting](#acting) ·
-[the skill](#the-skill) · [make your own](#make-your-own) · [how it works](#how-it-works)
+[catalog](godot/docs/CATALOG.md) · [use it](#use-it) · [make your own](#make-your-own) · [the skill](#the-skill) ·
+[how the port works](#how-the-port-works) · [the original JS](https://github.com/patch-gg/pixelfx)
+
+## use it
+
+Copy `godot/addons/pixelfx` into your project's `res://addons/` and enable **pixelfx** under Project Settings > Plugins.
+Then:
+
+```gdscript
+var fx := PixelFx2D.new()
+fx.effect = "ice/frost-nova"        # any id from the catalog
+fx.palette_preset = "fire"          # recolor with any ramp: fire ice poison holy arcane shadow gold neon ...
+fx.flip = hero.facing < 0
+fx.free_when_done = true
+fx.position = hero.position         # the effect's origin: feet, point of impact, base of a torch
+add_child(fx)
+```
+
+`PixelFx2D` can play an effect in two modes:
+- **BAKED** (the default) renders each frame once and replays it for free, shared by every node with the same options.
+- **LIVE** renders on the CPU every frame.
+
+Either way, pixels stay crisp and light goes on an additive layer, so glow brightens whatever is behind it.
+
+`PixelFxAct2D` plays the whole act: the stock character, the straw target, the freeze on contact and the shake. It
+emits `hit` at each contact.
+
+**With your own character**, read the timing: `PixelFxAct2D.timing("melee/sword-slash")` gives `windup`, `recovery`,
+and `hits` with `t` and `freeze`. Start your attack animation `windup` seconds before the effect, and freeze everything
+for `freeze` seconds at each hit.
+
+**SpriteFrames and sprite sheets**: run `cd godot && ./pfx sheets fire --spriteframes`. It writes a transparent PNG
+sheet, an Aseprite-style JSON (fps, loop, pivot, act timing) and a ready `SpriteFrames` for an `AnimatedSprite2D`. In the
+editor, Project > Tools > *pixelfx: Bake selected PixelFx2D* does the same for a node.
+
+Open `godot/` in Godot and press F5 for the gallery: every effect by category, recolored, reseeded, flipped, acted out.
+
+## make your own
+
+```bash
+cd godot
+./pfx new arcane/my-spell          # a working starting point (--loop for a loop, --sim for particles)
+./pfx render arcane/my-spell       # records/arcane/my-spell/contact.png: look at it
+./pfx act arcane/my-spell          # if a character is in it: consecutive 12 fps steps
+./pfx check arcane/my-spell        # spills, seams, unseeded randomness, slow frames, act mistakes
+./pfx index                        # list it in the registry and the catalog
+```
+
+`pfx` runs Godot headless (set `GODOT` if it isn't on your PATH). [godot/docs/AUTHORING.md](godot/docs/AUTHORING.md)
+has the contract, the drawing API and the quality bar.
+
+## the skill
+
+The `pixelfx-godot` skill teaches Claude Code to find, use, bake and make effects in Godot, and to port upstream changes.
+Install it as a plugin:
+
+```
+/plugin marketplace add winkidney/pixelfx-godot
+/plugin install pixelfx-godot@pixelfx-godot
+```
+
+You can also copy `godot/skills/pixelfx-godot` into `~/.claude/skills/`. Then ask for what you want:
+
+- "Add a frost nova to my Godot mage's ultimate, in purple."
+- "Bake the fire and explosions categories to SpriteFrames."
+- "This hit effect feels floaty. Make it punchier."
+- "Make five takes on a coin pickup sparkle and show me the best two."
+- "Merge the latest pixelfx and port whatever changed."
+
+## how the port works
+
+- **The original stays, untouched.** The JavaScript library (`src/`, `tools/`, `docs/`, `gallery/`, `skills/pixelfx/`) is
+  kept exactly as upstream has it. It is the reference, and `git merge upstream/main` keeps it current.
+  Everything Godot lives in `godot/`.
+- **One file, one file.**
+  - `src/core/*.js` is ported to `godot/addons/pixelfx/core/*.gd`.
+  - `src/fx/<cat>/<name>.js` is ported to `godot/addons/pixelfx/fx/<cat>/<name>.gd`, with the same names and the same
+    expressions.
+  - Each `.gd` records the git blob of the JS it came from. `node godot/port/sync.mjs` lists what an upstream merge left
+    stale or missing. [godot/docs/UPSTREAM.md](godot/docs/UPSTREAM.md) has the procedure, and
+    [godot/docs/PORTING.md](godot/docs/PORTING.md) the rules.
+- **Proven, not eyeballed.** `./pfx parity` renders every effect in eight variants (as is, flipped, rotated, recolored,
+  reseeded, short palette, dimmed, stopped mid-loop) and compares each frame with the JavaScript's.
+  - It compares the color buffer, the light buffer and every random number drawn.
+  - `./pfx parity --acts` does the same for the acted-out versions: character, target, freezes and shakes.
+  - `./pfx test` checks the core against fixtures from the JS core.
+  - The only differences allowed are the last-bit ones between V8's and the C library's `sin` and `cos`, where they move
+    a pixel.
+- **Two buffers, as in the original.** `color` holds pixels: opaque, dithered, or truly translucent. `light` holds
+  additive glow. Both are `PackedInt32Array`s with the same bytes as the JS `Uint32Array`s, so a frame is an
+  `Image.FORMAT_RGBA8` away from the screen.
+- **Seeded everything.** Every random number comes from the effect's seed, so frame 40 is the same every time.
+- **Speed.** GDScript is far slower than V8's JIT. Most effects cost 0.2 to 20 ms a frame when played LIVE, and a few
+  full-screen ones more. BAKED mode and SpriteFrames make that a one-time cost.
 
 The method is [Hugo Duprez](https://x.com/HugoDuprez)'s, from [How to make (good) pixel art effects with
-Claude](https://www.spritefusion.com/blog/how-to-make-good-pixel-art-effects-with-claude): code is clay, trust your
-eyes, feed your references. His [open-source effects](https://www.spritefusion.com/pixel-art-vfx) at Sprite Fusion
-set the bar, and `src/core/sim.js` and the effects that say so at the top adapt his code. This repo is our take on
-the idea at library scale, with a skill to keep going.
+Claude](https://www.spritefusion.com/blog/how-to-make-good-pixel-art-effects-with-claude). His [open-source
+effects](https://www.spritefusion.com/pixel-art-vfx) at Sprite Fusion set the bar.
 
-## what's in it.
+## license
 
-<!-- catalog -->
-| category | effects | some of them |
-|---|---|---|
-| **moves** | 12 | arrow shot, dash strike, earth stomp, fireball throw, ground pound, holy smite… |
-| **fire** | 12 | brazier, campfire, candle, fire breath, fire ring, fire tornado… |
-| **explosions** | 12 | barrel explosion, big explosion, cartoon pow, dirt explosion, firework burst, firework rocket… |
-| **water** | 12 | bubbles, drip, fountain, geyser, rain splash, ripples… |
-| **ice** | 10 | blizzard vortex, freeze, frost breath, frost nova, ice crystal, ice lance… |
-| **lightning** | 11 | ball lightning, chain lightning, charge up, electrified, lightning strike, plasma ball… |
-| **sci-fi** | 12 | emp blast, energy core, force field, glitch, hologram, jetpack… |
-| **melee** | 12 | claw swipe, dagger flurry, double slash, hammer smash, heavy cleave, scythe reap… |
-| **impacts** | 11 | blunt hit, bullet impact, critical hit, ground slam, heavy landing, hit flash… |
-| **projectiles** | 13 | arrow, bullet tracer, cannon shot, energy disc, signal flare, homing missile… |
-| **spawn & death** | 10 | coin drop, disintegrate, dissolve burn, egg hatch, poof, respawn beam… |
-| **arcane** | 12 | arcane beam, arcane missiles, arcane orb, blink in, blink out, magic circle cast… |
-| **holy** | 10 | blessing, divine shield, feather burst, halo, heal, healing ring… |
-| **shadow** | 12 | black hole, curse, dark explosion, eclipse, grasping hands, hex sigil… |
-| **status** | 13 | bleeding, burning, charmed, confused, cursed, frozen… |
-| **nature** | 13 | acid splash, boulder, earth spike, healing bloom, leaf storm, poison cloud… |
-| **weather** | 12 | aurora, blizzard, cherry blossoms, clouds, falling leaves, fireflies… |
-| **ui** | 12 | achievement, coin collect, combo counter, confetti, countdown, crit number… |
-| **pickups** | 11 | chest open, coin spin, collect burst, crystal shard, gem spin, heart pickup… |
-| **transitions** | 10 | blinds, burn away, crt off, diamond wipe, glitch wipe, iris… |
-| **critters** | 12 | bat, bird, butterfly, eyeball, fish school, flying skull… |
-<!-- /catalog -->
+MIT, code and effects, like the original. Parts are adapted from Hugo Duprez's MIT effects and from Hollow Crown's MIT
+source. The Patch Pixel font in `gallery/fonts` is Patch's own and not covered: see [NOTICE.md](NOTICE.md).
 
-Every effect is a file in `src/fx/<category>/<name>.js`. The [catalog](docs/CATALOG.md) lists them all.
-
-## use one.
-
-**In a browser game** (canvas, Phaser, PixiJS, Kaplay, three.js), use the code. No dependencies.
-
-```js
-import { createFrame, clearFrame, createFx, composite } from "pixelfx";
-import * as frostNova from "pixelfx/fx/ice/frost-nova";
-
-const frame = createFrame(320, 180);                   // your game's pixel resolution
-const img = new ImageData(320, 180);
-const fx = createFx(frostNova, { x: 160, y: 140 });   // also: flip, angle, seed, palette, light...
-
-function tick(dt) {
-  fx.update(dt);
-  clearFrame(frame);
-  fx.draw(frame, "back");                              // behind characters
-  drawCharacters();
-  fx.draw(frame, "front");
-  composite(frame, img.data, backgroundColor);         // color, then light added on top
-  ctx.putImageData(img, 0, 0);                         // scale up with image-rendering: pixelated
-}
-```
-
-Install from GitHub with `npm i github:patch-gg/pixelfx`, or copy `src/core` and the effects you want.
-
-**In any engine** (Godot, Unity, GameMaker, Defold, LÖVE, Bevy), use sprite sheets:
-
-```bash
-node tools/render.mjs ice/frost-nova --sheet
-```
-
-That writes a transparent PNG of every frame in a grid and an Aseprite-style JSON (frame rects, durations, and
-`meta.pixelfx` with fps, loop, columns and the pivot). Phaser's atlas loader and the Aseprite importers for Godot
-and Unity read it. `node tools/sheets.mjs` exports the whole library to `sheets/`.
-
-Any effect takes a `palette` (a dark-to-bright ramp of hex colors), so a fire can burn blue and a heal can glow
-pink without touching its code:
-
-```bash
-node tools/render.mjs fire/torch --gif --opts '{"palette": ["#102","#215","#43a","#8cf","#cff","#fff"]}'
-```
-
-## acting.
-
-<p align="center">
-  <img src="docs/readme/acts.gif" width="800" alt="A grey dummy fighting a straw target: a three-stroke sword combo, a hammer smash, a ground pound, a holy smite, a frost nova and a run with after-images, each with a wind-up, a freeze on contact and a recovery.">
-</p>
-
-An effect on its own looks like a sticker. What sells a hit is the body around it: the wind-up that says something is
-coming, the freeze on contact, the target rocking back, the recovery. So the 61 effects with a character, and the 12
-moves, say what the body does and when:
-
-```js
-export const act = {
-  target: { x: 58 },
-  poses: [
-    [-0.55, GUARD],            // he starts before the effect does (t = 0 is the effect's first frame)
-    [-0.3, WIND_UP],
-    [0, CUT, "snap"],          // "snap" holds the last pose and jumps on the key
-    [0.06, FOLLOW_THROUGH, "snap"],
-    [0.86, GUARD],
-  ],
-  hits: [{ t: 0.06, stop: 0.14, shake: 0.18, amp: 2, push: 2.8, straw: 18 }],   // freeze for 0.14 s on contact
-};
-```
-
-**Play the whole thing**, character and target included, by swapping `createFx` for `createAct`:
-
-```js
-import { createFrame, clearFrame, createAct, composite } from "pixelfx";
-import * as slash from "pixelfx/fx/melee/sword-slash";
-
-const act = createAct(slash, { x: 80, y: 140 });
-
-function tick(dt) {
-  act.update(dt);                                  // holds still by itself during a freeze
-  clearFrame(frame);
-  act.draw(frame);                                 // { body: false } and { target: false } leave them out
-  composite(frame, img.data, backgroundColor);
-  const [sx, sy] = act.shake;                      // throw the picture this far
-  ctx.putImageData(img, sx, sy);
-}
-```
-
-**Got your own character?** Effect ids haven't changed and a sprite sheet is still the effect alone, so existing games
-keep working. (Effects drawn on the body paint the stock dummy, so regenerate those if you ship them.) The timing is plain data: read `slash.act`, or `meta.pixelfx.act` in a sprite sheet's
-JSON (`windup`, `recovery`, `hits` with `t` and `freeze`, `poses`). Start your own wind-up animation that long before the effect, and
-stop updating everything for `freeze` seconds at each hit.
-
-Effects drawn on the body (frost, poison, a scan line) are written against the standing character and follow him
-wherever he goes: each pixel of a pose knows which pixel of the standing body it came from. `node tools/act.mjs
-<id> --sheet` bakes a whole act, character included, into a sprite sheet.
-
-The body is yours to use too: `skeleton(pose)` gives you every joint of a pose in 3D, to hang your own things on, and
-`posedParts(pose)` gives you each part drawn on its own.
-
-## the skill.
-
-The `pixelfx` skill teaches Claude Code to find, use, export and make effects. Install it as a plugin:
-
-```
-/plugin marketplace add patch-gg/pixelfx
-/plugin install pixelfx@pixelfx
-```
-
-or copy `skills/pixelfx` into `~/.claude/skills/`. Then ask for what you want:
-
-- "Add a frost nova to my mage's ultimate."
-- "Make five takes on a coin pickup sparkle and show me the best two."
-- "Export the fire and explosions categories as sprite sheets for Godot."
-- "This hit effect feels floaty. Make it punchier."
-- "Give this spell a wind-up and make the enemy react to it."
-
-## make your own.
-
-```bash
-node tools/new.mjs arcane/my-spell       # a working starting point (add --loop for a loop)
-node tools/render.mjs arcane/my-spell    # records/arcane/my-spell/contact.png: look at it
-node tools/check.mjs arcane/my-spell     # spills, seams, unseeded randomness, slow frames
-```
-
-Then go round: look at the contact sheet, fix the worst thing, render again. `--gif` and `--mp4` show the motion,
-`--all` shows every frame. `node tools/act.mjs arcane/my-spell` shows an act as consecutive 12 fps steps, because motion
-bugs don't show in samples. [docs/AUTHORING.md](docs/AUTHORING.md) has the contract, the drawing API and the quality
-bar. `node tools/serve.mjs` runs the gallery locally with your effects in it.
-
-## how it works.
-
-- **Two kinds of effect, no images.** Pure effects export `draw(p, t, o)`, the frame at `t` seconds from `t` alone, so
-  loops tile with no seam. Simulated effects export `create(o)` and step real particles, debris and lights at 120 Hz,
-  so sparks bounce and smoke rolls the same at any frame rate.
-- **Two buffers.** `color` takes pixels: opaque, dithered or truly translucent. `light` takes additive glow, added on
-  top. Hot things look hot because of the light buffer.
-- **Seeded everything.** Every random number comes from the effect's seed, so frame 40 is the same every time.
-- **Local space.** Effects draw around their own origin; the painter places, mirrors and rotates them. Directional
-  effects face right. A 24×38 stock character stands in for status effects, auras and hits.
-- **A real skeleton, drawn down to pixels.** The grey dummy is neutral on purpose, so the eye goes to the move and any effect's
-  colors read on it. He's a 3D skeleton with fixed-length bones, pelvis to spine to shoulders, rendered in a few flat tones with one clean
-  ink line, the way Dead Cells makes its sprites. So he can twist, bend and really turn round, and depth decides what's in front. Poses hold on 12 fps
-  steps, the way hand-drawn sprites do, while particles run at full rate.
-- **Same frame shape as Sprite Fusion's VFX** (`{ w, h, ox, oy, color, light }`), so both libraries can draw into
-  one frame.
-
-## license.
-
-MIT, code and effects. Use them in anything, commercial included. Parts are adapted from Hugo Duprez's MIT effects
-and from Hollow Crown's MIT source, and the Patch Pixel font in `gallery/fonts` is Patch's own and not covered: see
-[NOTICE.md](NOTICE.md).
-
-Made by [Patch](https://patch.gg).
+pixelfx is made by [Patch](https://patch.gg). The Godot port is by [winkidney](https://github.com/winkidney).
