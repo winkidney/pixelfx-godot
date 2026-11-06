@@ -32,7 +32,10 @@ func run(pos: PackedStringArray, flags: Dictionary) -> int:
 	"bg": "dark",
 	"options": {"palette": Px.PAL.arcane, "seed": 1},
 }""" % [name, cat, "1.2" if loop else "0.7", "true" if loop else "false"]
+	if not loop and not flags.has("sim"):
+		meta = meta.replace('"size": [48, 48]', '"size": [64, 64]').replace('"origin": [24, 32]', '"origin": [32, 28]')
 	if flags.has("sim"):
+		meta = meta.replace('"size": [48, 48]', '"size": [112, 96]').replace('"origin": [24, 32]', '"origin": [56, 72]')
 		src = """# %s: a simulated effect. The script is its state: members are what persists between frames.
 extends "../../core/effect.gd"
 
@@ -84,7 +87,7 @@ const Px := preload("../../core/px.gd")
 static func draw(p: Px.Painter, t: float, o: Dictionary) -> void:
 	var C := Px.ramp(o.palette)
 	var ph: float = t / meta.duration
-	Px.cycle(t, meta.duration, 12, o.seed, 0.8, func(age, life, r):
+	Px.cycle(t, meta.duration, 12, o.seed, 0.8, func(age: float, life: float, r: Px.Rng):
 		var k: float = age / life
 		var a: float = r.range(0.0, TAU) + ph * TAU
 		var rad := 6.0 + k * 12.0
@@ -105,7 +108,7 @@ static func draw(p: Px.Painter, t: float, o: Dictionary) -> void:
 	var C := Px.ramp(o.palette)
 	if t < 0.06:
 		p.circle(0, -8, 6, Px.WHITE)
-	Px.burst(14, o.seed, func(r):
+	Px.burst(14, o.seed, func(r: Px.Rng):
 		var a := r.range(0.0, TAU)
 		var sp := r.range(40.0, 90.0)
 		var life := r.range(0.3, 0.6)
