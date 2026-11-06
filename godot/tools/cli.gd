@@ -10,6 +10,7 @@
 #   ./pfx parity [ids] [--full] [--variants a,b] [--no-sheet] [--quiet]   check the port against the JS original
 #   ./pfx parity [ids] --acts             the same for acts: body, target, freezes and shakes
 #   ./pfx test                            core unit tests against the JS fixtures
+#   ./pfx bench [ids]                     how long a frame takes to render LIVE (median and worst, ms)
 #
 # Outputs go to godot/records/ (git-ignored). Ids are "category/name"; a category or a pattern ("fire/*") works too.
 extends SceneTree
@@ -53,6 +54,7 @@ func main() -> int:
 		"render": return cmd_render()
 		"parity": return cmd_parity()
 		"test": return cmd_test()
+		"bench": return cmd_bench()
 		"check": return load("res://tools/lib/check.gd").new().run(ids_or_all(), flags)
 		"act": return load("res://tools/lib/actview.gd").new().run(ids(), flags)
 		"sheets": return load("res://tools/lib/sheets.gd").new().run(ids_or_all(), flags)
@@ -156,6 +158,35 @@ func cmd_parity() -> int:
 	if flags.has("acts"):
 		return 1 if p.checkActs(list) else 0
 	return 1 if p.check(list, variants) else 0
+
+
+func cmd_bench() -> int:
+	var total := 0.0
+	var n := 0
+	for id in ids_or_all():
+		var fx := Lib.loadEffect(id)
+		if fx.has("error"):
+			continue
+		var meta: Dictionary = fx.meta
+		var frame := Px.createFrame(meta.size[0], meta.size[1])
+		var inst := Px.createFx(fx.mod, {"x": float(meta.origin[0]), "y": float(meta.origin[1])})
+		var frames := maxi(1, int(Px.round(meta.duration * meta.fps)))
+		var ms := []
+		for i in frames:
+			var t0 := Time.get_ticks_usec()
+			if i:
+				inst.update(1.0 / meta.fps)
+			frame.clear()
+			inst.draw(frame)
+			ms.append((Time.get_ticks_usec() - t0) / 1000.0)
+		ms.sort()
+		var med: float = ms[ms.size() >> 1]
+		total += med
+		n += 1
+		print("%-34s median %6.1f ms   worst %6.1f ms" % [id, med, ms[ms.size() - 1]])
+	if n:
+		print("%d effects, mean of medians %.1f ms" % [n, total / n])
+	return 0
 
 
 func cmd_test() -> int:

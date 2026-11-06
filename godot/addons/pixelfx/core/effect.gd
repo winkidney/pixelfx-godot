@@ -24,3 +24,21 @@ func draw(_p: Painter) -> void:
 
 func drawBack(_p: Painter) -> void:
 	pass
+
+
+## Let go of what this effect holds. Fx.Instance calls it when the instance is freed: a member that points back at the
+## effect (an onLand lambda bound to self, kept by its own Particles) is a reference cycle Godot's RefCounted never
+## frees on its own. Only object, Callable and untyped members are cleared; shared arrays are left alone.
+func dispose() -> void:
+	for prop in get_property_list():
+		if not (prop.usage & PROPERTY_USAGE_SCRIPT_VARIABLE):
+			continue
+		var v: Variant = get(prop.name)
+		match typeof(v):
+			TYPE_OBJECT:
+				set(prop.name, null)
+			TYPE_CALLABLE:
+				set(prop.name, Callable() if prop.type == TYPE_CALLABLE else null)
+			TYPE_ARRAY, TYPE_DICTIONARY:
+				if prop.type == TYPE_NIL:
+					set(prop.name, null)

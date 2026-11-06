@@ -168,6 +168,11 @@ class Instance:
 			else:
 				impl.draw(p)
 
+	func _notification(what: int) -> void:
+		# break the reference cycles a simulated effect may hold (see effect.gd dispose)
+		if what == NOTIFICATION_PREDELETE and impl is Object and impl.has_method("dispose"):
+			impl.dispose()
+
 	## Let it end: loops fade out, one-shots cut short.
 	func stop() -> void:
 		if stopAt == INF:

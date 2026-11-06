@@ -130,6 +130,52 @@ static func hypot(a: float, b: float, c: float = NA) -> float:
 		sum = pre
 	return sqrt(sum) * mx
 
+static var _w := PackedByteArray([0, 0, 0, 0, 0, 0, 0, 0])
+
+static func _bits(x: float) -> int:
+	_w.encode_double(0, x)
+	return _w.decode_s64(0)
+
+static func _dbl(b: int) -> float:
+	_w.encode_s64(0, b)
+	return _w.decode_double(0)
+
+## JS Math.cbrt, bit for bit: fdlibm's cbrt as V8 has it (src/base/ieee754.cc).
+static func cbrt(x: float) -> float:
+	var B1 := 715094163
+	var B2 := 696219795
+	var P0 := 1.87595182427177009643
+	var P1 := -1.88497979543377169875
+	var P2 := 1.621429720105354466140
+	var P3 := -0.758397934778766047437
+	var P4 := 0.145996192886612446982
+	var xb := _bits(x)
+	var hx := (xb >> 32) & 0xFFFFFFFF
+	var low := xb & 0xFFFFFFFF
+	var sgn := hx & 0x80000000
+	hx ^= sgn
+	if hx >= 0x7ff00000:
+		return x + x
+	var t := 0.0
+	if hx < 0x00100000:
+		if (hx | low) == 0:
+			return x
+		t = _dbl(0x43500000 << 32)
+		t *= x
+		var high := (_bits(t) >> 32) & 0xFFFFFFFF
+		t = _dbl((sgn | (floori((high & 0x7fffffff) / 3.0) + B2)) << 32)
+	else:
+		t = _dbl((sgn | (floori(hx / 3.0) + B1)) << 32)
+	var r := (t * t) * (t / x)
+	t = t * ((P0 + r * (P1 + r * P2)) + ((r * r) * r) * (P3 + r * P4))
+	t = _dbl((_bits(t) + 0x80000000) & ~0x3fffffff)
+	var s := t * t
+	r = x / s
+	var w := t + t
+	r = (r - t) / (w + r)
+	t = t + t * r
+	return t
+
 ## JS Math.log2 (C library log, so it may differ from V8 in the last bit).
 static func log2(x: float) -> float:
 	return log(x) / log(2.0)
