@@ -194,6 +194,11 @@ Key caches by `a.mask.id`, not by the mask itself.
 
   Set the size with `resize(n)`. Fill with `fill(v)`.
 - **`Map`** becomes a `Dictionary`, which keeps insertion order as Map does. **`Set`** becomes a `Dictionary` of `true`.
+- **`WeakMap` keyed by an object** (a painter, a frame) becomes `obj.set_meta("pfx_<name>", value)` /
+  `obj.get_meta("pfx_<name>", null)`. The value then lives exactly as long as the object. A static Dictionary keyed
+  by the object would keep it alive forever.
+- **Options:** `resolveOptions` turns top-level whole numbers into floats. Numbers *inside* an array option stay ints
+  (`focus: [160, 100]`), so read them with `float(o.focus[0])`.
 - **Objects** (particles, records) stay Dictionaries with string keys. `d.key` reads and writes them, and `d.newKey = v`
   works.
 - **Template-literal keys** become `"%d,%d" % [x, y]` or `str(x) + "," + str(y)`.

@@ -12,6 +12,7 @@ extends RefCounted
 const Px := preload("px.gd")
 const PixelFont := preload("font.gd")
 const Frame := preload("frame.gd")
+const SELF := preload("painter.gd")
 
 ## 4x4 ordered (Bayer) thresholds: a pixel at alpha a is drawn when a is above its cell's threshold.
 const BAYER: Array[float] = [0.03125, 0.53125, 0.15625, 0.65625, 0.78125, 0.28125, 0.90625, 0.40625, 0.21875, 0.71875, 0.09375, 0.59375, 0.96875, 0.46875, 0.84375, 0.34375]
@@ -44,9 +45,12 @@ var fade := 1.0
 var lightK := 1.0
 var layer := "front"
 var OUT := Out.new()
+## A plain painter (not a subclass that overrides put/add/blendPx): its shapes write the buffers directly.
+var _plain := true
 
 
 func _init(f: Frame) -> void:
+	_plain = get_script() == SELF
 	_frame = weakref(f)
 	_read(f)
 	reset()
@@ -142,6 +146,20 @@ func add(sx: int, sy: int, c: int, k: float = 1.0) -> void:
 	L[i] = -16777216 | (b << 16) | (g << 8) | r
 
 
+# add() for a plain painter: the same arithmetic, without the virtual call.
+func _addFast(sx: int, sy: int, c: int, k: float) -> void:
+	k *= fade * lightK
+	if k <= 0.004:
+		return
+	var x := sx - ox
+	var y := sy - oy
+	if x < 0 or y < 0 or x >= w or y >= h:
+		return
+	var i := y * w + x
+	var d := L[i]
+	L[i] = -16777216 | (int(minf(255.0, ((d >> 16) & 255) + ((c >> 16) & 255) * k)) << 16) | (int(minf(255.0, ((d >> 8) & 255) + ((c >> 8) & 255) * k)) << 8) | int(minf(255.0, (d & 255) + (c & 255) * k))
+
+
 ## Blend a color over what's there at alpha a (0..1), keeping the result's own alpha: soft smoke, vapour, mist.
 func blendPx(sx: int, sy: int, c: Variant, a: float) -> void:
 	a *= fade
@@ -194,7 +212,23 @@ func disc(cx: float, cy: float, r: float, c: Variant, a: Variant) -> void:
 				continue
 			var d := sqrt(d2) / r
 			var ang := atan2(dy, dx)
-			blendPx(sx, sy, _v2(c, cn, d, ang) if cf else c, _v2(a, an, d, ang) if af else a)
+			if not _plain:
+				blendPx(sx, sy, _v2(c, cn, d, ang) if cf else c, _v2(a, an, d, ang) if af else a)
+				continue
+			var cc: Variant = _v2(c, cn, d, ang) if cf else c
+			var ba: float = (_v2(a, an, d, ang) if af else a) * fade
+			if not cc or ba <= 0.004:
+				continue
+			var i := (sy - oy) * w + sx - ox
+			var q := C[i]
+			var ci: int = cc
+			var da := ((q >> 24) & 255) / 255.0
+			var oa := ba + da * (1.0 - ba)
+			var k := ba / oa
+			var cr_ := int((ci & 255) * k + (q & 255) * (1.0 - k)) & 255
+			var cg_ := int(((ci >> 8) & 255) * k + ((q >> 8) & 255) * (1.0 - k)) & 255
+			var cb_ := int(((ci >> 16) & 255) * k + ((q >> 16) & 255) * (1.0 - k)) & 255
+			C[i] = ((int(oa * 255.0) & 255) << 24) | (cb_ << 16) | (cg_ << 8) | cr_
 
 
 ## Read back the color under a local point (0 if empty), unsigned like a JS Uint32Array read. (JS: p.get)
@@ -207,12 +241,45 @@ func getc(x: float, y: float) -> int:
 # ---- pixels
 ## One opaque pixel.
 func px(x: float, y: float, c: Variant) -> void:
-	put(cellX(x, y), cellY(x, y), c, 1.0)
+	if not _plain:
+		put(cellX(x, y), cellY(x, y), c, 1.0)
+		return
+	if not c:
+		return
+	var cx := floorf(x) + 0.5
+	var cy := floorf(y) + 0.5
+	var sx := floori(tx + cx * fx * cs - cy * sn)
+	var sy := floori(ty + cx * fx * sn + cy * cs)
+	var a := 1.0 * fade
+	if a < 1.0 and a <= BAYER[((sy & 3) << 2) | (sx & 3)]:
+		return
+	var X := sx - ox
+	var Y := sy - oy
+	if X < 0 or Y < 0 or X >= w or Y >= h:
+		return
+	C[Y * w + X] = c
 
 ## One pixel at alpha a (0..1), faded by ordered dither.
 func dot(x: float, y: float, c: Variant, a: float = 1.0) -> void:
-	if a > 0.0:
+	if not (a > 0.0):
+		return
+	if not _plain:
 		put(cellX(x, y), cellY(x, y), c, a)
+		return
+	if not c:
+		return
+	var cx := floorf(x) + 0.5
+	var cy := floorf(y) + 0.5
+	var sx := floori(tx + cx * fx * cs - cy * sn)
+	var sy := floori(ty + cx * fx * sn + cy * cs)
+	a *= fade
+	if a < 1.0 and a <= BAYER[((sy & 3) << 2) | (sx & 3)]:
+		return
+	var X := sx - ox
+	var Y := sy - oy
+	if X < 0 or Y < 0 or X >= w or Y >= h:
+		return
+	C[Y * w + X] = c
 
 ## Add light to one pixel.
 func light(x: float, y: float, c: int, k: float = 1.0) -> void:
@@ -277,10 +344,23 @@ func shade(x0: float, y0: float, x1: float, y1: float, fn: Callable) -> void:
 			o.k = 0.0
 			var ret: Variant = fn.call(lx, ly, o) if n >= 3 else fn.call(lx, ly)
 			var c: Variant = ret if ret else o.c
+			if not _plain:
+				if c:
+					put(sx, sy, c, o.a)
+				if o.k > 0.0:
+					add(sx, sy, o.l if o.l else c, o.k)
+				continue
 			if c:
-				put(sx, sy, c, o.a)
+				var fa: float = o.a * fade
+				if not (fa < 1.0 and fa <= BAYER[((sy & 3) << 2) | (sx & 3)]):
+					C[(sy - oy) * w + sx - ox] = c
 			if o.k > 0.0:
-				add(sx, sy, o.l if o.l else c, o.k)
+				var kk: float = o.k * (fade * lightK)
+				if kk > 0.004:
+					var lc: int = o.l if o.l else c
+					var i := (sy - oy) * w + sx - ox
+					var q := L[i]
+					L[i] = -16777216 | (int(minf(255.0, ((q >> 16) & 255) + ((lc >> 16) & 255) * kk)) << 16) | (int(minf(255.0, ((q >> 8) & 255) + ((lc >> 8) & 255) * kk)) << 8) | int(minf(255.0, (q & 255) + (lc & 255) * kk))
 
 
 # Calls a color/alpha Callable with as many of (x, y) as it takes.
@@ -315,7 +395,16 @@ func line(x0: float, y0: float, x1: float, y1: float, c: Variant, a: Variant = 1
 	while true:
 		var u := i / float(n)
 		i += 1
-		put(sx, sy, _v1(c, cn, u) if fc else c, _v1(a, an, u) if fa else a)
+		if _plain:
+			var cc: Variant = _v1(c, cn, u) if fc else c
+			if cc:
+				var aa: float = (_v1(a, an, u) if fa else a) * fade
+				var X := sx - ox
+				var Y := sy - oy
+				if not (aa < 1.0 and aa <= BAYER[((sy & 3) << 2) | (sx & 3)]) and X >= 0 and Y >= 0 and X < w and Y < h:
+					C[Y * w + X] = cc
+		else:
+			put(sx, sy, _v1(c, cn, u) if fc else c, _v1(a, an, u) if fa else a)
 		if sx == ex and sy == ey:
 			break
 		var e2 := 2 * err
@@ -365,7 +454,12 @@ func beam(x0: float, y0: float, x1: float, y1: float, width: float, c: Variant, 
 			var cc: Variant = _v2(c, cn, u, v) if cf else c
 			var aa: Variant = _v2(a, an, u, v) if af else a
 			if cc:
-				put(sx, sy, cc, aa)
+				if _plain:
+					var fa: float = aa * fade
+					if not (fa < 1.0 and fa <= BAYER[((sy & 3) << 2) | (sx & 3)]):
+						C[(sy - oy) * w + sx - ox] = cc
+				else:
+					put(sx, sy, cc, aa)
 
 
 ## Filled disc. c and a may be Callables of (d: 0 center to 1 rim, angle).
@@ -403,7 +497,12 @@ func circle(cx: float, cy: float, r: float, c: Variant, a: Variant = 1.0) -> voi
 				if af:
 					aa = _v2(a, an, d, ang)
 			if cc:
-				put(sx, sy, cc, aa)
+				if _plain:
+					var fa: float = aa * fade
+					if not (fa < 1.0 and fa <= BAYER[((sy & 3) << 2) | (sx & 3)]):
+						C[(sy - oy) * w + sx - ox] = cc
+				else:
+					put(sx, sy, cc, aa)
 
 
 ## Ellipse. c and a may be Callables of (d: 0 center to 1 rim, angle).
@@ -439,7 +538,12 @@ func ellipse(cx: float, cy: float, rx: float, ry: float, c: Variant, a: Variant 
 				if af:
 					aa = _v2(a, an, d, ang)
 			if cc:
-				put(sx, sy, cc, aa)
+				if _plain:
+					var fa: float = aa * fade
+					if not (fa < 1.0 and fa <= BAYER[((sy & 3) << 2) | (sx & 3)]):
+						C[(sy - oy) * w + sx - ox] = cc
+				else:
+					put(sx, sy, cc, aa)
 
 
 ## Ring from radius r - w to r. c and a may be Callables of (v: 0 inner to 1 outer, angle).
@@ -479,7 +583,12 @@ func ring(cx: float, cy: float, r: float, w_: float, c: Variant, a: Variant = 1.
 				if af:
 					aa = _v2(a, an, v, ang)
 			if cc:
-				put(sx, sy, cc, aa)
+				if _plain:
+					var fa: float = aa * fade
+					if not (fa < 1.0 and fa <= BAYER[((sy & 3) << 2) | (sx & 3)]):
+						C[(sy - oy) * w + sx - ox] = cc
+				else:
+					put(sx, sy, cc, aa)
 
 
 ## Band of a ring from angle a0 to a1 (radians, a1 > a0), radius r - w to r: the slash and smear shape.
@@ -517,7 +626,12 @@ func arc(cx: float, cy: float, r: float, w_: Variant, a0: float, a1: float, c: V
 			var cc: Variant = _v2(c, cn, u, v) if cf else c
 			var aa: Variant = _v2(a, an, u, v) if af else a
 			if cc:
-				put(sx, sy, cc, aa)
+				if _plain:
+					var fa: float = aa * fade
+					if not (fa < 1.0 and fa <= BAYER[((sy & 3) << 2) | (sx & 3)]):
+						C[(sy - oy) * w + sx - ox] = cc
+				else:
+					put(sx, sy, cc, aa)
 
 
 ## Filled rectangle.
@@ -588,7 +702,12 @@ func poly(pts: Array, c: Variant, a: Variant = 1.0) -> void:
 			var cc: Variant = _v2(c, cn, x, y) if cf else c
 			var aa: Variant = _v2(a, an, x, y) if af else a
 			if cc:
-				put(sx, sy, cc, aa)
+				if _plain:
+					var fa: float = aa * fade
+					if not (fa < 1.0 and fa <= BAYER[((sy & 3) << 2) | (sx & 3)]):
+						C[(sy - oy) * w + sx - ox] = cc
+				else:
+					put(sx, sy, cc, aa)
 
 
 func tri(x0: float, y0: float, x1: float, y1: float, x2: float, y2: float, c: Variant, a: Variant = 1.0) -> void:
@@ -608,15 +727,37 @@ func glow(x: float, y: float, r: float, c: int, k: float = 0.5) -> void:
 	var y1 := ceilf(cy + r)
 	if is_inf(x0) or is_inf(y0) or is_nan(x0) or is_nan(y0):
 		return
-	for sy in range(int(y0), int(y1) + 1):
+	if not _plain:
+		for sy in range(int(y0), int(y1) + 1):
+			var dy := (sy + 0.5 - cy) / r
+			for sx in range(int(x0), int(x1) + 1):
+				var dx := (sx + 0.5 - cx) / r
+				var d := dx * dx + dy * dy
+				if d >= 1.0:
+					continue
+				var f := 1.0 - sqrt(d)
+				add(sx, sy, c, f * f * k)
+		return
+	# the same, with add() written in and the loops cut to the frame (add() drops what's outside it)
+	var fl := fade * lightK
+	var cr := c & 255
+	var cg := (c >> 8) & 255
+	var cb := (c >> 16) & 255
+	for sy in range(maxi(int(y0), oy), mini(int(y1), oy + h - 1) + 1):
 		var dy := (sy + 0.5 - cy) / r
-		for sx in range(int(x0), int(x1) + 1):
+		var row := (sy - oy) * w - ox
+		for sx in range(maxi(int(x0), ox), mini(int(x1), ox + w - 1) + 1):
 			var dx := (sx + 0.5 - cx) / r
 			var d := dx * dx + dy * dy
 			if d >= 1.0:
 				continue
 			var f := 1.0 - sqrt(d)
-			add(sx, sy, c, f * f * k)
+			var kk := f * f * k * fl
+			if kk <= 0.004:
+				continue
+			var i := row + sx
+			var q := L[i]
+			L[i] = -16777216 | (int(minf(255.0, ((q >> 16) & 255) + cb * kk)) << 16) | (int(minf(255.0, ((q >> 8) & 255) + cg * kk)) << 8) | int(minf(255.0, (q & 255) + cr * kk))
 
 
 ## Glow around a segment (a soft beam of light).
@@ -649,7 +790,10 @@ func glowLine(x0: float, y0: float, x1: float, y1: float, r: float, c: int, k: f
 			if d >= 1.0:
 				continue
 			var f := 1.0 - d
-			add(sx, sy, c, f * f * k)
+			if _plain:
+				_addFast(sx, sy, c, f * f * k)
+			else:
+				add(sx, sy, c, f * f * k)
 
 
 ## Glow hugging a circle of radius R (a shockwave's light), falling off over width r.
@@ -671,7 +815,10 @@ func glowRing(x: float, y: float, R: float, r: float, c: int, k: float = 0.5) ->
 			if d >= 1.0:
 				continue
 			var f := 1.0 - d
-			add(sx, sy, c, f * f * k)
+			if _plain:
+				_addFast(sx, sy, c, f * f * k)
+			else:
+				add(sx, sy, c, f * f * k)
 
 
 # ---- sprites, text, masks

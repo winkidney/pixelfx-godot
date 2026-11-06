@@ -41,17 +41,17 @@ class Clipped extends Px.Painter:
 		if inside(sx, sy):
 			super.blendPx(sx, sy, c, a)
 
-static var clips := {}
 
 
 ## The painter, clipped to the screen: sparks, smoke and light that fly past an edge are cut there instead of
 ## spilling outside the canvas. Every drawing call goes through it unchanged. (One per painter, kept in step
 ## with it, so it stays the same shape of object every frame.)
 static func clipTo(p: Px.Painter) -> Px.Painter:
-	var q: Px.Painter = clips.get(p)
+	# kept on the painter itself, so it lives exactly as long as the painter (the JS WeakMap)
+	var q: Px.Painter = p.get_meta("pfx_clip", null)
 	if q == null:
 		q = Clipped.new(p.frame)
-		clips[p] = q
+		p.set_meta("pfx_clip", q)
 	q.reset()
 	q.tx = p.tx
 	q.ty = p.ty
