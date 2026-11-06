@@ -136,6 +136,68 @@ static func renderFrames(fx: Dictionary, opts: Dictionary = {}) -> Dictionary:
 	return {"w": w, "h": h, "fps": fps, "n": n, "frames": frames, "margin": m}
 
 
+## An effect acted out: the character, the target, the freeze, the shake, on a canvas big enough for all of it.
+## Returns { w, h, fps, n, pivot, frames: [{ t (effect time, negative before it starts), frozen, color, clear }] }.
+## opts: { fps (60), bg, seed, options, actor (false: no body), target (false: no target), seconds, hold (0.3) }.
+static func renderAct(fx: Dictionary, opts: Dictionary = {}) -> Dictionary:
+	var meta: Dictionary = fx.meta
+	var fps: float = opts.get("fps", 60.0) if opts.get("fps") != null else 60.0
+	var b := Px.Act.actBounds(fx.mod)
+	var pad := 6
+	var w := int(b.x1 - b.x0) + pad * 2
+	var h := int(b.y1 - b.y0) + pad * 2
+	var X: float = pad - b.x0
+	var Y: float = pad - b.y0
+	var frame := Px.createFrame(w, h)
+	var bgKind: String = opts.bg if opts.get("bg") != null else meta.bg
+	var bg: Variant = null if bgKind == "none" else Px.Scene.backdrop(bgKind, w, h, Y)
+	var o := {"x": X, "y": Y}
+	if opts.get("seed") != null:
+		o.seed = opts.seed
+	o.merge(opts.get("options", {}), true)
+	var act := Px.Act.createAct(fx.mod, o)
+	var frames := []
+	var secs: float = opts.seconds if opts.get("seconds") != null else (meta.duration * 2.0 - act.t if meta.loop else 8.0)
+	var mx := int(Px.round(secs * fps))
+	var show := func():
+		frame.clear()
+		act.draw(frame, {"body": opts.get("actor") != false, "target": opts.get("target") != false})
+		var rgba := Px.composite(frame, PackedByteArray(), bg)
+		var sh := act.shake()
+		frames.append({"t": act.t, "frozen": act.frozen(), "color": _shifted(rgba, w, h, sh[0], sh[1]) if (sh[0] or sh[1]) else rgba, "clear": rgba})
+	show.call()
+	var i := 0
+	while i < mx and not act.done():
+		act.update(1.0 / fps)
+		show.call()
+		i += 1
+	# a beat on the end, so a video doesn't cut off the last pose
+	if not meta.loop:
+		i = 0
+		var hold: float = opts.hold if opts.get("hold") != null else 0.3
+		while i < fps * hold:
+			act.update(1.0 / fps)
+			show.call()
+			i += 1
+	return {"w": w, "h": h, "fps": fps, "n": frames.size(), "frames": frames, "pivot": [X, Y]}
+
+
+static func _shifted(rgba: PackedByteArray, w: int, h: int, sx: int, sy: int) -> PackedByteArray:
+	var out := PackedByteArray()
+	out.resize(w * h * 4)
+	for y in h:
+		for x in w:
+			var X := clampi(x - sx, 0, w - 1)
+			var Y := clampi(y - sy, 0, h - 1)
+			var d := (y * w + x) * 4
+			var s := (Y * w + X) * 4
+			out[d] = rgba[s]
+			out[d + 1] = rgba[s + 1]
+			out[d + 2] = rgba[s + 2]
+			out[d + 3] = rgba[s + 3]
+	return out
+
+
 ## Nearest-neighbour upscale of RGBA.
 static func upscale(rgba: PackedByteArray, w: int, h: int, k: int) -> PackedByteArray:
 	if k == 1:
