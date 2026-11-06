@@ -291,6 +291,32 @@ static func hash(a: Variant, b: Variant = NA, c: Variant = NA, d: Variant = NA, 
 		return h
 	return _mix(h, f)
 
+## rand(a, b, c) for the noise lattice, typed and written out: the same hash, without the Variant checks.
+static func _rand3(a: float, b: float, c: float) -> float:
+	var h := 0x9e3779b9
+	var u: int
+	var x: int
+	u = (int(a) & M32) if (absf(a) < 9.0e18 or is_nan(a)) else Rng.u32(a)
+	x = h ^ u
+	h = ((x * 0xca6b) + (((x * 0x85eb) & 0xFFFF) << 16)) & M32
+	h ^= h >> 13
+	h = ((h * 0xae35) + (((h * 0xc2b2) & 0xFFFF) << 16)) & M32
+	h ^= h >> 16
+	u = (int(b) & M32) if (absf(b) < 9.0e18 or is_nan(b)) else Rng.u32(b)
+	x = h ^ u
+	h = ((x * 0xca6b) + (((x * 0x85eb) & 0xFFFF) << 16)) & M32
+	h ^= h >> 13
+	h = ((h * 0xae35) + (((h * 0xc2b2) & 0xFFFF) << 16)) & M32
+	h ^= h >> 16
+	u = (int(c) & M32) if (absf(c) < 9.0e18 or is_nan(c)) else Rng.u32(c)
+	x = h ^ u
+	h = ((x * 0xca6b) + (((x * 0x85eb) & 0xFFFF) << 16)) & M32
+	h ^= h >> 13
+	h = ((h * 0xae35) + (((h * 0xc2b2) & 0xFFFF) << 16)) & M32
+	h ^= h >> 16
+	return h * INV32
+
+
 ## Deterministic random number in [0, 1) from 1 to 6 numbers (seed, particle index, which value...).
 static func rand(a: Variant, b: Variant = NA, c: Variant = NA, d: Variant = NA, e: Variant = NA, f: Variant = NA) -> float:
 	return Self.hash(a, b, c, d, e, f) * INV32
@@ -314,10 +340,11 @@ static func noise2(x: float, y: float, seed: Variant = 0) -> float:
 	var fy := y - iy
 	var ux := fx * fx * (3.0 - 2.0 * fx)
 	var uy := fy * fy * (3.0 - 2.0 * fy)
-	var a := Self.rand(ix, iy, seed)
-	var b := Self.rand(ix + 1.0, iy, seed)
-	var c := Self.rand(ix, iy + 1.0, seed)
-	var d := Self.rand(ix + 1.0, iy + 1.0, seed)
+	var sd: float = seed
+	var a := _rand3(ix, iy, sd)
+	var b := _rand3(ix + 1.0, iy, sd)
+	var c := _rand3(ix, iy + 1.0, sd)
+	var d := _rand3(ix + 1.0, iy + 1.0, sd)
 	return Self.lerp(Self.lerp(a, b, ux), Self.lerp(c, d, ux), uy) * 2.0 - 1.0
 
 ## Fractal 2D noise in about [-1, 1].
@@ -345,10 +372,11 @@ static func tileNoise(x: float, y: float, px: float = 0.0, py: float = 0.0, seed
 	var x1 := Self.wrap(ix + 1.0, px) if px else ix + 1.0
 	var y0 := Self.wrap(iy, py) if py else iy
 	var y1 := Self.wrap(iy + 1.0, py) if py else iy + 1.0
-	var a := Self.rand(x0, y0, seed)
-	var b := Self.rand(x1, y0, seed)
-	var c := Self.rand(x0, y1, seed)
-	var d := Self.rand(x1, y1, seed)
+	var sd: float = seed
+	var a := _rand3(x0, y0, sd)
+	var b := _rand3(x1, y0, sd)
+	var c := _rand3(x0, y1, sd)
+	var d := _rand3(x1, y1, sd)
 	return Self.lerp(Self.lerp(a, b, ux), Self.lerp(c, d, ux), uy) * 2.0 - 1.0
 
 ## Fractal tileNoise: every octave keeps the repeat, so scrolled fields still loop.
