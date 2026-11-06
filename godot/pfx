@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# pixelfx command line: runs the Godot tools headless. Set GODOT to your Godot 4.7+ binary if it isn't on PATH.
+#   ./pfx list frost        ./pfx render fire/torch        ./pfx check ice        ./pfx help
+set -euo pipefail
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+GODOT_BIN="${GODOT:-$(command -v godot || command -v godot4 || echo "$HOME/.local/bin/godot")}"
+exec "$GODOT_BIN" --headless --no-header --path "$DIR" -s res://tools/cli.gd -- "$@"
