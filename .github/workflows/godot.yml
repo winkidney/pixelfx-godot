@@ -38,7 +38,9 @@ jobs:
       - name: Core against the JS fixtures
         run: cd godot && ./pfx test
       - name: Nodes and baking
-        run: $GODOT --headless --no-header --path godot -s res://tests/node_test.gd
+        run: |
+          $GODOT --headless --no-header --path godot -s res://tests/node_test.gd -- melee/sword-slash moves/arrow-shot status/frozen transitions/iris
+          $GODOT --headless --no-header --path godot -s res://tests/smoke_all.gd
       - name: Upstream sync status
         run: node godot/port/sync.mjs
       - name: Parity and checks (one effect per category, and whatever changed)
