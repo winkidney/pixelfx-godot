@@ -498,11 +498,12 @@ const PATCH := -3064587  # hex("#f53cd1")
 # Particles without a simulation: each one's position is a closed-form function of its age.
 
 ## Where a particle is after t seconds, launched from (x, y) at (vx, vy) px/s, under gravity g and linear drag.
+## (Its exp is V8's, bit for bit: a drifting puff's position can land on a pixel boundary.)
 ## Returns [x, y].
 static func fly(x: float, y: float, vx: float, vy: float, t: float, g: float = 0.0, drag: float = 0.0) -> Array:
 	if drag <= 0.0:
 		return [x + vx * t, y + vy * t + 0.5 * g * t * t]
-	var f := (1.0 - exp(-drag * t)) / drag
+	var f := (1.0 - Self.exp(-drag * t)) / drag
 	var vt := g / drag
 	return [x + vx * f, y + vt * t + (vy - vt) * f]
 
@@ -510,7 +511,7 @@ static func fly(x: float, y: float, vx: float, vy: float, t: float, g: float = 0
 static func flyV(vx: float, vy: float, t: float, g: float = 0.0, drag: float = 0.0) -> Array:
 	if drag <= 0.0:
 		return [vx, vy + g * t]
-	var e := exp(-drag * t)
+	var e := Self.exp(-drag * t)
 	var vt := g / drag
 	return [vx * e, vt + (vy - vt) * e]
 
