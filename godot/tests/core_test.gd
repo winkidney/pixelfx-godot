@@ -121,6 +121,26 @@ func run() -> int:
 		check(_sha1(hc, col) == c.color, tag + " colors")
 		check(_sha1(hc, r.src) == c.src, tag + " src")
 		check(_sha1(hc, ink) == c.ink, tag + " ink")
+	var ebad := 0
+	for c in F.get("exp", []):
+		var v := Px.exp(c.x)
+		# subnormal results (x below about -708) aren't matched bit for bit: they're 1e-308 and smaller
+		if ((Px._bits(c.v) >> 52) & 0x7ff) == 0 and c.v != 0.0:
+			continue
+		if not near(v, c.v):
+			ebad += 1
+			if ebad <= 3:
+				print("exp(%s) = %s want %s" % [c.x, v, c.v])
+	check(ebad == 0, "Px.exp bit-exact (%d of %d differ)" % [ebad, F.get("exp", []).size()])
+	for c in F.get("sort", []):
+		var list := []
+		for q in c.keys.size():
+			list.append({"k": int(c.keys[q]), "i": q})
+		var byK := Px.sort(list.duplicate(), func(a, b): return a.k - b.k).map(func(o): return o.i)
+		check(byK == c.byK.map(func(v): return int(v)), "sort by key, n = %d" % c.n)
+		var S := Px.Rng.new(c.n)
+		var sh := Px.sort(list.duplicate(), func(_a, _b): return S.next() - 0.5).map(func(o): return o.i)
+		check(sh == c.shuffled.map(func(v): return int(v)) and S.s == int(c.draws), "sort with a random comparator, n = %d" % c.n)
 	print("core: %d checks, %d failed" % [checks, fails])
 	return 1 if fails else 0
 

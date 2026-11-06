@@ -32,6 +32,7 @@ const Chain := preload("chain.gd")
 const Poses := preload("poses.gd")
 const Act := preload("act.gd")
 const Rig := preload("rig.gd")
+const Sorter := preload("sort.gd")
 
 const M32 := 0xFFFFFFFF
 const INV32 := 1.0 / 4294967296.0
@@ -175,6 +176,65 @@ static func cbrt(x: float) -> float:
 	r = (r - t) / (w + r)
 	t = t + t * r
 	return t
+
+## JS Math.exp, bit for bit: fdlibm's exp as V8 has it (src/base/ieee754.cc), for every result that isn't subnormal.
+## The built-in exp() is the C library's and differs in the last bit for a few inputs; use this where it matters.
+static func exp(x: float) -> float:
+	var halF := [0.5, -0.5]
+	var ln2HI := [6.93147180369123816490e-01, -6.93147180369123816490e-01]
+	var ln2LO := [1.90821492927058770002e-10, -1.90821492927058770002e-10]
+	var invln2 := 1.44269504088896338700e+00
+	var P1 := 1.66666666666666019037e-01
+	var P2 := -2.77777777770155933842e-03
+	var P3 := 6.61375632143793436117e-05
+	var P4 := -1.65339022054652515390e-06
+	var P5 := 4.13813679705723846039e-08
+	var bits := _bits(x)
+	var hx := (bits >> 32) & 0xFFFFFFFF
+	var xsb := (hx >> 31) & 1
+	hx &= 0x7fffffff
+	var hi := 0.0
+	var lo := 0.0
+	var k := 0
+	if hx >= 0x40862E42:
+		if hx >= 0x7ff00000:
+			if ((hx & 0xfffff) | (bits & 0xFFFFFFFF)) != 0:
+				return x + x
+			return x if xsb == 0 else 0.0
+		if x > 7.09782712893383973096e+02:
+			return INF
+		if x < -7.45133219101941108420e+02:
+			return 0.0
+	if hx > 0x3fd62e42:
+		if hx < 0x3FF0A2B2:
+			if x == 1.0:
+				return 2.718281828459045
+			hi = x - ln2HI[xsb]
+			lo = ln2LO[xsb]
+			k = 1 - xsb - xsb
+		else:
+			k = int(invln2 * x + halF[xsb])
+			var t := float(k)
+			hi = x - t * ln2HI[0]
+			lo = t * ln2LO[0]
+		x = hi - lo
+	elif hx < 0x3e300000:
+		return 1.0 + x
+	else:
+		k = 0
+	var t2 := x * x
+	var twopk := _dbl((0x3ff00000 + (k << 20)) << 32) if k >= -1021 else _dbl((0x3ff00000 + ((k + 1000) << 20)) << 32)
+	var c := x - t2 * (P1 + t2 * (P2 + t2 * (P3 + t2 * (P4 + t2 * P5))))
+	if k == 0:
+		return 1.0 - ((x * c) / (c - 2.0) - x)
+	var y := 1.0 - ((lo - (x * c) / (2.0 - c)) - hi)
+	if k >= -1021:
+		if k == 1024:
+			return y * 2.0 * _dbl(0x7fe00000 << 32)
+		return y * twopk
+	# 2^-1000 from its bits: GDScript's parser doesn't read literals this small exactly
+	return y * twopk * _dbl(0x01700000 << 32)
+
 
 ## JS Math.log2 (C library log, so it may differ from V8 in the last bit).
 static func log2(x: float) -> float:
@@ -722,48 +782,11 @@ static func arr(n: float, fn: Callable) -> Array:
 		i += 1
 	return out
 
-## `list.sort(cmp)` with JS's guarantees: stable, cmp(a, b) < 0 puts a first. In place; returns list.
-## (Godot's sort_custom isn't stable, and a different order of equal items changes what gets drawn on top.)
+## `list.sort(cmp)` exactly as V8 does it (TimSort: same comparator calls in the same order, so even a random
+## comparator shuffles the same way and draws the same numbers). Stable, in place; returns list. Never sort_custom.
 static func sort(list: Array, cmp: Callable) -> Array:
-	var n := list.size()
-	if n < 2:
-		return list
-	var src := list.duplicate()
-	var dst := []
-	dst.resize(n)
-	var width := 1
-	while width < n:
-		var lo := 0
-		while lo < n:
-			var mid := mini(lo + width, n)
-			var hi := mini(lo + width * 2, n)
-			var i := lo
-			var j := mid
-			var k := lo
-			while i < mid and j < hi:
-				if float(cmp.call(src[j], src[i])) < 0.0:
-					dst[k] = src[j]
-					j += 1
-				else:
-					dst[k] = src[i]
-					i += 1
-				k += 1
-			while i < mid:
-				dst[k] = src[i]
-				i += 1
-				k += 1
-			while j < hi:
-				dst[k] = src[j]
-				j += 1
-				k += 1
-			lo += width * 2
-		var tmp := src
-		src = dst
-		dst = tmp
-		width *= 2
-	for q in n:
-		list[q] = src[q]
-	return list
+	return Sorter.sort(list, cmp)
+
 
 # ------------------------------------------------------------------------------------- the rest of the core API
 

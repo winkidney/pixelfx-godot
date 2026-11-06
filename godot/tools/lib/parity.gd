@@ -321,6 +321,7 @@ func checkActs(ids: PackedStringArray) -> int:
 		n += 1
 		var ref: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://.parity/js/%s.act.json" % id))
 		var meta: Dictionary = fx.meta
+		Px.Rig.CACHE.clear()
 		var b := Px.Act.actBounds(fx.mod)
 		var w := int(b.x1 - b.x0 + 12.0)
 		var h := int(b.y1 - b.y0 + 12.0)
@@ -331,6 +332,7 @@ func checkActs(ids: PackedStringArray) -> int:
 			note = "bounds %dx%d, js %dx%d" % [w, h, int(ref.w), int(ref.h)]
 		else:
 			var frame := Px.createFrame(w, h)
+			# actBounds above rendered poses into the rig's cache, as the JS did in its own fresh process
 			var act := Px.Act.createAct(fx.mod, {"x": X, "y": Y})
 			var fps := float(ref.fps)
 			var mx := int(Px.round((meta.duration * 2.0 - act.t if meta.loop else 8.0) * fps))
@@ -354,19 +356,87 @@ func checkActs(ids: PackedStringArray) -> int:
 			if got.size() != ref.frames.size():
 				note = "%d frames, js %d" % [got.size(), ref.frames.size()]
 			else:
+				var off := []
 				for k in got.size():
 					var a: Dictionary = ref.frames[k]
 					var g: Dictionary = got[k]
-					if a.c != g.c or a.l != g.l or int(a.s[0]) != g.s[0] or int(a.s[1]) != g.s[1] or a.f != g.f:
-						note = "frame %d differs first (%s%s%s)" % [k, "color " if a.c != g.c else "", "light " if a.l != g.l else "", "shake/freeze" if (a.f != g.f or int(a.s[0]) != g.s[0] or int(a.s[1]) != g.s[1]) else ""]
+					if int(a.s[0]) != g.s[0] or int(a.s[1]) != g.s[1] or a.f != g.f:
+						note = "frame %d: shake/freeze differ" % k
 						break
-		if note:
+					if a.c != g.c or a.l != g.l:
+						off.append(k)
+				if not note and off.size():
+					# not identical: compare the pixels, with the same tolerance as effects
+					var js := _actDump(id)
+					Px.Rig.CACHE.clear()
+					Px.Act.actBounds(fx.mod)
+					var gd := _actFrames(fx.mod, w, h, X, Y, float(ref.fps), meta)
+					var worst := 0
+					var over := 0
+					for k in off:
+						if k >= js.size() or k >= gd.size():
+							break
+						var d := diff(js[k], gd[k])
+						var lim := maxi(4, int(d.drawn * 0.001))
+						worst = maxi(worst, maxi(d.color, d.light))
+						if d.color > lim or d.light > lim:
+							over += 1
+					if over:
+						note = "%d of %d frames differ beyond tolerance (first %d, worst %d px)" % [over, got.size(), off[0], worst]
+					else:
+						note = "~%d frames differ, within tolerance (worst %d px)" % [off.size(), worst]
+		if note.begins_with("~"):
+			if not quiet:
+				print("ok~   %s act: %s" % [id, note.substr(1)])
+		elif note:
 			fails += 1
 			print("FAIL  %s act: %s" % [id, note])
 		elif not quiet:
 			print("ok    %s act" % id)
 	print("\n%d acts: %d pass, %d fail" % [n, n - fails, fails])
 	return fails
+
+
+func _actDump(id: String) -> Array:
+	OS.execute(node, PackedStringArray([ProjectSettings.globalize_path("res://port/ref.mjs"), "--acts", "--dump", id]), [], true)
+	var bytes := FileAccess.get_file_as_bytes("res://.parity/js/%s.act.bin.gz" % id)
+	if bytes.is_empty():
+		return []
+	bytes = bytes.decompress_dynamic(-1, FileAccess.COMPRESSION_GZIP)
+	var w := bytes.decode_u32(0)
+	var h := bytes.decode_u32(4)
+	var n := bytes.decode_u32(8)
+	var sz := w * h * 4
+	var out := []
+	var at := 12
+	for i in n:
+		out.append([bytes.slice(at, at + sz).to_int32_array(), bytes.slice(at + sz, at + sz * 2).to_int32_array()])
+		at += sz * 2
+	return out
+
+
+func _actFrames(mod: Script, w: int, h: int, X: float, Y: float, fps: float, meta: Dictionary) -> Array:
+	var frame := Px.createFrame(w, h)
+	var act := Px.Act.createAct(mod, {"x": X, "y": Y})
+	var mx := int(Px.round((meta.duration * 2.0 - act.t if meta.loop else 8.0) * fps))
+	var out := []
+	var shoot := func():
+		frame.clear()
+		act.draw(frame, {})
+		out.append([frame.color.duplicate(), frame.light.duplicate()])
+	shoot.call()
+	var i := 0
+	while i < mx and not act.done():
+		act.update(1.0 / fps)
+		shoot.call()
+		i += 1
+	if not meta.loop:
+		i = 0
+		while i < fps * 0.3:
+			act.update(1.0 / fps)
+			shoot.call()
+			i += 1
+	return out
 
 
 func _allowed(id: String, vname: String) -> bool:

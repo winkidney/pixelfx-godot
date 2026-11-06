@@ -101,21 +101,30 @@ function writeRef(fx, names, opts) {
 
 // ---- acts: the body, the target, the freeze and the shake, frame by frame (tools/lib/fxlib.mjs renderAct)
 export const ACT_FPS = 30;
-function writeActRef(fx) {
+function writeActRef(fx, dump = false) {
   const { meta, mod } = fx, b = actBounds(mod), pad = 6;
   const w = b.x1 - b.x0 + pad * 2, h = b.y1 - b.y0 + pad * 2, X = pad - b.x0, Y = pad - b.y0;
-  const frame = createFrame(w, h), act = createAct(mod, { x: X, y: Y }), frames = [];
+  const frame = createFrame(w, h), act = createAct(mod, { x: X, y: Y }), frames = [], raw = [];
   const max = Math.round((meta.loop ? meta.duration * 2 - act.t : 8) * ACT_FPS);
   const show = () => {
     clearFrame(frame);
     act.draw(frame, {});
     const [sx, sy] = act.shake;
     frames.push({ c: sha1(frame.color), l: sha1(frame.light), s: [sx, sy], f: act.frozen });
+    if (dump) raw.push(Buffer.from(frame.color.slice().buffer), Buffer.from(frame.light.slice().buffer));
   };
   show();
   for (let i = 0; i < max && !act.done(); i++) (act.update(1 / ACT_FPS), show());
   if (!meta.loop) for (let i = 0; i < ACT_FPS * 0.3; i++) (act.update(1 / ACT_FPS), show());
   const out = { id: fx.id, w, h, X, Y, fps: ACT_FPS, frames };
+  if (dump) {
+    const head = Buffer.alloc(12);
+    head.writeUInt32LE(w, 0); head.writeUInt32LE(h, 4); head.writeUInt32LE(frames.length, 8);
+    const gz = join(OUT, `${fx.id}.act.bin.gz`);
+    mkdirSync(dirname(gz), { recursive: true });
+    writeFileSync(gz, gzipSync(Buffer.concat([head, ...raw])));
+    return out;
+  }
   const file = join(OUT, `${fx.id}.act.json`);
   mkdirSync(dirname(file), { recursive: true });
   writeFileSync(file, JSON.stringify(out));
@@ -170,6 +179,22 @@ function fixtures() {
     return { q, n: r.n, box: [r.x0, r.y0, r.x1, r.y1], xs: sha1(i32(r.xs)), ys: sha1(i32(r.ys)), color: sha1(r.color), src: sha1(i32(r.src)), ink: sha1(i32(r.ink)) };
   });
   void READY;
+  // Math.exp (Px.exp ports V8's) and Array.prototype.sort, with a consistent and with a random comparator
+  out.exp = [];
+  const er = new Rng(42);
+  for (let i = 0; i < 4000; i++) {
+    const x = i < 3000 ? er.range(-12, 6) : er.range(-750, 720);
+    out.exp.push({ x, v: Math.exp(x) });
+  }
+  for (const x of [0, -0, 1, -1, 0.5, 0.3465735902799726, 0.34657359027997264, 1.0397207708399179, 709.78, -745.2, 1e-9, -1e-300, Infinity, -Infinity])
+    out.exp.push({ x, v: Math.exp(x) });
+  out.sort = [];
+  for (const n of [3, 10, 31, 32, 33, 64, 70, 150, 600]) {
+    const R = new Rng(n * 7), list = Array.from({ length: n }, (_, i) => ({ k: Math.floor(R.next() * 10), i }));
+    const byK = list.slice().sort((a, b) => a.k - b.k).map((o) => o.i);
+    const S = new Rng(n), shuffled = list.slice().sort(() => S.next() - 0.5).map((o) => o.i);
+    out.sort.push({ n, keys: list.map((o) => o.k), byK, shuffled, draws: S.s });
+  }
   const file = join(HERE, "..", "tests", "fixtures", "core.json");
   mkdirSync(dirname(file), { recursive: true });
   writeFileSync(file, JSON.stringify(exact(out)));
@@ -252,11 +277,23 @@ if (flags.fixtures) {
 }
 if (flags.acts) {
   const t0 = Date.now(), list = (pos.length ? resolveIds(pos) : allIds());
+  // the rig caches rendered poses by their rounded fields, so what an act draws depends on what was drawn before it in
+  // the same process: give each act a fresh process (Godot clears its cache before each act to match)
+  if (list.length > 1) {
+    const { execFileSync } = await import("node:child_process");
+    let n = 0;
+    for (const id of list) {
+      const out = execFileSync(process.execPath, [fileURLToPath(import.meta.url), "--acts", ...(flags.dump ? ["--dump"] : []), id], { encoding: "utf8" });
+      if (/ 1 acts,/.test(out)) n++;
+    }
+    console.log(`${n} acts, ${((Date.now() - t0) / 1000).toFixed(1)} s -> ${OUT}`);
+    process.exit(0);
+  }
   let n = 0;
   for (const id of list) {
     const fx = await loadEffect(id);
     if (!fx.mod.act) continue;
-    const r = writeActRef(fx);
+    const r = writeActRef(fx, !!flags.dump);
     n++;
     if (list.length <= 12) console.log(`${id}  act ${r.frames.length} frames ${r.w}x${r.h}`);
   }
