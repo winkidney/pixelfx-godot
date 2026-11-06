@@ -27,7 +27,7 @@ jobs:
           fetch-depth: 2
       - uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 24   # the version the port was verified with: the reference takes V8's Math functions
       - name: Godot (headless)
         run: |
           curl -fsSL -o godot.zip "https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}-stable/Godot_v${GODOT_VERSION}-stable_linux.x86_64.zip"
@@ -46,7 +46,7 @@ jobs:
       - name: Parity and checks (one effect per category, and whatever changed)
         if: github.event_name == 'push' || github.event_name == 'pull_request'
         run: |
-          ids=$(ls godot/addons/pixelfx/fx | grep -v '\.gd$' | while read c; do ls godot/addons/pixelfx/fx/$c | grep -v '^_' | head -1 | sed "s|\.gd$||;s|^|$c/|"; done)
+          ids=$(for d in godot/addons/pixelfx/fx/*/; do c=$(basename "$d"); ls "$d" | grep '\.gd$' | grep -v '^_' | head -1 | sed "s|\.gd$||;s|^|$c/|"; done)
           changed=$(git diff --name-only HEAD~1 -- godot/addons/pixelfx/fx src/fx | grep -v '/_lib' | grep -v '\.uid$' | sed -E 's#^(godot/addons/pixelfx/fx|src/fx)/##;s#\.(gd|js)$##' | grep / | sort -u || true)
           cd godot
           ./pfx parity $ids $changed --quiet

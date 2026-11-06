@@ -23,6 +23,10 @@ cd godot
 The reference data is produced by `node port/ref.mjs` from the upstream JS. The parity command runs it by itself when it's
 missing or stale.
 
+Use Node 24, as CI does. The reference takes V8's `Math.sin`, `cos`, `atan2` and friends, which have not been the same
+in every V8 version. The port was verified against Node 24's. Godot gets the same functions from the C library, so
+they can differ in the last bit by platform too. That's what the tolerance and `port/parity-allow.json` absorb.
+
 When the RNG trace differs, the effect drew random numbers in a different order or a different number of times. Look for:
 - a reordered expression;
 - a `for` loop with a different count;
