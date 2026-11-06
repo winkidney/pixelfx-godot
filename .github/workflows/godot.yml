@@ -47,7 +47,7 @@ jobs:
         if: github.event_name == 'push' || github.event_name == 'pull_request'
         run: |
           ids=$(ls godot/addons/pixelfx/fx | grep -v '\.gd$' | while read c; do ls godot/addons/pixelfx/fx/$c | grep -v '^_' | head -1 | sed "s|\.gd$||;s|^|$c/|"; done)
-          changed=$(git diff --name-only HEAD~1 -- godot/addons/pixelfx/fx src/fx | grep -v '/_lib' | sed -E 's#^(godot/addons/pixelfx/fx|src/fx)/##;s#\.(gd|js)$##' | grep / | sort -u || true)
+          changed=$(git diff --name-only HEAD~1 -- godot/addons/pixelfx/fx src/fx | grep -v '/_lib' | grep -v '\.uid$' | sed -E 's#^(godot/addons/pixelfx/fx|src/fx)/##;s#\.(gd|js)$##' | grep / | sort -u || true)
           cd godot
           ./pfx parity $ids $changed --quiet
           ./pfx check $ids $changed
