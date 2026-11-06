@@ -146,6 +146,11 @@ Key caches by `a.mask.id`, not by the mask itself.
 9. **Typed vars from Variants.** `var x := dict.key` is an error (Variant inference). Write `var x: float = dict.key`, or an
    untyped `var x = dict.key`.
 
+**Names**
+- A JS function or variable named like a GDScript built-in (`wrap`, `log`, `seed`, `floor`, `len`, `range`, `round`, `clamp`,
+  `sign`, `str`, `hash`, `ease`, `lerp`) gets a trailing underscore (`wrap_`). Unqualified, the call resolves to the
+  built-in, not to yours, and fails or does the wrong thing quietly. The same goes for parameters that shadow a member.
+
 **Values and truthiness**
 10. **`a || b` as a value** is `a if a else b`. **`a && b` as a value** is `b if a else a`. GDScript `or` and `and` return
     bools. Color `0` means "nothing", so `fn() || out.c` matters.
