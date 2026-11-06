@@ -104,6 +104,23 @@ func run() -> int:
 		drawCase(p, cs[0], cs[1])
 		check(_sha1(hc, f.color) == c.c, "painter color " + c.name)
 		check(_sha1(hc, f.light) == c.l, "painter light " + c.name)
+	for c in F.get("rig", []):
+		var r := Px.Rig.posed(c.q)
+		var col := PackedInt32Array()
+		col.resize(r.n)
+		for q in r.n:
+			col[q] = r.color[q]
+		var ink := PackedInt32Array()
+		ink.resize(r.n)
+		for q in r.n:
+			ink[q] = r.ink[q]
+		var tag := "rig %s" % JSON.stringify(c.q)
+		check(r.n == int(c.n), tag + " n %d want %d" % [r.n, int(c.n)])
+		check([r.x0, r.y0, r.x1, r.y1] == c.box.map(func(v): return int(v)), tag + " box")
+		check(_sha1(hc, r.xs) == c.xs and _sha1(hc, r.ys) == c.ys, tag + " pixel positions")
+		check(_sha1(hc, col) == c.color, tag + " colors")
+		check(_sha1(hc, r.src) == c.src, tag + " src")
+		check(_sha1(hc, ink) == c.ink, tag + " ink")
 	print("core: %d checks, %d failed" % [checks, fails])
 	return 1 if fails else 0
 

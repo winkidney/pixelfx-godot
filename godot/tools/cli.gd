@@ -8,6 +8,7 @@
 #   ./pfx new <category>/<name> [--loop] [--sim]   a working starting point
 #   ./pfx index                           regenerate fx/registry.gd and docs/CATALOG.md
 #   ./pfx parity [ids] [--full] [--variants a,b] [--no-sheet] [--quiet]   check the port against the JS original
+#   ./pfx parity [ids] --acts             the same for acts: body, target, freezes and shakes
 #   ./pfx test                            core unit tests against the JS fixtures
 #
 # Outputs go to godot/records/ (git-ignored). Ids are "category/name"; a category or a pattern ("fire/*") works too.
@@ -17,7 +18,7 @@ const Px := preload("res://addons/pixelfx/core/px.gd")
 const Lib := preload("res://tools/lib/fxlib.gd")
 const Parity := preload("res://tools/lib/parity.gd")
 
-const BOOL_FLAGS := ["gif", "mp4", "sheet", "all", "no-actor", "full", "no-sheet", "quiet", "loop", "sim", "spriteframes", "no-target", "help"]
+const BOOL_FLAGS := ["gif", "mp4", "sheet", "all", "no-actor", "full", "no-sheet", "quiet", "loop", "sim", "spriteframes", "no-target", "help", "acts"]
 
 var flags := {}
 var pos := PackedStringArray()
@@ -152,6 +153,8 @@ func cmd_parity() -> int:
 		variants = ["default", "flip", "angle", "pal4", "recolor", "seed7", "light", "stop"]
 	if flags.has("variants"):
 		variants = Array(String(flags.variants).split(","))
+	if flags.has("acts"):
+		return 1 if p.checkActs(list) else 0
 	return 1 if p.check(list, variants) else 0
 
 

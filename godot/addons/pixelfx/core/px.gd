@@ -396,16 +396,27 @@ static func flyV(vx: float, vy: float, t: float, g: float = 0.0, drag: float = 0
 	var vt := g / drag
 	return [vx * e, vt + (vy - vt) * e]
 
+## Calls fn with as many of (a, b, c, d) as it declares: JS callbacks may take fewer arguments than they're given.
+static func call4(fn: Callable, n: int, a: Variant, b: Variant = null, c: Variant = null, d: Variant = null) -> Variant:
+	match n:
+		0: return fn.call()
+		1: return fn.call(a)
+		2: return fn.call(a, b)
+		3: return fn.call(a, b, c)
+	return fn.call(a, b, c, d)
+
 ## n one-shot particles: fn.call(r, i) with a repeatable rng per particle.
 static func burst(n: float, seed: Variant, fn: Callable) -> void:
+	var na := fn.get_argument_count()
 	var i := 0
 	while i < n:
-		fn.call(rng(seed, i), i)
+		call4(fn, na, rng(seed, i), i)
 		i += 1
 
 ## Particles that repeat every `period` seconds, for loops with no seam: fn.call(age, life, r, i) for every live copy.
 ## life is a number or a Callable taking the particle's rng.
 static func cycle(t: float, period: float, count: float, seed: Variant, life: Variant, fn: Callable) -> void:
+	var na := fn.get_argument_count()
 	var i := 0
 	while i < count:
 		var g := rng(seed, i, 911)
@@ -413,12 +424,13 @@ static func cycle(t: float, period: float, count: float, seed: Variant, life: Va
 		var L: float = life.call(g) if life is Callable else life
 		var age := fmod(fmod(t - born, period) + period, period)
 		while age < L:
-			fn.call(age, L, rng(seed, i), i)
+			call4(fn, na, age, L, rng(seed, i), i)
 			age += period
 		i += 1
 
 ## Particles born at a steady rate between t0 and t1: fn.call(age, life, r, i) for every particle alive at t.
 static func stream(t: float, t0: float, t1: float, rate: float, seed: Variant, life: Variant, fn: Callable) -> void:
+	var na := fn.get_argument_count()
 	var n := floori((minf(t, t1) - t0) * rate)
 	var i := 0
 	while i <= n:
@@ -427,7 +439,7 @@ static func stream(t: float, t0: float, t1: float, rate: float, seed: Variant, l
 		var L: float = life.call(g) if life is Callable else life
 		var age := t - born
 		if age >= 0.0 and age < L:
-			fn.call(age, L, rng(seed, i), i)
+			call4(fn, na, age, L, rng(seed, i), i)
 		i += 1
 
 # -------------------------------------------------------------------------------------------------- shapes.js

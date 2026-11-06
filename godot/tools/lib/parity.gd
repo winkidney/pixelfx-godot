@@ -297,6 +297,78 @@ func check(ids: PackedStringArray, variants: Array) -> int:
 	return fails
 
 
+## Acts: the character, the target, freezes and shakes, against `ref.mjs --acts`. Returns the number that failed.
+func checkActs(ids: PackedStringArray) -> int:
+	var need := PackedStringArray()
+	for id in ids:
+		var fx := Lib.loadEffect(id)
+		if fx.has("error") or Px.Fx.actOf(fx.mod) == null:
+			continue
+		var ref := ProjectSettings.globalize_path("res://.parity/js/%s.act.json" % id)
+		var js := root().path_join("src/fx/" + id + ".js")
+		if not FileAccess.file_exists(ref) or FileAccess.get_modified_time(js) > FileAccess.get_modified_time(ref):
+			need.append(id)
+	if need.size():
+		var args := PackedStringArray([ProjectSettings.globalize_path("res://port/ref.mjs"), "--acts"])
+		args.append_array(need)
+		OS.execute(node, args, [], true)
+	var fails := 0
+	var n := 0
+	for id in ids:
+		var fx := Lib.loadEffect(id)
+		if fx.has("error") or Px.Fx.actOf(fx.mod) == null:
+			continue
+		n += 1
+		var ref: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://.parity/js/%s.act.json" % id))
+		var meta: Dictionary = fx.meta
+		var b := Px.Act.actBounds(fx.mod)
+		var w := int(b.x1 - b.x0 + 12.0)
+		var h := int(b.y1 - b.y0 + 12.0)
+		var X: float = 6.0 - b.x0
+		var Y: float = 6.0 - b.y0
+		var note := ""
+		if w != int(ref.w) or h != int(ref.h):
+			note = "bounds %dx%d, js %dx%d" % [w, h, int(ref.w), int(ref.h)]
+		else:
+			var frame := Px.createFrame(w, h)
+			var act := Px.Act.createAct(fx.mod, {"x": X, "y": Y})
+			var fps := float(ref.fps)
+			var mx := int(Px.round((meta.duration * 2.0 - act.t if meta.loop else 8.0) * fps))
+			var got := []
+			var show := func():
+				frame.clear()
+				act.draw(frame, {})
+				got.append({"c": _sha1(frame.color), "l": _sha1(frame.light), "s": act.shake(), "f": act.frozen()})
+			show.call()
+			var i := 0
+			while i < mx and not act.done():
+				act.update(1.0 / fps)
+				show.call()
+				i += 1
+			if not meta.loop:
+				i = 0
+				while i < fps * 0.3:
+					act.update(1.0 / fps)
+					show.call()
+					i += 1
+			if got.size() != ref.frames.size():
+				note = "%d frames, js %d" % [got.size(), ref.frames.size()]
+			else:
+				for k in got.size():
+					var a: Dictionary = ref.frames[k]
+					var g: Dictionary = got[k]
+					if a.c != g.c or a.l != g.l or int(a.s[0]) != g.s[0] or int(a.s[1]) != g.s[1] or a.f != g.f:
+						note = "frame %d differs first (%s%s%s)" % [k, "color " if a.c != g.c else "", "light " if a.l != g.l else "", "shake/freeze" if (a.f != g.f or int(a.s[0]) != g.s[0] or int(a.s[1]) != g.s[1]) else ""]
+						break
+		if note:
+			fails += 1
+			print("FAIL  %s act: %s" % [id, note])
+		elif not quiet:
+			print("ok    %s act" % id)
+	print("\n%d acts: %d pass, %d fail" % [n, n - fails, fails])
+	return fails
+
+
 func _allowed(id: String, vname: String) -> bool:
 	if not allow.has(id):
 		return false

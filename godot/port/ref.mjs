@@ -6,6 +6,8 @@
 //       every variant, the number and xor of every Rng.next() drawn per frame, and the act timing.
 //   node godot/port/ref.mjs <id> --dump --variant <v>
 //       also the raw frames: godot/.parity/js/<cat>/<name>.<v>.bin.gz (u32 w, u32 h, u32 n, then color+light per frame)
+//   node godot/port/ref.mjs --acts [ids]
+//       every act played as tools/act.mjs plays it (renderAct, at ACT_FPS): godot/.parity/js/<cat>/<name>.act.json
 //   node godot/port/ref.mjs --fixtures
 //       core fixtures for the Godot unit tests: godot/tests/fixtures/core.json
 //
@@ -20,7 +22,8 @@ import { fileURLToPath } from "node:url";
 import { allIds, resolveIds, loadEffect } from "../../tools/lib/fxlib.mjs";
 import * as core from "../../src/core/index.js";
 
-const { createFrame, clearFrame, createFx, painterFor, Rng, PAL, actTiming } = core;
+const { createFrame, clearFrame, createFx, painterFor, Rng, PAL, actTiming, createAct, actBounds } = core;
+import { posed } from "../../src/core/rig.js";
 const HERE = dirname(fileURLToPath(import.meta.url));
 const OUT = join(HERE, "..", ".parity", "js");
 
@@ -96,6 +99,29 @@ function writeRef(fx, names, opts) {
   return out;
 }
 
+// ---- acts: the body, the target, the freeze and the shake, frame by frame (tools/lib/fxlib.mjs renderAct)
+export const ACT_FPS = 30;
+function writeActRef(fx) {
+  const { meta, mod } = fx, b = actBounds(mod), pad = 6;
+  const w = b.x1 - b.x0 + pad * 2, h = b.y1 - b.y0 + pad * 2, X = pad - b.x0, Y = pad - b.y0;
+  const frame = createFrame(w, h), act = createAct(mod, { x: X, y: Y }), frames = [];
+  const max = Math.round((meta.loop ? meta.duration * 2 - act.t : 8) * ACT_FPS);
+  const show = () => {
+    clearFrame(frame);
+    act.draw(frame, {});
+    const [sx, sy] = act.shake;
+    frames.push({ c: sha1(frame.color), l: sha1(frame.light), s: [sx, sy], f: act.frozen });
+  };
+  show();
+  for (let i = 0; i < max && !act.done(); i++) (act.update(1 / ACT_FPS), show());
+  if (!meta.loop) for (let i = 0; i < ACT_FPS * 0.3; i++) (act.update(1 / ACT_FPS), show());
+  const out = { id: fx.id, w, h, X, Y, fps: ACT_FPS, frames };
+  const file = join(OUT, `${fx.id}.act.json`);
+  mkdirSync(dirname(file), { recursive: true });
+  writeFileSync(file, JSON.stringify(out));
+  return out;
+}
+
 // ---- core fixtures for tests/core_test.gd
 function fixtures() {
   const { hash, rand, noise, noise2, fbm, tileNoise, tileFbm, loopNoise, fit, blend, mix, scale, luma, at, hex, ease, ramp } = core;
@@ -137,6 +163,13 @@ function fixtures() {
     drawCase(core, p, c.draw);
     out.painter.push({ name: c.name, pi: c.pi, si: c.si, c: sha1(f.color), l: sha1(f.light) });
   }
+  // the rig: a spread of poses, each rendered to its pixel list
+  const READY = core.READY;
+  out.rig = RIG_POSES.map((q) => {
+    const r = posed(q), i32 = (a) => Int32Array.from(a);
+    return { q, n: r.n, box: [r.x0, r.y0, r.x1, r.y1], xs: sha1(i32(r.xs)), ys: sha1(i32(r.ys)), color: sha1(r.color), src: sha1(i32(r.src)), ink: sha1(i32(r.ink)) };
+  });
+  void READY;
   const file = join(HERE, "..", "tests", "fixtures", "core.json");
   mkdirSync(dirname(file), { recursive: true });
   writeFileSync(file, JSON.stringify(exact(out)));
@@ -154,6 +187,22 @@ function exact(v) {
   if (v && typeof v === "object") return Object.fromEntries(Object.entries(v).map(([k, x]) => [k, exact(x)]));
   return v;
 }
+
+const RIG_POSES = [
+  {}, { crouch: 3, fx: 11, fy: -21, bx: 9, by: -21, ffx: 7, fbx: -7 },
+  { crouch: 3, fx: 12, fy: -21, bx: 9, by: -21, ffx: 7, fbx: -7, weapon: "sword", sa: -0.85 },
+  { x: -8, crouch: 4, lean: -4, fx: -7, fy: -35, sa: -2.65, bx: 9, by: -25, armsFront: true, ffx: 9, fbx: -8, weapon: "sword" },
+  { crouch: 5, lean: 5, fx: 20, fy: -21, sa: 0.62, bx: -9, by: -24, ffx: 13, fbx: -10, toeB: true, weapon: "greatsword", two: true },
+  { fx: 14, fy: -26, bx: -10, by: -26, weapon: "bow", pull: true, nocked: true, turn: 1 },
+  { fx: 10, fy: -20, weapon: "hammer", two: true, sa: -1.9, yaw: 1.2, crouch: 6 },
+  { fx: 8, fy: -22, weapon: "scythe", two: true, sa: 2.4, wl: 0.6, wz: -1, y: -6 },
+  { fx: 16, fy: -24, weapon: "pistol", sa: 0, offWeapon: "dagger", sb: 3.6, bx: -6, by: -18, hx: 1, hy: -1 },
+  { fx: 12, fy: -28, weapon: "launcher", two: true, sa: 0.1, face: -1 },
+  { fx: -9, fy: -36, bx: 11, by: -34, turn: 1, twist: 2, toeF: true, ffy: -6, fbx: 6 },
+  { fx: 13, fy: -20, weapon: "spear", two: true, sa: 0.05, lean: 6, crouch: 7, ffx: 12, fbx: -12 },
+  { fx: 11, fy: -19, weapon: "claw", bx: 9, by: -19, yaw: 3.14159, ghost: 1 },
+  { fx: 6, fy: -30, weapon: "handle", bz: 5, fz: -2, fzz: 4, bzz: -4, y: -12 },
+];
 
 // Painter cases are plain data so tests/core_test.gd can replay the same calls. Colors are hex strings;
 // "fn:<name>" stands for one of the callbacks defined in drawCase (and its GDScript twin).
@@ -193,12 +242,25 @@ function drawCase(core, p, [m, args]) {
 // ---- command line
 const args = process.argv.slice(2), flags = {}, pos = [];
 for (let i = 0; i < args.length; i++) {
-  if (["--dump", "--fixtures"].includes(args[i])) flags[args[i].slice(2)] = true;
+  if (["--dump", "--fixtures", "--acts"].includes(args[i])) flags[args[i].slice(2)] = true;
   else if (args[i].startsWith("--")) flags[args[i].slice(2)] = args[++i];
   else pos.push(args[i]);
 }
 if (flags.fixtures) {
   fixtures();
+  process.exit(0);
+}
+if (flags.acts) {
+  const t0 = Date.now(), list = (pos.length ? resolveIds(pos) : allIds());
+  let n = 0;
+  for (const id of list) {
+    const fx = await loadEffect(id);
+    if (!fx.mod.act) continue;
+    const r = writeActRef(fx);
+    n++;
+    if (list.length <= 12) console.log(`${id}  act ${r.frames.length} frames ${r.w}x${r.h}`);
+  }
+  console.log(`${n} acts, ${((Date.now() - t0) / 1000).toFixed(1)} s -> ${OUT}`);
   process.exit(0);
 }
 const names = flags.variants ? flags.variants.split(",") : flags.variant ? [flags.variant] : Object.keys(VARIANTS);
