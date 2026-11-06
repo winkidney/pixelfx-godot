@@ -388,6 +388,8 @@ func checkActs(ids: PackedStringArray) -> int:
 		if note.begins_with("~"):
 			if not quiet:
 				print("ok~   %s act: %s" % [id, note.substr(1)])
+		elif note and allow.has(id) and allow[id].get("acts", false):
+			print("ok*   %s act: allowed (%s): %s" % [id, allow[id].get("reason", ""), note])
 		elif note:
 			fails += 1
 			print("FAIL  %s act: %s" % [id, note])

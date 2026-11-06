@@ -701,7 +701,9 @@ class ActInstance:
 		var H := frame.h
 		var sy := FY
 		var cx := FX + (-rx if flip else rx)
-		var hw := 10 + (int(absf(q.ffx - q.fbx)) >> 1) - mini(8, absi(ry) >> 1)
+		# a pose without its feet given: JS's Math.abs(undefined - undefined) >> 1 is 0
+		var feet: int = 0 if (q.get("ffx") == null or q.get("fbx") == null) else (int(absf(q.ffx - q.fbx)) >> 1)
+		var hw := 10 + feet - mini(8, absi(ry) >> 1)
 		if sy < 0 or sy >= H:
 			return
 		var C := frame.color
