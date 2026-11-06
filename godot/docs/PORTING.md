@@ -84,6 +84,8 @@ Everything the JS imports from `core/index.js` is `Px.<same name>`:
 | `clamp lerp seg smooth bump fract wrap invLerp remap dist angleTo` | `Px.clamp(x)`, etc. (defaults as in JS) |
 | `ease.outExpo(t)` | `Px.Ease.outExpo(t)` |
 | `Math.round(x)`, `Math.hypot(a, b)`, `Math.sign(x)` | `Px.round(x)`, `Px.hypot(a, b)`, `Px.sign(x)` (JS-exact; `Px.roundi` for an int) |
+| `Math.cbrt(x)`, `Math.log2(x)` | `Px.cbrt(x)` (V8's fdlibm, bit-exact), `Px.log2(x)` |
+| `Math.sin cos atan2 asin acos exp pow log sqrt` | the built-ins `sin(x)` … `sqrt(x)`. `sqrt` is exact. The others come from the C library and can differ from V8 in the last bit. Where parity shows that one bit matters (a value right on a rounding boundary), use `Px.exp(x)`, which is V8's fdlibm exp, bit-exact. For trig, report the case: it may be allowed with a reason. |
 | `TAU`, `Math.PI` | `TAU`, `PI` (built in) |
 | `rand(a, b, c)`, `rng(a, b)`, `hash(...)`, `new Rng(s)` | `Px.rand(a, b, c)`, `Px.rng(a, b)`, `Px.hash(...)`, `Px.Rng.new(s)` (1 to 6 args) |
 | `R.range R.chance R.pick R.sign R.next R.gauss`, `R.int(a, b)` | the same, but **`R.int_(a, b)`** |
@@ -101,7 +103,7 @@ Everything the JS imports from `core/index.js` is `Px.<same name>`:
 | `READY chain shiftKeys shiftHits` | `Px.READY`, `Px.chain([...])`, `Px.shiftKeys(keys, dt, {"dx": 3})`, `Px.shiftHits(...)` |
 | `{ ...A, x: 1 }` | `Px.merge(A, {"x": 1})` |
 | `Array.from({ length: n }, (_, i) => f(i))` | `Px.arr(n, func(i): return f(i))` |
-| `list.sort((a, b) => a.z - b.z)` | `Px.sort(list, func(a, b): return a.z - b.z)` (stable, like JS; never `sort_custom`) |
+| `list.sort((a, b) => a.z - b.z)` | `Px.sort(list, func(a, b): return a.z - b.z)`. This is V8's TimSort: the same comparator calls in the same order, so even `() => R.next() - 0.5` shuffles as in JS. Never `sort_custom`. |
 
 The painter keeps every JS method and member name, with one rename: `p.get(x, y)` is **`p.getc(x, y)`**. Arguments are the
 same:
