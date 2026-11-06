@@ -13,5 +13,10 @@
     "variants": [],
     "acts": true,
     "reason": "the rig's pose solver (core/rig.gd solve) gets atan2/sin from the C library; for this move's HOLD pose they are 1 ulp off V8's fdlibm, which flips the shade tone of a few near-arm pixels (5 to 13 px, in 1 to 3 frames of the act, before the effect is even drawn). Pixel positions match; the effect itself is identical in every variant."
+  },
+  "nature/poison-cloud": {
+    "variants": "*",
+    "acts": false,
+    "reason": "glibc sin/cos differ from V8's fdlibm in the last bit (3.6% of inputs); the tongue curls and plumes blend a colour over a near-identical one, so up to 15 scattered pixels a frame land one step apart in one channel. With V8's exact sin/cos values substituted, every frame is identical."
   }
 }
