@@ -100,6 +100,9 @@ class Track:
 			var light: Variant = Image.create_from_data(w, h, false, Image.FORMAT_RGBA8, frame.light.to_byte_array()) if lit else null
 			var both := Image.create_from_data(w, h, false, Image.FORMAT_RGBA8, Px.composite(frame, PackedByteArray(), null))
 			frames.append([color, light, both])
+			if frames.size() >= n:
+				# every frame is made: let go of the running effect (and any effect instances it holds)
+				inst = null
 		return frames[i]
 
 

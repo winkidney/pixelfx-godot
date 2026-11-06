@@ -48,7 +48,7 @@ class Clipped extends Px.Painter:
 ## with it, so it stays the same shape of object every frame.)
 static func clipTo(p: Px.Painter) -> Px.Painter:
 	# kept on the painter itself, so it lives exactly as long as the painter (the JS WeakMap)
-	var q: Px.Painter = p.get_meta("pfx_clip", null)
+	var q: Px.Painter = p.get_meta("pfx_clip") if p.has_meta("pfx_clip") else null
 	if q == null:
 		q = Clipped.new(p.frame)
 		p.set_meta("pfx_clip", q)

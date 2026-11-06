@@ -189,6 +189,7 @@ func _reload() -> void:
 		if _track == null:
 			_track = Baker.track(_mod, opts, _layer_name())
 			_cache[key] = _track
+			_hook_cleanup()
 	else:
 		var o := {"x": origin.x, "y": origin.y}
 		o.merge(opts, true)
@@ -226,6 +227,22 @@ static func clear_cache() -> void:
 	_cache.clear()
 
 
+# The cache is static, but what's in it (textures, effect instances) has to go while the engine is still up: when the
+# scene tree's root leaves (the game quits), clear it.
+static var _hooked := false
+
+static func _hook_cleanup() -> void:
+	if _hooked:
+		return
+	var tree := Engine.get_main_loop() as SceneTree
+	if tree == null or tree.root == null:
+		return
+	_hooked = true
+	tree.root.tree_exiting.connect(func():
+		_cache.clear()
+		_hooked = false, CONNECT_ONE_SHOT)
+
+
 ## Render every frame of an effect now (at load time, say), so the first play costs nothing.
 static func prebake(id_or_script: Variant, opts: Dictionary = {}, which_layer: String = "") -> void:
 	var mod: Script = id_or_script if id_or_script is Script else load("res://addons/pixelfx/fx/%s.gd" % id_or_script)
@@ -234,6 +251,7 @@ static func prebake(id_or_script: Variant, opts: Dictionary = {}, which_layer: S
 	if tr == null:
 		tr = Baker.track(mod, opts, which_layer)
 		_cache[key] = tr
+		_hook_cleanup()
 	for i in tr.n:
 		tr.get_frame(i)
 
