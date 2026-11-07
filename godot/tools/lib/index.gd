@@ -57,7 +57,7 @@ func run() -> int:
 	for c in Cats.categories:
 		if metas.any(func(m): return m.id.begins_with(c.id + "/")):
 			ncat += 1
-	md.append("%d effects in %d categories. Every one is a file in `godot/addons/pixelfx/fx/<category>/<name>.gd` (ported from `src/fx/<category>/<name>.js`); render any of them with `./pfx render <id> --gif`." % [metas.size(), ncat])
+	md.append("%d effects in %d categories. Every one is a file in `godot/addons/pixelfx/fx/<category>/<name>.gd` (ported from `src/fx/<category>/<name>.js`); render any of them with `./pfx render <id> --webp`." % [metas.size(), ncat])
 	md.append("")
 	for c in Cats.categories:
 		var list := metas.filter(func(m): return m.id.begins_with(c.id + "/"))

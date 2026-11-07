@@ -1,6 +1,6 @@
 # Catalog
 
-244 effects in 21 categories. Every one is a file in `godot/addons/pixelfx/fx/<category>/<name>.gd` (ported from `src/fx/<category>/<name>.js`); render any of them with `./pfx render <id> --gif`.
+244 effects in 21 categories. Every one is a file in `godot/addons/pixelfx/fx/<category>/<name>.gd` (ported from `src/fx/<category>/<name>.js`); render any of them with `./pfx render <id> --webp`.
 
 ## moves
 

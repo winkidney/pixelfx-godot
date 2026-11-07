@@ -311,6 +311,7 @@ static func writeVideo(file: String, r: Dictionary, k: int, loops: int = 1) -> b
 	var W := w * k
 	var H := h * k
 	var mp4 := file.ends_with(".mp4")
+	var webp := file.ends_with(".webp")
 	var raw := ProjectSettings.globalize_path(file + ".rgba")
 	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(file).get_base_dir())
 	var fa := FileAccess.open(raw, FileAccess.WRITE)
@@ -320,12 +321,16 @@ static func writeVideo(file: String, r: Dictionary, k: int, loops: int = 1) -> b
 		for f in r.frames:
 			fa.store_buffer(upscale(f.color, w, h, k))
 	fa.close()
-	var vf := "pad=%d:%d:0:0:black,format=yuv420p" % [W + W % 2, H + H % 2] if mp4 else "split[a][b];[a]palettegen=max_colors=255:stats_mode=full[p];[b][p]paletteuse=dither=none"
-	var args := ["-v", "error", "-y", "-f", "rawvideo", "-pix_fmt", "rgba", "-s", "%dx%d" % [W, H], "-r", str(r.fps), "-i", raw, "-vf", vf]
+	var args := ["-v", "error", "-y", "-f", "rawvideo", "-pix_fmt", "rgba", "-s", "%dx%d" % [W, H], "-r", str(r.fps), "-i", raw]
 	if mp4:
+		args.append_array(["-vf", "pad=%d:%d:0:0:black,format=yuv420p" % [W + W % 2, H + H % 2]])
 		args.append_array(["-c:v", "libx264", "-crf", "14", "-preset", "slow", "-movflags", "+faststart"])
+	elif webp:
+		# lossless: every pixel, the alpha and the frame timing exactly as rendered
+		args.append_array(["-c:v", "libwebp_anim", "-lossless", "1", "-compression_level", "4", "-pix_fmt", "bgra", "-loop", "0"])
 	else:
-		args.append_array(["-loop", "0"])
+		# GIF: at most 255 colors a frame, 1-bit alpha, delays in 1/100 s
+		args.append_array(["-vf", "split[a][b];[a]palettegen=max_colors=255:stats_mode=full[p];[b][p]paletteuse=dither=none", "-loop", "0"])
 	args.append(ProjectSettings.globalize_path(file))
 	var out := []
 	var code := OS.execute("ffmpeg", PackedStringArray(args), out, true)

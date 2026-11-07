@@ -1,6 +1,7 @@
 # ./pfx act: an effect acted out (the character, the target, the freeze on contact). Motion is what you are judging,
 # so the strip shows consecutive 12 fps steps, not a sample.
 #   ./pfx act melee/sword-slash            strip: records/act/melee-sword-slash.png
+#   ./pfx act melee/sword-slash --webp     lossless animated WebP: records/act/melee-sword-slash.webp
 #   ./pfx act melee/sword-slash --mp4      video: records/act/melee-sword-slash.mp4
 #   ./pfx act melee/sword-slash --sheet    the whole act, character and all, as a transparent sprite sheet
 # Options: --from S --to S (strip range) --step S (default 1/12) --cols N --zoom N --bg KIND --out FILE --no-target --seconds S
@@ -30,9 +31,9 @@ func run(ids: PackedStringArray, flags: Dictionary) -> int:
 			print("%s  %d frames of %d x %d  ->  %s" % [id, r.n, r.w, r.h, ProjectSettings.globalize_path(base + ".sheet.png")])
 			continue
 		var r := Lib.renderAct(fx, {"fps": 60.0, "bg": flags.get("bg"), "target": not flags.has("no-target"), "seconds": float(flags.seconds) if flags.has("seconds") else null})
-		if flags.has("mp4"):
+		if flags.has("mp4") or flags.has("webp"):
 			var k := int(flags.get("zoom", maxi(2, mini(8, int(960.0 / maxi(r.w, r.h))))))
-			var file: String = flags.get("out", base + ".mp4")
+			var file: String = flags.get("out", base + (".webp" if flags.has("webp") else ".mp4"))
 			Lib.writeVideo(file, r, k)
 			print("%s  %d frames  %.2f s  ->  %s" % [id, r.frames.size(), r.frames.size() / r.fps, ProjectSettings.globalize_path(file)])
 			continue
@@ -50,8 +51,8 @@ func run(ids: PackedStringArray, flags: Dictionary) -> int:
 		var rows := ceili(list.size() / float(cols))
 		var img := Lib.Canvas.new(cols * (r.w * k + 4), rows * (r.h * k + 18))
 		for j in list.size():
-			var x := (j % cols) * (r.w * k + 4)
-			var y := floori(j / float(cols)) * (r.h * k + 18)
+			var x: int = (j % cols) * (r.w * k + 4)
+			var y: int = floori(j / float(cols)) * (r.h * k + 18)
 			img.text("%.2f" % list[j].t, x + 2, y + 3, 2)
 			img.paste(Lib.upscale(list[j].color, r.w, r.h, k), r.w * k, r.h * k, x, y + 16)
 		var file: String = flags.get("out", base + ".png")

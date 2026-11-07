@@ -231,7 +231,7 @@ eyes, feed your references.
    [his](https://www.spritefusion.com/pixel-art-vfx).
 2. **Say it in one line** with the art direction, then draft: `./pfx new <category>/<name>` (`--loop`, `--sim`).
 3. **Render and look.** `./pfx render <id> --zoom 3` writes `records/<id>/contact.png`. `--all` shows every frame,
-   `--gif` and `--mp4` show the motion.
+   `--webp` (lossless; GIF loses colors), `--gif` and `--mp4` show the motion.
 4. **Fix the worst thing, render again.** Three rounds minimum; showpieces take more.
 5. **Act it out** if there's a character: `./pfx act <id>`.
 6. **Check:** run `./pfx check <id>` until it passes clean, then `./pfx index` to list it in the registry and catalog.

@@ -159,7 +159,7 @@ Then:
 3. **Draft.** `./pfx new <category>/<name>` gives a working file (`--loop` for a loop, `--sim` for particles). When the
    direction is open, write 3 to 5 genuinely different drafts (`<name>-a` .. `-e`), render them all
    (`./pfx render "<category>/<name>-*"`) and look at every contact sheet before choosing. If the user is around, show
-   them the strongest two or three (`--gif`).
+   them the strongest two or three (`--webp`, lossless).
 4. **Look, judge, fix.** Render, open `godot/records/<id>/contact.png`, and judge like a picky pixel artist. Fix the
    worst thing and render again. Three rounds minimum; a showpiece takes more. `--all` shows every frame, `--mp4` shows
    motion.

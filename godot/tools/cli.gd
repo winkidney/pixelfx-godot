@@ -1,9 +1,9 @@
 # pixelfx command line for Godot. Run it through ./pfx (godot --headless --path godot -s res://tools/cli.gd -- ...).
 #
 #   ./pfx list [words]                    search ids, names, tags and descriptions
-#   ./pfx render <ids> [--gif] [--mp4] [--sheet] [--all] [--zoom N] [--bg KIND] [--seed N] [--opts JSON] [--no-actor]
+#   ./pfx render <ids> [--webp] [--gif] [--mp4] [--sheet] [--all] [--zoom N] [--bg KIND] [--seed N] [--opts JSON] [--no-actor]
 #   ./pfx check [ids]                     catch spills, seams, unseeded randomness, slow frames, act mistakes
-#   ./pfx act <ids> [--mp4] [--sheet]     an effect acted out: consecutive 12 fps steps
+#   ./pfx act <ids> [--webp] [--mp4] [--sheet]   an effect acted out: consecutive 12 fps steps
 #   ./pfx sheets [ids] [--spriteframes]   sprite sheets (PNG + JSON, and SpriteFrames .tres) for the library
 #   ./pfx new <category>/<name> [--loop] [--sim]   a working starting point
 #   ./pfx index                           regenerate fx/registry.gd and docs/CATALOG.md
@@ -19,7 +19,7 @@ const Px := preload("res://addons/pixelfx/core/px.gd")
 const Lib := preload("res://tools/lib/fxlib.gd")
 const Parity := preload("res://tools/lib/parity.gd")
 
-const BOOL_FLAGS := ["gif", "mp4", "sheet", "all", "no-actor", "full", "no-sheet", "quiet", "loop", "sim", "spriteframes", "no-target", "help", "acts"]
+const BOOL_FLAGS := ["webp", "gif", "mp4", "sheet", "all", "no-actor", "full", "no-sheet", "quiet", "loop", "sim", "spriteframes", "no-target", "help", "acts"]
 
 var flags := {}
 var pos := PackedStringArray()
@@ -132,6 +132,9 @@ func cmd_render() -> int:
 		made.append(Lib.save_png(dir.path_join("contact.png"), Lib.contactSheet(fx, r, {"max": 400 if flags.has("all") else int(flags.get("max", 16)), "zoom": zoom})))
 		var k := int(flags.get("scale", maxi(2, mini(8, int(480.0 / maxi(r.w, r.h))))))
 		var loops := int(flags.get("loops", 2 if fx.meta.loop else 1))
+		# an animated WebP loops by itself: one pass unless --loops says otherwise
+		if flags.has("webp") and Lib.writeVideo(dir.path_join("anim.webp"), r, k, int(flags.get("loops", 1))):
+			made.append(dir.path_join("anim.webp"))
 		if flags.has("gif") and Lib.writeVideo(dir.path_join("anim.gif"), r, k, loops):
 			made.append(dir.path_join("anim.gif"))
 		if flags.has("mp4") and Lib.writeVideo(dir.path_join("anim.mp4"), r, k, maxi(loops, 3 if fx.meta.loop else 1)):
