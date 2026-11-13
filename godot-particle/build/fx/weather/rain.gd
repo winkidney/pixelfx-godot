@@ -1,4 +1,4 @@
-# reimagined-from: src/fx/weather/rain.js
+# reimagined-from: src/fx/weather/rain.js@20fe94ba69d0262151a65e38ff8a0bf90b043b75
 # Rain: slanted rain at four depths: far drops fade into the dark, near ones glint and splash, drops ring the puddles
 # and a low mist drifts over the wet floor.
 # The haze, the wet floor line and the puddles are the original's still pixels (port/props.py --share 0.3). Four

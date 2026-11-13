@@ -1,4 +1,4 @@
-# reimagined-from: src/fx/status/burning.js
+# reimagined-from: src/fx/status/burning.js@d28f251c8bfae13cd11d1179c849cdbf6f0d7d69
 # Burning: burning over time: small flames lick from four hot spots, trailing sparks and thin smoke; every 0.6 s they
 # flare, the body flashes white then orange, scorch marks spread.
 # The stand-in is the effect's own Actor node (shaders/actor.gdshader) so the flare can flash it; a small flame

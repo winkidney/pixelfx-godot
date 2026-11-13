@@ -82,6 +82,29 @@ You can also copy `godot/skills/pixelfx-godot` into `~/.claude/skills/`. Then as
 - "Make five takes on a coin pickup sparkle and show me the best two."
 - "Merge the latest pixelfx and port whatever changed."
 
+## a second port: native particles
+
+`godot-particle/` is a separate Godot project where the same 244 effects are rebuilt from Godot's own tools: GPU
+particles first, then canvas shaders, lines, sprites and an AnimationPlayer for what particles can't do. Each effect is
+an ordinary scene (`addons/pixelfx_particles/fx/<category>/<name>.tscn`) you can open and tweak in the editor, and it
+runs on the GPU in the Compatibility renderer (desktop, mobile, web). It keeps the pixel look: colours snap to the
+effect's own ramps, alpha dithers, light adds.
+
+It isn't a pixel copy. It is judged against the original frame by frame (`./pfxp compare`: how much it covers, where,
+in which colours, moving how) and by eye, side by side. The knight, the straw target, critters and still props reuse
+the original's pixels; fire, smoke, light, magic, rings, slashes, bolts and weather are made here.
+
+```gdscript
+var fx := PixelFxParticles2D.new()
+fx.effect = "ice/frost-nova"
+fx.palette_preset = "arcane"
+fx.position = hero.position
+add_child(fx)
+```
+
+`PixelFxParticlesAct2D` plays the acted-out version. [godot-particle/docs/AUTHORING.md](godot-particle/docs/AUTHORING.md)
+explains how an effect is built; `cd godot-particle && ./pfxp help` lists the tools.
+
 ## how the port works
 
 - **The original stays, untouched.** The JavaScript library (`src/`, `tools/`, `docs/`, `gallery/`, `skills/pixelfx/`) is

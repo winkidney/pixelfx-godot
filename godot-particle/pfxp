@@ -10,11 +10,19 @@ if [ ! -d "$DIR/.godot/imported" ] || [ "$1" = "import" ]; then
 	flock "$DIR/records/.import.lock" "$GODOT_BIN" --headless --path "$DIR" --import >/dev/null 2>&1 || true
 	[ "$1" = "import" ] && exit 0
 fi
-render() {
+# render and smoke need a real renderer: Godot under xvfb-run with the Compatibility renderer, at a fixed frame rate
+display() {
+	local cmd="$1"
+	shift
+	local fps=30
+	[[ " $* " == *" --act "* ]] && fps=60
 	xvfb-run -a -s "-screen 0 1280x800x24" "$GODOT_BIN" --no-header --path "$DIR" --rendering-driver opengl3 \
-		--fixed-fps 30 --disable-vsync -s res://tools/cli.gd -- render "$@" 2>&1 \
+		--fixed-fps $fps --disable-vsync -s res://tools/cli.gd -- "$cmd" "$@" 2>&1 \
 		| grep -v -e "Could not set V-Sync" -e "set_use_vsync" -e "^OpenGL API" -e "^$"
 	return "${PIPESTATUS[0]}"
+}
+render() {
+	display render "$@"
 }
 case "$1" in
 	render)
@@ -22,11 +30,18 @@ case "$1" in
 		render "$@"
 		exit $?
 		;;
+	smoke)
+		shift
+		display smoke "$@"
+		exit $?
+		;;
 	compare)
 		shift
 		ids=()
 		for a in "$@"; do [[ "$a" != --* ]] && ids+=("$a"); done
-		if [[ " $* " != *" --no-render "* ]]; then render "${ids[@]}" --quiet || exit 1; fi
+		extra=()
+		[[ " $* " == *" --act "* ]] && extra+=(--act)
+		if [[ " $* " != *" --no-render "* ]]; then render "${ids[@]}" "${extra[@]}" --quiet || exit 1; fi
 		exec python3 -I "$DIR/port/compare.py" "$@"
 		;;
 	*)

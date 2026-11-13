@@ -1,4 +1,4 @@
-# reimagined-from: src/fx/explosions/small-explosion.js
+# reimagined-from: src/fx/explosions/small-explosion.js@64b98a2976bf623829fe4bc9bdfc2b4ae894672a
 # Explosion: a ground blast: a white flash and shock rings, fire that cools into a rolling smoke column, sparks,
 # burning brands that land and keep burning, tumbling rocks and a glowing scorch.
 # Shapes: the flash, two shock rings and a band rolling out along the floor are ring shaders keyed over time.

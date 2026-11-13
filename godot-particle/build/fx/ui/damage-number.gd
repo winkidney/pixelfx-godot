@@ -1,4 +1,4 @@
-# reimagined-from: src/fx/ui/damage-number.js
+# reimagined-from: src/fx/ui/damage-number.js@3f026840a40959e48e9ca9a8d1da59734157a1f6
 # Damage number: a red -27 punches out of a hit spark, white for a frame, arcs up, lands with a squash, hops once and
 # fades out as it lifts.
 # The number is a PixelText (the original's word renderer) whose position and squash replay the original's little

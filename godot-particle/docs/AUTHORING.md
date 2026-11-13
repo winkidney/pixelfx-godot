@@ -21,9 +21,10 @@ cd godot-particle
 `./pfxp list [words]` searches the effects. `python3 -I port/compare.py <ids> --no-render` rescores without
 rendering. Renders go to `records/render/<id>/`, comparisons to `records/compare/<id>/` (git-ignored).
 
-**Done** means: `check` passes, the score is at least 0.5 (aim for 0.65), and you have looked at the sheet and the
-side-by-side and they read as the same effect. The score is a triage signal, not the judge: a glow-heavy effect can
-look right at 0.52 and a wrong one can sneak past 0.6. Your eyes decide.
+**Done** means: `check` passes, the score is at least 0.6 (aim for 0.75), and you have looked at the sheet and the
+side-by-side and they read as the same effect. Both sides are measured against the same backdrop (the original's,
+pixel for pixel), so a stand-in or a still prop counts the same on both. The score is a triage signal, not the judge:
+your eyes decide.
 
 ## What a scene is
 
@@ -52,7 +53,7 @@ look right at 0.52 and a wrong one can sneak past 0.6. Your eyes decide.
 
 | helper | makes |
 |---|---|
-| `particles(name, o)` | a GPUParticles2D. o: `at`, `back`, `layer`, `amount`, `lifetime`, `one_shot`, `explosiveness`, `randomness`, `preprocess`, `emitting`, `texture`, `align` (texture along velocity), `emit` (point, `{"box": v}`, `{"circle": r}`, `{"ring": [r, inner]}`, `{"points": PackedVector2Array}`), `dir`, `spread`, `speed`, `gravity`, `damping`, `radial`, `tangential`, `orbit`, `angle`, `spin`, `scale`, `scale_curve`, `alpha_curve`, `color`, `ramp`, `initial`, `turbulence`, `local`, `collide` |
+| `particles(name, o)` | a GPUParticles2D. o: `at`, `back`, `layer`, `amount`, `lifetime`, `one_shot`, `explosiveness`, `randomness`, `preprocess`, `emitting`, `texture`, `align` (texture along velocity), `emit` (point, `{"box": v}`, `{"circle": r}`, `{"ring": [r, inner]}`, `{"points": PackedVector2Array}`), `dir`, `spread`, `speed`, `gravity`, `damping`, `radial` (acceleration), `radial_speed`, `life_random`, `tangential`, `orbit`, `angle`, `spin`, `scale`, `scale_curve`, `alpha_curve`, `color`, `ramp`, `initial`, `turbulence`, `local`, `collide` |
 | `ramp(name, o)` | a stepped gradient from the original's colour ramp option `name`: `from`, `to` (part of it), `reverse` (brightest first: cooling over a life), `alpha` curve, `stops`. Recolouring follows it. |
 | `gradient(colors, offsets)`, `color(name, u)`, `curve(points)` | explicit gradients, a colour along a ramp, curves |
 | `sprite(name, tex, o)`, `rect(name, Rect2, color, o)`, `group(name, o)` | plain nodes |
@@ -60,9 +61,9 @@ look right at 0.52 and a wrong one can sneak past 0.6. Your eyes decide.
 | `glow(name, reach, params, o)` | soft additive disc or band (light layer) |
 | `arc(name, reach, params, o)` | crescent smear on a tilted ellipse (shaders/arc.gdshader): slashes, swipes, sweeps |
 | `fog(name, size, params, o)` | noise banks scrolling with the loop (shaders/fog.gdshader): mist, fog, haze, cloud, smoke sheets |
-| `shape(name, shader, size, params, o)` | any canvas shader on a rect centred on `at` (your own `.gdshader` under `fx/<cat>/`) |
+| `shape(name, shader, size, params, o)` | any canvas shader on a rect centred on `at` (your own `.gdshader` under `fx/<cat>/`); colour arrays become `vec4[]` uniforms and join the palette |
 | `bolt(name, a, b, o)` | a jagged line re-rolled off the effect's clock (core/bolt.gd): lightning, arcs, crackles, tendrils |
-| `line(name, points, o)` | a Line2D; `soft` gives it a glowing cross-section |
+| `line(name, points, o)` | a Line2D; `soft` gives it a glowing cross-section; with a `gradient` it gets a point every pixel so stepped colours stay stepped |
 | `text(name, s, o)` | a word in the original's pixel fonts, drawn as its UI words are (core/pixel_text.gd): fill ramp, bevel, outline, shadow, flash, squash |
 | `ground(y)` | a floor particles can land on, bounce off or vanish into (`collide`) |
 | `actor_node()` | the stand-in as the effect's own node, with a flash and tint you can key (status effects) |

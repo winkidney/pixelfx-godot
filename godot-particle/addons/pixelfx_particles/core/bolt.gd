@@ -19,6 +19,7 @@ extends Line2D
 @export var branch_width := 1.0
 
 var _step := -1
+var _built := []
 var _branches: Array[Line2D] = []
 
 
@@ -30,7 +31,8 @@ func _process(_delta: float) -> void:
 	var fx := _effect()
 	var t: float = fx.t if fx else 0.0
 	var step := int(floor(t * rate)) if rate > 0.0 else 0
-	if step != _step:
+	# re-roll on the next step, and redraw at once when the ends or the jag are keyed somewhere new
+	if step != _step or _built != [from, to, jag]:
 		_rebuild(step)
 
 
@@ -43,6 +45,7 @@ func _effect() -> Node:
 
 func _rebuild(step: int) -> void:
 	_step = step
+	_built = [from, to, jag]
 	var rng := RandomNumberGenerator.new()
 	rng.seed = hash(Vector3i(bolt_seed, step, segments))
 	points = _zigzag(from, to, segments, jag, rng)

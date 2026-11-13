@@ -228,7 +228,8 @@ func _place(n: CanvasItem, o: Dictionary, parent: Node = null) -> void:
 ##   texture ("dot2", "disc5", "glow16", ... or a Texture2D), align (point the texture along the velocity)
 ##   emit: Vector2.ZERO (a point) | {"box": Vector2} | {"circle": r} | {"ring": [r, inner]} | {"points": PackedVector2Array}
 ##   dir (degrees, 0 right, -90 up: default -90), spread (degrees either side), speed [min, max], gravity Vector2,
-##   damping [min, max], radial [min, max], tangential [min, max], orbit [min, max] (turns a second),
+##   damping [min, max], radial [min, max] (acceleration away from the emitter), radial_speed [min, max] (velocity
+##   away from it), life_random (0..1: lifetimes vary), tangential [min, max], orbit [min, max] (turns a second),
 ##   angle [min, max], spin [min, max] (degrees a second), scale [min, max], scale_curve [[t, v], ...],
 ##   alpha_curve [[t, a], ...], color, ramp (colour over life, from ramp()), initial (a random starting colour),
 ##   turbulence {strength, scale, speed, influence [min, max]: keep it 0.005..0.03, more stops a particle dead},
@@ -283,13 +284,18 @@ func particles(name: String, o: Dictionary = {}) -> GPUParticles2D:
 	_range(m, "initial_velocity", o.get("speed", [0.0, 0.0]))
 	_range(m, "damping", o.get("damping", [0.0, 0.0]))
 	_range(m, "radial_accel", o.get("radial", [0.0, 0.0]))
+	_range(m, "radial_velocity", o.get("radial_speed", [0.0, 0.0]))
+	m.lifetime_randomness = o.get("life_random", 0.0)
 	_range(m, "tangential_accel", o.get("tangential", [0.0, 0.0]))
 	_range(m, "orbit_velocity", o.get("orbit", [0.0, 0.0]))
 	_range(m, "angle", o.get("angle", [0.0, 0.0]))
 	_range(m, "angular_velocity", o.get("spin", [0.0, 0.0]))
 	_range(m, "scale", o.get("scale", [1.0, 1.0]))
 	if o.has("scale_curve"):
-		m.scale_curve = curve(o.scale_curve, 8.0)
+		var top := 8.0
+		for pt in o.scale_curve:
+			top = maxf(top, float(pt[1]))
+		m.scale_curve = curve(o.scale_curve, top)
 	if o.has("alpha_curve"):
 		m.alpha_curve = curve(o.alpha_curve)
 	if o.has("color"):
@@ -438,6 +444,14 @@ func shape(name: String, shader: Variant, size: Vector2, params: Dictionary = {}
 		var v: Variant = params[k]
 		if v is int:
 			v = float(v)   # an int given to a float uniform is dropped when the scene is saved
+		if v is PackedColorArray or (v is Array and v.size() and v.all(func(c): return c is Color)):
+			# a vec4[] uniform needs a PackedVector4Array (colours arrive as zeros otherwise)
+			var arr := PackedVector4Array()
+			for c in v:
+				arr.append(Vector4(c.r, c.g, c.b, c.a))
+				if not lit:
+					keep_colour(c)
+			v = arr
 		if v is Color and not lit:
 			keep_colour(v)
 		m.set_shader_parameter(k, v)
@@ -510,6 +524,16 @@ func ground(y := 0.0) -> LightOccluder2D:
 func line(name: String, points: PackedVector2Array, o: Dictionary = {}) -> Line2D:
 	var l := Line2D.new()
 	l.name = name
+	if o.has("gradient") and points.size() >= 2:
+		# a Line2D's gradient lands on its points: give it one a pixel so a stepped gradient stays stepped
+		var dense := PackedVector2Array([points[0]])
+		for i in range(1, points.size()):
+			var a := points[i - 1]
+			var b := points[i]
+			var n := maxi(1, int(ceil(a.distance_to(b))))
+			for k in range(1, n + 1):
+				dense.append(a.lerp(b, k / float(n)))
+		points = dense
 	l.points = points
 	l.width = o.get("width", 1.0)
 	l.default_color = o.get("color", Color.WHITE)

@@ -1,4 +1,4 @@
-# reimagined-from: src/fx/transitions/iris.js
+# reimagined-from: src/fx/transitions/iris.js@022b4ba67998bba6943eb6aefbc748ec23df8868
 # Iris: a lit iris closes onto a warm spotlight where dust drifts, holds as its rim twinkles, snaps shut into a glint,
 # then pops open from a flash with a white-hot rim throwing sparks.
 # The ink and its lit rim are one shader (shaders/iris.gdshader) whose radius follows the original's curve, sampled

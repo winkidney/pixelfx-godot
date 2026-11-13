@@ -1,4 +1,4 @@
-# reimagined-from: src/fx/fire/torch.js@b3a3f2c1
+# reimagined-from: src/fx/fire/torch.js@e4fc006bf9ce6b4c54f06869fdac765498f5a1d0
 # Torch: a wall torch on an iron bracket: a licking flame leaping off a pitch-soaked wrap, licks and puffs torn off
 # its tips, smoke, embers, a flickering light on the wall.
 # The bracket, handle and wrap are the original's pixels (port/props.py); the flame is three emitters (a hot root,

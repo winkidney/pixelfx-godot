@@ -1,5 +1,6 @@
 # Frames of a particle effect (records/render/<id>/) against the pixel port's reference (godot/records/gallery/<id>/
 # anim.webp, lossless and identical to the JS original). Not a pixel match: a reimagining is judged on what it does.
+# Both are measured against the same backdrop: the render's, which is the original's pixel for pixel.
 #   activity  how much of the canvas the effect covers frame by frame: the curve's shape and its total
 #   extent    where it ever draws: IoU of the two footprints, each widened by 3 px
 #   colour    which colours it draws: overlap of the two OKLab histograms
@@ -33,8 +34,12 @@ def ids_for(args):
     return [i for i in out if not (i in seen or seen.add(i))]
 
 
+ACT = os.path.join(ROOT, "..", "godot", "records", "act")
+MODE = {"act": False}
+
+
 def ref_frames(fid):
-    path = os.path.join(REF, fid, "anim.webp")
+    path = os.path.join(ACT, fid.replace("/", "-") + ".webp") if MODE["act"] else os.path.join(REF, fid, "anim.webp")
     if not os.path.exists(path):
         raise FileNotFoundError(f"{path}: render the reference first (cd godot && ./pfx render {fid} --webp --scale 1 --out res://records/gallery)")
     # the encoder merges identical neighbouring frames into one longer frame: spread them back onto 30 fps
@@ -45,10 +50,11 @@ def ref_frames(fid):
             frames.append(np.asarray(im.convert("RGB")).copy())
             t += im.info.get("duration", 33) or 33
             ends.append(t)
-    n = max(1, int(round(t * 30 / 1000)))
+    fps = 60 if MODE["act"] else 30
+    n = max(1, int(round(t * fps / 1000)))
     out, j = [], 0
     for k in range(n):
-        tk = (k + 0.5) * 1000 / 30
+        tk = (k + 0.5) * 1000 / fps
         while j < len(ends) - 1 and ends[j] <= tk:
             j += 1
         out.append(frames[j])
@@ -56,7 +62,7 @@ def ref_frames(fid):
 
 
 def pfx_frames(fid):
-    d = os.path.join(ROOT, "records", "render", fid)
+    d = os.path.join(ROOT, "records", "render-act" if MODE["act"] else "render", fid)
     files = sorted(f for f in glob.glob(os.path.join(d, "[0-9]*.png")))
     if not files:
         raise FileNotFoundError(f"{d}: nothing rendered (./pfxp render {fid})")
@@ -130,7 +136,9 @@ def score(fid):
     h, w = ref[0].shape[:2]
     if pfx[0].shape[:2] != (h, w):
         raise ValueError(f"{fid}: canvas {pfx[0].shape[1]}x{pfx[0].shape[0]}, the reference's {w}x{h}")
-    rbg = mode_backdrop(ref)
+    # both sides against the same, true backdrop (the render's: core/backdrop.gd draws the original's exactly), so
+    # still parts (a stand-in, an orb's glass, a pool of light) count the same on both
+    rbg = pbg if pbg.shape == ref[0].shape else mode_backdrop(ref)
     rm = active(ref, rbg)
     pm = active(pfx, pbg)
     # colour also counts faint light, which is most of what a glow is
@@ -183,7 +191,7 @@ def sheet(fid, ref, pfx, out):
     img.save(os.path.join(out, "sheet.png"))
     m = min(len(ref), len(pfx))
     side = [Image.fromarray(np.concatenate([ref[i], np.full((h, 2, 3), 40, np.uint8), pfx[i]], axis=1)).resize(((2 * w + 2) * 2, h * 2), Image.NEAREST) for i in range(m)]
-    side[0].save(os.path.join(out, "side.webp"), save_all=True, append_images=side[1:], duration=33, loop=0, lossless=True, method=0)
+    side[0].save(os.path.join(out, "side.webp"), save_all=True, append_images=side[1:], duration=17 if MODE["act"] else 33, loop=0, lossless=True, method=0)
 
 
 def main(argv):
@@ -192,10 +200,11 @@ def main(argv):
     lo = float(argv[argv.index("--min") + 1]) if "--min" in argv else None
     if lo is not None:
         args = [a for a in args if a != str(lo) and a != argv[argv.index("--min") + 1]]
+    MODE["act"] = "--act" in argv
     ids = ids_for(args or ["*"])
     rows, bad = [], 0
     for fid in ids:
-        out = os.path.join(ROOT, "records", "compare", fid)
+        out = os.path.join(ROOT, "records", "compare-act" if MODE["act"] else "compare", fid)
         os.makedirs(out, exist_ok=True)
         try:
             r, ref, pfx = score(fid)
@@ -211,7 +220,7 @@ def main(argv):
         print(f"{flag}{fid:30s} {r['score']:.3f}  act {r['activity']:.2f}  ext {r['extent']:.2f}  col {r['colour']:.2f}  mot {r['motion']:.2f}  (shift {r['shift']:+d})")
     if rows:
         print(f"\n{len(rows)} compared, mean score {np.mean([r['score'] for r in rows]):.3f}" + (f", {bad} below {lo} or skipped" if lo is not None else ""))
-        summ = os.path.join(ROOT, "records", "compare", "summary.json")
+        summ = os.path.join(ROOT, "records", "compare-act" if MODE["act"] else "compare", "summary.json")
         old = json.load(open(summ)) if os.path.exists(summ) else {}
         old.update({r["id"]: r for r in rows})
         json.dump(old, open(summ, "w"), indent=1)
