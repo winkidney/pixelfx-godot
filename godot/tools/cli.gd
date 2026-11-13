@@ -11,6 +11,7 @@
 #   ./pfx parity [ids] --acts             the same for acts: body, target, freezes and shakes
 #   ./pfx test                            core unit tests against the JS fixtures
 #   ./pfx bench [ids]                     how long a frame takes to render LIVE (median and worst, ms)
+#   ./pfx export meta|actors [ids] --out DIR   what the particle port takes from this one (godot-particle/)
 #
 # Outputs go to godot/records/ (git-ignored). Ids are "category/name"; a category or a pattern ("fire/*") works too.
 extends SceneTree
@@ -60,6 +61,7 @@ func main() -> int:
 		"sheets": return load("res://tools/lib/sheets.gd").new().run(ids_or_all(), flags)
 		"new": return load("res://tools/lib/newfx.gd").new().run(pos, flags)
 		"index": return load("res://tools/lib/index.gd").new().run()
+		"export": return load("res://tools/lib/export_particle.gd").new().run(pos, flags)
 		"help": return help()
 	printerr("unknown command: ", cmd)
 	return help(1)

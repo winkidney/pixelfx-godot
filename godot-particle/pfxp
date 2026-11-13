@@ -1,0 +1,35 @@
+#!/bin/bash
+# pixelfx particles CLI: ./pfxp <command> [args] (./pfxp help). Set GODOT if godot isn't on your PATH.
+# render (and compare, which renders first) run Godot under xvfb-run with the Compatibility renderer at a fixed
+# 30 fps: GPU particles need a real renderer. Everything else runs headless.
+DIR="$(cd "$(dirname "$0")" && pwd)"
+GODOT_BIN="${GODOT:-godot}"
+# importing writes .godot/: one at a time, however many shells run pfxp at once
+if [ ! -d "$DIR/.godot/imported" ] || [ "$1" = "import" ]; then
+	mkdir -p "$DIR/records"
+	flock "$DIR/records/.import.lock" "$GODOT_BIN" --headless --path "$DIR" --import >/dev/null 2>&1 || true
+	[ "$1" = "import" ] && exit 0
+fi
+render() {
+	xvfb-run -a -s "-screen 0 1280x800x24" "$GODOT_BIN" --no-header --path "$DIR" --rendering-driver opengl3 \
+		--fixed-fps 30 --disable-vsync -s res://tools/cli.gd -- render "$@" 2>&1 \
+		| grep -v -e "Could not set V-Sync" -e "set_use_vsync" -e "^OpenGL API" -e "^$"
+	return "${PIPESTATUS[0]}"
+}
+case "$1" in
+	render)
+		shift
+		render "$@"
+		exit $?
+		;;
+	compare)
+		shift
+		ids=()
+		for a in "$@"; do [[ "$a" != --* ]] && ids+=("$a"); done
+		if [[ " $* " != *" --no-render "* ]]; then render "${ids[@]}" --quiet || exit 1; fi
+		exec python3 -I "$DIR/port/compare.py" "$@"
+		;;
+	*)
+		exec "$GODOT_BIN" --headless --no-header --path "$DIR" -s res://tools/cli.gd -- "$@"
+		;;
+esac
