@@ -843,8 +843,8 @@ static func _near(x: Variant, y: Variant, a: Variant, c: Variant) -> bool:
 ## Another effect played inside this one (the original's chain(): a move strings effects together). Its own scene is
 ## instanced, held until `t` (seconds) and played then; it keeps its own colours, seed and timing, and follows this
 ## effect's speed, take and light. o (all optional): t, until (cut it off then: it vanishes, as in the original),
-## x, y (px from the origin, or a Callable of this effect's time for a projectile's flight), height (raise it: the
-## original's `height` option), palette (PackedColorArray: its main ramp in other colours, the original's
+## x, y (px from the origin, or a Callable of this effect's time for a projectile's flight), height (the original's
+## `height` option: the scene is lifted by its difference from that effect's default), palette (PackedColorArray: its main ramp in other colours, the original's
 ## `palette`), flip.
 func cue(fx_id: String, o: Dictionary = {}) -> Node2D:
 	var scene: PackedScene = load("res://addons/pixelfx_particles/fx/%s.tscn" % fx_id)
@@ -859,7 +859,11 @@ func cue(fx_id: String, o: Dictionary = {}) -> Node2D:
 	if o.has("palette"):
 		inst.set("palette_override", PackedColorArray(o.palette))
 	root.add_child(inst)
-	var lift := Vector2(0.0, -float(o.get("height", 0.0)))
+	# `height`: the original's option of that name, px above the floor; the scene draws at its own default height
+	var lift := Vector2.ZERO
+	if o.has("height"):
+		var dflt: Variant = (meta_of(fx_id).get("options", {}) as Dictionary).get("height", 0.0)
+		lift.y = -(float(o.height) - float(dflt))
 	var off: float = o.get("until", -1.0)
 	var fx_x: Variant = o.get("x", 0.0)
 	var fx_y: Variant = o.get("y", 0.0)

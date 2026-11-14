@@ -1,0 +1,93 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://addons/pixelfx_particles/core/pfx_effect.gd" id="1_ym5ac"]
+[ext_resource type="PackedScene" path="res://addons/pixelfx_particles/fx/melee/sword-slash.tscn" id="2_4p7gp"]
+[ext_resource type="PackedScene" path="res://addons/pixelfx_particles/fx/impacts/crit-hit.tscn" id="3_6rwti"]
+
+[sub_resource type="Animation" id="Animation_icl1l"]
+length = 2.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SwordSlash1:visible")
+tracks/0/interp = 0
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.159),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SwordSlash1")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.159),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CritHit2:visible")
+tracks/2/interp = 0
+tracks/2/loop_wrap = false
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.219),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CritHit2")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.219),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_orxax"]
+_data = {
+&"fx": SubResource("Animation_icl1l")
+}
+
+[node name="DashStrike" type="Node2D" unique_id=1422507169]
+script = ExtResource("1_ym5ac")
+effect_id = "moves/dash-strike"
+source = "src/fx/moves/dash-strike.js@9d2c7d8aeb053fd4afc94a78bae03725912b3580"
+duration = 2.3
+canvas_size = Vector2i(372, 156)
+origin = Vector2i(66, 136)
+bg = "ground"
+actor = 2
+palette_extra = PackedColorArray()
+palette_override = PackedColorArray()
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2042064124]
+callback_mode_method = 1
+libraries/ = SubResource("AnimationLibrary_orxax")
+
+[node name="SwordSlash1" parent="." unique_id=758280633 instance=ExtResource("2_4p7gp")]
+visible = false
+position = Vector2(116, 0)
+autoplay = false
+show_actor = false
+
+[node name="CritHit2" parent="." unique_id=1390880972 instance=ExtResource("3_6rwti")]
+visible = false
+position = Vector2(166, -2)
+autoplay = false
+show_actor = false

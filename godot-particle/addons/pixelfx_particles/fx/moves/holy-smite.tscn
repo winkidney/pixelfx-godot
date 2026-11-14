@@ -1,0 +1,43 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://addons/pixelfx_particles/core/pfx_effect.gd" id="1_sxqp4"]
+[ext_resource type="PackedScene" path="res://addons/pixelfx_particles/fx/holy/smite.tscn" id="2_p6n0m"]
+
+[sub_resource type="Animation" id="Animation_yf3x3"]
+length = 2.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Smite1:visible")
+tracks/0/interp = 0
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_e6p02"]
+_data = {
+&"fx": SubResource("Animation_yf3x3")
+}
+
+[node name="HolySmite" type="Node2D" unique_id=755870227]
+script = ExtResource("1_sxqp4")
+effect_id = "moves/holy-smite"
+source = "src/fx/moves/holy-smite.js@8afbf29ad647f73d7d5c16c59cf9d950c09390f7"
+duration = 2.8
+canvas_size = Vector2i(252, 182)
+origin = Vector2i(42, 151)
+bg = "ground"
+actor = 2
+palette_extra = PackedColorArray()
+palette_override = PackedColorArray()
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=803965114]
+libraries/ = SubResource("AnimationLibrary_e6p02")
+
+[node name="Smite1" parent="." unique_id=955632186 instance=ExtResource("2_p6n0m")]
+position = Vector2(118, 0)
+show_actor = false

@@ -1,0 +1,76 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://addons/pixelfx_particles/core/pfx_effect.gd" id="1_03fby"]
+[ext_resource type="PackedScene" path="res://addons/pixelfx_particles/fx/arcane/magic-circle-cast.tscn" id="2_5gv7k"]
+[ext_resource type="PackedScene" path="res://addons/pixelfx_particles/fx/fire/meteor.tscn" id="3_4mpos"]
+
+[sub_resource type="Animation" id="Animation_cvy12"]
+length = 6.43
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MagicCircleCast1:visible")
+tracks/0/interp = 0
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Meteor2:visible")
+tracks/1/interp = 0
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.429),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Meteor2")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1.429),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_31j6c"]
+_data = {
+&"fx": SubResource("Animation_cvy12")
+}
+
+[node name="MeteorCall" type="Node2D" unique_id=2022312157]
+script = ExtResource("1_03fby")
+effect_id = "moves/meteor-call"
+source = "src/fx/moves/meteor-call.js@434a9b5e14c9de8ed7ffa8e7f2b7fa7a35c6d7fe"
+duration = 6.43
+canvas_size = Vector2i(380, 240)
+origin = Vector2i(92, 212)
+bg = "ground"
+actor = 2
+palette_extra = PackedColorArray()
+palette_override = PackedColorArray()
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2066464544]
+callback_mode_method = 1
+libraries/ = SubResource("AnimationLibrary_31j6c")
+
+[node name="MagicCircleCast1" parent="." unique_id=942140735 instance=ExtResource("2_5gv7k")]
+show_actor = false
+
+[node name="Meteor2" parent="." unique_id=1868950975 instance=ExtResource("3_4mpos")]
+visible = false
+position = Vector2(170, 0)
+autoplay = false
+show_actor = false
