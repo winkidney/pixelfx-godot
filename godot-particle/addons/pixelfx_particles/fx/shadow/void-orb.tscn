@@ -1,0 +1,776 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://addons/pixelfx_particles/core/pfx_effect.gd" id="1_u36ws"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/shaders/ring_light.gdshader" id="2_8phqf"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/fx/shadow/_void-orb.gdshader" id="3_0flcy"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/fx/shadow/_void-orb_light.gdshader" id="4_ipiwt"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/shaders/dither.gdshader" id="5_6taks"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/textures/disc9.png" id="6_mps3g"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/textures/dot1.png" id="7_mgvov"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/shaders/light.gdshader" id="8_rr70p"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/textures/glow8.png" id="9_6tq2d"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/textures/streak4.png" id="10_p3wch"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/textures/streak8.png" id="11_q8dro"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/shaders/ring.gdshader" id="12_gtdv0"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/fx/shadow/_halo.gdshader" id="13_158nt"]
+
+[sub_resource type="Animation" id="Animation_go8sj"]
+length = 3.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FloorGlow:material:shader_parameter/alpha")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.48333332, 0.51666665, 0.53333336, 0.55, 0.56666666, 0.6, 0.6166667, 0.6333333, 0.65, 0.6666667, 0.71666664, 0.73333335, 0.75, 0.76666665, 0.8, 1.8666667, 2.0166667, 2.05, 2.0666666, 2.0833333, 2.1, 2.1166666, 2.1333334, 2.15, 2.1666667, 2.1833334, 2.2, 2.2166667, 2.25, 2.2666667, 2.2833333, 2.3, 2.3333333, 3.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.22, 0.2206677108163748, 0.22448555303663326, 0.22980776796450827, 0.23914628996787052, 0.253370241075447, 0.2921422290354754, 0.3094839316814369, 0.3190970716251432, 0.3179798673853704, 0.30649144172389214, 0.25013308389055117, 0.23690133154060683, 0.22846366615062239, 0.2237840458531434, 0.2205383105741918, 0.2200000003304496, 0.22056221389921615, 0.22391638950989862, 0.22872003891575893, 0.2373344964519527, 0.25076552287381737, 0.26875033826073175, 0.2889685712438983, 0.307113424752006, 0.3182379314618176, 0.31890849495208473, 0.3089095148591859, 0.2913547929638747, 0.25270798264122146, 0.23868140160983117, 0.22952632553278113, 0.22433712203388703, 0.22063978621516797, 0.22]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Veil:material:shader_parameter/t")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 3.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Filaments:material:shader_parameter/t")
+tracks/2/interp = 1
+tracks/2/loop_wrap = false
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 3.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Lensing:material:shader_parameter/t")
+tracks/3/interp = 1
+tracks/3/loop_wrap = false
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 3.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("VortexLight:material:shader_parameter/t")
+tracks/4/interp = 1
+tracks/4/loop_wrap = false
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 3.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("GulpRing0:material:shader_parameter/radius")
+tracks/5/interp = 1
+tracks/5/loop_wrap = false
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.6333333, 0.65, 0.68333334, 0.71666664, 0.75, 0.78333336, 0.81666666, 0.85, 0.8833333, 0.9166667, 0.95, 0.98333335, 1.0166667, 1.0333333, 1.05, 2.1166666, 3.1833334, 3.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [14.0, 14.0, 49.9775, 49.5775, 48.6775, 47.2775, 45.37750000000001, 42.97750000000001, 40.077500000000015, 36.67750000000002, 32.777500000000025, 28.377500000000026, 23.47750000000003, 18.07750000000003, 15.190000000000001, 14.0, 14.0, 14.0, 14.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("GulpRing0:material:shader_parameter/alpha")
+tracks/6/interp = 1
+tracks/6/loop_wrap = false
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.6333333, 0.65, 1.0333333, 1.05, 2.1166666, 3.1833334, 3.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, 0.3412500000000001, 0.005833333333333351, 0.0, 0.0, 0.0, 0.0]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("GulpLight0:material:shader_parameter/radius")
+tracks/7/interp = 1
+tracks/7/loop_wrap = false
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.6333333, 0.65, 0.68333334, 0.71666664, 0.75, 0.78333336, 0.81666666, 0.85, 0.8833333, 0.9166667, 0.95, 0.98333335, 1.0166667, 1.0333333, 1.05, 2.1166666, 3.1833334, 3.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [14.0, 14.0, 49.9775, 49.5775, 48.6775, 47.2775, 45.37750000000001, 42.97750000000001, 40.077500000000015, 36.67750000000002, 32.777500000000025, 28.377500000000026, 23.47750000000003, 18.07750000000003, 15.190000000000001, 14.0, 14.0, 14.0, 14.0]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("GulpLight0:material:shader_parameter/alpha")
+tracks/8/interp = 1
+tracks/8/loop_wrap = false
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 0.6333333, 0.65, 1.0333333, 1.05, 2.1166666, 3.1833334, 3.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, 0.2925000000000001, 0.005000000000000016, 0.0, 0.0, 0.0, 0.0]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("GulpRing1:material:shader_parameter/radius")
+tracks/9/interp = 1
+tracks/9/loop_wrap = false
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 1.0666667, 2.1333334, 2.1666667, 2.1833334, 2.2166667, 2.25, 2.2833333, 2.3166666, 2.35, 2.3833334, 2.4166667, 2.45, 2.4833333, 2.5166667, 2.55, 2.5666666, 2.5833333, 3.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [14.0, 14.0, 14.0, 14.0, 49.9879, 49.6279, 48.767900000000004, 47.40790000000001, 45.5479, 43.187900000000006, 40.327900000000014, 36.967900000000036, 33.1079, 28.747900000000016, 23.887900000000034, 18.527900000000056, 15.66039999999999, 14.0, 14.0]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("GulpRing1:material:shader_parameter/alpha")
+tracks/10/interp = 1
+tracks/10/loop_wrap = false
+tracks/10/keys = {
+"times": PackedFloat32Array(0, 1.0666667, 2.1333334, 2.1666667, 2.1833334, 2.5666666, 2.5833333, 3.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, 0.0, 0.0, 0.34358333333333363, 0.008166666666666622, 0.0, 0.0]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("GulpLight1:material:shader_parameter/radius")
+tracks/11/interp = 1
+tracks/11/loop_wrap = false
+tracks/11/keys = {
+"times": PackedFloat32Array(0, 1.0666667, 2.1333334, 2.1666667, 2.1833334, 2.2166667, 2.25, 2.2833333, 2.3166666, 2.35, 2.3833334, 2.4166667, 2.45, 2.4833333, 2.5166667, 2.55, 2.5666666, 2.5833333, 3.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [14.0, 14.0, 14.0, 14.0, 49.9879, 49.6279, 48.767900000000004, 47.40790000000001, 45.5479, 43.187900000000006, 40.327900000000014, 36.967900000000036, 33.1079, 28.747900000000016, 23.887900000000034, 18.527900000000056, 15.66039999999999, 14.0, 14.0]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("GulpLight1:material:shader_parameter/alpha")
+tracks/12/interp = 1
+tracks/12/loop_wrap = false
+tracks/12/keys = {
+"times": PackedFloat32Array(0, 1.0666667, 2.1333334, 2.1666667, 2.1833334, 2.5666666, 2.5833333, 3.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, 0.0, 0.0, 0.29450000000000026, 0.006999999999999962, 0.0, 0.0]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("Rim:material:shader_parameter/t")
+tracks/13/interp = 1
+tracks/13/loop_wrap = false
+tracks/13/keys = {
+"times": PackedFloat32Array(0, 3.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("Halo:material:shader_parameter/k")
+tracks/14/interp = 1
+tracks/14/loop_wrap = false
+tracks/14/keys = {
+"times": PackedFloat32Array(0, 0.48333332, 0.5, 0.51666665, 0.53333336, 0.55, 0.56666666, 0.5833333, 0.6, 0.6166667, 0.6333333, 0.65, 0.6666667, 0.68333334, 0.7, 0.71666664, 0.73333335, 0.75, 0.76666665, 0.78333336, 0.85, 1.9166666, 2.0166667, 2.0333333, 2.05, 2.0666666, 2.0833333, 2.1, 2.1166666, 2.1333334, 2.15, 2.1666667, 2.1833334, 2.2, 2.2166667, 2.2333333, 2.25, 2.2666667, 2.2833333, 2.3, 2.3166666, 2.3666666, 3.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.6, 0.6020031324491244, 0.6054946916666202, 0.6134566591098997, 0.6294233038935247, 0.6574388699036116, 0.7001107232263408, 0.755781389716223, 0.8164266871064261, 0.8684517950443107, 0.8972912148754295, 0.8939396021561111, 0.8594743251716763, 0.8044988843583685, 0.743895680649014, 0.6903992516716535, 0.6507039946218205, 0.6253909984518672, 0.6113521375594302, 0.6045314351998826, 0.600037022941226, 0.6000003283342885, 0.6016866416976484, 0.6047112359110773, 0.6117491685296957, 0.6261601167472767, 0.6520034893558581, 0.6922965686214521, 0.7462510147821952, 0.806905713731695, 0.8613402742560178, 0.8947137943854528, 0.896725484856254, 0.8667285445775577, 0.8140643788916241, 0.7533838299543805, 0.6981239479236644, 0.6560442048294934, 0.6285789765983434, 0.6130113661016611, 0.6052888272721688, 0.6001798996924947, 0.6]
+}
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("HaloWide:material:shader_parameter/k")
+tracks/15/interp = 1
+tracks/15/loop_wrap = false
+tracks/15/keys = {
+"times": PackedFloat32Array(0, 0.48333332, 0.51666665, 0.53333336, 0.55, 0.56666666, 0.6, 0.6166667, 0.6333333, 0.65, 0.6666667, 0.71666664, 0.73333335, 0.75, 0.76666665, 0.8, 1.8666667, 2.0166667, 2.05, 2.0666666, 2.0833333, 2.1, 2.1166666, 2.1333334, 2.15, 2.1666667, 2.1833334, 2.2, 2.2166667, 2.25, 2.2666667, 2.2833333, 2.3, 2.3333333, 3.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.38, 0.3810015662245622, 0.38672832955494985, 0.3947116519467624, 0.4087194349518058, 0.43005536161317043, 0.48821334355321305, 0.5142258975221554, 0.5286456074377148, 0.5269698010780556, 0.5097371625858382, 0.42519962583582677, 0.4053519973109102, 0.3926954992259336, 0.3856760687797151, 0.3808074658612877, 0.3800000004956744, 0.3808433208488242, 0.3858745842648479, 0.39308005837363835, 0.40600174467792904, 0.42614828431072604, 0.45312550739109764, 0.4834528568658475, 0.5106701371280089, 0.5273568971927265, 0.528362742428127, 0.5133642722887788, 0.48703218944581206, 0.4290619739618322, 0.40802210241474673, 0.3942894882991717, 0.38650568305083055, 0.380959679322752, 0.38]
+}
+tracks/16/type = "value"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("Orb:material:shader_parameter/t")
+tracks/16/interp = 1
+tracks/16/loop_wrap = false
+tracks/16/keys = {
+"times": PackedFloat32Array(0, 3.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_x1g82"]
+_data = {
+&"fx": SubResource("Animation_go8sj")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pby8d"]
+shader = ExtResource("2_8phqf")
+shader_parameter/size = Vector2(112, 112)
+shader_parameter/radius = 52.0
+shader_parameter/thickness = null
+shader_parameter/squash = null
+shader_parameter/color = Color(0.43529412, 0.17254902, 0.7529412, 1)
+shader_parameter/strength = null
+shader_parameter/alpha = 0.22
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g2wip"]
+shader = ExtResource("3_0flcy")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = true
+shader_parameter/size = Vector2(96, 96)
+shader_parameter/center = Vector2(0, -62)
+shader_parameter/t = null
+shader_parameter/mode = 1.0
+shader_parameter/pal = PackedColorArray(0.023529412, 0.015686275, 0.043137256, 1, 0.08235294, 0.047058824, 0.14901961, 1, 0.16470589, 0.06666667, 0.3137255, 1, 0.27450982, 0.101960786, 0.5176471, 1, 0.43529412, 0.17254902, 0.7529412, 1, 0.6156863, 0.36078432, 0.9254902, 1, 0.8117647, 0.6509804, 1, 1, 0.9647059, 0.91764706, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tf423"]
+shader = ExtResource("3_0flcy")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = null
+shader_parameter/size = Vector2(96, 96)
+shader_parameter/center = Vector2(0, -62)
+shader_parameter/t = null
+shader_parameter/mode = 0.0
+shader_parameter/pal = PackedColorArray(0.023529412, 0.015686275, 0.043137256, 1, 0.08235294, 0.047058824, 0.14901961, 1, 0.16470589, 0.06666667, 0.3137255, 1, 0.27450982, 0.101960786, 0.5176471, 1, 0.43529412, 0.17254902, 0.7529412, 1, 0.6156863, 0.36078432, 0.9254902, 1, 0.8117647, 0.6509804, 1, 1, 0.9647059, 0.91764706, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bn8mk"]
+shader = ExtResource("3_0flcy")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = null
+shader_parameter/size = Vector2(96, 96)
+shader_parameter/center = Vector2(0, -62)
+shader_parameter/t = null
+shader_parameter/mode = 2.0
+shader_parameter/pal = PackedColorArray(0.023529412, 0.015686275, 0.043137256, 1, 0.08235294, 0.047058824, 0.14901961, 1, 0.16470589, 0.06666667, 0.3137255, 1, 0.27450982, 0.101960786, 0.5176471, 1, 0.43529412, 0.17254902, 0.7529412, 1, 0.6156863, 0.36078432, 0.9254902, 1, 0.8117647, 0.6509804, 1, 1, 0.9647059, 0.91764706, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xr43o"]
+shader = ExtResource("4_ipiwt")
+shader_parameter/size = Vector2(96, 96)
+shader_parameter/center = Vector2(0, -62)
+shader_parameter/t = null
+shader_parameter/pal = PackedColorArray(0.023529412, 0.015686275, 0.043137256, 1, 0.08235294, 0.047058824, 0.14901961, 1, 0.16470589, 0.06666667, 0.3137255, 1, 0.27450982, 0.101960786, 0.5176471, 1, 0.43529412, 0.17254902, 0.7529412, 1, 0.6156863, 0.36078432, 0.9254902, 1, 0.8117647, 0.6509804, 1, 1, 0.9647059, 0.91764706, 1, 1, 1, 1, 1, 1)
+shader_parameter/strength = null
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x8ren"]
+resource_name = "Soft"
+shader = ExtResource("5_6taks")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = true
+
+[sub_resource type="Curve" id="Curve_b1qa7"]
+_data = [Vector2(0, 0.4), 0.0, -0.4, 1, 1, Vector2(1, 0), -0.4, 0.0, 1, 1]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_4i5ta"]
+curve = SubResource("Curve_b1qa7")
+
+[sub_resource type="Curve" id="Curve_474ib"]
+_limits = [0.0, 8.0, 0.0, 1.0]
+_data = [Vector2(0, 0.4), 0.0, 0.70000005, 1, 1, Vector2(1, 1.1), 0.70000005, 0.0, 1, 1]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_07vpn"]
+curve = SubResource("Curve_474ib")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_7k3fj"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(44, 0.2, 0)
+direction = Vector3(6.123234e-17, -1, 0)
+spread = 0.0
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_07vpn")
+color = Color(0.27450982, 0.101960786, 0.5176471, 1)
+alpha_curve = SubResource("CurveTexture_4i5ta")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ymojs"]
+resource_name = "Dither"
+shader = ExtResource("5_6taks")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = null
+
+[sub_resource type="Curve" id="Curve_beco0"]
+_data = [Vector2(0, 0), 0.0, 8.333333, 1, 1, Vector2(0.12, 1), 8.333333, 0.0, 1, 1, Vector2(1, 1), 0.0, 0.0, 1, 1]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_alpd6"]
+curve = SubResource("Curve_beco0")
+
+[sub_resource type="Gradient" id="Gradient_by60a"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.4, 0.75)
+colors = PackedColorArray(0.6156863, 0.36078432, 0.9254902, 1, 0.8117647, 0.6509804, 1, 1, 0.9647059, 0.91764706, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_n4ici"]
+gradient = SubResource("Gradient_by60a")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mvoe0"]
+lifetime_randomness = 0.2
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(0, 61, 0)
+emission_shape = 3
+emission_box_extents = Vector3(44, 0.2, 0)
+direction = Vector3(6.123234e-17, -1, 0)
+spread = 0.0
+gravity = Vector3(0, 0, 0)
+radial_accel_min = -34.0
+radial_accel_max = -28.0
+color_ramp = SubResource("GradientTexture1D_n4ici")
+alpha_curve = SubResource("CurveTexture_alpd6")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g4bwp"]
+resource_name = "Light"
+shader = ExtResource("8_rr70p")
+shader_parameter/strength = null
+shader_parameter/steps = null
+
+[sub_resource type="Curve" id="Curve_yk21f"]
+_data = [Vector2(0, 0), 0.0, 6.666666, 1, 1, Vector2(0.15, 1), 6.666666, 0.0, 1, 1, Vector2(1, 1), 0.0, 0.0, 1, 1]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_3hajw"]
+curve = SubResource("Curve_yk21f")
+
+[sub_resource type="Gradient" id="Gradient_2o58c"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8)
+colors = PackedColorArray(1, 1, 1, 1, 0.9647059, 0.91764706, 1, 1, 0.8117647, 0.6509804, 1, 1, 0.8117647, 0.6509804, 1, 1, 0.6156863, 0.36078432, 0.9254902, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_s02aq"]
+gradient = SubResource("Gradient_2o58c")
+
+[sub_resource type="Image" id="Image_e6gxc"]
+data = {
+"data": PackedByteArray(78, 190, 88, 194, 67, 20, 174, 193, 128, 188, 68, 193, 95, 142, 120, 194, 54, 249, 3, 66, 24, 211, 45, 194, 98, 64, 66, 65, 181, 46, 240, 193, 255, 43, 50, 194, 120, 175, 184, 193, 244, 107, 17, 66, 95, 143, 78, 192, 42, 130, 186, 65, 247, 160, 58, 194, 105, 164, 21, 66, 13, 138, 199, 192, 128, 126, 232, 193, 49, 180, 65, 194, 209, 210, 131, 65, 89, 161, 94, 194, 141, 38, 54, 194, 247, 247, 254, 193, 103, 100, 103, 66, 187, 216, 25, 190, 241, 245, 246, 65, 14, 172, 254, 65, 250, 210, 3, 66, 100, 45, 85, 194, 136, 14, 1, 194, 102, 181, 198, 192, 11, 126, 246, 193, 137, 115, 4, 66, 234, 213, 7, 194, 145, 84, 50, 65, 247, 211, 239, 193, 146, 120, 224, 65, 96, 238, 233, 193, 31, 232, 5, 194, 24, 103, 53, 66, 254, 173, 35, 193, 129, 13, 46, 66, 232, 143, 195, 192, 200, 3, 243, 192, 154, 53, 245, 193, 54, 73, 239, 193, 92, 10, 178, 65, 178, 121, 4, 66, 40, 9, 45, 194, 133, 191, 141, 65, 208, 132, 255, 193, 175, 124, 24, 66, 150, 187, 40, 194, 94, 121, 35, 65, 87, 116, 9, 194, 254, 206, 208, 65, 2, 222, 68, 194, 190, 164, 251, 192, 242, 144, 101, 194, 4, 167, 62, 66, 225, 77, 187, 65, 118, 1, 54, 194, 217, 111, 161, 64, 163, 28, 253, 193, 169, 131, 2, 194, 155, 64, 11, 194, 122, 105, 191, 65, 46, 79, 19, 65, 101, 54, 100, 194, 205, 197, 81, 193, 137, 180, 47, 194, 218, 72, 224, 65, 238, 173, 107, 193, 115, 22, 196, 62, 68, 173, 123, 194, 239, 158, 6, 66, 76, 250, 130, 193, 126, 14, 6, 66, 132, 144, 216, 193, 28, 72, 171, 64, 169, 222, 40, 194, 34, 26, 150, 193, 181, 161, 5, 194, 166, 37, 171, 65, 154, 77, 34, 194, 241, 121, 249, 63, 229, 90, 32, 194, 126, 244, 113, 66, 215, 55, 141, 193, 146, 2, 103, 194, 126, 3, 140, 191, 140, 130, 114, 66, 169, 46, 75, 193, 252, 237, 21, 66, 222, 170, 62, 194, 206, 140, 103, 65, 7, 166, 67, 194, 136, 230, 88, 66, 117, 7, 182, 65, 138, 8, 87, 194, 104, 185, 76, 192, 62, 206, 85, 194, 50, 142, 216, 64, 205, 239, 37, 193, 140, 71, 9, 194, 202, 238, 25, 194, 43, 178, 9, 194, 168, 254, 240, 192, 2, 139, 2, 194, 28, 92, 19, 194, 110, 135, 165, 193, 47, 4, 173, 193, 107, 230, 58, 194, 90, 184, 159, 193, 194, 193, 45, 194, 173, 109, 45, 66, 46, 127, 2, 65, 57, 77, 61, 194, 196, 248, 206, 65, 92, 53, 238, 193, 180, 24, 239, 192, 221, 39, 87, 193, 72, 112, 247, 193, 247, 174, 236, 193, 211, 88, 82, 194, 46, 57, 6, 66, 216, 202, 161, 193, 163, 120, 224, 65, 187, 252, 11, 194, 81, 205, 10, 63, 135, 182, 34, 194, 2, 201, 219, 193, 209, 196, 44, 194, 127, 145, 180, 193, 14, 162, 56, 194, 220, 65, 186, 192, 156, 254, 90, 194, 81, 146, 123, 194, 119, 100, 108, 192, 243, 158, 76, 194, 163, 254, 19, 193, 166, 220, 142, 65, 143, 153, 89, 194, 67, 58, 211, 64, 106, 35, 44, 194, 139, 152, 50, 194, 124, 127, 129, 193, 190, 54, 21, 66, 34, 20, 53, 192, 150, 108, 102, 194, 42, 182, 73, 193, 53, 7, 229, 64, 175, 183, 43, 194, 199, 18, 216, 193, 230, 147, 58, 194, 226, 96, 7, 194, 132, 183, 42, 194, 146, 9, 184, 65, 121, 189, 14, 194, 209, 254, 20, 194, 72, 28, 11, 66, 132, 125, 208, 65, 59, 200, 210, 65, 91, 228, 222, 192, 190, 177, 98, 194, 242, 244, 89, 66, 160, 106, 196, 65, 145, 235, 58, 193, 155, 31, 242, 193, 229, 113, 142, 65, 20, 138, 222, 193, 114, 62, 65, 65, 140, 138, 48, 194, 136, 76, 47, 64, 32, 98, 252, 193, 62, 33, 68, 193, 136, 144, 48, 194, 172, 17, 223, 65, 29, 179, 33, 194, 195, 73, 7, 66, 6, 59, 79, 194, 192, 102, 34, 66, 210, 164, 167, 65, 110, 99, 129, 193, 83, 4, 55, 194, 2, 155, 194, 65, 170, 16, 194, 65, 136, 54, 87, 64, 136, 149, 59, 194, 121, 38, 77, 66, 42, 190, 142, 65, 120, 31, 189, 193, 90, 16, 20, 194, 98, 194, 239, 193, 100, 251, 29, 65, 166, 31, 123, 192, 88, 27, 45, 194, 68, 156, 250, 64, 181, 254, 16, 194, 100, 25, 41, 66, 227, 125, 0, 193, 202, 252, 140, 193, 84, 192, 75, 194, 170, 37, 20, 193, 91, 73, 13, 194, 251, 126, 55, 66, 121, 133, 52, 193, 253, 132, 11, 66, 216, 198, 64, 193, 227, 144, 61, 66, 193, 18, 64, 191, 189, 152, 53, 66, 126, 85, 41, 65, 53, 186, 150, 193, 184, 231, 41, 194, 243, 169, 24, 194, 246, 182, 143, 65, 110, 186, 46, 66, 188, 254, 144, 65, 41, 42, 39, 193, 164, 198, 22, 194, 252, 20, 40, 194, 106, 186, 40, 193, 213, 15, 48, 66, 207, 3, 82, 64, 24, 185, 187, 65, 6, 180, 217, 193, 128, 45, 204, 193, 28, 11, 136, 193, 243, 243, 248, 193, 27, 219, 159, 65, 203, 196, 98, 66, 69, 160, 230, 192, 210, 139, 199, 65, 55, 120, 179, 65, 178, 98, 173, 193, 14, 160, 248, 193, 40, 173, 10, 193, 167, 146, 114, 194, 239, 202, 40, 66, 236, 249, 227, 192, 249, 135, 80, 66, 81, 125, 215, 192, 174, 210, 119, 193, 200, 247, 59, 194, 80, 236, 43, 66, 144, 153, 213, 193, 248, 123, 45, 66, 183, 64, 37, 194, 223, 241, 178, 64, 195, 69, 77, 194, 15, 223, 9, 194, 17, 187, 104, 65, 194, 205, 15, 66, 219, 135, 216, 65, 206, 76, 1, 194, 60, 185, 130, 193, 91, 53, 232, 65, 63, 39, 18, 194, 195, 120, 251, 192, 120, 242, 43, 194, 252, 4, 219, 193, 83, 39, 107, 193, 197, 35, 25, 194, 59, 21, 210, 192, 72, 226, 139, 193, 12, 74, 61, 194, 171, 208, 158, 193, 185, 158, 219, 193, 70, 74, 233, 193, 223, 26, 52, 194, 16, 188, 8, 66, 191, 209, 88, 63, 87, 219, 135, 193, 241, 236, 226, 193, 248, 80, 15, 66, 242, 51, 12, 65, 14, 54, 230, 65, 89, 94, 17, 194, 108, 116, 145, 65, 103, 153, 87, 194, 38, 47, 141, 65, 253, 144, 108, 194, 161, 58, 16, 65, 138, 71, 32, 194, 13, 44, 4, 66, 67, 207, 113, 65, 168, 69, 232, 193, 231, 28, 250, 65, 130, 223, 223, 65, 198, 85, 57, 194, 159, 176, 10, 194, 97, 164, 213, 65, 203, 145, 58, 194, 112, 76, 32, 193, 61, 204, 138, 193, 75, 224, 63, 194, 90, 184, 138, 193, 36, 207, 56, 194, 22, 198, 24, 64, 172, 239, 108, 194, 167, 109, 37, 65, 86, 129, 4, 194, 157, 116, 151, 65, 4, 204, 0, 194, 6, 114, 112, 193, 17, 155, 21, 194, 136, 37, 2, 66, 111, 7, 51, 194, 10, 229, 135, 192, 92, 72, 100, 194, 11, 70, 184, 193, 147, 201, 19, 194, 68, 186, 200, 193, 136, 70, 90, 194, 193, 163, 180, 65, 250, 220, 84, 194, 1, 55, 171, 193, 187, 57, 16, 194, 235, 232, 0, 194, 32, 139, 105, 193, 159, 214, 240, 193, 218, 167, 250, 193, 220, 124, 43, 193, 196, 59, 244, 193, 3, 26, 75, 193, 73, 166, 239, 193, 69, 54, 23, 66, 109, 8, 11, 194, 183, 207, 77, 194, 202, 200, 90, 62, 248, 191, 153, 192, 129, 29, 91, 194, 42, 20, 191, 193, 133, 139, 189, 193, 105, 129, 188, 193, 237, 12, 245, 193, 240, 101, 252, 193, 27, 154, 83, 194, 193, 66, 114, 193, 23, 196, 117, 194, 167, 90, 231, 65, 53, 41, 115, 65, 8, 82, 157, 65, 56, 47, 41, 194, 64, 63, 176, 65, 15, 232, 216, 193, 85, 68, 28, 194, 142, 94, 37, 66, 248, 51, 243, 193, 89, 150, 212, 64, 97, 145, 31, 194, 68, 168, 23, 194, 104, 3, 23, 66, 113, 75, 5, 194, 120, 102, 212, 65, 143, 83, 7, 194, 118, 155, 159, 65, 75, 118, 60, 194, 126, 231, 21, 194, 184, 44, 102, 65, 79, 97, 47, 194, 132, 145, 29, 194, 175, 247, 185, 65, 194, 111, 247, 193, 204, 202, 11, 193, 209, 227, 65, 194, 34, 203, 63, 194, 85, 175, 12, 66, 220, 128, 20, 194, 88, 132, 21, 193, 161, 20, 22, 66, 203, 239, 239, 192, 202, 219, 64, 66, 90, 206, 179, 193, 199, 248, 34, 194, 9, 143, 6, 194, 68, 254, 49, 66, 18, 32, 28, 66, 2, 133, 12, 66, 84, 233, 7, 193, 241, 103, 83, 66, 130, 164, 216, 64, 102, 50, 98, 193, 204, 113, 38, 194, 164, 241, 77, 194, 8, 246, 75, 65, 178, 120, 226, 193, 73, 27, 43, 193, 28, 163, 44, 194, 148, 164, 194, 192, 33, 48, 204, 193, 151, 187, 160, 65, 172, 160, 58, 193, 1, 253, 26, 194, 127, 150, 148, 193, 163, 133, 102, 194, 218, 37, 220, 192, 234, 15, 94, 194, 229, 20, 90, 66, 63, 95, 36, 193, 18, 204, 254, 64, 226, 82, 248, 193, 138, 73, 224, 193, 212, 176, 154, 193, 201, 121, 71, 194, 191, 95, 1, 194, 75, 144, 251, 65, 223, 32, 149, 65, 16, 183, 222, 65, 161, 108, 68, 194, 4, 232, 169, 193, 115, 2, 189, 65, 203, 193, 88, 65, 51, 77, 12, 194, 236, 185, 65, 66, 198, 25, 54, 193, 148, 24, 207, 193, 152, 141, 24, 194, 95, 30, 20, 194, 31, 50, 175, 193, 238, 74, 229, 193, 252, 16, 156, 65, 211, 149, 95, 66, 36, 46, 236, 65, 31, 187, 177, 65, 217, 218, 19, 194, 238, 120, 52, 194, 185, 231, 17, 66, 162, 206, 50, 65, 48, 233, 14, 194, 147, 13, 253, 193, 149, 77, 223, 65, 183, 212, 5, 66, 105, 242, 38, 194, 161, 88, 242, 65, 72, 89, 56, 193, 199, 55, 13, 193, 88, 105, 244, 193, 67, 227, 35, 194, 204, 214, 16, 65, 30, 120, 68, 194, 201, 61, 21, 66, 242, 90, 216, 65, 103, 168, 14, 194, 108, 219, 47, 66, 194, 159, 64, 193, 30, 161, 15, 66, 25, 146, 2, 194, 206, 196, 149, 193, 127, 2, 25, 194, 74, 234, 15, 194, 102, 70, 20, 66, 219, 213, 140, 193, 253, 44, 1, 194, 57, 246, 69, 66, 30, 140, 144, 191, 61, 128, 151, 64, 255, 202, 41, 194, 194, 215, 211, 65, 85, 226, 91, 194, 170, 219, 31, 192, 180, 175, 5, 194, 61, 6, 34, 194, 172, 221, 213, 193, 155, 190, 218, 64, 116, 158, 94, 194, 224, 182, 222, 193, 229, 131, 145, 65, 53, 140, 31, 194, 98, 20, 121, 64, 76, 206, 53, 193, 225, 109, 20, 194, 81, 159, 248, 193, 212, 252, 241, 65, 49, 242, 201, 65, 88, 127, 68, 194, 90, 197, 97, 193, 134, 64, 245, 193, 104, 5, 127, 65, 62, 232, 102, 194),
+"format": "RGFloat",
+"height": 1,
+"mipmaps": false,
+"width": 240
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_ptiud"]
+image = SubResource("Image_e6gxc")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_kevhm"]
+lifetime_randomness = 0.25
+particle_flag_align_y = true
+particle_flag_disable_z = true
+emission_shape = 4
+emission_point_texture = SubResource("ImageTexture_ptiud")
+emission_point_count = 240
+direction = Vector3(6.123234e-17, -1, 0)
+spread = 0.0
+orbit_velocity_min = -0.4
+orbit_velocity_max = -0.22
+gravity = Vector3(0, 0, 0)
+radial_accel_min = -42.0
+radial_accel_max = -30.0
+color_initial_ramp = SubResource("GradientTexture1D_s02aq")
+alpha_curve = SubResource("CurveTexture_3hajw")
+
+[sub_resource type="Gradient" id="Gradient_phqrp"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.5)
+colors = PackedColorArray(0.8117647, 0.6509804, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_h7bp5"]
+gradient = SubResource("Gradient_phqrp")
+
+[sub_resource type="Image" id="Image_si8v8"]
+data = {
+"data": PackedByteArray(77, 98, 64, 65, 230, 63, 120, 194, 28, 110, 71, 194, 219, 248, 22, 194, 217, 107, 191, 193, 126, 226, 89, 194, 219, 215, 90, 66, 87, 37, 16, 194, 75, 80, 224, 193, 78, 218, 104, 194, 77, 69, 43, 66, 75, 247, 18, 194, 75, 173, 86, 66, 21, 233, 219, 193, 159, 209, 222, 190, 148, 209, 134, 194, 113, 201, 241, 193, 111, 62, 86, 194, 155, 249, 144, 66, 51, 14, 70, 193, 1, 237, 8, 194, 145, 164, 71, 194, 201, 96, 56, 66, 163, 234, 41, 194, 123, 18, 214, 65, 84, 107, 77, 194, 12, 152, 117, 66, 200, 242, 16, 193, 95, 36, 66, 194, 222, 185, 228, 193, 53, 150, 98, 66, 144, 115, 47, 194, 207, 178, 229, 193, 1, 110, 126, 194, 82, 135, 139, 66, 133, 121, 69, 192, 171, 77, 121, 194, 138, 42, 192, 65, 129, 54, 83, 66, 50, 142, 31, 194, 125, 8, 119, 194, 218, 170, 242, 193, 37, 90, 49, 65, 41, 51, 126, 194, 251, 157, 129, 194, 18, 192, 80, 193, 89, 198, 219, 65, 175, 142, 92, 194, 19, 63, 129, 66, 213, 162, 157, 193, 22, 103, 14, 65, 253, 105, 106, 194, 241, 139, 31, 66, 204, 166, 36, 194, 102, 86, 65, 194, 212, 150, 32, 194, 171, 70, 64, 66, 198, 131, 94, 194, 181, 83, 143, 194, 62, 21, 82, 193, 42, 10, 223, 193, 66, 167, 110, 194, 226, 136, 100, 194, 26, 185, 250, 193, 10, 111, 231, 65, 199, 45, 97, 194, 208, 105, 160, 65, 248, 22, 129, 194, 138, 32, 68, 66, 213, 131, 85, 194, 212, 3, 197, 193, 36, 141, 93, 194, 220, 187, 5, 194, 197, 38, 108, 194, 107, 75, 73, 194, 76, 154, 83, 194, 196, 188, 61, 192, 2, 253, 124, 194, 86, 154, 218, 193, 121, 144, 134, 194, 20, 225, 128, 66, 188, 13, 209, 193, 179, 254, 167, 193, 105, 94, 128, 194, 30, 196, 128, 194, 36, 87, 243, 193, 36, 114, 61, 194, 106, 209, 84, 194, 25, 196, 79, 66, 225, 196, 225, 193, 248, 73, 26, 66, 94, 159, 115, 194, 233, 74, 136, 194, 17, 42, 246, 192, 134, 72, 121, 194, 197, 72, 134, 65, 181, 26, 73, 194, 150, 17, 26, 194, 19, 34, 134, 194, 6, 175, 190, 193, 158, 93, 6, 194, 32, 63, 76, 194, 160, 24, 5, 66, 79, 189, 55, 194, 131, 46, 74, 194, 17, 229, 197, 193, 35, 28, 40, 194, 54, 251, 27, 194, 237, 199, 182, 65, 238, 103, 90, 194, 95, 141, 94, 194, 4, 122, 38, 194, 93, 155, 116, 194, 155, 52, 36, 65, 106, 4, 49, 194, 230, 94, 55, 194, 219, 66, 114, 66, 104, 61, 82, 193, 233, 211, 151, 192, 237, 233, 136, 194, 27, 69, 137, 194, 98, 119, 178, 65, 190, 93, 9, 66, 117, 28, 127, 194, 14, 157, 12, 65, 192, 183, 138, 194, 134, 2, 57, 66, 129, 126, 49, 194, 19, 203, 241, 193, 196, 220, 99, 194, 254, 48, 68, 66, 185, 125, 68, 194, 146, 231, 115, 66, 77, 74, 134, 64, 47, 41, 11, 194, 35, 193, 66, 194, 202, 88, 180, 65, 40, 99, 77, 194, 164, 151, 56, 66, 252, 212, 70, 194, 42, 130, 101, 194, 16, 240, 245, 193, 227, 0, 217, 65, 207, 76, 120, 194, 82, 128, 105, 194, 119, 110, 6, 64, 139, 87, 8, 194, 67, 67, 113, 194, 29, 43, 111, 194, 193, 241, 179, 193, 14, 45, 117, 194, 47, 1, 33, 194, 79, 255, 194, 65, 146, 112, 98, 194, 148, 177, 146, 66, 128, 133, 12, 64, 215, 183, 120, 64, 116, 1, 136, 194, 98, 167, 100, 66, 177, 194, 36, 194, 101, 11, 16, 66, 78, 191, 98, 194, 202, 26, 122, 64, 246, 191, 134, 194, 12, 103, 90, 66, 151, 80, 51, 194, 92, 30, 40, 66, 11, 206, 112, 194, 25, 140, 92, 194, 126, 35, 27, 194, 43, 161, 123, 65, 231, 233, 95, 194, 24, 89, 162, 65, 49, 80, 105, 194, 178, 194, 120, 194, 102, 242, 116, 65, 117, 96, 115, 194, 141, 166, 27, 194, 110, 220, 1, 193, 39, 199, 134, 194, 75, 60, 87, 66, 207, 186, 243, 193, 58, 103, 135, 193, 53, 4, 129, 194, 2, 53, 145, 194, 18, 32, 96, 193, 144, 216, 145, 64, 244, 189, 134, 194, 44, 139, 42, 66, 178, 58, 103, 194, 245, 176, 134, 193, 198, 60, 86, 194, 239, 4, 177, 65, 228, 248, 102, 194, 8, 29, 123, 66, 167, 125, 220, 191, 38, 177, 129, 66, 149, 251, 175, 193, 135, 234, 98, 64, 71, 226, 142, 194, 47, 174, 52, 66, 86, 80, 52, 194, 155, 80, 52, 193, 74, 245, 142, 194, 14, 240, 197, 65, 252, 165, 134, 194, 42, 124, 115, 194, 251, 181, 122, 193, 247, 149, 141, 194, 208, 22, 64, 64, 206, 45, 133, 194, 233, 62, 21, 64, 64, 231, 106, 194, 53, 42, 40, 194, 191, 87, 167, 193, 76, 242, 128, 194, 200, 87, 128, 194, 111, 41, 118, 193, 131, 189, 47, 194, 178, 162, 96, 194, 175, 188, 84, 194, 70, 217, 230, 193, 242, 116, 90, 66, 176, 28, 236, 193, 5, 242, 130, 194, 147, 244, 102, 65, 49, 156, 107, 66, 177, 237, 234, 65, 255, 253, 100, 66, 224, 68, 8, 65, 191, 40, 38, 191, 202, 115, 105, 194, 173, 66, 95, 66, 206, 37, 216, 193, 157, 199, 178, 193, 31, 63, 116, 194, 245, 13, 144, 66, 150, 209, 144, 64, 47, 206, 133, 66, 159, 70, 228, 193, 123, 213, 143, 66, 246, 223, 137, 62, 106, 33, 230, 65, 20, 164, 80, 194, 46, 136, 128, 194, 244, 49, 217, 64, 240, 97, 71, 194, 108, 23, 44, 194, 127, 150, 54, 194, 151, 207, 24, 194, 238, 104, 103, 66, 115, 183, 180, 193, 239, 170, 141, 66, 25, 175, 239, 190, 125, 96, 121, 194, 227, 10, 245, 65, 53, 86, 115, 194, 185, 202, 144, 191, 131, 48, 77, 63, 189, 145, 106, 194, 190, 186, 7, 65, 127, 177, 132, 194, 43, 174, 57, 65, 239, 124, 122, 194, 15, 44, 103, 66, 160, 209, 46, 192, 77, 215, 121, 66, 181, 186, 137, 65, 253, 246, 113, 194, 81, 73, 229, 193, 32, 36, 26, 66, 125, 191, 54, 194, 233, 175, 241, 65, 85, 168, 61, 194, 33, 22, 97, 194, 222, 49, 64, 194, 162, 4, 12, 66, 207, 10, 130, 194, 123, 236, 226, 192, 201, 6, 106, 194, 17, 134, 98, 65, 95, 12, 142, 194, 118, 72, 122, 194, 213, 170, 180, 193, 253, 8, 134, 66, 135, 138, 230, 65, 145, 57, 78, 65, 99, 8, 135, 194, 81, 95, 104, 194, 232, 85, 28, 194, 31, 142, 107, 66, 17, 251, 29, 194, 141, 76, 126, 194, 99, 142, 228, 193, 229, 177, 39, 194, 156, 26, 44, 194, 98, 247, 131, 66, 9, 102, 78, 193, 118, 57, 18, 193, 182, 92, 95, 194, 218, 70, 49, 66, 207, 29, 32, 194, 255, 10, 88, 194, 232, 124, 22, 194, 78, 173, 18, 66, 71, 100, 109, 194, 246, 192, 33, 194, 195, 159, 79, 194, 114, 15, 106, 66, 162, 194, 201, 193, 196, 77, 125, 66, 107, 248, 133, 65, 150, 37, 115, 66, 177, 128, 146, 65, 59, 92, 25, 66, 11, 244, 121, 194, 191, 127, 44, 194, 105, 253, 17, 194, 228, 32, 72, 66, 251, 250, 250, 193, 23, 224, 58, 66, 2, 228, 4, 194, 2, 16, 130, 66, 221, 20, 238, 193, 4, 111, 93, 194, 121, 105, 199, 193, 18, 72, 133, 65, 33, 59, 114, 194, 179, 32, 55, 65, 211, 92, 140, 194, 254, 37, 111, 66, 191, 82, 194, 193, 100, 235, 57, 64, 9, 114, 124, 194, 118, 73, 183, 65, 25, 9, 111, 194, 55, 134, 81, 66, 212, 182, 200, 65, 3, 247, 30, 194, 178, 76, 85, 194, 56, 142, 135, 66, 212, 194, 92, 65, 119, 46, 44, 194, 54, 66, 50, 194, 88, 38, 111, 194, 186, 25, 24, 194, 10, 108, 114, 194, 193, 205, 25, 194, 59, 252, 21, 66, 8, 128, 108, 194, 114, 78, 90, 194, 28, 33, 204, 193, 81, 161, 59, 194, 78, 216, 2, 194, 4, 162, 94, 194, 147, 60, 41, 65, 116, 52, 173, 64, 81, 74, 145, 194, 210, 205, 85, 194, 74, 43, 51, 194, 238, 253, 133, 194, 186, 246, 137, 65, 143, 20, 56, 194, 78, 88, 26, 194, 53, 114, 104, 194, 122, 86, 37, 194, 182, 13, 128, 194, 101, 10, 170, 193, 64, 63, 99, 194, 132, 174, 2, 194, 92, 96, 57, 66, 1, 4, 27, 194, 93, 132, 17, 66, 227, 185, 114, 194, 208, 224, 80, 194, 141, 22, 0, 194, 234, 13, 135, 66, 82, 177, 210, 192, 21, 193, 229, 193, 156, 190, 118, 194, 177, 112, 60, 194, 109, 167, 24, 194, 89, 71, 204, 192, 137, 190, 134, 194, 179, 91, 102, 193, 190, 83, 121, 194, 136, 6, 8, 193, 98, 192, 130, 194, 102, 138, 131, 194, 18, 107, 209, 193, 87, 19, 33, 194, 211, 182, 113, 194, 220, 31, 72, 66, 21, 153, 20, 194, 250, 22, 143, 194, 158, 0, 99, 65, 142, 155, 85, 66, 154, 36, 199, 65, 220, 23, 50, 66, 180, 153, 72, 194),
+"format": "RGFloat",
+"height": 1,
+"mipmaps": false,
+"width": 200
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_adax5"]
+image = SubResource("Image_si8v8")
+
+[sub_resource type="Curve" id="Curve_pufei"]
+_limits = [0.0, 8.0, 0.0, 1.0]
+_data = [Vector2(0, 0.3), 0.0, 1.0999999, 1, 1, Vector2(1, 1.4), 1.0999999, 0.0, 1, 1]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_7pj7k"]
+curve = SubResource("Curve_pufei")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fx67m"]
+particle_flag_align_y = true
+particle_flag_disable_z = true
+emission_shape = 4
+emission_point_texture = SubResource("ImageTexture_adax5")
+emission_point_count = 200
+direction = Vector3(6.123234e-17, -1, 0)
+spread = 0.0
+radial_velocity_min = -12.0
+radial_velocity_max = -8.0
+gravity = Vector3(0, 0, 0)
+radial_accel_min = -640.0
+radial_accel_max = -520.0
+scale_curve = SubResource("CurveTexture_7pj7k")
+color_ramp = SubResource("GradientTexture1D_h7bp5")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xqomq"]
+shader = ExtResource("12_gtdv0")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = null
+shader_parameter/size = Vector2(108, 108)
+shader_parameter/radius = 48.0
+shader_parameter/thickness = 1.0
+shader_parameter/squash = null
+shader_parameter/color = Color(0.43529412, 0.17254902, 0.7529412, 1)
+shader_parameter/edge_color = null
+shader_parameter/edge = null
+shader_parameter/side = null
+shader_parameter/ragged = null
+shader_parameter/grain = null
+shader_parameter/alpha = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jvmgi"]
+shader = ExtResource("2_8phqf")
+shader_parameter/size = Vector2(112, 112)
+shader_parameter/radius = 48.0
+shader_parameter/thickness = 4.0
+shader_parameter/squash = 1.0
+shader_parameter/color = Color(0.6156863, 0.36078432, 0.9254902, 1)
+shader_parameter/strength = null
+shader_parameter/alpha = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u8mav"]
+shader = ExtResource("12_gtdv0")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = null
+shader_parameter/size = Vector2(108, 108)
+shader_parameter/radius = 48.0
+shader_parameter/thickness = 1.0
+shader_parameter/squash = null
+shader_parameter/color = Color(0.43529412, 0.17254902, 0.7529412, 1)
+shader_parameter/edge_color = null
+shader_parameter/edge = null
+shader_parameter/side = null
+shader_parameter/ragged = null
+shader_parameter/grain = null
+shader_parameter/alpha = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3bla4"]
+shader = ExtResource("2_8phqf")
+shader_parameter/size = Vector2(112, 112)
+shader_parameter/radius = 48.0
+shader_parameter/thickness = 4.0
+shader_parameter/squash = 1.0
+shader_parameter/color = Color(0.6156863, 0.36078432, 0.9254902, 1)
+shader_parameter/strength = null
+shader_parameter/alpha = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_35nvs"]
+shader = ExtResource("3_0flcy")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = null
+shader_parameter/size = Vector2(28, 28)
+shader_parameter/center = Vector2(0, -62)
+shader_parameter/t = null
+shader_parameter/mode = 3.0
+shader_parameter/pal = PackedColorArray(0.023529412, 0.015686275, 0.043137256, 1, 0.08235294, 0.047058824, 0.14901961, 1, 0.16470589, 0.06666667, 0.3137255, 1, 0.27450982, 0.101960786, 0.5176471, 1, 0.43529412, 0.17254902, 0.7529412, 1, 0.6156863, 0.36078432, 0.9254902, 1, 0.8117647, 0.6509804, 1, 1, 0.9647059, 0.91764706, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_s0eil"]
+shader = ExtResource("13_158nt")
+shader_parameter/size = Vector2(44, 44)
+shader_parameter/r0 = 11.5
+shader_parameter/r1 = 19.0
+shader_parameter/squash = 1.0
+shader_parameter/color = Color(0.8117647, 0.6509804, 1, 1)
+shader_parameter/k = 0.6
+shader_parameter/alpha = null
+shader_parameter/strength = null
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g6rb2"]
+shader = ExtResource("13_158nt")
+shader_parameter/size = Vector2(122, 122)
+shader_parameter/r0 = 11.5
+shader_parameter/r1 = 58.0
+shader_parameter/squash = 1.0
+shader_parameter/color = Color(0.43529412, 0.17254902, 0.7529412, 1)
+shader_parameter/k = 0.38
+shader_parameter/alpha = null
+shader_parameter/strength = null
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uis2e"]
+shader = ExtResource("3_0flcy")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = null
+shader_parameter/size = Vector2(28, 28)
+shader_parameter/center = Vector2(0, -62)
+shader_parameter/t = null
+shader_parameter/mode = 4.0
+shader_parameter/pal = PackedColorArray(0.023529412, 0.015686275, 0.043137256, 1, 0.08235294, 0.047058824, 0.14901961, 1, 0.16470589, 0.06666667, 0.3137255, 1, 0.27450982, 0.101960786, 0.5176471, 1, 0.43529412, 0.17254902, 0.7529412, 1, 0.6156863, 0.36078432, 0.9254902, 1, 0.8117647, 0.6509804, 1, 1, 0.9647059, 0.91764706, 1, 1, 1, 1, 1, 1)
+
+[node name="VoidOrb" type="Node2D" unique_id=1519308242]
+script = ExtResource("1_u36ws")
+effect_id = "shadow/void-orb"
+source = "src/fx/shadow/void-orb.js@63f0c0f52086f7a1d86b3a36c3e14ee68692ec6a"
+duration = 3.2
+loop = true
+canvas_size = Vector2i(168, 160)
+origin = Vector2i(84, 150)
+bg = "ground"
+ramps = {
+"palette": PackedColorArray(0.023529412, 0.015686275, 0.043137256, 1, 0.08235294, 0.047058824, 0.14901961, 1, 0.16470589, 0.06666667, 0.3137255, 1, 0.27450982, 0.101960786, 0.5176471, 1, 0.43529412, 0.17254902, 0.7529412, 1, 0.6156863, 0.36078432, 0.9254902, 1, 0.8117647, 0.6509804, 1, 1, 0.9647059, 0.91764706, 1, 1)
+}
+palette_extra = PackedColorArray(1, 1, 1, 1)
+palette_override = PackedColorArray()
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1150133949]
+libraries/ = SubResource("AnimationLibrary_x1g82")
+
+[node name="FloorGlow" type="ColorRect" parent="." unique_id=1821262976]
+z_index = 2
+material = SubResource("ShaderMaterial_pby8d")
+offset_left = -56.0
+offset_top = -57.0
+offset_right = 56.0
+offset_bottom = 55.0
+mouse_filter = 2
+
+[node name="Veil" type="ColorRect" parent="." unique_id=209845512]
+z_index = 1
+material = SubResource("ShaderMaterial_g2wip")
+offset_left = -48.0
+offset_top = -110.0
+offset_right = 48.0
+offset_bottom = -14.0
+mouse_filter = 2
+
+[node name="Filaments" type="ColorRect" parent="." unique_id=1530485729]
+z_index = 1
+material = SubResource("ShaderMaterial_tf423")
+offset_left = -48.0
+offset_top = -110.0
+offset_right = 48.0
+offset_bottom = -14.0
+mouse_filter = 2
+
+[node name="Lensing" type="ColorRect" parent="." unique_id=2049993580]
+z_index = 1
+material = SubResource("ShaderMaterial_bn8mk")
+offset_left = -48.0
+offset_top = -110.0
+offset_right = 48.0
+offset_bottom = -14.0
+mouse_filter = 2
+
+[node name="VortexLight" type="ColorRect" parent="." unique_id=1921135899]
+z_index = 2
+material = SubResource("ShaderMaterial_xr43o")
+offset_left = -48.0
+offset_top = -110.0
+offset_right = 48.0
+offset_bottom = -14.0
+mouse_filter = 2
+
+[node name="DustPuff" type="GPUParticles2D" parent="." unique_id=1856967589]
+z_index = 1
+material = SubResource("ShaderMaterial_x8ren")
+position = Vector2(0, -1.5)
+amount = 3
+texture = ExtResource("6_mps3g")
+lifetime = 0.5
+preprocess = 0.5
+use_fixed_seed = true
+seed = 704626
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+process_material = SubResource("ParticleProcessMaterial_7k3fj")
+
+[node name="Dust" type="GPUParticles2D" parent="." unique_id=1235449829]
+z_index = 1
+material = SubResource("ShaderMaterial_ymojs")
+position = Vector2(0, -62)
+amount = 9
+texture = ExtResource("7_mgvov")
+lifetime = 2.0
+preprocess = 2.0
+use_fixed_seed = true
+seed = 987669
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+process_material = SubResource("ParticleProcessMaterial_mvoe0")
+
+[node name="DustLight" type="GPUParticles2D" parent="." unique_id=350471035]
+modulate = Color(0.6156863, 0.36078432, 0.9254902, 0.3)
+z_index = 2
+material = SubResource("ShaderMaterial_g4bwp")
+position = Vector2(0, -62)
+amount = 9
+texture = ExtResource("9_6tq2d")
+lifetime = 2.0
+preprocess = 2.0
+use_fixed_seed = true
+seed = 987669
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+process_material = SubResource("ParticleProcessMaterial_mvoe0")
+
+[node name="Motes" type="GPUParticles2D" parent="." unique_id=763084063]
+z_index = 1
+material = SubResource("ShaderMaterial_ymojs")
+position = Vector2(0, -62)
+amount = 14
+texture = ExtResource("10_p3wch")
+lifetime = 1.5
+preprocess = 1.5
+use_fixed_seed = true
+seed = 96850
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+process_material = SubResource("ParticleProcessMaterial_kevhm")
+
+[node name="MotesLight" type="GPUParticles2D" parent="." unique_id=1877651611]
+modulate = Color(1, 1, 1, 0.3)
+z_index = 2
+material = SubResource("ShaderMaterial_g4bwp")
+position = Vector2(0, -62)
+amount = 14
+texture = ExtResource("9_6tq2d")
+lifetime = 1.5
+preprocess = 1.5
+use_fixed_seed = true
+seed = 96850
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+process_material = SubResource("ParticleProcessMaterial_kevhm")
+
+[node name="Streaks" type="GPUParticles2D" parent="." unique_id=852872858]
+z_index = 1
+material = SubResource("ShaderMaterial_ymojs")
+position = Vector2(0, -62)
+amount = 2
+texture = ExtResource("11_q8dro")
+lifetime = 0.42
+preprocess = 0.42
+use_fixed_seed = true
+seed = 537963
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+process_material = SubResource("ParticleProcessMaterial_fx67m")
+
+[node name="StreaksLight" type="GPUParticles2D" parent="." unique_id=1644861923]
+modulate = Color(0.8117647, 0.6509804, 1, 0.4)
+z_index = 2
+material = SubResource("ShaderMaterial_g4bwp")
+position = Vector2(0, -62)
+amount = 2
+texture = ExtResource("9_6tq2d")
+lifetime = 0.42
+preprocess = 0.42
+use_fixed_seed = true
+seed = 537963
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+process_material = SubResource("ParticleProcessMaterial_fx67m")
+
+[node name="GulpRing0" type="ColorRect" parent="." unique_id=693903334]
+z_index = 1
+material = SubResource("ShaderMaterial_xqomq")
+offset_left = -54.0
+offset_top = -116.0
+offset_right = 54.0
+offset_bottom = -8.0
+mouse_filter = 2
+
+[node name="GulpLight0" type="ColorRect" parent="." unique_id=236004517]
+z_index = 2
+material = SubResource("ShaderMaterial_jvmgi")
+offset_left = -56.0
+offset_top = -118.0
+offset_right = 56.0
+offset_bottom = -6.0
+mouse_filter = 2
+
+[node name="GulpRing1" type="ColorRect" parent="." unique_id=1285875758]
+z_index = 1
+material = SubResource("ShaderMaterial_u8mav")
+offset_left = -54.0
+offset_top = -116.0
+offset_right = 54.0
+offset_bottom = -8.0
+mouse_filter = 2
+
+[node name="GulpLight1" type="ColorRect" parent="." unique_id=1319570684]
+z_index = 2
+material = SubResource("ShaderMaterial_3bla4")
+offset_left = -56.0
+offset_top = -118.0
+offset_right = 56.0
+offset_bottom = -6.0
+mouse_filter = 2
+
+[node name="Rim" type="ColorRect" parent="." unique_id=575412727]
+z_index = 1
+material = SubResource("ShaderMaterial_35nvs")
+offset_left = -14.0
+offset_top = -76.0
+offset_right = 14.0
+offset_bottom = -48.0
+mouse_filter = 2
+
+[node name="Halo" type="ColorRect" parent="." unique_id=739594739]
+z_index = 2
+material = SubResource("ShaderMaterial_s0eil")
+offset_left = -22.0
+offset_top = -84.0
+offset_right = 22.0
+offset_bottom = -40.0
+mouse_filter = 2
+
+[node name="HaloWide" type="ColorRect" parent="." unique_id=258788442]
+z_index = 2
+material = SubResource("ShaderMaterial_g6rb2")
+offset_left = -61.0
+offset_top = -123.0
+offset_right = 61.0
+offset_bottom = -1.0
+mouse_filter = 2
+
+[node name="Orb" type="ColorRect" parent="." unique_id=743090414]
+z_index = 3
+material = SubResource("ShaderMaterial_uis2e")
+offset_left = -14.0
+offset_top = -76.0
+offset_right = 14.0
+offset_bottom = -48.0
+mouse_filter = 2

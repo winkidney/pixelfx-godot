@@ -1,0 +1,555 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://addons/pixelfx_particles/core/pfx_effect.gd" id="1_0ajjx"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/shaders/ring.gdshader" id="2_e0nx7"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/shaders/dither.gdshader" id="3_1mtm3"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/textures/disc9.png" id="4_di0ln"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/shaders/ring_light.gdshader" id="5_348bx"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/fx/shadow/_shadow-flames_tongues.gdshader" id="6_cnlr4"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/textures/disc5.png" id="7_qfvmq"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/textures/disc3.png" id="8_ai74k"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/textures/dot1.png" id="9_pmdo5"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/shaders/light.gdshader" id="10_g3oui"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/textures/glow8.png" id="11_qt7rn"]
+
+[sub_resource type="Animation" id="Animation_ug73m"]
+length = 2.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Bloom:material:shader_parameter/alpha")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.033333335, 0.06666667, 0.1, 0.13333334, 0.16666667, 0.2, 0.23333333, 0.26666668, 0.3, 0.33333334, 0.4, 0.43333334, 0.5, 0.53333336, 0.6, 0.6666667, 0.7, 0.73333335, 0.76666665, 0.8, 0.8333333, 0.8666667, 0.9, 0.93333334, 0.96666664, 1, 1.0333333, 1.0666667, 1.1333333, 1.2, 1.2333333, 1.2666667, 1.3, 1.3333334, 1.3666667, 1.4, 1.4333333, 1.4666667, 1.5, 1.5333333, 1.5666667, 1.6, 1.6333333, 1.6666666, 1.7, 1.7333333, 1.7666667, 1.8, 1.8333334, 1.8666667, 1.9, 1.9333333, 1.9666667, 2, 2.0666666, 2.1, 2.1333334, 2.1666667, 2.2, 2.2333333, 2.2666667, 2.3, 2.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.4923577697634755, 0.4351016651955665, 0.3857931105288245, 0.4004615189740154, 0.4068995755715886, 0.4010366973338838, 0.3978081979827753, 0.38894338893721514, 0.39729588343895117, 0.42754130789526373, 0.4368054311919638, 0.4365378425522907, 0.4300834936512592, 0.43392676113509626, 0.42429065482950984, 0.3990651790069023, 0.4113860297425298, 0.3935661204978922, 0.40353329294659135, 0.4266696838992613, 0.39223099474585627, 0.40080381476084503, 0.4004740417810127, 0.37904961304862317, 0.41016826364844533, 0.4248550675315642, 0.4143048416831363, 0.4272152338280958, 0.4529471125154729, 0.4733814807374395, 0.43672330600911663, 0.4072582514269981, 0.38197210590894354, 0.44566621829377057, 0.4882780218359093, 0.4680018850678103, 0.47120885871364365, 0.4714963153305234, 0.4301193743014869, 0.38582914232994037, 0.42774757002035646, 0.47824796330714336, 0.48615478181671357, 0.44757869430912134, 0.445056388050419, 0.44935672030574153, 0.4304003484321649, 0.45522794125449567, 0.48488368212638305, 0.4130667872982017, 0.35164483729112794, 0.401828693337656, 0.44337438110314903, 0.4623966749568129, 0.49013659291841666, 0.3841194605619291, 0.40236279152243426, 0.37765324249800186, 0.4012163267265443, 0.4371371720548708, 0.4633266278269729, 0.4939776234656692, 0.49008326467851043, 0.4923577697634755]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Heart:material:shader_parameter/alpha")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.033333335, 0.06666667, 0.1, 0.13333334, 0.2, 0.23333333, 0.26666668, 0.3, 0.33333334, 0.4, 0.43333334, 0.5, 0.53333336, 0.6, 0.6666667, 0.7, 0.73333335, 0.76666665, 0.8, 0.8333333, 0.8666667, 0.9, 0.93333334, 0.96666664, 1, 1.0333333, 1.0666667, 1.1333333, 1.2, 1.2333333, 1.2666667, 1.3, 1.3333334, 1.3666667, 1.4333333, 1.5, 1.5333333, 1.5666667, 1.6, 1.6333333, 1.6666666, 1.7, 1.7333333, 1.7666667, 1.8, 1.8333334, 1.8666667, 1.9, 1.9333333, 1.9666667, 2, 2.0666666, 2.1, 2.1333334, 2.1666667, 2.2, 2.2333333, 2.2666667, 2.3, 2.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.3348032834391634, 0.29586913233298523, 0.2623393151596007, 0.27231383290233047, 0.27669171138868026, 0.27050957462828723, 0.26448150447730634, 0.2701612007384868, 0.29072808936877936, 0.2970276932105354, 0.2968457329355577, 0.2924567756828563, 0.2950701975718655, 0.2885176452840667, 0.2713643217246936, 0.2797425002249203, 0.2676249619385667, 0.27440263920368213, 0.2901353850514977, 0.2667170764271823, 0.27254659403737463, 0.27232234841108865, 0.2577537368730638, 0.27891441928094285, 0.28890144592146366, 0.2817272923445327, 0.2905063590031052, 0.3080040365105216, 0.3218994069014589, 0.2969718480861993, 0.27693561097035874, 0.25974103201808163, 0.303053028439764, 0.3320290548484183, 0.31824128184611106, 0.3206174944247559, 0.2623638167843595, 0.2908683476138424, 0.3252086150488575, 0.33058525163536523, 0.3043535121302025, 0.30263834387428495, 0.30556256980790425, 0.2926722369338722, 0.3095550000530571, 0.3297209038459405, 0.28088541536277717, 0.239118489357967, 0.27324351146960607, 0.3014945791501414, 0.3144297389706328, 0.3332928831845233, 0.2612012331821118, 0.2736066982352553, 0.2568042048986413, 0.27282710217405015, 0.2972532769973122, 0.3150621069223416, 0.3359047839566551, 0.3332566199813871, 0.3348032834391634]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Tongues:material:shader_parameter/t")
+tracks/2/interp = 1
+tracks/2/loop_wrap = false
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 2.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("@ColorRect@2:material:shader_parameter/t")
+tracks/3/interp = 1
+tracks/3/loop_wrap = false
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 2.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2gqhb"]
+_data = {
+&"fx": SubResource("Animation_ug73m")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q1re4"]
+shader = ExtResource("2_e0nx7")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = null
+shader_parameter/size = Vector2(50, 12)
+shader_parameter/radius = 22.0
+shader_parameter/thickness = null
+shader_parameter/squash = 0.14545454545454548
+shader_parameter/color = Color(0.08235294, 0.047058824, 0.14901961, 1)
+shader_parameter/edge_color = null
+shader_parameter/edge = null
+shader_parameter/side = null
+shader_parameter/ragged = null
+shader_parameter/grain = null
+shader_parameter/alpha = null
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uke5n"]
+shader = ExtResource("2_e0nx7")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = null
+shader_parameter/size = Vector2(32, 10)
+shader_parameter/radius = 13.2
+shader_parameter/thickness = null
+shader_parameter/squash = 0.14545454545454548
+shader_parameter/color = Color(0.023529412, 0.015686275, 0.043137256, 1)
+shader_parameter/edge_color = null
+shader_parameter/edge = null
+shader_parameter/side = null
+shader_parameter/ragged = null
+shader_parameter/grain = null
+shader_parameter/alpha = null
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lcsry"]
+resource_name = "Soft"
+shader = ExtResource("3_1mtm3")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = true
+
+[sub_resource type="Gradient" id="Gradient_do7o2"]
+offsets = PackedFloat32Array(0, 0.1, 0.4, 0.75, 1)
+colors = PackedColorArray(0.21960786, 0.08431373, 0.4156863, 0, 0.21960786, 0.08431373, 0.4156863, 0.75, 0.14, 0.060784318, 0.26431373, 0.6, 0.115294114, 0.05490196, 0.21490195, 0.3, 0.08235294, 0.047058824, 0.14901961, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_0kjhs"]
+gradient = SubResource("Gradient_do7o2")
+
+[sub_resource type="Curve" id="Curve_uf0ke"]
+_limits = [0.0, 8.0, 0.0, 1.0]
+_data = [Vector2(0, 0.7), 0.0, 1.3, 1, 1, Vector2(1, 2), 1.3, 0.0, 1, 1]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_85i0f"]
+curve = SubResource("Curve_uf0ke")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_x5v8u"]
+lifetime_randomness = 0.37
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(6, 1, 0)
+direction = Vector3(6.123234e-17, -1, 0)
+spread = 8.0
+initial_velocity_min = 20.0
+initial_velocity_max = 28.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.7
+scale_max = 0.7
+scale_curve = SubResource("CurveTexture_85i0f")
+color_ramp = SubResource("GradientTexture1D_0kjhs")
+turbulence_enabled = true
+turbulence_noise_strength = 2.0
+turbulence_noise_scale = 3.0
+turbulence_influence_min = 0.01
+turbulence_influence_max = 0.02
+
+[sub_resource type="Gradient" id="Gradient_kpwbm"]
+offsets = PackedFloat32Array(0, 0.12, 0.5, 0.8)
+colors = PackedColorArray(0.6156863, 0.36078432, 0.9254902, 0, 0.6156863, 0.36078432, 0.9254902, 0.4, 0.6156863, 0.36078432, 0.9254902, 0.15, 0.6156863, 0.36078432, 0.9254902, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_i5nbq"]
+gradient = SubResource("Gradient_kpwbm")
+
+[sub_resource type="Curve" id="Curve_wh65e"]
+_limits = [0.0, 8.0, 0.0, 1.0]
+_data = [Vector2(0, 0.38), 0.0, 0.72, 1, 1, Vector2(1, 1.1), 0.72, 0.0, 1, 1]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_vjhvk"]
+curve = SubResource("Curve_wh65e")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ytjw7"]
+lifetime_randomness = 0.37
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(6, 1, 0)
+direction = Vector3(6.123234e-17, -1, 0)
+spread = 8.0
+initial_velocity_min = 20.0
+initial_velocity_max = 28.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.7
+scale_max = 0.7
+scale_curve = SubResource("CurveTexture_vjhvk")
+color_ramp = SubResource("GradientTexture1D_i5nbq")
+turbulence_enabled = true
+turbulence_noise_strength = 2.0
+turbulence_noise_scale = 3.0
+turbulence_influence_min = 0.01
+turbulence_influence_max = 0.02
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jnr2j"]
+shader = ExtResource("5_348bx")
+shader_parameter/size = Vector2(98, 98)
+shader_parameter/radius = 46.0
+shader_parameter/thickness = null
+shader_parameter/squash = null
+shader_parameter/color = Color(0.43529412, 0.17254902, 0.7529412, 1)
+shader_parameter/strength = null
+shader_parameter/alpha = 0.3
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rvbho"]
+shader = ExtResource("5_348bx")
+shader_parameter/size = Vector2(110, 110)
+shader_parameter/radius = 52.0
+shader_parameter/thickness = null
+shader_parameter/squash = null
+shader_parameter/color = Color(0.43529412, 0.17254902, 0.7529412, 1)
+shader_parameter/strength = null
+shader_parameter/alpha = 0.5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bo1h3"]
+shader = ExtResource("5_348bx")
+shader_parameter/size = Vector2(58, 58)
+shader_parameter/radius = 26.0
+shader_parameter/thickness = null
+shader_parameter/squash = null
+shader_parameter/color = Color(0.8117647, 0.6509804, 1, 1)
+shader_parameter/strength = null
+shader_parameter/alpha = 0.34
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o7hme"]
+shader = ExtResource("6_cnlr4")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = null
+shader_parameter/size = Vector2(44, 60)
+shader_parameter/center = Vector2(0, -30)
+shader_parameter/t = null
+shader_parameter/heart_only = null
+shader_parameter/c0 = Color(0.023529412, 0.015686275, 0.043137256, 1)
+shader_parameter/c2 = Color(0.16470589, 0.06666667, 0.3137255, 1)
+shader_parameter/c4 = Color(0.43529412, 0.17254902, 0.7529412, 1)
+shader_parameter/c6 = Color(0.8117647, 0.6509804, 1, 1)
+shader_parameter/c7 = Color(0.9647059, 0.91764706, 1, 1)
+shader_parameter/white = Color(1, 1, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hr07f"]
+shader = ExtResource("6_cnlr4")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = null
+shader_parameter/size = Vector2(44, 60)
+shader_parameter/center = Vector2(0, -30)
+shader_parameter/t = null
+shader_parameter/heart_only = 1.0
+shader_parameter/c0 = Color(0.023529412, 0.015686275, 0.043137256, 1)
+shader_parameter/c2 = Color(0.16470589, 0.06666667, 0.3137255, 1)
+shader_parameter/c4 = Color(0.43529412, 0.17254902, 0.7529412, 1)
+shader_parameter/c6 = Color(0.8117647, 0.6509804, 1, 1)
+shader_parameter/c7 = Color(0.9647059, 0.91764706, 1, 1)
+shader_parameter/white = Color(1, 1, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b8cin"]
+resource_name = "Dither"
+shader = ExtResource("3_1mtm3")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = null
+
+[sub_resource type="Gradient" id="Gradient_bbgv0"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.5)
+colors = PackedColorArray(0.8117647, 0.6509804, 1, 1, 0.43529412, 0.17254902, 0.7529412, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_4fvap"]
+gradient = SubResource("Gradient_bbgv0")
+
+[sub_resource type="Image" id="Image_oedhx"]
+data = {
+"data": PackedByteArray(27, 87, 45, 65, 231, 159, 65, 193, 118, 2, 78, 193, 40, 235, 106, 193, 33, 39, 132, 64, 146, 80, 114, 193, 143, 207, 109, 193, 112, 151, 34, 193, 50, 86, 105, 65, 96, 159, 67, 193, 80, 230, 70, 63, 67, 92, 186, 193, 52, 96, 4, 65, 130, 10, 103, 193, 67, 240, 88, 193, 186, 30, 118, 193, 250, 197, 109, 193, 183, 215, 60, 193, 251, 199, 96, 65, 224, 51, 82, 193, 58, 178, 114, 192, 20, 151, 148, 193, 67, 131, 254, 64, 19, 242, 184, 193, 192, 150, 86, 64, 159, 184, 161, 193, 214, 21, 84, 65, 36, 247, 121, 193, 200, 220, 249, 64, 233, 106, 158, 193, 88, 203, 23, 65, 253, 149, 147, 193, 34, 104, 7, 192, 88, 71, 191, 193, 182, 4, 22, 193, 133, 192, 132, 193, 198, 163, 19, 193, 107, 21, 158, 193, 128, 250, 139, 64, 236, 253, 94, 193, 102, 148, 29, 193, 211, 184, 132, 193, 105, 66, 242, 64, 242, 197, 145, 193, 23, 74, 3, 65, 135, 199, 117, 193, 107, 94, 195, 64, 64, 121, 139, 193, 190, 196, 16, 193, 36, 21, 204, 193, 228, 209, 42, 65, 203, 36, 101, 193, 16, 127, 194, 64, 26, 102, 97, 193, 133, 202, 254, 64, 86, 46, 193, 193, 26, 14, 0, 65, 134, 162, 105, 193, 79, 119, 146, 64, 77, 197, 150, 193, 118, 234, 3, 65, 177, 97, 149, 193, 76, 55, 177, 63, 64, 4, 199, 193, 131, 172, 53, 65, 22, 131, 144, 193, 124, 114, 8, 191, 155, 76, 150, 193, 210, 230, 100, 192, 129, 52, 1, 194, 104, 74, 109, 193, 61, 79, 53, 193, 2, 95, 134, 64, 70, 88, 154, 193, 102, 62, 176, 191, 89, 68, 3, 194, 209, 169, 44, 193, 28, 140, 124, 193, 55, 235, 32, 65, 230, 180, 72, 193, 20, 247, 28, 193, 235, 179, 131, 193, 41, 41, 56, 65, 64, 72, 38, 193, 38, 1, 242, 192, 54, 12, 79, 193, 224, 133, 45, 64, 65, 57, 183, 193, 252, 82, 214, 63, 85, 48, 172, 193, 126, 177, 98, 65, 244, 106, 146, 193, 117, 20, 11, 65, 111, 178, 135, 193, 244, 249, 33, 193, 186, 250, 73, 193, 133, 80, 20, 193, 148, 210, 199, 193, 7, 118, 32, 192, 93, 128, 203, 193, 193, 86, 154, 192, 231, 99, 161, 193, 36, 210, 244, 192, 48, 36, 24, 193, 228, 203, 4, 64, 192, 97, 228, 193, 159, 126, 29, 65, 211, 95, 76, 193, 134, 135, 16, 64, 250, 46, 159, 193, 109, 238, 190, 192, 199, 209, 170, 193, 0, 65, 114, 61, 46, 2, 242, 193, 219, 186, 182, 192, 152, 228, 186, 193, 64, 32, 130, 190, 84, 179, 153, 193, 227, 51, 195, 64, 248, 112, 189, 193, 214, 28, 73, 65, 92, 135, 91, 193, 230, 148, 47, 64, 87, 197, 155, 193, 207, 75, 242, 64, 185, 64, 121, 193, 140, 188, 99, 192, 34, 47, 227, 193, 158, 244, 15, 65, 68, 187, 190, 193, 66, 26, 196, 192, 76, 19, 168, 193, 48, 126, 230, 192, 14, 159, 105, 193, 36, 174, 178, 64, 54, 207, 188, 193, 28, 200, 133, 191, 80, 139, 148, 193, 224, 182, 116, 192, 175, 210, 189, 193, 119, 82, 56, 65, 250, 63, 143, 193, 59, 44, 95, 65, 14, 195, 143, 193, 117, 168, 89, 193, 171, 84, 37, 193, 136, 47, 52, 192, 56, 190, 189, 193, 79, 192, 35, 193, 188, 143, 134, 193, 70, 179, 119, 192, 158, 48, 139, 193, 178, 100, 42, 64, 170, 46, 192, 193, 119, 195, 57, 192, 46, 116, 250, 193, 108, 255, 207, 63, 224, 11, 233, 193, 172, 107, 212, 63, 180, 129, 236, 193, 86, 3, 46, 192, 18, 229, 205, 193, 235, 126, 20, 193, 156, 11, 107, 193, 220, 160, 3, 65, 249, 42, 52, 193, 238, 106, 95, 65, 15, 212, 80, 193, 225, 165, 246, 192, 43, 108, 45, 193, 32, 148, 249, 64, 126, 26, 64, 193, 221, 230, 8, 193, 134, 188, 206, 193, 200, 44, 25, 192, 33, 13, 188, 193, 124, 181, 122, 192, 15, 179, 171, 193, 136, 57, 3, 192, 222, 90, 203, 193, 77, 232, 182, 192, 39, 246, 188, 193, 240, 139, 207, 64, 238, 48, 141, 193, 125, 144, 247, 64, 20, 45, 149, 193, 110, 223, 203, 192, 4, 66, 152, 193, 108, 227, 62, 64, 102, 143, 233, 193, 240, 243, 14, 65, 228, 125, 132, 193, 156, 237, 252, 64, 137, 173, 94, 193, 60, 138, 88, 65, 69, 130, 131, 193, 203, 40, 9, 193, 18, 169, 111, 193, 208, 201, 101, 191, 197, 251, 237, 193, 125, 183, 107, 193, 126, 228, 92, 193, 0, 28, 198, 191, 234, 59, 217, 193, 79, 58, 236, 64, 45, 117, 141, 193, 114, 129, 50, 64, 232, 40, 81, 193, 236, 28, 37, 64, 137, 101, 105, 193, 10, 210, 80, 64, 109, 212, 204, 193, 124, 148, 59, 65, 11, 128, 137, 193, 50, 160, 8, 65, 4, 61, 156, 193, 186, 120, 26, 193, 175, 34, 37, 193, 252, 108, 45, 65, 216, 125, 50, 193, 206, 203, 206, 192, 15, 109, 192, 193, 160, 76, 106, 65, 60, 247, 116, 193, 137, 242, 20, 64, 81, 119, 106, 193, 192, 124, 229, 192, 229, 109, 142, 193, 52, 159, 74, 193, 171, 124, 31, 193, 170, 42, 230, 64, 74, 125, 134, 193, 65, 227, 212, 64, 104, 252, 185, 193, 127, 158, 235, 192, 61, 67, 129, 193, 115, 73, 130, 192, 237, 12, 106, 193, 124, 124, 154, 64, 54, 133, 192, 193),
+"format": "RGFloat",
+"height": 1,
+"mipmaps": false,
+"width": 120
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_hsekd"]
+image = SubResource("Image_oedhx")
+
+[sub_resource type="Curve" id="Curve_y3tru"]
+_limits = [0.0, 8.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, -0.6999999, 1, 1, Vector2(1, 0.3), -0.6999999, 0.0, 1, 1]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_tdkgh"]
+curve = SubResource("Curve_y3tru")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_q78vv"]
+lifetime_randomness = 0.5
+particle_flag_disable_z = true
+emission_shape = 4
+emission_point_texture = SubResource("ImageTexture_hsekd")
+emission_point_count = 120
+direction = Vector3(6.123234e-17, -1, 0)
+spread = 18.0
+initial_velocity_min = 20.0
+initial_velocity_max = 40.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.75
+scale_max = 1.25
+scale_curve = SubResource("CurveTexture_tdkgh")
+color_ramp = SubResource("GradientTexture1D_4fvap")
+
+[sub_resource type="Gradient" id="Gradient_rrh8s"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.3)
+colors = PackedColorArray(0.16470589, 0.06666667, 0.3137255, 1, 0.43529412, 0.17254902, 0.7529412, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_exqao"]
+gradient = SubResource("Gradient_rrh8s")
+
+[sub_resource type="Image" id="Image_mnjfe"]
+data = {
+"data": PackedByteArray(27, 87, 45, 65, 231, 159, 65, 193, 118, 2, 78, 193, 40, 235, 106, 193, 33, 39, 132, 64, 146, 80, 114, 193, 143, 207, 109, 193, 112, 151, 34, 193, 50, 86, 105, 65, 96, 159, 67, 193, 80, 230, 70, 63, 67, 92, 186, 193, 52, 96, 4, 65, 130, 10, 103, 193, 67, 240, 88, 193, 186, 30, 118, 193, 250, 197, 109, 193, 183, 215, 60, 193, 251, 199, 96, 65, 224, 51, 82, 193, 58, 178, 114, 192, 20, 151, 148, 193, 67, 131, 254, 64, 19, 242, 184, 193, 192, 150, 86, 64, 159, 184, 161, 193, 214, 21, 84, 65, 36, 247, 121, 193, 200, 220, 249, 64, 233, 106, 158, 193, 88, 203, 23, 65, 253, 149, 147, 193, 34, 104, 7, 192, 88, 71, 191, 193, 182, 4, 22, 193, 133, 192, 132, 193, 198, 163, 19, 193, 107, 21, 158, 193, 128, 250, 139, 64, 236, 253, 94, 193, 102, 148, 29, 193, 211, 184, 132, 193, 105, 66, 242, 64, 242, 197, 145, 193, 23, 74, 3, 65, 135, 199, 117, 193, 107, 94, 195, 64, 64, 121, 139, 193, 190, 196, 16, 193, 36, 21, 204, 193, 228, 209, 42, 65, 203, 36, 101, 193, 16, 127, 194, 64, 26, 102, 97, 193, 133, 202, 254, 64, 86, 46, 193, 193, 26, 14, 0, 65, 134, 162, 105, 193, 79, 119, 146, 64, 77, 197, 150, 193, 118, 234, 3, 65, 177, 97, 149, 193, 76, 55, 177, 63, 64, 4, 199, 193, 131, 172, 53, 65, 22, 131, 144, 193, 124, 114, 8, 191, 155, 76, 150, 193, 210, 230, 100, 192, 129, 52, 1, 194, 104, 74, 109, 193, 61, 79, 53, 193, 2, 95, 134, 64, 70, 88, 154, 193, 102, 62, 176, 191, 89, 68, 3, 194, 209, 169, 44, 193, 28, 140, 124, 193, 55, 235, 32, 65, 230, 180, 72, 193, 20, 247, 28, 193, 235, 179, 131, 193, 41, 41, 56, 65, 64, 72, 38, 193, 38, 1, 242, 192, 54, 12, 79, 193, 224, 133, 45, 64, 65, 57, 183, 193, 252, 82, 214, 63, 85, 48, 172, 193, 126, 177, 98, 65, 244, 106, 146, 193, 117, 20, 11, 65, 111, 178, 135, 193, 244, 249, 33, 193, 186, 250, 73, 193, 133, 80, 20, 193, 148, 210, 199, 193, 7, 118, 32, 192, 93, 128, 203, 193, 193, 86, 154, 192, 231, 99, 161, 193, 36, 210, 244, 192, 48, 36, 24, 193, 228, 203, 4, 64, 192, 97, 228, 193, 159, 126, 29, 65, 211, 95, 76, 193, 134, 135, 16, 64, 250, 46, 159, 193, 109, 238, 190, 192, 199, 209, 170, 193, 0, 65, 114, 61, 46, 2, 242, 193, 219, 186, 182, 192, 152, 228, 186, 193, 64, 32, 130, 190, 84, 179, 153, 193, 227, 51, 195, 64, 248, 112, 189, 193, 214, 28, 73, 65, 92, 135, 91, 193, 230, 148, 47, 64, 87, 197, 155, 193, 207, 75, 242, 64, 185, 64, 121, 193, 140, 188, 99, 192, 34, 47, 227, 193, 158, 244, 15, 65, 68, 187, 190, 193, 66, 26, 196, 192, 76, 19, 168, 193, 48, 126, 230, 192, 14, 159, 105, 193, 36, 174, 178, 64, 54, 207, 188, 193, 28, 200, 133, 191, 80, 139, 148, 193, 224, 182, 116, 192, 175, 210, 189, 193, 119, 82, 56, 65, 250, 63, 143, 193, 59, 44, 95, 65, 14, 195, 143, 193, 117, 168, 89, 193, 171, 84, 37, 193, 136, 47, 52, 192, 56, 190, 189, 193, 79, 192, 35, 193, 188, 143, 134, 193, 70, 179, 119, 192, 158, 48, 139, 193, 178, 100, 42, 64, 170, 46, 192, 193, 119, 195, 57, 192, 46, 116, 250, 193, 108, 255, 207, 63, 224, 11, 233, 193, 172, 107, 212, 63, 180, 129, 236, 193, 86, 3, 46, 192, 18, 229, 205, 193, 235, 126, 20, 193, 156, 11, 107, 193, 220, 160, 3, 65, 249, 42, 52, 193, 238, 106, 95, 65, 15, 212, 80, 193, 225, 165, 246, 192, 43, 108, 45, 193, 32, 148, 249, 64, 126, 26, 64, 193, 221, 230, 8, 193, 134, 188, 206, 193, 200, 44, 25, 192, 33, 13, 188, 193, 124, 181, 122, 192, 15, 179, 171, 193, 136, 57, 3, 192, 222, 90, 203, 193, 77, 232, 182, 192, 39, 246, 188, 193, 240, 139, 207, 64, 238, 48, 141, 193, 125, 144, 247, 64, 20, 45, 149, 193, 110, 223, 203, 192, 4, 66, 152, 193, 108, 227, 62, 64, 102, 143, 233, 193, 240, 243, 14, 65, 228, 125, 132, 193, 156, 237, 252, 64, 137, 173, 94, 193, 60, 138, 88, 65, 69, 130, 131, 193, 203, 40, 9, 193, 18, 169, 111, 193, 208, 201, 101, 191, 197, 251, 237, 193, 125, 183, 107, 193, 126, 228, 92, 193, 0, 28, 198, 191, 234, 59, 217, 193, 79, 58, 236, 64, 45, 117, 141, 193, 114, 129, 50, 64, 232, 40, 81, 193, 236, 28, 37, 64, 137, 101, 105, 193, 10, 210, 80, 64, 109, 212, 204, 193, 124, 148, 59, 65, 11, 128, 137, 193, 50, 160, 8, 65, 4, 61, 156, 193, 186, 120, 26, 193, 175, 34, 37, 193, 252, 108, 45, 65, 216, 125, 50, 193, 206, 203, 206, 192, 15, 109, 192, 193, 160, 76, 106, 65, 60, 247, 116, 193, 137, 242, 20, 64, 81, 119, 106, 193, 192, 124, 229, 192, 229, 109, 142, 193, 52, 159, 74, 193, 171, 124, 31, 193, 170, 42, 230, 64, 74, 125, 134, 193, 65, 227, 212, 64, 104, 252, 185, 193, 127, 158, 235, 192, 61, 67, 129, 193, 115, 73, 130, 192, 237, 12, 106, 193, 124, 124, 154, 64, 54, 133, 192, 193),
+"format": "RGFloat",
+"height": 1,
+"mipmaps": false,
+"width": 120
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_mgjru"]
+image = SubResource("Image_mnjfe")
+
+[sub_resource type="Curve" id="Curve_td61t"]
+_limits = [0.0, 8.0, 0.0, 1.0]
+_data = [Vector2(0, 0.55), 0.0, -0.52500004, 1, 1, Vector2(0.4, 0.34), -0.52500004, -34.00003, 1, 1, Vector2(0.41, 0), -34.00003, 0.0, 1, 1, Vector2(1, 0), 0.0, 0.0, 1, 1]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_v7i4i"]
+curve = SubResource("Curve_td61t")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_hs7le"]
+lifetime_randomness = 0.5
+particle_flag_disable_z = true
+emission_shape = 4
+emission_point_texture = SubResource("ImageTexture_mgjru")
+emission_point_count = 120
+direction = Vector3(6.123234e-17, -1, 0)
+spread = 18.0
+initial_velocity_min = 20.0
+initial_velocity_max = 40.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.75
+scale_max = 1.25
+scale_curve = SubResource("CurveTexture_v7i4i")
+color_ramp = SubResource("GradientTexture1D_exqao")
+
+[sub_resource type="Gradient" id="Gradient_j407d"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.3, 0.6, 0.72, 0.84, 0.94)
+colors = PackedColorArray(1, 1, 1, 1, 0.9647059, 0.91764706, 1, 1, 0.8117647, 0.6509804, 1, 1, 0.8117647, 0.6509804, 1, 0.5, 0.8117647, 0.6509804, 1, 1, 0.8117647, 0.6509804, 1, 0.3)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_pa2gk"]
+gradient = SubResource("Gradient_j407d")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_d5fvd"]
+lifetime_randomness = 0.44
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(12, 1, 0)
+direction = Vector3(6.123234e-17, -1, 0)
+spread = 8.0
+initial_velocity_min = 24.0
+initial_velocity_max = 46.0
+gravity = Vector3(0, 0, 0)
+color_ramp = SubResource("GradientTexture1D_pa2gk")
+turbulence_enabled = true
+turbulence_noise_strength = 3.0
+turbulence_noise_scale = 3.0
+turbulence_influence_min = 0.01
+turbulence_influence_max = 0.02
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y7525"]
+resource_name = "Light"
+shader = ExtResource("10_g3oui")
+shader_parameter/strength = null
+shader_parameter/steps = null
+
+[sub_resource type="Gradient" id="Gradient_cgksp"]
+colors = PackedColorArray(0.8117647, 0.6509804, 1, 0.35, 0.8117647, 0.6509804, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_pdasx"]
+gradient = SubResource("Gradient_cgksp")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ru0qs"]
+lifetime_randomness = 0.44
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(12, 1, 0)
+direction = Vector3(6.123234e-17, -1, 0)
+spread = 8.0
+initial_velocity_min = 24.0
+initial_velocity_max = 46.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.75
+scale_max = 0.75
+color_ramp = SubResource("GradientTexture1D_pdasx")
+turbulence_enabled = true
+turbulence_noise_strength = 3.0
+turbulence_noise_scale = 3.0
+turbulence_influence_min = 0.01
+turbulence_influence_max = 0.02
+
+[node name="ShadowFlames" type="Node2D" unique_id=1076192214]
+script = ExtResource("1_0ajjx")
+effect_id = "shadow/shadow-flames"
+source = "src/fx/shadow/shadow-flames.js@e1228257fcc5af65dba6014b69afcf6f6b287bac"
+duration = 2.4
+loop = true
+canvas_size = Vector2i(104, 112)
+origin = Vector2i(52, 102)
+bg = "ground"
+ramps = {
+"palette": PackedColorArray(0.023529412, 0.015686275, 0.043137256, 1, 0.08235294, 0.047058824, 0.14901961, 1, 0.16470589, 0.06666667, 0.3137255, 1, 0.27450982, 0.101960786, 0.5176471, 1, 0.43529412, 0.17254902, 0.7529412, 1, 0.6156863, 0.36078432, 0.9254902, 1, 0.8117647, 0.6509804, 1, 1, 0.9647059, 0.91764706, 1, 1)
+}
+palette_extra = PackedColorArray(0.21960786, 0.08431373, 0.4156863, 1, 0.14, 0.060784318, 0.26431373, 1, 0.115294114, 0.05490196, 0.21490195, 1, 1, 1, 1, 1)
+palette_override = PackedColorArray()
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1969753701]
+libraries/ = SubResource("AnimationLibrary_2gqhb")
+
+[node name="Burn" type="ColorRect" parent="." unique_id=2145115590]
+z_index = -2
+material = SubResource("ShaderMaterial_q1re4")
+offset_left = -25.0
+offset_top = -5.5
+offset_right = 25.0
+offset_bottom = 6.5
+mouse_filter = 2
+
+[node name="BurnCore" type="ColorRect" parent="." unique_id=438981935]
+z_index = -2
+material = SubResource("ShaderMaterial_uke5n")
+offset_left = -16.0
+offset_top = -4.5
+offset_right = 16.0
+offset_bottom = 5.5
+mouse_filter = 2
+
+[node name="Smoke" type="GPUParticles2D" parent="." unique_id=1362467065]
+z_index = -2
+material = SubResource("ShaderMaterial_lcsry")
+position = Vector2(0, -30)
+amount = 11
+texture = ExtResource("4_di0ln")
+lifetime = 1.9
+preprocess = 1.9
+use_fixed_seed = true
+seed = 690693
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+process_material = SubResource("ParticleProcessMaterial_x5v8u")
+
+[node name="SmokeLit" type="GPUParticles2D" parent="." unique_id=1673117720]
+z_index = -2
+material = SubResource("ShaderMaterial_lcsry")
+position = Vector2(0, -28)
+amount = 11
+texture = ExtResource("4_di0ln")
+lifetime = 1.9
+preprocess = 1.9
+use_fixed_seed = true
+seed = 690693
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+process_material = SubResource("ParticleProcessMaterial_ytjw7")
+
+[node name="FloorLight" type="ColorRect" parent="." unique_id=1671730866]
+z_index = 2
+material = SubResource("ShaderMaterial_jnr2j")
+offset_left = -49.0
+offset_top = -51.0
+offset_right = 49.0
+offset_bottom = 47.0
+mouse_filter = 2
+
+[node name="Bloom" type="ColorRect" parent="." unique_id=1456894611]
+z_index = 2
+material = SubResource("ShaderMaterial_rvbho")
+offset_left = -55.0
+offset_top = -71.0
+offset_right = 55.0
+offset_bottom = 39.0
+mouse_filter = 2
+
+[node name="Heart" type="ColorRect" parent="." unique_id=971092517]
+z_index = 2
+material = SubResource("ShaderMaterial_bo1h3")
+offset_left = -29.0
+offset_top = -41.0
+offset_right = 29.0
+offset_bottom = 17.0
+mouse_filter = 2
+
+[node name="Tongues" type="ColorRect" parent="." unique_id=1658868483]
+z_index = 1
+material = SubResource("ShaderMaterial_o7hme")
+offset_left = -22.0
+offset_top = -60.0
+offset_right = 22.0
+mouse_filter = 2
+
+[node name="@ColorRect@2" type="ColorRect" parent="." unique_id=388355978]
+z_index = 3
+material = SubResource("ShaderMaterial_hr07f")
+offset_left = -22.0
+offset_top = -60.0
+offset_right = 22.0
+mouse_filter = 2
+
+[node name="Licks" type="GPUParticles2D" parent="." unique_id=1311974945]
+z_index = 1
+material = SubResource("ShaderMaterial_b8cin")
+amount = 7
+texture = ExtResource("7_qfvmq")
+lifetime = 0.5
+preprocess = 0.5
+use_fixed_seed = true
+seed = 232470
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+process_material = SubResource("ParticleProcessMaterial_q78vv")
+
+[node name="LickCores" type="GPUParticles2D" parent="." unique_id=1171646330]
+z_index = 1
+material = SubResource("ShaderMaterial_b8cin")
+amount = 7
+texture = ExtResource("8_ai74k")
+lifetime = 0.5
+preprocess = 0.5
+use_fixed_seed = true
+seed = 232470
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+process_material = SubResource("ParticleProcessMaterial_hs7le")
+
+[node name="Embers" type="GPUParticles2D" parent="." unique_id=2067193712]
+z_index = 1
+material = SubResource("ShaderMaterial_b8cin")
+position = Vector2(0, -10)
+amount = 22
+texture = ExtResource("9_pmdo5")
+lifetime = 1.8
+preprocess = 1.8
+use_fixed_seed = true
+seed = 747824
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+process_material = SubResource("ParticleProcessMaterial_d5fvd")
+
+[node name="EmberLight" type="GPUParticles2D" parent="." unique_id=1949413044]
+z_index = 2
+material = SubResource("ShaderMaterial_y7525")
+position = Vector2(0, -10)
+amount = 22
+texture = ExtResource("11_qt7rn")
+lifetime = 1.8
+preprocess = 1.8
+use_fixed_seed = true
+seed = 747824
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+process_material = SubResource("ParticleProcessMaterial_ru0qs")
