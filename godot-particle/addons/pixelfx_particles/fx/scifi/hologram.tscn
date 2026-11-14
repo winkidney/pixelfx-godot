@@ -1,0 +1,190 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://addons/pixelfx_particles/core/pfx_effect.gd" id="1_qry0d"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/fx/scifi/hologram/prop.png" id="2_2ncbq"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/fx/scifi/_hologram.gdshader" id="3_glwt3"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/fx/scifi/hologram/_glitch.res" id="4_j6ec8"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/shaders/dither.gdshader" id="5_cik1j"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/textures/dot1.png" id="6_lcjif"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/fx/scifi/_hologram_bits.gdshader" id="7_5wr4u"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/fx/scifi/hologram/_bits.res" id="8_wcmv3"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/fx/scifi/_hologram_light.gdshader" id="9_3bl2n"]
+
+[sub_resource type="Animation" id="Animation_qqamv"]
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Cone:material:shader_parameter/t")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 4.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Bits:process_material:shader_parameter/t")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 4.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Model:material:shader_parameter/t")
+tracks/2/interp = 1
+tracks/2/loop_wrap = false
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 4.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Light:material:shader_parameter/t")
+tracks/3/interp = 1
+tracks/3/loop_wrap = false
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 4.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_enopm"]
+_data = {
+&"fx": SubResource("Animation_qqamv")
+}
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_u4rgq"]
+resource_name = "Prop"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fjxfd"]
+shader = ExtResource("3_glwt3")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = null
+shader_parameter/size = Vector2(112, 104)
+shader_parameter/center = Vector2(0, -40)
+shader_parameter/t = 0.0
+shader_parameter/data = ExtResource("4_j6ec8")
+shader_parameter/mode = 1
+shader_parameter/pal = PackedColorArray(0.019607844, 0.047058824, 0.11764706, 1, 0.039215688, 0.12156863, 0.28235295, 1, 0.07058824, 0.23137255, 0.5019608, 1, 0.11372549, 0.39215687, 0.72156864, 1, 0.18039216, 0.59607846, 0.9098039, 1, 0.42352942, 0.8156863, 1, 1, 0.78431374, 0.9411765, 1, 1, 1, 1, 1, 1)
+shader_parameter/split_c = Color(1, 0.30980393, 0.84705883, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wnvj4"]
+resource_name = "Dither"
+shader = ExtResource("5_cik1j")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = null
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kuxpu"]
+shader = ExtResource("7_5wr4u")
+shader_parameter/t = 0.0
+shader_parameter/data = ExtResource("4_j6ec8")
+shader_parameter/bits = ExtResource("8_wcmv3")
+shader_parameter/hi = Color(1, 1, 1, 1)
+shader_parameter/lo = Color(0.42352942, 0.8156863, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kxjp5"]
+shader = ExtResource("3_glwt3")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = null
+shader_parameter/size = Vector2(112, 104)
+shader_parameter/center = Vector2(0, -40)
+shader_parameter/t = 0.0
+shader_parameter/data = ExtResource("4_j6ec8")
+shader_parameter/mode = 0
+shader_parameter/pal = PackedColorArray(0.019607844, 0.047058824, 0.11764706, 1, 0.039215688, 0.12156863, 0.28235295, 1, 0.07058824, 0.23137255, 0.5019608, 1, 0.11372549, 0.39215687, 0.72156864, 1, 0.18039216, 0.59607846, 0.9098039, 1, 0.42352942, 0.8156863, 1, 1, 0.78431374, 0.9411765, 1, 1, 1, 1, 1, 1)
+shader_parameter/split_c = Color(1, 0.30980393, 0.84705883, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_706s0"]
+shader = ExtResource("9_3bl2n")
+shader_parameter/size = Vector2(112, 104)
+shader_parameter/center = Vector2(0, -40)
+shader_parameter/t = 0.0
+shader_parameter/data = ExtResource("4_j6ec8")
+shader_parameter/pal = PackedColorArray(0.019607844, 0.047058824, 0.11764706, 1, 0.039215688, 0.12156863, 0.28235295, 1, 0.07058824, 0.23137255, 0.5019608, 1, 0.11372549, 0.39215687, 0.72156864, 1, 0.18039216, 0.59607846, 0.9098039, 1, 0.42352942, 0.8156863, 1, 1, 0.78431374, 0.9411765, 1, 1, 1, 1, 1, 1)
+shader_parameter/strength = null
+
+[node name="Hologram" type="Node2D" unique_id=1781179437]
+script = ExtResource("1_qry0d")
+effect_id = "scifi/hologram"
+source = "src/fx/scifi/hologram.js@e7d1ccd898099f842c303e7a8caa7b9a6aa8d211"
+duration = 4.0
+loop = true
+canvas_size = Vector2i(112, 104)
+origin = Vector2i(56, 92)
+bg = "ground"
+ramps = {
+"metal": PackedColorArray(0.05490196, 0.050980393, 0.078431375, 1, 0.11764706, 0.10980392, 0.15294118, 1, 0.19215687, 0.18039216, 0.24313726, 1, 0.29411766, 0.2784314, 0.34901962, 1, 0.43529412, 0.41568628, 0.50980395, 1, 0.6156863, 0.59607846, 0.6901961, 1),
+"palette": PackedColorArray(0.019607844, 0.047058824, 0.11764706, 1, 0.039215688, 0.12156863, 0.28235295, 1, 0.07058824, 0.23137255, 0.5019608, 1, 0.11372549, 0.39215687, 0.72156864, 1, 0.18039216, 0.59607846, 0.9098039, 1, 0.42352942, 0.8156863, 1, 1, 0.78431374, 0.9411765, 1, 1, 1, 1, 1, 1)
+}
+palette_extra = PackedColorArray(1, 0.30980393, 0.84705883, 1)
+palette_override = PackedColorArray()
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=727520330]
+libraries/ = SubResource("AnimationLibrary_enopm")
+
+[node name="Prop" type="Sprite2D" parent="." unique_id=256046613]
+z_index = -2
+material = SubResource("CanvasItemMaterial_u4rgq")
+position = Vector2(-56, -92)
+texture = ExtResource("2_2ncbq")
+centered = false
+
+[node name="Cone" type="ColorRect" parent="." unique_id=1080082684]
+z_index = 1
+material = SubResource("ShaderMaterial_fjxfd")
+offset_left = -56.0
+offset_top = -92.0
+offset_right = 56.0
+offset_bottom = 12.0
+mouse_filter = 2
+
+[node name="Bits" type="GPUParticles2D" parent="." unique_id=1818297305]
+z_index = 1
+material = SubResource("ShaderMaterial_wnvj4")
+amount = 18
+texture = ExtResource("6_lcjif")
+lifetime = 4.0
+preprocess = 0.016666666666666666
+explosiveness = 1.0
+use_fixed_seed = true
+seed = 927205
+fixed_fps = 60
+interpolate = false
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+local_coords = true
+process_material = SubResource("ShaderMaterial_kuxpu")
+
+[node name="Model" type="ColorRect" parent="." unique_id=1926072658]
+z_index = 1
+material = SubResource("ShaderMaterial_kxjp5")
+offset_left = -56.0
+offset_top = -92.0
+offset_right = 56.0
+offset_bottom = 12.0
+mouse_filter = 2
+
+[node name="Light" type="ColorRect" parent="." unique_id=825552284]
+z_index = 2
+material = SubResource("ShaderMaterial_706s0")
+offset_left = -56.0
+offset_top = -92.0
+offset_right = 56.0
+offset_bottom = 12.0
+mouse_filter = 2

@@ -152,6 +152,10 @@ After adding a PNG, run `./pfxp import` (it locks; other shells wait).
 - **Process shaders**: one that sets TRANSFORM itself needs `"local": true` (else its particles land at the
   viewport's corner). Light is added over everything in the original: a light node with `back: true` goes under
   the stand-in, which is rarely what the original does.
+- **Integer `%` in shaders** on a negative int comes out wrong on some GPUs (as if unsigned): write your own
+  `imod(a, b)` (`a - b * int(floor(float(a) / float(b)))`) for hashes and lattices that can go negative.
+- **Precision at build time**: GDScript's `Vector2/3/4` are single precision. Maths that decides which pixel a point
+  lands on (a corner near x = 0, a bar at 11.999...) should use plain floats (doubles).
 - **Collision size**: `collide.size` is Godot's `collision_base_size`, scaled by the particle's scale; check where
   a big texture comes to rest and shrink it until it sits on the floor.
 - **speed_scale**: an emitter's own `speed_scale` is kept (PfxEffect multiplies it by `speed`), so one emitter can
