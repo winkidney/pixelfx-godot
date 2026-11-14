@@ -22,6 +22,7 @@ uniform float steps = 7.0;
 uniform float alpha = 1.0;
 
 void fragment() {
+	vec4 tint = COLOR;   // the node's modulate: fade a group, tint a copy
 	vec2 p = floor((UV - 0.5) * size) + 0.5;
 	float a = radians(-tilt);
 	p = vec2(p.x * cos(a) - p.y * sin(a), p.x * sin(a) + p.y * cos(a));
@@ -51,6 +52,7 @@ void fragment() {
 	ci = clamp(ci, 0.0, n - 1.0);
 	vec4 c = texture(ramp, vec2((ci + 0.5) / n, 0.5));
 	c.a *= min(1.0, v / 0.4) * alpha;
+	c *= tint;
 	if (pfx_pixel(c, FRAGCOORD.xy)) {
 		discard;
 	}

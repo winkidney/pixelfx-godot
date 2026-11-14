@@ -96,8 +96,11 @@ func check(id: String) -> Dictionary:
 			if ci.material == null and not String(ci.name).begins_with("_"):
 				warn.append("%s: no material (neither the dither colour layer nor the light layer)" % fx.get_path_to(ci))
 			elif ci.material is ShaderMaterial and ci.material.shader:
-				if "TIME" in ci.material.shader.code:
+				if _reads_time(ci.material.shader.code):
 					fail.append("%s: its shader reads TIME (use a uniform the animation keys)" % fx.get_path_to(ci))
+		if ci is GPUParticles2D and ci.process_material is ShaderMaterial and ci.process_material.shader:
+			if _reads_time(ci.process_material.shader.code):
+				fail.append("%s: its process shader reads TIME (use a uniform the animation keys)" % fx.get_path_to(ci))
 	fx.free()
 	return {"fail": fail, "warn": warn}
 
@@ -120,3 +123,8 @@ static func _last_on(anim: Animation, fx: Node, gp: GPUParticles2D) -> float:
 				return anim.track_get_key_time(tr, k)
 		return anim.length
 	return last
+
+
+static func _reads_time(code: String) -> bool:
+	var re := RegEx.create_from_string("\\bTIME\\b")
+	return re.search(code) != null

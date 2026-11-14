@@ -1,0 +1,1202 @@
+[gd_scene format=4]
+
+[ext_resource type="Script" path="res://addons/pixelfx_particles/core/pfx_effect.gd" id="1_pijm6"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/shaders/dither.gdshader" id="2_74kjr"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/fx/nature/_spiral.gdshader" id="3_fd1if"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/fx/nature/_funnel.gdshader" id="4_uwthl"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/shaders/light.gdshader" id="5_pjqb3"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/textures/beam16.png" id="6_4wtne"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/shaders/ring_light.gdshader" id="7_knadg"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/fx/nature/_funnel_glow.gdshader" id="8_if8nx"]
+
+[sub_resource type="Animation" id="Animation_gy4ti"]
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DustBack:process_material:shader_parameter/t")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DustFront:process_material:shader_parameter/t")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("DustLitBack:process_material:shader_parameter/t")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("DustLitFront:process_material:shader_parameter/t")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("LeafAmberBack:process_material:shader_parameter/t")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("LeafAmberFront:process_material:shader_parameter/t")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("LeafGreenBack:process_material:shader_parameter/t")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("LeafGreenFront:process_material:shader_parameter/t")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("TwigBack:process_material:shader_parameter/t")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("TwigFront:process_material:shader_parameter/t")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("PebbleBack:process_material:shader_parameter/t")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("PebbleFront:process_material:shader_parameter/t")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("FunnelBack:material:shader_parameter/t")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("FunnelBack:material:shader_parameter/flash")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0, 0.016666668, 0.033333335, 0.05, 0.06666667, 0.083333336, 0.1, 0.11666667, 0.13333334, 0.15, 0.16666667, 0.18333334, 0.2, 0.21666667, 0.23333333, 0.25, 0.26666668, 0.28333333, 0.3, 0.31666666, 0.33333334, 0.35, 0.36666667, 0.38333333, 0.4, 0.41666666, 0.43333334, 0.45, 0.46666667, 0.48333332, 0.5, 0.51666665, 0.53333336, 0.55, 0.56666666, 0.5833333, 0.6, 0.6166667, 0.6333333, 0.65, 0.6666667, 0.68333334, 0.7, 0.71666664, 0.73333335, 0.75, 0.76666665, 0.78333336, 0.8, 0.81666666, 0.8333333, 0.85, 0.8666667, 0.8833333, 0.9, 0.9166667, 0.93333334, 0.95, 0.96666664, 0.98333335, 1, 1.0166667, 1.0333333, 1.05, 1.0666667, 1.0833334, 1.1, 1.1166667, 1.1333333, 1.15, 1.1666666, 1.1833333, 1.2, 1.2166667, 1.2333333, 1.25, 1.2666667, 1.2833333, 1.3, 1.3166667, 1.3333334, 1.35, 1.3666667, 1.3833333, 1.4, 1.4166666, 1.4333333, 1.45, 1.4666667, 1.4833333, 1.5, 1.5166667, 1.5333333, 1.55, 1.5666667, 1.5833334, 1.6, 1.6166667, 1.6333333, 1.65, 1.6666666, 1.6833333, 1.7, 1.7166667, 1.7333333, 1.75, 1.7666667, 1.7833333, 1.8, 1.8166667, 1.8333334, 1.85, 1.8666667, 1.8833333, 1.9, 1.9166666, 1.9333333, 1.95, 1.9666667, 1.9833333, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.1999999999999993, 0.5333333333333314, 0.866666666666668, 0.7999999999999998, 0.4666666666666677, 0.13333333333333108, 0.0, 0.0, 0.0, 3.8635761256955444e-15, 0.333333333333336, 0.5333333333333318, 0.19999999999999962, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("Body:material:shader_parameter/t")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("Body:material:shader_parameter/flash")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(0, 0.016666668, 0.033333335, 0.05, 0.06666667, 0.083333336, 0.1, 0.11666667, 0.13333334, 0.15, 0.16666667, 0.18333334, 0.2, 0.21666667, 0.23333333, 0.25, 0.26666668, 0.28333333, 0.3, 0.31666666, 0.33333334, 0.35, 0.36666667, 0.38333333, 0.4, 0.41666666, 0.43333334, 0.45, 0.46666667, 0.48333332, 0.5, 0.51666665, 0.53333336, 0.55, 0.56666666, 0.5833333, 0.6, 0.6166667, 0.6333333, 0.65, 0.6666667, 0.68333334, 0.7, 0.71666664, 0.73333335, 0.75, 0.76666665, 0.78333336, 0.8, 0.81666666, 0.8333333, 0.85, 0.8666667, 0.8833333, 0.9, 0.9166667, 0.93333334, 0.95, 0.96666664, 0.98333335, 1, 1.0166667, 1.0333333, 1.05, 1.0666667, 1.0833334, 1.1, 1.1166667, 1.1333333, 1.15, 1.1666666, 1.1833333, 1.2, 1.2166667, 1.2333333, 1.25, 1.2666667, 1.2833333, 1.3, 1.3166667, 1.3333334, 1.35, 1.3666667, 1.3833333, 1.4, 1.4166666, 1.4333333, 1.45, 1.4666667, 1.4833333, 1.5, 1.5166667, 1.5333333, 1.55, 1.5666667, 1.5833334, 1.6, 1.6166667, 1.6333333, 1.65, 1.6666666, 1.6833333, 1.7, 1.7166667, 1.7333333, 1.75, 1.7666667, 1.7833333, 1.8, 1.8166667, 1.8333334, 1.85, 1.8666667, 1.8833333, 1.9, 1.9166666, 1.9333333, 1.95, 1.9666667, 1.9833333, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.1999999999999993, 0.5333333333333314, 0.866666666666668, 0.7999999999999998, 0.4666666666666677, 0.13333333333333108, 0.0, 0.0, 0.0, 3.8635761256955444e-15, 0.333333333333336, 0.5333333333333318, 0.19999999999999962, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+}
+tracks/16/type = "value"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("FunnelFront:material:shader_parameter/t")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/17/type = "value"
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/path = NodePath("FunnelFront:material:shader_parameter/flash")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/keys = {
+"times": PackedFloat32Array(0, 0.016666668, 0.033333335, 0.05, 0.06666667, 0.083333336, 0.1, 0.11666667, 0.13333334, 0.15, 0.16666667, 0.18333334, 0.2, 0.21666667, 0.23333333, 0.25, 0.26666668, 0.28333333, 0.3, 0.31666666, 0.33333334, 0.35, 0.36666667, 0.38333333, 0.4, 0.41666666, 0.43333334, 0.45, 0.46666667, 0.48333332, 0.5, 0.51666665, 0.53333336, 0.55, 0.56666666, 0.5833333, 0.6, 0.6166667, 0.6333333, 0.65, 0.6666667, 0.68333334, 0.7, 0.71666664, 0.73333335, 0.75, 0.76666665, 0.78333336, 0.8, 0.81666666, 0.8333333, 0.85, 0.8666667, 0.8833333, 0.9, 0.9166667, 0.93333334, 0.95, 0.96666664, 0.98333335, 1, 1.0166667, 1.0333333, 1.05, 1.0666667, 1.0833334, 1.1, 1.1166667, 1.1333333, 1.15, 1.1666666, 1.1833333, 1.2, 1.2166667, 1.2333333, 1.25, 1.2666667, 1.2833333, 1.3, 1.3166667, 1.3333334, 1.35, 1.3666667, 1.3833333, 1.4, 1.4166666, 1.4333333, 1.45, 1.4666667, 1.4833333, 1.5, 1.5166667, 1.5333333, 1.55, 1.5666667, 1.5833334, 1.6, 1.6166667, 1.6333333, 1.65, 1.6666666, 1.6833333, 1.7, 1.7166667, 1.7333333, 1.75, 1.7666667, 1.7833333, 1.8, 1.8166667, 1.8333334, 1.85, 1.8666667, 1.8833333, 1.9, 1.9166666, 1.9333333, 1.95, 1.9666667, 1.9833333, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.1999999999999993, 0.5333333333333314, 0.866666666666668, 0.7999999999999998, 0.4666666666666677, 0.13333333333333108, 0.0, 0.0, 0.0, 3.8635761256955444e-15, 0.333333333333336, 0.5333333333333318, 0.19999999999999962, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+}
+tracks/18/type = "value"
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/path = NodePath("Grit:process_material:shader_parameter/t")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/19/type = "value"
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/path = NodePath("Grit2:process_material:shader_parameter/t")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/20/type = "value"
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/path = NodePath("HeadLight:material:shader_parameter/t")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/21/type = "value"
+tracks/21/imported = false
+tracks/21/enabled = true
+tracks/21/path = NodePath("Column:points")
+tracks/21/interp = 1
+tracks/21/loop_wrap = true
+tracks/21/keys = {
+"times": PackedFloat32Array(0, 0.033333335, 0.06666667, 0.1, 0.13333334, 0.16666667, 0.2, 0.23333333, 0.26666668, 0.3, 0.33333334, 0.36666667, 0.4, 0.43333334, 0.46666667, 0.5, 0.53333336, 0.56666666, 0.6, 0.6333333, 0.6666667, 0.7, 0.73333335, 0.76666665, 0.8, 0.8333333, 0.8666667, 0.9, 0.93333334, 0.96666664, 1, 1.0333333, 1.0666667, 1.1, 1.1333333, 1.1666666, 1.2, 1.2333333, 1.2666667, 1.3, 1.3333334, 1.3666667, 1.4, 1.4333333, 1.4666667, 1.5, 1.5333333, 1.5666667, 1.6, 1.6333333, 1.6666666, 1.7, 1.7333333, 1.7666667, 1.8, 1.8333334, 1.8666667, 1.9, 1.9333333, 1.9666667, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [PackedVector2Array(-0.3864676, -11.2, -4.2066393, -100.8), PackedVector2Array(-0.10645921, -11.2, -5.5704727, -100.8), PackedVector2Array(0.16614774, -11.2, -6.858493, -100.8), PackedVector2Array(0.42755413, -11.2, -8.036716, -100.8), PackedVector2Array(0.67449355, -11.2, -9.07388, -100.8), PackedVector2Array(0.90428567, -11.2, -9.942579, -100.8), PackedVector2Array(1.1148643, -11.2, -10.620274, -100.8), PackedVector2Array(1.3047807, -11.2, -11.090105, -100.8), PackedVector2Array(1.4731817, -11.2, -11.34149, -100.8), PackedVector2Array(1.6197652, -11.2, -11.370474, -100.8), PackedVector2Array(1.7447162, -11.2, -11.1798315, -100.8), PackedVector2Array(1.848627, -11.2, -10.778893, -100.8), PackedVector2Array(1.932404, -11.2, -10.183137, -100.8), PackedVector2Array(1.9971695, -11.2, -9.413522, -100.8), PackedVector2Array(2.0441592, -11.2, -8.49564, -100.8), PackedVector2Array(2.074624, -11.2, -7.458677, -100.8), PackedVector2Array(2.08974, -11.2, -6.3342595, -100.8), PackedVector2Array(2.0905282, -11.2, -5.155225, -100.8), PackedVector2Array(2.0777922, -11.2, -3.9543612, -100.8), PackedVector2Array(2.0520742, -11.2, -2.763182, -100.8), PackedVector2Array(2.0136306, -11.2, -1.6107776, -100.8), PackedVector2Array(1.9624312, -11.2, -0.522796, -100.8), PackedVector2Array(1.8981785, -11.2, 0.47940782, -100.8), PackedVector2Array(1.820349, -11.2, 1.3794177, -100.8), PackedVector2Array(1.7282524, -11.2, 2.166174, -100.8), PackedVector2Array(1.6211066, -11.2, 2.8341467, -100.8), PackedVector2Array(1.4981245, -11.2, 3.3832626, -100.8), PackedVector2Array(1.3586082, -11.2, 3.8185868, -100.8), PackedVector2Array(1.2020468, -11.2, 4.149785, -100.8), PackedVector2Array(1.0282097, -11.2, 4.390386, -100.8), PackedVector2Array(0.8372358, -11.2, 4.5568843, -100.8), PackedVector2Array(0.629708, -11.2, 4.667721, -100.8), PackedVector2Array(0.40671313, -11.2, 4.742199, -100.8), PackedVector2Array(0.16988204, -11.2, 4.799373, -100.8), PackedVector2Array(-0.07859291, -11.2, 4.856974, -100.8), PackedVector2Array(-0.33596423, -11.2, 4.9304094, -100.8), PackedVector2Array(-0.5989605, -11.2, 5.031897, -100.8), PackedVector2Array(-0.86384207, -11.2, 5.1697598, -100.8), PackedVector2Array(-1.1264791, -11.2, 5.3479233, -100.8), PackedVector2Array(-1.3824514, -11.2, 5.5656343, -100.8), PackedVector2Array(-1.627163, -11.2, 5.8174167, -100.8), PackedVector2Array(-1.8559719, -11.2, 6.0932684, -100.8), PackedVector2Array(-2.0643263, -11.2, 6.379085, -100.8), PackedVector2Array(-2.247903, -11.2, 6.657299, -100.8), PackedVector2Array(-2.402746, -11.2, 6.9077063, -100.8), PackedVector2Array(-2.5253923, -11.2, 7.108432, -100.8), PackedVector2Array(-2.6129887, -11.2, 7.2370114, -100.8), PackedVector2Array(-2.663389, -11.2, 7.2715187, -100.8), PackedVector2Array(-2.6752284, -11.2, 7.1917048, -100.8), PackedVector2Array(-2.6479747, -11.2, 6.980088, -100.8), PackedVector2Array(-2.581952, -11.2, 6.622947, -100.8), PackedVector2Array(-2.478335, -11.2, 6.1111727, -100.8), PackedVector2Array(-2.3391173, -11.2, 5.4409375, -100.8), PackedVector2Array(-2.1670516, -11.2, 4.614149, -100.8), PackedVector2Array(-1.9655662, -11.2, 3.6386664, -100.8), PackedVector2Array(-1.7386597, -11.2, 2.5282674, -100.8), PackedVector2Array(-1.4907794, -11.2, 1.3023626, -100.8), PackedVector2Array(-1.2266861, -11.2, -0.014535028, -100.8), PackedVector2Array(-0.951313, -11.2, -1.3935621, -100.8), PackedVector2Array(-0.6696228, -11.2, -2.802452, -100.8), PackedVector2Array(-0.3864676, -11.2, -4.2066393, -100.8)]
+}
+tracks/22/type = "value"
+tracks/22/imported = false
+tracks/22/enabled = true
+tracks/22/path = NodePath("FootLight:position")
+tracks/22/interp = 1
+tracks/22/loop_wrap = true
+tracks/22/keys = {
+"times": PackedFloat32Array(0, 0.033333335, 0.06666667, 0.1, 0.13333334, 0.16666667, 0.2, 0.23333333, 0.26666668, 0.3, 0.33333334, 0.36666667, 0.4, 0.43333334, 0.46666667, 0.5, 0.53333336, 0.56666666, 0.6, 0.6333333, 0.6666667, 0.7, 0.73333335, 0.76666665, 0.8, 0.8333333, 0.8666667, 0.9, 0.93333334, 0.96666664, 1, 1.0333333, 1.0666667, 1.1, 1.1333333, 1.1666666, 1.2, 1.2333333, 1.2666667, 1.3, 1.3333334, 1.3666667, 1.4, 1.4333333, 1.4666667, 1.5, 1.5333333, 1.5666667, 1.6, 1.6333333, 1.6666666, 1.7, 1.7333333, 1.7666667, 1.8, 1.8333334, 1.8666667, 1.9, 1.9333333, 1.9666667, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-34, -36), Vector2(-33.8223, -36), Vector2(-33.64655, -36), Vector2(-33.47467, -36), Vector2(-33.308548, -36), Vector2(-33.15, -36), Vector2(-33.000767, -36), Vector2(-32.862476, -36), Vector2(-32.736652, -36), Vector2(-32.624672, -36), Vector2(-32.527756, -36), Vector2(-32.44697, -36), Vector2(-32.383205, -36), Vector2(-32.33715, -36), Vector2(-32.30931, -36), Vector2(-32.3, -36), Vector2(-32.30931, -36), Vector2(-32.33715, -36), Vector2(-32.383205, -36), Vector2(-32.44697, -36), Vector2(-32.527756, -36), Vector2(-32.624672, -36), Vector2(-32.736652, -36), Vector2(-32.862476, -36), Vector2(-33.000767, -36), Vector2(-33.15, -36), Vector2(-33.308548, -36), Vector2(-33.47467, -36), Vector2(-33.64655, -36), Vector2(-33.8223, -36), Vector2(-34, -36), Vector2(-34.1777, -36), Vector2(-34.35345, -36), Vector2(-34.52533, -36), Vector2(-34.691452, -36), Vector2(-34.85, -36), Vector2(-34.999233, -36), Vector2(-35.137524, -36), Vector2(-35.263348, -36), Vector2(-35.375328, -36), Vector2(-35.472244, -36), Vector2(-35.55303, -36), Vector2(-35.616795, -36), Vector2(-35.66285, -36), Vector2(-35.69069, -36), Vector2(-35.7, -36), Vector2(-35.69069, -36), Vector2(-35.66285, -36), Vector2(-35.616795, -36), Vector2(-35.55303, -36), Vector2(-35.472244, -36), Vector2(-35.375328, -36), Vector2(-35.263348, -36), Vector2(-35.137524, -36), Vector2(-34.999233, -36), Vector2(-34.85, -36), Vector2(-34.691452, -36), Vector2(-34.52533, -36), Vector2(-34.35345, -36), Vector2(-34.1777, -36), Vector2(-34, -36)]
+}
+tracks/23/type = "value"
+tracks/23/imported = false
+tracks/23/enabled = true
+tracks/23/path = NodePath("Flash:position")
+tracks/23/interp = 1
+tracks/23/loop_wrap = true
+tracks/23/keys = {
+"times": PackedFloat32Array(0, 0.033333335, 0.06666667, 0.1, 0.13333334, 0.16666667, 0.2, 0.23333333, 0.26666668, 0.3, 0.33333334, 0.36666667, 0.4, 0.43333334, 0.46666667, 0.5, 0.53333336, 0.56666666, 0.6, 0.6333333, 0.6666667, 0.7, 0.73333335, 0.76666665, 0.8, 0.8333333, 0.8666667, 0.9, 0.93333334, 0.96666664, 1, 1.0333333, 1.0666667, 1.1, 1.1333333, 1.1666666, 1.2, 1.2333333, 1.2666667, 1.3, 1.3333334, 1.3666667, 1.4, 1.4333333, 1.4666667, 1.5, 1.5333333, 1.5666667, 1.6, 1.6333333, 1.6666666, 1.7, 1.7333333, 1.7666667, 1.8, 1.8333334, 1.8666667, 1.9, 1.9333333, 1.9666667, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-78.20664, -188), Vector2(-79.57047, -188), Vector2(-80.85849, -188), Vector2(-82.03671, -188), Vector2(-83.07388, -188), Vector2(-83.94258, -188), Vector2(-84.62027, -188), Vector2(-85.0901, -188), Vector2(-85.34149, -188), Vector2(-85.370476, -188), Vector2(-85.17983, -188), Vector2(-84.77889, -188), Vector2(-84.183136, -188), Vector2(-83.41352, -188), Vector2(-82.495636, -188), Vector2(-81.45868, -188), Vector2(-80.33426, -188), Vector2(-79.15523, -188), Vector2(-77.95436, -188), Vector2(-76.76318, -188), Vector2(-75.61078, -188), Vector2(-74.5228, -188), Vector2(-73.52059, -188), Vector2(-72.62058, -188), Vector2(-71.833824, -188), Vector2(-71.165855, -188), Vector2(-70.61674, -188), Vector2(-70.18141, -188), Vector2(-69.85021, -188), Vector2(-69.60961, -188), Vector2(-69.443115, -188), Vector2(-69.332275, -188), Vector2(-69.2578, -188), Vector2(-69.20063, -188), Vector2(-69.14303, -188), Vector2(-69.06959, -188), Vector2(-68.9681, -188), Vector2(-68.83024, -188), Vector2(-68.65208, -188), Vector2(-68.434364, -188), Vector2(-68.18259, -188), Vector2(-67.90673, -188), Vector2(-67.62092, -188), Vector2(-67.3427, -188), Vector2(-67.09229, -188), Vector2(-66.89157, -188), Vector2(-66.762985, -188), Vector2(-66.728485, -188), Vector2(-66.8083, -188), Vector2(-67.01991, -188), Vector2(-67.37705, -188), Vector2(-67.888824, -188), Vector2(-68.55906, -188), Vector2(-69.38585, -188), Vector2(-70.361336, -188), Vector2(-71.47173, -188), Vector2(-72.69764, -188), Vector2(-74.014534, -188), Vector2(-75.39356, -188), Vector2(-76.80245, -188), Vector2(-78.20664, -188)]
+}
+tracks/24/type = "value"
+tracks/24/imported = false
+tracks/24/enabled = true
+tracks/24/path = NodePath("Flash:material:shader_parameter/alpha")
+tracks/24/interp = 1
+tracks/24/loop_wrap = true
+tracks/24/keys = {
+"times": PackedFloat32Array(0, 0.033333335, 0.06666667, 0.1, 0.13333334, 0.16666667, 0.2, 0.23333333, 0.26666668, 0.3, 0.33333334, 0.36666667, 0.4, 0.43333334, 0.46666667, 0.5, 0.53333336, 0.56666666, 0.6, 0.6333333, 0.6666667, 0.7, 0.73333335, 0.76666665, 0.8, 0.8333333, 0.8666667, 0.9, 0.93333334, 0.96666664, 1, 1.0333333, 1.0666667, 1.1, 1.1333333, 1.1666666, 1.2, 1.2333333, 1.2666667, 1.3, 1.3333334, 1.3666667, 1.4, 1.4333333, 1.4666667, 1.5, 1.5333333, 1.5666667, 1.6, 1.6333333, 1.6666666, 1.7, 1.7333333, 1.7666667, 1.8, 1.8333334, 1.8666667, 1.9, 1.9333333, 1.9666667, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.08999999999999968, 0.3900000000000006, 0.21000000000000046, 0.0, 0.0, 0.1500000000000012, 0.08999999999999983, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+}
+tracks/25/type = "value"
+tracks/25/imported = false
+tracks/25/enabled = true
+tracks/25/path = NodePath("Bolt:visible")
+tracks/25/interp = 0
+tracks/25/loop_wrap = true
+tracks/25/keys = {
+"times": PackedFloat32Array(0, 0.033333335, 0.06666667, 0.1, 0.13333334, 0.16666667, 0.2, 0.23333333, 0.26666668, 0.3, 0.33333334, 0.36666667, 0.4, 0.43333334, 0.46666667, 0.5, 0.53333336, 0.56666666, 0.6, 0.6333333, 0.6666667, 0.7, 0.73333335, 0.76666665, 0.8, 0.8333333, 0.8666667, 0.9, 0.93333334, 0.96666664, 1, 1.0333333, 1.0666667, 1.1, 1.1333333, 1.1666666, 1.2, 1.2333333, 1.2666667, 1.3, 1.3333334, 1.3666667, 1.4, 1.4333333, 1.4666667, 1.5, 1.5333333, 1.5666667, 1.6, 1.6333333, 1.6666666, 1.7, 1.7333333, 1.7666667, 1.8, 1.8333334, 1.8666667, 1.9, 1.9333333, 1.9666667, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true, true, true, false, false, true, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false]
+}
+tracks/26/type = "value"
+tracks/26/imported = false
+tracks/26/enabled = true
+tracks/26/path = NodePath("Bolt:points")
+tracks/26/interp = 0
+tracks/26/loop_wrap = true
+tracks/26/keys = {
+"times": PackedFloat32Array(0, 1.2, 1.2333333, 1.2666667, 1.3666667, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [PackedVector2Array(-12.968103, -118, -7.710225, -117.23503, -3.269536, -120.15235, 0.18804374, -116.58302, 3.8489769, -113.22259, 7.9586287, -111.61738, 12.247219, -110.581055, 16.762959, -112.156166, 21.031897, -110), PackedVector2Array(-12.968103, -118, -7.710225, -117.23503, -3.269536, -120.15235, 0.18804374, -116.58302, 3.8489769, -113.22259, 7.9586287, -111.61738, 12.247219, -110.581055, 16.762959, -112.156166, 21.031897, -110), PackedVector2Array(-12.83024, -118, -7.5723615, -117.23503, -3.1316729, -120.15235, 0.3259069, -116.58302, 3.98684, -113.22259, 8.096492, -111.61738, 12.385082, -110.581055, 16.900822, -112.156166, 21.16976, -110), PackedVector2Array(-12.652077, -118, -7.3941984, -117.23503, -2.9535098, -120.15235, 0.50407004, -116.58302, 4.1650033, -113.22259, 8.274655, -111.61738, 12.563246, -110.581055, 17.078987, -112.156166, 21.347923, -110), PackedVector2Array(-11.906732, -118, -6.648853, -117.23503, -2.2081642, -120.15235, 1.2494156, -116.58302, 4.910349, -113.22259, 9.020001, -111.61738, 13.308592, -110.581055, 17.824333, -112.156166, 22.09327, -110), PackedVector2Array(-11.620915, -118, -6.3630366, -117.23503, -1.922348, -120.15235, 1.5352318, -116.58302, 5.196165, -113.22259, 9.305818, -111.61738, 13.594408, -110.581055, 18.11015, -112.156166, 22.379086, -110)]
+}
+tracks/27/type = "value"
+tracks/27/imported = false
+tracks/27/enabled = true
+tracks/27/path = NodePath("Bolt:default_color")
+tracks/27/interp = 0
+tracks/27/loop_wrap = true
+tracks/27/keys = {
+"times": PackedFloat32Array(0, 1.2, 1.2333333, 1.2666667, 1.3666667, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Color(0.8862745, 0.87058824, 0.9411765, 1), Color(0.8862745, 0.87058824, 0.9411765, 1), Color(1, 1, 1, 1), Color(0.8862745, 0.87058824, 0.9411765, 1), Color(0.8862745, 0.87058824, 0.9411765, 1), Color(0.8862745, 0.87058824, 0.9411765, 1)]
+}
+tracks/28/type = "value"
+tracks/28/imported = false
+tracks/28/enabled = true
+tracks/28/path = NodePath("Bolt:modulate:a")
+tracks/28/interp = 0
+tracks/28/loop_wrap = true
+tracks/28/keys = {
+"times": PackedFloat32Array(0, 1.2, 1.2333333, 1.2666667, 1.3666667, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0.29999999999999893, 0.29999999999999893, 1.0, 0.7000000000000015, 0.500000000000004, 0.29999999999999943]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bee0d"]
+_data = {
+&"fx": SubResource("Animation_gy4ti")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3uyc1"]
+resource_name = "Soft"
+shader = ExtResource("2_74kjr")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = true
+
+[sub_resource type="Image" id="Image_gwqli"]
+data = {
+"data": PackedByteArray("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABOPi7/Tj4u/04+Lv9OPi7/Tj4u/wAAAAAAAAAAAAAAAAAAAAAAAAAATj4u/04+Lv9OPi7/Tj4u/04+Lv9OPi7/Tj4u/wAAAAAAAAAAAAAAAE4+Lv9OPi7/Tj4u/04+Lv9OPi7/Tj4u/04+Lv9OPi7/Tj4u/wAAAAAAAAAATj4u/04+Lv9OPi7/Tj4u/04+Lv9OPi7/Tj4u/04+Lv9OPi7/AAAAAAAAAABOPi7/Tj4u/04+Lv9OPi7/Tj4u/04+Lv9OPi7/Tj4u/04+Lv8AAAAAAAAAAE4+Lv9OPi7/Tj4u/04+Lv9OPi7/Tj4u/04+Lv9OPi7/Tj4u/wAAAAAAAAAATj4u/04+Lv9OPi7/Tj4u/04+Lv9OPi7/Tj4u/04+Lv9OPi7/AAAAAAAAAAAAAAAATj4u/04+Lv9OPi7/Tj4u/04+Lv9OPi7/Tj4u/wAAAAAAAAAAAAAAAAAAAAAAAAAATj4u/04+Lv9OPi7/Tj4u/04+Lv8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=="),
+"format": "RGBA8",
+"height": 11,
+"mipmaps": false,
+"width": 11
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_osm87"]
+image = SubResource("Image_gwqli")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i30o5"]
+shader = ExtResource("3_fd1if")
+shader_parameter/mode = 3
+shader_parameter/side = -1.0
+shader_parameter/seed = 5.0
+shader_parameter/life_min = 0.7
+shader_parameter/life_max = 1.3
+shader_parameter/tex_size = Vector2(4.5, 4.5)
+shader_parameter/len_range = null
+shader_parameter/wid_range = null
+shader_parameter/t = null
+shader_parameter/tint = null
+shader_parameter/glint = null
+shader_parameter/flip = null
+shader_parameter/sub = null
+
+[sub_resource type="Image" id="Image_wxklk"]
+data = {
+"data": PackedByteArray("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB2Ykr/dmJK/3ZiSv92Ykr/dmJK/wAAAAAAAAAAAAAAAAAAAAAAAAAAdmJK/3ZiSv92Ykr/dmJK/3ZiSv92Ykr/dmJK/wAAAAAAAAAAAAAAAHZiSv92Ykr/dmJK/3ZiSv92Ykr/dmJK/3ZiSv92Ykr/dmJK/wAAAAAAAAAAdmJK/3ZiSv92Ykr/dmJK/3ZiSv92Ykr/dmJK/3ZiSv92Ykr/AAAAAAAAAAB2Ykr/dmJK/3ZiSv92Ykr/dmJK/3ZiSv92Ykr/dmJK/3ZiSv8AAAAAAAAAAHZiSv92Ykr/dmJK/3ZiSv92Ykr/dmJK/3ZiSv92Ykr/dmJK/wAAAAAAAAAAdmJK/3ZiSv92Ykr/dmJK/3ZiSv92Ykr/dmJK/3ZiSv92Ykr/AAAAAAAAAAAAAAAAdmJK/3ZiSv92Ykr/dmJK/3ZiSv92Ykr/dmJK/wAAAAAAAAAAAAAAAAAAAAAAAAAAdmJK/3ZiSv92Ykr/dmJK/3ZiSv8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=="),
+"format": "RGBA8",
+"height": 11,
+"mipmaps": false,
+"width": 11
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_mjfma"]
+image = SubResource("Image_wxklk")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fd7fp"]
+shader = ExtResource("3_fd1if")
+shader_parameter/mode = 3
+shader_parameter/side = -1.0
+shader_parameter/seed = 5.0
+shader_parameter/life_min = 0.7
+shader_parameter/life_max = 1.3
+shader_parameter/tex_size = Vector2(4.5, 4.5)
+shader_parameter/len_range = null
+shader_parameter/wid_range = null
+shader_parameter/t = null
+shader_parameter/tint = null
+shader_parameter/glint = null
+shader_parameter/flip = null
+shader_parameter/sub = Vector4(-0.2, -0.5, 0.55, 0.8)
+
+[sub_resource type="Image" id="Image_g6lwg"]
+data = {
+"data": PackedByteArray("KiAY/04+Lv92Ykr/oIpq/8u4lP8="),
+"format": "RGBA8",
+"height": 1,
+"mipmaps": false,
+"width": 5
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_8ccok"]
+image = SubResource("Image_g6lwg")
+
+[sub_resource type="Image" id="Image_dnjva"]
+data = {
+"data": PackedByteArray("5+fn/yMjI/+Wlpb/+vr6/w4ODv8RERH/xcXF/8fHx/8JCQn/q6ur/39/f//MzMz/BQUF/3BwcP+EhIT/Ghoa/2JiYv8zMzP/zc3N/0pKSv8oKCj/vLy8/21tbf/MzMz/ODg4/wkJCf81NTX/4uLi/2VlZf/s7Oz/mJiY/6ysrP9ubm7/3t7e/5aWlv9ISEj/sLCw//n5+f8bGxv/f39//9zc3P+tra3/ISEh/4qKiv8vLy//Kioq/1VVVf/6+vr/5ubm/1lZWf/t7e3/cXFx/5ubm/8aGhr//v7+/2BgYP+9vb3/cHBw/9ra2v+0tLT/j4+P/9HR0f86Ojr/hoaG/21tbf+SkpL/QUFB/z8/P//l5eX/h4eH/yIiIv/u7u7/zMzM/5+fn//Dw8P/9PT0/zIyMv+bm5v/Gxsb/35+fv+Pj4//dnZ2/0dHR/85OTn/0tLS/0FBQf9nZ2f/dXV1/xwcHP9+fn7/DQ0N/9TU1P8KCgr/yMjI/+Tk5P+ZmZn/+fn5/1BQUP/q6ur/vLy8//X19f90dHT//v7+/+Pj4//8/Pz/VFRU/87Ozv+EhIT/ioqK/xEREf8TExP/5ubm/9HR0f9paWn/s7Oz/7Kysv+ioqL/+fn5/3l5ef9ra2v/p6en/z09Pf8HBwf/np6e/1ZWVv8uLi7/Xl5e/y8vL/8qKir/v7+//25ubv+NjY3/NDQ0/xcXF/93d3f/V1dX/zk5Of/t7e3/ra2t/0JCQv8EBAT/ycnJ/yQkJP8SEhL/ISEh/zMzM//9/f3/HR0d/7CwsP84ODj//v7+/zY2Nv/l5eX/aGho/7Ozs//v7+//R0dH//b29v89PT3/Ojo6/3Fxcf+ZmZn/FhYW/wAAAP8ZGRn/zc3N/8/Pz/89PT3/MDAw//j4+P+xsbH/8fHx/8HBwf8MDAz/TExM/7S0tP8LCwv/8PDw/0xMTP8TExP/xMTE//f39/+5ubn/CwsL/9PT0/9HR0f/nJyc/x0dHf+kpKT/w8PD/6Ghof8fHx//YWFh/ycnJ/9cXFz/U1NT/76+vv8FBQX/4uLi/319ff9SUlL/2NjY/+Dg4P/7+/v/kJCQ/8TExP8KCgr/fHx8/1JSUv98fHz/7Ozs/w4ODv8PDw//7e3t/8jIyP8oKCj/LS0t/4ODg//5+fn/ZWVl/52dnf9RUVH/JiYm/+vr6/+bm5v/iIiI/52dnf+pqan/EhIS/wMDA/9OTk7/9/f3/+Hh4f9aWlr/dHR0/1dXV/91dXX/CAgI/93d3f9PT0//+fn5/xoaGv/39/f/5eXl//j4+P9+fn7/"),
+"format": "RGBA8",
+"height": 41,
+"mipmaps": false,
+"width": 6
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_6qvrk"]
+image = SubResource("Image_dnjva")
+
+[sub_resource type="Image" id="Image_y6ovk"]
+data = {
+"data": PackedByteArray("FBIh/yMfM/82MUr/TUdi/2hhff+Kg57/s63E/+Le8P8="),
+"format": "RGBA8",
+"height": 1,
+"mipmaps": false,
+"width": 8
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_ifenc"]
+image = SubResource("Image_y6ovk")
+
+[sub_resource type="Image" id="Image_8p50n"]
+data = {
+"data": PackedByteArray("AAAA/wAAAP///////////wAAAP8AAAD//////////////////////wAAAP8AAAD/AAAA/wAAAP8AAAD//////wAAAP8AAAD/AAAA/wAAAP//////AAAA//////8AAAD//////wAAAP8AAAD/AAAA//////8AAAD/AAAA//////8AAAD/////////////////AAAA/wAAAP///////////wAAAP8AAAD///////////8AAAD//////wAAAP8AAAD/AAAA//////8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA//////8AAAD/AAAA/wAAAP8AAAD//////wAAAP8AAAD/AAAA////////////AAAA/wAAAP8AAAD/AAAA////////////AAAA/wAAAP8AAAD//////wAAAP8AAAD/AAAA//////8AAAD/AAAA////////////AAAA/wAAAP8AAAD//////wAAAP////////////////8AAAD//////wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA////////////AAAA/w=="),
+"format": "RGBA8",
+"height": 112,
+"mipmaps": false,
+"width": 1
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_xygwl"]
+image = SubResource("Image_8p50n")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nh24q"]
+shader = ExtResource("4_uwthl")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = true
+shader_parameter/size = Vector2(140, 146)
+shader_parameter/center = Vector2(0, -61)
+shader_parameter/t = 0.0
+shader_parameter/flash = 0.0
+shader_parameter/pass = 0.0
+shader_parameter/band_a = PackedVector4Array(0.01453489, 1.085328, 0.9460729, 1.7890573, 0.02484304, 1.0462388, 2.0257642, 1.4028265, 0.04677584, 1.0755577, 4.600287, 1.0518667, 0.059160143, 1.0146829, 1.1451361, 1.2308708, 0.08229659, 1.057087, 2.3048446, 1.7983258, 0.094912305, 1.0290451, 3.1885366, 0.80723447, 0.112696946, 1.0838691, 5.7292137, 1.8876655, 0.13364297, 1.0230329, 0.62715954, 1.6495304, 0.14703088, 1.0528193, 4.2649775, 1.856681, 0.16265337, 1.0433897, 4.5133433, 1.4523321, 0.18652743, 1.0753582, 1.2603555, 1.3888415, 0.19686146, 1.0996354, 1.2648809, 0.79523396, 0.21384618, 1.0741966, 3.98069, 1.4885792, 0.22708641, 1.0254254, 2.8771613, 1.8567048, 0.24456456, 1.0549244, 6.040906, 0.76817286, 0.2666329, 1.0334994, 4.3059535, 1.9921398, 0.27984253, 1.0940756, 0.939678, 2.07143, 0.30466548, 1.0632153, 2.6037936, 1.2492707, 0.31243655, 1.0714908, 5.0764213, 1.2126424, 0.33947024, 1.0699303, 5.6276197, 2.0470748, 0.3594087, 1.0634714, 2.5193803, 1.0552733, 0.37716535, 1.0884992, 4.9696865, 1.0653188, 0.38711375, 1.0069686, 4.6929317, 1.3815812, 0.40980285, 1.0713108, 5.014471, 2.0226963, 0.42811567, 1.0924678, 3.2949252, 1.4803089, 0.437372, 1.0291014, 0.8477738, 2.0051641, 0.45836785, 1.0297759, 4.1003265, 1.2573097, 0.48018566, 1.0403678, 2.2797403, 1.6714745, 0.49091956, 1.005413, 3.87303, 1.6925364, 0.5141779, 1.0611546, 5.8741665, 1.434646, 0.51965076, 1.0986758, 5.037459, 0.82947373, 0.5479698, 1.0099833, 4.3979554, 1.1040099, 0.56465274, 1.0918196, 1.0700791, 1.9490813, 0.5800287, 1.0358216, 1.4541156, 1.0324327, 0.5982568, 1.074106, 0.8614862, 2.0215137, 0.6127619, 1.0788081, 1.1785648, 0.91228426, 0.62256455, 1.0202461, 2.2040632, 1.8148804, 0.6457406, 1.0934275, 4.4829683, 1.8932849, 0.6659986, 1.0521272, 6.280033, 2.0070024, 0.6818964, 1.0365604, 4.7889876, 0.86663985, 0.6924284, 1.0789237, 5.9139585, 1.2865857, 0.71127075, 1.0438253, 5.9731297, 1.0720394, 0.72672576, 1.003392, 5.115675, 1.0030916, 0.74598163, 1.0337548, 3.0913217, 2.0654728, 0.7683413, 1.0591841, 3.2877984, 1.4598137, 0.7856387, 1.0018041, 2.2284396, 1.0120035, 0.7993669, 1.0311056, 3.6281338, 0.92670214, 0.8145663, 1.0323023, 2.0999415, 0.80604374, 0.839027, 1.0440457, 5.951489, 1.7128786, 0.85450065, 1.0469451, 4.525413, 1.8219904, 0.87648356, 1.0366695, 1.6256735, 1.044235, 0.8848609, 1.0163692, 1.9878216, 0.7087733, 0.90991706, 1.0610483, 3.5078554, 1.2027828, 0.9253936, 1.054495, 2.8819153, 1.7605019, 0.93434155, 1.0310962, 2.345801, 1.5059184, 0.9617986, 1.0786655, 3.7514281, 1.6439635, 0.97060865, 1.0958179, 6.200203, 2.0726006, 0.99422145, 1.097759, 0.1207172, 0.9338975)
+shader_parameter/band_b = PackedVector4Array(2, 0.37426606, 0, 0, 3, 0.57109195, 0, 0, 2, 0.4950452, 0, 0, 2, 0.24881159, 0, 0, 4, 0.030085724, 0, 0, 2, 0.03747264, 0, 0, 2, 0.3028565, 0, 0, 2, 0.4960826, 0, 0, 2, 0.22709571, 0, 0, 4, 0.69641864, 0, 0, 2, 0.78144807, 0, 0, 3, 0.9772758, 0, 0, 4, 0.9982126, 0, 0, 4, 0.030950371, 0, 0, 3, 0.8423012, 0, 0, 2, 0.3550218, 0, 0, 2, 0.43353745, 0, 0, 3, 0.77102655, 0, 0, 2, 0.99941623, 0, 0, 4, 0.63944596, 0, 0, 4, 0.1532677, 0, 0, 3, 0.994691, 0, 0, 2, 0.591298, 0, 0, 2, 0.54451764, 0, 0, 2, 0.92595136, 0, 0, 3, 0.7492112, 0, 0, 2, 0.25307262, 0, 0, 3, 0.4685711, 0, 0, 2, 0.9332137, 0, 0, 2, 0.5049599, 0, 0, 4, 0.76874506, 0, 0, 3, 0.6768312, 0, 0, 2, 0.028499186, 0, 0, 4, 0.851602, 0, 0, 2, 0.14865573, 0, 0, 2, 0.14482065, 0, 0, 2, 0.9953445, 0, 0, 3, 0.58780944, 0, 0, 4, 0.14039494, 0, 0, 3, 0.7677229, 0, 0, 4, 0.2822212, 0, 0, 2, 0.3595535, 0, 0, 4, 0.14331098, 0, 0, 3, 0.35380965, 0, 0, 2, 0.28032237, 0, 0, 2, 0.56834215, 0, 0, 3, 0.56058526, 0, 0, 4, 0.34319782, 0, 0, 3, 0.08870773, 0, 0, 4, 0.40735862, 0, 0, 3, 0.7568461, 0, 0, 3, 0.16138007, 0, 0, 3, 0.8337954, 0, 0, 2, 0.70457876, 0, 0, 3, 0.73278224, 0, 0, 2, 0.39581472, 0, 0, 4, 0.6080761, 0, 0, 2, 0.42189056, 0, 0)
+shader_parameter/crown_a = PackedVector4Array(0.7465815, 1.1934636, 2.77083, 5.34424, 0.97792983, 1.2290254, 2.047926, 5.8554797, 0.4258789, 2.037405, 2.5844414, 4.5881867, 0.43919906, 1.3609735, 2.726069, 4.108533, 0.9356524, 3.276649, 1.7460377, 4.0797973, 0.6428055, 1.1775817, 1.410538, 3.7717755, 0.72427315, 3.692282, 2.0361156, 4.8539057, 1.0855829, 1.671982, 2.7737603, 5.468113, 0.47790667, 1.1615434, 1.440753, 4.190581, 1.125898, 4.596302, 1.747201, 5.8419952, 0.96881443, 6.2213697, 2.4997509, 4.9056206, 0.6044184, 2.4888005, 2.556311, 3.4858584, 0.88781804, 0.10840785, 1.803828, 5.4926515, 0.73990077, 2.2824526, 1.6490659, 5.6888676, 0.8119661, 2.2619464, 1.9821513, 3.397097, 0.7619595, 5.2454214, 1.9205629, 3.3123548)
+shader_parameter/crown_b = PackedVector4Array(2, -2.2545817, 0, 0, 2, -3.582596, 0, 0, 2, -1.3699166, 0, 0, 1, -1.4144943, 0, 0, 1, 0.5027399, 0, 0, 2, -5.464543, 0, 0, 2, 0.9160771, 0, 0, 2, 2.149486, 0, 0, 2, -5.9148097, 0, 0, 1, -0.61857677, 0, 0, 1, 1.7438161, 0, 0, 1, -3.0641937, 0, 0, 2, 0.74015164, 0, 0, 2, -3.0567753, 0, 0, 2, -1.9696006, 0, 0, 2, 0.46675336, 0, 0)
+shader_parameter/scuff = PackedVector4Array(27.762287, 1.4775726, 0.5348185, 0, 15.389102, 1.1931243, 0.9340342, 0, 22.305285, 3.7668166, 0.57432723, 0, 18.862942, 3.8237464, 0.92952216, 0, 23.722277, 6.1706877, 0.9383368, 0, 23.011955, 1.2484524, 0.91302645, 0, 23.561813, 2.8846803, 1.0420431, 0)
+shader_parameter/pal = SubResource("ImageTexture_ifenc")
+shader_parameter/dust = SubResource("ImageTexture_8ccok")
+shader_parameter/noise = SubResource("ImageTexture_6qvrk")
+shader_parameter/rows = SubResource("ImageTexture_xygwl")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uh50x"]
+resource_name = "Dither"
+shader = ExtResource("2_74kjr")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = null
+
+[sub_resource type="Image" id="Image_hgki0"]
+data = {
+"data": PackedByteArray("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEogDP9KIAz/SiAM/0ogDP8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEogDP/oli7/6JYu/+iWLv/oli7/SiAM/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEogDP/oli7/6JYu/+iWLv/oli7/6JYu/+iWLv9KIAz/AAAAAAAAAAAAAAAAAAAAAKhUHP9KIAz/qFQc/6hUHP+oVBz/qFQc/6hUHP+oVBz/SiAM/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEogDP+oVBz/qFQc/6hUHP+oVBz/SiAM/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAASiAM/0ogDP9KIAz/SiAM/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=="),
+"format": "RGBA8",
+"height": 13,
+"mipmaps": false,
+"width": 13
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_wrthq"]
+image = SubResource("Image_hgki0")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bwc4p"]
+shader = ExtResource("3_fd1if")
+shader_parameter/mode = 2
+shader_parameter/side = -1.0
+shader_parameter/seed = 20.0
+shader_parameter/life_min = 1.3
+shader_parameter/life_max = 1.95
+shader_parameter/tex_size = Vector2(7.5, 2.2)
+shader_parameter/len_range = Vector2(6, 9)
+shader_parameter/wid_range = Vector2(1.8, 2.6)
+shader_parameter/t = null
+shader_parameter/tint = null
+shader_parameter/glint = null
+shader_parameter/flip = null
+shader_parameter/sub = null
+
+[sub_resource type="Image" id="Image_4rq46"]
+data = {
+"data": PackedByteArray("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABI4GP8SOBj/EjgY/xI4GP8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABI4GP9suDr/bLg6/2y4Ov9suDr/EjgY/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABI4GP9suDr/bLg6/2y4Ov9suDr/bLg6/2y4Ov8SOBj/AAAAAAAAAAAAAAAAAAAAAC96Kv8SOBj/L3oq/y96Kv8veir/L3oq/y96Kv8veir/EjgY/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABI4GP8veir/L3oq/y96Kv8veir/EjgY/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEjgY/xI4GP8SOBj/EjgY/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=="),
+"format": "RGBA8",
+"height": 13,
+"mipmaps": false,
+"width": 13
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_u0ign"]
+image = SubResource("Image_4rq46")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b0x1d"]
+shader = ExtResource("3_fd1if")
+shader_parameter/mode = 2
+shader_parameter/side = -1.0
+shader_parameter/seed = 33.0
+shader_parameter/life_min = 1.3
+shader_parameter/life_max = 1.95
+shader_parameter/tex_size = Vector2(7.5, 2.2)
+shader_parameter/len_range = Vector2(6, 9)
+shader_parameter/wid_range = Vector2(1.8, 2.6)
+shader_parameter/t = null
+shader_parameter/tint = null
+shader_parameter/glint = null
+shader_parameter/flip = null
+shader_parameter/sub = null
+
+[sub_resource type="Image" id="Image_21h7r"]
+data = {
+"data": PackedByteArray("SiAM/0ogDP9KIAz/SiAM/0ogDP/oli7/"),
+"format": "RGBA8",
+"height": 1,
+"mipmaps": false,
+"width": 6
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_6yf81"]
+image = SubResource("Image_21h7r")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_aoi77"]
+shader = ExtResource("3_fd1if")
+shader_parameter/mode = 2
+shader_parameter/side = -1.0
+shader_parameter/seed = 46.0
+shader_parameter/life_min = 1.3
+shader_parameter/life_max = 1.95
+shader_parameter/tex_size = Vector2(6, 1)
+shader_parameter/len_range = Vector2(6, 6)
+shader_parameter/wid_range = null
+shader_parameter/t = null
+shader_parameter/tint = null
+shader_parameter/glint = null
+shader_parameter/flip = 0.0
+shader_parameter/sub = null
+
+[sub_resource type="Image" id="Image_lc4uo"]
+data = {
+"data": PackedByteArray("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABQSIf8UEiH/FBIh/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAUEiH/4t7w/+Le8P9oYX3/FBIh/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABQSIf/i3vD/aGF9/2hhff8UEiH/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABQSIf82MUr/FBIh/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABQSIf8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=="),
+"format": "RGBA8",
+"height": 11,
+"mipmaps": false,
+"width": 11
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_a8bl7"]
+image = SubResource("Image_lc4uo")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_73ajt"]
+shader = ExtResource("3_fd1if")
+shader_parameter/mode = 2
+shader_parameter/side = -1.0
+shader_parameter/seed = 59.0
+shader_parameter/life_min = 1.3
+shader_parameter/life_max = 1.95
+shader_parameter/tex_size = Vector2(2.1, 2.1)
+shader_parameter/len_range = Vector2(1.6, 2.6)
+shader_parameter/wid_range = null
+shader_parameter/t = null
+shader_parameter/tint = null
+shader_parameter/glint = null
+shader_parameter/flip = 0.0
+shader_parameter/sub = null
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_h6ivt"]
+shader = ExtResource("4_uwthl")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = true
+shader_parameter/size = Vector2(140, 146)
+shader_parameter/center = Vector2(0, -61)
+shader_parameter/t = 0.0
+shader_parameter/flash = 0.0
+shader_parameter/pass = 1.0
+shader_parameter/band_a = PackedVector4Array(0.01453489, 1.085328, 0.9460729, 1.7890573, 0.02484304, 1.0462388, 2.0257642, 1.4028265, 0.04677584, 1.0755577, 4.600287, 1.0518667, 0.059160143, 1.0146829, 1.1451361, 1.2308708, 0.08229659, 1.057087, 2.3048446, 1.7983258, 0.094912305, 1.0290451, 3.1885366, 0.80723447, 0.112696946, 1.0838691, 5.7292137, 1.8876655, 0.13364297, 1.0230329, 0.62715954, 1.6495304, 0.14703088, 1.0528193, 4.2649775, 1.856681, 0.16265337, 1.0433897, 4.5133433, 1.4523321, 0.18652743, 1.0753582, 1.2603555, 1.3888415, 0.19686146, 1.0996354, 1.2648809, 0.79523396, 0.21384618, 1.0741966, 3.98069, 1.4885792, 0.22708641, 1.0254254, 2.8771613, 1.8567048, 0.24456456, 1.0549244, 6.040906, 0.76817286, 0.2666329, 1.0334994, 4.3059535, 1.9921398, 0.27984253, 1.0940756, 0.939678, 2.07143, 0.30466548, 1.0632153, 2.6037936, 1.2492707, 0.31243655, 1.0714908, 5.0764213, 1.2126424, 0.33947024, 1.0699303, 5.6276197, 2.0470748, 0.3594087, 1.0634714, 2.5193803, 1.0552733, 0.37716535, 1.0884992, 4.9696865, 1.0653188, 0.38711375, 1.0069686, 4.6929317, 1.3815812, 0.40980285, 1.0713108, 5.014471, 2.0226963, 0.42811567, 1.0924678, 3.2949252, 1.4803089, 0.437372, 1.0291014, 0.8477738, 2.0051641, 0.45836785, 1.0297759, 4.1003265, 1.2573097, 0.48018566, 1.0403678, 2.2797403, 1.6714745, 0.49091956, 1.005413, 3.87303, 1.6925364, 0.5141779, 1.0611546, 5.8741665, 1.434646, 0.51965076, 1.0986758, 5.037459, 0.82947373, 0.5479698, 1.0099833, 4.3979554, 1.1040099, 0.56465274, 1.0918196, 1.0700791, 1.9490813, 0.5800287, 1.0358216, 1.4541156, 1.0324327, 0.5982568, 1.074106, 0.8614862, 2.0215137, 0.6127619, 1.0788081, 1.1785648, 0.91228426, 0.62256455, 1.0202461, 2.2040632, 1.8148804, 0.6457406, 1.0934275, 4.4829683, 1.8932849, 0.6659986, 1.0521272, 6.280033, 2.0070024, 0.6818964, 1.0365604, 4.7889876, 0.86663985, 0.6924284, 1.0789237, 5.9139585, 1.2865857, 0.71127075, 1.0438253, 5.9731297, 1.0720394, 0.72672576, 1.003392, 5.115675, 1.0030916, 0.74598163, 1.0337548, 3.0913217, 2.0654728, 0.7683413, 1.0591841, 3.2877984, 1.4598137, 0.7856387, 1.0018041, 2.2284396, 1.0120035, 0.7993669, 1.0311056, 3.6281338, 0.92670214, 0.8145663, 1.0323023, 2.0999415, 0.80604374, 0.839027, 1.0440457, 5.951489, 1.7128786, 0.85450065, 1.0469451, 4.525413, 1.8219904, 0.87648356, 1.0366695, 1.6256735, 1.044235, 0.8848609, 1.0163692, 1.9878216, 0.7087733, 0.90991706, 1.0610483, 3.5078554, 1.2027828, 0.9253936, 1.054495, 2.8819153, 1.7605019, 0.93434155, 1.0310962, 2.345801, 1.5059184, 0.9617986, 1.0786655, 3.7514281, 1.6439635, 0.97060865, 1.0958179, 6.200203, 2.0726006, 0.99422145, 1.097759, 0.1207172, 0.9338975)
+shader_parameter/band_b = PackedVector4Array(2, 0.37426606, 0, 0, 3, 0.57109195, 0, 0, 2, 0.4950452, 0, 0, 2, 0.24881159, 0, 0, 4, 0.030085724, 0, 0, 2, 0.03747264, 0, 0, 2, 0.3028565, 0, 0, 2, 0.4960826, 0, 0, 2, 0.22709571, 0, 0, 4, 0.69641864, 0, 0, 2, 0.78144807, 0, 0, 3, 0.9772758, 0, 0, 4, 0.9982126, 0, 0, 4, 0.030950371, 0, 0, 3, 0.8423012, 0, 0, 2, 0.3550218, 0, 0, 2, 0.43353745, 0, 0, 3, 0.77102655, 0, 0, 2, 0.99941623, 0, 0, 4, 0.63944596, 0, 0, 4, 0.1532677, 0, 0, 3, 0.994691, 0, 0, 2, 0.591298, 0, 0, 2, 0.54451764, 0, 0, 2, 0.92595136, 0, 0, 3, 0.7492112, 0, 0, 2, 0.25307262, 0, 0, 3, 0.4685711, 0, 0, 2, 0.9332137, 0, 0, 2, 0.5049599, 0, 0, 4, 0.76874506, 0, 0, 3, 0.6768312, 0, 0, 2, 0.028499186, 0, 0, 4, 0.851602, 0, 0, 2, 0.14865573, 0, 0, 2, 0.14482065, 0, 0, 2, 0.9953445, 0, 0, 3, 0.58780944, 0, 0, 4, 0.14039494, 0, 0, 3, 0.7677229, 0, 0, 4, 0.2822212, 0, 0, 2, 0.3595535, 0, 0, 4, 0.14331098, 0, 0, 3, 0.35380965, 0, 0, 2, 0.28032237, 0, 0, 2, 0.56834215, 0, 0, 3, 0.56058526, 0, 0, 4, 0.34319782, 0, 0, 3, 0.08870773, 0, 0, 4, 0.40735862, 0, 0, 3, 0.7568461, 0, 0, 3, 0.16138007, 0, 0, 3, 0.8337954, 0, 0, 2, 0.70457876, 0, 0, 3, 0.73278224, 0, 0, 2, 0.39581472, 0, 0, 4, 0.6080761, 0, 0, 2, 0.42189056, 0, 0)
+shader_parameter/crown_a = PackedVector4Array(0.7465815, 1.1934636, 2.77083, 5.34424, 0.97792983, 1.2290254, 2.047926, 5.8554797, 0.4258789, 2.037405, 2.5844414, 4.5881867, 0.43919906, 1.3609735, 2.726069, 4.108533, 0.9356524, 3.276649, 1.7460377, 4.0797973, 0.6428055, 1.1775817, 1.410538, 3.7717755, 0.72427315, 3.692282, 2.0361156, 4.8539057, 1.0855829, 1.671982, 2.7737603, 5.468113, 0.47790667, 1.1615434, 1.440753, 4.190581, 1.125898, 4.596302, 1.747201, 5.8419952, 0.96881443, 6.2213697, 2.4997509, 4.9056206, 0.6044184, 2.4888005, 2.556311, 3.4858584, 0.88781804, 0.10840785, 1.803828, 5.4926515, 0.73990077, 2.2824526, 1.6490659, 5.6888676, 0.8119661, 2.2619464, 1.9821513, 3.397097, 0.7619595, 5.2454214, 1.9205629, 3.3123548)
+shader_parameter/crown_b = PackedVector4Array(2, -2.2545817, 0, 0, 2, -3.582596, 0, 0, 2, -1.3699166, 0, 0, 1, -1.4144943, 0, 0, 1, 0.5027399, 0, 0, 2, -5.464543, 0, 0, 2, 0.9160771, 0, 0, 2, 2.149486, 0, 0, 2, -5.9148097, 0, 0, 1, -0.61857677, 0, 0, 1, 1.7438161, 0, 0, 1, -3.0641937, 0, 0, 2, 0.74015164, 0, 0, 2, -3.0567753, 0, 0, 2, -1.9696006, 0, 0, 2, 0.46675336, 0, 0)
+shader_parameter/scuff = PackedVector4Array(27.762287, 1.4775726, 0.5348185, 0, 15.389102, 1.1931243, 0.9340342, 0, 22.305285, 3.7668166, 0.57432723, 0, 18.862942, 3.8237464, 0.92952216, 0, 23.722277, 6.1706877, 0.9383368, 0, 23.011955, 1.2484524, 0.91302645, 0, 23.561813, 2.8846803, 1.0420431, 0)
+shader_parameter/pal = SubResource("ImageTexture_ifenc")
+shader_parameter/dust = SubResource("ImageTexture_8ccok")
+shader_parameter/noise = SubResource("ImageTexture_6qvrk")
+shader_parameter/rows = SubResource("ImageTexture_xygwl")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5hv2w"]
+shader = ExtResource("4_uwthl")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = true
+shader_parameter/size = Vector2(140, 146)
+shader_parameter/center = Vector2(0, -61)
+shader_parameter/t = 0.0
+shader_parameter/flash = 0.0
+shader_parameter/pass = 2.0
+shader_parameter/band_a = PackedVector4Array(0.01453489, 1.085328, 0.9460729, 1.7890573, 0.02484304, 1.0462388, 2.0257642, 1.4028265, 0.04677584, 1.0755577, 4.600287, 1.0518667, 0.059160143, 1.0146829, 1.1451361, 1.2308708, 0.08229659, 1.057087, 2.3048446, 1.7983258, 0.094912305, 1.0290451, 3.1885366, 0.80723447, 0.112696946, 1.0838691, 5.7292137, 1.8876655, 0.13364297, 1.0230329, 0.62715954, 1.6495304, 0.14703088, 1.0528193, 4.2649775, 1.856681, 0.16265337, 1.0433897, 4.5133433, 1.4523321, 0.18652743, 1.0753582, 1.2603555, 1.3888415, 0.19686146, 1.0996354, 1.2648809, 0.79523396, 0.21384618, 1.0741966, 3.98069, 1.4885792, 0.22708641, 1.0254254, 2.8771613, 1.8567048, 0.24456456, 1.0549244, 6.040906, 0.76817286, 0.2666329, 1.0334994, 4.3059535, 1.9921398, 0.27984253, 1.0940756, 0.939678, 2.07143, 0.30466548, 1.0632153, 2.6037936, 1.2492707, 0.31243655, 1.0714908, 5.0764213, 1.2126424, 0.33947024, 1.0699303, 5.6276197, 2.0470748, 0.3594087, 1.0634714, 2.5193803, 1.0552733, 0.37716535, 1.0884992, 4.9696865, 1.0653188, 0.38711375, 1.0069686, 4.6929317, 1.3815812, 0.40980285, 1.0713108, 5.014471, 2.0226963, 0.42811567, 1.0924678, 3.2949252, 1.4803089, 0.437372, 1.0291014, 0.8477738, 2.0051641, 0.45836785, 1.0297759, 4.1003265, 1.2573097, 0.48018566, 1.0403678, 2.2797403, 1.6714745, 0.49091956, 1.005413, 3.87303, 1.6925364, 0.5141779, 1.0611546, 5.8741665, 1.434646, 0.51965076, 1.0986758, 5.037459, 0.82947373, 0.5479698, 1.0099833, 4.3979554, 1.1040099, 0.56465274, 1.0918196, 1.0700791, 1.9490813, 0.5800287, 1.0358216, 1.4541156, 1.0324327, 0.5982568, 1.074106, 0.8614862, 2.0215137, 0.6127619, 1.0788081, 1.1785648, 0.91228426, 0.62256455, 1.0202461, 2.2040632, 1.8148804, 0.6457406, 1.0934275, 4.4829683, 1.8932849, 0.6659986, 1.0521272, 6.280033, 2.0070024, 0.6818964, 1.0365604, 4.7889876, 0.86663985, 0.6924284, 1.0789237, 5.9139585, 1.2865857, 0.71127075, 1.0438253, 5.9731297, 1.0720394, 0.72672576, 1.003392, 5.115675, 1.0030916, 0.74598163, 1.0337548, 3.0913217, 2.0654728, 0.7683413, 1.0591841, 3.2877984, 1.4598137, 0.7856387, 1.0018041, 2.2284396, 1.0120035, 0.7993669, 1.0311056, 3.6281338, 0.92670214, 0.8145663, 1.0323023, 2.0999415, 0.80604374, 0.839027, 1.0440457, 5.951489, 1.7128786, 0.85450065, 1.0469451, 4.525413, 1.8219904, 0.87648356, 1.0366695, 1.6256735, 1.044235, 0.8848609, 1.0163692, 1.9878216, 0.7087733, 0.90991706, 1.0610483, 3.5078554, 1.2027828, 0.9253936, 1.054495, 2.8819153, 1.7605019, 0.93434155, 1.0310962, 2.345801, 1.5059184, 0.9617986, 1.0786655, 3.7514281, 1.6439635, 0.97060865, 1.0958179, 6.200203, 2.0726006, 0.99422145, 1.097759, 0.1207172, 0.9338975)
+shader_parameter/band_b = PackedVector4Array(2, 0.37426606, 0, 0, 3, 0.57109195, 0, 0, 2, 0.4950452, 0, 0, 2, 0.24881159, 0, 0, 4, 0.030085724, 0, 0, 2, 0.03747264, 0, 0, 2, 0.3028565, 0, 0, 2, 0.4960826, 0, 0, 2, 0.22709571, 0, 0, 4, 0.69641864, 0, 0, 2, 0.78144807, 0, 0, 3, 0.9772758, 0, 0, 4, 0.9982126, 0, 0, 4, 0.030950371, 0, 0, 3, 0.8423012, 0, 0, 2, 0.3550218, 0, 0, 2, 0.43353745, 0, 0, 3, 0.77102655, 0, 0, 2, 0.99941623, 0, 0, 4, 0.63944596, 0, 0, 4, 0.1532677, 0, 0, 3, 0.994691, 0, 0, 2, 0.591298, 0, 0, 2, 0.54451764, 0, 0, 2, 0.92595136, 0, 0, 3, 0.7492112, 0, 0, 2, 0.25307262, 0, 0, 3, 0.4685711, 0, 0, 2, 0.9332137, 0, 0, 2, 0.5049599, 0, 0, 4, 0.76874506, 0, 0, 3, 0.6768312, 0, 0, 2, 0.028499186, 0, 0, 4, 0.851602, 0, 0, 2, 0.14865573, 0, 0, 2, 0.14482065, 0, 0, 2, 0.9953445, 0, 0, 3, 0.58780944, 0, 0, 4, 0.14039494, 0, 0, 3, 0.7677229, 0, 0, 4, 0.2822212, 0, 0, 2, 0.3595535, 0, 0, 4, 0.14331098, 0, 0, 3, 0.35380965, 0, 0, 2, 0.28032237, 0, 0, 2, 0.56834215, 0, 0, 3, 0.56058526, 0, 0, 4, 0.34319782, 0, 0, 3, 0.08870773, 0, 0, 4, 0.40735862, 0, 0, 3, 0.7568461, 0, 0, 3, 0.16138007, 0, 0, 3, 0.8337954, 0, 0, 2, 0.70457876, 0, 0, 3, 0.73278224, 0, 0, 2, 0.39581472, 0, 0, 4, 0.6080761, 0, 0, 2, 0.42189056, 0, 0)
+shader_parameter/crown_a = PackedVector4Array(0.7465815, 1.1934636, 2.77083, 5.34424, 0.97792983, 1.2290254, 2.047926, 5.8554797, 0.4258789, 2.037405, 2.5844414, 4.5881867, 0.43919906, 1.3609735, 2.726069, 4.108533, 0.9356524, 3.276649, 1.7460377, 4.0797973, 0.6428055, 1.1775817, 1.410538, 3.7717755, 0.72427315, 3.692282, 2.0361156, 4.8539057, 1.0855829, 1.671982, 2.7737603, 5.468113, 0.47790667, 1.1615434, 1.440753, 4.190581, 1.125898, 4.596302, 1.747201, 5.8419952, 0.96881443, 6.2213697, 2.4997509, 4.9056206, 0.6044184, 2.4888005, 2.556311, 3.4858584, 0.88781804, 0.10840785, 1.803828, 5.4926515, 0.73990077, 2.2824526, 1.6490659, 5.6888676, 0.8119661, 2.2619464, 1.9821513, 3.397097, 0.7619595, 5.2454214, 1.9205629, 3.3123548)
+shader_parameter/crown_b = PackedVector4Array(2, -2.2545817, 0, 0, 2, -3.582596, 0, 0, 2, -1.3699166, 0, 0, 1, -1.4144943, 0, 0, 1, 0.5027399, 0, 0, 2, -5.464543, 0, 0, 2, 0.9160771, 0, 0, 2, 2.149486, 0, 0, 2, -5.9148097, 0, 0, 1, -0.61857677, 0, 0, 1, 1.7438161, 0, 0, 1, -3.0641937, 0, 0, 2, 0.74015164, 0, 0, 2, -3.0567753, 0, 0, 2, -1.9696006, 0, 0, 2, 0.46675336, 0, 0)
+shader_parameter/scuff = PackedVector4Array(27.762287, 1.4775726, 0.5348185, 0, 15.389102, 1.1931243, 0.9340342, 0, 22.305285, 3.7668166, 0.57432723, 0, 18.862942, 3.8237464, 0.92952216, 0, 23.722277, 6.1706877, 0.9383368, 0, 23.011955, 1.2484524, 0.91302645, 0, 23.561813, 2.8846803, 1.0420431, 0)
+shader_parameter/pal = SubResource("ImageTexture_ifenc")
+shader_parameter/dust = SubResource("ImageTexture_8ccok")
+shader_parameter/noise = SubResource("ImageTexture_6qvrk")
+shader_parameter/rows = SubResource("ImageTexture_xygwl")
+
+[sub_resource type="Image" id="Image_1ywpe"]
+data = {
+"data": PackedByteArray("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB2Ykr/dmJK/3ZiSv92Ykr/dmJK/wAAAAAAAAAAAAAAAAAAAAAAAAAAdmJK/3ZiSv92Ykr/dmJK/3ZiSv92Ykr/dmJK/wAAAAAAAAAAAAAAAHZiSv92Ykr/dmJK/3ZiSv92Ykr/dmJK/3ZiSv92Ykr/dmJK/wAAAAAAAAAAdmJK/3ZiSv92Ykr/dmJK/3ZiSv92Ykr/dmJK/3ZiSv92Ykr/AAAAAAAAAAB2Ykr/dmJK/3ZiSv92Ykr/dmJK/3ZiSv92Ykr/dmJK/3ZiSv8AAAAAAAAAAHZiSv92Ykr/dmJK/3ZiSv92Ykr/dmJK/3ZiSv92Ykr/dmJK/wAAAAAAAAAAdmJK/3ZiSv92Ykr/dmJK/3ZiSv92Ykr/dmJK/3ZiSv92Ykr/AAAAAAAAAAAAAAAAdmJK/3ZiSv92Ykr/dmJK/3ZiSv92Ykr/dmJK/wAAAAAAAAAAAAAAAAAAAAAAAAAAdmJK/3ZiSv92Ykr/dmJK/3ZiSv8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=="),
+"format": "RGBA8",
+"height": 11,
+"mipmaps": false,
+"width": 11
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_pf47l"]
+image = SubResource("Image_1ywpe")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_01wu5"]
+shader = ExtResource("3_fd1if")
+shader_parameter/mode = 3
+shader_parameter/side = 1.0
+shader_parameter/seed = 5.0
+shader_parameter/life_min = 0.7
+shader_parameter/life_max = 1.3
+shader_parameter/tex_size = Vector2(4.5, 4.5)
+shader_parameter/len_range = null
+shader_parameter/wid_range = null
+shader_parameter/t = null
+shader_parameter/tint = null
+shader_parameter/glint = null
+shader_parameter/flip = null
+shader_parameter/sub = null
+
+[sub_resource type="Image" id="Image_i4t0g"]
+data = {
+"data": PackedByteArray("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACgimr/oIpq/6CKav+gimr/oIpq/wAAAAAAAAAAAAAAAAAAAAAAAAAAoIpq/6CKav+gimr/oIpq/6CKav+gimr/oIpq/wAAAAAAAAAAAAAAAKCKav+gimr/oIpq/6CKav+gimr/oIpq/6CKav+gimr/oIpq/wAAAAAAAAAAoIpq/6CKav+gimr/oIpq/6CKav+gimr/oIpq/6CKav+gimr/AAAAAAAAAACgimr/oIpq/6CKav+gimr/oIpq/6CKav+gimr/oIpq/6CKav8AAAAAAAAAAKCKav+gimr/oIpq/6CKav+gimr/oIpq/6CKav+gimr/oIpq/wAAAAAAAAAAoIpq/6CKav+gimr/oIpq/6CKav+gimr/oIpq/6CKav+gimr/AAAAAAAAAAAAAAAAoIpq/6CKav+gimr/oIpq/6CKav+gimr/oIpq/wAAAAAAAAAAAAAAAAAAAAAAAAAAoIpq/6CKav+gimr/oIpq/6CKav8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=="),
+"format": "RGBA8",
+"height": 11,
+"mipmaps": false,
+"width": 11
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_stg0i"]
+image = SubResource("Image_i4t0g")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6sjsr"]
+shader = ExtResource("3_fd1if")
+shader_parameter/mode = 3
+shader_parameter/side = 1.0
+shader_parameter/seed = 5.0
+shader_parameter/life_min = 0.7
+shader_parameter/life_max = 1.3
+shader_parameter/tex_size = Vector2(4.5, 4.5)
+shader_parameter/len_range = null
+shader_parameter/wid_range = null
+shader_parameter/t = null
+shader_parameter/tint = null
+shader_parameter/glint = null
+shader_parameter/flip = null
+shader_parameter/sub = Vector4(-0.2, -0.5, 0.55, 0.8)
+
+[sub_resource type="Image" id="Image_l4cth"]
+data = {
+"data": PackedByteArray("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEogDP9KIAz/SiAM/0ogDP8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEogDP//0nr//9J6///Sev//0nr/SiAM/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEogDP//0nr//9J6///Sev//0nr//9J6///Sev9KIAz/AAAAAAAAAAAAAAAAAAAAAKhUHP9KIAz/6JYu/+iWLv/oli7/6JYu/+iWLv/oli7/SiAM/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEogDP/oli7/6JYu/+iWLv/oli7/SiAM/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAASiAM/0ogDP9KIAz/SiAM/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=="),
+"format": "RGBA8",
+"height": 13,
+"mipmaps": false,
+"width": 13
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_grvft"]
+image = SubResource("Image_l4cth")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_edq7g"]
+shader = ExtResource("3_fd1if")
+shader_parameter/mode = 2
+shader_parameter/side = 1.0
+shader_parameter/seed = 20.0
+shader_parameter/life_min = 1.3
+shader_parameter/life_max = 1.95
+shader_parameter/tex_size = Vector2(7.5, 2.2)
+shader_parameter/len_range = Vector2(6, 9)
+shader_parameter/wid_range = Vector2(1.8, 2.6)
+shader_parameter/t = null
+shader_parameter/tint = null
+shader_parameter/glint = null
+shader_parameter/flip = null
+shader_parameter/sub = null
+
+[sub_resource type="Image" id="Image_dkywt"]
+data = {
+"data": PackedByteArray("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABI4GP8SOBj/EjgY/xI4GP8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABI4GP/I8HD/yPBw/8jwcP/I8HD/EjgY/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABI4GP/I8HD/yPBw/8jwcP/I8HD/yPBw/8jwcP8SOBj/AAAAAAAAAAAAAAAAAAAAAC96Kv8SOBj/bLg6/2y4Ov9suDr/bLg6/2y4Ov9suDr/EjgY/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABI4GP9suDr/bLg6/2y4Ov9suDr/EjgY/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEjgY/xI4GP8SOBj/EjgY/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=="),
+"format": "RGBA8",
+"height": 13,
+"mipmaps": false,
+"width": 13
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_gatet"]
+image = SubResource("Image_dkywt")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hb1l4"]
+shader = ExtResource("3_fd1if")
+shader_parameter/mode = 2
+shader_parameter/side = 1.0
+shader_parameter/seed = 33.0
+shader_parameter/life_min = 1.3
+shader_parameter/life_max = 1.95
+shader_parameter/tex_size = Vector2(7.5, 2.2)
+shader_parameter/len_range = Vector2(6, 9)
+shader_parameter/wid_range = Vector2(1.8, 2.6)
+shader_parameter/t = null
+shader_parameter/tint = null
+shader_parameter/glint = null
+shader_parameter/flip = null
+shader_parameter/sub = null
+
+[sub_resource type="Image" id="Image_27kga"]
+data = {
+"data": PackedByteArray("qFQc/6hUHP+oVBz/qFQc/6hUHP/oli7/"),
+"format": "RGBA8",
+"height": 1,
+"mipmaps": false,
+"width": 6
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_i7hhu"]
+image = SubResource("Image_27kga")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_adrb1"]
+shader = ExtResource("3_fd1if")
+shader_parameter/mode = 2
+shader_parameter/side = 1.0
+shader_parameter/seed = 46.0
+shader_parameter/life_min = 1.3
+shader_parameter/life_max = 1.95
+shader_parameter/tex_size = Vector2(6, 1)
+shader_parameter/len_range = Vector2(6, 6)
+shader_parameter/wid_range = null
+shader_parameter/t = null
+shader_parameter/tint = null
+shader_parameter/glint = null
+shader_parameter/flip = 0.0
+shader_parameter/sub = null
+
+[sub_resource type="Image" id="Image_74fjd"]
+data = {
+"data": PackedByteArray("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABQSIf8UEiH/FBIh/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAUEiH/4t7w/+Le8P9oYX3/FBIh/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABQSIf/i3vD/aGF9/2hhff8UEiH/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABQSIf82MUr/FBIh/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABQSIf8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=="),
+"format": "RGBA8",
+"height": 11,
+"mipmaps": false,
+"width": 11
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_qyjhu"]
+image = SubResource("Image_74fjd")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4ar8f"]
+shader = ExtResource("3_fd1if")
+shader_parameter/mode = 2
+shader_parameter/side = 1.0
+shader_parameter/seed = 59.0
+shader_parameter/life_min = 1.3
+shader_parameter/life_max = 1.95
+shader_parameter/tex_size = Vector2(2.1, 2.1)
+shader_parameter/len_range = Vector2(1.6, 2.6)
+shader_parameter/wid_range = null
+shader_parameter/t = null
+shader_parameter/tint = null
+shader_parameter/glint = null
+shader_parameter/flip = 0.0
+shader_parameter/sub = null
+
+[sub_resource type="Image" id="Image_kce33"]
+data = {
+"data": PackedByteArray("oIpq/w=="),
+"format": "RGBA8",
+"height": 1,
+"mipmaps": false,
+"width": 1
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_cnav1"]
+image = SubResource("Image_kce33")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2xvxl"]
+shader = ExtResource("3_fd1if")
+shader_parameter/mode = 4
+shader_parameter/side = 0.0
+shader_parameter/seed = 41.0
+shader_parameter/life_min = 0.35
+shader_parameter/life_max = 0.6
+shader_parameter/tex_size = null
+shader_parameter/len_range = null
+shader_parameter/wid_range = null
+shader_parameter/t = null
+shader_parameter/tint = null
+shader_parameter/glint = null
+shader_parameter/flip = null
+shader_parameter/sub = null
+
+[sub_resource type="Image" id="Image_bjy5n"]
+data = {
+"data": PackedByteArray("y7iU/w=="),
+"format": "RGBA8",
+"height": 1,
+"mipmaps": false,
+"width": 1
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_a6ide"]
+image = SubResource("Image_bjy5n")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8wlwn"]
+shader = ExtResource("3_fd1if")
+shader_parameter/mode = 4
+shader_parameter/side = 0.0
+shader_parameter/seed = 43.0
+shader_parameter/life_min = 0.35
+shader_parameter/life_max = 0.6
+shader_parameter/tex_size = null
+shader_parameter/len_range = null
+shader_parameter/wid_range = null
+shader_parameter/t = null
+shader_parameter/tint = null
+shader_parameter/glint = null
+shader_parameter/flip = null
+shader_parameter/sub = null
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fxf08"]
+resource_name = "Light"
+shader = ExtResource("5_pjqb3")
+shader_parameter/strength = null
+shader_parameter/steps = null
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cms71"]
+shader = ExtResource("7_knadg")
+shader_parameter/size = Vector2(68, 68)
+shader_parameter/radius = 30.0
+shader_parameter/thickness = null
+shader_parameter/squash = null
+shader_parameter/color = Color(0.627451, 0.5411765, 0.41568628, 1)
+shader_parameter/strength = null
+shader_parameter/alpha = 0.12
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_voqhs"]
+shader = ExtResource("8_if8nx")
+shader_parameter/size = Vector2(140, 146)
+shader_parameter/center = Vector2(0, -61)
+shader_parameter/t = 0.0
+shader_parameter/band_a = PackedVector4Array(0.01453489, 1.085328, 0.9460729, 1.7890573, 0.02484304, 1.0462388, 2.0257642, 1.4028265, 0.04677584, 1.0755577, 4.600287, 1.0518667, 0.059160143, 1.0146829, 1.1451361, 1.2308708, 0.08229659, 1.057087, 2.3048446, 1.7983258, 0.094912305, 1.0290451, 3.1885366, 0.80723447, 0.112696946, 1.0838691, 5.7292137, 1.8876655, 0.13364297, 1.0230329, 0.62715954, 1.6495304, 0.14703088, 1.0528193, 4.2649775, 1.856681, 0.16265337, 1.0433897, 4.5133433, 1.4523321, 0.18652743, 1.0753582, 1.2603555, 1.3888415, 0.19686146, 1.0996354, 1.2648809, 0.79523396, 0.21384618, 1.0741966, 3.98069, 1.4885792, 0.22708641, 1.0254254, 2.8771613, 1.8567048, 0.24456456, 1.0549244, 6.040906, 0.76817286, 0.2666329, 1.0334994, 4.3059535, 1.9921398, 0.27984253, 1.0940756, 0.939678, 2.07143, 0.30466548, 1.0632153, 2.6037936, 1.2492707, 0.31243655, 1.0714908, 5.0764213, 1.2126424, 0.33947024, 1.0699303, 5.6276197, 2.0470748, 0.3594087, 1.0634714, 2.5193803, 1.0552733, 0.37716535, 1.0884992, 4.9696865, 1.0653188, 0.38711375, 1.0069686, 4.6929317, 1.3815812, 0.40980285, 1.0713108, 5.014471, 2.0226963, 0.42811567, 1.0924678, 3.2949252, 1.4803089, 0.437372, 1.0291014, 0.8477738, 2.0051641, 0.45836785, 1.0297759, 4.1003265, 1.2573097, 0.48018566, 1.0403678, 2.2797403, 1.6714745, 0.49091956, 1.005413, 3.87303, 1.6925364, 0.5141779, 1.0611546, 5.8741665, 1.434646, 0.51965076, 1.0986758, 5.037459, 0.82947373, 0.5479698, 1.0099833, 4.3979554, 1.1040099, 0.56465274, 1.0918196, 1.0700791, 1.9490813, 0.5800287, 1.0358216, 1.4541156, 1.0324327, 0.5982568, 1.074106, 0.8614862, 2.0215137, 0.6127619, 1.0788081, 1.1785648, 0.91228426, 0.62256455, 1.0202461, 2.2040632, 1.8148804, 0.6457406, 1.0934275, 4.4829683, 1.8932849, 0.6659986, 1.0521272, 6.280033, 2.0070024, 0.6818964, 1.0365604, 4.7889876, 0.86663985, 0.6924284, 1.0789237, 5.9139585, 1.2865857, 0.71127075, 1.0438253, 5.9731297, 1.0720394, 0.72672576, 1.003392, 5.115675, 1.0030916, 0.74598163, 1.0337548, 3.0913217, 2.0654728, 0.7683413, 1.0591841, 3.2877984, 1.4598137, 0.7856387, 1.0018041, 2.2284396, 1.0120035, 0.7993669, 1.0311056, 3.6281338, 0.92670214, 0.8145663, 1.0323023, 2.0999415, 0.80604374, 0.839027, 1.0440457, 5.951489, 1.7128786, 0.85450065, 1.0469451, 4.525413, 1.8219904, 0.87648356, 1.0366695, 1.6256735, 1.044235, 0.8848609, 1.0163692, 1.9878216, 0.7087733, 0.90991706, 1.0610483, 3.5078554, 1.2027828, 0.9253936, 1.054495, 2.8819153, 1.7605019, 0.93434155, 1.0310962, 2.345801, 1.5059184, 0.9617986, 1.0786655, 3.7514281, 1.6439635, 0.97060865, 1.0958179, 6.200203, 2.0726006, 0.99422145, 1.097759, 0.1207172, 0.9338975)
+shader_parameter/band_b = PackedVector4Array(2, 0.37426606, 0, 0, 3, 0.57109195, 0, 0, 2, 0.4950452, 0, 0, 2, 0.24881159, 0, 0, 4, 0.030085724, 0, 0, 2, 0.03747264, 0, 0, 2, 0.3028565, 0, 0, 2, 0.4960826, 0, 0, 2, 0.22709571, 0, 0, 4, 0.69641864, 0, 0, 2, 0.78144807, 0, 0, 3, 0.9772758, 0, 0, 4, 0.9982126, 0, 0, 4, 0.030950371, 0, 0, 3, 0.8423012, 0, 0, 2, 0.3550218, 0, 0, 2, 0.43353745, 0, 0, 3, 0.77102655, 0, 0, 2, 0.99941623, 0, 0, 4, 0.63944596, 0, 0, 4, 0.1532677, 0, 0, 3, 0.994691, 0, 0, 2, 0.591298, 0, 0, 2, 0.54451764, 0, 0, 2, 0.92595136, 0, 0, 3, 0.7492112, 0, 0, 2, 0.25307262, 0, 0, 3, 0.4685711, 0, 0, 2, 0.9332137, 0, 0, 2, 0.5049599, 0, 0, 4, 0.76874506, 0, 0, 3, 0.6768312, 0, 0, 2, 0.028499186, 0, 0, 4, 0.851602, 0, 0, 2, 0.14865573, 0, 0, 2, 0.14482065, 0, 0, 2, 0.9953445, 0, 0, 3, 0.58780944, 0, 0, 4, 0.14039494, 0, 0, 3, 0.7677229, 0, 0, 4, 0.2822212, 0, 0, 2, 0.3595535, 0, 0, 4, 0.14331098, 0, 0, 3, 0.35380965, 0, 0, 2, 0.28032237, 0, 0, 2, 0.56834215, 0, 0, 3, 0.56058526, 0, 0, 4, 0.34319782, 0, 0, 3, 0.08870773, 0, 0, 4, 0.40735862, 0, 0, 3, 0.7568461, 0, 0, 3, 0.16138007, 0, 0, 3, 0.8337954, 0, 0, 2, 0.70457876, 0, 0, 3, 0.73278224, 0, 0, 2, 0.39581472, 0, 0, 4, 0.6080761, 0, 0, 2, 0.42189056, 0, 0)
+shader_parameter/radius = null
+shader_parameter/strength = null
+shader_parameter/alpha = 0.3
+shader_parameter/color = Color(0.7019608, 0.6784314, 0.76862746, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hfa4n"]
+shader = ExtResource("7_knadg")
+shader_parameter/size = Vector2(148, 148)
+shader_parameter/radius = 70.0
+shader_parameter/thickness = null
+shader_parameter/squash = null
+shader_parameter/color = Color(0.8862745, 0.87058824, 0.9411765, 1)
+shader_parameter/strength = null
+shader_parameter/alpha = 0.0
+
+[node name="Tornado" type="Node2D" unique_id=1573320309]
+script = ExtResource("1_pijm6")
+effect_id = "nature/tornado"
+source = "src/fx/nature/tornado.js@a2efc88293cd3be0a6a45e6b12a53d25d34304c3"
+duration = 2.0
+loop = true
+canvas_size = Vector2i(196, 168)
+origin = Vector2i(98, 152)
+bg = "ground"
+ramps = {
+"dust": PackedColorArray(0.16470589, 0.1254902, 0.09411765, 1, 0.30588236, 0.24313726, 0.18039216, 1, 0.4627451, 0.38431373, 0.2901961, 1, 0.627451, 0.5411765, 0.41568628, 1, 0.79607844, 0.72156864, 0.5803922, 1),
+"leaves": PackedColorArray(0.2901961, 0.1254902, 0.047058824, 1, 0.65882355, 0.32941177, 0.10980392, 1, 0.9098039, 0.5882353, 0.18039216, 1, 1, 0.8235294, 0.47843137, 1, 0.07058824, 0.21960784, 0.09411765, 1, 0.18431373, 0.47843137, 0.16470589, 1, 0.42352942, 0.72156864, 0.22745098, 1, 0.78431374, 0.9411765, 0.4392157, 1),
+"palette": PackedColorArray(0.078431375, 0.07058824, 0.12941177, 1, 0.13725491, 0.12156863, 0.2, 1, 0.21176471, 0.19215687, 0.2901961, 1, 0.3019608, 0.2784314, 0.38431373, 1, 0.40784314, 0.38039216, 0.49019608, 1, 0.5411765, 0.5137255, 0.61960787, 1, 0.7019608, 0.6784314, 0.76862746, 1, 0.8862745, 0.87058824, 0.9411765, 1)
+}
+palette_extra = PackedColorArray(1, 1, 1, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1981964391]
+libraries/ = SubResource("AnimationLibrary_bee0d")
+
+[node name="DustBack" type="GPUParticles2D" parent="." unique_id=361866532]
+z_index = -2
+material = SubResource("ShaderMaterial_3uyc1")
+amount = 40
+texture = SubResource("ImageTexture_osm87")
+lifetime = 2.0
+preprocess = 2.0
+use_fixed_seed = true
+seed = 521698
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+local_coords = true
+process_material = SubResource("ShaderMaterial_i30o5")
+
+[node name="DustLitBack" type="GPUParticles2D" parent="." unique_id=2117576708]
+z_index = -2
+material = SubResource("ShaderMaterial_3uyc1")
+amount = 40
+texture = SubResource("ImageTexture_mjfma")
+lifetime = 2.0
+preprocess = 2.0
+use_fixed_seed = true
+seed = 895279
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+local_coords = true
+process_material = SubResource("ShaderMaterial_fd7fp")
+
+[node name="FunnelBack" type="ColorRect" parent="." unique_id=864279418]
+z_index = -2
+material = SubResource("ShaderMaterial_nh24q")
+offset_left = -70.0
+offset_top = -134.0
+offset_right = 70.0
+offset_bottom = 12.0
+mouse_filter = 2
+
+[node name="LeafAmberBack" type="GPUParticles2D" parent="." unique_id=1150917957]
+z_index = -2
+material = SubResource("ShaderMaterial_uh50x")
+texture = SubResource("ImageTexture_wrthq")
+lifetime = 2.0
+preprocess = 2.0
+use_fixed_seed = true
+seed = 548516
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+local_coords = true
+process_material = SubResource("ShaderMaterial_bwc4p")
+
+[node name="LeafGreenBack" type="GPUParticles2D" parent="." unique_id=1555403428]
+z_index = -2
+material = SubResource("ShaderMaterial_uh50x")
+amount = 7
+texture = SubResource("ImageTexture_u0ign")
+lifetime = 2.0
+preprocess = 2.0
+use_fixed_seed = true
+seed = 28467
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+local_coords = true
+process_material = SubResource("ShaderMaterial_b0x1d")
+
+[node name="TwigBack" type="GPUParticles2D" parent="." unique_id=1692079710]
+z_index = -2
+material = SubResource("ShaderMaterial_uh50x")
+amount = 4
+texture = SubResource("ImageTexture_6yf81")
+lifetime = 2.0
+preprocess = 2.0
+use_fixed_seed = true
+seed = 16382
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+local_coords = true
+process_material = SubResource("ShaderMaterial_aoi77")
+
+[node name="PebbleBack" type="GPUParticles2D" parent="." unique_id=270145044]
+z_index = -2
+material = SubResource("ShaderMaterial_uh50x")
+amount = 5
+texture = SubResource("ImageTexture_a8bl7")
+lifetime = 2.0
+preprocess = 2.0
+use_fixed_seed = true
+seed = 18390
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+local_coords = true
+process_material = SubResource("ShaderMaterial_73ajt")
+
+[node name="Body" type="ColorRect" parent="." unique_id=1485540972]
+z_index = -2
+material = SubResource("ShaderMaterial_h6ivt")
+offset_left = -70.0
+offset_top = -134.0
+offset_right = 70.0
+offset_bottom = 12.0
+mouse_filter = 2
+
+[node name="FunnelFront" type="ColorRect" parent="." unique_id=882742761]
+z_index = 1
+material = SubResource("ShaderMaterial_5hv2w")
+offset_left = -70.0
+offset_top = -134.0
+offset_right = 70.0
+offset_bottom = 12.0
+mouse_filter = 2
+
+[node name="DustFront" type="GPUParticles2D" parent="." unique_id=257717753]
+z_index = 1
+material = SubResource("ShaderMaterial_3uyc1")
+amount = 40
+texture = SubResource("ImageTexture_pf47l")
+lifetime = 2.0
+preprocess = 2.0
+use_fixed_seed = true
+seed = 997089
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+local_coords = true
+process_material = SubResource("ShaderMaterial_01wu5")
+
+[node name="DustLitFront" type="GPUParticles2D" parent="." unique_id=974264807]
+z_index = 1
+material = SubResource("ShaderMaterial_3uyc1")
+amount = 40
+texture = SubResource("ImageTexture_stg0i")
+lifetime = 2.0
+preprocess = 2.0
+use_fixed_seed = true
+seed = 595738
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+local_coords = true
+process_material = SubResource("ShaderMaterial_6sjsr")
+
+[node name="LeafAmberFront" type="GPUParticles2D" parent="." unique_id=17528358]
+z_index = 1
+material = SubResource("ShaderMaterial_uh50x")
+texture = SubResource("ImageTexture_grvft")
+lifetime = 2.0
+preprocess = 2.0
+use_fixed_seed = true
+seed = 696641
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+local_coords = true
+process_material = SubResource("ShaderMaterial_edq7g")
+
+[node name="LeafGreenFront" type="GPUParticles2D" parent="." unique_id=1617629237]
+z_index = 1
+material = SubResource("ShaderMaterial_uh50x")
+amount = 7
+texture = SubResource("ImageTexture_gatet")
+lifetime = 2.0
+preprocess = 2.0
+use_fixed_seed = true
+seed = 899723
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+local_coords = true
+process_material = SubResource("ShaderMaterial_hb1l4")
+
+[node name="TwigFront" type="GPUParticles2D" parent="." unique_id=1023260492]
+z_index = 1
+material = SubResource("ShaderMaterial_uh50x")
+amount = 4
+texture = SubResource("ImageTexture_i7hhu")
+lifetime = 2.0
+preprocess = 2.0
+use_fixed_seed = true
+seed = 227320
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+local_coords = true
+process_material = SubResource("ShaderMaterial_adrb1")
+
+[node name="PebbleFront" type="GPUParticles2D" parent="." unique_id=1076982129]
+z_index = 1
+material = SubResource("ShaderMaterial_uh50x")
+amount = 5
+texture = SubResource("ImageTexture_qyjhu")
+lifetime = 2.0
+preprocess = 2.0
+use_fixed_seed = true
+seed = 159708
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+local_coords = true
+process_material = SubResource("ShaderMaterial_4ar8f")
+
+[node name="Grit" type="GPUParticles2D" parent="." unique_id=1862665148]
+z_index = 1
+material = SubResource("ShaderMaterial_uh50x")
+texture = SubResource("ImageTexture_cnav1")
+lifetime = 2.0
+preprocess = 2.0
+use_fixed_seed = true
+seed = 269501
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+local_coords = true
+process_material = SubResource("ShaderMaterial_2xvxl")
+
+[node name="Grit2" type="GPUParticles2D" parent="." unique_id=1294352278]
+z_index = 1
+material = SubResource("ShaderMaterial_uh50x")
+texture = SubResource("ImageTexture_a6ide")
+lifetime = 2.0
+preprocess = 2.0
+use_fixed_seed = true
+seed = 850510
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+local_coords = true
+process_material = SubResource("ShaderMaterial_8wlwn")
+
+[node name="Column" type="Line2D" parent="." unique_id=2032191750]
+z_index = 2
+material = SubResource("ShaderMaterial_fxf08")
+points = PackedVector2Array(0, -11, 0, -100)
+width = 52.0
+default_color = Color(0.5411765, 0.5137255, 0.61960787, 0.08)
+texture = ExtResource("6_4wtne")
+texture_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="FootLight" type="ColorRect" parent="." unique_id=1360335444]
+z_index = 2
+material = SubResource("ShaderMaterial_cms71")
+offset_left = -34.0
+offset_top = -36.0
+offset_right = 34.0
+offset_bottom = 32.0
+mouse_filter = 2
+
+[node name="HeadLight" type="ColorRect" parent="." unique_id=1742752003]
+z_index = 2
+material = SubResource("ShaderMaterial_voqhs")
+offset_left = -70.0
+offset_top = -134.0
+offset_right = 70.0
+offset_bottom = 12.0
+mouse_filter = 2
+
+[node name="Flash" type="ColorRect" parent="." unique_id=889150325]
+z_index = 2
+material = SubResource("ShaderMaterial_hfa4n")
+offset_left = -74.0
+offset_top = -188.0
+offset_right = 74.0
+offset_bottom = -40.0
+mouse_filter = 2
+
+[node name="Bolt" type="Line2D" parent="." unique_id=722540390]
+visible = false
+z_index = 1
+material = SubResource("ShaderMaterial_uh50x")
+points = PackedVector2Array(0, 0, 1, 1)
+width = 1.0

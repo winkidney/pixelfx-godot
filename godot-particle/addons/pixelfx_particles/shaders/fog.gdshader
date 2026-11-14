@@ -31,6 +31,7 @@ float dens(vec2 p) {
 }
 
 void fragment() {
+	vec4 tint = COLOR;   // the node's modulate: fade a group, tint a copy
 	vec2 p = floor((UV - 0.5) * size) + 0.5 + center;
 	float d = dens(p);
 	if (d < threshold) {
@@ -43,6 +44,7 @@ void fragment() {
 	} else {
 		c = vec4((d > body + th ? high : low).rgb, clamp((d - threshold) * 1.6, 0.0, 1.0) * alpha);
 	}
+	c *= tint;
 	if (pfx_pixel(c, FRAGCOORD.xy)) {
 		discard;
 	}

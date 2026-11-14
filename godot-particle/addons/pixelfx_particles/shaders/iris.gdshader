@@ -23,6 +23,7 @@ float h(vec2 p) {
 }
 
 void fragment() {
+	vec4 tint = COLOR;   // the node's modulate: fade a group, tint a copy
 	vec2 p = floor((UV - 0.5) * size) + 0.5 + center;
 	float d = length(p - focus);
 	vec4 c;
@@ -37,6 +38,7 @@ void fragment() {
 	} else {
 		c = ink;
 	}
+	c *= tint;
 	if (pfx_pixel(c, FRAGCOORD.xy)) {
 		discard;
 	}

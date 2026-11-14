@@ -12,6 +12,7 @@ uniform float strength = 1.0;
 uniform float alpha = 1.0;
 
 void fragment() {
+	vec4 tint = COLOR;
 	vec2 p = floor((UV - 0.5) * size) + 0.5;
 	float d = length(vec2(p.x, p.y / max(squash, 0.001)));
 	float k;
@@ -21,5 +22,5 @@ void fragment() {
 		k = 1.0 - clamp(d / max(radius, 0.001), 0.0, 1.0);
 	}
 	k = k * k;
-	COLOR = vec4(color.rgb * color.a * k * alpha * strength, 1.0);
+	COLOR = vec4(color.rgb * color.a * k * alpha * strength * tint.rgb * tint.a, 1.0);
 }

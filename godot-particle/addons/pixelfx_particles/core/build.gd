@@ -233,7 +233,9 @@ func _place(n: CanvasItem, o: Dictionary, parent: Node = null) -> void:
 ##   angle [min, max], spin [min, max] (degrees a second), scale [min, max], scale_curve [[t, v], ...],
 ##   alpha_curve [[t, a], ...], color, ramp (colour over life, from ramp()), initial (a random starting colour),
 ##   turbulence {strength, scale, speed, influence [min, max]: keep it 0.005..0.03, more stops a particle dead},
-##   local (local coordinates), collide {bounce, friction, hide (vanish on contact), size}: needs a ground().
+##   local (local coordinates), collide {bounce, friction, hide (vanish on contact), size}: needs a ground(),
+##   drag (damping proportional to speed, the original's drag), process_shader + process_params (your own
+##   `shader_type particles` shader instead of the material; the canvas material still does the colour layer).
 ## No sub-emitters or trails: the Compatibility renderer (web, mobile) has neither. A splash where drops land is an
 ## emitter of its own along the floor; a fire where a brand lands is one that starts when it lands.
 func particles(name: String, o: Dictionary = {}) -> GPUParticles2D:
@@ -285,6 +287,8 @@ func particles(name: String, o: Dictionary = {}) -> GPUParticles2D:
 	_range(m, "damping", o.get("damping", [0.0, 0.0]))
 	_range(m, "radial_accel", o.get("radial", [0.0, 0.0]))
 	_range(m, "radial_velocity", o.get("radial_speed", [0.0, 0.0]))
+	# drag: damping proportional to speed (the original's), not a fixed deceleration
+	m.particle_flag_damping_as_friction = o.get("drag", false)
 	m.lifetime_randomness = o.get("life_random", 0.0)
 	_range(m, "tangential_accel", o.get("tangential", [0.0, 0.0]))
 	_range(m, "orbit_velocity", o.get("orbit", [0.0, 0.0]))
@@ -321,6 +325,14 @@ func particles(name: String, o: Dictionary = {}) -> GPUParticles2D:
 		# influence pulls the velocity toward the noise field every step: above ~0.03 it eats the initial speed
 		_range(m, "turbulence_influence", t.get("influence", [0.01, 0.02]))
 	p.process_material = m
+	if o.has("process_shader"):
+		# your own particle process shader (shader_type particles) where the material can't do it: a spiral, a path
+		var ps := ShaderMaterial.new()
+		ps.shader = load(o.process_shader) if o.process_shader is String else o.process_shader
+		for k in o.get("process_params", {}):
+			var v: Variant = o.process_params[k]
+			ps.set_shader_parameter(k, float(v) if v is int else v)
+		p.process_material = ps
 	return p
 
 
@@ -404,7 +416,8 @@ func frames(name: String = "Body", o: Dictionary = {}) -> Sprite2D:
 
 ## The effect's still pixels lifted from the original (port/props.py: fx/<cat>/<name>/prop.png), in place, exact.
 func prop(o: Dictionary = {}) -> Sprite2D:
-	var path := "res://addons/pixelfx_particles/fx/%s/prop.png" % id
+	# o.file: another lifted image in the effect's folder (a prop split into the part behind and the part in front)
+	var path := "res://addons/pixelfx_particles/fx/%s/%s" % [id, o.get("file", "prop.png")]
 	var oo := {"centered": false, "at": -Vector2(root.origin), "layer": "prop", "back": o.get("back", true)}
 	oo.merge(o, true)
 	return sprite(o.get("name", "Prop"), load(path), oo)
@@ -440,10 +453,13 @@ func shape(name: String, shader: Variant, size: Vector2, params: Dictionary = {}
 	r.z_index = (-1 if lit else -2) if o.get("back", false) else (2 if lit else 1)
 	m.set_shader_parameter("size", size)
 	m.set_shader_parameter("center", at)
+	var types := {}
+	for u in m.shader.get_shader_uniform_list():
+		types[u.name] = u.type
 	for k in params:
 		var v: Variant = params[k]
-		if v is int:
-			v = float(v)   # an int given to a float uniform is dropped when the scene is saved
+		if v is int and types.get(k, TYPE_FLOAT) == TYPE_FLOAT:
+			v = float(v)   # an int given to a float uniform is dropped when the scene is saved (int uniforms keep ints)
 		if v is PackedColorArray or (v is Array and v.size() and v.all(func(c): return c is Color)):
 			# a vec4[] uniform needs a PackedVector4Array (colours arrive as zeros otherwise)
 			var arr := PackedVector4Array()
@@ -545,6 +561,8 @@ func line(name: String, points: PackedVector2Array, o: Dictionary = {}) -> Line2
 		# a soft cross-section (bright down the middle, fading to its edges): glows, beams
 		l.texture = texture("beam16")
 		l.texture_mode = Line2D.LINE_TEXTURE_STRETCH
+		l.begin_cap_mode = Line2D.LINE_CAP_ROUND
+		l.end_cap_mode = Line2D.LINE_CAP_ROUND
 	_place(l, o, o.get("parent"))
 	return l
 
@@ -604,6 +622,31 @@ func arc(name: String, reach: float, params: Dictionary = {}, o: Dictionary = {}
 	return shape(name, "arc", Vector2(e, e), params, o)
 
 
+## A closed ellipse as a Line2D (rx, ry, centred on o.at): thin floor rings that a squashed ring shader breaks up.
+## o: width, color, layer, back, side (1: only the far half, -1: the near half), steps.
+func ellipse(name: String, rx: float, ry: float, o: Dictionary = {}) -> Line2D:
+	var pts := PackedVector2Array()
+	var n: int = o.get("steps", maxi(16, int(ceil(TAU * maxf(rx, ry)))))
+	var side: float = o.get("side", 0.0)
+	for i in n + 1:
+		var a := TAU * i / n
+		var p := Vector2(cos(a) * rx, sin(a) * ry).round()
+		if (side > 0.0 and p.y > 0.0) or (side < 0.0 and p.y < 0.0):
+			continue
+		pts.append(p)
+	return line(name, pts, o)
+
+
+## A texture made at build time (an Image you drew), saved beside the scene as fx/<id>/<file>.res so the .tscn stays
+## small. Returns it, loaded, to use like any texture.
+func asset(file: String, img: Image) -> Texture2D:
+	var dir := "res://addons/pixelfx_particles/fx/%s/" % id
+	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(dir))
+	var path := dir + file.get_basename() + ".res"
+	ResourceSaver.save(ImageTexture.create_from_image(img), path)
+	return load(path)
+
+
 ## A plain Node2D to group or move things (at, back, parent).
 func group(name: String, o: Dictionary = {}) -> Node2D:
 	var g := Node2D.new()
@@ -626,6 +669,9 @@ func key(node: Node, prop: String, keys: Array, interp := "linear") -> void:
 		fx.track_set_path(tr, path)
 	fx.track_set_interpolation_type(tr, {"linear": Animation.INTERPOLATION_LINEAR, "nearest": Animation.INTERPOLATION_NEAREST, "cubic": Animation.INTERPOLATION_CUBIC}[interp])
 	fx.value_track_set_update_mode(tr, Animation.UPDATE_DISCRETE if interp == "nearest" else Animation.UPDATE_CONTINUOUS)
+	if keys.size() and float(keys[0][0]) > 0.0:
+		# before its first key a track sets nothing (the node would keep its saved value): hold the first value from 0
+		keys = [[0.0, keys[0][1]]] + keys
 	for k in keys:
 		var v: Variant = k[1]
 		if v is int and prop.begins_with("material:shader_parameter/"):

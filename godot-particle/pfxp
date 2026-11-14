@@ -16,10 +16,19 @@ display() {
 	shift
 	local fps=30
 	[[ " $* " == *" --act "* ]] && fps=60
+	local log
+	log=$(mktemp)
 	xvfb-run -a -s "-screen 0 1280x800x24" "$GODOT_BIN" --no-header --path "$DIR" --rendering-driver opengl3 \
 		--fixed-fps $fps --disable-vsync -s res://tools/cli.gd -- "$cmd" "$@" 2>&1 \
-		| grep -v -e "Could not set V-Sync" -e "set_use_vsync" -e "^OpenGL API" -e "^$"
-	return "${PIPESTATUS[0]}"
+		| grep -v -e "Could not set V-Sync" -e "set_use_vsync" -e "^OpenGL API" -e "^$" | tee "$log"
+	local code="${PIPESTATUS[0]}"
+	# a shader that doesn't compile, or a script error, fails the run even when Godot carries on
+	if grep -q -e "SHADER ERROR" -e "SCRIPT ERROR" "$log"; then
+		echo "FAIL: shader or script errors above" >&2
+		code=1
+	fi
+	rm -f "$log"
+	return "$code"
 }
 render() {
 	display render "$@"

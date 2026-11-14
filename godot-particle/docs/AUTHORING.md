@@ -68,7 +68,9 @@ your eyes decide.
 | `ground(y)` | a floor particles can land on, bounce off or vanish into (`collide`) |
 | `actor_node()` | the stand-in as the effect's own node, with a flash and tint you can key (status effects) |
 | `actor_points(edge)` | the stand-in's silhouette (or outline) as emission points: flames, frost, poison on the body |
-| `prop(o)` | the original's still pixels (see below) |
+| `prop(o)` | the original's still pixels (see below); `file` picks another lifted image in the effect's folder (a prop split behind / in front) |
+| `asset(file, image)` | a texture you drew at build time, saved beside the scene as `.res` (keeps the `.tscn` small) |
+| `ellipse(name, rx, ry, o)` | a closed thin ellipse as a Line2D (`side` for one half): floor rings a squashed ring shader breaks up |
 | `frames(name, o)` | the original's frames for a body that isn't an effect (see below) |
 | `key(node, prop, [[t, v], ...], interp)` | keys on `fx`: `"position"`, `"modulate:a"`, `"material:shader_parameter/radius"`, `"amount_ratio"`... interp `"linear"`, `"nearest"` (steps, on/off), `"cubic"` |
 | `emit(p, on, off)`, `show(n, on, off)`, `loop_t(n)` | emitters and visibility over time; a shader's `t` over the loop |
@@ -127,6 +129,19 @@ After adding a PNG, run `./pfxp import` (it locks; other shells wait).
 - **One-shots** must be done by their duration (`check` warns when particles outlive it). **Loops** need
   `preprocess` on their continuous emitters.
 - **Screen effects** (320 x 180, origin at the top-left) cover the canvas: weather, transitions.
+- **Keys**: a track holds its first key's value from t = 0 (before it, Godot would leave the node's saved value).
+  A `[0, 0]` key followed by `[1.0, 1]` fades in from 0; add a hold key just before a window to keep it shut.
+- **Drag**: `damping` is a constant deceleration; `"drag": true` makes it proportional to speed, as the original's
+  drag is, so buoyancy and gravity can still win.
+- **Light twins**: two emitters with the same options and seed emit the same particles; give one the light layer
+  for a glow that rides each ember, mote or spark.
+- **preprocess** starts a loop from where its emitter sits at t = 0, so an emitter on a keyed path shows a straight
+  first stretch: key the path to start where it ends.
+- **Names**: `light`, `dither`, `soft`, `root`, `meta`, `id`, `fx`, `anim` are build.gd members; don't define
+  functions or variables with those names. Lambdas handed to helpers need typed parameters.
+- **back: true** puts glows and shapes under the stand-in too.
+- **Angles**: a positive particle `angle` turns the quad counter-clockwise on screen (leans it left).
+- **Spawn rates**: the original rolls its chances on 120 Hz substeps; read per 30 fps frame they come out low.
 
 ## Examples
 
