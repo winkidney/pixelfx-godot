@@ -1,0 +1,182 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://addons/pixelfx_particles/core/pfx_effect.gd" id="1_yso83"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/fx/holy/_sun.gdshader" id="2_1ejq8"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/fx/holy/_sun_light.gdshader" id="3_2q2m8"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/fx/holy/_flip.gdshader" id="4_jqt7u"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/fx/holy/sunburst/sparkle.res" id="5_yuduj"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/shaders/light.gdshader" id="6_xw1qf"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/textures/glow16.png" id="7_0b51h"]
+
+[sub_resource type="Animation" id="Animation_6xrl4"]
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sun:material:shader_parameter/t")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SunLight:material:shader_parameter/t")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yfite"]
+_data = {
+&"fx": SubResource("Animation_6xrl4")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_15pqy"]
+shader = ExtResource("2_1ejq8")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = null
+shader_parameter/size = Vector2(128, 128)
+shader_parameter/t = null
+shader_parameter/rays = 8
+shader_parameter/pal = PackedColorArray(0.23137255, 0.11372549, 0.16470589, 1, 0.47843137, 0.22745098, 0.17254902, 1, 0.76862746, 0.39607844, 0.18039216, 1, 0.9411765, 0.627451, 0.2509804, 1, 1, 0.8235294, 0.36862746, 1, 1, 0.9411765, 0.627451, 1, 1, 0.9843137, 0.8784314, 1, 1, 1, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_823uv"]
+shader = ExtResource("3_2q2m8")
+shader_parameter/size = Vector2(128, 128)
+shader_parameter/t = null
+shader_parameter/rays = 8
+shader_parameter/pal = PackedColorArray(0.23137255, 0.11372549, 0.16470589, 1, 0.47843137, 0.22745098, 0.17254902, 1, 0.76862746, 0.39607844, 0.18039216, 1, 0.9411765, 0.627451, 0.2509804, 1, 1, 0.8235294, 0.36862746, 1, 1, 0.9411765, 0.627451, 1, 1, 0.9843137, 0.8784314, 1, 1, 1, 1, 1)
+shader_parameter/strength = null
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_717yx"]
+shader = ExtResource("4_jqt7u")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = null
+shader_parameter/frames = 11
+shader_parameter/use_alpha = 0.0
+
+[sub_resource type="Curve" id="Curve_a27el"]
+_data = [Vector2(0, 0), 0.0, 2.0, 1, 1, Vector2(0.5, 1), 2.0, -2.0, 1, 1, Vector2(1, 0), -2.0, 0.0, 1, 1]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_tnin8"]
+curve = SubResource("Curve_a27el")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_nmru0"]
+lifetime_randomness = 0.5
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 0.0
+emission_ring_radius = 44.0
+emission_ring_inner_radius = 16.0
+emission_ring_cone_angle = 90.0
+direction = Vector3(6.123234e-17, -1, 0)
+spread = 0.0
+gravity = Vector3(0, 0, 0)
+alpha_curve = SubResource("CurveTexture_tnin8")
+anim_speed_min = 1.0
+anim_speed_max = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k78sq"]
+resource_name = "Light"
+shader = ExtResource("6_xw1qf")
+shader_parameter/strength = null
+shader_parameter/steps = null
+
+[sub_resource type="Curve" id="Curve_7o0rr"]
+_data = [Vector2(0, 0), 0.0, 2.0, 1, 1, Vector2(0.5, 1), 2.0, -2.0, 1, 1, Vector2(1, 0), -2.0, 0.0, 1, 1]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_0bt1e"]
+curve = SubResource("Curve_7o0rr")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_nmse8"]
+lifetime_randomness = 0.5
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 0.0
+emission_ring_radius = 44.0
+emission_ring_inner_radius = 16.0
+emission_ring_cone_angle = 90.0
+direction = Vector3(6.123234e-17, -1, 0)
+spread = 0.0
+gravity = Vector3(0, 0, 0)
+alpha_curve = SubResource("CurveTexture_0bt1e")
+anim_speed_min = 1.0
+anim_speed_max = 1.0
+
+[node name="Sunburst" type="Node2D" unique_id=690865308]
+script = ExtResource("1_yso83")
+effect_id = "holy/sunburst"
+source = "src/fx/holy/sunburst.js@2083d4e40049dd9e9b183fddb7db37b640c6bfd9"
+duration = 4.0
+loop = true
+canvas_size = Vector2i(128, 128)
+origin = Vector2i(64, 64)
+ramps = {
+"palette": PackedColorArray(0.23137255, 0.11372549, 0.16470589, 1, 0.47843137, 0.22745098, 0.17254902, 1, 0.76862746, 0.39607844, 0.18039216, 1, 0.9411765, 0.627451, 0.2509804, 1, 1, 0.8235294, 0.36862746, 1, 1, 0.9411765, 0.627451, 1, 1, 0.9843137, 0.8784314, 1, 1, 1, 1, 1)
+}
+palette_extra = PackedColorArray()
+palette_override = PackedColorArray()
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1746556728]
+libraries/ = SubResource("AnimationLibrary_yfite")
+
+[node name="Sun" type="ColorRect" parent="." unique_id=1227077406]
+z_index = 1
+material = SubResource("ShaderMaterial_15pqy")
+offset_left = -64.0
+offset_top = -64.0
+offset_right = 64.0
+offset_bottom = 64.0
+mouse_filter = 2
+
+[node name="SunLight" type="ColorRect" parent="." unique_id=925103318]
+z_index = 2
+material = SubResource("ShaderMaterial_823uv")
+offset_left = -64.0
+offset_top = -64.0
+offset_right = 64.0
+offset_bottom = 64.0
+mouse_filter = 2
+
+[node name="Twinkles" type="GPUParticles2D" parent="." unique_id=1590817127]
+z_index = 1
+material = SubResource("ShaderMaterial_717yx")
+amount = 2
+texture = ExtResource("5_yuduj")
+lifetime = 0.7
+preprocess = 0.7
+use_fixed_seed = true
+seed = 644190
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+process_material = SubResource("ParticleProcessMaterial_nmru0")
+
+[node name="TwinkleLight" type="GPUParticles2D" parent="." unique_id=1790028681]
+modulate = Color(1, 1, 1, 0.4)
+z_index = 2
+material = SubResource("ShaderMaterial_k78sq")
+amount = 2
+texture = ExtResource("7_0b51h")
+lifetime = 0.7
+preprocess = 0.7
+use_fixed_seed = true
+seed = 385793
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+process_material = SubResource("ParticleProcessMaterial_nmse8")
