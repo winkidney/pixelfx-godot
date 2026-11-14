@@ -7,6 +7,7 @@ GODOT_BIN="${GODOT:-godot}"
 # importing writes .godot/: one at a time, however many shells run pfxp at once
 if [ ! -d "$DIR/.godot/imported" ] || [ "$1" = "import" ]; then
 	mkdir -p "$DIR/records"
+	touch "$DIR/records/.gdignore"   # scratch renders: nothing for Godot to import
 	flock "$DIR/records/.import.lock" "$GODOT_BIN" --headless --path "$DIR" --import >/dev/null 2>&1 || true
 	[ "$1" = "import" ] && exit 0
 fi
