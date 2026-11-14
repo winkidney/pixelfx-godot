@@ -76,6 +76,7 @@ var _done := false
 var _unique := false
 var _particles: Array[GPUParticles2D] = []
 var _seeds: Array[int] = []
+var _speeds: Array[float] = []   # each emitter's own speed_scale (one can run on slowed time), times `speed`
 var _anim: AnimationPlayer
 var _stand_in: CanvasItem
 
@@ -107,9 +108,11 @@ func _ready() -> void:
 func _collect() -> void:
 	_particles.clear()
 	_seeds.clear()
+	_speeds.clear()
 	for n in find_children("*", "GPUParticles2D", true, false):
 		_particles.append(n)
 		_seeds.append(n.seed)
+		_speeds.append(n.speed_scale)
 	_anim = get_node_or_null("AnimationPlayer")
 
 
@@ -178,8 +181,8 @@ func _apply_speed() -> void:
 		return
 	if _anim:
 		_anim.speed_scale = speed
-	for p in _particles:
-		p.speed_scale = speed
+	for i in _particles.size():
+		_particles[i].speed_scale = _speeds[i] * speed
 
 
 func _apply_seed() -> void:

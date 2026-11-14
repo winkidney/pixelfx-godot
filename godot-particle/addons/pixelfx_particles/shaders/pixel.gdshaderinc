@@ -3,7 +3,9 @@
 uniform sampler2D palette : filter_nearest, repeat_disable;
 uniform int palette_size = 0;
 uniform float alpha_scale = 1.0;
-// true: keep real translucency (smoke, dust, mist: the original blends those) in 8 steps instead of dithering it
+// true: keep real translucency (smoke, dust, mist: the original blends those) in 32 steps instead of dithering it;
+// a pixel between two steps takes one or the other through the Bayer matrix, so gradients don't band and a faint
+// puff fades out instead of turning into a flat disc
 uniform bool translucent = false;
 
 const float PFX_BAYER[16] = float[](0., 8., 2., 10., 12., 4., 14., 6., 3., 11., 1., 9., 15., 7., 13., 5.);
@@ -35,7 +37,7 @@ vec3 pfx_snap(vec3 c) {
 bool pfx_pixel(inout vec4 c, vec2 fragcoord) {
 	float a = c.a * alpha_scale;
 	if (translucent) {
-		a = floor(a * 8.0 + 0.5) / 8.0;
+		a = floor(a * 32.0 + pfx_threshold(fragcoord)) / 32.0;
 		if (a <= 0.0) {
 			return true;
 		}

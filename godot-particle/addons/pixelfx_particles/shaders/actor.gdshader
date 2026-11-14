@@ -8,7 +8,7 @@ uniform vec4 tint_color : source_color = vec4(1.0);
 uniform float tint = 0.0;
 
 void fragment() {
-	vec4 c = texture(TEXTURE, UV) * COLOR;
+	vec4 c = COLOR;   // in Godot 4 COLOR already holds the texture times modulate
 	if (c.a < 0.5) {
 		discard;
 	}

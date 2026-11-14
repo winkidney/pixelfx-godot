@@ -41,7 +41,7 @@ your eyes decide.
 - **Layers** (the `layer` option of every helper):
   - `"color"` (default): the dither material, on/off alpha through a Bayer matrix, colours snapped to the effect's
     palette. Most things.
-  - `"soft"`: real translucency in 8 steps, snapped. Smoke, dust, mist, haze, washes.
+  - `"soft"`: real translucency in 32 dithered steps, snapped. Smoke, dust, mist, haze, washes.
   - `"light"`: additive, the original's light buffer: glows, shines, flashes of light. Drawn over the colour layers.
   - `"prop"`: exactly as drawn, for the original's own pixels (props, frames).
   - `back: true` puts a node behind the stand-in character (the original's `drawBack`), otherwise it's in front.
@@ -131,10 +131,26 @@ After adding a PNG, run `./pfxp import` (it locks; other shells wait).
 - **Screen effects** (320 x 180, origin at the top-left) cover the canvas: weather, transitions.
 - **Keys**: a track holds its first key's value from t = 0 (before it, Godot would leave the node's saved value).
   A `[0, 0]` key followed by `[1.0, 1]` fades in from 0; add a hold key just before a window to keep it shut.
-- **Drag**: `damping` is a constant deceleration; `"drag": true` makes it proportional to speed, as the original's
-  drag is, so buoyancy and gravity can still win.
+- **Drag**: `damping` is a constant deceleration. `"drag": 0.6` takes the original's drag value (1/s, `v -= v k dt`)
+  and calibrates Godot's friction to it: a particle at the mean speed travels as far over its life as in the original
+  (faster ones a little less, slower a little more). `"drag": true` is Godot's raw friction on your `damping`,
+  `dv/dt = -0.05 damping v^2`: at damping 2 a particle at 100 px/s loses 1000 px/s^2, far harder than the original.
 - **Light twins**: two emitters with the same options and seed emit the same particles; give one the light layer
-  for a glow that rides each ember, mote or spark.
+  for a glow that rides each ember, mote or spark. Keep every option the same, ramps included (dropping
+  `initial` or `ramp` changes Godot's random draws and the twin drifts off): tint the twin with `modulate`.
+- **Reserved uniforms**: PfxEffect sets `strength` (light), `palette`, `palette_size`, `alpha_scale` and
+  `translucent` on every material that has them. Use `strength` only for a light multiplier.
+- **Shader uniforms**: `shape()` passes an int to an `int` uniform and turns it into a float for a `float` one;
+  colour arrays go to `vec4 x[N]` and to `vec4 x[N] : source_color` alike. `PI` and `TAU` are built in:
+  redefining them doesn't compile.
+- **Collision size**: `collide.size` is Godot's `collision_base_size`, scaled by the particle's scale; check where
+  a big texture comes to rest and shrink it until it sits on the floor.
+- **speed_scale**: an emitter's own `speed_scale` is kept (PfxEffect multiplies it by `speed`), so one emitter can
+  run on slowed time.
+- **Steps**: `"nearest"` keys land a millisecond early so a step on a frame's time shows on that frame. Loops don't
+  blend their last key back into their first.
+- **Soft layer**: alpha comes in 32 steps, dithered between neighbours through the Bayer matrix: gradients don't
+  band and a faint puff fades out instead of turning into a flat grey disc.
 - **preprocess** starts a loop from where its emitter sits at t = 0, so an emitter on a keyed path shows a straight
   first stretch: key the path to start where it ends.
 - **Names**: `light`, `dither`, `soft`, `root`, `meta`, `id`, `fx`, `anim` are build.gd members; don't define

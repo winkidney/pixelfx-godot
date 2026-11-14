@@ -1,0 +1,1001 @@
+[gd_scene format=4]
+
+[ext_resource type="Script" path="res://addons/pixelfx_particles/core/pfx_effect.gd" id="1_vaaow"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/fx/water/_whirlpool.gdshader" id="2_42681"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/fx/water/_whirlpool_light.gdshader" id="3_0cl6a"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/shaders/dither.gdshader" id="4_fl2r8"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/textures/streak3.png" id="5_a5n4o"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/textures/plus3.png" id="6_p8n5d"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/textures/dot1.png" id="7_7qvo7"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/shaders/ring_light.gdshader" id="8_20qdl"]
+
+[sub_resource type="Animation" id="Animation_fls37"]
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Water:material:shader_parameter/t")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Foam:material:shader_parameter/t")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("FoamLight:material:shader_parameter/t")
+tracks/2/interp = 1
+tracks/2/loop_wrap = false
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Glint0:visible")
+tracks/3/interp = 0
+tracks/3/loop_wrap = false
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1.299, 1.3323333, 1.3656666, 2.999),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, false, true, false, false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Glint0/Arms:visible")
+tracks/4/interp = 0
+tracks/4/loop_wrap = false
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 2.999),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Glint0:position")
+tracks/5/interp = 0
+tracks/5/loop_wrap = false
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.032333333, 0.06566667, 0.099, 0.13233334, 0.16566667, 0.199, 0.23233333, 0.26566666, 0.299, 0.33233333, 0.36566666, 0.399, 0.43233332, 0.46566668, 0.499, 0.5323333, 0.5656667, 0.599, 0.63233334, 0.66566664, 0.699, 0.73233336, 0.76566666, 0.799, 0.8323333, 0.8656667, 0.899, 0.93233335, 0.96566665, 0.999, 1.0323334, 1.0656667, 1.099, 1.1323333, 1.1656667, 1.199, 1.2323333, 1.2656667, 1.299, 1.3323333, 1.3656666, 1.399, 1.4323334, 1.4656667, 1.499, 1.5323334, 1.5656667, 1.599, 1.6323333, 1.6656667, 1.699, 1.7323333, 1.7656667, 1.799, 1.8323333, 1.8656666, 1.899, 1.9323334, 1.9656667, 1.999, 2.0323334, 2.0656667, 2.099, 2.1323333, 2.1656666, 2.199, 2.2323334, 2.2656667, 2.299, 2.3323333, 2.3656666, 2.399, 2.4323332, 2.4656668, 2.499, 2.5323334, 2.5656667, 2.599, 2.6323333, 2.6656666, 2.699, 2.7323334, 2.7656667, 2.799, 2.8323333, 2.8656666, 2.899, 2.9323332, 2.9656668, 2.999),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(-26.5, 2.5), Vector2(-26.5, 4.5), Vector2(-25.5, 5.5), Vector2(-24.5, 6.5), Vector2(-23.5, 8.5), Vector2(-22.5, 9.5), Vector2(-21.5, 10.5), Vector2(-19.5, 11.5), Vector2(-18.5, 12.5), Vector2(-16.5, 13.5), Vector2(-14.5, 13.5), Vector2(-12.5, 14.5), Vector2(-10.5, 15.5), Vector2(-8.5, 15.5), Vector2(-6.5, 15.5), Vector2(-3.5, 16.5), Vector2(-1.5, 16.5), Vector2(0.5, 16.5), Vector2(2.5, 16.5), Vector2(5.5, 16.5), Vector2(7.5, 15.5), Vector2(9.5, 15.5), Vector2(11.5, 14.5), Vector2(13.5, 14.5), Vector2(15.5, 13.5), Vector2(17.5, 12.5), Vector2(19.5, 11.5), Vector2(20.5, 10.5), Vector2(21.5, 9.5), Vector2(23.5, 8.5), Vector2(24.5, 7.5), Vector2(25.5, 6.5), Vector2(26.5, 4.5), Vector2(26.5, 3.5), Vector2(26.5, 2.5), Vector2(27.5, 0.5), Vector2(27.5, -0.5), Vector2(26.5, -1.5), Vector2(26.5, -3.5), Vector2(16.5, 13.5), Vector2(18.5, 12.5), Vector2(19.5, 11.5), Vector2(21.5, 10.5), Vector2(22.5, 9.5), Vector2(23.5, 7.5), Vector2(24.5, 6.5), Vector2(25.5, 5.5), Vector2(26.5, 4.5), Vector2(26.5, 2.5), Vector2(27.5, 1.5), Vector2(27.5, 0.5), Vector2(27.5, -1.5), Vector2(26.5, -2.5), Vector2(26.5, -3.5), Vector2(25.5, -5.5), Vector2(24.5, -6.5), Vector2(24.5, -7.5), Vector2(22.5, -8.5), Vector2(21.5, -9.5), Vector2(20.5, -10.5), Vector2(18.5, -11.5), Vector2(16.5, -12.5), Vector2(14.5, -13.5), Vector2(13.5, -14.5), Vector2(10.5, -14.5), Vector2(8.5, -15.5), Vector2(6.5, -15.5), Vector2(4.5, -16.5), Vector2(2.5, -16.5), Vector2(-0.5, -16.5), Vector2(-2.5, -16.5), Vector2(-4.5, -16.5), Vector2(-6.5, -15.5), Vector2(-8.5, -15.5), Vector2(-11.5, -14.5), Vector2(-13.5, -14.5), Vector2(-14.5, -13.5), Vector2(-16.5, -12.5), Vector2(-18.5, -11.5), Vector2(-20.5, -10.5), Vector2(-21.5, -9.5), Vector2(-22.5, -8.5), Vector2(-24.5, -7.5), Vector2(-24.5, -6.5), Vector2(-25.5, -5.5), Vector2(-26.5, -3.5), Vector2(-26.5, -2.5), Vector2(-27.5, -1.5), Vector2(-27.5, 0.5), Vector2(-27.5, 1.5), Vector2(-26.5, 2.5)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Glint0Light:position")
+tracks/6/interp = 0
+tracks/6/loop_wrap = false
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.032333333, 0.06566667, 0.099, 0.13233334, 0.16566667, 0.199, 0.23233333, 0.26566666, 0.299, 0.33233333, 0.36566666, 0.399, 0.43233332, 0.46566668, 0.499, 0.5323333, 0.5656667, 0.599, 0.63233334, 0.66566664, 0.699, 0.73233336, 0.76566666, 0.799, 0.8323333, 0.8656667, 0.899, 0.93233335, 0.96566665, 0.999, 1.0323334, 1.0656667, 1.099, 1.1323333, 1.1656667, 1.199, 1.2323333, 1.2656667, 1.299, 1.3323333, 1.3656666, 1.399, 1.4323334, 1.4656667, 1.499, 1.5323334, 1.5656667, 1.599, 1.6323333, 1.6656667, 1.699, 1.7323333, 1.7656667, 1.799, 1.8323333, 1.8656666, 1.899, 1.9323334, 1.9656667, 1.999, 2.0323334, 2.0656667, 2.099, 2.1323333, 2.1656666, 2.199, 2.2323334, 2.2656667, 2.299, 2.3323333, 2.3656666, 2.399, 2.4323332, 2.4656668, 2.499, 2.5323334, 2.5656667, 2.599, 2.6323333, 2.6656666, 2.699, 2.7323334, 2.7656667, 2.799, 2.8323333, 2.8656666, 2.899, 2.9323332, 2.9656668, 2.999),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(-33.5, -4.5), Vector2(-33.5, -2.5), Vector2(-32.5, -1.5), Vector2(-31.5, -0.5), Vector2(-30.5, 1.5), Vector2(-29.5, 2.5), Vector2(-28.5, 3.5), Vector2(-26.5, 4.5), Vector2(-25.5, 5.5), Vector2(-23.5, 6.5), Vector2(-21.5, 6.5), Vector2(-19.5, 7.5), Vector2(-17.5, 8.5), Vector2(-15.5, 8.5), Vector2(-13.5, 8.5), Vector2(-10.5, 9.5), Vector2(-8.5, 9.5), Vector2(-6.5, 9.5), Vector2(-4.5, 9.5), Vector2(-1.5, 9.5), Vector2(0.5, 8.5), Vector2(2.5, 8.5), Vector2(4.5, 7.5), Vector2(6.5, 7.5), Vector2(8.5, 6.5), Vector2(10.5, 5.5), Vector2(12.5, 4.5), Vector2(13.5, 3.5), Vector2(14.5, 2.5), Vector2(16.5, 1.5), Vector2(17.5, 0.5), Vector2(18.5, -0.5), Vector2(19.5, -2.5), Vector2(19.5, -3.5), Vector2(19.5, -4.5), Vector2(20.5, -6.5), Vector2(20.5, -7.5), Vector2(19.5, -8.5), Vector2(19.5, -10.5), Vector2(9.5, 6.5), Vector2(11.5, 5.5), Vector2(12.5, 4.5), Vector2(14.5, 3.5), Vector2(15.5, 2.5), Vector2(16.5, 0.5), Vector2(17.5, -0.5), Vector2(18.5, -1.5), Vector2(19.5, -2.5), Vector2(19.5, -4.5), Vector2(20.5, -5.5), Vector2(20.5, -6.5), Vector2(20.5, -8.5), Vector2(19.5, -9.5), Vector2(19.5, -10.5), Vector2(18.5, -12.5), Vector2(17.5, -13.5), Vector2(17.5, -14.5), Vector2(15.5, -15.5), Vector2(14.5, -16.5), Vector2(13.5, -17.5), Vector2(11.5, -18.5), Vector2(9.5, -19.5), Vector2(7.5, -20.5), Vector2(6.5, -21.5), Vector2(3.5, -21.5), Vector2(1.5, -22.5), Vector2(-0.5, -22.5), Vector2(-2.5, -23.5), Vector2(-4.5, -23.5), Vector2(-7.5, -23.5), Vector2(-9.5, -23.5), Vector2(-11.5, -23.5), Vector2(-13.5, -22.5), Vector2(-15.5, -22.5), Vector2(-18.5, -21.5), Vector2(-20.5, -21.5), Vector2(-21.5, -20.5), Vector2(-23.5, -19.5), Vector2(-25.5, -18.5), Vector2(-27.5, -17.5), Vector2(-28.5, -16.5), Vector2(-29.5, -15.5), Vector2(-31.5, -14.5), Vector2(-31.5, -13.5), Vector2(-32.5, -12.5), Vector2(-33.5, -10.5), Vector2(-33.5, -9.5), Vector2(-34.5, -8.5), Vector2(-34.5, -6.5), Vector2(-34.5, -5.5), Vector2(-33.5, -4.5)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Glint0Light:material:shader_parameter/alpha")
+tracks/7/interp = 0
+tracks/7/loop_wrap = false
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 1.299, 1.3323333, 1.3656666, 2.999),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0.0, 0.0, 0.20918731176533745, 0.0, 0.0]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Glint1:visible")
+tracks/8/interp = 0
+tracks/8/loop_wrap = false
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 1.999, 2.0323334, 2.0656667, 2.999),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, false, true, false, false]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Glint1/Arms:visible")
+tracks/9/interp = 0
+tracks/9/loop_wrap = false
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 2.999),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, false]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Glint1:position")
+tracks/10/interp = 0
+tracks/10/loop_wrap = false
+tracks/10/keys = {
+"times": PackedFloat32Array(0, 0.032333333, 0.06566667, 0.099, 0.13233334, 0.16566667, 0.199, 0.23233333, 0.26566666, 0.299, 0.33233333, 0.36566666, 0.399, 0.43233332, 0.46566668, 0.499, 0.5323333, 0.5656667, 0.599, 0.63233334, 0.66566664, 0.699, 0.73233336, 0.76566666, 0.799, 0.8323333, 0.8656667, 0.899, 0.93233335, 0.96566665, 0.999, 1.0323334, 1.0656667, 1.099, 1.1323333, 1.1656667, 1.199, 1.2323333, 1.2656667, 1.299, 1.3323333, 1.3656666, 1.399, 1.4323334, 1.4656667, 1.499, 1.5323334, 1.5656667, 1.599, 1.6323333, 1.6656667, 1.699, 1.7323333, 1.7656667, 1.799, 1.8323333, 1.8656666, 1.899, 1.9323334, 1.9656667, 1.999, 2.0323334, 2.0656667, 2.099, 2.1323333, 2.1656666, 2.199, 2.2323334, 2.2656667, 2.299, 2.3323333, 2.3656666, 2.399, 2.4323332, 2.4656668, 2.499, 2.5323334, 2.5656667, 2.599, 2.6323333, 2.6656666, 2.699, 2.7323334, 2.7656667, 2.799, 2.8323333, 2.8656666, 2.899, 2.9323332, 2.9656668, 2.999),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(30.5, 18.5), Vector2(32.5, 17.5), Vector2(35.5, 15.5), Vector2(37.5, 13.5), Vector2(38.5, 11.5), Vector2(40.5, 9.5), Vector2(41.5, 7.5), Vector2(42.5, 5.5), Vector2(43.5, 3.5), Vector2(43.5, 1.5), Vector2(43.5, -0.5), Vector2(43.5, -2.5), Vector2(42.5, -5.5), Vector2(42.5, -7.5), Vector2(40.5, -9.5), Vector2(39.5, -11.5), Vector2(37.5, -13.5), Vector2(35.5, -15.5), Vector2(33.5, -16.5), Vector2(31.5, -18.5), Vector2(28.5, -19.5), Vector2(25.5, -21.5), Vector2(22.5, -22.5), Vector2(19.5, -23.5), Vector2(16.5, -24.5), Vector2(12.5, -25.5), Vector2(9.5, -25.5), Vector2(5.5, -26.5), Vector2(1.5, -26.5), Vector2(-1.5, -26.5), Vector2(-5.5, -26.5), Vector2(-8.5, -25.5), Vector2(-12.5, -25.5), Vector2(-15.5, -24.5), Vector2(-19.5, -23.5), Vector2(-22.5, -22.5), Vector2(-25.5, -21.5), Vector2(-28.5, -19.5), Vector2(-31.5, -18.5), Vector2(-33.5, -16.5), Vector2(-35.5, -15.5), Vector2(-37.5, -13.5), Vector2(-39.5, -11.5), Vector2(-40.5, -9.5), Vector2(-42.5, -7.5), Vector2(-42.5, -5.5), Vector2(-43.5, -2.5), Vector2(-43.5, -0.5), Vector2(-43.5, 1.5), Vector2(-43.5, 3.5), Vector2(-42.5, 5.5), Vector2(-26.5, -20.5), Vector2(-29.5, -19.5), Vector2(-32.5, -17.5), Vector2(-34.5, -16.5), Vector2(-36.5, -14.5), Vector2(-38.5, -12.5), Vector2(-40.5, -10.5), Vector2(-41.5, -8.5), Vector2(-42.5, -6.5), Vector2(-43.5, -4.5), Vector2(-43.5, -2.5), Vector2(-43.5, 0.5), Vector2(-43.5, 2.5), Vector2(-43.5, 4.5), Vector2(-42.5, 6.5), Vector2(-41.5, 8.5), Vector2(-39.5, 10.5), Vector2(-38.5, 12.5), Vector2(-36.5, 14.5), Vector2(-34.5, 16.5), Vector2(-31.5, 17.5), Vector2(-29.5, 19.5), Vector2(-26.5, 20.5), Vector2(-23.5, 22.5), Vector2(-20.5, 23.5), Vector2(-17.5, 24.5), Vector2(-13.5, 24.5), Vector2(-10.5, 25.5), Vector2(-6.5, 25.5), Vector2(-2.5, 26.5), Vector2(0.5, 26.5), Vector2(4.5, 26.5), Vector2(7.5, 25.5), Vector2(11.5, 25.5), Vector2(14.5, 24.5), Vector2(18.5, 23.5), Vector2(21.5, 22.5), Vector2(24.5, 21.5), Vector2(27.5, 20.5), Vector2(30.5, 18.5)]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Glint1Light:position")
+tracks/11/interp = 0
+tracks/11/loop_wrap = false
+tracks/11/keys = {
+"times": PackedFloat32Array(0, 0.032333333, 0.06566667, 0.099, 0.13233334, 0.16566667, 0.199, 0.23233333, 0.26566666, 0.299, 0.33233333, 0.36566666, 0.399, 0.43233332, 0.46566668, 0.499, 0.5323333, 0.5656667, 0.599, 0.63233334, 0.66566664, 0.699, 0.73233336, 0.76566666, 0.799, 0.8323333, 0.8656667, 0.899, 0.93233335, 0.96566665, 0.999, 1.0323334, 1.0656667, 1.099, 1.1323333, 1.1656667, 1.199, 1.2323333, 1.2656667, 1.299, 1.3323333, 1.3656666, 1.399, 1.4323334, 1.4656667, 1.499, 1.5323334, 1.5656667, 1.599, 1.6323333, 1.6656667, 1.699, 1.7323333, 1.7656667, 1.799, 1.8323333, 1.8656666, 1.899, 1.9323334, 1.9656667, 1.999, 2.0323334, 2.0656667, 2.099, 2.1323333, 2.1656666, 2.199, 2.2323334, 2.2656667, 2.299, 2.3323333, 2.3656666, 2.399, 2.4323332, 2.4656668, 2.499, 2.5323334, 2.5656667, 2.599, 2.6323333, 2.6656666, 2.699, 2.7323334, 2.7656667, 2.799, 2.8323333, 2.8656666, 2.899, 2.9323332, 2.9656668, 2.999),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(23.5, 11.5), Vector2(25.5, 10.5), Vector2(28.5, 8.5), Vector2(30.5, 6.5), Vector2(31.5, 4.5), Vector2(33.5, 2.5), Vector2(34.5, 0.5), Vector2(35.5, -1.5), Vector2(36.5, -3.5), Vector2(36.5, -5.5), Vector2(36.5, -7.5), Vector2(36.5, -9.5), Vector2(35.5, -12.5), Vector2(35.5, -14.5), Vector2(33.5, -16.5), Vector2(32.5, -18.5), Vector2(30.5, -20.5), Vector2(28.5, -22.5), Vector2(26.5, -23.5), Vector2(24.5, -25.5), Vector2(21.5, -26.5), Vector2(18.5, -28.5), Vector2(15.5, -29.5), Vector2(12.5, -30.5), Vector2(9.5, -31.5), Vector2(5.5, -32.5), Vector2(2.5, -32.5), Vector2(-1.5, -33.5), Vector2(-5.5, -33.5), Vector2(-8.5, -33.5), Vector2(-12.5, -33.5), Vector2(-15.5, -32.5), Vector2(-19.5, -32.5), Vector2(-22.5, -31.5), Vector2(-26.5, -30.5), Vector2(-29.5, -29.5), Vector2(-32.5, -28.5), Vector2(-35.5, -26.5), Vector2(-38.5, -25.5), Vector2(-40.5, -23.5), Vector2(-42.5, -22.5), Vector2(-44.5, -20.5), Vector2(-46.5, -18.5), Vector2(-47.5, -16.5), Vector2(-49.5, -14.5), Vector2(-49.5, -12.5), Vector2(-50.5, -9.5), Vector2(-50.5, -7.5), Vector2(-50.5, -5.5), Vector2(-50.5, -3.5), Vector2(-49.5, -1.5), Vector2(-33.5, -27.5), Vector2(-36.5, -26.5), Vector2(-39.5, -24.5), Vector2(-41.5, -23.5), Vector2(-43.5, -21.5), Vector2(-45.5, -19.5), Vector2(-47.5, -17.5), Vector2(-48.5, -15.5), Vector2(-49.5, -13.5), Vector2(-50.5, -11.5), Vector2(-50.5, -9.5), Vector2(-50.5, -6.5), Vector2(-50.5, -4.5), Vector2(-50.5, -2.5), Vector2(-49.5, -0.5), Vector2(-48.5, 1.5), Vector2(-46.5, 3.5), Vector2(-45.5, 5.5), Vector2(-43.5, 7.5), Vector2(-41.5, 9.5), Vector2(-38.5, 10.5), Vector2(-36.5, 12.5), Vector2(-33.5, 13.5), Vector2(-30.5, 15.5), Vector2(-27.5, 16.5), Vector2(-24.5, 17.5), Vector2(-20.5, 17.5), Vector2(-17.5, 18.5), Vector2(-13.5, 18.5), Vector2(-9.5, 19.5), Vector2(-6.5, 19.5), Vector2(-2.5, 19.5), Vector2(0.5, 18.5), Vector2(4.5, 18.5), Vector2(7.5, 17.5), Vector2(11.5, 16.5), Vector2(14.5, 15.5), Vector2(17.5, 14.5), Vector2(20.5, 13.5), Vector2(23.5, 11.5)]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("Glint1Light:material:shader_parameter/alpha")
+tracks/12/interp = 0
+tracks/12/loop_wrap = false
+tracks/12/keys = {
+"times": PackedFloat32Array(0, 1.999, 2.0323334, 2.0656667, 2.999),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0.0, 0.0, 0.19866467468821436, 0.0, 0.0]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("Glint2:visible")
+tracks/13/interp = 0
+tracks/13/loop_wrap = false
+tracks/13/keys = {
+"times": PackedFloat32Array(0, 2.999),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, false]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("Glint2/Arms:visible")
+tracks/14/interp = 0
+tracks/14/loop_wrap = false
+tracks/14/keys = {
+"times": PackedFloat32Array(0, 2.999),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, false]
+}
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("Glint2:position")
+tracks/15/interp = 0
+tracks/15/loop_wrap = false
+tracks/15/keys = {
+"times": PackedFloat32Array(0, 0.032333333, 0.06566667, 0.099, 0.13233334, 0.16566667, 0.199, 0.23233333, 0.26566666, 0.299, 0.33233333, 0.36566666, 0.399, 0.43233332, 0.46566668, 0.499, 0.5323333, 0.5656667, 0.599, 0.63233334, 0.66566664, 0.699, 0.73233336, 0.76566666, 0.799, 0.8323333, 0.8656667, 0.899, 0.93233335, 0.96566665, 0.999, 1.0323334, 1.0656667, 1.099, 1.1323333, 1.1656667, 1.199, 1.2323333, 1.2656667, 1.299, 1.3323333, 1.3656666, 1.399, 1.4323334, 1.4656667, 1.499, 1.5323334, 1.5656667, 1.599, 1.6323333, 1.6656667, 1.699, 1.7323333, 1.7656667, 1.799, 1.8323333, 1.8656666, 1.899, 1.9323334, 1.9656667, 1.999, 2.0323334, 2.0656667, 2.099, 2.1323333, 2.1656666, 2.199, 2.2323334, 2.2656667, 2.299, 2.3323333, 2.3656666, 2.399, 2.4323332, 2.4656668, 2.499, 2.5323334, 2.5656667, 2.599, 2.6323333, 2.6656666, 2.699, 2.7323334, 2.7656667, 2.799, 2.8323333, 2.8656666, 2.899, 2.9323332, 2.9656668, 2.999),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(35.5, 2.5), Vector2(35.5, 0.5), Vector2(35.5, -1.5), Vector2(35.5, -3.5), Vector2(34.5, -4.5), Vector2(33.5, -6.5), Vector2(32.5, -8.5), Vector2(31.5, -9.5), Vector2(30.5, -11.5), Vector2(28.5, -12.5), Vector2(26.5, -14.5), Vector2(24.5, -15.5), Vector2(22.5, -16.5), Vector2(19.5, -17.5), Vector2(17.5, -18.5), Vector2(14.5, -19.5), Vector2(11.5, -20.5), Vector2(9.5, -20.5), Vector2(6.5, -21.5), Vector2(3.5, -21.5), Vector2(0.5, -21.5), Vector2(-2.5, -21.5), Vector2(-5.5, -21.5), Vector2(-8.5, -20.5), Vector2(-11.5, -20.5), Vector2(-14.5, -19.5), Vector2(-16.5, -18.5), Vector2(-19.5, -17.5), Vector2(-21.5, -16.5), Vector2(-24.5, -15.5), Vector2(-26.5, -14.5), Vector2(-28.5, -13.5), Vector2(-29.5, -11.5), Vector2(-31.5, -10.5), Vector2(-32.5, -8.5), Vector2(-33.5, -6.5), Vector2(-34.5, -5.5), Vector2(-35.5, -3.5), Vector2(-35.5, -1.5), Vector2(-35.5, 0.5), Vector2(-35.5, 1.5), Vector2(-35.5, 3.5), Vector2(-34.5, 5.5), Vector2(-33.5, 7.5), Vector2(-32.5, 8.5), Vector2(-31.5, 10.5), Vector2(-29.5, 11.5), Vector2(-27.5, 13.5), Vector2(-25.5, 14.5), Vector2(-23.5, 15.5), Vector2(-21.5, 17.5), Vector2(-19.5, 18.5), Vector2(-16.5, 18.5), Vector2(-13.5, 19.5), Vector2(-11.5, 20.5), Vector2(-8.5, 20.5), Vector2(-5.5, 21.5), Vector2(-2.5, 21.5), Vector2(0.5, 21.5), Vector2(3.5, 21.5), Vector2(6.5, 21.5), Vector2(9.5, 20.5), Vector2(12.5, 20.5), Vector2(15.5, 19.5), Vector2(17.5, 18.5), Vector2(20.5, 17.5), Vector2(22.5, 16.5), Vector2(24.5, 15.5), Vector2(26.5, 14.5), Vector2(28.5, 12.5), Vector2(30.5, 11.5), Vector2(31.5, 9.5), Vector2(33.5, 8.5), Vector2(34.5, 6.5), Vector2(34.5, 4.5), Vector2(35.5, 2.5), Vector2(35.5, 1.5), Vector2(35.5, -0.5), Vector2(35.5, -2.5), Vector2(34.5, -4.5), Vector2(34.5, -5.5), Vector2(33.5, -7.5), Vector2(32.5, -9.5), Vector2(30.5, -10.5), Vector2(29.5, -12.5), Vector2(30.5, 10.5), Vector2(32.5, 9.5), Vector2(33.5, 7.5), Vector2(34.5, 5.5), Vector2(35.5, 3.5), Vector2(35.5, 2.5)]
+}
+tracks/16/type = "value"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("Glint2Light:position")
+tracks/16/interp = 0
+tracks/16/loop_wrap = false
+tracks/16/keys = {
+"times": PackedFloat32Array(0, 0.032333333, 0.06566667, 0.099, 0.13233334, 0.16566667, 0.199, 0.23233333, 0.26566666, 0.299, 0.33233333, 0.36566666, 0.399, 0.43233332, 0.46566668, 0.499, 0.5323333, 0.5656667, 0.599, 0.63233334, 0.66566664, 0.699, 0.73233336, 0.76566666, 0.799, 0.8323333, 0.8656667, 0.899, 0.93233335, 0.96566665, 0.999, 1.0323334, 1.0656667, 1.099, 1.1323333, 1.1656667, 1.199, 1.2323333, 1.2656667, 1.299, 1.3323333, 1.3656666, 1.399, 1.4323334, 1.4656667, 1.499, 1.5323334, 1.5656667, 1.599, 1.6323333, 1.6656667, 1.699, 1.7323333, 1.7656667, 1.799, 1.8323333, 1.8656666, 1.899, 1.9323334, 1.9656667, 1.999, 2.0323334, 2.0656667, 2.099, 2.1323333, 2.1656666, 2.199, 2.2323334, 2.2656667, 2.299, 2.3323333, 2.3656666, 2.399, 2.4323332, 2.4656668, 2.499, 2.5323334, 2.5656667, 2.599, 2.6323333, 2.6656666, 2.699, 2.7323334, 2.7656667, 2.799, 2.8323333, 2.8656666, 2.899, 2.9323332, 2.9656668, 2.999),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(28.5, -4.5), Vector2(28.5, -6.5), Vector2(28.5, -8.5), Vector2(28.5, -10.5), Vector2(27.5, -11.5), Vector2(26.5, -13.5), Vector2(25.5, -15.5), Vector2(24.5, -16.5), Vector2(23.5, -18.5), Vector2(21.5, -19.5), Vector2(19.5, -21.5), Vector2(17.5, -22.5), Vector2(15.5, -23.5), Vector2(12.5, -24.5), Vector2(10.5, -25.5), Vector2(7.5, -26.5), Vector2(4.5, -27.5), Vector2(2.5, -27.5), Vector2(-0.5, -28.5), Vector2(-3.5, -28.5), Vector2(-6.5, -28.5), Vector2(-9.5, -28.5), Vector2(-12.5, -28.5), Vector2(-15.5, -27.5), Vector2(-18.5, -27.5), Vector2(-21.5, -26.5), Vector2(-23.5, -25.5), Vector2(-26.5, -24.5), Vector2(-28.5, -23.5), Vector2(-31.5, -22.5), Vector2(-33.5, -21.5), Vector2(-35.5, -20.5), Vector2(-36.5, -18.5), Vector2(-38.5, -17.5), Vector2(-39.5, -15.5), Vector2(-40.5, -13.5), Vector2(-41.5, -12.5), Vector2(-42.5, -10.5), Vector2(-42.5, -8.5), Vector2(-42.5, -6.5), Vector2(-42.5, -5.5), Vector2(-42.5, -3.5), Vector2(-41.5, -1.5), Vector2(-40.5, 0.5), Vector2(-39.5, 1.5), Vector2(-38.5, 3.5), Vector2(-36.5, 4.5), Vector2(-34.5, 6.5), Vector2(-32.5, 7.5), Vector2(-30.5, 8.5), Vector2(-28.5, 10.5), Vector2(-26.5, 11.5), Vector2(-23.5, 11.5), Vector2(-20.5, 12.5), Vector2(-18.5, 13.5), Vector2(-15.5, 13.5), Vector2(-12.5, 14.5), Vector2(-9.5, 14.5), Vector2(-6.5, 14.5), Vector2(-3.5, 14.5), Vector2(-0.5, 14.5), Vector2(2.5, 13.5), Vector2(5.5, 13.5), Vector2(8.5, 12.5), Vector2(10.5, 11.5), Vector2(13.5, 10.5), Vector2(15.5, 9.5), Vector2(17.5, 8.5), Vector2(19.5, 7.5), Vector2(21.5, 5.5), Vector2(23.5, 4.5), Vector2(24.5, 2.5), Vector2(26.5, 1.5), Vector2(27.5, -0.5), Vector2(27.5, -2.5), Vector2(28.5, -4.5), Vector2(28.5, -5.5), Vector2(28.5, -7.5), Vector2(28.5, -9.5), Vector2(27.5, -11.5), Vector2(27.5, -12.5), Vector2(26.5, -14.5), Vector2(25.5, -16.5), Vector2(23.5, -17.5), Vector2(22.5, -19.5), Vector2(23.5, 3.5), Vector2(25.5, 2.5), Vector2(26.5, 0.5), Vector2(27.5, -1.5), Vector2(28.5, -3.5), Vector2(28.5, -4.5)]
+}
+tracks/17/type = "value"
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/path = NodePath("Glint2Light:material:shader_parameter/alpha")
+tracks/17/interp = 0
+tracks/17/loop_wrap = false
+tracks/17/keys = {
+"times": PackedFloat32Array(0, 2.999),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0.0, 0.0]
+}
+tracks/18/type = "value"
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/path = NodePath("Glint3:visible")
+tracks/18/interp = 0
+tracks/18/loop_wrap = false
+tracks/18/keys = {
+"times": PackedFloat32Array(0, 2.6656666, 2.699, 2.799, 2.8323333, 2.999),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, false, true, true, false, false]
+}
+tracks/19/type = "value"
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/path = NodePath("Glint3/Arms:visible")
+tracks/19/interp = 0
+tracks/19/loop_wrap = false
+tracks/19/keys = {
+"times": PackedFloat32Array(0, 2.6656666, 2.699, 2.7323334, 2.999),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, false, true, false, false]
+}
+tracks/20/type = "value"
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/path = NodePath("Glint3:position")
+tracks/20/interp = 0
+tracks/20/loop_wrap = false
+tracks/20/keys = {
+"times": PackedFloat32Array(0, 0.032333333, 0.06566667, 0.099, 0.13233334, 0.16566667, 0.199, 0.23233333, 0.26566666, 0.299, 0.33233333, 0.36566666, 0.399, 0.43233332, 0.46566668, 0.499, 0.5323333, 0.5656667, 0.599, 0.63233334, 0.66566664, 0.699, 0.73233336, 0.76566666, 0.799, 0.8323333, 0.8656667, 0.899, 0.93233335, 0.96566665, 0.999, 1.0323334, 1.0656667, 1.099, 1.1323333, 1.1656667, 1.199, 1.2323333, 1.2656667, 1.299, 1.3323333, 1.3656666, 1.399, 1.4323334, 1.4656667, 1.499, 1.5323334, 1.5656667, 1.599, 1.6323333, 1.6656667, 1.699, 1.7323333, 1.7656667, 1.799, 1.8323333, 1.8656666, 1.899, 1.9323334, 1.9656667, 1.999, 2.0323334, 2.0656667, 2.099, 2.1323333, 2.1656666, 2.199, 2.2323334, 2.2656667, 2.299, 2.3323333, 2.3656666, 2.399, 2.4323332, 2.4656668, 2.499, 2.5323334, 2.5656667, 2.599, 2.6323333, 2.6656666, 2.699, 2.7323334, 2.7656667, 2.799, 2.8323333, 2.8656666, 2.899, 2.9323332, 2.9656668, 2.999),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(-22.5, 13.5), Vector2(-20.5, 14.5), Vector2(-18.5, 15.5), Vector2(-16.5, 16.5), Vector2(-13.5, 16.5), Vector2(-11.5, 17.5), Vector2(-9.5, 17.5), Vector2(-6.5, 18.5), Vector2(-4.5, 18.5), Vector2(-1.5, 18.5), Vector2(1.5, 18.5), Vector2(3.5, 18.5), Vector2(6.5, 18.5), Vector2(8.5, 18.5), Vector2(11.5, 17.5), Vector2(13.5, 16.5), Vector2(15.5, 16.5), Vector2(18.5, 15.5), Vector2(20.5, 14.5), Vector2(22.5, 13.5), Vector2(23.5, 12.5), Vector2(25.5, 10.5), Vector2(26.5, 9.5), Vector2(28.5, 8.5), Vector2(29.5, 6.5), Vector2(30.5, 5.5), Vector2(30.5, 3.5), Vector2(31.5, 2.5), Vector2(31.5, 0.5), Vector2(31.5, -0.5), Vector2(31.5, -2.5), Vector2(30.5, -4.5), Vector2(29.5, -5.5), Vector2(29.5, -7.5), Vector2(27.5, -8.5), Vector2(26.5, -9.5), Vector2(25.5, -11.5), Vector2(23.5, -12.5), Vector2(21.5, -13.5), Vector2(19.5, -14.5), Vector2(17.5, -15.5), Vector2(15.5, -16.5), Vector2(13.5, -16.5), Vector2(10.5, -17.5), Vector2(8.5, -18.5), Vector2(5.5, -18.5), Vector2(3.5, -18.5), Vector2(0.5, -18.5), Vector2(-1.5, -18.5), Vector2(-4.5, -18.5), Vector2(-7.5, -18.5), Vector2(-9.5, -17.5), Vector2(-12.5, -17.5), Vector2(-14.5, -16.5), Vector2(-16.5, -15.5), Vector2(-18.5, -15.5), Vector2(-20.5, -14.5), Vector2(-22.5, -12.5), Vector2(-24.5, -11.5), Vector2(-25.5, -10.5), Vector2(-27.5, -9.5), Vector2(-28.5, -7.5), Vector2(-29.5, -6.5), Vector2(-30.5, -4.5), Vector2(-30.5, -3.5), Vector2(-31.5, -1.5), Vector2(-31.5, -0.5), Vector2(-31.5, 1.5), Vector2(-30.5, 2.5), Vector2(-30.5, 4.5), Vector2(-29.5, 5.5), Vector2(-21.5, -13.5), Vector2(-23.5, -12.5), Vector2(-25.5, -11.5), Vector2(-26.5, -9.5), Vector2(-27.5, -8.5), Vector2(-28.5, -7.5), Vector2(-29.5, -5.5), Vector2(-30.5, -4.5), Vector2(-30.5, -2.5), Vector2(-31.5, -1.5), Vector2(-31.5, 0.5), Vector2(-31.5, 2.5), Vector2(-30.5, 3.5), Vector2(-30.5, 5.5), Vector2(-29.5, 6.5), Vector2(-28.5, 8.5), Vector2(-27.5, 9.5), Vector2(-25.5, 10.5), Vector2(-24.5, 11.5), Vector2(-22.5, 13.5)]
+}
+tracks/21/type = "value"
+tracks/21/imported = false
+tracks/21/enabled = true
+tracks/21/path = NodePath("Glint3Light:position")
+tracks/21/interp = 0
+tracks/21/loop_wrap = false
+tracks/21/keys = {
+"times": PackedFloat32Array(0, 0.032333333, 0.06566667, 0.099, 0.13233334, 0.16566667, 0.199, 0.23233333, 0.26566666, 0.299, 0.33233333, 0.36566666, 0.399, 0.43233332, 0.46566668, 0.499, 0.5323333, 0.5656667, 0.599, 0.63233334, 0.66566664, 0.699, 0.73233336, 0.76566666, 0.799, 0.8323333, 0.8656667, 0.899, 0.93233335, 0.96566665, 0.999, 1.0323334, 1.0656667, 1.099, 1.1323333, 1.1656667, 1.199, 1.2323333, 1.2656667, 1.299, 1.3323333, 1.3656666, 1.399, 1.4323334, 1.4656667, 1.499, 1.5323334, 1.5656667, 1.599, 1.6323333, 1.6656667, 1.699, 1.7323333, 1.7656667, 1.799, 1.8323333, 1.8656666, 1.899, 1.9323334, 1.9656667, 1.999, 2.0323334, 2.0656667, 2.099, 2.1323333, 2.1656666, 2.199, 2.2323334, 2.2656667, 2.299, 2.3323333, 2.3656666, 2.399, 2.4323332, 2.4656668, 2.499, 2.5323334, 2.5656667, 2.599, 2.6323333, 2.6656666, 2.699, 2.7323334, 2.7656667, 2.799, 2.8323333, 2.8656666, 2.899, 2.9323332, 2.9656668, 2.999),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(-29.5, 6.5), Vector2(-27.5, 7.5), Vector2(-25.5, 8.5), Vector2(-23.5, 9.5), Vector2(-20.5, 9.5), Vector2(-18.5, 10.5), Vector2(-16.5, 10.5), Vector2(-13.5, 11.5), Vector2(-11.5, 11.5), Vector2(-8.5, 11.5), Vector2(-5.5, 11.5), Vector2(-3.5, 11.5), Vector2(-0.5, 11.5), Vector2(1.5, 11.5), Vector2(4.5, 10.5), Vector2(6.5, 9.5), Vector2(8.5, 9.5), Vector2(11.5, 8.5), Vector2(13.5, 7.5), Vector2(15.5, 6.5), Vector2(16.5, 5.5), Vector2(18.5, 3.5), Vector2(19.5, 2.5), Vector2(21.5, 1.5), Vector2(22.5, -0.5), Vector2(23.5, -1.5), Vector2(23.5, -3.5), Vector2(24.5, -4.5), Vector2(24.5, -6.5), Vector2(24.5, -7.5), Vector2(24.5, -9.5), Vector2(23.5, -11.5), Vector2(22.5, -12.5), Vector2(22.5, -14.5), Vector2(20.5, -15.5), Vector2(19.5, -16.5), Vector2(18.5, -18.5), Vector2(16.5, -19.5), Vector2(14.5, -20.5), Vector2(12.5, -21.5), Vector2(10.5, -22.5), Vector2(8.5, -23.5), Vector2(6.5, -23.5), Vector2(3.5, -24.5), Vector2(1.5, -25.5), Vector2(-1.5, -25.5), Vector2(-3.5, -25.5), Vector2(-6.5, -25.5), Vector2(-8.5, -25.5), Vector2(-11.5, -25.5), Vector2(-14.5, -25.5), Vector2(-16.5, -24.5), Vector2(-19.5, -24.5), Vector2(-21.5, -23.5), Vector2(-23.5, -22.5), Vector2(-25.5, -22.5), Vector2(-27.5, -21.5), Vector2(-29.5, -19.5), Vector2(-31.5, -18.5), Vector2(-32.5, -17.5), Vector2(-34.5, -16.5), Vector2(-35.5, -14.5), Vector2(-36.5, -13.5), Vector2(-37.5, -11.5), Vector2(-37.5, -10.5), Vector2(-38.5, -8.5), Vector2(-38.5, -7.5), Vector2(-38.5, -5.5), Vector2(-37.5, -4.5), Vector2(-37.5, -2.5), Vector2(-36.5, -1.5), Vector2(-28.5, -20.5), Vector2(-30.5, -19.5), Vector2(-32.5, -18.5), Vector2(-33.5, -16.5), Vector2(-34.5, -15.5), Vector2(-35.5, -14.5), Vector2(-36.5, -12.5), Vector2(-37.5, -11.5), Vector2(-37.5, -9.5), Vector2(-38.5, -8.5), Vector2(-38.5, -6.5), Vector2(-38.5, -4.5), Vector2(-37.5, -3.5), Vector2(-37.5, -1.5), Vector2(-36.5, -0.5), Vector2(-35.5, 1.5), Vector2(-34.5, 2.5), Vector2(-32.5, 3.5), Vector2(-31.5, 4.5), Vector2(-29.5, 6.5)]
+}
+tracks/22/type = "value"
+tracks/22/imported = false
+tracks/22/enabled = true
+tracks/22/path = NodePath("Glint3Light:material:shader_parameter/alpha")
+tracks/22/interp = 0
+tracks/22/loop_wrap = false
+tracks/22/keys = {
+"times": PackedFloat32Array(0, 2.6656666, 2.699, 2.7323334, 2.7656667, 2.799, 2.8323333, 2.999),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0.0, 0.0, 0.2715483462132265, 0.19559615143911982, 0.10886518237056118, 0.01613494787339908, 0.0, 0.0]
+}
+tracks/23/type = "value"
+tracks/23/imported = false
+tracks/23/enabled = true
+tracks/23/path = NodePath("Glint4:visible")
+tracks/23/interp = 0
+tracks/23/loop_wrap = false
+tracks/23/keys = {
+"times": PackedFloat32Array(0, 0.16566667, 0.199, 0.23233333, 0.26566666, 0.299, 0.43233332, 0.46566668, 2.999),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, false, true, false, false, true, true, false, false]
+}
+tracks/24/type = "value"
+tracks/24/imported = false
+tracks/24/enabled = true
+tracks/24/path = NodePath("Glint4/Arms:visible")
+tracks/24/interp = 0
+tracks/24/loop_wrap = false
+tracks/24/keys = {
+"times": PackedFloat32Array(0, 0.16566667, 0.199, 0.23233333, 0.26566666, 0.299, 0.399, 0.43233332, 2.999),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, false, true, false, false, true, true, false, false]
+}
+tracks/25/type = "value"
+tracks/25/imported = false
+tracks/25/enabled = true
+tracks/25/path = NodePath("Glint4:position")
+tracks/25/interp = 0
+tracks/25/loop_wrap = false
+tracks/25/keys = {
+"times": PackedFloat32Array(0, 0.032333333, 0.06566667, 0.099, 0.13233334, 0.16566667, 0.199, 0.23233333, 0.26566666, 0.299, 0.33233333, 0.36566666, 0.399, 0.43233332, 0.46566668, 0.499, 0.5323333, 0.5656667, 0.599, 0.63233334, 0.66566664, 0.699, 0.73233336, 0.76566666, 0.799, 0.8323333, 0.8656667, 0.899, 0.93233335, 0.96566665, 0.999, 1.0323334, 1.0656667, 1.099, 1.1323333, 1.1656667, 1.199, 1.2323333, 1.2656667, 1.299, 1.3323333, 1.3656666, 1.399, 1.4323334, 1.4656667, 1.499, 1.5323334, 1.5656667, 1.599, 1.6323333, 1.6656667, 1.699, 1.7323333, 1.7656667, 1.799, 1.8323333, 1.8656666, 1.899, 1.9323334, 1.9656667, 1.999, 2.0323334, 2.0656667, 2.099, 2.1323333, 2.1656666, 2.199, 2.2323334, 2.2656667, 2.299, 2.3323333, 2.3656666, 2.399, 2.4323332, 2.4656668, 2.499, 2.5323334, 2.5656667, 2.599, 2.6323333, 2.6656666, 2.699, 2.7323334, 2.7656667, 2.799, 2.8323333, 2.8656666, 2.899, 2.9323332, 2.9656668, 2.999),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(7.5, -27.5), Vector2(3.5, -27.5), Vector2(-0.5, -27.5), Vector2(-4.5, -27.5), Vector2(39.5, -14.5), Vector2(37.5, -16.5), Vector2(35.5, -17.5), Vector2(32.5, -19.5), Vector2(29.5, -21.5), Vector2(26.5, -22.5), Vector2(23.5, -23.5), Vector2(20.5, -24.5), Vector2(16.5, -25.5), Vector2(13.5, -26.5), Vector2(9.5, -27.5), Vector2(5.5, -27.5), Vector2(1.5, -27.5), Vector2(-2.5, -27.5), Vector2(-6.5, -27.5), Vector2(-9.5, -27.5), Vector2(-13.5, -26.5), Vector2(-17.5, -25.5), Vector2(-20.5, -24.5), Vector2(-24.5, -23.5), Vector2(-27.5, -22.5), Vector2(-30.5, -20.5), Vector2(-33.5, -19.5), Vector2(-35.5, -17.5), Vector2(-38.5, -15.5), Vector2(-40.5, -13.5), Vector2(-41.5, -11.5), Vector2(-43.5, -9.5), Vector2(-44.5, -7.5), Vector2(-45.5, -5.5), Vector2(-46.5, -2.5), Vector2(-46.5, -0.5), Vector2(-46.5, 1.5), Vector2(-45.5, 3.5), Vector2(-45.5, 6.5), Vector2(-44.5, 8.5), Vector2(-42.5, 10.5), Vector2(-41.5, 12.5), Vector2(-39.5, 14.5), Vector2(-37.5, 16.5), Vector2(-34.5, 18.5), Vector2(-31.5, 20.5), Vector2(-29.5, 21.5), Vector2(-25.5, 23.5), Vector2(-22.5, 24.5), Vector2(-19.5, 25.5), Vector2(-15.5, 26.5), Vector2(-11.5, 26.5), Vector2(-8.5, 27.5), Vector2(-4.5, 27.5), Vector2(-0.5, 27.5), Vector2(3.5, 27.5), Vector2(7.5, 27.5), Vector2(10.5, 26.5), Vector2(14.5, 26.5), Vector2(18.5, 25.5), Vector2(21.5, 24.5), Vector2(25.5, 23.5), Vector2(28.5, 22.5), Vector2(31.5, 20.5), Vector2(33.5, 18.5), Vector2(36.5, 17.5), Vector2(38.5, 15.5), Vector2(40.5, 13.5), Vector2(42.5, 11.5), Vector2(43.5, 9.5), Vector2(44.5, 6.5), Vector2(45.5, 4.5), Vector2(46.5, 2.5), Vector2(46.5, -0.5), Vector2(46.5, -2.5), Vector2(45.5, -4.5), Vector2(44.5, -6.5), Vector2(43.5, -9.5), Vector2(42.5, -11.5), Vector2(40.5, -13.5), Vector2(38.5, -15.5), Vector2(36.5, -17.5), Vector2(33.5, -18.5), Vector2(31.5, -20.5), Vector2(28.5, -22.5), Vector2(24.5, -23.5), Vector2(21.5, -24.5), Vector2(18.5, -25.5), Vector2(14.5, -26.5), Vector2(10.5, -27.5), Vector2(7.5, -27.5)]
+}
+tracks/26/type = "value"
+tracks/26/imported = false
+tracks/26/enabled = true
+tracks/26/path = NodePath("Glint4Light:position")
+tracks/26/interp = 0
+tracks/26/loop_wrap = false
+tracks/26/keys = {
+"times": PackedFloat32Array(0, 0.032333333, 0.06566667, 0.099, 0.13233334, 0.16566667, 0.199, 0.23233333, 0.26566666, 0.299, 0.33233333, 0.36566666, 0.399, 0.43233332, 0.46566668, 0.499, 0.5323333, 0.5656667, 0.599, 0.63233334, 0.66566664, 0.699, 0.73233336, 0.76566666, 0.799, 0.8323333, 0.8656667, 0.899, 0.93233335, 0.96566665, 0.999, 1.0323334, 1.0656667, 1.099, 1.1323333, 1.1656667, 1.199, 1.2323333, 1.2656667, 1.299, 1.3323333, 1.3656666, 1.399, 1.4323334, 1.4656667, 1.499, 1.5323334, 1.5656667, 1.599, 1.6323333, 1.6656667, 1.699, 1.7323333, 1.7656667, 1.799, 1.8323333, 1.8656666, 1.899, 1.9323334, 1.9656667, 1.999, 2.0323334, 2.0656667, 2.099, 2.1323333, 2.1656666, 2.199, 2.2323334, 2.2656667, 2.299, 2.3323333, 2.3656666, 2.399, 2.4323332, 2.4656668, 2.499, 2.5323334, 2.5656667, 2.599, 2.6323333, 2.6656666, 2.699, 2.7323334, 2.7656667, 2.799, 2.8323333, 2.8656666, 2.899, 2.9323332, 2.9656668, 2.999),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(0.5, -34.5), Vector2(-3.5, -34.5), Vector2(-7.5, -34.5), Vector2(-11.5, -34.5), Vector2(32.5, -21.5), Vector2(30.5, -23.5), Vector2(28.5, -24.5), Vector2(25.5, -26.5), Vector2(22.5, -28.5), Vector2(19.5, -29.5), Vector2(16.5, -30.5), Vector2(13.5, -31.5), Vector2(9.5, -32.5), Vector2(6.5, -33.5), Vector2(2.5, -34.5), Vector2(-1.5, -34.5), Vector2(-5.5, -34.5), Vector2(-9.5, -34.5), Vector2(-13.5, -34.5), Vector2(-16.5, -34.5), Vector2(-20.5, -33.5), Vector2(-24.5, -32.5), Vector2(-27.5, -31.5), Vector2(-31.5, -30.5), Vector2(-34.5, -29.5), Vector2(-37.5, -27.5), Vector2(-40.5, -26.5), Vector2(-42.5, -24.5), Vector2(-45.5, -22.5), Vector2(-47.5, -20.5), Vector2(-48.5, -18.5), Vector2(-50.5, -16.5), Vector2(-51.5, -14.5), Vector2(-52.5, -12.5), Vector2(-53.5, -9.5), Vector2(-53.5, -7.5), Vector2(-53.5, -5.5), Vector2(-52.5, -3.5), Vector2(-52.5, -0.5), Vector2(-51.5, 1.5), Vector2(-49.5, 3.5), Vector2(-48.5, 5.5), Vector2(-46.5, 7.5), Vector2(-44.5, 9.5), Vector2(-41.5, 11.5), Vector2(-38.5, 13.5), Vector2(-36.5, 14.5), Vector2(-32.5, 16.5), Vector2(-29.5, 17.5), Vector2(-26.5, 18.5), Vector2(-22.5, 19.5), Vector2(-18.5, 19.5), Vector2(-15.5, 20.5), Vector2(-11.5, 20.5), Vector2(-7.5, 20.5), Vector2(-3.5, 20.5), Vector2(0.5, 20.5), Vector2(3.5, 19.5), Vector2(7.5, 19.5), Vector2(11.5, 18.5), Vector2(14.5, 17.5), Vector2(18.5, 16.5), Vector2(21.5, 15.5), Vector2(24.5, 13.5), Vector2(26.5, 11.5), Vector2(29.5, 10.5), Vector2(31.5, 8.5), Vector2(33.5, 6.5), Vector2(35.5, 4.5), Vector2(36.5, 2.5), Vector2(37.5, -0.5), Vector2(38.5, -2.5), Vector2(39.5, -4.5), Vector2(39.5, -7.5), Vector2(39.5, -9.5), Vector2(38.5, -11.5), Vector2(37.5, -13.5), Vector2(36.5, -16.5), Vector2(35.5, -18.5), Vector2(33.5, -20.5), Vector2(31.5, -22.5), Vector2(29.5, -24.5), Vector2(26.5, -25.5), Vector2(24.5, -27.5), Vector2(21.5, -29.5), Vector2(17.5, -30.5), Vector2(14.5, -31.5), Vector2(11.5, -32.5), Vector2(7.5, -33.5), Vector2(3.5, -34.5), Vector2(0.5, -34.5)]
+}
+tracks/27/type = "value"
+tracks/27/imported = false
+tracks/27/enabled = true
+tracks/27/path = NodePath("Glint4Light:material:shader_parameter/alpha")
+tracks/27/interp = 0
+tracks/27/loop_wrap = false
+tracks/27/keys = {
+"times": PackedFloat32Array(0, 0.16566667, 0.199, 0.23233333, 0.26566666, 0.299, 0.33233333, 0.36566666, 0.399, 0.43233332, 0.46566668, 2.999),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0.0, 0.0, 0.27162850699376906, 0.0, 0.0, 0.39872417438656016, 0.37127452906076236, 0.3103528398525173, 0.22145146698306012, 0.11258526313141569, 0.0, 0.0]
+}
+tracks/28/type = "value"
+tracks/28/imported = false
+tracks/28/enabled = true
+tracks/28/path = NodePath("Glint5:visible")
+tracks/28/interp = 0
+tracks/28/loop_wrap = false
+tracks/28/keys = {
+"times": PackedFloat32Array(0, 2.999),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, false]
+}
+tracks/29/type = "value"
+tracks/29/imported = false
+tracks/29/enabled = true
+tracks/29/path = NodePath("Glint5/Arms:visible")
+tracks/29/interp = 0
+tracks/29/loop_wrap = false
+tracks/29/keys = {
+"times": PackedFloat32Array(0, 2.999),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, false]
+}
+tracks/30/type = "value"
+tracks/30/imported = false
+tracks/30/enabled = true
+tracks/30/path = NodePath("Glint5:position")
+tracks/30/interp = 0
+tracks/30/loop_wrap = false
+tracks/30/keys = {
+"times": PackedFloat32Array(0, 0.032333333, 0.06566667, 0.099, 0.13233334, 0.16566667, 0.199, 0.23233333, 0.26566666, 0.299, 0.33233333, 0.36566666, 0.399, 0.43233332, 0.46566668, 0.499, 0.5323333, 0.5656667, 0.599, 0.63233334, 0.66566664, 0.699, 0.73233336, 0.76566666, 0.799, 0.8323333, 0.8656667, 0.899, 0.93233335, 0.96566665, 0.999, 1.0323334, 1.0656667, 1.099, 1.1323333, 1.1656667, 1.199, 1.2323333, 1.2656667, 1.299, 1.3323333, 1.3656666, 1.399, 1.4323334, 1.4656667, 1.499, 1.5323334, 1.5656667, 1.599, 1.6323333, 1.6656667, 1.699, 1.7323333, 1.7656667, 1.799, 1.8323333, 1.8656666, 1.899, 1.9323334, 1.9656667, 1.999, 2.0323334, 2.0656667, 2.099, 2.1323333, 2.1656666, 2.199, 2.2323334, 2.2656667, 2.299, 2.3323333, 2.3656666, 2.399, 2.4323332, 2.4656668, 2.499, 2.5323334, 2.5656667, 2.599, 2.6323333, 2.6656666, 2.699, 2.7323334, 2.7656667, 2.799, 2.8323333, 2.8656666, 2.899, 2.9323332, 2.9656668, 2.999),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(18.5, 8.5), Vector2(19.5, 8.5), Vector2(21.5, 6.5), Vector2(21.5, 5.5), Vector2(22.5, 4.5), Vector2(23.5, 3.5), Vector2(23.5, 2.5), Vector2(23.5, 1.5), Vector2(24.5, 0.5), Vector2(23.5, -1.5), Vector2(23.5, -2.5), Vector2(23.5, -3.5), Vector2(22.5, -4.5), Vector2(16.5, 10.5), Vector2(18.5, 9.5), Vector2(19.5, 8.5), Vector2(20.5, 7.5), Vector2(21.5, 6.5), Vector2(22.5, 5.5), Vector2(22.5, 4.5), Vector2(23.5, 3.5), Vector2(23.5, 1.5), Vector2(24.5, 0.5), Vector2(24.5, -0.5), Vector2(23.5, -1.5), Vector2(23.5, -2.5), Vector2(23.5, -3.5), Vector2(22.5, -5.5), Vector2(21.5, -6.5), Vector2(20.5, -7.5), Vector2(19.5, -8.5), Vector2(18.5, -9.5), Vector2(17.5, -10.5), Vector2(15.5, -10.5), Vector2(14.5, -11.5), Vector2(12.5, -12.5), Vector2(10.5, -12.5), Vector2(8.5, -13.5), Vector2(6.5, -13.5), Vector2(5.5, -14.5), Vector2(3.5, -14.5), Vector2(1.5, -14.5), Vector2(-0.5, -14.5), Vector2(-2.5, -14.5), Vector2(-4.5, -14.5), Vector2(-6.5, -13.5), Vector2(-8.5, -13.5), Vector2(-10.5, -12.5), Vector2(-12.5, -12.5), Vector2(-14.5, -11.5), Vector2(-15.5, -10.5), Vector2(-17.5, -10.5), Vector2(-18.5, -9.5), Vector2(-19.5, -8.5), Vector2(-20.5, -7.5), Vector2(-21.5, -6.5), Vector2(-22.5, -5.5), Vector2(-23.5, -3.5), Vector2(-23.5, -2.5), Vector2(-23.5, -1.5), Vector2(-24.5, -0.5), Vector2(-24.5, 0.5), Vector2(-23.5, 1.5), Vector2(-23.5, 3.5), Vector2(-22.5, 4.5), Vector2(-22.5, 5.5), Vector2(-21.5, 6.5), Vector2(-20.5, 7.5), Vector2(-19.5, 8.5), Vector2(-18.5, 9.5), Vector2(-16.5, 10.5), Vector2(-15.5, 11.5), Vector2(-13.5, 11.5), Vector2(-11.5, 12.5), Vector2(-10.5, 13.5), Vector2(-8.5, 13.5), Vector2(-6.5, 13.5), Vector2(-4.5, 14.5), Vector2(-2.5, 14.5), Vector2(-0.5, 14.5), Vector2(1.5, 14.5), Vector2(3.5, 14.5), Vector2(5.5, 14.5), Vector2(7.5, 13.5), Vector2(9.5, 13.5), Vector2(11.5, 12.5), Vector2(12.5, 12.5), Vector2(14.5, 11.5), Vector2(16.5, 10.5), Vector2(17.5, 9.5), Vector2(18.5, 8.5)]
+}
+tracks/31/type = "value"
+tracks/31/imported = false
+tracks/31/enabled = true
+tracks/31/path = NodePath("Glint5Light:position")
+tracks/31/interp = 0
+tracks/31/loop_wrap = false
+tracks/31/keys = {
+"times": PackedFloat32Array(0, 0.032333333, 0.06566667, 0.099, 0.13233334, 0.16566667, 0.199, 0.23233333, 0.26566666, 0.299, 0.33233333, 0.36566666, 0.399, 0.43233332, 0.46566668, 0.499, 0.5323333, 0.5656667, 0.599, 0.63233334, 0.66566664, 0.699, 0.73233336, 0.76566666, 0.799, 0.8323333, 0.8656667, 0.899, 0.93233335, 0.96566665, 0.999, 1.0323334, 1.0656667, 1.099, 1.1323333, 1.1656667, 1.199, 1.2323333, 1.2656667, 1.299, 1.3323333, 1.3656666, 1.399, 1.4323334, 1.4656667, 1.499, 1.5323334, 1.5656667, 1.599, 1.6323333, 1.6656667, 1.699, 1.7323333, 1.7656667, 1.799, 1.8323333, 1.8656666, 1.899, 1.9323334, 1.9656667, 1.999, 2.0323334, 2.0656667, 2.099, 2.1323333, 2.1656666, 2.199, 2.2323334, 2.2656667, 2.299, 2.3323333, 2.3656666, 2.399, 2.4323332, 2.4656668, 2.499, 2.5323334, 2.5656667, 2.599, 2.6323333, 2.6656666, 2.699, 2.7323334, 2.7656667, 2.799, 2.8323333, 2.8656666, 2.899, 2.9323332, 2.9656668, 2.999),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(11.5, 1.5), Vector2(12.5, 1.5), Vector2(14.5, -0.5), Vector2(14.5, -1.5), Vector2(15.5, -2.5), Vector2(16.5, -3.5), Vector2(16.5, -4.5), Vector2(16.5, -5.5), Vector2(17.5, -6.5), Vector2(16.5, -8.5), Vector2(16.5, -9.5), Vector2(16.5, -10.5), Vector2(15.5, -11.5), Vector2(9.5, 3.5), Vector2(11.5, 2.5), Vector2(12.5, 1.5), Vector2(13.5, 0.5), Vector2(14.5, -0.5), Vector2(15.5, -1.5), Vector2(15.5, -2.5), Vector2(16.5, -3.5), Vector2(16.5, -5.5), Vector2(17.5, -6.5), Vector2(17.5, -7.5), Vector2(16.5, -8.5), Vector2(16.5, -9.5), Vector2(16.5, -10.5), Vector2(15.5, -12.5), Vector2(14.5, -13.5), Vector2(13.5, -14.5), Vector2(12.5, -15.5), Vector2(11.5, -16.5), Vector2(10.5, -17.5), Vector2(8.5, -17.5), Vector2(7.5, -18.5), Vector2(5.5, -19.5), Vector2(3.5, -19.5), Vector2(1.5, -20.5), Vector2(-0.5, -20.5), Vector2(-1.5, -21.5), Vector2(-3.5, -21.5), Vector2(-5.5, -21.5), Vector2(-7.5, -21.5), Vector2(-9.5, -21.5), Vector2(-11.5, -21.5), Vector2(-13.5, -20.5), Vector2(-15.5, -20.5), Vector2(-17.5, -19.5), Vector2(-19.5, -19.5), Vector2(-21.5, -18.5), Vector2(-22.5, -17.5), Vector2(-24.5, -17.5), Vector2(-25.5, -16.5), Vector2(-26.5, -15.5), Vector2(-27.5, -14.5), Vector2(-28.5, -13.5), Vector2(-29.5, -12.5), Vector2(-30.5, -10.5), Vector2(-30.5, -9.5), Vector2(-30.5, -8.5), Vector2(-31.5, -7.5), Vector2(-31.5, -6.5), Vector2(-30.5, -5.5), Vector2(-30.5, -3.5), Vector2(-29.5, -2.5), Vector2(-29.5, -1.5), Vector2(-28.5, -0.5), Vector2(-27.5, 0.5), Vector2(-26.5, 1.5), Vector2(-25.5, 2.5), Vector2(-23.5, 3.5), Vector2(-22.5, 4.5), Vector2(-20.5, 4.5), Vector2(-18.5, 5.5), Vector2(-17.5, 6.5), Vector2(-15.5, 6.5), Vector2(-13.5, 6.5), Vector2(-11.5, 7.5), Vector2(-9.5, 7.5), Vector2(-7.5, 7.5), Vector2(-5.5, 7.5), Vector2(-3.5, 7.5), Vector2(-1.5, 7.5), Vector2(0.5, 6.5), Vector2(2.5, 6.5), Vector2(4.5, 5.5), Vector2(5.5, 5.5), Vector2(7.5, 4.5), Vector2(9.5, 3.5), Vector2(10.5, 2.5), Vector2(11.5, 1.5)]
+}
+tracks/32/type = "value"
+tracks/32/imported = false
+tracks/32/enabled = true
+tracks/32/path = NodePath("Glint5Light:material:shader_parameter/alpha")
+tracks/32/interp = 0
+tracks/32/loop_wrap = false
+tracks/32/keys = {
+"times": PackedFloat32Array(0, 2.999),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0.0, 0.0]
+}
+tracks/33/type = "value"
+tracks/33/imported = false
+tracks/33/enabled = true
+tracks/33/path = NodePath("Glint6:visible")
+tracks/33/interp = 0
+tracks/33/loop_wrap = false
+tracks/33/keys = {
+"times": PackedFloat32Array(0, 2.999),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, false]
+}
+tracks/34/type = "value"
+tracks/34/imported = false
+tracks/34/enabled = true
+tracks/34/path = NodePath("Glint6/Arms:visible")
+tracks/34/interp = 0
+tracks/34/loop_wrap = false
+tracks/34/keys = {
+"times": PackedFloat32Array(0, 2.999),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, false]
+}
+tracks/35/type = "value"
+tracks/35/imported = false
+tracks/35/enabled = true
+tracks/35/path = NodePath("Glint6:position")
+tracks/35/interp = 0
+tracks/35/loop_wrap = false
+tracks/35/keys = {
+"times": PackedFloat32Array(0, 0.032333333, 0.06566667, 0.099, 0.13233334, 0.16566667, 0.199, 0.23233333, 0.26566666, 0.299, 0.33233333, 0.36566666, 0.399, 0.43233332, 0.46566668, 0.499, 0.5323333, 0.5656667, 0.599, 0.63233334, 0.66566664, 0.699, 0.73233336, 0.76566666, 0.799, 0.8323333, 0.8656667, 0.899, 0.93233335, 0.96566665, 0.999, 1.0323334, 1.0656667, 1.099, 1.1323333, 1.1656667, 1.199, 1.2323333, 1.2656667, 1.299, 1.3323333, 1.3656666, 1.399, 1.4323334, 1.4656667, 1.499, 1.5323334, 1.5656667, 1.599, 1.6323333, 1.6656667, 1.699, 1.7323333, 1.7656667, 1.799, 1.8323333, 1.8656666, 1.899, 1.9323334, 1.9656667, 1.999, 2.0323334, 2.0656667, 2.099, 2.1323333, 2.1656666, 2.199, 2.2323334, 2.2656667, 2.299, 2.3323333, 2.3656666, 2.399, 2.4323332, 2.4656668, 2.499, 2.5323334, 2.5656667, 2.599, 2.6323333, 2.6656666, 2.699, 2.7323334, 2.7656667, 2.799, 2.8323333, 2.8656666, 2.899, 2.9323332, 2.9656668, 2.999),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(21.5, 7.5), Vector2(22.5, 6.5), Vector2(22.5, 5.5), Vector2(23.5, 4.5), Vector2(23.5, 2.5), Vector2(24.5, 1.5), Vector2(24.5, 0.5), Vector2(24.5, -0.5), Vector2(24.5, -2.5), Vector2(23.5, -3.5), Vector2(23.5, -4.5), Vector2(22.5, -5.5), Vector2(21.5, -6.5), Vector2(19.5, 8.5), Vector2(20.5, 7.5), Vector2(21.5, 6.5), Vector2(22.5, 5.5), Vector2(23.5, 4.5), Vector2(23.5, 3.5), Vector2(24.5, 2.5), Vector2(24.5, 1.5), Vector2(24.5, -0.5), Vector2(24.5, -1.5), Vector2(24.5, -2.5), Vector2(23.5, -3.5), Vector2(22.5, -4.5), Vector2(22.5, -6.5), Vector2(21.5, -7.5), Vector2(20.5, -8.5), Vector2(19.5, -9.5), Vector2(17.5, -10.5), Vector2(16.5, -10.5), Vector2(14.5, -11.5), Vector2(13.5, -12.5), Vector2(11.5, -12.5), Vector2(9.5, -13.5), Vector2(7.5, -13.5), Vector2(5.5, -14.5), Vector2(3.5, -14.5), Vector2(1.5, -14.5), Vector2(-0.5, -14.5), Vector2(-2.5, -14.5), Vector2(-4.5, -14.5), Vector2(-6.5, -14.5), Vector2(-8.5, -13.5), Vector2(-10.5, -13.5), Vector2(-12.5, -12.5), Vector2(-13.5, -12.5), Vector2(-15.5, -11.5), Vector2(-16.5, -10.5), Vector2(-18.5, -9.5), Vector2(-19.5, -8.5), Vector2(-20.5, -7.5), Vector2(-21.5, -6.5), Vector2(-22.5, -5.5), Vector2(-23.5, -4.5), Vector2(-23.5, -3.5), Vector2(-24.5, -1.5), Vector2(-24.5, -0.5), Vector2(-24.5, 0.5), Vector2(-24.5, 1.5), Vector2(-23.5, 2.5), Vector2(-23.5, 4.5), Vector2(-22.5, 5.5), Vector2(-21.5, 6.5), Vector2(-21.5, 7.5), Vector2(-19.5, 8.5), Vector2(-18.5, 9.5), Vector2(-17.5, 10.5), Vector2(-15.5, 11.5), Vector2(-14.5, 11.5), Vector2(-12.5, 12.5), Vector2(-10.5, 13.5), Vector2(-8.5, 13.5), Vector2(-6.5, 14.5), Vector2(-4.5, 14.5), Vector2(-2.5, 14.5), Vector2(-0.5, 14.5), Vector2(1.5, 14.5), Vector2(3.5, 14.5), Vector2(5.5, 14.5), Vector2(7.5, 14.5), Vector2(8.5, 13.5), Vector2(10.5, 13.5), Vector2(12.5, 12.5), Vector2(14.5, 11.5), Vector2(15.5, 11.5), Vector2(17.5, 10.5), Vector2(18.5, 9.5), Vector2(19.5, 8.5), Vector2(21.5, 7.5)]
+}
+tracks/36/type = "value"
+tracks/36/imported = false
+tracks/36/enabled = true
+tracks/36/path = NodePath("Glint6Light:position")
+tracks/36/interp = 0
+tracks/36/loop_wrap = false
+tracks/36/keys = {
+"times": PackedFloat32Array(0, 0.032333333, 0.06566667, 0.099, 0.13233334, 0.16566667, 0.199, 0.23233333, 0.26566666, 0.299, 0.33233333, 0.36566666, 0.399, 0.43233332, 0.46566668, 0.499, 0.5323333, 0.5656667, 0.599, 0.63233334, 0.66566664, 0.699, 0.73233336, 0.76566666, 0.799, 0.8323333, 0.8656667, 0.899, 0.93233335, 0.96566665, 0.999, 1.0323334, 1.0656667, 1.099, 1.1323333, 1.1656667, 1.199, 1.2323333, 1.2656667, 1.299, 1.3323333, 1.3656666, 1.399, 1.4323334, 1.4656667, 1.499, 1.5323334, 1.5656667, 1.599, 1.6323333, 1.6656667, 1.699, 1.7323333, 1.7656667, 1.799, 1.8323333, 1.8656666, 1.899, 1.9323334, 1.9656667, 1.999, 2.0323334, 2.0656667, 2.099, 2.1323333, 2.1656666, 2.199, 2.2323334, 2.2656667, 2.299, 2.3323333, 2.3656666, 2.399, 2.4323332, 2.4656668, 2.499, 2.5323334, 2.5656667, 2.599, 2.6323333, 2.6656666, 2.699, 2.7323334, 2.7656667, 2.799, 2.8323333, 2.8656666, 2.899, 2.9323332, 2.9656668, 2.999),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(14.5, 0.5), Vector2(15.5, -0.5), Vector2(15.5, -1.5), Vector2(16.5, -2.5), Vector2(16.5, -4.5), Vector2(17.5, -5.5), Vector2(17.5, -6.5), Vector2(17.5, -7.5), Vector2(17.5, -9.5), Vector2(16.5, -10.5), Vector2(16.5, -11.5), Vector2(15.5, -12.5), Vector2(14.5, -13.5), Vector2(12.5, 1.5), Vector2(13.5, 0.5), Vector2(14.5, -0.5), Vector2(15.5, -1.5), Vector2(16.5, -2.5), Vector2(16.5, -3.5), Vector2(17.5, -4.5), Vector2(17.5, -5.5), Vector2(17.5, -7.5), Vector2(17.5, -8.5), Vector2(17.5, -9.5), Vector2(16.5, -10.5), Vector2(15.5, -11.5), Vector2(15.5, -13.5), Vector2(14.5, -14.5), Vector2(13.5, -15.5), Vector2(12.5, -16.5), Vector2(10.5, -17.5), Vector2(9.5, -17.5), Vector2(7.5, -18.5), Vector2(6.5, -19.5), Vector2(4.5, -19.5), Vector2(2.5, -20.5), Vector2(0.5, -20.5), Vector2(-1.5, -21.5), Vector2(-3.5, -21.5), Vector2(-5.5, -21.5), Vector2(-7.5, -21.5), Vector2(-9.5, -21.5), Vector2(-11.5, -21.5), Vector2(-13.5, -21.5), Vector2(-15.5, -20.5), Vector2(-17.5, -20.5), Vector2(-19.5, -19.5), Vector2(-20.5, -19.5), Vector2(-22.5, -18.5), Vector2(-23.5, -17.5), Vector2(-25.5, -16.5), Vector2(-26.5, -15.5), Vector2(-27.5, -14.5), Vector2(-28.5, -13.5), Vector2(-29.5, -12.5), Vector2(-30.5, -11.5), Vector2(-30.5, -10.5), Vector2(-31.5, -8.5), Vector2(-31.5, -7.5), Vector2(-31.5, -6.5), Vector2(-31.5, -5.5), Vector2(-30.5, -4.5), Vector2(-30.5, -2.5), Vector2(-29.5, -1.5), Vector2(-28.5, -0.5), Vector2(-28.5, 0.5), Vector2(-26.5, 1.5), Vector2(-25.5, 2.5), Vector2(-24.5, 3.5), Vector2(-22.5, 4.5), Vector2(-21.5, 4.5), Vector2(-19.5, 5.5), Vector2(-17.5, 6.5), Vector2(-15.5, 6.5), Vector2(-13.5, 7.5), Vector2(-11.5, 7.5), Vector2(-9.5, 7.5), Vector2(-7.5, 7.5), Vector2(-5.5, 7.5), Vector2(-3.5, 7.5), Vector2(-1.5, 7.5), Vector2(0.5, 7.5), Vector2(1.5, 6.5), Vector2(3.5, 6.5), Vector2(5.5, 5.5), Vector2(7.5, 4.5), Vector2(8.5, 4.5), Vector2(10.5, 3.5), Vector2(11.5, 2.5), Vector2(12.5, 1.5), Vector2(14.5, 0.5)]
+}
+tracks/37/type = "value"
+tracks/37/imported = false
+tracks/37/enabled = true
+tracks/37/path = NodePath("Glint6Light:material:shader_parameter/alpha")
+tracks/37/interp = 0
+tracks/37/loop_wrap = false
+tracks/37/keys = {
+"times": PackedFloat32Array(0, 2.999),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0.0, 0.0]
+}
+tracks/38/type = "value"
+tracks/38/imported = false
+tracks/38/enabled = true
+tracks/38/path = NodePath("Glint7:visible")
+tracks/38/interp = 0
+tracks/38/loop_wrap = false
+tracks/38/keys = {
+"times": PackedFloat32Array(0, 2.999),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, false]
+}
+tracks/39/type = "value"
+tracks/39/imported = false
+tracks/39/enabled = true
+tracks/39/path = NodePath("Glint7/Arms:visible")
+tracks/39/interp = 0
+tracks/39/loop_wrap = false
+tracks/39/keys = {
+"times": PackedFloat32Array(0, 2.999),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, false]
+}
+tracks/40/type = "value"
+tracks/40/imported = false
+tracks/40/enabled = true
+tracks/40/path = NodePath("Glint7:position")
+tracks/40/interp = 0
+tracks/40/loop_wrap = false
+tracks/40/keys = {
+"times": PackedFloat32Array(0, 0.032333333, 0.06566667, 0.099, 0.13233334, 0.16566667, 0.199, 0.23233333, 0.26566666, 0.299, 0.33233333, 0.36566666, 0.399, 0.43233332, 0.46566668, 0.499, 0.5323333, 0.5656667, 0.599, 0.63233334, 0.66566664, 0.699, 0.73233336, 0.76566666, 0.799, 0.8323333, 0.8656667, 0.899, 0.93233335, 0.96566665, 0.999, 1.0323334, 1.0656667, 1.099, 1.1323333, 1.1656667, 1.199, 1.2323333, 1.2656667, 1.299, 1.3323333, 1.3656666, 1.399, 1.4323334, 1.4656667, 1.499, 1.5323334, 1.5656667, 1.599, 1.6323333, 1.6656667, 1.699, 1.7323333, 1.7656667, 1.799, 1.8323333, 1.8656666, 1.899, 1.9323334, 1.9656667, 1.999, 2.0323334, 2.0656667, 2.099, 2.1323333, 2.1656666, 2.199, 2.2323334, 2.2656667, 2.299, 2.3323333, 2.3656666, 2.399, 2.4323332, 2.4656668, 2.499, 2.5323334, 2.5656667, 2.599, 2.6323333, 2.6656666, 2.699, 2.7323334, 2.7656667, 2.799, 2.8323333, 2.8656666, 2.899, 2.9323332, 2.9656668, 2.999),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(27.5, 12.5), Vector2(28.5, 10.5), Vector2(30.5, 9.5), Vector2(31.5, 7.5), Vector2(32.5, 6.5), Vector2(33.5, 4.5), Vector2(33.5, 2.5), Vector2(33.5, 1.5), Vector2(34.5, -0.5), Vector2(33.5, -2.5), Vector2(33.5, -3.5), Vector2(32.5, -5.5), Vector2(31.5, -7.5), Vector2(30.5, -8.5), Vector2(29.5, -10.5), Vector2(28.5, -11.5), Vector2(26.5, -12.5), Vector2(24.5, -14.5), Vector2(22.5, -15.5), Vector2(20.5, -16.5), Vector2(17.5, -17.5), Vector2(15.5, -18.5), Vector2(12.5, -18.5), Vector2(10.5, -19.5), Vector2(7.5, -19.5), Vector2(4.5, -20.5), Vector2(1.5, -20.5), Vector2(-1.5, -20.5), Vector2(-3.5, -20.5), Vector2(-6.5, -20.5), Vector2(-9.5, -19.5), Vector2(-12.5, -19.5), Vector2(-14.5, -18.5), Vector2(-17.5, -17.5), Vector2(-19.5, -16.5), Vector2(-21.5, -15.5), Vector2(-24.5, -14.5), Vector2(-25.5, -13.5), Vector2(-27.5, -11.5), Vector2(-29.5, -10.5), Vector2(-30.5, -8.5), Vector2(-31.5, -7.5), Vector2(-32.5, -5.5), Vector2(-33.5, -4.5), Vector2(-33.5, -2.5), Vector2(-34.5, -0.5), Vector2(-34.5, 0.5), Vector2(-33.5, 2.5), Vector2(-33.5, 4.5), Vector2(-32.5, 5.5), Vector2(-31.5, 7.5), Vector2(-30.5, 9.5), Vector2(-29.5, 10.5), Vector2(-27.5, 12.5), Vector2(-25.5, 13.5), Vector2(-23.5, 14.5), Vector2(-21.5, 15.5), Vector2(-19.5, 16.5), Vector2(-17.5, 17.5), Vector2(-14.5, 18.5), Vector2(-11.5, 19.5), Vector2(-9.5, 19.5), Vector2(-6.5, 20.5), Vector2(-3.5, 20.5), Vector2(-0.5, 20.5), Vector2(1.5, 20.5), Vector2(4.5, 20.5), Vector2(7.5, 19.5), Vector2(10.5, 19.5), Vector2(12.5, 18.5), Vector2(15.5, 18.5), Vector2(18.5, 17.5), Vector2(20.5, 16.5), Vector2(22.5, 15.5), Vector2(24.5, 14.5), Vector2(26.5, 12.5), Vector2(28.5, 11.5), Vector2(29.5, 10.5), Vector2(30.5, 8.5), Vector2(32.5, 6.5), Vector2(32.5, 5.5), Vector2(33.5, 3.5), Vector2(33.5, 1.5), Vector2(11.5, 19.5), Vector2(14.5, 18.5), Vector2(16.5, 17.5), Vector2(18.5, 16.5), Vector2(21.5, 15.5), Vector2(23.5, 14.5), Vector2(25.5, 13.5), Vector2(27.5, 12.5)]
+}
+tracks/41/type = "value"
+tracks/41/imported = false
+tracks/41/enabled = true
+tracks/41/path = NodePath("Glint7Light:position")
+tracks/41/interp = 0
+tracks/41/loop_wrap = false
+tracks/41/keys = {
+"times": PackedFloat32Array(0, 0.032333333, 0.06566667, 0.099, 0.13233334, 0.16566667, 0.199, 0.23233333, 0.26566666, 0.299, 0.33233333, 0.36566666, 0.399, 0.43233332, 0.46566668, 0.499, 0.5323333, 0.5656667, 0.599, 0.63233334, 0.66566664, 0.699, 0.73233336, 0.76566666, 0.799, 0.8323333, 0.8656667, 0.899, 0.93233335, 0.96566665, 0.999, 1.0323334, 1.0656667, 1.099, 1.1323333, 1.1656667, 1.199, 1.2323333, 1.2656667, 1.299, 1.3323333, 1.3656666, 1.399, 1.4323334, 1.4656667, 1.499, 1.5323334, 1.5656667, 1.599, 1.6323333, 1.6656667, 1.699, 1.7323333, 1.7656667, 1.799, 1.8323333, 1.8656666, 1.899, 1.9323334, 1.9656667, 1.999, 2.0323334, 2.0656667, 2.099, 2.1323333, 2.1656666, 2.199, 2.2323334, 2.2656667, 2.299, 2.3323333, 2.3656666, 2.399, 2.4323332, 2.4656668, 2.499, 2.5323334, 2.5656667, 2.599, 2.6323333, 2.6656666, 2.699, 2.7323334, 2.7656667, 2.799, 2.8323333, 2.8656666, 2.899, 2.9323332, 2.9656668, 2.999),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(20.5, 5.5), Vector2(21.5, 3.5), Vector2(23.5, 2.5), Vector2(24.5, 0.5), Vector2(25.5, -0.5), Vector2(26.5, -2.5), Vector2(26.5, -4.5), Vector2(26.5, -5.5), Vector2(27.5, -7.5), Vector2(26.5, -9.5), Vector2(26.5, -10.5), Vector2(25.5, -12.5), Vector2(24.5, -14.5), Vector2(23.5, -15.5), Vector2(22.5, -17.5), Vector2(21.5, -18.5), Vector2(19.5, -19.5), Vector2(17.5, -21.5), Vector2(15.5, -22.5), Vector2(13.5, -23.5), Vector2(10.5, -24.5), Vector2(8.5, -25.5), Vector2(5.5, -25.5), Vector2(3.5, -26.5), Vector2(0.5, -26.5), Vector2(-2.5, -27.5), Vector2(-5.5, -27.5), Vector2(-8.5, -27.5), Vector2(-10.5, -27.5), Vector2(-13.5, -27.5), Vector2(-16.5, -26.5), Vector2(-19.5, -26.5), Vector2(-21.5, -25.5), Vector2(-24.5, -24.5), Vector2(-26.5, -23.5), Vector2(-28.5, -22.5), Vector2(-31.5, -21.5), Vector2(-32.5, -20.5), Vector2(-34.5, -18.5), Vector2(-36.5, -17.5), Vector2(-37.5, -15.5), Vector2(-38.5, -14.5), Vector2(-39.5, -12.5), Vector2(-40.5, -11.5), Vector2(-40.5, -9.5), Vector2(-41.5, -7.5), Vector2(-41.5, -6.5), Vector2(-40.5, -4.5), Vector2(-40.5, -2.5), Vector2(-39.5, -1.5), Vector2(-38.5, 0.5), Vector2(-37.5, 2.5), Vector2(-36.5, 3.5), Vector2(-34.5, 5.5), Vector2(-32.5, 6.5), Vector2(-30.5, 7.5), Vector2(-28.5, 8.5), Vector2(-26.5, 9.5), Vector2(-24.5, 10.5), Vector2(-21.5, 11.5), Vector2(-18.5, 12.5), Vector2(-16.5, 12.5), Vector2(-13.5, 13.5), Vector2(-10.5, 13.5), Vector2(-7.5, 13.5), Vector2(-5.5, 13.5), Vector2(-2.5, 13.5), Vector2(0.5, 12.5), Vector2(3.5, 12.5), Vector2(5.5, 11.5), Vector2(8.5, 11.5), Vector2(11.5, 10.5), Vector2(13.5, 9.5), Vector2(15.5, 8.5), Vector2(17.5, 7.5), Vector2(19.5, 5.5), Vector2(21.5, 4.5), Vector2(22.5, 3.5), Vector2(23.5, 1.5), Vector2(25.5, -0.5), Vector2(25.5, -1.5), Vector2(26.5, -3.5), Vector2(26.5, -5.5), Vector2(4.5, 12.5), Vector2(7.5, 11.5), Vector2(9.5, 10.5), Vector2(11.5, 9.5), Vector2(14.5, 8.5), Vector2(16.5, 7.5), Vector2(18.5, 6.5), Vector2(20.5, 5.5)]
+}
+tracks/42/type = "value"
+tracks/42/imported = false
+tracks/42/enabled = true
+tracks/42/path = NodePath("Glint7Light:material:shader_parameter/alpha")
+tracks/42/interp = 0
+tracks/42/loop_wrap = false
+tracks/42/keys = {
+"times": PackedFloat32Array(0, 2.999),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0.0, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rl8ip"]
+_data = {
+&"fx": SubResource("Animation_fls37")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mn3ph"]
+shader = ExtResource("2_42681")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = true
+shader_parameter/pal = PackedVector4Array(0.039215688, 0.08627451, 0.1882353, 1, 0.07058824, 0.1882353, 0.3882353, 1, 0.105882354, 0.33333334, 0.5882353, 1, 0.16470589, 0.49803922, 0.76862746, 1, 0.27058825, 0.6627451, 0.8901961, 1, 0.5254902, 0.827451, 0.9607843, 1, 0.8039216, 0.94509804, 1, 1, 1, 1, 1, 1)
+shader_parameter/size = Vector2(120, 72)
+shader_parameter/t = null
+shader_parameter/R = 60.0
+shader_parameter/sy = 0.6
+shader_parameter/K = 2.4
+shader_parameter/eye = 0.16
+shader_parameter/mode = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ma7mm"]
+shader = ExtResource("2_42681")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = null
+shader_parameter/pal = PackedVector4Array(0.039215688, 0.08627451, 0.1882353, 1, 0.07058824, 0.1882353, 0.3882353, 1, 0.105882354, 0.33333334, 0.5882353, 1, 0.16470589, 0.49803922, 0.76862746, 1, 0.27058825, 0.6627451, 0.8901961, 1, 0.5254902, 0.827451, 0.9607843, 1, 0.8039216, 0.94509804, 1, 1, 1, 1, 1, 1)
+shader_parameter/size = Vector2(120, 72)
+shader_parameter/t = null
+shader_parameter/R = 60.0
+shader_parameter/sy = 0.6
+shader_parameter/K = 2.4
+shader_parameter/eye = 0.16
+shader_parameter/mode = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_677tq"]
+shader = ExtResource("3_0cl6a")
+shader_parameter/pal = PackedVector4Array(0.039215688, 0.08627451, 0.1882353, 1, 0.07058824, 0.1882353, 0.3882353, 1, 0.105882354, 0.33333334, 0.5882353, 1, 0.16470589, 0.49803922, 0.76862746, 1, 0.27058825, 0.6627451, 0.8901961, 1, 0.5254902, 0.827451, 0.9607843, 1, 0.8039216, 0.94509804, 1, 1, 1, 1, 1, 1)
+shader_parameter/size = Vector2(120, 72)
+shader_parameter/t = null
+shader_parameter/R = 60.0
+shader_parameter/sy = 0.6
+shader_parameter/K = 2.4
+shader_parameter/eye = 0.16
+shader_parameter/strength = null
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ycwkd"]
+resource_name = "Dither"
+shader = ExtResource("4_fl2r8")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = null
+
+[sub_resource type="Gradient" id="Gradient_je8u6"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.2, 0.6, 0.92)
+colors = PackedColorArray(0.5254902, 0.827451, 0.9607843, 1, 1, 1, 1, 1, 0.8039216, 0.94509804, 1, 1, 0.8039216, 0.94509804, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_qelr5"]
+gradient = SubResource("Gradient_je8u6")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vqg61"]
+particle_flag_align_y = true
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 0.0
+emission_ring_radius = 48.0
+emission_ring_inner_radius = 46.8
+emission_ring_cone_angle = 90.0
+direction = Vector3(6.123234e-17, -1, 0)
+spread = 0.0
+orbit_velocity_min = -0.75
+orbit_velocity_max = -0.6
+radial_velocity_min = -14.0
+radial_velocity_max = -8.0
+gravity = Vector3(0, 0, 0)
+radial_accel_min = -16.0
+radial_accel_max = -10.0
+scale_min = 1.7
+scale_max = 1.7
+color_ramp = SubResource("GradientTexture1D_qelr5")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_065mw"]
+shader = ExtResource("8_20qdl")
+shader_parameter/size = Vector2(14, 14)
+shader_parameter/radius = 5.0
+shader_parameter/thickness = null
+shader_parameter/squash = null
+shader_parameter/color = Color(0.5254902, 0.827451, 0.9607843, 1)
+shader_parameter/strength = null
+shader_parameter/alpha = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a57wt"]
+shader = ExtResource("8_20qdl")
+shader_parameter/size = Vector2(14, 14)
+shader_parameter/radius = 5.0
+shader_parameter/thickness = null
+shader_parameter/squash = null
+shader_parameter/color = Color(0.5254902, 0.827451, 0.9607843, 1)
+shader_parameter/strength = null
+shader_parameter/alpha = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jlo7f"]
+shader = ExtResource("8_20qdl")
+shader_parameter/size = Vector2(14, 14)
+shader_parameter/radius = 5.0
+shader_parameter/thickness = null
+shader_parameter/squash = null
+shader_parameter/color = Color(0.5254902, 0.827451, 0.9607843, 1)
+shader_parameter/strength = null
+shader_parameter/alpha = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5anam"]
+shader = ExtResource("8_20qdl")
+shader_parameter/size = Vector2(14, 14)
+shader_parameter/radius = 5.0
+shader_parameter/thickness = null
+shader_parameter/squash = null
+shader_parameter/color = Color(0.5254902, 0.827451, 0.9607843, 1)
+shader_parameter/strength = null
+shader_parameter/alpha = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oqjms"]
+shader = ExtResource("8_20qdl")
+shader_parameter/size = Vector2(14, 14)
+shader_parameter/radius = 5.0
+shader_parameter/thickness = null
+shader_parameter/squash = null
+shader_parameter/color = Color(0.5254902, 0.827451, 0.9607843, 1)
+shader_parameter/strength = null
+shader_parameter/alpha = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6wq4s"]
+shader = ExtResource("8_20qdl")
+shader_parameter/size = Vector2(14, 14)
+shader_parameter/radius = 5.0
+shader_parameter/thickness = null
+shader_parameter/squash = null
+shader_parameter/color = Color(0.5254902, 0.827451, 0.9607843, 1)
+shader_parameter/strength = null
+shader_parameter/alpha = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1bj7n"]
+shader = ExtResource("8_20qdl")
+shader_parameter/size = Vector2(14, 14)
+shader_parameter/radius = 5.0
+shader_parameter/thickness = null
+shader_parameter/squash = null
+shader_parameter/color = Color(0.5254902, 0.827451, 0.9607843, 1)
+shader_parameter/strength = null
+shader_parameter/alpha = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wks66"]
+shader = ExtResource("8_20qdl")
+shader_parameter/size = Vector2(14, 14)
+shader_parameter/radius = 5.0
+shader_parameter/thickness = null
+shader_parameter/squash = null
+shader_parameter/color = Color(0.5254902, 0.827451, 0.9607843, 1)
+shader_parameter/strength = null
+shader_parameter/alpha = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yrt4j"]
+shader = ExtResource("8_20qdl")
+shader_parameter/size = Vector2(112, 112)
+shader_parameter/radius = 54.0
+shader_parameter/thickness = null
+shader_parameter/squash = null
+shader_parameter/color = Color(0.27058825, 0.6627451, 0.8901961, 1)
+shader_parameter/strength = null
+shader_parameter/alpha = 0.2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_13w1w"]
+shader = ExtResource("8_20qdl")
+shader_parameter/size = Vector2(48, 48)
+shader_parameter/radius = 21.36
+shader_parameter/thickness = null
+shader_parameter/squash = null
+shader_parameter/color = Color(0.5254902, 0.827451, 0.9607843, 1)
+shader_parameter/strength = null
+shader_parameter/alpha = 0.28
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3ok0u"]
+shader = ExtResource("8_20qdl")
+shader_parameter/size = Vector2(32, 32)
+shader_parameter/radius = 14.0
+shader_parameter/thickness = null
+shader_parameter/squash = null
+shader_parameter/color = Color(0.5254902, 0.827451, 0.9607843, 1)
+shader_parameter/strength = null
+shader_parameter/alpha = 0.32
+
+[node name="Whirlpool" type="Node2D" unique_id=227130136]
+script = ExtResource("1_vaaow")
+effect_id = "water/whirlpool"
+source = "src/fx/water/whirlpool.js@e1772bb1a31c07713612d34e9a64914486888cfc"
+duration = 3.0
+loop = true
+canvas_size = Vector2i(128, 84)
+origin = Vector2i(64, 42)
+ramps = {
+"palette": PackedColorArray(0.039215688, 0.08627451, 0.1882353, 1, 0.07058824, 0.1882353, 0.3882353, 1, 0.105882354, 0.33333334, 0.5882353, 1, 0.16470589, 0.49803922, 0.76862746, 1, 0.27058825, 0.6627451, 0.8901961, 1, 0.5254902, 0.827451, 0.9607843, 1, 0.8039216, 0.94509804, 1, 1, 1, 1, 1, 1)
+}
+palette_extra = PackedColorArray()
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=123006779]
+libraries/ = SubResource("AnimationLibrary_rl8ip")
+
+[node name="Water" type="ColorRect" parent="." unique_id=1678092332]
+z_index = 1
+material = SubResource("ShaderMaterial_mn3ph")
+offset_left = -60.0
+offset_top = -36.0
+offset_right = 60.0
+offset_bottom = 36.0
+mouse_filter = 2
+
+[node name="Foam" type="ColorRect" parent="." unique_id=981710977]
+z_index = 1
+material = SubResource("ShaderMaterial_ma7mm")
+offset_left = -60.0
+offset_top = -36.0
+offset_right = 60.0
+offset_bottom = 36.0
+mouse_filter = 2
+
+[node name="FoamLight" type="ColorRect" parent="." unique_id=1000703685]
+z_index = 2
+material = SubResource("ShaderMaterial_677tq")
+offset_left = -60.0
+offset_top = -36.0
+offset_right = 60.0
+offset_bottom = 36.0
+mouse_filter = 2
+
+[node name="Flat" type="Node2D" parent="." unique_id=478850387]
+scale = Vector2(1, 0.6)
+
+[node name="Flecks" type="GPUParticles2D" parent="Flat" unique_id=931902283]
+z_index = 1
+material = SubResource("ShaderMaterial_ycwkd")
+amount = 17
+texture = ExtResource("5_a5n4o")
+lifetime = 1.7
+preprocess = 1.7
+randomness = 0.3
+use_fixed_seed = true
+seed = 270674
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_vqg61")
+
+[node name="Glint0" type="Node2D" parent="." unique_id=1137404805]
+
+[node name="Arms" type="Sprite2D" parent="Glint0" unique_id=322701590]
+modulate = Color(0.8039216, 0.94509804, 1, 1)
+z_index = 1
+material = SubResource("ShaderMaterial_ycwkd")
+texture = ExtResource("6_p8n5d")
+
+[node name="Core" type="Sprite2D" parent="Glint0" unique_id=196119593]
+z_index = 1
+material = SubResource("ShaderMaterial_ycwkd")
+position = Vector2(-0.5, -0.5)
+texture = ExtResource("7_7qvo7")
+centered = false
+
+[node name="Glint0Light" type="ColorRect" parent="." unique_id=1468964835]
+z_index = 2
+material = SubResource("ShaderMaterial_065mw")
+offset_left = -7.0
+offset_top = -7.0
+offset_right = 7.0
+offset_bottom = 7.0
+mouse_filter = 2
+
+[node name="Glint1" type="Node2D" parent="." unique_id=117917791]
+
+[node name="Arms" type="Sprite2D" parent="Glint1" unique_id=1807969300]
+modulate = Color(0.8039216, 0.94509804, 1, 1)
+z_index = 1
+material = SubResource("ShaderMaterial_ycwkd")
+texture = ExtResource("6_p8n5d")
+
+[node name="Core" type="Sprite2D" parent="Glint1" unique_id=1769153891]
+z_index = 1
+material = SubResource("ShaderMaterial_ycwkd")
+position = Vector2(-0.5, -0.5)
+texture = ExtResource("7_7qvo7")
+centered = false
+
+[node name="Glint1Light" type="ColorRect" parent="." unique_id=1544717613]
+z_index = 2
+material = SubResource("ShaderMaterial_a57wt")
+offset_left = -7.0
+offset_top = -7.0
+offset_right = 7.0
+offset_bottom = 7.0
+mouse_filter = 2
+
+[node name="Glint2" type="Node2D" parent="." unique_id=84025445]
+
+[node name="Arms" type="Sprite2D" parent="Glint2" unique_id=1441688140]
+modulate = Color(0.8039216, 0.94509804, 1, 1)
+z_index = 1
+material = SubResource("ShaderMaterial_ycwkd")
+texture = ExtResource("6_p8n5d")
+
+[node name="Core" type="Sprite2D" parent="Glint2" unique_id=671073929]
+z_index = 1
+material = SubResource("ShaderMaterial_ycwkd")
+position = Vector2(-0.5, -0.5)
+texture = ExtResource("7_7qvo7")
+centered = false
+
+[node name="Glint2Light" type="ColorRect" parent="." unique_id=1339099772]
+z_index = 2
+material = SubResource("ShaderMaterial_jlo7f")
+offset_left = -7.0
+offset_top = -7.0
+offset_right = 7.0
+offset_bottom = 7.0
+mouse_filter = 2
+
+[node name="Glint3" type="Node2D" parent="." unique_id=986361984]
+
+[node name="Arms" type="Sprite2D" parent="Glint3" unique_id=1614559361]
+modulate = Color(0.8039216, 0.94509804, 1, 1)
+z_index = 1
+material = SubResource("ShaderMaterial_ycwkd")
+texture = ExtResource("6_p8n5d")
+
+[node name="Core" type="Sprite2D" parent="Glint3" unique_id=351829618]
+z_index = 1
+material = SubResource("ShaderMaterial_ycwkd")
+position = Vector2(-0.5, -0.5)
+texture = ExtResource("7_7qvo7")
+centered = false
+
+[node name="Glint3Light" type="ColorRect" parent="." unique_id=966868633]
+z_index = 2
+material = SubResource("ShaderMaterial_5anam")
+offset_left = -7.0
+offset_top = -7.0
+offset_right = 7.0
+offset_bottom = 7.0
+mouse_filter = 2
+
+[node name="Glint4" type="Node2D" parent="." unique_id=1759362246]
+
+[node name="Arms" type="Sprite2D" parent="Glint4" unique_id=207602497]
+modulate = Color(0.8039216, 0.94509804, 1, 1)
+z_index = 1
+material = SubResource("ShaderMaterial_ycwkd")
+texture = ExtResource("6_p8n5d")
+
+[node name="Core" type="Sprite2D" parent="Glint4" unique_id=1612310066]
+z_index = 1
+material = SubResource("ShaderMaterial_ycwkd")
+position = Vector2(-0.5, -0.5)
+texture = ExtResource("7_7qvo7")
+centered = false
+
+[node name="Glint4Light" type="ColorRect" parent="." unique_id=1653008567]
+z_index = 2
+material = SubResource("ShaderMaterial_oqjms")
+offset_left = -7.0
+offset_top = -7.0
+offset_right = 7.0
+offset_bottom = 7.0
+mouse_filter = 2
+
+[node name="Glint5" type="Node2D" parent="." unique_id=1768407231]
+
+[node name="Arms" type="Sprite2D" parent="Glint5" unique_id=127983342]
+modulate = Color(0.8039216, 0.94509804, 1, 1)
+z_index = 1
+material = SubResource("ShaderMaterial_ycwkd")
+texture = ExtResource("6_p8n5d")
+
+[node name="Core" type="Sprite2D" parent="Glint5" unique_id=786461593]
+z_index = 1
+material = SubResource("ShaderMaterial_ycwkd")
+position = Vector2(-0.5, -0.5)
+texture = ExtResource("7_7qvo7")
+centered = false
+
+[node name="Glint5Light" type="ColorRect" parent="." unique_id=377068474]
+z_index = 2
+material = SubResource("ShaderMaterial_6wq4s")
+offset_left = -7.0
+offset_top = -7.0
+offset_right = 7.0
+offset_bottom = 7.0
+mouse_filter = 2
+
+[node name="Glint6" type="Node2D" parent="." unique_id=1865038522]
+
+[node name="Arms" type="Sprite2D" parent="Glint6" unique_id=1971213595]
+modulate = Color(0.8039216, 0.94509804, 1, 1)
+z_index = 1
+material = SubResource("ShaderMaterial_ycwkd")
+texture = ExtResource("6_p8n5d")
+
+[node name="Core" type="Sprite2D" parent="Glint6" unique_id=841852796]
+z_index = 1
+material = SubResource("ShaderMaterial_ycwkd")
+position = Vector2(-0.5, -0.5)
+texture = ExtResource("7_7qvo7")
+centered = false
+
+[node name="Glint6Light" type="ColorRect" parent="." unique_id=384261473]
+z_index = 2
+material = SubResource("ShaderMaterial_1bj7n")
+offset_left = -7.0
+offset_top = -7.0
+offset_right = 7.0
+offset_bottom = 7.0
+mouse_filter = 2
+
+[node name="Glint7" type="Node2D" parent="." unique_id=135241034]
+
+[node name="Arms" type="Sprite2D" parent="Glint7" unique_id=893260598]
+modulate = Color(0.8039216, 0.94509804, 1, 1)
+z_index = 1
+material = SubResource("ShaderMaterial_ycwkd")
+texture = ExtResource("6_p8n5d")
+
+[node name="Core" type="Sprite2D" parent="Glint7" unique_id=41515535]
+z_index = 1
+material = SubResource("ShaderMaterial_ycwkd")
+position = Vector2(-0.5, -0.5)
+texture = ExtResource("7_7qvo7")
+centered = false
+
+[node name="Glint7Light" type="ColorRect" parent="." unique_id=1708515742]
+z_index = 2
+material = SubResource("ShaderMaterial_wks66")
+offset_left = -7.0
+offset_top = -7.0
+offset_right = 7.0
+offset_bottom = 7.0
+mouse_filter = 2
+
+[node name="Sheen" type="ColorRect" parent="." unique_id=285998693]
+z_index = 2
+material = SubResource("ShaderMaterial_yrt4j")
+offset_left = -56.0
+offset_top = -56.0
+offset_right = 56.0
+offset_bottom = 56.0
+mouse_filter = 2
+
+[node name="EyeLight" type="ColorRect" parent="." unique_id=698874330]
+z_index = 2
+material = SubResource("ShaderMaterial_13w1w")
+offset_left = -24.0
+offset_top = -24.0
+offset_right = 24.0
+offset_bottom = 24.0
+mouse_filter = 2
+
+[node name="RimLight" type="ColorRect" parent="." unique_id=419551812]
+z_index = 2
+material = SubResource("ShaderMaterial_3ok0u")
+offset_left = -16.0
+offset_top = -20.608
+offset_right = 16.0
+offset_bottom = 11.392
+mouse_filter = 2

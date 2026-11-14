@@ -17,6 +17,7 @@ const DITHER := preload("../shaders/dither.gdshader")
 const LIGHT := preload("../shaders/light.gdshader")
 const TEX := "res://addons/pixelfx_particles/textures/"
 const META := "res://port/meta.json"
+const STEP_EARLY := 0.001   # seconds a "nearest" key moves earlier than asked, so it lands on its own frame
 
 static var _meta := {}
 
@@ -234,7 +235,8 @@ func _place(n: CanvasItem, o: Dictionary, parent: Node = null) -> void:
 ##   alpha_curve [[t, a], ...], color, ramp (colour over life, from ramp()), initial (a random starting colour),
 ##   turbulence {strength, scale, speed, influence [min, max]: keep it 0.005..0.03, more stops a particle dead},
 ##   local (local coordinates), collide {bounce, friction, hide (vanish on contact), size}: needs a ground(),
-##   drag (damping proportional to speed, the original's drag), process_shader + process_params (your own
+##   drag (a number: the original's drag k, calibrated onto Godot's friction | true: Godot's own quadratic friction,
+##   dv/dt = -0.05 * damping * v^2, on your damping), process_shader + process_params (your own
 ##   `shader_type particles` shader instead of the material; the canvas material still does the colour layer).
 ## No sub-emitters or trails: the Compatibility renderer (web, mobile) has neither. A splash where drops land is an
 ## emitter of its own along the floor; a fire where a brand lands is one that starts when it lands.
@@ -287,8 +289,22 @@ func particles(name: String, o: Dictionary = {}) -> GPUParticles2D:
 	_range(m, "damping", o.get("damping", [0.0, 0.0]))
 	_range(m, "radial_accel", o.get("radial", [0.0, 0.0]))
 	_range(m, "radial_velocity", o.get("radial_speed", [0.0, 0.0]))
-	# drag: damping proportional to speed (the original's), not a fixed deceleration
-	m.particle_flag_damping_as_friction = o.get("drag", false)
+	var dg: Variant = o.get("drag", false)
+	if dg is bool:
+		# true: Godot's friction, dv/dt = -0.05 * damping * v^2 (fast particles slow far more than slow ones)
+		m.particle_flag_damping_as_friction = dg
+	elif float(dg) > 0.0:
+		# a number: the original's drag k (1/s, dv/dt = -k v). Godot has no such damping, only its quadratic friction:
+		# pick the friction that carries a particle at the mean speed as far over its life as the original's drag
+		var sp: Array = _pair(o.get("speed", [0.0, 0.0]))
+		var rs: Array = _pair(o.get("radial_speed", [0.0, 0.0]))
+		var v: float = maxf((sp[0] + sp[1]) / 2.0, absf(rs[0] + rs[1]) / 2.0)
+		if v < 1.0:
+			v = maxf(1.0, (o.get("gravity", Vector2.ZERO) as Vector2).length() * p.lifetime / 2.0)
+		var c := friction_for(float(dg), v, p.lifetime)
+		m.particle_flag_damping_as_friction = true
+		m.damping_min = c / 0.05
+		m.damping_max = c / 0.05
 	m.lifetime_randomness = o.get("life_random", 0.0)
 	_range(m, "tangential_accel", o.get("tangential", [0.0, 0.0]))
 	_range(m, "orbit_velocity", o.get("orbit", [0.0, 0.0]))
@@ -334,6 +350,25 @@ func particles(name: String, o: Dictionary = {}) -> GPUParticles2D:
 			ps.set_shader_parameter(k, float(v) if v is int else v)
 		p.process_material = ps
 	return p
+
+
+static func _pair(r: Variant) -> Array:
+	return [float(r[0]), float(r[1])] if r is Array else [float(r), float(r)]
+
+
+## The quadratic friction c (dv/dt = -c v^2) under which a particle starting at speed v travels as far in t seconds
+## as under linear drag k (dv/dt = -k v): ln(1 + c v t) / c = v (1 - e^(-k t)) / k.
+static func friction_for(k: float, v: float, t: float) -> float:
+	var want := v * (1.0 - exp(-k * t)) / k
+	var lo := 1e-9
+	var hi := 1e3
+	for i in 100:
+		var c := sqrt(lo * hi)
+		if log(1.0 + c * v * t) / c > want:
+			lo = c
+		else:
+			hi = c
+	return sqrt(lo * hi)
 
 
 static func _v3(v: Vector2) -> Vector3:
@@ -461,10 +496,12 @@ func shape(name: String, shader: Variant, size: Vector2, params: Dictionary = {}
 		if v is int and types.get(k, TYPE_FLOAT) == TYPE_FLOAT:
 			v = float(v)   # an int given to a float uniform is dropped when the scene is saved (int uniforms keep ints)
 		if v is PackedColorArray or (v is Array and v.size() and v.all(func(c): return c is Color)):
-			# a vec4[] uniform needs a PackedVector4Array (colours arrive as zeros otherwise)
-			var arr := PackedVector4Array()
+			# a plain vec4[] uniform needs a PackedVector4Array (colours arrive as zeros otherwise); one hinted
+			# source_color needs a PackedColorArray (it saves as null otherwise)
+			var hinted: bool = types.get(k, TYPE_PACKED_COLOR_ARRAY) == TYPE_PACKED_COLOR_ARRAY
+			var arr: Variant = PackedColorArray() if hinted else PackedVector4Array()
 			for c in v:
-				arr.append(Vector4(c.r, c.g, c.b, c.a))
+				arr.append(c if hinted else Vector4(c.r, c.g, c.b, c.a))
 				if not lit:
 					keep_colour(c)
 			v = arr
@@ -669,6 +706,9 @@ func key(node: Node, prop: String, keys: Array, interp := "linear") -> void:
 		fx.track_set_path(tr, path)
 	fx.track_set_interpolation_type(tr, {"linear": Animation.INTERPOLATION_LINEAR, "nearest": Animation.INTERPOLATION_NEAREST, "cubic": Animation.INTERPOLATION_CUBIC}[interp])
 	fx.value_track_set_update_mode(tr, Animation.UPDATE_DISCRETE if interp == "nearest" else Animation.UPDATE_CONTINUOUS)
+	# a looping track would otherwise blend from its last key back to its first over the loop's last stretch; the
+	# original holds the last value until the loop wraps
+	fx.track_set_interpolation_loop_wrap(tr, false)
 	if keys.size() and float(keys[0][0]) > 0.0:
 		# before its first key a track sets nothing (the node would keep its saved value): hold the first value from 0
 		keys = [[0.0, keys[0][1]]] + keys
@@ -679,7 +719,11 @@ func key(node: Node, prop: String, keys: Array, interp := "linear") -> void:
 			v = float(v)
 		if node is Control and prop == "position" and v is Vector2:
 			v = v - node.size / 2.0   # a shape's position is its centre, as where it was placed
-		fx.track_insert_key(tr, float(k[0]), v)
+		var t := float(k[0])
+		if interp == "nearest" and t > 0.0:
+			# a step on a frame's time could land a frame late (the clock adds up 1/fps in floats): take it a hair early
+			t = maxf(0.0, t - STEP_EARLY)
+		fx.track_insert_key(tr, t, v)
 
 
 ## Keys sampled every frame are mostly redundant: drop the inside of runs that hold one value and, on linear tracks,
