@@ -672,6 +672,7 @@ func key(node: Node, prop: String, keys: Array, interp := "linear") -> void:
 	if keys.size() and float(keys[0][0]) > 0.0:
 		# before its first key a track sets nothing (the node would keep its saved value): hold the first value from 0
 		keys = [[0.0, keys[0][1]]] + keys
+	keys = _thin(keys, interp)
 	for k in keys:
 		var v: Variant = k[1]
 		if v is int and prop.begins_with("material:shader_parameter/"):
@@ -679,6 +680,54 @@ func key(node: Node, prop: String, keys: Array, interp := "linear") -> void:
 		if node is Control and prop == "position" and v is Vector2:
 			v = v - node.size / 2.0   # a shape's position is its centre, as where it was placed
 		fx.track_insert_key(tr, float(k[0]), v)
+
+
+## Keys sampled every frame are mostly redundant: drop the inside of runs that hold one value and, on linear tracks,
+## keys the neighbours already interpolate (within half a percent of the value's size, a fraction of a pixel). The
+## track plays the same; the scene file stays small.
+static func _thin(keys: Array, interp: String) -> Array:
+	if keys.size() < 3:
+		return keys
+	var out := [keys[0]]
+	for i in range(1, keys.size() - 1):
+		var a: Variant = out[-1][1]
+		var b: Variant = keys[i][1]
+		var c: Variant = keys[i + 1][1]
+		if _same(a, b) and _same(b, c):
+			continue
+		if interp == "linear" and _between(out[-1], keys[i], keys[i + 1]):
+			continue
+		out.append(keys[i])
+	out.append(keys[-1])
+	return out
+
+
+static func _same(a: Variant, b: Variant) -> bool:
+	if typeof(a) != typeof(b):
+		return false
+	if a is float:
+		return is_equal_approx(a, b)
+	if a is Vector2 or a is Vector3 or a is Color or a is Vector4:
+		return a.is_equal_approx(b)
+	return a == b
+
+
+static func _between(ka: Array, kb: Array, kc: Array) -> bool:
+	var a: Variant = ka[1]
+	var b: Variant = kb[1]
+	var c: Variant = kc[1]
+	if typeof(a) != typeof(b) or typeof(b) != typeof(c):
+		return false
+	var u := (float(kb[0]) - float(ka[0])) / maxf(1e-6, float(kc[0]) - float(ka[0]))
+	if a is float or a is int:
+		var tol := maxf(0.005 * maxf(absf(a), absf(c)), 1e-3)
+		return absf(lerpf(float(a), float(c), u) - float(b)) <= tol
+	if a is Vector2 or a is Vector3:
+		return (a.lerp(c, u) - b).length() <= 0.05 * maxf(1.0, maxf(a.length(), c.length()) * 0.01)
+	if a is Color:
+		var m: Color = a.lerp(c, u)
+		return absf(m.r - b.r) < 0.002 and absf(m.g - b.g) < 0.002 and absf(m.b - b.b) < 0.002 and absf(m.a - b.a) < 0.002
+	return false
 
 
 ## An emitter that starts at `on` (seconds) and, if `off` >= 0, stops at `off`. One-shot emitters burst at `on`.
