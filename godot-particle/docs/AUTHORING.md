@@ -149,6 +149,9 @@ After adding a PNG, run `./pfxp import` (it locks; other shells wait).
 - **Shader uniforms**: `shape()` passes an int to an `int` uniform and turns it into a float for a `float` one;
   colour arrays go to `vec4 x[N]` and to `vec4 x[N] : source_color` alike. `PI` and `TAU` are built in:
   redefining them doesn't compile.
+- **Process shaders**: one that sets TRANSFORM itself needs `"local": true` (else its particles land at the
+  viewport's corner). Light is added over everything in the original: a light node with `back: true` goes under
+  the stand-in, which is rarely what the original does.
 - **Collision size**: `collide.size` is Godot's `collision_base_size`, scaled by the particle's scale; check where
   a big texture comes to rest and shrink it until it sits on the floor.
 - **speed_scale**: an emitter's own `speed_scale` is kept (PfxEffect multiplies it by `speed`), so one emitter can

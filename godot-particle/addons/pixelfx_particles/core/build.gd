@@ -353,9 +353,13 @@ func particles(name: String, o: Dictionary = {}) -> GPUParticles2D:
 		# your own particle process shader (shader_type particles) where the material can't do it: a spiral, a path
 		var ps := ShaderMaterial.new()
 		ps.shader = load(o.process_shader) if o.process_shader is String else o.process_shader
+		var kinds := {}
+		for u in ps.shader.get_shader_uniform_list():
+			kinds[u.name] = u.type
 		for k in o.get("process_params", {}):
 			var v: Variant = o.process_params[k]
-			ps.set_shader_parameter(k, float(v) if v is int else v)
+			# an int given to a float uniform is dropped when the scene is saved; an int uniform keeps its int
+			ps.set_shader_parameter(k, float(v) if v is int and kinds.get(k, TYPE_FLOAT) == TYPE_FLOAT else v)
 		p.process_material = ps
 	return p
 
