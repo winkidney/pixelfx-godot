@@ -126,5 +126,7 @@ static func _last_on(anim: Animation, fx: Node, gp: GPUParticles2D) -> float:
 
 
 static func _reads_time(code: String) -> bool:
-	var re := RegEx.create_from_string("\\bTIME\\b")
-	return re.search(code) != null
+	# comments don't count: strip /* ... */ and // ... first
+	var bare := RegEx.create_from_string("(?s)/\\*.*?\\*/").sub(code, "", true)
+	bare = RegEx.create_from_string("//[^\\n]*").sub(bare, "", true)
+	return RegEx.create_from_string("\\bTIME\\b").search(bare) != null
