@@ -53,7 +53,8 @@ your eyes decide.
 
 | helper | makes |
 |---|---|
-| `particles(name, o)` | a GPUParticles2D. o: `at`, `back`, `layer`, `amount`, `lifetime`, `one_shot`, `explosiveness`, `randomness`, `preprocess`, `emitting`, `texture`, `align` (texture along velocity), `emit` (point, `{"box": v}`, `{"circle": r}`, `{"ring": [r, inner]}`, `{"points": PackedVector2Array}`), `dir`, `spread`, `speed`, `gravity`, `damping`, `radial` (acceleration), `radial_speed`, `life_random`, `tangential`, `orbit`, `angle`, `spin`, `scale`, `scale_curve`, `alpha_curve`, `color`, `ramp`, `initial`, `turbulence`, `local`, `collide` |
+| `particles(name, o)` | a GPUParticles2D. o: `at`, `back`, `layer`, `amount`, `lifetime`, `one_shot`, `explosiveness`, `randomness`, `preprocess`, `emitting`, `texture`, `align` (texture along velocity), `emit` (point, `{"box": v}`, `{"circle": r}`, `{"ring": [r, inner]}`, `{"points": PackedVector2Array}`, `{"points": ..., "normals": ...}`: with `dir` 0 each flies along its point's normal, the length scaling its speed; each particle picks a random point), `dir`, `spread`, `speed`, `gravity`, `damping`, `radial` (acceleration), `radial_speed`, `life_random`, `tangential`, `orbit`, `angle`, `spin`, `scale`, `scale_curve`, `alpha_curve`, `color`, `ramp`, `initial`, `turbulence`, `local`, `collide`, `drag` |
+| `twin(p, o)` | a copy of emitter `p` on the light layer (or `layer`): same material, seed and keys, so it emits the very same particles; `modulate`, `texture`, `scale` |
 | `ramp(name, o)` | a stepped gradient from the original's colour ramp option `name`: `from`, `to` (part of it), `reverse` (brightest first: cooling over a life), `alpha` curve, `stops`. Recolouring follows it. |
 | `gradient(colors, offsets)`, `color(name, u)`, `curve(points)` | explicit gradients, a colour along a ramp, curves |
 | `sprite(name, tex, o)`, `rect(name, Rect2, color, o)`, `group(name, o)` | plain nodes |
@@ -63,7 +64,7 @@ your eyes decide.
 | `fog(name, size, params, o)` | noise banks scrolling with the loop (shaders/fog.gdshader): mist, fog, haze, cloud, smoke sheets |
 | `shape(name, shader, size, params, o)` | any canvas shader on a rect centred on `at` (your own `.gdshader` under `fx/<cat>/`); colour arrays become `vec4[]` uniforms and join the palette |
 | `bolt(name, a, b, o)` | a jagged line re-rolled off the effect's clock (core/bolt.gd): lightning, arcs, crackles, tendrils |
-| `line(name, points, o)` | a Line2D; `soft` gives it a glowing cross-section; with a `gradient` it gets a point every pixel so stepped colours stay stepped |
+| `line(name, points, o)` | a Line2D; `soft` gives it a glowing cross-section; with a `gradient` it gets a point every pixel so stepped colours stay stepped (a Line2D samples its gradient only at its points: a hand-made two-point line shows just its end colours) |
 | `text(name, s, o)` | a word in the original's pixel fonts, drawn as its UI words are (core/pixel_text.gd): fill ramp, bevel, outline, shadow, flash, squash |
 | `ground(y)` | a floor particles can land on, bounce off or vanish into (`collide`) |
 | `actor_node()` | the stand-in as the effect's own node, with a flash and tint you can key (status effects) |
@@ -74,10 +75,11 @@ your eyes decide.
 | `frames(name, o)` | the original's frames for a body that isn't an effect (see below) |
 | `key(node, prop, [[t, v], ...], interp)` | keys on `fx`: `"position"`, `"modulate:a"`, `"material:shader_parameter/radius"`, `"amount_ratio"`... interp `"linear"`, `"nearest"` (steps, on/off), `"cubic"` |
 | `emit(p, on, off)`, `show(n, on, off)`, `loop_t(n)` | emitters and visibility over time; a shader's `t` over the loop |
+| `cue(id, o)` | another effect's scene played inside this one at `t` (the original's `chain()`, for moves): `until` cuts it off, `x`/`y` (numbers or a Callable of time, for a flight), `height`, `palette` (its main ramp in other colours), `flip` |
 | `keep_colour(c)` | keep a colour that isn't in any ramp out of the palette snap (gradients, rects, text and shape colours do it themselves) |
 
 Textures (`addons/pixelfx_particles/textures/`): `dot1`-`dot4`, `disc3`-`disc13`, `ring5`-`ring13`, `plus3`,
-`spark5`, `spark7`, `star5`, `streak3`-`streak12` (with `align`), `ripple5x1`-`ripple15x5`, `glow8`-`glow64` (soft,
+`spark5`, `spark7`, `star5`, `streak3`-`streak12` (with `align`, which turns the texture's bottom row toward the velocity: a bright head goes at the bottom), `ripple5x1`-`ripple15x5`, `glow8`-`glow64` (soft,
 for the light layer), `beam8`, `beam16`, noise (`noise256x64`, `noise128`, `noise128soft`, `noise64grain`).
 
 ## What reuses the original's pixels, and what never does
@@ -121,6 +123,10 @@ After adding a PNG, run `./pfxp import` (it locks; other shells wait).
   it 0.005..0.03; the default is 0.01..0.02. For licking flames, sway the emitter's `position` with keys instead.
 - **Light goes on top**: the light layer draws over the colour layers (that's how the original composites). Bright
   additive glow over a flame washes it white: keep glows dim and warm, measure them against the reference.
+- **Recolouring** (`set_palette`, a cue's `palette`, the node's `palette_preset`) swaps every colour that is exactly
+  one of the ramp's colours for the same step of the new ramp: gradients, colour properties, shader uniforms,
+  colour keys. Take colours from the ramp (`C[i]`, `ramp()`, `color()`) and they follow; a colour you mix yourself
+  (a lerp, a darkened copy) stays as it is.
 - **Palette snap**: colours on the colour and soft layers snap to the effect's ramps plus `palette_extra`. Helpers
   keep their own colours; a colour you set by hand on a node or material needs `keep_colour()`. Props and frames
   use the prop layer and never snap.
@@ -135,9 +141,9 @@ After adding a PNG, run `./pfxp import` (it locks; other shells wait).
   and calibrates Godot's friction to it: a particle at the mean speed travels as far over its life as in the original
   (faster ones a little less, slower a little more). `"drag": true` is Godot's raw friction on your `damping`,
   `dv/dt = -0.05 damping v^2`: at damping 2 a particle at 100 px/s loses 1000 px/s^2, far harder than the original.
-- **Light twins**: two emitters with the same options and seed emit the same particles; give one the light layer
-  for a glow that rides each ember, mote or spark. Keep every option the same, ramps included (dropping
-  `initial` or `ramp` changes Godot's random draws and the twin drifts off): tint the twin with `modulate`.
+- **Light twins**: two emitters with the same options and seed emit the same particles; `twin(p)` makes one on the
+  light layer for a glow that rides each ember, mote or spark. Keep every option the same, ramps included
+  (dropping `initial` or `ramp` changes Godot's random draws and the twin drifts off): tint the twin with `modulate`.
 - **Reserved uniforms**: PfxEffect sets `strength` (light), `palette`, `palette_size`, `alpha_scale` and
   `translucent` on every material that has them. Use `strength` only for a light multiplier.
 - **Shader uniforms**: `shape()` passes an int to an `int` uniform and turns it into a float for a `float` one;
@@ -147,8 +153,10 @@ After adding a PNG, run `./pfxp import` (it locks; other shells wait).
   a big texture comes to rest and shrink it until it sits on the floor.
 - **speed_scale**: an emitter's own `speed_scale` is kept (PfxEffect multiplies it by `speed`), so one emitter can
   run on slowed time.
-- **Steps**: `"nearest"` keys land a millisecond early so a step on a frame's time shows on that frame. Loops don't
-  blend their last key back into their first.
+- **Keys you sample**: a curve keyed every frame is thinned to the keys that matter (a key goes only when every key
+  it stands for stays within 0.3%, at most 0.1 px); no need to thin it yourself. `"nearest"` keys land a
+  millisecond early so a step on a frame's time shows on that frame. Loops don't blend their last key back into
+  their first. A bolt redraws after the frame's keys are applied, so a keyed `to` shows at once.
 - **Soft layer**: alpha comes in 32 steps, dithered between neighbours through the Bayer matrix: gradients don't
   band and a faint puff fades out instead of turning into a flat grey disc.
 - **preprocess** starts a loop from where its emitter sits at t = 0, so an emitter on a keyed path shows a straight

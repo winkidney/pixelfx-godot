@@ -24,6 +24,8 @@ var _branches: Array[Line2D] = []
 
 
 func _ready() -> void:
+	# after the AnimationPlayer has applied this frame's keys, so a keyed `to` shows on the frame it's keyed for
+	process_priority = 100
 	_rebuild(0)
 
 

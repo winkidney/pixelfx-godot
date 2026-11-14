@@ -1,0 +1,140 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://addons/pixelfx_particles/core/pfx_effect.gd" id="1_giumk"]
+[ext_resource type="PackedScene" path="res://addons/pixelfx_particles/fx/arcane/spell-charge.tscn" id="2_vfhn0"]
+[ext_resource type="PackedScene" path="res://addons/pixelfx_particles/fx/fire/fireball.tscn" id="3_sbtso"]
+[ext_resource type="PackedScene" path="res://addons/pixelfx_particles/fx/explosions/small-explosion.tscn" id="4_tsk0p"]
+
+[sub_resource type="Animation" id="Animation_xs71q"]
+length = 6.81
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpellCharge1:visible")
+tracks/0/interp = 0
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.079, 0.949),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SpellCharge1")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.079),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Fireball2:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = false
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.95, 1.41),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(28, -22), Vector2(28, -22), Vector2(184.4, -22)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Fireball2:visible")
+tracks/3/interp = 0
+tracks/3/loop_wrap = false
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.949, 1.409),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Fireball2")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.949),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play"
+}]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("SmallExplosion3:visible")
+tracks/5/interp = 0
+tracks/5/loop_wrap = false
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 1.409),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/6/type = "method"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("SmallExplosion3")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(1.409),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4q436"]
+_data = {
+&"fx": SubResource("Animation_xs71q")
+}
+
+[node name="FireballThrow" type="Node2D" unique_id=80081695]
+script = ExtResource("1_giumk")
+effect_id = "moves/fireball-throw"
+source = "src/fx/moves/fireball-throw.js@d65a6201b1e6ca516865e3cbe47ccfc6e7e9d8e5"
+duration = 6.81
+canvas_size = Vector2i(356, 244)
+origin = Vector2i(64, 198)
+bg = "ground"
+actor = 2
+palette_extra = PackedColorArray()
+palette_override = PackedColorArray()
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1694764483]
+callback_mode_method = 1
+libraries/ = SubResource("AnimationLibrary_4q436")
+
+[node name="SpellCharge1" parent="." unique_id=476858262 instance=ExtResource("2_vfhn0")]
+visible = false
+palette_override = PackedColorArray(0.12156863, 0.043137256, 0.0627451, 1, 0.2901961, 0.06666667, 0.09411765, 1, 0.54901963, 0.11372549, 0.10980392, 1, 0.8, 0.22745098, 0.101960786, 1, 0.9490196, 0.4392157, 0.12156863, 1, 1, 0.68235296, 0.20784314, 1, 1, 0.8862745, 0.47843137, 1, 1, 0.972549, 0.8392157, 1)
+autoplay = false
+show_actor = false
+
+[node name="Fireball2" parent="." unique_id=1273857604 instance=ExtResource("3_sbtso")]
+visible = false
+position = Vector2(28, -22)
+palette_override = PackedColorArray()
+autoplay = false
+show_actor = false
+
+[node name="SmallExplosion3" parent="." unique_id=825887514 instance=ExtResource("4_tsk0p")]
+visible = false
+position = Vector2(190, 0)
+palette_override = PackedColorArray()
+autoplay = false
+show_actor = false

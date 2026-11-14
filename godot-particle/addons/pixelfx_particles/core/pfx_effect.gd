@@ -39,6 +39,8 @@ const STAND_INS := ["", "res://addons/pixelfx_particles/actor/stock/hero1.png", 
 @export var ramps := {}
 ## Colours the palette snap keeps besides the ramps (white flashes, black ink, ...).
 @export var palette_extra := PackedColorArray()
+## Recolour the main ramp when the scene starts (set_palette): an effect cued in a move in other colours.
+@export var palette_override := PackedColorArray()
 
 @export_group("Play")
 @export var autoplay := true
@@ -77,12 +79,16 @@ var _unique := false
 var _particles: Array[GPUParticles2D] = []
 var _seeds: Array[int] = []
 var _speeds: Array[float] = []   # each emitter's own speed_scale (one can run on slowed time), times `speed`
+var _emit_on: Array[bool] = []   # each emitter's `emitting` as saved: what play() puts back
+var _nested: Array[PfxEffect] = []   # effects cued inside this one (a move's chain): each runs itself
 var _anim: AnimationPlayer
 var _stand_in: CanvasItem
 
 
 func _ready() -> void:
 	_collect()
+	if palette_override.size():
+		set_palette(palette_override)
 	_apply_palette()
 	_apply_light()
 	_apply_seed()
@@ -103,23 +109,47 @@ func _ready() -> void:
 		_stand_in.visible = show_actor
 	if autoplay:
 		play()
+	else:
+		_hold()
 
 
 func _collect() -> void:
 	_particles.clear()
 	_seeds.clear()
 	_speeds.clear()
-	for n in find_children("*", "GPUParticles2D", true, false):
-		_particles.append(n)
-		_seeds.append(n.seed)
-		_speeds.append(n.speed_scale)
+	_emit_on.clear()
+	_nested.clear()
+	for n in _own():
+		if n is GPUParticles2D:
+			_particles.append(n)
+			_seeds.append(n.seed)
+			_speeds.append(n.speed_scale)
+			_emit_on.append(n.emitting)
 	_anim = get_node_or_null("AnimationPlayer")
+
+
+## Every node of this effect, leaving out the inside of effects cued in it (they look after themselves).
+func _own() -> Array[Node]:
+	var out: Array[Node] = []
+	_walk(self, out)
+	return out
+
+
+func _walk(n: Node, out: Array[Node]) -> void:
+	for c in n.get_children():
+		if c is PfxEffect:
+			_nested.append(c)
+			continue
+		out.append(c)
+		_walk(c, out)
 
 
 ## Every ShaderMaterial in the scene whose shader has the given uniform (each shared one once).
 func _materials(uniform: String) -> Array[ShaderMaterial]:
 	var out: Array[ShaderMaterial] = []
-	for n in find_children("*", "CanvasItem", true, false):
+	for n in _own():
+		if not n is CanvasItem:
+			continue
 		var m: Material = n.material
 		if m is ShaderMaterial and m.shader and not out.has(m):
 			for u in m.shader.get_shader_uniform_list():
@@ -135,14 +165,33 @@ func play() -> void:
 	_stop_at = -1.0
 	_done = false
 	modulate.a = 1.0
-	for p in _particles:
+	for i in _particles.size():
 		# restart() switches emitting on: put back what the scene says (the animation turns the rest on when due)
-		var on := p.emitting
-		p.restart(true)
-		p.emitting = on
+		_particles[i].restart(true)
+		_particles[i].emitting = _emit_on[i]
+	for n in _nested:
+		# a cue at 0 plays with this one; the rest wait for the animation to start them
+		if n.autoplay:
+			n.play()
+		else:
+			n._hold()
 	if _anim and _anim.has_animation("fx"):
 		_anim.play("fx")
 		_anim.seek(0.0, true)
+
+
+## Wait to be played: nothing emits, nothing left over from a previous run.
+func _hold() -> void:
+	t = 0.0
+	_stop_at = -1.0
+	_done = false
+	for p in _particles:
+		p.restart(true)
+		p.emitting = false
+	for n in _nested:
+		n._hold()
+	if _anim:
+		_anim.stop()
 
 
 ## Let it end: emitters stop, and everything fades out over FADE seconds.
@@ -152,6 +201,8 @@ func stop() -> void:
 	_stop_at = t
 	for p in _particles:
 		p.emitting = false
+	for n in _nested:
+		n.stop()
 
 
 func is_done() -> bool:
@@ -183,6 +234,8 @@ func _apply_speed() -> void:
 		_anim.speed_scale = speed
 	for i in _particles.size():
 		_particles[i].speed_scale = _speeds[i] * speed
+	for n in _nested:
+		n.speed = speed
 
 
 func _apply_seed() -> void:
@@ -190,6 +243,8 @@ func _apply_seed() -> void:
 		return
 	for i in _particles.size():
 		_particles[i].seed = _seeds[i] + take
+	for n in _nested:
+		n.take = take
 
 
 func _apply_light() -> void:
@@ -197,6 +252,8 @@ func _apply_light() -> void:
 		return
 	for m in _materials("strength"):
 		m.set_shader_parameter("strength", light)
+	for n in _nested:
+		n.light = light
 
 
 ## The palette the dither material snaps to: every ramp colour plus palette_extra.
@@ -225,16 +282,21 @@ func _apply_palette() -> void:
 		m.set_shader_parameter("palette_size", cols.size())
 
 
-## Recolour every gradient built from the ramp `name` (its stops keep their place along the ramp), and the palette.
-## The first recolour makes this instance's materials its own, so other instances of the scene keep their colours.
+## Recolour the ramp `name`: gradients built from it keep their place along it, and every other colour drawn in one of
+## its colours (gradient stops, colour properties, shader uniforms, colour keys, the palette snap) takes the colour
+## at the same step of the new ramp. The first recolour makes this instance's materials and animation its own, so
+## other instances of the scene keep their colours.
 func set_ramp(name: String, colors: PackedColorArray) -> void:
 	if colors.is_empty():
 		return
 	_make_unique()
+	var old: PackedColorArray = ramps.get(name, PackedColorArray())
 	ramps[name] = colors
+	var tagged: Array[Gradient] = []
 	for g in _gradients():
 		if String(g.get_meta("ramp", "")) != name:
 			continue
+		tagged.append(g)
 		var at: PackedFloat32Array = g.get_meta("ramp_at", PackedFloat32Array())
 		var cs := g.colors
 		for i in cs.size():
@@ -242,7 +304,69 @@ func set_ramp(name: String, colors: PackedColorArray) -> void:
 			var c := colors[clampi(int(roundf(u * (colors.size() - 1))), 0, colors.size() - 1)]
 			cs[i] = Color(c.r, c.g, c.b, cs[i].a)
 		g.colors = cs
+	if old.size():
+		var swap := {}
+		for i in old.size():
+			var u := i / float(maxi(1, old.size() - 1))
+			var key := old[i].to_html(false)
+			if not swap.has(key):
+				swap[key] = colors[clampi(int(roundf(u * (colors.size() - 1))), 0, colors.size() - 1)]
+		_swap_colours(swap, tagged)
 	_apply_palette()
+
+
+## Every colour whose rgb is a key of `swap` becomes swap[key], keeping its alpha.
+func _swap_colours(swap: Dictionary, skip: Array[Gradient]) -> void:
+	var one := func(c: Color) -> Color:
+		var k := c.to_html(false)
+		if swap.has(k):
+			var n: Color = swap[k]
+			return Color(n.r, n.g, n.b, c.a)
+		return c
+	var many := func(v: Variant) -> Variant:
+		if v is Color:
+			return one.call(v)
+		if v is PackedColorArray:
+			var a: PackedColorArray = v.duplicate()
+			for i in a.size():
+				a[i] = one.call(a[i])
+			return a
+		if v is PackedVector4Array:
+			var b: PackedVector4Array = v.duplicate()
+			for i in b.size():
+				var c: Color = one.call(Color(b[i].x, b[i].y, b[i].z, b[i].w))
+				b[i] = Vector4(c.r, c.g, c.b, c.a)
+			return b
+		return v
+	for g in _gradients():
+		if not skip.has(g):
+			g.colors = many.call(g.colors)
+	var seen := {}
+	for n in _own():
+		for pr in n.get_property_list():
+			if (pr.type == TYPE_COLOR or pr.type == TYPE_PACKED_COLOR_ARRAY) and pr.usage & PROPERTY_USAGE_STORAGE:
+				n.set(pr.name, many.call(n.get(pr.name)))
+		if n is GPUParticles2D and n.process_material is ParticleProcessMaterial and not seen.has(n.process_material):
+			seen[n.process_material] = true
+			n.process_material.color = one.call(n.process_material.color)
+		if n is CanvasItem and n.material is ShaderMaterial and not seen.has(n.material):
+			seen[n.material] = true
+			for u in n.material.shader.get_shader_uniform_list():
+				var v: Variant = n.material.get_shader_parameter(u.name)
+				if v is Color or v is PackedColorArray or v is PackedVector4Array:
+					n.material.set_shader_parameter(u.name, many.call(v))
+	palette_extra = many.call(palette_extra)
+	if _anim:
+		for lib in _anim.get_animation_library_list():
+			for an in _anim.get_animation_library(lib).get_animation_list():
+				var a: Animation = _anim.get_animation_library(lib).get_animation(an)
+				for tr in a.get_track_count():
+					if a.track_get_type(tr) != Animation.TYPE_VALUE:
+						continue
+					for k in a.track_get_key_count(tr):
+						var v: Variant = a.track_get_key_value(tr, k)
+						if v is Color or v is PackedColorArray or v is PackedVector4Array:
+							a.track_set_key_value(tr, k, many.call(v))
 
 
 ## Recolour the effect's main ramp ("palette" in most effects, else its first ramp).
@@ -259,7 +383,7 @@ func _gradients() -> Array[Gradient]:
 		if tex is GradientTexture1D or tex is GradientTexture2D:
 			if tex.gradient and not out.has(tex.gradient):
 				out.append(tex.gradient)
-	for n in find_children("*", "", true, false):
+	for n in _own():
 		if n is GPUParticles2D and n.process_material is ParticleProcessMaterial:
 			add.call(n.process_material.color_ramp)
 			add.call(n.process_material.color_initial_ramp)
@@ -278,7 +402,7 @@ func _make_unique() -> void:
 		return
 	_unique = true
 	var mats := {}
-	for n in find_children("*", "", true, false):
+	for n in _own():
 		if n is GPUParticles2D and n.process_material:
 			n.process_material = n.process_material.duplicate(true)
 		if n is Line2D and n.gradient:
@@ -289,3 +413,14 @@ func _make_unique() -> void:
 			n.material = mats[n.material]
 		if "texture" in n and n.get("texture") is GradientTexture1D:
 			n.set("texture", n.get("texture").duplicate(true))
+	if _anim:
+		# colour keys get recoloured too: this instance's own copy of the animation, playing on from where it was
+		var at := _anim.current_animation_position if _anim.is_playing() else -1.0
+		var cur := _anim.current_animation
+		for lib in _anim.get_animation_library_list():
+			var copy: AnimationLibrary = _anim.get_animation_library(lib).duplicate(true)
+			_anim.remove_animation_library(lib)
+			_anim.add_animation_library(lib, copy)
+		if at >= 0.0 and cur != "":
+			_anim.play(cur)
+			_anim.seek(at, true)

@@ -1,0 +1,61 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://addons/pixelfx_particles/core/pfx_effect.gd" id="1_y4la5"]
+[ext_resource type="PackedScene" path="res://addons/pixelfx_particles/fx/nature/earth-spike.tscn" id="2_18fum"]
+
+[sub_resource type="Animation" id="Animation_7cmjr"]
+length = 3.46
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EarthSpike1:visible")
+tracks/0/interp = 0
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.059),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("EarthSpike1")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.059),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rtnfd"]
+_data = {
+&"fx": SubResource("Animation_7cmjr")
+}
+
+[node name="EarthStomp" type="Node2D" unique_id=1319942257]
+script = ExtResource("1_y4la5")
+effect_id = "moves/earth-stomp"
+source = "src/fx/moves/earth-stomp.js@a4353ca12e4f51b6c6f0cb1f1e5978cbe6c0c877"
+duration = 3.46
+canvas_size = Vector2i(290, 142)
+origin = Vector2i(50, 128)
+bg = "ground"
+actor = 2
+palette_extra = PackedColorArray()
+palette_override = PackedColorArray()
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=829419913]
+callback_mode_method = 1
+libraries/ = SubResource("AnimationLibrary_rtnfd")
+
+[node name="EarthSpike1" parent="." unique_id=185659490 instance=ExtResource("2_18fum")]
+visible = false
+position = Vector2(112, 0)
+palette_override = PackedColorArray()
+autoplay = false
+show_actor = false

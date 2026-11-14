@@ -18,6 +18,7 @@ const LIGHT := preload("../shaders/light.gdshader")
 const TEX := "res://addons/pixelfx_particles/textures/"
 const META := "res://port/meta.json"
 const STEP_EARLY := 0.001   # seconds a "nearest" key moves earlier than asked, so it lands on its own frame
+const THIN_SPAN := 64   # most keys one kept key may stand for (thinning stays linear in the keys)
 
 static var _meta := {}
 
@@ -34,6 +35,8 @@ var light: ShaderMaterial
 ## Props (the original's own still pixels, port/props.py) draw exactly as they are: no dither, no palette snap.
 var prop_mat: CanvasItemMaterial
 var _count := 0
+var _twins := []   # [emitter, twin] pairs: the twin gets its emitter's keys at save()
+var _cues := 0
 
 
 static func meta_of(effect_id: String) -> Dictionary:
@@ -228,6 +231,7 @@ func _place(n: CanvasItem, o: Dictionary, parent: Node = null) -> void:
 ##   amount (16), lifetime (1.0), one_shot, explosiveness, randomness, preprocess (loops: one lifetime), emitting
 ##   texture ("dot2", "disc5", "glow16", ... or a Texture2D), align (point the texture along the velocity)
 ##   emit: Vector2.ZERO (a point) | {"box": Vector2} | {"circle": r} | {"ring": [r, inner]} | {"points": PackedVector2Array}
+##   | {"points": ..., "normals": PackedVector2Array} (with dir 0: each flies along its normal, length scales speed)
 ##   dir (degrees, 0 right, -90 up: default -90), spread (degrees either side), speed [min, max], gravity Vector2,
 ##   damping [min, max], radial [min, max] (acceleration away from the emitter), radial_speed [min, max] (velocity
 ##   away from it), life_random (0..1: lifetimes vary), tangential [min, max], orbit [min, max] (turns a second),
@@ -282,6 +286,10 @@ func particles(name: String, o: Dictionary = {}) -> GPUParticles2D:
 			m.emission_shape = ParticleProcessMaterial.EMISSION_SHAPE_POINTS
 			m.emission_point_texture = _points_texture(e.points)
 			m.emission_point_count = e.points.size()
+			if e.has("normals"):
+				# with dir 0, each particle flies along its point's normal, the normal's length scaling its speed
+				m.emission_shape = ParticleProcessMaterial.EMISSION_SHAPE_DIRECTED_POINTS
+				m.emission_normal_texture = _points_texture(e.normals)
 	var d: float = o.get("dir", -90.0)
 	m.direction = Vector3(cos(deg_to_rad(d)), sin(deg_to_rad(d)), 0)
 	m.spread = o.get("spread", 0.0)
@@ -350,6 +358,48 @@ func particles(name: String, o: Dictionary = {}) -> GPUParticles2D:
 			ps.set_shader_parameter(k, float(v) if v is int else v)
 		p.process_material = ps
 	return p
+
+
+## A copy of emitter p on another layer ("light" by default): the same material, seed and keys, so it emits the very
+## same particles (a glow riding each ember, a bright head on each streak). o: layer, name, texture, modulate,
+## scale (multiplies the particles' scale). p's keys are copied when the scene is saved, so key p whenever you like.
+func twin(p: GPUParticles2D, o: Dictionary = {}) -> GPUParticles2D:
+	var q: GPUParticles2D = p.duplicate()
+	q.name = o.get("name", String(p.name) + "Light")
+	q.seed = p.seed
+	p.get_parent().add_child(q)
+	var layer: String = o.get("layer", "light")
+	var back := p.z_index < 0
+	q.z_index = (-1 if layer == "light" else -2) if back else (2 if layer == "light" else 1)
+	q.material = {"light": light, "soft": soft, "prop": prop_mat}.get(layer, dither)
+	if o.has("texture"):
+		q.texture = texture(o.texture)
+	if o.has("modulate"):
+		q.modulate = o.modulate
+	if o.has("scale") and q.process_material is ParticleProcessMaterial:
+		var m: ParticleProcessMaterial = q.process_material.duplicate()
+		m.scale_min *= float(o.scale)
+		m.scale_max *= float(o.scale)
+		q.process_material = m
+	_twins.append([p, q])
+	return q
+
+
+func _copy_twin_keys() -> void:
+	for pair in _twins:
+		var src := String(root.get_path_to(pair[0])) + ":"
+		var dst := String(root.get_path_to(pair[1])) + ":"
+		for tr in fx.get_track_count():
+			var path := String(fx.track_get_path(tr))
+			if not path.begins_with(src) or fx.find_track(NodePath(dst + path.substr(src.length())), Animation.TYPE_VALUE) >= 0:
+				continue
+			var nt := fx.add_track(Animation.TYPE_VALUE)
+			fx.track_set_path(nt, NodePath(dst + path.substr(src.length())))
+			fx.track_set_interpolation_type(nt, fx.track_get_interpolation_type(tr))
+			fx.value_track_set_update_mode(nt, fx.value_track_get_update_mode(tr))
+			fx.track_set_interpolation_loop_wrap(nt, false)
+			for k in fx.track_get_key_count(tr):
+				fx.track_insert_key(nt, fx.track_get_key_time(tr, k), fx.track_get_key_value(tr, k))
 
 
 static func _pair(r: Variant) -> Array:
@@ -727,23 +777,43 @@ func key(node: Node, prop: String, keys: Array, interp := "linear") -> void:
 
 
 ## Keys sampled every frame are mostly redundant: drop the inside of runs that hold one value and, on linear tracks,
-## keys the neighbours already interpolate (within half a percent of the value's size, a fraction of a pixel). The
-## track plays the same; the scene file stays small.
+## keys the kept ones already interpolate. A key goes only when every key it skips stays within a hair of the line
+## that replaces them (0.3% of the value's size, at most 0.1 px), so a smooth curve keeps its shape. The track plays
+## the same; the scene file stays small.
 static func _thin(keys: Array, interp: String) -> Array:
-	if keys.size() < 3:
+	var n := keys.size()
+	if n < 3:
 		return keys
 	var out := [keys[0]]
-	for i in range(1, keys.size() - 1):
-		var a: Variant = out[-1][1]
-		var b: Variant = keys[i][1]
-		var c: Variant = keys[i + 1][1]
-		if _same(a, b) and _same(b, c):
-			continue
-		if interp == "linear" and _between(out[-1], keys[i], keys[i + 1]):
-			continue
-		out.append(keys[i])
-	out.append(keys[-1])
+	var i := 0
+	while i < n - 1:
+		var j := i + 1
+		while j + 1 < n and j + 1 - i <= THIN_SPAN and _spans(keys, i, j + 1, interp):
+			j += 1
+		out.append(keys[j])
+		i = j
 	return out
+
+
+## Whether the track gives every key strictly between i and j (near enough) with only keys i and j.
+static func _spans(keys: Array, i: int, j: int, interp: String) -> bool:
+	var a: Variant = keys[i][1]
+	var c: Variant = keys[j][1]
+	var lerps := interp == "linear" and typeof(c) == typeof(a) and (a is float or a is Vector2 or a is Vector3 or a is Color)
+	if not lerps and interp != "nearest" and not _same(c, a):
+		return false   # cubic (or a type that doesn't blend): only a run of one value goes
+	for m in range(i + 1, j):
+		var b: Variant = keys[m][1]
+		if not lerps:
+			if not _same(b, a):
+				return false
+			continue
+		if typeof(b) != typeof(a):
+			return false
+		var u := (float(keys[m][0]) - float(keys[i][0])) / maxf(1e-6, float(keys[j][0]) - float(keys[i][0]))
+		if not _near(lerpf(a, c, u) if a is float else a.lerp(c, u), b, a, c):
+			return false
+	return true
 
 
 static func _same(a: Variant, b: Variant) -> bool:
@@ -756,22 +826,60 @@ static func _same(a: Variant, b: Variant) -> bool:
 	return a == b
 
 
-static func _between(ka: Array, kb: Array, kc: Array) -> bool:
-	var a: Variant = ka[1]
-	var b: Variant = kb[1]
-	var c: Variant = kc[1]
-	if typeof(a) != typeof(b) or typeof(b) != typeof(c):
-		return false
-	var u := (float(kb[0]) - float(ka[0])) / maxf(1e-6, float(kc[0]) - float(ka[0]))
-	if a is float or a is int:
-		var tol := maxf(0.005 * maxf(absf(a), absf(c)), 1e-3)
-		return absf(lerpf(float(a), float(c), u) - float(b)) <= tol
-	if a is Vector2 or a is Vector3:
-		return (a.lerp(c, u) - b).length() <= 0.05 * maxf(1.0, maxf(a.length(), c.length()) * 0.01)
-	if a is Color:
-		var m: Color = a.lerp(c, u)
-		return absf(m.r - b.r) < 0.002 and absf(m.g - b.g) < 0.002 and absf(m.b - b.b) < 0.002 and absf(m.a - b.a) < 0.002
-	return false
+static func _near(x: Variant, y: Variant, a: Variant, c: Variant) -> bool:
+	if x is float:
+		return absf(x - y) <= clampf(0.003 * maxf(absf(a), absf(c)), 1e-3, 0.1)
+	if x is Vector2 or x is Vector3:
+		return (x - y).length() <= clampf(0.003 * maxf(a.length(), c.length()), 1e-3, 0.1)
+	if x is Color:
+		return absf(x.r - y.r) < 0.002 and absf(x.g - y.g) < 0.002 and absf(x.b - y.b) < 0.002 and absf(x.a - y.a) < 0.002
+	return x == y
+
+
+## Another effect played inside this one (the original's chain(): a move strings effects together). Its own scene is
+## instanced, held until `t` (seconds) and played then; it keeps its own colours, seed and timing, and follows this
+## effect's speed, take and light. o (all optional): t, until (cut it off then: it vanishes, as in the original),
+## x, y (px from the origin, or a Callable of this effect's time for a projectile's flight), height (raise it: the
+## original's `height` option), palette (PackedColorArray: its main ramp in other colours, the original's
+## `palette`), flip.
+func cue(fx_id: String, o: Dictionary = {}) -> Node2D:
+	var scene: PackedScene = load("res://addons/pixelfx_particles/fx/%s.tscn" % fx_id)
+	var inst: Node2D = scene.instantiate(PackedScene.GEN_EDIT_STATE_INSTANCE)
+	var on: float = o.get("t", 0.0)
+	_cues += 1
+	inst.name = "%s%d" % [fx_id.get_file().to_pascal_case(), _cues]
+	inst.set("autoplay", on <= 0.0)
+	inst.set("show_actor", false)
+	if o.get("flip", false):
+		inst.set("flip", true)
+	if o.has("palette"):
+		inst.set("palette_override", PackedColorArray(o.palette))
+	root.add_child(inst)
+	var lift := Vector2(0.0, -float(o.get("height", 0.0)))
+	var off: float = o.get("until", -1.0)
+	var fx_x: Variant = o.get("x", 0.0)
+	var fx_y: Variant = o.get("y", 0.0)
+	if fx_x is Callable or fx_y is Callable:
+		var end: float = off if off >= 0.0 else float(meta.duration)
+		var keys := []
+		var n := maxi(1, int(ceil((end - on) * 60.0)))
+		for i in n + 1:
+			var tt := on + (end - on) * i / float(n)
+			var px: float = fx_x.call(tt) if fx_x is Callable else float(fx_x)
+			var py: float = fx_y.call(tt) if fx_y is Callable else float(fx_y)
+			keys.append([tt, Vector2(px, py) + lift])
+		inst.position = keys[0][1]
+		key(inst, "position", keys)
+	else:
+		inst.position = Vector2(float(fx_x), float(fx_y)) + lift
+	show(inst, on, off)
+	if on > 0.0:
+		# a method key, called the moment the animation passes it (not deferred to the frame's end)
+		anim.callback_mode_method = AnimationMixer.ANIMATION_CALLBACK_MODE_METHOD_IMMEDIATE
+		var tr := fx.add_track(Animation.TYPE_METHOD)
+		fx.track_set_path(tr, root.get_path_to(inst))
+		fx.track_insert_key(tr, maxf(0.0, on - STEP_EARLY), {"method": "play", "args": []})
+	return inst
 
 
 ## An emitter that starts at `on` (seconds) and, if `off` >= 0, stops at `off`. One-shot emitters burst at `on`.
@@ -799,6 +907,7 @@ func show(n: CanvasItem, on: float, off := -1.0) -> void:
 # ------------------------------------------------------------------ save
 
 func save(path: String) -> int:
+	_copy_twin_keys()
 	_own(root, root)
 	var packed := PackedScene.new()
 	var err := packed.pack(root)
@@ -813,4 +922,5 @@ func save(path: String) -> int:
 static func _own(n: Node, owner_: Node) -> void:
 	for c in n.get_children():
 		c.owner = owner_
-		_own(c, owner_)
+		if c.scene_file_path == "":   # a cued effect is saved as an instance of its own scene, not copied in
+			_own(c, owner_)
