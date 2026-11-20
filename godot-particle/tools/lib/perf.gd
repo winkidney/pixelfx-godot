@@ -118,7 +118,13 @@ func _measure(tree: SceneTree, host: Node2D, secs: float, warm := WARM) -> Dicti
 	for sv in host.find_children("*", "SubViewport", true, false):
 		vps.append(sv.get_viewport_rid())
 		RenderingServer.viewport_set_measure_render_time(sv.get_viewport_rid(), true)
-	for i in warm:
+	if warm > 0:
+		for i in warm:
+			await tree.process_frame
+		# the warm-up played some of each effect (with a slow crowd, all of a short one-shot): start them over so the
+		# window measures the whole effect
+		for fx in host.get_children():
+			fx.play()
 		await tree.process_frame
 	var frame: Array[float] = []
 	var cpu: Array[float] = []
