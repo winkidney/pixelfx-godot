@@ -45,6 +45,11 @@ case "$1" in
 		display smoke "$@"
 		exit $?
 		;;
+	perf)
+		# runtime cost on the real GPU: a window on the desktop, the Compatibility renderer, no vsync (not Xvfb)
+		exec "$GODOT_BIN" --no-header --path "$DIR" --rendering-method gl_compatibility --rendering-driver opengl3 \
+			--disable-vsync --resolution 1280x720 -s res://tools/cli.gd -- "$@"
+		;;
 	compare)
 		shift
 		ids=()

@@ -9,6 +9,8 @@ ROOT = os.path.dirname(HERE)
 REC = os.path.join(ROOT, "records")
 META = json.load(open(os.path.join(HERE, "meta.json")))
 OUT = os.path.join(REC, "review")
+_perf = os.path.join(REC, "perf", "summary.json")
+PERF = json.load(open(_perf)).get("effects", {}) if os.path.exists(_perf) else {}   # port/perf_report.py
 
 
 def load(kind):
@@ -34,6 +36,11 @@ def tone(s):
 def card(d):
     meta = META.get(d["id"], {})
     parts = " · ".join(f"{k[:3]} {d[k]:.2f}" for k in ("activity", "extent", "colour", "motion"))
+    pf = PERF.get(d["id"])
+    if pf and "act" not in d.get("side", ""):
+        ms = lambda r: f'{r["single"]["frame"]:.2f}' if r.get("single") else "–"
+        parts += (f'<br>ms per frame — LIVE {ms(pf["live"])} · BAKED {ms(pf["baked"])} · particles {ms(pf["particle"])}'
+                  + (f' · crowd ×{pf["x_crowd"]:.1f}' if pf.get("x_crowd") else ""))
     return (
         f'<figure class="{tone(d["score"])}" data-score="{d["score"]}">'
         f'<img loading="lazy" src="{html.escape(d["side"])}" alt="{html.escape(d["id"])}">'

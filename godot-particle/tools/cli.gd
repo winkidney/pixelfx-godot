@@ -6,6 +6,7 @@
 #   ./pfxp compare <ids>                  render, then frames against the reference: records/compare/<id>/ (python)
 #   ./pfxp check [ids]                    scenes load, meta matches the original, timeline sane, seeds fixed
 #   ./pfxp smoke [ids]                    every built effect (and act) through the nodes, played to its end (xvfb-run)
+#   ./pfxp perf [ids] [--stress 64]       runtime cost on the real GPU: one instance and a crowd (needs a display)
 #   ./pfxp index                          addons/pixelfx_particles/fx/registry.gd and docs/CATALOG.md
 #   ./pfxp new <id>                       a build script to start from
 #   ./pfxp list [words]                   ids, names and descriptions
@@ -47,6 +48,7 @@ func main() -> int:
 		"build": return cmd_build()
 		"render": return await load("res://tools/lib/render.gd").new().run(self, ids_or_all(), flags)
 		"smoke": return await load("res://tools/lib/smoke.gd").new().run(self, ids_or_built(), flags)
+		"perf": return await load("res://tools/lib/perf.gd").new().run(self, ids_or_built(), flags)
 		"check": return load("res://tools/lib/check.gd").new().run(ids_or_built(), flags)
 		"index": return load("res://tools/lib/index.gd").new().run()
 		"new": return load("res://tools/lib/newfx.gd").new().run(pos, flags)
