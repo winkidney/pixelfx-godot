@@ -1,0 +1,670 @@
+[gd_scene format=4]
+
+[ext_resource type="Script" path="res://addons/pixelfx_particles/core/pfx_effect.gd" id="1_e2tsr"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/fx/ui/_bits.gdshader" id="2_d4gcm"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/fx/ui/combo-counter/_speed_lines.res" id="3_yofso"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/fx/ui/combo-counter/_quad1.res" id="4_ijmrq"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/fx/ui/_ftp.gdshader" id="5_jhw8k"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/fx/ui/combo-counter/_slam.res" id="6_p7kse"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/fx/ui/combo-counter/_particles.res" id="7_oqojf"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/fx/ui/_word.gdshader" id="8_pgn37"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/fx/ui/combo-counter/_smear_0_glyphs.res" id="9_o30xe"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/fx/ui/combo-counter/_smear_0_layout.res" id="10_x32kp"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/fx/ui/combo-counter/_smear_1_glyphs.res" id="11_22er7"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/fx/ui/combo-counter/_smear_1_layout.res" id="12_py03h"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/fx/ui/combo-counter/_combo_glyphs.res" id="13_38myu"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/fx/ui/combo-counter/_combo_layout.res" id="14_7blea"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/fx/ui/combo-counter/_timer.res" id="15_tq0i7"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/fx/ui/_bits_light.gdshader" id="16_y0qkv"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/fx/ui/combo-counter/_light.res" id="17_bas4s"]
+
+[sub_resource type="Animation" id="Animation_my32h"]
+length = 1.45
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpeedLines/SpeedLines:process_material:shader_parameter/t")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.45),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.45]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Slam/Slam:process_material:shader_parameter/t")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.45),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.45]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Particles/Particles:process_material:shader_parameter/t")
+tracks/2/interp = 1
+tracks/2/loop_wrap = false
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.45),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.45]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Timer/Timer:process_material:shader_parameter/t")
+tracks/3/interp = 1
+tracks/3/loop_wrap = false
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1.45),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.45]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Light:process_material:shader_parameter/t")
+tracks/4/interp = 1
+tracks/4/loop_wrap = false
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1.45),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.45]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Smear0:material:shader_parameter/frame")
+tracks/5/interp = 0
+tracks/5/loop_wrap = false
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.032333333, 0.06566667, 0.099, 0.13233334, 0.16566667, 0.199, 0.23233333, 0.26566666, 0.299, 0.33233333, 0.36566666, 0.399, 0.43233332, 0.46566668, 0.499, 0.5323333, 0.5656667, 0.599, 0.63233334, 0.66566664, 0.699, 0.73233336, 0.76566666, 0.799, 0.8323333, 0.8656667, 0.899, 0.93233335, 0.96566665, 0.999, 1.0323334, 1.0656667, 1.099, 1.1323333, 1.1656667, 1.199, 1.2323333, 1.2656667, 1.299, 1.3323333, 1.3656666, 1.399, 1.4323334, 1.4656667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0, 13.0, 14.0, 15.0, 16.0, 17.0, 18.0, 19.0, 20.0, 21.0, 22.0, 23.0, 24.0, 25.0, 26.0, 27.0, 28.0, 29.0, 30.0, 31.0, 32.0, 33.0, 34.0, 35.0, 36.0, 37.0, 38.0, 39.0, 40.0, 41.0, 42.0, 43.0, 44.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Smear0:material:shader_parameter/it0")
+tracks/6/interp = 0
+tracks/6/loop_wrap = false
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.032333333, 0.06566667, 0.099, 0.13233334, 1.1656667, 1.199, 1.2323333, 1.2656667, 1.299, 1.3323333, 1.4656667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [PackedVector4Array(-16, -92, 28, 29, -16, -63, 28, 29, -2, -30, 14, 17, -2, -15, 14, 17, -2, -1, 14, 18, -2, 14, 14, 17, -2, 29, 14, 17, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(-16, -90, 28, 29, -16, -61, 28, 29, -2, -28, 14, 17, -2, -13, 14, 17, -2, 2, 14, 17, -2, 16, 14, 17, -2, 31, 14, 17, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(-16, -73, 28, 29, -16, -44, 28, 30, -2, -11, 14, 18, -2, 4, 14, 17, -2, 19, 14, 17, -2, 33, 14, 17, -2, 48, 14, 17, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(-16, -63, 28, 29, -16, -34, 28, 29, -2, -1, 14, 17, -2, 14, 14, 17, -2, 29, 14, 17, -2, 43, 14, 17, -2, 58, 14, 17, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(-16, -60, 28, 27, -16, -34, 28, 28, -2, -5, 14, 17, -2, 9, 14, 16, -2, 22, 14, 17, -2, 36, 14, 16, -2, 49, 14, 16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(-16, -56, 28, 27, -16, -29, 28, 27, -2, 0, 14, 16, -2, 13, 14, 16, -2, 27, 14, 16, -2, 40, 14, 16, -2, 54, 14, 16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(-16, -49, 28, 27, -16, -22, 28, 27, -2, 7, 14, 16, -2, 20, 14, 16, -2, 34, 14, 16, -2, 47, 14, 16, -2, 61, 14, 16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(-16, -39, 28, 27, -16, -12, 28, 27, -2, 17, 14, 16, -2, 30, 14, 16, -2, 44, 14, 16, -2, 57, 14, 16, -2, 70, 14, 17, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(-16, -38, 28, 27, -16, -11, 28, 27, -2, 18, 14, 16, -2, 31, 14, 16, -2, 45, 14, 16, -2, 58, 14, 16, -2, 72, 14, 16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Smear0:material:shader_parameter/it1")
+tracks/7/interp = 0
+tracks/7/loop_wrap = false
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.06566667, 0.13233334, 1.1656667, 1.199, 1.2323333, 1.2656667, 1.299, 1.3323333, 1.4656667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [PackedVector4Array(0.5, 0, 1, 1, 0.5, 0, 1, 1, 0.5, 0, 0.5, 1, 0.5, 0, 0.5, 1, 0.5, 0, 0.5, 1, 0.5, 0, 0.5, 1, 0.5, 0, 0.5, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 0.5, 1, 1, 0, 0.5, 1, 1, 0, 0.5, 1, 1, 0, 0.5, 1, 1, 0, 0.5, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 0.5, 1, 1, 0, 0.5, 1, 1, 0, 0.5, 1, 1, 0, 0.5, 1, 1, 0, 0.5, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(0.8333333, 0, 1, 1, 0.8333333, 0, 1, 1, 0.8333333, 0, 0.5, 1, 0.8333333, 0, 0.5, 1, 0.8333333, 0, 0.5, 1, 0.8333333, 0, 0.5, 1, 0.8333333, 0, 0.5, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(0.5555556, 0, 1, 1, 0.5555556, 0, 1, 1, 0.5555556, 0, 0.5, 1, 0.5555556, 0, 0.5, 1, 0.5555556, 0, 0.5, 1, 0.5555556, 0, 0.5, 1, 0.5555556, 0, 0.5, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(0.2777778, 0, 1, 1, 0.2777778, 0, 1, 1, 0.2777778, 0, 0.5, 1, 0.2777778, 0, 0.5, 1, 0.2777778, 0, 0.5, 1, 0.2777778, 0, 0.5, 1, 0.2777778, 0, 0.5, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(1.8540725e-14, 0, 1, 1, 1.8540725e-14, 0, 1, 1, 1.8540725e-14, 0, 0.5, 1, 1.8540725e-14, 0, 0.5, 1, 1.8540725e-14, 0, 0.5, 1, 1.8540725e-14, 0, 0.5, 1, 1.8540725e-14, 0, 0.5, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Smear0:material:shader_parameter/box")
+tracks/8/interp = 0
+tracks/8/loop_wrap = false
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 0.032333333, 0.06566667, 0.099, 0.13233334, 1.1656667, 1.199, 1.2323333, 1.2656667, 1.299, 1.3323333, 1.4656667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector4(-99, -18, 50, 16), Vector4(-97, -18, 53, 16), Vector4(-80, -18, 70, 16), Vector4(-70, -18, 80, 16), Vector4(0, 0, -1, -1), Vector4(-67, -18, 70, 16), Vector4(-63, -18, 74, 16), Vector4(-56, -18, 81, 16), Vector4(-46, -18, 91, 16), Vector4(-45, -18, 92, 16), Vector4(0, 0, -1, -1), Vector4(0, 0, -1, -1)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Smear0:material:shader_parameter/has_shine")
+tracks/9/interp = 0
+tracks/9/loop_wrap = false
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 1.4656667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, false]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Smear0:material:shader_parameter/shine")
+tracks/10/interp = 0
+tracks/10/loop_wrap = false
+tracks/10/keys = {
+"times": PackedFloat32Array(0, 1.4656667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0.0, 0.0]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Smear0:material:shader_parameter/shine_y")
+tracks/11/interp = 0
+tracks/11/loop_wrap = false
+tracks/11/keys = {
+"times": PackedFloat32Array(0, 1.4656667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0.0, 0.0]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("Smear1:material:shader_parameter/frame")
+tracks/12/interp = 0
+tracks/12/loop_wrap = false
+tracks/12/keys = {
+"times": PackedFloat32Array(0, 0.032333333, 0.06566667, 0.099, 0.13233334, 0.16566667, 0.199, 0.23233333, 0.26566666, 0.299, 0.33233333, 0.36566666, 0.399, 0.43233332, 0.46566668, 0.499, 0.5323333, 0.5656667, 0.599, 0.63233334, 0.66566664, 0.699, 0.73233336, 0.76566666, 0.799, 0.8323333, 0.8656667, 0.899, 0.93233335, 0.96566665, 0.999, 1.0323334, 1.0656667, 1.099, 1.1323333, 1.1656667, 1.199, 1.2323333, 1.2656667, 1.299, 1.3323333, 1.3656666, 1.399, 1.4323334, 1.4656667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0, 13.0, 14.0, 15.0, 16.0, 17.0, 18.0, 19.0, 20.0, 21.0, 22.0, 23.0, 24.0, 25.0, 26.0, 27.0, 28.0, 29.0, 30.0, 31.0, 32.0, 33.0, 34.0, 35.0, 36.0, 37.0, 38.0, 39.0, 40.0, 41.0, 42.0, 43.0, 44.0]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("Smear1:material:shader_parameter/it0")
+tracks/13/interp = 0
+tracks/13/loop_wrap = false
+tracks/13/keys = {
+"times": PackedFloat32Array(0, 0.032333333, 0.06566667, 0.099, 0.13233334, 1.1656667, 1.199, 1.2323333, 1.2656667, 1.299, 1.3323333, 1.4656667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [PackedVector4Array(-16, -92, 28, 29, -16, -63, 28, 29, -2, -30, 14, 17, -2, -15, 14, 17, -2, -1, 14, 18, -2, 14, 14, 17, -2, 29, 14, 17, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(-16, -82, 28, 30, -16, -52, 28, 29, -2, -19, 14, 17, -2, -5, 14, 18, -2, 10, 14, 17, -2, 25, 14, 17, -2, 39, 14, 18, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(-16, -68, 28, 30, -16, -39, 28, 30, -2, -5, 14, 17, -2, 9, 14, 18, -2, 24, 14, 17, -2, 39, 14, 17, -2, 53, 14, 17, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(-16, -61, 28, 29, -16, -32, 28, 30, -2, 1, 14, 18, -2, 16, 14, 17, -2, 31, 14, 17, -2, 45, 14, 18, -2, 60, 14, 17, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(-16, -62, 28, 28, -16, -35, 28, 28, -2, -6, 14, 17, -2, 8, 14, 16, -2, 21, 14, 16, -2, 35, 14, 16, -2, 48, 14, 16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(-16, -58, 28, 27, -16, -32, 28, 28, -2, -3, 14, 17, -2, 11, 14, 16, -2, 24, 14, 17, -2, 38, 14, 16, -2, 51, 14, 16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(-16, -53, 28, 28, -16, -26, 28, 28, -2, 3, 14, 17, -2, 17, 14, 16, -2, 30, 14, 16, -2, 44, 14, 16, -2, 57, 14, 16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(-16, -44, 28, 27, -16, -17, 28, 27, -2, 12, 14, 16, -2, 25, 14, 17, -2, 39, 14, 16, -2, 52, 14, 16, -2, 66, 14, 16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(-16, -38, 28, 27, -16, -11, 28, 27, -2, 18, 14, 16, -2, 31, 14, 16, -2, 45, 14, 16, -2, 58, 14, 16, -2, 72, 14, 16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("Smear1:material:shader_parameter/it1")
+tracks/14/interp = 0
+tracks/14/loop_wrap = false
+tracks/14/keys = {
+"times": PackedFloat32Array(0, 0.06566667, 0.13233334, 1.1656667, 1.199, 1.2323333, 1.2656667, 1.299, 1.3323333, 1.4656667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [PackedVector4Array(0.5, 0, 1, 1, 0.5, 0, 1, 1, 0.5, 0, 0.5, 1, 0.5, 0, 0.5, 1, 0.5, 0, 0.5, 1, 0.5, 0, 0.5, 1, 0.5, 0, 0.5, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 0.5, 1, 1, 0, 0.5, 1, 1, 0, 0.5, 1, 1, 0, 0.5, 1, 1, 0, 0.5, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 0.5, 1, 1, 0, 0.5, 1, 1, 0, 0.5, 1, 1, 0, 0.5, 1, 1, 0, 0.5, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(0.8333333, 0, 1, 1, 0.8333333, 0, 1, 1, 0.8333333, 0, 0.5, 1, 0.8333333, 0, 0.5, 1, 0.8333333, 0, 0.5, 1, 0.8333333, 0, 0.5, 1, 0.8333333, 0, 0.5, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(0.5555556, 0, 1, 1, 0.5555556, 0, 1, 1, 0.5555556, 0, 0.5, 1, 0.5555556, 0, 0.5, 1, 0.5555556, 0, 0.5, 1, 0.5555556, 0, 0.5, 1, 0.5555556, 0, 0.5, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(0.2777778, 0, 1, 1, 0.2777778, 0, 1, 1, 0.2777778, 0, 0.5, 1, 0.2777778, 0, 0.5, 1, 0.2777778, 0, 0.5, 1, 0.2777778, 0, 0.5, 1, 0.2777778, 0, 0.5, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(1.8540725e-14, 0, 1, 1, 1.8540725e-14, 0, 1, 1, 1.8540725e-14, 0, 0.5, 1, 1.8540725e-14, 0, 0.5, 1, 1.8540725e-14, 0, 0.5, 1, 1.8540725e-14, 0, 0.5, 1, 1.8540725e-14, 0, 0.5, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)]
+}
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("Smear1:material:shader_parameter/box")
+tracks/15/interp = 0
+tracks/15/loop_wrap = false
+tracks/15/keys = {
+"times": PackedFloat32Array(0, 0.032333333, 0.06566667, 0.099, 0.13233334, 1.1656667, 1.199, 1.2323333, 1.2656667, 1.299, 1.3323333, 1.4656667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector4(-99, -18, 50, 16), Vector4(-89, -18, 61, 16), Vector4(-75, -18, 75, 16), Vector4(-68, -18, 82, 16), Vector4(0, 0, -1, -1), Vector4(-69, -18, 69, 16), Vector4(-65, -18, 72, 16), Vector4(-60, -18, 78, 16), Vector4(-51, -18, 86, 16), Vector4(-45, -18, 92, 16), Vector4(0, 0, -1, -1), Vector4(0, 0, -1, -1)]
+}
+tracks/16/type = "value"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("Smear1:material:shader_parameter/has_shine")
+tracks/16/interp = 0
+tracks/16/loop_wrap = false
+tracks/16/keys = {
+"times": PackedFloat32Array(0, 1.4656667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, false]
+}
+tracks/17/type = "value"
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/path = NodePath("Smear1:material:shader_parameter/shine")
+tracks/17/interp = 0
+tracks/17/loop_wrap = false
+tracks/17/keys = {
+"times": PackedFloat32Array(0, 1.4656667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0.0, 0.0]
+}
+tracks/18/type = "value"
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/path = NodePath("Smear1:material:shader_parameter/shine_y")
+tracks/18/interp = 0
+tracks/18/loop_wrap = false
+tracks/18/keys = {
+"times": PackedFloat32Array(0, 1.4656667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0.0, 0.0]
+}
+tracks/19/type = "value"
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/path = NodePath("Combo:material:shader_parameter/frame")
+tracks/19/interp = 0
+tracks/19/loop_wrap = false
+tracks/19/keys = {
+"times": PackedFloat32Array(0, 0.032333333, 0.06566667, 0.099, 0.13233334, 0.16566667, 0.199, 0.23233333, 0.26566666, 0.299, 0.33233333, 0.36566666, 0.399, 0.43233332, 0.46566668, 0.499, 0.5323333, 0.5656667, 0.599, 0.63233334, 0.66566664, 0.699, 0.73233336, 0.76566666, 0.799, 0.8323333, 0.8656667, 0.899, 0.93233335, 0.96566665, 0.999, 1.0323334, 1.0656667, 1.099, 1.1323333, 1.1656667, 1.199, 1.2323333, 1.2656667, 1.299, 1.3323333, 1.3656666, 1.399, 1.4323334, 1.4656667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0, 13.0, 14.0, 15.0, 16.0, 17.0, 18.0, 19.0, 20.0, 21.0, 22.0, 23.0, 24.0, 25.0, 26.0, 27.0, 28.0, 29.0, 30.0, 31.0, 32.0, 33.0, 34.0, 35.0, 36.0, 37.0, 38.0, 39.0, 40.0, 41.0, 42.0, 43.0, 44.0]
+}
+tracks/20/type = "value"
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/path = NodePath("Combo:material:shader_parameter/it0")
+tracks/20/interp = 0
+tracks/20/loop_wrap = false
+tracks/20/keys = {
+"times": PackedFloat32Array(0, 0.032333333, 0.06566667, 0.099, 0.13233334, 0.16566667, 0.199, 0.23233333, 0.26566666, 0.299, 0.33233333, 0.399, 0.46566668, 0.499, 0.5323333, 0.5656667, 0.66566664, 0.76566666, 0.799, 0.8656667, 0.93233335, 1.0323334, 1.1323333, 1.1656667, 1.199, 1.2323333, 1.2656667, 1.299, 1.3323333, 1.4656667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [PackedVector4Array(-16, -92, 28, 29, -16, -63, 28, 29, -2, -30, 14, 17, -2, -15, 14, 17, -2, -1, 14, 18, -2, 14, 14, 17, -2, 29, 14, 17, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(-16, -75, 28, 30, -16, -45, 28, 29, -2, -12, 14, 17, -2, 3, 14, 17, -2, 17, 14, 17, -2, 32, 14, 17, -2, 47, 14, 17, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(-16, -64, 28, 30, -16, -35, 28, 30, -2, -1, 14, 17, -2, 13, 14, 17, -2, 28, 14, 17, -2, 43, 14, 17, -2, 57, 14, 17, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(-16, -60, 28, 29, -16, -31, 28, 29, -2, 2, 14, 17, -2, 17, 14, 17, -2, 31, 14, 18, -2, 46, 14, 17, -2, 61, 14, 17, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(-13, -52, 28, 25, -13, -28, 28, 25, 1, -4, 14, 15, 1, 8, 14, 15, 1, 20, 14, 15, 1, 32, 14, 15, 1, 44, 14, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(-14, -51, 28, 25, -14, -27, 28, 25, 0, -3, 14, 15, 0, 9, 14, 15, 0, 21, 14, 15, 0, 33, 14, 15, 0, 45, 14, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(-15, -56, 28, 25, -15, -32, 28, 25, -1, -8, 14, 15, -1, 4, 14, 15, -1, 16, 14, 15, -1, 28, 14, 15, -1, 40, 14, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(-18, -57, 29, 25, -18, -33, 29, 25, -3, -9, 14, 15, -3, 3, 14, 15, -3, 15, 14, 15, -3, 27, 14, 15, -3, 39, 14, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(-17, -56, 29, 25, -17, -32, 29, 25, -2, -8, 14, 15, -2, 4, 14, 15, -2, 16, 14, 15, -2, 28, 14, 15, -2, 40, 14, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(-16, -55, 29, 25, -16, -31, 29, 25, -1, -7, 14, 15, -1, 5, 14, 15, -1, 17, 14, 15, -1, 29, 14, 15, -1, 41, 14, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(-17, -55, 29, 25, -17, -31, 29, 25, -2, -7, 14, 15, -2, 5, 14, 15, -2, 17, 14, 15, -2, 29, 14, 15, -2, 41, 14, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(-17, -56, 29, 25, -17, -32, 29, 25, -2, -8, 14, 15, -2, 4, 14, 15, -2, 16, 14, 15, -2, 28, 14, 15, -2, 40, 14, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(-19, -56, 31, 25, -19, -32, 31, 25, -2, -8, 14, 15, -2, 4, 14, 15, -2, 16, 14, 15, -2, 28, 14, 15, -2, 40, 14, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(-20, -55, 32, 25, -20, -31, 32, 25, -2, -7, 14, 15, -2, 5, 14, 15, -2, 17, 14, 15, -2, 29, 14, 15, -2, 41, 14, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(-19, -55, 31, 25, -19, -31, 31, 25, -2, -7, 14, 15, -2, 5, 14, 15, -2, 17, 14, 15, -2, 29, 14, 15, -2, 41, 14, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(-17, -56, 29, 25, -17, -32, 29, 25, -2, -8, 14, 15, -2, 4, 14, 15, -2, 16, 14, 15, -2, 28, 14, 15, -2, 40, 14, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(-17, -55, 29, 25, -17, -31, 29, 25, -2, -7, 14, 15, -2, 5, 14, 15, -2, 17, 14, 15, -2, 29, 14, 15, -2, 41, 14, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(-17, -56, 29, 25, -17, -32, 29, 25, -2, -8, 14, 15, -2, 4, 14, 15, -2, 16, 14, 15, -2, 28, 14, 15, -2, 40, 14, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(-16, -56, 28, 25, -16, -32, 28, 25, -2, -8, 14, 15, -2, 4, 14, 15, -2, 16, 14, 15, -2, 28, 14, 15, -2, 40, 14, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(-16, -55, 28, 25, -16, -31, 28, 25, -2, -7, 14, 15, -2, 5, 14, 15, -2, 17, 14, 15, -2, 29, 14, 15, -2, 41, 14, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(-16, -56, 28, 25, -16, -32, 28, 25, -2, -8, 14, 15, -2, 4, 14, 15, -2, 16, 14, 15, -2, 28, 14, 15, -2, 40, 14, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(-16, -55, 28, 25, -16, -31, 28, 25, -2, -7, 14, 15, -2, 5, 14, 15, -2, 17, 14, 15, -2, 29, 14, 15, -2, 41, 14, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(-16, -59, 28, 25, -16, -35, 28, 25, -2, -11, 14, 15, -2, 1, 14, 15, -2, 13, 14, 15, -2, 25, 14, 15, -2, 37, 14, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(-16, -62, 28, 27, -16, -35, 28, 27, -2, -6, 14, 16, -2, 7, 14, 16, -2, 21, 14, 16, -2, 34, 14, 16, -2, 48, 14, 16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(-16, -60, 28, 27, -16, -33, 28, 27, -2, -4, 14, 16, -2, 9, 14, 16, -2, 23, 14, 16, -2, 36, 14, 16, -2, 49, 14, 17, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(-16, -56, 28, 28, -16, -29, 28, 28, -2, 0, 14, 17, -2, 14, 14, 16, -2, 27, 14, 16, -2, 41, 14, 16, -2, 54, 14, 16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(-16, -48, 28, 27, -16, -21, 28, 27, -2, 8, 14, 16, -2, 21, 14, 16, -2, 35, 14, 16, -2, 48, 14, 16, -2, 61, 14, 17, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(-16, -38, 28, 27, -16, -11, 28, 27, -2, 18, 14, 16, -2, 31, 14, 16, -2, 45, 14, 16, -2, 58, 14, 16, -2, 72, 14, 16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)]
+}
+tracks/21/type = "value"
+tracks/21/imported = false
+tracks/21/enabled = true
+tracks/21/path = NodePath("Combo:material:shader_parameter/it1")
+tracks/21/interp = 0
+tracks/21/loop_wrap = false
+tracks/21/keys = {
+"times": PackedFloat32Array(0, 0.06566667, 0.13233334, 0.199, 0.46566668, 0.5656667, 1.199, 1.2323333, 1.2656667, 1.299, 1.3323333, 1.4656667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [PackedVector4Array(0.5, 0, 1, 1, 0.5, 0, 1, 1, 0.5, 0, 0.5, 1, 0.5, 0, 0.5, 1, 0.5, 0, 0.5, 1, 0.5, 0, 0.5, 1, 0.5, 0, 0.5, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 0.5, 1, 1, 0, 0.5, 1, 1, 0, 0.5, 1, 1, 0, 0.5, 1, 1, 0, 0.5, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 0.5, 1, 1, 1, 0.5, 1, 1, 1, 0.5, 1, 1, 1, 0.5, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 0.5, 1, 1, 0, 0.5, 1, 1, 0, 0.5, 1, 1, 0, 0.5, 1, 1, 0, 0.5, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 0.5, 1, 1, 1, 0.5, 1, 1, 1, 0.5, 1, 1, 1, 0.5, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 0.5, 1, 1, 0, 0.5, 1, 1, 0, 0.5, 1, 1, 0, 0.5, 1, 1, 0, 0.5, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(0.8333333, 0, 1, 1, 0.8333333, 0, 1, 1, 0.8333333, 0, 0.5, 1, 0.8333333, 0, 0.5, 1, 0.8333333, 0, 0.5, 1, 0.8333333, 0, 0.5, 1, 0.8333333, 0, 0.5, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(0.5555556, 0, 1, 1, 0.5555556, 0, 1, 1, 0.5555556, 0, 0.5, 1, 0.5555556, 0, 0.5, 1, 0.5555556, 0, 0.5, 1, 0.5555556, 0, 0.5, 1, 0.5555556, 0, 0.5, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(0.2777778, 0, 1, 1, 0.2777778, 0, 1, 1, 0.2777778, 0, 0.5, 1, 0.2777778, 0, 0.5, 1, 0.2777778, 0, 0.5, 1, 0.2777778, 0, 0.5, 1, 0.2777778, 0, 0.5, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(1.8540725e-14, 0, 1, 1, 1.8540725e-14, 0, 1, 1, 1.8540725e-14, 0, 0.5, 1, 1.8540725e-14, 0, 0.5, 1, 1.8540725e-14, 0, 0.5, 1, 1.8540725e-14, 0, 0.5, 1, 1.8540725e-14, 0, 0.5, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)]
+}
+tracks/22/type = "value"
+tracks/22/imported = false
+tracks/22/enabled = true
+tracks/22/path = NodePath("Combo:material:shader_parameter/box")
+tracks/22/interp = 0
+tracks/22/loop_wrap = false
+tracks/22/keys = {
+"times": PackedFloat32Array(0, 0.032333333, 0.06566667, 0.099, 0.13233334, 0.16566667, 0.199, 0.23233333, 0.26566666, 0.299, 0.33233333, 0.399, 0.46566668, 0.499, 0.5323333, 0.5656667, 0.66566664, 0.76566666, 0.799, 0.8656667, 0.93233335, 1.0323334, 1.1323333, 1.1656667, 1.199, 1.2323333, 1.2656667, 1.299, 1.3323333, 1.4656667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector4(-100, -19, 51, 17), Vector4(-83, -19, 69, 17), Vector4(-72, -19, 80, 17), Vector4(-68, -19, 83, 17), Vector4(-60, -16, 64, 20), Vector4(-59, -17, 66, 19), Vector4(-64, -18, 61, 18), Vector4(-65, -21, 59, 16), Vector4(-64, -20, 61, 17), Vector4(-63, -19, 61, 18), Vector4(-63, -20, 61, 17), Vector4(-64, -20, 61, 17), Vector4(-64, -22, 61, 17), Vector4(-63, -23, 61, 17), Vector4(-63, -22, 61, 17), Vector4(-64, -20, 61, 17), Vector4(-63, -20, 61, 17), Vector4(-64, -20, 61, 17), Vector4(-64, -19, 61, 17), Vector4(-63, -19, 61, 17), Vector4(-64, -19, 61, 17), Vector4(-63, -19, 61, 17), Vector4(-67, -19, 58, 17), Vector4(-70, -19, 69, 17), Vector4(-68, -19, 71, 17), Vector4(-64, -19, 76, 17), Vector4(-56, -19, 83, 17), Vector4(-46, -19, 93, 17), Vector4(0, 0, -1, -1), Vector4(0, 0, -1, -1)]
+}
+tracks/23/type = "value"
+tracks/23/imported = false
+tracks/23/enabled = true
+tracks/23/path = NodePath("Combo:material:shader_parameter/has_shine")
+tracks/23/interp = 0
+tracks/23/loop_wrap = false
+tracks/23/keys = {
+"times": PackedFloat32Array(0, 0.63233334, 0.8656667, 1.4656667),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [false, true, false, false]
+}
+tracks/24/type = "value"
+tracks/24/imported = false
+tracks/24/enabled = true
+tracks/24/path = NodePath("Combo:material:shader_parameter/shine")
+tracks/24/interp = 0
+tracks/24/loop_wrap = false
+tracks/24/keys = {
+"times": PackedFloat32Array(0, 0.63233334, 0.66566664, 0.699, 0.73233336, 0.76566666, 0.799, 0.8323333, 0.8656667, 1.4656667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0.0, -55.77777777777767, -37.72222222222218, -19.666666666666686, -1.6111111111111924, 16.444444444444287, 34.49999999999979, 52.55555555555527, 0.0, 0.0]
+}
+tracks/25/type = "value"
+tracks/25/imported = false
+tracks/25/enabled = true
+tracks/25/path = NodePath("Combo:material:shader_parameter/shine_y")
+tracks/25/interp = 0
+tracks/25/loop_wrap = false
+tracks/25/keys = {
+"times": PackedFloat32Array(0, 1.3323333, 1.4656667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [-16.0, 0.0, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7qpng"]
+_data = {
+&"fx": SubResource("Animation_my32h")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4yda5"]
+resource_name = "SpeedLines"
+shader = ExtResource("2_d4gcm")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = null
+shader_parameter/data = ExtResource("3_yofso")
+shader_parameter/pal = PackedColorArray(0.101960786, 0.019607844, 0.08627451, 1, 0.23921569, 0.039215688, 0.2, 1, 0.4392157, 0.08235294, 0.3764706, 1, 0.6901961, 0.13333334, 0.56078434, 1, 0.9607843, 0.23529412, 0.81960785, 1, 1, 0.5254902, 0.9019608, 1, 1, 0.8235294, 0.9647059, 1, 1, 1, 1, 1)
+shader_parameter/raw = null
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gvpa4"]
+shader = ExtResource("5_jhw8k")
+shader_parameter/data = ExtResource("3_yofso")
+shader_parameter/t = null
+shader_parameter/nframes = 45
+shader_parameter/looped = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ssw6u"]
+resource_name = "Slam"
+shader = ExtResource("2_d4gcm")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = null
+shader_parameter/data = ExtResource("6_p7kse")
+shader_parameter/pal = PackedColorArray(0.101960786, 0.019607844, 0.08627451, 1, 0.23921569, 0.039215688, 0.2, 1, 0.4392157, 0.08235294, 0.3764706, 1, 0.6901961, 0.13333334, 0.56078434, 1, 0.9607843, 0.23529412, 0.81960785, 1, 1, 0.5254902, 0.9019608, 1, 1, 0.8235294, 0.9647059, 1, 1, 1, 1, 1)
+shader_parameter/raw = null
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ptvq0"]
+shader = ExtResource("5_jhw8k")
+shader_parameter/data = ExtResource("6_p7kse")
+shader_parameter/t = null
+shader_parameter/nframes = 45
+shader_parameter/looped = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_v6a8r"]
+resource_name = "Particles"
+shader = ExtResource("2_d4gcm")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = null
+shader_parameter/data = ExtResource("7_oqojf")
+shader_parameter/pal = PackedColorArray(0.101960786, 0.019607844, 0.08627451, 1, 0.23921569, 0.039215688, 0.2, 1, 0.4392157, 0.08235294, 0.3764706, 1, 0.6901961, 0.13333334, 0.56078434, 1, 0.9607843, 0.23529412, 0.81960785, 1, 1, 0.5254902, 0.9019608, 1, 1, 0.8235294, 0.9647059, 1, 1, 1, 1, 1)
+shader_parameter/raw = null
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o5tw2"]
+shader = ExtResource("5_jhw8k")
+shader_parameter/data = ExtResource("7_oqojf")
+shader_parameter/t = null
+shader_parameter/nframes = 45
+shader_parameter/looped = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k3v12"]
+shader = ExtResource("8_pgn37")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = null
+shader_parameter/size = Vector2(208, 100)
+shader_parameter/center = Vector2(0, 0)
+shader_parameter/glyphs = ExtResource("9_o30xe")
+shader_parameter/n = 7
+shader_parameter/gh = 7.0
+shader_parameter/gw = PackedFloat32Array(5, 5, 5, 5, 5, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/it0 = null
+shader_parameter/it1 = null
+shader_parameter/lay = ExtResource("10_x32kp")
+shader_parameter/frame = null
+shader_parameter/box = null
+shader_parameter/fill = PackedColorArray(0.4392157, 0.08235294, 0.3764706, 1, 0.4392157, 0.08235294, 0.3764706, 1, 0.4392157, 0.08235294, 0.3764706, 1, 0.4392157, 0.08235294, 0.3764706, 1)
+shader_parameter/nfill = 1
+shader_parameter/edge = Color(0.4392157, 0.08235294, 0.3764706, 1)
+shader_parameter/has_edge = true
+shader_parameter/under = Color(0.4392157, 0.08235294, 0.3764706, 1)
+shader_parameter/has_under = true
+shader_parameter/outline = null
+shader_parameter/has_outline = null
+shader_parameter/ow = 1
+shader_parameter/shadow = null
+shader_parameter/has_shadow = null
+shader_parameter/has_shine = null
+shader_parameter/shine = null
+shader_parameter/shine_y = null
+shader_parameter/glint = null
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kefv4"]
+shader = ExtResource("8_pgn37")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = null
+shader_parameter/size = Vector2(208, 100)
+shader_parameter/center = Vector2(0, 0)
+shader_parameter/glyphs = ExtResource("11_22er7")
+shader_parameter/n = 7
+shader_parameter/gh = 7.0
+shader_parameter/gw = PackedFloat32Array(5, 5, 5, 5, 5, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/it0 = null
+shader_parameter/it1 = null
+shader_parameter/lay = ExtResource("12_py03h")
+shader_parameter/frame = null
+shader_parameter/box = null
+shader_parameter/fill = PackedColorArray(0.6901961, 0.13333334, 0.56078434, 1, 0.6901961, 0.13333334, 0.56078434, 1, 0.6901961, 0.13333334, 0.56078434, 1, 0.6901961, 0.13333334, 0.56078434, 1)
+shader_parameter/nfill = 1
+shader_parameter/edge = Color(0.6901961, 0.13333334, 0.56078434, 1)
+shader_parameter/has_edge = true
+shader_parameter/under = Color(0.6901961, 0.13333334, 0.56078434, 1)
+shader_parameter/has_under = true
+shader_parameter/outline = null
+shader_parameter/has_outline = null
+shader_parameter/ow = 1
+shader_parameter/shadow = null
+shader_parameter/has_shadow = null
+shader_parameter/has_shine = null
+shader_parameter/shine = null
+shader_parameter/shine_y = null
+shader_parameter/glint = null
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_trdyl"]
+shader = ExtResource("8_pgn37")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = null
+shader_parameter/size = Vector2(208, 100)
+shader_parameter/center = Vector2(0, 0)
+shader_parameter/glyphs = ExtResource("13_38myu")
+shader_parameter/n = 7
+shader_parameter/gh = 7.0
+shader_parameter/gw = PackedFloat32Array(5, 5, 5, 5, 5, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/it0 = null
+shader_parameter/it1 = null
+shader_parameter/lay = ExtResource("14_7blea")
+shader_parameter/frame = null
+shader_parameter/box = null
+shader_parameter/fill = PackedColorArray(0.9607843, 0.23529412, 0.81960785, 1, 1, 0.5254902, 0.9019608, 1, 1, 0.8235294, 0.9647059, 1, 1, 1, 1, 1)
+shader_parameter/nfill = 4
+shader_parameter/edge = Color(1, 1, 1, 1)
+shader_parameter/has_edge = true
+shader_parameter/under = Color(0.6901961, 0.13333334, 0.56078434, 1)
+shader_parameter/has_under = true
+shader_parameter/outline = Color(0.101960786, 0.019607844, 0.08627451, 1)
+shader_parameter/has_outline = true
+shader_parameter/ow = 2
+shader_parameter/shadow = Color(0.050980393, 0.007843138, 0.043137256, 1)
+shader_parameter/has_shadow = true
+shader_parameter/has_shine = null
+shader_parameter/shine = null
+shader_parameter/shine_y = null
+shader_parameter/glint = Color(1, 0.8235294, 0.9647059, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bwdx4"]
+resource_name = "Timer"
+shader = ExtResource("2_d4gcm")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = null
+shader_parameter/data = ExtResource("15_tq0i7")
+shader_parameter/pal = PackedColorArray(0.101960786, 0.019607844, 0.08627451, 1, 0.23921569, 0.039215688, 0.2, 1, 0.4392157, 0.08235294, 0.3764706, 1, 0.6901961, 0.13333334, 0.56078434, 1, 0.9607843, 0.23529412, 0.81960785, 1, 1, 0.5254902, 0.9019608, 1, 1, 0.8235294, 0.9647059, 1, 1, 1, 1, 1)
+shader_parameter/raw = null
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0gs5b"]
+shader = ExtResource("5_jhw8k")
+shader_parameter/data = ExtResource("15_tq0i7")
+shader_parameter/t = null
+shader_parameter/nframes = 45
+shader_parameter/looped = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dhsci"]
+resource_name = "Light"
+shader = ExtResource("16_y0qkv")
+shader_parameter/data = ExtResource("17_bas4s")
+shader_parameter/canvas = Vector4(-104, -50, 208, 100)
+shader_parameter/strength = null
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nh6u2"]
+shader = ExtResource("5_jhw8k")
+shader_parameter/data = ExtResource("17_bas4s")
+shader_parameter/t = null
+shader_parameter/nframes = 45
+shader_parameter/looped = false
+
+[node name="ComboCounter" type="Node2D" unique_id=1310888737]
+script = ExtResource("1_e2tsr")
+effect_id = "ui/combo-counter"
+source = "src/fx/ui/combo-counter.js@2aaf9f4d38a5d88e4eddd76a317b23399b34299e"
+duration = 1.45
+canvas_size = Vector2i(208, 100)
+origin = Vector2i(104, 50)
+ramps = {
+"palette": PackedColorArray(0.101960786, 0.019607844, 0.08627451, 1, 0.23921569, 0.039215688, 0.2, 1, 0.4392157, 0.08235294, 0.3764706, 1, 0.6901961, 0.13333334, 0.56078434, 1, 0.9607843, 0.23529412, 0.81960785, 1, 1, 0.5254902, 0.9019608, 1, 1, 0.8235294, 0.9647059, 1, 1, 1, 1, 1)
+}
+palette_extra = PackedColorArray(0.050980393, 0.007843138, 0.043137256, 1, 0.7490196, 0.6156863, 0.72156864, 1, 0.54901963, 0.54901963, 0.54901963, 1, 0.54901963, 0.4509804, 0.5294118, 1)
+palette_override = PackedColorArray()
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1475179854]
+libraries/ = SubResource("AnimationLibrary_7qpng")
+
+[node name="SpeedLines" type="Node2D" parent="." unique_id=710505258]
+
+[node name="SpeedLines" type="GPUParticles2D" parent="SpeedLines" unique_id=517049400]
+z_index = 1
+material = SubResource("ShaderMaterial_4yda5")
+amount = 18
+texture = ExtResource("4_ijmrq")
+lifetime = 1.49
+one_shot = true
+preprocess = 0.016666666666666666
+explosiveness = 1.0
+use_fixed_seed = true
+seed = 49678
+fixed_fps = 60
+interpolate = false
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+local_coords = true
+draw_order = 0
+process_material = SubResource("ShaderMaterial_gvpa4")
+
+[node name="Slam" type="Node2D" parent="." unique_id=878722550]
+
+[node name="Slam" type="GPUParticles2D" parent="Slam" unique_id=190515563]
+z_index = 1
+material = SubResource("ShaderMaterial_ssw6u")
+amount = 11
+texture = ExtResource("4_ijmrq")
+lifetime = 1.49
+one_shot = true
+preprocess = 0.016666666666666666
+explosiveness = 1.0
+use_fixed_seed = true
+seed = 536452
+fixed_fps = 60
+interpolate = false
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+local_coords = true
+draw_order = 0
+process_material = SubResource("ShaderMaterial_ptvq0")
+
+[node name="Particles" type="Node2D" parent="." unique_id=18710585]
+
+[node name="Particles" type="GPUParticles2D" parent="Particles" unique_id=1444409484]
+z_index = 1
+material = SubResource("ShaderMaterial_v6a8r")
+amount = 52
+texture = ExtResource("4_ijmrq")
+lifetime = 1.49
+one_shot = true
+preprocess = 0.016666666666666666
+explosiveness = 1.0
+use_fixed_seed = true
+seed = 666327
+fixed_fps = 60
+interpolate = false
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+local_coords = true
+draw_order = 0
+process_material = SubResource("ShaderMaterial_o5tw2")
+
+[node name="Smear0" type="ColorRect" parent="." unique_id=483248477]
+z_index = 1
+material = SubResource("ShaderMaterial_k3v12")
+offset_left = -104.0
+offset_top = -50.0
+offset_right = 104.0
+offset_bottom = 50.0
+mouse_filter = 2
+metadata/gh = 7.0
+metadata/ow = 1.0
+metadata/n = 7
+metadata/nfill = 1
+
+[node name="Smear1" type="ColorRect" parent="." unique_id=1850980337]
+z_index = 1
+material = SubResource("ShaderMaterial_kefv4")
+offset_left = -104.0
+offset_top = -50.0
+offset_right = 104.0
+offset_bottom = 50.0
+mouse_filter = 2
+metadata/gh = 7.0
+metadata/ow = 1.0
+metadata/n = 7
+metadata/nfill = 1
+
+[node name="Combo" type="ColorRect" parent="." unique_id=823319029]
+z_index = 1
+material = SubResource("ShaderMaterial_trdyl")
+offset_left = -104.0
+offset_top = -50.0
+offset_right = 104.0
+offset_bottom = 50.0
+mouse_filter = 2
+metadata/gh = 7.0
+metadata/ow = 2.0
+metadata/n = 7
+metadata/nfill = 4
+
+[node name="Timer" type="Node2D" parent="." unique_id=1558495608]
+
+[node name="Timer" type="GPUParticles2D" parent="Timer" unique_id=2057543751]
+z_index = 1
+material = SubResource("ShaderMaterial_bwdx4")
+amount = 6
+texture = ExtResource("4_ijmrq")
+lifetime = 1.49
+one_shot = true
+preprocess = 0.016666666666666666
+explosiveness = 1.0
+use_fixed_seed = true
+seed = 24725
+fixed_fps = 60
+interpolate = false
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+local_coords = true
+draw_order = 0
+process_material = SubResource("ShaderMaterial_0gs5b")
+
+[node name="Light" type="GPUParticles2D" parent="." unique_id=826838379]
+z_index = 2
+material = SubResource("ShaderMaterial_dhsci")
+amount = 29
+texture = ExtResource("4_ijmrq")
+lifetime = 1.49
+one_shot = true
+preprocess = 0.016666666666666666
+explosiveness = 1.0
+use_fixed_seed = true
+seed = 530955
+fixed_fps = 60
+interpolate = false
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+local_coords = true
+draw_order = 0
+process_material = SubResource("ShaderMaterial_nh6u2")

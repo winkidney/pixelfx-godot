@@ -1,703 +1,197 @@
-[gd_scene format=3]
+[gd_scene format=4]
 
-[ext_resource type="Script" path="res://addons/pixelfx_particles/core/pfx_effect.gd" id="1_0x4jg"]
-[ext_resource type="Shader" path="res://addons/pixelfx_particles/shaders/dither.gdshader" id="2_ofa0m"]
-[ext_resource type="Shader" path="res://addons/pixelfx_particles/shaders/ring.gdshader" id="3_ed4d2"]
-[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/textures/star5.png" id="4_rileo"]
-[ext_resource type="Shader" path="res://addons/pixelfx_particles/shaders/ring_light.gdshader" id="5_dn65a"]
-[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/textures/streak3.png" id="6_helx3"]
-[ext_resource type="Script" path="res://addons/pixelfx_particles/core/pixel_text.gd" id="7_h3dxe"]
-[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/textures/plus3.png" id="8_4fbt5"]
+[ext_resource type="Script" path="res://addons/pixelfx_particles/core/pfx_effect.gd" id="1_ed4d2"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/fx/ui/_bits.gdshader" id="2_rileo"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/fx/ui/damage-number/_hit.res" id="3_dn65a"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/fx/ui/damage-number/_quad1.res" id="4_helx3"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/fx/ui/_ftp.gdshader" id="5_h3dxe"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/fx/ui/_word.gdshader" id="6_4fbt5"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/fx/ui/damage-number/_number_glyphs.res" id="7_oh6cy"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/fx/ui/damage-number/_number_layout.res" id="8_b4afl"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/fx/ui/_bits_light.gdshader" id="9_ux1r5"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/fx/ui/damage-number/_light.res" id="10_py7lk"]
 
-[sub_resource type="Animation" id="Animation_oh6cy"]
+[sub_resource type="Animation" id="Animation_texdv"]
 length = 1.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Star:visible")
-tracks/0/interp = 0
+tracks/0/path = NodePath("Hit/Hit:process_material:shader_parameter/t")
+tracks/0/interp = 1
 tracks/0/loop_wrap = false
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.069),
+"times": PackedFloat32Array(0, 1.05),
 "transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
+"update": 0,
+"values": [0.0, 1.05]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Star/Spike0:width")
-tracks/1/interp = 0
+tracks/1/path = NodePath("Light:process_material:shader_parameter/t")
+tracks/1/interp = 1
 tracks/1/loop_wrap = false
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.034),
+"times": PackedFloat32Array(0, 1.05),
 "transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [3.0, 1.0]
+"update": 0,
+"values": [0.0, 1.05]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Star/Spike0:default_color")
+tracks/2/path = NodePath("Number:material:shader_parameter/frame")
 tracks/2/interp = 0
 tracks/2/loop_wrap = false
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.034),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.032333333, 0.06566667, 0.099, 0.13233334, 0.16566667, 0.199, 0.23233333, 0.26566666, 0.299, 0.33233333, 0.36566666, 0.399, 0.43233332, 0.46566668, 0.499, 0.5323333, 0.5656667, 0.599, 0.63233334, 0.66566664, 0.699, 0.73233336, 0.76566666, 0.799, 0.8323333, 0.8656667, 0.899, 0.93233335, 0.96566665, 0.999, 1.0323334, 1.0656667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [Color(1, 1, 1, 1), Color(1, 0.6039216, 0.5254902, 1)]
+"values": [0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0, 13.0, 14.0, 15.0, 16.0, 17.0, 18.0, 19.0, 20.0, 21.0, 22.0, 23.0, 24.0, 25.0, 26.0, 27.0, 28.0, 29.0, 30.0, 31.0, 32.0]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Star/Spike0:points")
+tracks/3/path = NodePath("Number:material:shader_parameter/it0")
 tracks/3/interp = 0
 tracks/3/loop_wrap = false
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.034),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.032333333, 0.06566667, 0.099, 0.13233334, 0.16566667, 0.199, 0.23233333, 0.26566666, 0.299, 0.33233333, 0.36566666, 0.399, 0.43233332, 0.46566668, 0.499, 0.5323333, 0.5656667, 0.599, 0.699, 0.76566666, 0.799, 0.93233335, 0.96566665, 0.999, 1.0323334, 1.0656667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [PackedVector2Array(0, 0, 11.079619, 0.90112257), PackedVector2Array(6.481577, 0.52715665, 14.403504, 1.1714593)]
+"values": [PackedVector4Array(-35, -28, 27, 18, -35, -12, 27, 21, -35, 7, 27, 21, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(-32, -19, 19, 14, -32, -8, 19, 16, -32, 5, 19, 16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(-31, -15, 14, 12, -31, -6, 14, 14, -31, 5, 14, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(-34, -14, 14, 12, -34, -5, 14, 14, -34, 6, 14, 14, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(-37, -14, 15, 13, -37, -4, 15, 14, -37, 7, 15, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(-39, -14, 15, 13, -39, -4, 15, 15, -39, 8, 15, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(-39, -13, 15, 13, -39, -3, 15, 15, -39, 9, 15, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(-38, -12, 15, 13, -38, -2, 15, 15, -38, 10, 15, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(-36, -12, 15, 13, -36, -2, 15, 15, -36, 10, 15, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(-33, -11, 15, 13, -33, -1, 15, 15, -33, 11, 15, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(-31, -9, 16, 12, -31, 0, 16, 14, -31, 11, 16, 14, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(-26, -8, 16, 12, -26, 1, 16, 14, -26, 12, 16, 14, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(-21, -11, 13, 14, -21, 0, 13, 16, -21, 14, 13, 16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(-23, -10, 14, 14, -23, 1, 14, 15, -23, 14, 14, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(-24, -8, 15, 13, -24, 2, 15, 15, -24, 14, 15, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(-23, -8, 15, 13, -23, 2, 15, 15, -23, 14, 15, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(-20, -10, 12, 14, -20, 2, 12, 16, -20, 15, 12, 16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(-22, -9, 14, 14, -22, 2, 14, 16, -22, 15, 14, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(-23, -8, 15, 13, -23, 2, 15, 15, -23, 14, 15, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(-22, -8, 14, 13, -22, 2, 14, 15, -22, 14, 14, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(-22, -8, 15, 13, -22, 2, 15, 15, -22, 14, 15, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(-23, -8, 15, 13, -23, 2, 15, 15, -23, 14, 15, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(-24, -8, 15, 13, -24, 2, 15, 15, -24, 14, 15, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(-26, -8, 15, 13, -26, 2, 15, 15, -26, 14, 15, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(-28, -8, 15, 13, -28, 2, 15, 15, -28, 14, 15, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Star/Spike1:width")
+tracks/4/path = NodePath("Number:material:shader_parameter/it1")
 tracks/4/interp = 0
 tracks/4/loop_wrap = false
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.034),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.06566667, 0.099, 0.8656667, 0.899, 0.93233335, 0.96566665, 0.999, 1.0323334, 1.0656667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [3.0, 1.0]
+"values": [PackedVector4Array(1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(1, 0.4, 0, 1, 1, 0.4, 0, 1, 1, 0.4, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(0.84313726, 0, 0, 1, 0.84313726, 0, 0, 1, 0.84313726, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(0.64705884, 0, 0, 1, 0.64705884, 0, 0, 1, 0.64705884, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(0.4509804, 0, 0, 1, 0.4509804, 0, 0, 1, 0.4509804, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(0.25490198, 0, 0, 1, 0.25490198, 0, 0, 1, 0.25490198, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(0.05882353, 0, 0, 1, 0.05882353, 0, 0, 1, 0.05882353, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), PackedVector4Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Star/Spike1:default_color")
+tracks/5/path = NodePath("Number:material:shader_parameter/box")
 tracks/5/interp = 0
 tracks/5/loop_wrap = false
 tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.034),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.032333333, 0.06566667, 0.099, 0.13233334, 0.16566667, 0.199, 0.23233333, 0.26566666, 0.299, 0.33233333, 0.36566666, 0.399, 0.43233332, 0.46566668, 0.499, 0.5323333, 0.5656667, 0.599, 0.699, 0.76566666, 0.799, 0.93233335, 0.96566665, 0.999, 1.0323334, 1.0656667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [Color(1, 1, 1, 1), Color(1, 0.84705883, 0.8, 1)]
+"values": [Vector4(-28, -37, 29, -4), Vector4(-19, -34, 22, -9), Vector4(-15, -33, 21, -13), Vector4(-14, -36, 21, -16), Vector4(-14, -39, 23, -18), Vector4(-14, -41, 24, -20), Vector4(-13, -41, 25, -20), Vector4(-12, -40, 26, -19), Vector4(-12, -38, 26, -17), Vector4(-11, -35, 27, -14), Vector4(-9, -33, 26, -11), Vector4(-8, -28, 27, -6), Vector4(-11, -23, 31, -4), Vector4(-10, -25, 30, -5), Vector4(-8, -26, 30, -5), Vector4(-8, -25, 30, -4), Vector4(-10, -22, 32, -4), Vector4(-9, -24, 31, -4), Vector4(-8, -25, 30, -4), Vector4(-8, -24, 30, -4), Vector4(-8, -24, 30, -3), Vector4(-8, -25, 30, -4), Vector4(-8, -26, 30, -5), Vector4(-8, -28, 30, -7), Vector4(-8, -30, 30, -9), Vector4(0, 0, -1, -1), Vector4(0, 0, -1, -1)]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("Star/Spike1:points")
+tracks/6/path = NodePath("Number:material:shader_parameter/has_shine")
 tracks/6/interp = 0
 tracks/6/loop_wrap = false
 tracks/6/keys = {
-"times": PackedFloat32Array(0, 0.034),
+"times": PackedFloat32Array(0, 1.0656667),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [PackedVector2Array(0, 0, 11.475543, 7.5762906), PackedVector2Array(6.7131925, 4.43213, 14.918205, 9.849177)]
+"values": [false, false]
 }
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("Star/Spike2:width")
+tracks/7/path = NodePath("Number:material:shader_parameter/shine")
 tracks/7/interp = 0
 tracks/7/loop_wrap = false
 tracks/7/keys = {
-"times": PackedFloat32Array(0, 0.034),
+"times": PackedFloat32Array(0, 1.0656667),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [3.0, 1.0]
+"values": [0.0, 0.0]
 }
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("Star/Spike2:default_color")
+tracks/8/path = NodePath("Number:material:shader_parameter/shine_y")
 tracks/8/interp = 0
 tracks/8/loop_wrap = false
 tracks/8/keys = {
-"times": PackedFloat32Array(0, 0.034),
+"times": PackedFloat32Array(0, 1.0656667),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [Color(1, 1, 1, 1), Color(1, 0.6039216, 0.5254902, 1)]
-}
-tracks/9/type = "value"
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/path = NodePath("Star/Spike2:points")
-tracks/9/interp = 0
-tracks/9/loop_wrap = false
-tracks/9/keys = {
-"times": PackedFloat32Array(0, 0.034),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [PackedVector2Array(0, 0, 3.0029013, 10.811053), PackedVector2Array(1.7566972, 6.324466, 3.9037716, 14.054369)]
-}
-tracks/10/type = "value"
-tracks/10/imported = false
-tracks/10/enabled = true
-tracks/10/path = NodePath("Star/Spike3:width")
-tracks/10/interp = 0
-tracks/10/loop_wrap = false
-tracks/10/keys = {
-"times": PackedFloat32Array(0, 0.034),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [3.0, 1.0]
-}
-tracks/11/type = "value"
-tracks/11/imported = false
-tracks/11/enabled = true
-tracks/11/path = NodePath("Star/Spike3:default_color")
-tracks/11/interp = 0
-tracks/11/loop_wrap = false
-tracks/11/keys = {
-"times": PackedFloat32Array(0, 0.034),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [Color(1, 1, 1, 1), Color(1, 0.84705883, 0.8, 1)]
-}
-tracks/12/type = "value"
-tracks/12/imported = false
-tracks/12/enabled = true
-tracks/12/path = NodePath("Star/Spike3:points")
-tracks/12/interp = 0
-tracks/12/loop_wrap = false
-tracks/12/keys = {
-"times": PackedFloat32Array(0, 0.034),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [PackedVector2Array(0, 0, -3.8180547, 10.60619), PackedVector2Array(-2.2335618, 6.2046204, -4.963471, 13.788046)]
-}
-tracks/13/type = "value"
-tracks/13/imported = false
-tracks/13/enabled = true
-tracks/13/path = NodePath("Star/Spike4:width")
-tracks/13/interp = 0
-tracks/13/loop_wrap = false
-tracks/13/keys = {
-"times": PackedFloat32Array(0, 0.034),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [3.0, 1.0]
-}
-tracks/14/type = "value"
-tracks/14/imported = false
-tracks/14/enabled = true
-tracks/14/path = NodePath("Star/Spike4:default_color")
-tracks/14/interp = 0
-tracks/14/loop_wrap = false
-tracks/14/keys = {
-"times": PackedFloat32Array(0, 0.034),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [Color(1, 1, 1, 1), Color(1, 0.6039216, 0.5254902, 1)]
-}
-tracks/15/type = "value"
-tracks/15/imported = false
-tracks/15/enabled = true
-tracks/15/path = NodePath("Star/Spike4:points")
-tracks/15/interp = 0
-tracks/15/loop_wrap = false
-tracks/15/keys = {
-"times": PackedFloat32Array(0, 0.034),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [PackedVector2Array(0, 0, -7.3927493, 3.4126027), PackedVector2Array(-4.324758, 1.9963723, -9.610574, 4.4363832)]
-}
-tracks/16/type = "value"
-tracks/16/imported = false
-tracks/16/enabled = true
-tracks/16/path = NodePath("Star/Spike5:width")
-tracks/16/interp = 0
-tracks/16/loop_wrap = false
-tracks/16/keys = {
-"times": PackedFloat32Array(0, 0.034),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [3.0, 1.0]
-}
-tracks/17/type = "value"
-tracks/17/imported = false
-tracks/17/enabled = true
-tracks/17/path = NodePath("Star/Spike5:default_color")
-tracks/17/interp = 0
-tracks/17/loop_wrap = false
-tracks/17/keys = {
-"times": PackedFloat32Array(0, 0.034),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [Color(1, 1, 1, 1), Color(1, 0.84705883, 0.8, 1)]
-}
-tracks/18/type = "value"
-tracks/18/imported = false
-tracks/18/enabled = true
-tracks/18/path = NodePath("Star/Spike5:points")
-tracks/18/interp = 0
-tracks/18/loop_wrap = false
-tracks/18/keys = {
-"times": PackedFloat32Array(0, 0.034),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [PackedVector2Array(0, 0, -10.363629, -5.1885257), PackedVector2Array(-6.0627227, -3.0352874, -13.472717, -6.7450833)]
-}
-tracks/19/type = "value"
-tracks/19/imported = false
-tracks/19/enabled = true
-tracks/19/path = NodePath("Star/Spike6:width")
-tracks/19/interp = 0
-tracks/19/loop_wrap = false
-tracks/19/keys = {
-"times": PackedFloat32Array(0, 0.034),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [3.0, 1.0]
-}
-tracks/20/type = "value"
-tracks/20/imported = false
-tracks/20/enabled = true
-tracks/20/path = NodePath("Star/Spike6:default_color")
-tracks/20/interp = 0
-tracks/20/loop_wrap = false
-tracks/20/keys = {
-"times": PackedFloat32Array(0, 0.034),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [Color(1, 1, 1, 1), Color(1, 0.6039216, 0.5254902, 1)]
-}
-tracks/21/type = "value"
-tracks/21/imported = false
-tracks/21/enabled = true
-tracks/21/path = NodePath("Star/Spike6:points")
-tracks/21/interp = 0
-tracks/21/loop_wrap = false
-tracks/21/keys = {
-"times": PackedFloat32Array(0, 0.034),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [PackedVector2Array(0, 0, -4.770352, -9.29062), PackedVector2Array(-2.7906556, -5.4350123, -6.201457, -12.0778055)]
-}
-tracks/22/type = "value"
-tracks/22/imported = false
-tracks/22/enabled = true
-tracks/22/path = NodePath("Star/Spike7:width")
-tracks/22/interp = 0
-tracks/22/loop_wrap = false
-tracks/22/keys = {
-"times": PackedFloat32Array(0, 0.034),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [3.0, 1.0]
-}
-tracks/23/type = "value"
-tracks/23/imported = false
-tracks/23/enabled = true
-tracks/23/path = NodePath("Star/Spike7:default_color")
-tracks/23/interp = 0
-tracks/23/loop_wrap = false
-tracks/23/keys = {
-"times": PackedFloat32Array(0, 0.034),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [Color(1, 1, 1, 1), Color(1, 0.84705883, 0.8, 1)]
-}
-tracks/24/type = "value"
-tracks/24/imported = false
-tracks/24/enabled = true
-tracks/24/path = NodePath("Star/Spike7:points")
-tracks/24/interp = 0
-tracks/24/loop_wrap = false
-tracks/24/keys = {
-"times": PackedFloat32Array(0, 0.034),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [PackedVector2Array(0, 0, 2.524181, -11.061465), PackedVector2Array(1.4766458, -6.470957, 3.281435, -14.379905)]
-}
-tracks/25/type = "value"
-tracks/25/imported = false
-tracks/25/enabled = true
-tracks/25/path = NodePath("Star/Spike8:width")
-tracks/25/interp = 0
-tracks/25/loop_wrap = false
-tracks/25/keys = {
-"times": PackedFloat32Array(0, 0.034),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [3.0, 1.0]
-}
-tracks/26/type = "value"
-tracks/26/imported = false
-tracks/26/enabled = true
-tracks/26/path = NodePath("Star/Spike8:default_color")
-tracks/26/interp = 0
-tracks/26/loop_wrap = false
-tracks/26/keys = {
-"times": PackedFloat32Array(0, 0.034),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [Color(1, 1, 1, 1), Color(1, 0.6039216, 0.5254902, 1)]
-}
-tracks/27/type = "value"
-tracks/27/imported = false
-tracks/27/enabled = true
-tracks/27/path = NodePath("Star/Spike8:points")
-tracks/27/interp = 0
-tracks/27/loop_wrap = false
-tracks/27/keys = {
-"times": PackedFloat32Array(0, 0.034),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [PackedVector2Array(0, 0, 8.851143, -8.790734), PackedVector2Array(5.177918, -5.142579, 11.506485, -11.427954)]
-}
-tracks/28/type = "value"
-tracks/28/imported = false
-tracks/28/enabled = true
-tracks/28/path = NodePath("Core:visible")
-tracks/28/interp = 0
-tracks/28/loop_wrap = false
-tracks/28/keys = {
-"times": PackedFloat32Array(0, 0.034),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-tracks/29/type = "value"
-tracks/29/imported = false
-tracks/29/enabled = true
-tracks/29/path = NodePath("Glint:visible")
-tracks/29/interp = 0
-tracks/29/loop_wrap = false
-tracks/29/keys = {
-"times": PackedFloat32Array(0, 0.069, 0.159),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [false, true, false]
-}
-tracks/30/type = "value"
-tracks/30/imported = false
-tracks/30/enabled = true
-tracks/30/path = NodePath("Glint:scale")
-tracks/30/interp = 1
-tracks/30/loop_wrap = false
-tracks/30/keys = {
-"times": PackedFloat32Array(0, 0.07, 0.16),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(1, 1), Vector2(0.2, 0.2)]
-}
-tracks/31/type = "value"
-tracks/31/imported = false
-tracks/31/enabled = true
-tracks/31/path = NodePath("Ring:material:shader_parameter/radius")
-tracks/31/interp = 1
-tracks/31/loop_wrap = false
-tracks/31/keys = {
-"times": PackedFloat32Array(0, 0.016666668, 0.033333335, 0.05, 0.06666667, 0.083333336, 0.1, 0.11666667, 0.13333334, 0.15, 0.16666667, 0.2, 0.21666667),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [3.0, 5.10489885076662, 6.891532403929098, 8.385987978963186, 9.61435289534463, 10.602714472549184, 11.377160030052593, 11.963776887330607, 12.388652363858975, 12.677873779113447, 12.857528452569774, 12.992486851990984, 12.999965216907366]
-}
-tracks/32/type = "value"
-tracks/32/imported = false
-tracks/32/enabled = true
-tracks/32/path = NodePath("Ring:material:shader_parameter/thickness")
-tracks/32/interp = 1
-tracks/32/loop_wrap = false
-tracks/32/keys = {
-"times": PackedFloat32Array(0, 0.22),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [2.0, 1.0]
-}
-tracks/33/type = "value"
-tracks/33/imported = false
-tracks/33/enabled = true
-tracks/33/path = NodePath("Ring:material:shader_parameter/color")
-tracks/33/interp = 0
-tracks/33/loop_wrap = false
-tracks/33/keys = {
-"times": PackedFloat32Array(0, 0.087),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [Color(1, 1, 1, 1), Color(1, 0.6039216, 0.5254902, 1)]
-}
-tracks/34/type = "value"
-tracks/34/imported = false
-tracks/34/enabled = true
-tracks/34/path = NodePath("Ring:material:shader_parameter/alpha")
-tracks/34/interp = 1
-tracks/34/loop_wrap = false
-tracks/34/keys = {
-"times": PackedFloat32Array(0, 0.22),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [1.0, 0.0]
-}
-tracks/35/type = "value"
-tracks/35/imported = false
-tracks/35/enabled = true
-tracks/35/path = NodePath("Ring:visible")
-tracks/35/interp = 0
-tracks/35/loop_wrap = false
-tracks/35/keys = {
-"times": PackedFloat32Array(0, 0.219),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-tracks/36/type = "value"
-tracks/36/imported = false
-tracks/36/enabled = true
-tracks/36/path = NodePath("HitLight:material:shader_parameter/alpha")
-tracks/36/interp = 1
-tracks/36/loop_wrap = false
-tracks/36/keys = {
-"times": PackedFloat32Array(0, 0.25),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.7, 0.0]
-}
-tracks/37/type = "value"
-tracks/37/imported = false
-tracks/37/enabled = true
-tracks/37/path = NodePath("Sparks:emitting")
-tracks/37/interp = 0
-tracks/37/loop_wrap = false
-tracks/37/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/38/type = "value"
-tracks/38/imported = false
-tracks/38/enabled = true
-tracks/38/path = NodePath("Number:position")
-tracks/38/interp = 0
-tracks/38/loop_wrap = false
-tracks/38/keys = {
-"times": PackedFloat32Array(0, 0.032333333, 0.06566667, 0.099, 0.13233334, 0.16566667, 0.199, 0.23233333, 0.26566666, 0.299, 0.33233333, 0.36566666, 0.399, 0.43233332, 0.499, 0.5323333, 0.899, 0.93233335, 0.96566665, 0.999, 1.0323334),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [Vector2(0, -8), Vector2(1, -13), Vector2(2, -17), Vector2(3, -21), Vector2(4, -23), Vector2(5, -24), Vector2(6, -24), Vector2(6, -23), Vector2(7, -22), Vector2(8, -19), Vector2(8, -15), Vector2(9, -10), Vector2(9, -9), Vector2(10, -10), Vector2(11, -9), Vector2(11, -8), Vector2(11, -9), Vector2(11, -10), Vector2(11, -11), Vector2(11, -13), Vector2(11, -14)]
-}
-tracks/39/type = "value"
-tracks/39/imported = false
-tracks/39/enabled = true
-tracks/39/path = NodePath("Number:sx")
-tracks/39/interp = 0
-tracks/39/loop_wrap = false
-tracks/39/keys = {
-"times": PackedFloat32Array(0, 0.032333333, 0.06566667, 0.099, 0.13233334, 0.16566667, 0.199, 0.23233333, 0.26566666, 0.299, 0.33233333, 0.36566666, 0.399, 0.43233332, 0.46566668, 0.499, 0.5323333, 0.5656667, 0.599, 1.0323334),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [3.128, 2.1742489594689682, 1.8655968667882454, 1.846427986470322, 1.951298921092848, 2.0101511765224083, 2.0165036717636466, 2.0062239305397185, 1.9994230606387047, 1.9982647385191652, 1.839293863521368, 1.8400017889113376, 2.2602012251827714, 2.1267644679532096, 2.0000066566863626, 1.9999822366876996, 2.2599878466593664, 2.1266650883887053, 2.0000017107760475, 2.0000000001715796]
-}
-tracks/40/type = "value"
-tracks/40/imported = false
-tracks/40/enabled = true
-tracks/40/path = NodePath("Number:sy")
-tracks/40/interp = 0
-tracks/40/loop_wrap = false
-tracks/40/keys = {
-"times": PackedFloat32Array(0, 0.032333333, 0.06566667, 0.099, 0.13233334, 0.16566667, 0.199, 0.23233333, 0.26566666, 0.299, 0.33233333, 0.36566666, 0.399, 0.43233332, 0.46566668, 0.499, 0.5323333, 0.5656667, 0.599, 1.0323334),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [3.74, 2.5996454950172447, 1.8655968667882454, 1.846427986470322, 1.951298921092848, 2.0101511765224083, 2.0165036717636466, 2.0062239305397185, 1.9994230606387047, 1.9982647385191652, 2.1991557063842446, 2.2000021389157296, 1.7112634644943305, 1.859344762996362, 2.0000066566863626, 1.9999822366876996, 1.7111019094667768, 1.8592578794342214, 2.0000017107760475, 2.0000000001715796]
-}
-tracks/41/type = "value"
-tracks/41/imported = false
-tracks/41/enabled = true
-tracks/41/path = NodePath("Number:flash")
-tracks/41/interp = 0
-tracks/41/loop_wrap = false
-tracks/41/keys = {
-"times": PackedFloat32Array(0, 0.06566667, 0.099, 1.0323334),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [1.0, 0.4, 0.0, 0.0]
-}
-tracks/42/type = "value"
-tracks/42/imported = false
-tracks/42/enabled = true
-tracks/42/path = NodePath("Number:modulate:a")
-tracks/42/interp = 1
-tracks/42/loop_wrap = false
-tracks/42/keys = {
-"times": PackedFloat32Array(0, 0.8333333, 0.8666667, 1, 1.0333333),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 0,
-"values": [1.0, 1.0, 0.8431372549019645, 0.05882352941177127, 0.0]
-}
-tracks/43/type = "value"
-tracks/43/imported = false
-tracks/43/enabled = true
-tracks/43/path = NodePath("WordLight:material:shader_parameter/alpha")
-tracks/43/interp = 1
-tracks/43/loop_wrap = false
-tracks/43/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.8333333, 0.8666667, 1, 1.0333333),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [0.7, 0.30000000000000004, 0.3, 0.25294117647058934, 0.01764705882353138, 0.0]
-}
-tracks/44/type = "value"
-tracks/44/imported = false
-tracks/44/enabled = true
-tracks/44/path = NodePath("WordLight:position")
-tracks/44/interp = 0
-tracks/44/loop_wrap = false
-tracks/44/keys = {
-"times": PackedFloat32Array(0, 0.032333333, 0.06566667, 0.099, 0.13233334, 0.16566667, 0.199, 0.23233333, 0.26566666, 0.299, 0.33233333, 0.36566666, 0.399, 0.43233332, 0.499, 0.5323333, 0.899, 0.93233335, 0.96566665, 0.999, 1.0323334),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [Vector2(-24, -40), Vector2(-23, -45), Vector2(-22, -49), Vector2(-21, -53), Vector2(-20, -55), Vector2(-19, -56), Vector2(-18, -56), Vector2(-18, -55), Vector2(-17, -54), Vector2(-16, -51), Vector2(-16, -47), Vector2(-15, -42), Vector2(-15, -41), Vector2(-14, -42), Vector2(-13, -41), Vector2(-13, -40), Vector2(-13, -41), Vector2(-13, -42), Vector2(-13, -43), Vector2(-13, -45), Vector2(-13, -46)]
-}
-tracks/45/type = "value"
-tracks/45/imported = false
-tracks/45/enabled = true
-tracks/45/path = NodePath("KickL:emitting")
-tracks/45/interp = 0
-tracks/45/loop_wrap = false
-tracks/45/keys = {
-"times": PackedFloat32Array(0, 0.38233334),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, true]
-}
-tracks/46/type = "value"
-tracks/46/imported = false
-tracks/46/enabled = true
-tracks/46/path = NodePath("KickR:emitting")
-tracks/46/interp = 0
-tracks/46/loop_wrap = false
-tracks/46/keys = {
-"times": PackedFloat32Array(0, 0.38233334),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, true]
+"values": [0.0, 0.0]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_b4afl"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hoa22"]
 _data = {
-&"fx": SubResource("Animation_oh6cy")
+&"fx": SubResource("Animation_texdv")
 }
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ux1r5"]
-resource_name = "Dither"
-shader = ExtResource("2_ofa0m")
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nyhfm"]
+resource_name = "Hit"
+shader = ExtResource("2_rileo")
 shader_parameter/palette_size = null
 shader_parameter/alpha_scale = null
 shader_parameter/translucent = null
+shader_parameter/data = ExtResource("3_dn65a")
+shader_parameter/pal = PackedColorArray(0.101960786, 0.019607844, 0.03137255, 1, 0.2901961, 0.043137256, 0.07058824, 1, 0.54901963, 0.078431375, 0.1254902, 1, 0.83137256, 0.16470589, 0.18039216, 1, 1, 0.3529412, 0.2901961, 1, 1, 0.6039216, 0.5254902, 1, 1, 0.84705883, 0.8, 1, 1, 1, 1, 1)
+shader_parameter/raw = null
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_py7lk"]
-shader = ExtResource("3_ed4d2")
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ls22l"]
+shader = ExtResource("5_h3dxe")
+shader_parameter/data = ExtResource("3_dn65a")
+shader_parameter/t = null
+shader_parameter/nframes = 33
+shader_parameter/looped = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wga08"]
+shader = ExtResource("6_4fbt5")
 shader_parameter/palette_size = null
 shader_parameter/alpha_scale = null
 shader_parameter/translucent = null
-shader_parameter/size = Vector2(12, 12)
-shader_parameter/radius = 3.2
-shader_parameter/thickness = null
-shader_parameter/squash = null
-shader_parameter/color = Color(1, 1, 1, 1)
-shader_parameter/edge_color = null
-shader_parameter/edge = null
-shader_parameter/side = null
-shader_parameter/ragged = null
-shader_parameter/grain = null
-shader_parameter/alpha = null
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_texdv"]
-shader = ExtResource("3_ed4d2")
-shader_parameter/palette_size = null
-shader_parameter/alpha_scale = null
-shader_parameter/translucent = null
-shader_parameter/size = Vector2(32, 32)
-shader_parameter/radius = 3.0
-shader_parameter/thickness = 2.0
-shader_parameter/squash = null
-shader_parameter/color = Color(1, 1, 1, 1)
-shader_parameter/edge_color = null
-shader_parameter/edge = null
-shader_parameter/side = null
-shader_parameter/ragged = null
-shader_parameter/grain = null
-shader_parameter/alpha = null
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_hoa22"]
-shader = ExtResource("5_dn65a")
-shader_parameter/size = Vector2(64, 64)
-shader_parameter/radius = 30.0
-shader_parameter/thickness = null
-shader_parameter/squash = null
-shader_parameter/color = Color(1, 0.6039216, 0.5254902, 1)
-shader_parameter/strength = null
-shader_parameter/alpha = null
-
-[sub_resource type="Gradient" id="Gradient_nyhfm"]
-interpolation_mode = 1
-offsets = PackedFloat32Array(0, 0.25, 0.5, 0.75)
-colors = PackedColorArray(1, 1, 1, 1, 1, 0.84705883, 0.8, 1, 1, 0.3529412, 0.2901961, 1, 0.54901963, 0.078431375, 0.1254902, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_ls22l"]
-gradient = SubResource("Gradient_nyhfm")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wga08"]
-particle_flag_align_y = true
-particle_flag_disable_z = true
-direction = Vector3(6.123234e-17, -1, 0)
-spread = 85.0
-initial_velocity_min = 90.0
-initial_velocity_max = 200.0
-gravity = Vector3(0, 0, 0)
-damping_min = 200.0
-damping_max = 400.0
-color_ramp = SubResource("GradientTexture1D_ls22l")
+shader_parameter/size = Vector2(76, 68)
+shader_parameter/center = Vector2(8, -18)
+shader_parameter/glyphs = ExtResource("7_oh6cy")
+shader_parameter/n = 3
+shader_parameter/gh = 7.0
+shader_parameter/gw = PackedFloat32Array(4, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/it0 = null
+shader_parameter/it1 = null
+shader_parameter/lay = ExtResource("8_b4afl")
+shader_parameter/frame = null
+shader_parameter/box = null
+shader_parameter/fill = PackedColorArray(0.83137256, 0.16470589, 0.18039216, 1, 0.83137256, 0.16470589, 0.18039216, 1, 1, 0.3529412, 0.2901961, 1, 1, 0.6039216, 0.5254902, 1)
+shader_parameter/nfill = 4
+shader_parameter/edge = Color(1, 0.84705883, 0.8, 1)
+shader_parameter/has_edge = true
+shader_parameter/under = Color(0.54901963, 0.078431375, 0.1254902, 1)
+shader_parameter/has_under = true
+shader_parameter/outline = Color(0.101960786, 0.019607844, 0.03137255, 1)
+shader_parameter/has_outline = true
+shader_parameter/ow = 1
+shader_parameter/shadow = Color(0.050980393, 0.007843138, 0.015686275, 1)
+shader_parameter/has_shadow = true
+shader_parameter/has_shine = null
+shader_parameter/shine = null
+shader_parameter/shine_y = null
+shader_parameter/glint = null
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mjqbt"]
-shader = ExtResource("5_dn65a")
-shader_parameter/size = Vector2(48, 48)
-shader_parameter/radius = 18.0
-shader_parameter/thickness = null
-shader_parameter/squash = null
-shader_parameter/color = Color(1, 0.3529412, 0.2901961, 1)
+resource_name = "Light"
+shader = ExtResource("9_ux1r5")
+shader_parameter/data = ExtResource("10_py7lk")
+shader_parameter/canvas = Vector4(-30, -52, 76, 68)
 shader_parameter/strength = null
-shader_parameter/alpha = null
 
-[sub_resource type="Curve" id="Curve_a666p"]
-_data = [Vector2(0, 1), 0.0, 0.0, 1, 1, Vector2(0.7, 1), 0.0, -3.3333333, 1, 1, Vector2(1, 0), -3.3333333, 0.0, 1, 1]
-point_count = 3
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a666p"]
+shader = ExtResource("5_h3dxe")
+shader_parameter/data = ExtResource("10_py7lk")
+shader_parameter/t = null
+shader_parameter/nframes = 33
+shader_parameter/looped = false
 
-[sub_resource type="CurveTexture" id="CurveTexture_4dcgp"]
-curve = SubResource("Curve_a666p")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vy6db"]
-particle_flag_disable_z = true
-direction = Vector3(-0.76604444, -0.64278764, 0)
-spread = 20.0
-initial_velocity_min = 15.0
-initial_velocity_max = 35.0
-gravity = Vector3(0, 0, 0)
-color = Color(1, 0.84705883, 0.8, 1)
-alpha_curve = SubResource("CurveTexture_4dcgp")
-
-[sub_resource type="Curve" id="Curve_qquhh"]
-_data = [Vector2(0, 1), 0.0, 0.0, 1, 1, Vector2(0.7, 1), 0.0, -3.3333333, 1, 1, Vector2(1, 0), -3.3333333, 0.0, 1, 1]
-point_count = 3
-
-[sub_resource type="CurveTexture" id="CurveTexture_u1jqy"]
-curve = SubResource("Curve_qquhh")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_q426k"]
-particle_flag_disable_z = true
-direction = Vector3(0.76604444, -0.64278764, 0)
-spread = 20.0
-initial_velocity_min = 15.0
-initial_velocity_max = 35.0
-gravity = Vector3(0, 0, 0)
-color = Color(1, 0.84705883, 0.8, 1)
-alpha_curve = SubResource("CurveTexture_u1jqy")
-
-[node name="DamageNumber" type="Node2D" unique_id=824790944]
-script = ExtResource("1_0x4jg")
+[node name="DamageNumber" type="Node2D" unique_id=1114505934]
+script = ExtResource("1_ed4d2")
 effect_id = "ui/damage-number"
 source = "src/fx/ui/damage-number.js@3f026840a40959e48e9ca9a8d1da59734157a1f6"
 duration = 1.05
@@ -706,167 +200,59 @@ origin = Vector2i(30, 52)
 ramps = {
 "palette": PackedColorArray(0.101960786, 0.019607844, 0.03137255, 1, 0.2901961, 0.043137256, 0.07058824, 1, 0.54901963, 0.078431375, 0.1254902, 1, 0.83137256, 0.16470589, 0.18039216, 1, 1, 0.3529412, 0.2901961, 1, 1, 0.6039216, 0.5254902, 1, 1, 0.84705883, 0.8, 1, 1, 1, 1, 1)
 }
-palette_extra = PackedColorArray(0.050980393, 0.009803922, 0.015686275, 1)
+palette_extra = PackedColorArray(0.050980393, 0.007843138, 0.015686275, 1, 0.7490196, 0.63529414, 0.6, 1)
 palette_override = PackedColorArray()
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1541212138]
-libraries/ = SubResource("AnimationLibrary_b4afl")
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=807254341]
+libraries/ = SubResource("AnimationLibrary_hoa22")
 
-[node name="Star" type="Node2D" parent="." unique_id=942552091]
-position = Vector2(0, -4)
+[node name="Hit" type="Node2D" parent="." unique_id=1829619563]
 
-[node name="Spike0" type="Line2D" parent="Star" unique_id=612666478]
+[node name="Hit" type="GPUParticles2D" parent="Hit" unique_id=50766812]
 z_index = 1
-material = SubResource("ShaderMaterial_ux1r5")
-points = PackedVector2Array(0, 0, 11.079619, 0.90112257)
-width = 3.0
-
-[node name="Spike1" type="Line2D" parent="Star" unique_id=1737163034]
-z_index = 1
-material = SubResource("ShaderMaterial_ux1r5")
-points = PackedVector2Array(0, 0, 11.475543, 7.5762906)
-width = 3.0
-
-[node name="Spike2" type="Line2D" parent="Star" unique_id=133823241]
-z_index = 1
-material = SubResource("ShaderMaterial_ux1r5")
-points = PackedVector2Array(0, 0, 3.0029013, 10.811053)
-width = 3.0
-
-[node name="Spike3" type="Line2D" parent="Star" unique_id=623338444]
-z_index = 1
-material = SubResource("ShaderMaterial_ux1r5")
-points = PackedVector2Array(0, 0, -3.8180547, 10.60619)
-width = 3.0
-
-[node name="Spike4" type="Line2D" parent="Star" unique_id=1672950658]
-z_index = 1
-material = SubResource("ShaderMaterial_ux1r5")
-points = PackedVector2Array(0, 0, -7.3927493, 3.4126027)
-width = 3.0
-
-[node name="Spike5" type="Line2D" parent="Star" unique_id=225988277]
-z_index = 1
-material = SubResource("ShaderMaterial_ux1r5")
-points = PackedVector2Array(0, 0, -10.363629, -5.1885257)
-width = 3.0
-
-[node name="Spike6" type="Line2D" parent="Star" unique_id=1858930363]
-z_index = 1
-material = SubResource("ShaderMaterial_ux1r5")
-points = PackedVector2Array(0, 0, -4.770352, -9.29062)
-width = 3.0
-
-[node name="Spike7" type="Line2D" parent="Star" unique_id=2016249904]
-z_index = 1
-material = SubResource("ShaderMaterial_ux1r5")
-points = PackedVector2Array(0, 0, 2.524181, -11.061465)
-width = 3.0
-
-[node name="Spike8" type="Line2D" parent="Star" unique_id=650595427]
-z_index = 1
-material = SubResource("ShaderMaterial_ux1r5")
-points = PackedVector2Array(0, 0, 8.851143, -8.790734)
-width = 3.0
-
-[node name="Core" type="ColorRect" parent="." unique_id=355909153]
-z_index = 1
-material = SubResource("ShaderMaterial_py7lk")
-offset_left = -6.0
-offset_top = -10.0
-offset_right = 6.0
-offset_bottom = 2.0
-mouse_filter = 2
-
-[node name="Glint" type="Sprite2D" parent="." unique_id=204200872]
-visible = false
-z_index = 1
-material = SubResource("ShaderMaterial_ux1r5")
-position = Vector2(0, -4)
-texture = ExtResource("4_rileo")
-
-[node name="Ring" type="ColorRect" parent="." unique_id=434616514]
-z_index = 1
-material = SubResource("ShaderMaterial_texdv")
-offset_left = -16.0
-offset_top = -20.0
-offset_right = 16.0
-offset_bottom = 12.0
-mouse_filter = 2
-
-[node name="HitLight" type="ColorRect" parent="." unique_id=664533194]
-z_index = 2
-material = SubResource("ShaderMaterial_hoa22")
-offset_left = -32.0
-offset_top = -36.0
-offset_right = 32.0
-offset_bottom = 28.0
-mouse_filter = 2
-
-[node name="Sparks" type="GPUParticles2D" parent="." unique_id=917342336]
-z_index = 1
-material = SubResource("ShaderMaterial_ux1r5")
-position = Vector2(0, -4)
-amount = 9
-texture = ExtResource("6_helx3")
-lifetime = 0.25
+material = SubResource("ShaderMaterial_nyhfm")
+amount = 47
+texture = ExtResource("4_helx3")
+lifetime = 1.09
 one_shot = true
+preprocess = 0.016666666666666666
 explosiveness = 1.0
 use_fixed_seed = true
-seed = 205850
+seed = 352221
 fixed_fps = 60
+interpolate = false
 visibility_rect = Rect2(-1024, -1024, 2048, 2048)
-process_material = SubResource("ParticleProcessMaterial_wga08")
+local_coords = true
+draw_order = 0
+process_material = SubResource("ShaderMaterial_ls22l")
 
-[node name="Number" type="Node2D" parent="." unique_id=1397055984]
+[node name="Number" type="ColorRect" parent="." unique_id=1830789061]
 z_index = 1
-material = SubResource("ShaderMaterial_ux1r5")
-position = Vector2(0, -8)
-script = ExtResource("7_h3dxe")
-text = "-27"
-sx = 2.0
-sy = 2.0
-fill = PackedColorArray(0.83137256, 0.16470589, 0.18039216, 1, 0.83137256, 0.16470589, 0.18039216, 1, 1, 0.3529412, 0.2901961, 1, 1, 0.6039216, 0.5254902, 1)
-edge = Color(1, 0.84705883, 0.8, 1)
-under = Color(0.54901963, 0.078431375, 0.1254902, 1)
-outline = Color(0.101960786, 0.019607844, 0.03137255, 1)
-shadow = Color(0.050980393, 0.009803922, 0.015686275, 1)
+material = SubResource("ShaderMaterial_wga08")
+offset_left = -30.0
+offset_top = -52.0
+offset_right = 46.0
+offset_bottom = 16.0
+mouse_filter = 2
+metadata/gh = 7.0
+metadata/ow = 1.0
+metadata/n = 3
+metadata/nfill = 4
 
-[node name="WordLight" type="ColorRect" parent="." unique_id=712513461]
+[node name="Light" type="GPUParticles2D" parent="." unique_id=1944275668]
 z_index = 2
 material = SubResource("ShaderMaterial_mjqbt")
-offset_left = -24.0
-offset_top = -40.0
-offset_right = 24.0
-offset_bottom = 8.0
-mouse_filter = 2
-
-[node name="KickL" type="GPUParticles2D" parent="." unique_id=2055613060]
-z_index = 1
-material = SubResource("ShaderMaterial_ux1r5")
-position = Vector2(-3, -8)
-emitting = false
-amount = 1
-texture = ExtResource("8_4fbt5")
-lifetime = 0.3
+amount = 12
+texture = ExtResource("4_helx3")
+lifetime = 1.09
 one_shot = true
+preprocess = 0.016666666666666666
+explosiveness = 1.0
 use_fixed_seed = true
-seed = 777501
+seed = 967716
 fixed_fps = 60
+interpolate = false
 visibility_rect = Rect2(-1024, -1024, 2048, 2048)
-process_material = SubResource("ParticleProcessMaterial_vy6db")
-
-[node name="KickR" type="GPUParticles2D" parent="." unique_id=1890234330]
-z_index = 1
-material = SubResource("ShaderMaterial_ux1r5")
-position = Vector2(25, -8)
-emitting = false
-amount = 1
-texture = ExtResource("8_4fbt5")
-lifetime = 0.3
-one_shot = true
-use_fixed_seed = true
-seed = 777508
-fixed_fps = 60
-visibility_rect = Rect2(-1024, -1024, 2048, 2048)
-process_material = SubResource("ParticleProcessMaterial_q426k")
+local_coords = true
+draw_order = 0
+process_material = SubResource("ShaderMaterial_a666p")
