@@ -1,40 +1,46 @@
 # reimagined-from: src/fx/weather/rain.js@20fe94ba69d0262151a65e38ff8a0bf90b043b75
 # Rain: slanted rain at four depths: far drops fade into the dark, near ones glint and splash, drops ring the puddles
-# and a low mist drifts over the wet floor.
-# The haze, the wet floor line and the puddles are the original's still pixels (port/props.py --share 0.3). Four
-# emitters across the top, one per depth (streaks aligned with their fall, longer and brighter nearer), the far two
-# ending in the air, the near two landing on a collision floor; droplets splashing up all along the floor; ripples on
-# the puddles; a band of mist drifting low along the floor (the fog shader).
-extends "res://addons/pixelfx_particles/core/build.gd"
+# An overcast haze (the soft layer), the wet floor with its puddles and the mist low over it (canvas shaders,
+# fx/weather/_rain_sky.gdshader, with their light), and four depths of rain as GPU particles placed from the clock by
+# the original's own trips (_rain.gdshader): far drops thinned by sweeping gusts and ending in the air, near ones
+# landing in crowns on the floor or rings along a puddle (splash emitters of their own, _rain_splash.gdshader), the
+# nearest catching the light (light twins). Streaks drawn as the original's two-tone lines (_streak.gdshader).
+extends "res://build/fx/weather/_weather.gd"
 
-const SLANT := -0.2          # x per y as they fall
-const TOP := -184.0          # just above the canvas (the origin is the floor, 170 px down)
+const COLS := [[2, 2, 3], [2, 3, 4], [3, 4, 5], [3, 5, 7]]
+const NN := [200, 150, 96, 42]
+const QUAD := [4, 12, 20, 32]
 
 
 func make() -> void:
-	ground()
-	prop({"name": "Haze"})
-	var fall := rad_to_deg(atan2(1.0, SLANT))
-	# far to near: [amount, speed, streak, colour from..to, lifetime (far ones end in the air)]
-	var layers := [
-		["Far", 200, [230, 280], "streak3", [0.25, 0.4], [0.5, 0.62], false],
-		["Mid", 150, [300, 340], "streak4", [0.3, 0.55], [0.48, 0.58], false],
-		["Near", 96, [380, 430], "streak8", [0.45, 0.75], 0.75, true],
-		["Close", 60, [470, 520], "streak12", [0.6, 0.9], 0.6, true],
-	]
-	particles("Splash", {"at": Vector2(0, -1), "amount": 90, "lifetime": 0.3, "texture": "dot1", "emit": {"box": Vector2(160, 0.5)},
-		"dir": -90, "spread": 60, "speed": [25, 55], "gravity": Vector2(0, 320), "ramp": ramp("palette", {"from": 0.62, "to": 0.85})})
-	for L in layers:
-		var c: Array = L[4]
-		var o := {"at": Vector2(0, TOP), "amount": L[1], "lifetime": L[5] if L[5] is float else L[5][1], "randomness": 0.2,
-			"texture": L[3], "align": true, "emit": {"box": Vector2(200, 1)}, "dir": fall, "spread": 0, "speed": L[2],
-			"ramp": ramp("palette", {"from": c[0], "to": c[1], "reverse": true})}
-		if L[6]:
-			o.collide = {"hide": true, "size": 1}
-		particles(L[0], o)
-	# rings on the puddles and a mist drifting low over the wet floor
-	particles("Ripples", {"at": Vector2(0, -1), "amount": 14, "lifetime": 0.45, "texture": "ripple7x3", "emit": {"box": Vector2(160, 0.5)},
-		"scale_curve": [[0, 0.6], [1, 1.6]], "ramp": ramp("palette", {"from": 0.5, "to": 0.75, "reverse": true, "alpha": [[0, 1], [0.6, 1], [1, 0.2]]})})
-	fog("Mist", Vector2(330, 36), {"profile": Vector4(-22, -4, 7, 10), "drift": Vector2(1, 0), "period": Vector2(256 / 0.45, 64 / 4.0),
-		"low": color("palette", 0.43), "high": color("palette", 0.57), "crest": color("palette", 0.57).lerp(color("palette", 0.71), 0.5),
-		"alpha": 0.5}, {"at": Vector2(0, -7)})
+	var C := fitc("palette", 8)
+	var W := Color.WHITE
+	keep_colour(W)
+	var S := 4
+	sky("Haze", "haze", {"top": mixc(C[0], C[1], 0.6), "a0": 0.3, "a1": 0.26, "e0": -170.0, "e1": 0.0, "y0": -170.0, "y1": 0.0},
+		{"layer": "soft"})
+	var crest := mixc(C[4], C[5], 0.5)
+	var sk := {"C": C, "crest": crest, "seed": S, "M": field_tex(S + 9)}
+	sky("FloorSheen", "rain_sky", sk.merged({"pass_": 1, "soft": true}), {"layer": "soft"})
+	sky("Floor", "rain_sky", sk.merged({"pass_": 1, "soft": false}))
+	sky("FloorLight", "rain_sky_light", sk.merged({"pass_": 0}), {"layer": "light"})
+	var G := field_tex(S + 21, 256, 128, [4, 8, 16])
+	for L in 3:
+		drops(L, C, G)
+	splashes(2, C)
+	sky("Mist", "rain_sky", sk.merged({"pass_": 2, "soft": true}), {"layer": "soft"})
+	var near := drops(3, C, G)
+	body_light(near, "streak_light", 12, {"glow_color": C[5], "radius": 4.0, "off": Vector2(0, -2)})
+	var sp := splashes(3, C)
+	body_light(sp, "rain_splash_light", 16, {"glow_color": C[5]})
+
+
+func drops(L: int, C: PackedColorArray, G: Texture2D) -> GPUParticles2D:
+	var c: Array = COLS[L]
+	return bodies("Drops%d" % L, NN[L], "rain", "streak", QUAD[L], {"layer": L, "seed": 4, "G": G, "mode": 3 if L == 0 else 0,
+		"split": 0.45, "ta0": 0.35, "ta1": 0.65, "tail": [C[c[0]], C[c[0]], C[c[0]]], "bodyc": [C[c[1]], C[c[1]], C[c[1]]],
+		"head": [C[c[2]], C[c[2]], C[c[2]]]})
+
+
+func splashes(L: int, C: PackedColorArray) -> GPUParticles2D:
+	return bodies("Splashes%d" % L, NN[L] * 3, "rain", "rain_splash", 40, {"layer": L + 2, "seed": 4, "C": C, "white": Color.WHITE})

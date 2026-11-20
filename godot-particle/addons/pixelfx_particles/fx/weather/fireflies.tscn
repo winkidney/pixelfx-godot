@@ -1,0 +1,434 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://addons/pixelfx_particles/core/pfx_effect.gd" id="1_umigu"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/fx/weather/_haze.gdshader" id="2_53kcq"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/fx/weather/_blade.gdshader" id="3_fpj21"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/fx/weather/_fireflies.gdshader" id="4_rdo7l"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/fx/weather/_firefly.gdshader" id="5_semsx"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/fx/weather/_firefly_light.gdshader" id="6_qnqlj"]
+
+[sub_resource type="Animation" id="Animation_dgjfr"]
+length = 12.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Haze:material:shader_parameter/t")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 12),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 12.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GrassBack:process_material:shader_parameter/t")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 12),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 12.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("FliesFar:process_material:shader_parameter/t")
+tracks/2/interp = 1
+tracks/2/loop_wrap = false
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 12),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 12.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("FliesFar:material:shader_parameter/t")
+tracks/3/interp = 1
+tracks/3/loop_wrap = false
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 12),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 12.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("FliesFar:material:shader_parameter/beat")
+tracks/4/interp = 0
+tracks/4/loop_wrap = false
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.032333333, 0.06566667, 0.099, 0.13233334, 0.16566667, 0.23233333, 0.299, 0.33233333, 0.36566666, 0.43233332, 0.46566668, 0.499, 0.5656667, 0.599, 0.63233334, 0.66566664, 0.699, 0.73233336, 0.76566666, 0.8323333, 0.8656667, 0.899, 0.93233335, 0.96566665, 0.999, 1.0323334, 1.099, 1.1323333, 1.1656667, 1.199, 1.2323333, 1.2656667, 1.299, 1.3323333, 1.3656666, 1.399, 1.4323334, 1.4656667, 1.499, 1.5323334, 1.5656667, 1.599, 1.6323333, 1.6656667, 1.699, 1.7323333, 1.7656667, 1.799, 1.8323333, 1.8656666, 1.899, 1.9323334, 1.9656667, 1.999, 2.0323334, 2.0656667, 2.099, 2.1323333, 2.1656666, 2.199, 2.2323334, 2.2656667, 2.299, 2.3323333, 2.3656666, 2.399, 2.4323332, 2.4656668, 2.499, 2.5323334, 2.5656667, 2.599, 2.6323333, 2.6656666, 2.699, 2.7323334, 2.7656667, 2.799, 2.8656666, 2.899, 2.9323332, 2.9656668, 2.999, 3.0323334, 3.0656667, 3.099, 3.1323333, 3.1656666, 3.199, 3.2323334, 3.2656667, 3.299, 3.3323333, 3.3656666, 3.399, 3.4323332, 3.4656668, 3.499, 3.5323334, 3.5656667, 3.599, 3.6323333, 3.6656666, 3.699, 3.7323334, 3.7656667, 3.799, 3.8323333, 3.8656666, 3.899, 3.9323332, 3.9656668, 3.999, 4.0323334, 4.0656667, 4.099, 4.1323333, 4.1656666, 4.199, 4.232333, 4.2656665, 4.299, 4.3323336, 4.365667, 4.399, 4.4323335, 4.465667, 4.499, 4.5323334, 4.5656667, 4.599, 4.6323333, 4.6656666, 4.699, 4.732333, 4.7656665, 4.799, 4.8323336, 4.865667, 4.899, 4.9323335, 4.965667, 4.999, 5.0323334, 5.0656667, 5.099, 5.1323333, 5.1656666, 5.199, 5.232333, 5.2656665, 5.299, 5.3323336, 5.365667, 5.399, 5.4323335, 5.465667, 5.499, 5.5323334, 5.5656667, 5.599, 5.6323333, 5.6656666, 5.699, 5.732333, 5.7656665, 5.799, 5.8323336, 5.865667, 5.899, 5.9323335, 5.965667, 5.999, 6.0323334, 6.0656667, 6.099, 6.1323333, 6.1656666, 6.199, 6.232333, 6.2656665, 6.299, 6.3323336, 6.365667, 6.399, 6.4323335, 6.465667, 6.499, 6.5323334, 6.5656667, 6.599, 6.6323333, 6.6656666, 6.699, 6.732333, 6.7656665, 6.799, 6.8323336, 6.865667, 6.899, 6.9323335, 6.965667, 6.999, 7.0323334, 7.0656667, 7.099, 7.1323333, 7.1656666, 7.199, 7.232333, 7.2656665, 7.299, 7.3323336, 7.365667, 7.399, 7.4323335, 7.465667, 7.499, 7.5323334, 7.5656667, 7.599, 7.6323333, 7.6656666, 7.699, 7.732333, 7.7656665, 7.799, 7.8323336, 7.865667, 7.899, 7.9323335, 7.965667, 7.999, 8.032333, 8.065666, 8.099, 8.132334, 8.165667, 8.199, 8.232333, 8.265667, 8.299, 8.332334, 8.365666, 8.399, 8.432333, 8.465667, 8.499, 8.532333, 8.565666, 8.599, 8.632334, 8.665667, 8.699, 8.732333, 8.765667, 8.799, 8.832334, 8.865666, 8.899, 8.932333, 8.965667, 8.999, 9.032333, 9.065666, 9.099, 9.132334, 9.165667, 9.199, 9.232333, 9.265667, 9.299, 9.332334, 9.365666, 9.399, 9.432333, 9.465667, 9.499, 9.532333, 9.565666, 9.599, 9.632334, 9.665667, 9.699, 9.732333, 9.765667, 9.799, 9.832334, 9.865666, 9.899, 9.932333, 9.965667, 9.999, 10.032333, 10.065666, 10.099, 10.132334, 10.165667, 10.199, 10.232333, 10.265667, 10.299, 10.332334, 10.365666, 10.399, 10.432333, 10.465667, 10.499, 10.532333, 10.565666, 10.599, 10.632334, 10.665667, 10.699, 10.732333, 10.765667, 10.799, 10.832334, 10.865666, 10.899, 10.932333, 10.965667, 10.999, 11.032333, 11.065666, 11.099, 11.132334, 11.165667, 11.199, 11.232333, 11.265667, 11.299, 11.332334, 11.365666, 11.399, 11.432333, 11.465667, 11.499, 11.532333, 11.565666, 11.599, 11.632334, 11.665667, 11.699, 11.732333, 11.765667, 11.799, 11.832334, 11.865666, 11.899, 11.932333, 11.965667, 11.999),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("FliesFarLight:material:shader_parameter/t")
+tracks/5/interp = 1
+tracks/5/loop_wrap = false
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 12),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 12.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("GrassFront:process_material:shader_parameter/t")
+tracks/6/interp = 1
+tracks/6/loop_wrap = false
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 12),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 12.0]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("FliesNear:process_material:shader_parameter/t")
+tracks/7/interp = 1
+tracks/7/loop_wrap = false
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 12),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 12.0]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("FliesNear:material:shader_parameter/t")
+tracks/8/interp = 1
+tracks/8/loop_wrap = false
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 12),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 12.0]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("FliesNear:material:shader_parameter/beat")
+tracks/9/interp = 0
+tracks/9/loop_wrap = false
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 0.032333333, 0.06566667, 0.099, 0.13233334, 0.16566667, 0.23233333, 0.299, 0.33233333, 0.36566666, 0.43233332, 0.46566668, 0.499, 0.5656667, 0.599, 0.63233334, 0.66566664, 0.699, 0.73233336, 0.76566666, 0.8323333, 0.8656667, 0.899, 0.93233335, 0.96566665, 0.999, 1.0323334, 1.099, 1.1323333, 1.1656667, 1.199, 1.2323333, 1.2656667, 1.299, 1.3323333, 1.3656666, 1.399, 1.4323334, 1.4656667, 1.499, 1.5323334, 1.5656667, 1.599, 1.6323333, 1.6656667, 1.699, 1.7323333, 1.7656667, 1.799, 1.8323333, 1.8656666, 1.899, 1.9323334, 1.9656667, 1.999, 2.0323334, 2.0656667, 2.099, 2.1323333, 2.1656666, 2.199, 2.2323334, 2.2656667, 2.299, 2.3323333, 2.3656666, 2.399, 2.4323332, 2.4656668, 2.499, 2.5323334, 2.5656667, 2.599, 2.6323333, 2.6656666, 2.699, 2.7323334, 2.7656667, 2.799, 2.8656666, 2.899, 2.9323332, 2.9656668, 2.999, 3.0323334, 3.0656667, 3.099, 3.1323333, 3.1656666, 3.199, 3.2323334, 3.2656667, 3.299, 3.3323333, 3.3656666, 3.399, 3.4323332, 3.4656668, 3.499, 3.5323334, 3.5656667, 3.599, 3.6323333, 3.6656666, 3.699, 3.7323334, 3.7656667, 3.799, 3.8323333, 3.8656666, 3.899, 3.9323332, 3.9656668, 3.999, 4.0323334, 4.0656667, 4.099, 4.1323333, 4.1656666, 4.199, 4.232333, 4.2656665, 4.299, 4.3323336, 4.365667, 4.399, 4.4323335, 4.465667, 4.499, 4.5323334, 4.5656667, 4.599, 4.6323333, 4.6656666, 4.699, 4.732333, 4.7656665, 4.799, 4.8323336, 4.865667, 4.899, 4.9323335, 4.965667, 4.999, 5.0323334, 5.0656667, 5.099, 5.1323333, 5.1656666, 5.199, 5.232333, 5.2656665, 5.299, 5.3323336, 5.365667, 5.399, 5.4323335, 5.465667, 5.499, 5.5323334, 5.5656667, 5.599, 5.6323333, 5.6656666, 5.699, 5.732333, 5.7656665, 5.799, 5.8323336, 5.865667, 5.899, 5.9323335, 5.965667, 5.999, 6.0323334, 6.0656667, 6.099, 6.1323333, 6.1656666, 6.199, 6.232333, 6.2656665, 6.299, 6.3323336, 6.365667, 6.399, 6.4323335, 6.465667, 6.499, 6.5323334, 6.5656667, 6.599, 6.6323333, 6.6656666, 6.699, 6.732333, 6.7656665, 6.799, 6.8323336, 6.865667, 6.899, 6.9323335, 6.965667, 6.999, 7.0323334, 7.0656667, 7.099, 7.1323333, 7.1656666, 7.199, 7.232333, 7.2656665, 7.299, 7.3323336, 7.365667, 7.399, 7.4323335, 7.465667, 7.499, 7.5323334, 7.5656667, 7.599, 7.6323333, 7.6656666, 7.699, 7.732333, 7.7656665, 7.799, 7.8323336, 7.865667, 7.899, 7.9323335, 7.965667, 7.999, 8.032333, 8.065666, 8.099, 8.132334, 8.165667, 8.199, 8.232333, 8.265667, 8.299, 8.332334, 8.365666, 8.399, 8.432333, 8.465667, 8.499, 8.532333, 8.565666, 8.599, 8.632334, 8.665667, 8.699, 8.732333, 8.765667, 8.799, 8.832334, 8.865666, 8.899, 8.932333, 8.965667, 8.999, 9.032333, 9.065666, 9.099, 9.132334, 9.165667, 9.199, 9.232333, 9.265667, 9.299, 9.332334, 9.365666, 9.399, 9.432333, 9.465667, 9.499, 9.532333, 9.565666, 9.599, 9.632334, 9.665667, 9.699, 9.732333, 9.765667, 9.799, 9.832334, 9.865666, 9.899, 9.932333, 9.965667, 9.999, 10.032333, 10.065666, 10.099, 10.132334, 10.165667, 10.199, 10.232333, 10.265667, 10.299, 10.332334, 10.365666, 10.399, 10.432333, 10.465667, 10.499, 10.532333, 10.565666, 10.599, 10.632334, 10.665667, 10.699, 10.732333, 10.765667, 10.799, 10.832334, 10.865666, 10.899, 10.932333, 10.965667, 10.999, 11.032333, 11.065666, 11.099, 11.132334, 11.165667, 11.199, 11.232333, 11.265667, 11.299, 11.332334, 11.365666, 11.399, 11.432333, 11.465667, 11.499, 11.532333, 11.565666, 11.599, 11.632334, 11.665667, 11.699, 11.732333, 11.765667, 11.799, 11.832334, 11.865666, 11.899, 11.932333, 11.965667, 11.999),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("FliesNearLight:material:shader_parameter/t")
+tracks/10/interp = 1
+tracks/10/loop_wrap = false
+tracks/10/keys = {
+"times": PackedFloat32Array(0, 12),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 12.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tbqcl"]
+_data = {
+&"fx": SubResource("Animation_dgjfr")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i1fcj"]
+shader = ExtResource("2_53kcq")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = true
+shader_parameter/t = null
+shader_parameter/size = Vector2(320, 180)
+shader_parameter/center = Vector2(0, -80)
+shader_parameter/mode = 1
+shader_parameter/top = Color(0.02745098, 0.05882353, 0.043137256, 1)
+shader_parameter/low = Color(0.047058824, 0.101960786, 0.07058824, 1)
+shader_parameter/a0 = 0.48
+shader_parameter/a1 = 0.14
+shader_parameter/e0 = -170.0
+shader_parameter/e1 = 10.0
+shader_parameter/pw = 1.0
+shader_parameter/y0 = -170.0
+shader_parameter/y1 = 9.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ndvtk"]
+resource_name = "GrassBack"
+shader = ExtResource("3_fpj21")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = null
+shader_parameter/quad = Vector2(48, 48)
+shader_parameter/C = PackedColorArray(0.16470589, 0.22745098, 0.0627451, 1, 0.3529412, 0.47843137, 0.101960786, 1, 0.6039216, 0.8156863, 0.16470589, 1, 0.8392157, 1, 0.3529412, 1, 0.95686275, 1, 0.72156864, 1, 1, 1, 1, 1)
+shader_parameter/G = PackedColorArray(0.02745098, 0.05882353, 0.043137256, 1, 0.047058824, 0.101960786, 0.07058824, 1, 0.07450981, 0.15686275, 0.101960786, 1, 0.11372549, 0.22745098, 0.14117648, 1, 0.16862746, 0.32156864, 0.19607843, 1, 0.24705882, 0.43137255, 0.2509804, 1)
+
+[sub_resource type="Gradient" id="Gradient_i26nv"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_58mgv"]
+gradient = SubResource("Gradient_i26nv")
+width = 48
+height = 48
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sxpld"]
+shader = ExtResource("4_rdo7l")
+shader_parameter/t = null
+shader_parameter/seed = 2
+shader_parameter/layer = 2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bnong"]
+resource_name = "FliesFar"
+shader = ExtResource("5_semsx")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = null
+shader_parameter/t = null
+shader_parameter/seed = 2
+shader_parameter/quad = Vector2(24, 24)
+shader_parameter/C = PackedColorArray(0.16470589, 0.22745098, 0.0627451, 1, 0.3529412, 0.47843137, 0.101960786, 1, 0.6039216, 0.8156863, 0.16470589, 1, 0.8392157, 1, 0.3529412, 1, 0.95686275, 1, 0.72156864, 1, 1, 1, 1, 1)
+shader_parameter/wing = Color(0.6117647, 0.6862745, 0.45882353, 1)
+shader_parameter/beat = null
+
+[sub_resource type="Gradient" id="Gradient_s1o2u"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_x26ik"]
+gradient = SubResource("Gradient_s1o2u")
+width = 24
+height = 24
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xql8j"]
+shader = ExtResource("4_rdo7l")
+shader_parameter/t = null
+shader_parameter/seed = 2
+shader_parameter/layer = 0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xfljx"]
+shader = ExtResource("6_qnqlj")
+shader_parameter/t = null
+shader_parameter/seed = 2
+shader_parameter/quad = Vector2(64, 64)
+shader_parameter/C = PackedColorArray(0.16470589, 0.22745098, 0.0627451, 1, 0.3529412, 0.47843137, 0.101960786, 1, 0.6039216, 0.8156863, 0.16470589, 1, 0.8392157, 1, 0.3529412, 1, 0.95686275, 1, 0.72156864, 1, 1, 1, 1, 1)
+shader_parameter/strength = null
+
+[sub_resource type="Gradient" id="Gradient_dyjos"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_dm2th"]
+gradient = SubResource("Gradient_dyjos")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qym2w"]
+resource_name = "GrassFront"
+shader = ExtResource("3_fpj21")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = null
+shader_parameter/quad = Vector2(48, 48)
+shader_parameter/C = PackedColorArray(0.16470589, 0.22745098, 0.0627451, 1, 0.3529412, 0.47843137, 0.101960786, 1, 0.6039216, 0.8156863, 0.16470589, 1, 0.8392157, 1, 0.3529412, 1, 0.95686275, 1, 0.72156864, 1, 1, 1, 1, 1)
+shader_parameter/G = PackedColorArray(0.02745098, 0.05882353, 0.043137256, 1, 0.047058824, 0.101960786, 0.07058824, 1, 0.07450981, 0.15686275, 0.101960786, 1, 0.11372549, 0.22745098, 0.14117648, 1, 0.16862746, 0.32156864, 0.19607843, 1, 0.24705882, 0.43137255, 0.2509804, 1)
+
+[sub_resource type="Gradient" id="Gradient_rw7a6"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_sxax8"]
+gradient = SubResource("Gradient_rw7a6")
+width = 48
+height = 48
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pioab"]
+shader = ExtResource("4_rdo7l")
+shader_parameter/t = null
+shader_parameter/seed = 2
+shader_parameter/layer = 3
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ejr1f"]
+resource_name = "FliesNear"
+shader = ExtResource("5_semsx")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = null
+shader_parameter/t = null
+shader_parameter/seed = 2
+shader_parameter/quad = Vector2(24, 24)
+shader_parameter/C = PackedColorArray(0.16470589, 0.22745098, 0.0627451, 1, 0.3529412, 0.47843137, 0.101960786, 1, 0.6039216, 0.8156863, 0.16470589, 1, 0.8392157, 1, 0.3529412, 1, 0.95686275, 1, 0.72156864, 1, 1, 1, 1, 1)
+shader_parameter/wing = Color(0.6117647, 0.6862745, 0.45882353, 1)
+shader_parameter/beat = null
+
+[sub_resource type="Gradient" id="Gradient_5ldjc"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_2qg47"]
+gradient = SubResource("Gradient_5ldjc")
+width = 24
+height = 24
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_suiw7"]
+shader = ExtResource("4_rdo7l")
+shader_parameter/t = null
+shader_parameter/seed = 2
+shader_parameter/layer = 1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_otxis"]
+shader = ExtResource("6_qnqlj")
+shader_parameter/t = null
+shader_parameter/seed = 2
+shader_parameter/quad = Vector2(64, 64)
+shader_parameter/C = PackedColorArray(0.16470589, 0.22745098, 0.0627451, 1, 0.3529412, 0.47843137, 0.101960786, 1, 0.6039216, 0.8156863, 0.16470589, 1, 0.8392157, 1, 0.3529412, 1, 0.95686275, 1, 0.72156864, 1, 1, 1, 1, 1)
+shader_parameter/strength = null
+
+[sub_resource type="Gradient" id="Gradient_4p4h0"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_wbe3t"]
+gradient = SubResource("Gradient_4p4h0")
+
+[node name="Fireflies" type="Node2D" unique_id=1748675342]
+script = ExtResource("1_umigu")
+effect_id = "weather/fireflies"
+source = "src/fx/weather/fireflies.js@25511900cc17f40531342253430ea82206f2db98"
+duration = 12.0
+loop = true
+canvas_size = Vector2i(320, 180)
+origin = Vector2i(160, 170)
+bg = "sky"
+ramps = {
+"grass": PackedColorArray(0.02745098, 0.05882353, 0.043137256, 1, 0.047058824, 0.101960786, 0.07058824, 1, 0.07450981, 0.15686275, 0.101960786, 1, 0.11372549, 0.22745098, 0.14117648, 1, 0.16862746, 0.32156864, 0.19607843, 1, 0.24705882, 0.43137255, 0.2509804, 1),
+"palette": PackedColorArray(0.16470589, 0.22745098, 0.0627451, 1, 0.3529412, 0.47843137, 0.101960786, 1, 0.6039216, 0.8156863, 0.16470589, 1, 0.8392157, 1, 0.3529412, 1, 0.95686275, 1, 0.72156864, 1, 1, 1, 1, 1)
+}
+palette_extra = PackedColorArray(0.02745098, 0.0627451, 0.047058824, 1, 0.03137255, 0.06666667, 0.047058824, 1, 0.03137255, 0.07058824, 0.050980393, 1, 0.03529412, 0.07450981, 0.050980393, 1, 0.03529412, 0.078431375, 0.05490196, 1, 0.03529412, 0.08235294, 0.05882353, 1, 0.039215688, 0.08627451, 0.05882353, 1, 0.039215688, 0.09019608, 0.0627451, 1, 0.043137256, 0.09411765, 0.0627451, 1, 0.043137256, 0.09803922, 0.06666667, 1, 0.6117647, 0.6862745, 0.45882353, 1)
+palette_override = PackedColorArray()
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1208268418]
+libraries/ = SubResource("AnimationLibrary_tbqcl")
+
+[node name="Haze" type="ColorRect" parent="." unique_id=1984129819]
+z_index = 1
+material = SubResource("ShaderMaterial_i1fcj")
+offset_left = -160.0
+offset_top = -170.0
+offset_right = 160.0
+offset_bottom = 10.0
+mouse_filter = 2
+
+[node name="GrassBack" type="GPUParticles2D" parent="." unique_id=1924275355]
+z_index = 1
+material = SubResource("ShaderMaterial_ndvtk")
+amount = 230
+texture = SubResource("GradientTexture2D_58mgv")
+lifetime = 12.0
+preprocess = 0.016666666666666666
+explosiveness = 1.0
+use_fixed_seed = true
+seed = 792205
+fixed_fps = 60
+interpolate = false
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+local_coords = true
+draw_order = 0
+process_material = SubResource("ShaderMaterial_sxpld")
+
+[node name="FliesFar" type="GPUParticles2D" parent="." unique_id=1978281458]
+z_index = 1
+material = SubResource("ShaderMaterial_bnong")
+amount = 26
+texture = SubResource("GradientTexture2D_x26ik")
+lifetime = 12.0
+preprocess = 0.016666666666666666
+explosiveness = 1.0
+use_fixed_seed = true
+seed = 657150
+fixed_fps = 60
+interpolate = false
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+local_coords = true
+draw_order = 0
+process_material = SubResource("ShaderMaterial_xql8j")
+
+[node name="FliesFarLight" type="GPUParticles2D" parent="." unique_id=142037332]
+z_index = 2
+material = SubResource("ShaderMaterial_xfljx")
+amount = 26
+texture = SubResource("GradientTexture2D_dm2th")
+lifetime = 12.0
+preprocess = 0.016666666666666666
+explosiveness = 1.0
+use_fixed_seed = true
+seed = 657150
+fixed_fps = 60
+interpolate = false
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+local_coords = true
+draw_order = 0
+process_material = SubResource("ShaderMaterial_xql8j")
+
+[node name="GrassFront" type="GPUParticles2D" parent="." unique_id=1814271900]
+z_index = 1
+material = SubResource("ShaderMaterial_qym2w")
+amount = 150
+texture = SubResource("GradientTexture2D_sxax8")
+lifetime = 12.0
+preprocess = 0.016666666666666666
+explosiveness = 1.0
+use_fixed_seed = true
+seed = 650261
+fixed_fps = 60
+interpolate = false
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+local_coords = true
+draw_order = 0
+process_material = SubResource("ShaderMaterial_pioab")
+
+[node name="FliesNear" type="GPUParticles2D" parent="." unique_id=1778920960]
+z_index = 1
+material = SubResource("ShaderMaterial_ejr1f")
+amount = 6
+texture = SubResource("GradientTexture2D_2qg47")
+lifetime = 12.0
+preprocess = 0.016666666666666666
+explosiveness = 1.0
+use_fixed_seed = true
+seed = 250762
+fixed_fps = 60
+interpolate = false
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+local_coords = true
+draw_order = 0
+process_material = SubResource("ShaderMaterial_suiw7")
+
+[node name="FliesNearLight" type="GPUParticles2D" parent="." unique_id=265672138]
+z_index = 2
+material = SubResource("ShaderMaterial_otxis")
+amount = 6
+texture = SubResource("GradientTexture2D_wbe3t")
+lifetime = 12.0
+preprocess = 0.016666666666666666
+explosiveness = 1.0
+use_fixed_seed = true
+seed = 250762
+fixed_fps = 60
+interpolate = false
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+local_coords = true
+draw_order = 0
+process_material = SubResource("ShaderMaterial_suiw7")

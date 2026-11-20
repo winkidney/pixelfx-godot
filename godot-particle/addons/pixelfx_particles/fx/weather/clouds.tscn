@@ -1,0 +1,211 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://addons/pixelfx_particles/core/pfx_effect.gd" id="1_g7fk5"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/fx/weather/_moon.gdshader" id="2_3vt17"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/fx/weather/_cloud.gdshader" id="3_0k6os"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/fx/weather/_clouds.gdshader" id="4_myc27"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/fx/weather/_cloud_light.gdshader" id="5_6sxkn"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/fx/weather/_glows.gdshader" id="6_jtgg7"]
+
+[sub_resource type="Animation" id="Animation_jleok"]
+length = 12.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Moon:material:shader_parameter/t")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 12),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 12.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Clouds:process_material:shader_parameter/t")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 12),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 12.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Clouds:material:shader_parameter/t")
+tracks/2/interp = 1
+tracks/2/loop_wrap = false
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 12),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 12.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CloudsLight:material:shader_parameter/t")
+tracks/3/interp = 1
+tracks/3/loop_wrap = false
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 12),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 12.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Halo:material:shader_parameter/t")
+tracks/4/interp = 1
+tracks/4/loop_wrap = false
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 12),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 12.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1d06r"]
+_data = {
+&"fx": SubResource("Animation_jleok")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_w8lqg"]
+shader = ExtResource("2_3vt17")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = null
+shader_parameter/size = Vector2(320, 180)
+shader_parameter/center = Vector2(0, -90)
+shader_parameter/C = PackedColorArray(0.047058824, 0.047058824, 0.09411765, 1, 0.08627451, 0.09019608, 0.16470589, 1, 0.13725491, 0.14509805, 0.2509804, 1, 0.21176471, 0.22745098, 0.3529412, 1, 0.32941177, 0.3529412, 0.5019608, 1, 0.5019608, 0.53333336, 0.68235296, 1, 0.7372549, 0.76862746, 0.8862745, 1, 0.9490196, 0.95686275, 1, 1)
+shader_parameter/white = Color(1, 1, 1, 1)
+shader_parameter/moon = null
+shader_parameter/radius = null
+shader_parameter/t = null
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_exsll"]
+resource_name = "Clouds"
+shader = ExtResource("3_0k6os")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = true
+shader_parameter/t = null
+shader_parameter/seed = 7
+shader_parameter/quad = Vector2(192, 192)
+shader_parameter/C = PackedColorArray(0.047058824, 0.047058824, 0.09411765, 1, 0.08627451, 0.09019608, 0.16470589, 1, 0.13725491, 0.14509805, 0.2509804, 1, 0.21176471, 0.22745098, 0.3529412, 1, 0.32941177, 0.3529412, 0.5019608, 1, 0.5019608, 0.53333336, 0.68235296, 1, 0.7372549, 0.76862746, 0.8862745, 1, 0.9490196, 0.95686275, 1, 1)
+
+[sub_resource type="Gradient" id="Gradient_t0es8"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_4ysqc"]
+gradient = SubResource("Gradient_t0es8")
+width = 192
+height = 192
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x445j"]
+shader = ExtResource("4_myc27")
+shader_parameter/t = null
+shader_parameter/seed = 7
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_el31e"]
+shader = ExtResource("5_6sxkn")
+shader_parameter/t = null
+shader_parameter/seed = 7
+shader_parameter/quad = Vector2(192, 192)
+shader_parameter/C = PackedColorArray(0.047058824, 0.047058824, 0.09411765, 1, 0.08627451, 0.09019608, 0.16470589, 1, 0.13725491, 0.14509805, 0.2509804, 1, 0.21176471, 0.22745098, 0.3529412, 1, 0.32941177, 0.3529412, 0.5019608, 1, 0.5019608, 0.53333336, 0.68235296, 1, 0.7372549, 0.76862746, 0.8862745, 1, 0.9490196, 0.95686275, 1, 1)
+shader_parameter/strength = null
+
+[sub_resource type="Gradient" id="Gradient_a73bu"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_hooh7"]
+gradient = SubResource("Gradient_a73bu")
+width = 192
+height = 192
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_whyme"]
+shader = ExtResource("6_jtgg7")
+shader_parameter/t = null
+shader_parameter/size = Vector2(320, 180)
+shader_parameter/center = Vector2(0, -90)
+shader_parameter/pos = PackedVector2Array(92, -128, 92, -128, 92, -128, 92, -128)
+shader_parameter/rad = PackedFloat32Array(110, 40, 18, 0)
+shader_parameter/k = PackedFloat32Array(0.14, 0.25, 0.3, 0)
+shader_parameter/col = PackedColorArray(0.32941177, 0.3529412, 0.5019608, 1, 0.5019608, 0.53333336, 0.68235296, 1, 0.7372549, 0.76862746, 0.8862745, 1, 0.7372549, 0.76862746, 0.8862745, 1)
+shader_parameter/strength = null
+
+[node name="Clouds" type="Node2D" unique_id=1456240511]
+script = ExtResource("1_g7fk5")
+effect_id = "weather/clouds"
+source = "src/fx/weather/clouds.js@eb7454a67fbef6fd3f32f71c08f6cde8f1df4db3"
+duration = 12.0
+loop = true
+canvas_size = Vector2i(320, 180)
+origin = Vector2i(160, 180)
+bg = "sky"
+ramps = {
+"palette": PackedColorArray(0.047058824, 0.047058824, 0.09411765, 1, 0.08627451, 0.09019608, 0.16470589, 1, 0.13725491, 0.14509805, 0.2509804, 1, 0.21176471, 0.22745098, 0.3529412, 1, 0.32941177, 0.3529412, 0.5019608, 1, 0.5019608, 0.53333336, 0.68235296, 1, 0.7372549, 0.76862746, 0.8862745, 1, 0.9490196, 0.95686275, 1, 1)
+}
+palette_extra = PackedColorArray(1, 1, 1, 1)
+palette_override = PackedColorArray()
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=698882178]
+libraries/ = SubResource("AnimationLibrary_1d06r")
+
+[node name="Moon" type="ColorRect" parent="." unique_id=236323511]
+z_index = 1
+material = SubResource("ShaderMaterial_w8lqg")
+offset_left = -160.0
+offset_top = -180.0
+offset_right = 160.0
+mouse_filter = 2
+
+[node name="Clouds" type="GPUParticles2D" parent="." unique_id=432444878]
+z_index = 1
+material = SubResource("ShaderMaterial_exsll")
+amount = 18
+texture = SubResource("GradientTexture2D_4ysqc")
+lifetime = 12.0
+preprocess = 0.016666666666666666
+explosiveness = 1.0
+use_fixed_seed = true
+seed = 317047
+fixed_fps = 60
+interpolate = false
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+local_coords = true
+draw_order = 0
+process_material = SubResource("ShaderMaterial_x445j")
+
+[node name="CloudsLight" type="GPUParticles2D" parent="." unique_id=1460790170]
+z_index = 2
+material = SubResource("ShaderMaterial_el31e")
+amount = 18
+texture = SubResource("GradientTexture2D_hooh7")
+lifetime = 12.0
+preprocess = 0.016666666666666666
+explosiveness = 1.0
+use_fixed_seed = true
+seed = 317047
+fixed_fps = 60
+interpolate = false
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+local_coords = true
+draw_order = 0
+process_material = SubResource("ShaderMaterial_x445j")
+
+[node name="Halo" type="ColorRect" parent="." unique_id=1784503684]
+z_index = 2
+material = SubResource("ShaderMaterial_whyme")
+offset_left = -160.0
+offset_top = -180.0
+offset_right = 160.0
+mouse_filter = 2

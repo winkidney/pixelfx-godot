@@ -1,0 +1,308 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://addons/pixelfx_particles/core/pfx_effect.gd" id="1_5u5lx"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/fx/weather/_milky.gdshader" id="2_qg6c0"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/fx/weather/_milky_light.gdshader" id="3_n2gl8"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/fx/weather/_star.gdshader" id="4_clhx2"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/fx/weather/_stars.gdshader" id="5_ivt01"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/fx/weather/_star_light.gdshader" id="6_jt75v"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/fx/weather/_meteor.gdshader" id="7_lh50f"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/fx/weather/_shooting.gdshader" id="8_6wlm8"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/fx/weather/_meteor_light.gdshader" id="9_1wylr"]
+
+[sub_resource type="Animation" id="Animation_dm4cx"]
+length = 10.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Band:material:shader_parameter/t")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 10),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 10.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BandLight:material:shader_parameter/t")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 10),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 10.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Stars:process_material:shader_parameter/t")
+tracks/2/interp = 1
+tracks/2/loop_wrap = false
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 10),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 10.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Meteors:process_material:shader_parameter/t")
+tracks/3/interp = 1
+tracks/3/loop_wrap = false
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 10),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 10.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Meteors:material:shader_parameter/t")
+tracks/4/interp = 1
+tracks/4/loop_wrap = false
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 10),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 10.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("MeteorsLight:material:shader_parameter/t")
+tracks/5/interp = 1
+tracks/5/loop_wrap = false
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 10),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 10.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3vp7j"]
+_data = {
+&"fx": SubResource("Animation_dm4cx")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8ioeb"]
+shader = ExtResource("2_qg6c0")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = null
+shader_parameter/t = null
+shader_parameter/size = Vector2(320, 180)
+shader_parameter/center = Vector2(0, -90)
+shader_parameter/K = PackedColorArray(0.078431375, 0.078431375, 0.15686275, 1, 0.16470589, 0.16470589, 0.2901961, 1, 0.29803923, 0.29803923, 0.4862745, 1, 0.5568628, 0.5568628, 0.76862746, 1, 0.8627451, 0.8627451, 1, 1)
+shader_parameter/seed = 4
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mcp8h"]
+shader = ExtResource("3_n2gl8")
+shader_parameter/size = Vector2(320, 180)
+shader_parameter/center = Vector2(0, -90)
+shader_parameter/K = PackedColorArray(0.078431375, 0.078431375, 0.15686275, 1, 0.16470589, 0.16470589, 0.2901961, 1, 0.29803923, 0.29803923, 0.4862745, 1, 0.5568628, 0.5568628, 0.76862746, 1, 0.8627451, 0.8627451, 1, 1)
+shader_parameter/strength = null
+shader_parameter/t = null
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0voir"]
+resource_name = "Stars"
+shader = ExtResource("4_clhx2")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = null
+shader_parameter/quad = Vector2(8, 8)
+shader_parameter/dim = Color(0.5568628, 0.5568628, 0.76862746, 1)
+shader_parameter/steady = PackedColorArray(0.8627451, 0.8627451, 1, 1, 1, 1, 1, 1)
+shader_parameter/spark = Color(0.8627451, 0.8627451, 1, 1)
+shader_parameter/spark_tip = Color(0.5568628, 0.5568628, 0.76862746, 1)
+shader_parameter/white = Color(1, 1, 1, 1)
+
+[sub_resource type="Gradient" id="Gradient_xwxg1"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_pbj51"]
+gradient = SubResource("Gradient_xwxg1")
+width = 8
+height = 8
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xxs7n"]
+shader = ExtResource("5_ivt01")
+shader_parameter/t = null
+shader_parameter/seed = 4
+shader_parameter/D = 10.0
+shader_parameter/ylen = 178.0
+shader_parameter/cut = 0.94
+shader_parameter/sel = 0.8
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_w4cem"]
+shader = ExtResource("6_jt75v")
+shader_parameter/t = null
+shader_parameter/quad = Vector2(24, 24)
+shader_parameter/steady_glow = Color(0.5568628, 0.5568628, 0.76862746, 1)
+shader_parameter/steady_k = 0.22
+shader_parameter/spark = Color(0.8627451, 0.8627451, 1, 1)
+shader_parameter/spark_k = 0.3
+shader_parameter/strength = null
+
+[sub_resource type="Gradient" id="Gradient_7xntl"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_faaob"]
+gradient = SubResource("Gradient_7xntl")
+width = 24
+height = 24
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ryqpm"]
+resource_name = "Meteors"
+shader = ExtResource("7_lh50f")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = null
+shader_parameter/t = null
+shader_parameter/seed = 4
+shader_parameter/C = PackedColorArray(0.22745098, 0.11764706, 0.3529412, 1, 0.47843137, 0.22745098, 0.5411765, 1, 0.8784314, 0.3764706, 0.47843137, 1, 1, 0.65882355, 0.41568628, 1, 1, 0.9019608, 0.65882355, 1, 1, 1, 1, 1)
+shader_parameter/white = Color(1, 1, 1, 1)
+shader_parameter/quad = Vector2(640, 640)
+
+[sub_resource type="Gradient" id="Gradient_7tokn"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ul1w0"]
+gradient = SubResource("Gradient_7tokn")
+width = 640
+height = 640
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rhtmu"]
+shader = ExtResource("8_6wlm8")
+shader_parameter/t = null
+shader_parameter/seed = 4
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4mqms"]
+shader = ExtResource("9_1wylr")
+shader_parameter/t = null
+shader_parameter/seed = 4
+shader_parameter/C = PackedColorArray(0.22745098, 0.11764706, 0.3529412, 1, 0.47843137, 0.22745098, 0.5411765, 1, 0.8784314, 0.3764706, 0.47843137, 1, 1, 0.65882355, 0.41568628, 1, 1, 0.9019608, 0.65882355, 1, 1, 1, 1, 1)
+shader_parameter/white = Color(1, 1, 1, 1)
+shader_parameter/quad = Vector2(640, 640)
+shader_parameter/strength = null
+
+[sub_resource type="Gradient" id="Gradient_162uj"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_otdhy"]
+gradient = SubResource("Gradient_162uj")
+width = 640
+height = 640
+
+[node name="ShootingStars" type="Node2D" unique_id=829364175]
+script = ExtResource("1_5u5lx")
+effect_id = "weather/shooting-stars"
+source = "src/fx/weather/shooting-stars.js@292d44454a83d069beb930edabd68c9f0ac0ef82"
+duration = 10.0
+loop = true
+canvas_size = Vector2i(320, 180)
+origin = Vector2i(160, 180)
+bg = "sky"
+ramps = {
+"palette": PackedColorArray(0.22745098, 0.11764706, 0.3529412, 1, 0.47843137, 0.22745098, 0.5411765, 1, 0.8784314, 0.3764706, 0.47843137, 1, 1, 0.65882355, 0.41568628, 1, 1, 0.9019608, 0.65882355, 1, 1, 1, 1, 1),
+"sky": PackedColorArray(0.078431375, 0.078431375, 0.15686275, 1, 0.16470589, 0.16470589, 0.2901961, 1, 0.29803923, 0.29803923, 0.4862745, 1, 0.5568628, 0.5568628, 0.76862746, 1, 0.8627451, 0.8627451, 1, 1)
+}
+palette_extra = PackedColorArray()
+palette_override = PackedColorArray()
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1732162466]
+libraries/ = SubResource("AnimationLibrary_3vp7j")
+
+[node name="Band" type="ColorRect" parent="." unique_id=2071010799]
+z_index = 1
+material = SubResource("ShaderMaterial_8ioeb")
+offset_left = -160.0
+offset_top = -180.0
+offset_right = 160.0
+mouse_filter = 2
+
+[node name="BandLight" type="ColorRect" parent="." unique_id=822119053]
+z_index = 2
+material = SubResource("ShaderMaterial_mcp8h")
+offset_left = -160.0
+offset_top = -180.0
+offset_right = 160.0
+mouse_filter = 2
+
+[node name="Stars" type="GPUParticles2D" parent="." unique_id=904621559]
+z_index = 1
+material = SubResource("ShaderMaterial_0voir")
+amount = 130
+texture = SubResource("GradientTexture2D_pbj51")
+lifetime = 10.0
+preprocess = 0.016666666666666666
+explosiveness = 1.0
+use_fixed_seed = true
+seed = 521243
+fixed_fps = 60
+interpolate = false
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+local_coords = true
+draw_order = 0
+process_material = SubResource("ShaderMaterial_xxs7n")
+
+[node name="StarsLight" type="GPUParticles2D" parent="." unique_id=937490442]
+z_index = 2
+material = SubResource("ShaderMaterial_w4cem")
+amount = 130
+texture = SubResource("GradientTexture2D_faaob")
+lifetime = 10.0
+preprocess = 0.016666666666666666
+explosiveness = 1.0
+use_fixed_seed = true
+seed = 521243
+fixed_fps = 60
+interpolate = false
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+local_coords = true
+draw_order = 0
+process_material = SubResource("ShaderMaterial_xxs7n")
+
+[node name="Meteors" type="GPUParticles2D" parent="." unique_id=1039874197]
+z_index = 1
+material = SubResource("ShaderMaterial_ryqpm")
+amount = 7
+texture = SubResource("GradientTexture2D_ul1w0")
+lifetime = 10.0
+preprocess = 0.016666666666666666
+explosiveness = 1.0
+use_fixed_seed = true
+seed = 541267
+fixed_fps = 60
+interpolate = false
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+local_coords = true
+draw_order = 0
+process_material = SubResource("ShaderMaterial_rhtmu")
+
+[node name="MeteorsLight" type="GPUParticles2D" parent="." unique_id=829419387]
+z_index = 2
+material = SubResource("ShaderMaterial_4mqms")
+amount = 7
+texture = SubResource("GradientTexture2D_otdhy")
+lifetime = 10.0
+preprocess = 0.016666666666666666
+explosiveness = 1.0
+use_fixed_seed = true
+seed = 541267
+fixed_fps = 60
+interpolate = false
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+local_coords = true
+draw_order = 0
+process_material = SubResource("ShaderMaterial_rhtmu")

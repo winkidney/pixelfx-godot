@@ -147,7 +147,7 @@ After adding a PNG, run `./pfxp import` (it locks; other shells wait).
 - **Reserved uniforms**: PfxEffect sets `strength` (light), `palette`, `palette_size`, `alpha_scale` and
   `translucent` on every material that has them. Use `strength` only for a light multiplier.
 - **Shader uniforms**: `shape()` passes an int to an `int` uniform and turns it into a float for a `float` one;
-  colour arrays go to `vec4 x[N]` and to `vec4 x[N] : source_color` alike. `PI` and `TAU` are built in:
+  colour arrays go to `vec4 x[N]` and to `vec4 x[N] : source_color` alike. `PI`, `TAU` and `E` are built in:
   redefining them doesn't compile.
 - **Process shaders**: one that sets TRANSFORM itself needs `"local": true` (else its particles land at the
   viewport's corner). Light is added over everything in the original: a light node with `back: true` goes under

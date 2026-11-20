@@ -1,0 +1,275 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://addons/pixelfx_particles/core/pfx_effect.gd" id="1_f8wru"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/fx/weather/_god_rays_sky.gdshader" id="2_oivbe"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/fx/weather/_god_rays_sky_light.gdshader" id="3_t4bt5"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/fx/weather/_mote.gdshader" id="4_fr4pf"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/fx/weather/_god_rays.gdshader" id="5_o8t4i"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/fx/weather/_mote_light.gdshader" id="6_wplnj"]
+
+[sub_resource type="Animation" id="Animation_7n408"]
+length = 10.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Air:material:shader_parameter/t")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 10),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 10.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AirLight:material:shader_parameter/t")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 10),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 10.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MotesBack:process_material:shader_parameter/t")
+tracks/2/interp = 1
+tracks/2/loop_wrap = false
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 10),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 10.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("MotesFront:process_material:shader_parameter/t")
+tracks/3/interp = 1
+tracks/3/loop_wrap = false
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 10),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 10.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_i8cfq"]
+_data = {
+&"fx": SubResource("Animation_7n408")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yoiwy"]
+shader = ExtResource("2_oivbe")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = true
+shader_parameter/t = null
+shader_parameter/seed = 3
+shader_parameter/size = Vector2(320, 180)
+shader_parameter/center = Vector2(0, -80)
+shader_parameter/C = PackedColorArray(0.101960786, 0.07058824, 0.03137255, 1, 0.22745098, 0.15686275, 0.0627451, 1, 0.47843137, 0.3529412, 0.14117648, 1, 0.78431374, 0.6039216, 0.26666668, 1, 0.9490196, 0.8235294, 0.47843137, 1, 1, 0.9490196, 0.76862746, 1, 1, 1, 1, 1)
+shader_parameter/L = PackedColorArray(0.101960786, 0.07058824, 0.03137255, 1, 0.19607843, 0.13333334, 0.05490196, 1, 0.38431373, 0.28235295, 0.11372549, 1, 0.6117647, 0.47058824, 0.20784314, 1, 0.7372549, 0.63529414, 0.3647059, 1, 0.77254903, 0.7294118, 0.58431375, 1, 0.77254903, 0.7647059, 0.75686276, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qaio6"]
+shader = ExtResource("3_t4bt5")
+shader_parameter/t = null
+shader_parameter/seed = 3
+shader_parameter/size = Vector2(320, 180)
+shader_parameter/center = Vector2(0, -80)
+shader_parameter/C = PackedColorArray(0.101960786, 0.07058824, 0.03137255, 1, 0.22745098, 0.15686275, 0.0627451, 1, 0.47843137, 0.3529412, 0.14117648, 1, 0.78431374, 0.6039216, 0.26666668, 1, 0.9490196, 0.8235294, 0.47843137, 1, 1, 0.9490196, 0.76862746, 1, 1, 1, 1, 1)
+shader_parameter/L = PackedColorArray(0.101960786, 0.07058824, 0.03137255, 1, 0.19607843, 0.13333334, 0.05490196, 1, 0.38431373, 0.28235295, 0.11372549, 1, 0.6117647, 0.47058824, 0.20784314, 1, 0.7372549, 0.63529414, 0.3647059, 1, 0.77254903, 0.7294118, 0.58431375, 1, 0.77254903, 0.7647059, 0.75686276, 1)
+shader_parameter/strength = null
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4gl04"]
+resource_name = "MotesBack"
+shader = ExtResource("4_fr4pf")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = null
+shader_parameter/quad = Vector2(4, 4)
+shader_parameter/tone = PackedColorArray(0.9490196, 0.8235294, 0.47843137, 1, 1, 0.9490196, 0.76862746, 1, 1, 1, 1, 1)
+shader_parameter/side = Color(0.9490196, 0.8235294, 0.47843137, 1)
+
+[sub_resource type="Gradient" id="Gradient_rqqt5"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_p5k83"]
+gradient = SubResource("Gradient_rqqt5")
+width = 4
+height = 4
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_62518"]
+shader = ExtResource("5_o8t4i")
+shader_parameter/t = null
+shader_parameter/seed = 3
+shader_parameter/first = 50
+shader_parameter/front = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0avt3"]
+shader = ExtResource("6_wplnj")
+shader_parameter/t = null
+shader_parameter/quad = Vector2(16, 16)
+shader_parameter/glow_color = Color(0.9490196, 0.8235294, 0.47843137, 1)
+shader_parameter/strength = null
+
+[sub_resource type="Gradient" id="Gradient_0ug7f"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_i44vi"]
+gradient = SubResource("Gradient_0ug7f")
+width = 16
+height = 16
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o5ls4"]
+resource_name = "MotesFront"
+shader = ExtResource("4_fr4pf")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = null
+shader_parameter/quad = Vector2(4, 4)
+shader_parameter/tone = PackedColorArray(0.9490196, 0.8235294, 0.47843137, 1, 1, 0.9490196, 0.76862746, 1, 1, 1, 1, 1)
+shader_parameter/side = Color(0.9490196, 0.8235294, 0.47843137, 1)
+
+[sub_resource type="Gradient" id="Gradient_mofwj"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_gdd4i"]
+gradient = SubResource("Gradient_mofwj")
+width = 4
+height = 4
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rjdyn"]
+shader = ExtResource("5_o8t4i")
+shader_parameter/t = null
+shader_parameter/seed = 3
+shader_parameter/first = 0
+shader_parameter/front = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i48wo"]
+shader = ExtResource("6_wplnj")
+shader_parameter/t = null
+shader_parameter/quad = Vector2(16, 16)
+shader_parameter/glow_color = Color(0.9490196, 0.8235294, 0.47843137, 1)
+shader_parameter/strength = null
+
+[sub_resource type="Gradient" id="Gradient_64tvn"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_nlwu4"]
+gradient = SubResource("Gradient_64tvn")
+width = 16
+height = 16
+
+[node name="GodRays" type="Node2D" unique_id=1600136152]
+script = ExtResource("1_f8wru")
+effect_id = "weather/god-rays"
+source = "src/fx/weather/god-rays.js@5902f1d614ec621a4516cf3bccfa5d1a8ecb3c5a"
+duration = 10.0
+loop = true
+canvas_size = Vector2i(320, 180)
+origin = Vector2i(160, 170)
+bg = "sky"
+ramps = {
+"palette": PackedColorArray(0.101960786, 0.07058824, 0.03137255, 1, 0.22745098, 0.15686275, 0.0627451, 1, 0.47843137, 0.3529412, 0.14117648, 1, 0.78431374, 0.6039216, 0.26666668, 1, 0.9490196, 0.8235294, 0.47843137, 1, 1, 0.9490196, 0.76862746, 1, 1, 1, 1, 1)
+}
+palette_extra = PackedColorArray(0.19607843, 0.13333334, 0.05490196, 1, 0.38431373, 0.28235295, 0.11372549, 1, 0.6117647, 0.47058824, 0.20784314, 1, 0.7372549, 0.63529414, 0.3647059, 1, 0.77254903, 0.7294118, 0.58431375, 1, 0.77254903, 0.7647059, 0.75686276, 1)
+palette_override = PackedColorArray()
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1739045225]
+libraries/ = SubResource("AnimationLibrary_i8cfq")
+
+[node name="Air" type="ColorRect" parent="." unique_id=1971191067]
+z_index = 1
+material = SubResource("ShaderMaterial_yoiwy")
+offset_left = -160.0
+offset_top = -170.0
+offset_right = 160.0
+offset_bottom = 10.0
+mouse_filter = 2
+
+[node name="AirLight" type="ColorRect" parent="." unique_id=344457922]
+z_index = 2
+material = SubResource("ShaderMaterial_qaio6")
+offset_left = -160.0
+offset_top = -170.0
+offset_right = 160.0
+offset_bottom = 10.0
+mouse_filter = 2
+
+[node name="MotesBack" type="GPUParticles2D" parent="." unique_id=1207665699]
+z_index = 1
+material = SubResource("ShaderMaterial_4gl04")
+amount = 110
+texture = SubResource("GradientTexture2D_p5k83")
+lifetime = 10.0
+preprocess = 0.016666666666666666
+explosiveness = 1.0
+use_fixed_seed = true
+seed = 40915
+fixed_fps = 60
+interpolate = false
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+local_coords = true
+draw_order = 0
+process_material = SubResource("ShaderMaterial_62518")
+
+[node name="MotesBackLight" type="GPUParticles2D" parent="." unique_id=136553585]
+z_index = 2
+material = SubResource("ShaderMaterial_0avt3")
+amount = 110
+texture = SubResource("GradientTexture2D_i44vi")
+lifetime = 10.0
+preprocess = 0.016666666666666666
+explosiveness = 1.0
+use_fixed_seed = true
+seed = 40915
+fixed_fps = 60
+interpolate = false
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+local_coords = true
+draw_order = 0
+process_material = SubResource("ShaderMaterial_62518")
+
+[node name="MotesFront" type="GPUParticles2D" parent="." unique_id=1427470035]
+z_index = 1
+material = SubResource("ShaderMaterial_o5ls4")
+amount = 50
+texture = SubResource("GradientTexture2D_gdd4i")
+lifetime = 10.0
+preprocess = 0.016666666666666666
+explosiveness = 1.0
+use_fixed_seed = true
+seed = 720998
+fixed_fps = 60
+interpolate = false
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+local_coords = true
+draw_order = 0
+process_material = SubResource("ShaderMaterial_rjdyn")
+
+[node name="MotesFrontLight" type="GPUParticles2D" parent="." unique_id=1526018876]
+z_index = 2
+material = SubResource("ShaderMaterial_i48wo")
+amount = 50
+texture = SubResource("GradientTexture2D_nlwu4")
+lifetime = 10.0
+preprocess = 0.016666666666666666
+explosiveness = 1.0
+use_fixed_seed = true
+seed = 720998
+fixed_fps = 60
+interpolate = false
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+local_coords = true
+draw_order = 0
+process_material = SubResource("ShaderMaterial_rjdyn")
