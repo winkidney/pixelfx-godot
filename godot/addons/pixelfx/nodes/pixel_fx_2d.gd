@@ -270,6 +270,9 @@ func _process(delta: float) -> void:
 		_playing = false
 		_color.texture = null
 		_light.texture = null
+		# drop the frame images too, so play() after the end makes fresh textures instead of updating none
+		_img_c = null
+		_img_l = null
 		modulate.a = 1.0
 		finished.emit()
 		if Engine.is_editor_hint():
