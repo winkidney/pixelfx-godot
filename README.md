@@ -105,6 +105,21 @@ add_child(fx)
 `PixelFxParticlesAct2D` plays the acted-out version. [godot-particle/docs/AUTHORING.md](godot-particle/docs/AUTHORING.md)
 explains how an effect is built; `cd godot-particle && ./pfxp help` lists the tools.
 
+How close and how fast, on an RTX 4070 SUPER with a Ryzen 9 7900X3D (Compatibility renderer, 1280×720, vsync off,
+median of two runs; `./pfx perf`, `./pfxp perf`, `python3 godot-particle/port/perf_report.py`):
+
+| | pixel LIVE | pixel BAKED | particles |
+|---|---|---|---|
+| similarity to the original (`./pfxp compare`) | 1.0 | 1.0 | 0.954 effects, 0.920 acts |
+| one effect, ms a frame (mean of 244) | 9.75 | 0.28 | 0.42 |
+| 64 at once, ms a frame | 997 | 0.45 | 52.7 |
+
+Particles run about 20 times faster than LIVE (geometric mean: ×21.0 for one, ×20.3 for 64), and stay live: they
+recolour, flip and react while they play. BAKED replays textures and is cheaper still at runtime, but it renders every
+frame on first show (about 2 s of extra work per effect over its first play) and keeps every frame in video memory.
+With 64 at once, 6 short impacts and UI effects run slower as particles than LIVE: each instance renders into its own
+pixel view.
+
 ## how the port works
 
 - **The original stays, untouched.** The JavaScript library (`src/`, `tools/`, `docs/`, `gallery/`, `skills/pixelfx/`) is

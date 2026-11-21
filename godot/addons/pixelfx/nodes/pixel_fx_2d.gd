@@ -306,7 +306,8 @@ func _show() -> void:
 		var lb := _frame.light.to_byte_array()
 		if not additive_light:
 			cb = Px.composite(_frame, PackedByteArray(), null)
-		if _img_c == null or _img_c.get_width() != _frame.w:
+		# a fresh texture whenever the frame no longer fits the one there (none yet, or a replay at another size)
+		if _img_c == null or _color.texture == null or _img_c.get_width() != _frame.w or _img_c.get_height() != _frame.h:
 			_img_c = Image.create_from_data(_frame.w, _frame.h, false, Image.FORMAT_RGBA8, cb)
 			_img_l = Image.create_from_data(_frame.w, _frame.h, false, Image.FORMAT_RGBA8, lb)
 			_color.texture = ImageTexture.create_from_image(_img_c)
