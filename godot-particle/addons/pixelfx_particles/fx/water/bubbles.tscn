@@ -1,0 +1,795 @@
+[gd_scene format=4]
+
+[ext_resource type="Script" path="res://addons/pixelfx_particles/core/pfx_effect.gd" id="1_fhgrk"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/fx/water/bubbles/prop.png" id="2_i35yr"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/fx/water/_underwater.gdshader" id="3_ol2aq"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/fx/water/_underwater_light.gdshader" id="4_djnqa"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/shaders/dither.gdshader" id="5_4fiwy"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/textures/dot1.png" id="6_qguud"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/textures/dot2.png" id="7_4hgtg"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/textures/ring5.png" id="8_rs7pl"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/textures/disc3.png" id="9_jel3c"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/textures/ring7.png" id="10_yljup"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/textures/disc5.png" id="11_27i5d"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/textures/ripple7x3.png" id="12_odbi8"]
+
+[sub_resource type="Animation" id="Animation_qaryf"]
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Water:material:shader_parameter/t")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Surface:material:shader_parameter/t")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Light:material:shader_parameter/t")
+tracks/2/interp = 1
+tracks/2/loop_wrap = false
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dw1py"]
+_data = {
+&"fx": SubResource("Animation_qaryf")
+}
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_vjg1l"]
+resource_name = "Prop"
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_amfag"]
+polygon = PackedVector2Array(-4096, -156, 4096, -156, 4096, -92, -4096, -92)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ds1qj"]
+shader = ExtResource("3_ol2aq")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = true
+shader_parameter/pal = PackedVector4Array(0.039215688, 0.08627451, 0.1882353, 1, 0.07058824, 0.1882353, 0.3882353, 1, 0.105882354, 0.33333334, 0.5882353, 1, 0.16470589, 0.49803922, 0.76862746, 1, 0.27058825, 0.6627451, 0.8901961, 1, 0.5254902, 0.827451, 0.9607843, 1, 0.8039216, 0.94509804, 1, 1, 1, 1, 1, 1)
+shader_parameter/size = Vector2(96, 100)
+shader_parameter/center = Vector2(0, -48)
+shader_parameter/t = null
+shader_parameter/top = -92.0
+shader_parameter/half_w = 48.0
+shader_parameter/mode = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ct0wi"]
+shader = ExtResource("3_ol2aq")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = null
+shader_parameter/pal = PackedVector4Array(0.039215688, 0.08627451, 0.1882353, 1, 0.07058824, 0.1882353, 0.3882353, 1, 0.105882354, 0.33333334, 0.5882353, 1, 0.16470589, 0.49803922, 0.76862746, 1, 0.27058825, 0.6627451, 0.8901961, 1, 0.5254902, 0.827451, 0.9607843, 1, 0.8039216, 0.94509804, 1, 1, 1, 1, 1, 1)
+shader_parameter/size = Vector2(96, 100)
+shader_parameter/center = Vector2(0, -48)
+shader_parameter/t = null
+shader_parameter/top = -92.0
+shader_parameter/half_w = 48.0
+shader_parameter/mode = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3r3mb"]
+shader = ExtResource("4_djnqa")
+shader_parameter/pal = PackedVector4Array(0.039215688, 0.08627451, 0.1882353, 1, 0.07058824, 0.1882353, 0.3882353, 1, 0.105882354, 0.33333334, 0.5882353, 1, 0.16470589, 0.49803922, 0.76862746, 1, 0.27058825, 0.6627451, 0.8901961, 1, 0.5254902, 0.827451, 0.9607843, 1, 0.8039216, 0.94509804, 1, 1, 1, 1, 1, 1)
+shader_parameter/size = Vector2(112, 116)
+shader_parameter/center = Vector2(0, -48)
+shader_parameter/t = null
+shader_parameter/top = -92.0
+shader_parameter/half_w = 48.0
+shader_parameter/strength = null
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oq80c"]
+resource_name = "Dither"
+shader = ExtResource("5_4fiwy")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = null
+
+[sub_resource type="Curve" id="Curve_y02gy"]
+_data = [Vector2(0, 0), 0.0, 12.5, 1, 1, Vector2(0.08, 1), 12.5, 0.0, 1, 1, Vector2(0.3, 1), 0.0, -12.500003, 1, 1, Vector2(0.38, 0), -12.500003, 0.0, 1, 1, Vector2(0.5, 0), 0.0, 12.500003, 1, 1, Vector2(0.58, 1), 12.500003, 0.0, 1, 1, Vector2(0.92, 1), 0.0, -12.500003, 1, 1, Vector2(1, 0), -12.500003, 0.0, 1, 1]
+point_count = 8
+
+[sub_resource type="CurveTexture" id="CurveTexture_7n4j6"]
+curve = SubResource("Curve_y02gy")
+
+[sub_resource type="Gradient" id="Gradient_gt4li"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.25, 0.5, 0.75)
+colors = PackedColorArray(0.27058825, 0.6627451, 0.8901961, 1, 0.5254902, 0.827451, 0.9607843, 1, 0.27058825, 0.6627451, 0.8901961, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_2o6ja"]
+gradient = SubResource("Gradient_gt4li")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3d801"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(42, 43, 0)
+direction = Vector3(6.123234e-17, -1, 0)
+spread = 20.0
+initial_velocity_min = 3.0
+initial_velocity_max = 5.0
+gravity = Vector3(0, 0, 0)
+color_initial_ramp = SubResource("GradientTexture1D_2o6ja")
+alpha_curve = SubResource("CurveTexture_7n4j6")
+turbulence_enabled = true
+turbulence_noise_scale = 4.0
+turbulence_influence_min = 0.005
+turbulence_influence_max = 0.01
+
+[sub_resource type="Gradient" id="Gradient_r22ad"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.33333334, 0.6666667)
+colors = PackedColorArray(0.5254902, 0.827451, 0.9607843, 1, 0.8039216, 0.94509804, 1, 1, 0.5254902, 0.827451, 0.9607843, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_x1hes"]
+gradient = SubResource("Gradient_r22ad")
+
+[sub_resource type="Image" id="Image_h83xt"]
+data = {
+"data": PackedByteArray("AACgwAAAAMAAAIA/AAAAwAAAwEAAAADA"),
+"format": "RGFloat",
+"height": 1,
+"mipmaps": false,
+"width": 3
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_fgcro"]
+image = SubResource("Image_h83xt")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_yf061"]
+particle_flag_disable_z = true
+emission_shape = 4
+emission_point_texture = SubResource("ImageTexture_fgcro")
+emission_point_count = 3
+direction = Vector3(6.123234e-17, -1, 0)
+spread = 3.0
+initial_velocity_min = 34.0
+initial_velocity_max = 44.0
+gravity = Vector3(0, 0, 0)
+color_initial_ramp = SubResource("GradientTexture1D_x1hes")
+turbulence_enabled = true
+turbulence_noise_strength = 1.5
+turbulence_noise_scale = 3.0
+turbulence_influence_min = 0.01
+turbulence_influence_max = 0.02
+collision_mode = 2
+collision_use_scale = true
+
+[sub_resource type="Image" id="Image_m4224"]
+data = {
+"data": PackedByteArray("AACgwAAAAMAAAIA/AAAAwAAAwEAAAADA"),
+"format": "RGFloat",
+"height": 1,
+"mipmaps": false,
+"width": 3
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_4uljx"]
+image = SubResource("Image_m4224")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_bjxd3"]
+particle_flag_disable_z = true
+emission_shape = 4
+emission_point_texture = SubResource("ImageTexture_4uljx")
+emission_point_count = 3
+direction = Vector3(6.123234e-17, -1, 0)
+spread = 3.0
+initial_velocity_min = 36.0
+initial_velocity_max = 46.0
+gravity = Vector3(0, 0, 0)
+color = Color(0.5254902, 0.827451, 0.9607843, 1)
+turbulence_enabled = true
+turbulence_noise_strength = 1.5
+turbulence_noise_scale = 3.0
+turbulence_influence_min = 0.01
+turbulence_influence_max = 0.02
+collision_mode = 2
+collision_use_scale = true
+
+[sub_resource type="Image" id="Image_hi4de"]
+data = {
+"data": PackedByteArray("AACgwAAAAMAAAIA/AAAAwAAAwEAAAADA"),
+"format": "RGFloat",
+"height": 1,
+"mipmaps": false,
+"width": 3
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_xly41"]
+image = SubResource("Image_hi4de")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_xy43k"]
+particle_flag_disable_z = true
+emission_shape = 4
+emission_point_texture = SubResource("ImageTexture_xly41")
+emission_point_count = 3
+direction = Vector3(6.123234e-17, -1, 0)
+spread = 3.0
+initial_velocity_min = 36.0
+initial_velocity_max = 46.0
+gravity = Vector3(0, 0, 0)
+turbulence_enabled = true
+turbulence_noise_strength = 1.5
+turbulence_noise_scale = 3.0
+turbulence_influence_min = 0.01
+turbulence_influence_max = 0.02
+collision_mode = 2
+collision_use_scale = true
+
+[sub_resource type="Image" id="Image_5y1g1"]
+data = {
+"data": PackedByteArray("AACgwAAAAMAAAIA/AAAAwAAAwEAAAADA"),
+"format": "RGFloat",
+"height": 1,
+"mipmaps": false,
+"width": 3
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_uq4jc"]
+image = SubResource("Image_5y1g1")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fsbwp"]
+particle_flag_disable_z = true
+emission_shape = 4
+emission_point_texture = SubResource("ImageTexture_uq4jc")
+emission_point_count = 3
+direction = Vector3(6.123234e-17, -1, 0)
+spread = 3.0
+initial_velocity_min = 44.0
+initial_velocity_max = 54.0
+gravity = Vector3(0, 0, 0)
+color = Color(0.27058825, 0.6627451, 0.8901961, 1)
+turbulence_enabled = true
+turbulence_noise_strength = 1.5
+turbulence_noise_scale = 3.0
+turbulence_influence_min = 0.01
+turbulence_influence_max = 0.02
+collision_mode = 2
+collision_use_scale = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wge0q"]
+resource_name = "Soft"
+shader = ExtResource("5_4fiwy")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = true
+
+[sub_resource type="Image" id="Image_rqfqv"]
+data = {
+"data": PackedByteArray("AACgwAAAAMAAAIA/AAAAwAAAwEAAAADA"),
+"format": "RGFloat",
+"height": 1,
+"mipmaps": false,
+"width": 3
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_givqf"]
+image = SubResource("Image_rqfqv")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_hb26n"]
+particle_flag_disable_z = true
+emission_shape = 4
+emission_point_texture = SubResource("ImageTexture_givqf")
+emission_point_count = 3
+direction = Vector3(6.123234e-17, -1, 0)
+spread = 3.0
+initial_velocity_min = 44.0
+initial_velocity_max = 54.0
+gravity = Vector3(0, 0, 0)
+color = Color(0.5254902, 0.827451, 0.9607843, 0.15)
+turbulence_enabled = true
+turbulence_noise_strength = 1.5
+turbulence_noise_scale = 3.0
+turbulence_influence_min = 0.01
+turbulence_influence_max = 0.02
+collision_mode = 2
+collision_use_scale = true
+
+[sub_resource type="Image" id="Image_mm2q8"]
+data = {
+"data": PackedByteArray("AACgwAAAAMAAAIA/AAAAwAAAwEAAAADA"),
+"format": "RGFloat",
+"height": 1,
+"mipmaps": false,
+"width": 3
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_1xy43"]
+image = SubResource("Image_mm2q8")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2sypl"]
+particle_flag_disable_z = true
+emission_shape = 4
+emission_point_texture = SubResource("ImageTexture_1xy43")
+emission_point_count = 3
+direction = Vector3(6.123234e-17, -1, 0)
+spread = 3.0
+initial_velocity_min = 44.0
+initial_velocity_max = 54.0
+gravity = Vector3(0, 0, 0)
+color = Color(0.8039216, 0.94509804, 1, 1)
+turbulence_enabled = true
+turbulence_noise_strength = 1.5
+turbulence_noise_scale = 3.0
+turbulence_influence_min = 0.01
+turbulence_influence_max = 0.02
+collision_mode = 2
+collision_use_scale = true
+
+[sub_resource type="Image" id="Image_8wqqn"]
+data = {
+"data": PackedByteArray("AACgwAAAAMAAAIA/AAAAwAAAwEAAAADA"),
+"format": "RGFloat",
+"height": 1,
+"mipmaps": false,
+"width": 3
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_g87qy"]
+image = SubResource("Image_8wqqn")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mhmxl"]
+particle_flag_disable_z = true
+emission_shape = 4
+emission_point_texture = SubResource("ImageTexture_g87qy")
+emission_point_count = 3
+direction = Vector3(6.123234e-17, -1, 0)
+spread = 3.0
+initial_velocity_min = 44.0
+initial_velocity_max = 54.0
+gravity = Vector3(0, 0, 0)
+turbulence_enabled = true
+turbulence_noise_strength = 1.5
+turbulence_noise_scale = 3.0
+turbulence_influence_min = 0.01
+turbulence_influence_max = 0.02
+collision_mode = 2
+collision_use_scale = true
+
+[sub_resource type="Image" id="Image_2vlur"]
+data = {
+"data": PackedByteArray("AACgwAAAAMAAAIA/AAAAwAAAwEAAAADA"),
+"format": "RGFloat",
+"height": 1,
+"mipmaps": false,
+"width": 3
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_547tf"]
+image = SubResource("Image_2vlur")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qc7te"]
+particle_flag_disable_z = true
+emission_shape = 4
+emission_point_texture = SubResource("ImageTexture_547tf")
+emission_point_count = 3
+direction = Vector3(6.123234e-17, -1, 0)
+spread = 3.0
+initial_velocity_min = 48.0
+initial_velocity_max = 58.0
+gravity = Vector3(0, 0, 0)
+color = Color(0.27058825, 0.6627451, 0.8901961, 1)
+turbulence_enabled = true
+turbulence_noise_strength = 1.5
+turbulence_noise_scale = 3.0
+turbulence_influence_min = 0.01
+turbulence_influence_max = 0.02
+collision_mode = 2
+collision_use_scale = true
+
+[sub_resource type="Image" id="Image_0lshe"]
+data = {
+"data": PackedByteArray("AACgwAAAAMAAAIA/AAAAwAAAwEAAAADA"),
+"format": "RGFloat",
+"height": 1,
+"mipmaps": false,
+"width": 3
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_3fy1x"]
+image = SubResource("Image_0lshe")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_lfy3u"]
+particle_flag_disable_z = true
+emission_shape = 4
+emission_point_texture = SubResource("ImageTexture_3fy1x")
+emission_point_count = 3
+direction = Vector3(6.123234e-17, -1, 0)
+spread = 3.0
+initial_velocity_min = 48.0
+initial_velocity_max = 58.0
+gravity = Vector3(0, 0, 0)
+color = Color(0.5254902, 0.827451, 0.9607843, 0.15)
+turbulence_enabled = true
+turbulence_noise_strength = 1.5
+turbulence_noise_scale = 3.0
+turbulence_influence_min = 0.01
+turbulence_influence_max = 0.02
+collision_mode = 2
+collision_use_scale = true
+
+[sub_resource type="Image" id="Image_0g4bd"]
+data = {
+"data": PackedByteArray("AACgwAAAAMAAAIA/AAAAwAAAwEAAAADA"),
+"format": "RGFloat",
+"height": 1,
+"mipmaps": false,
+"width": 3
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_nrrgr"]
+image = SubResource("Image_0g4bd")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_grreq"]
+particle_flag_disable_z = true
+emission_shape = 4
+emission_point_texture = SubResource("ImageTexture_nrrgr")
+emission_point_count = 3
+direction = Vector3(6.123234e-17, -1, 0)
+spread = 3.0
+initial_velocity_min = 48.0
+initial_velocity_max = 58.0
+gravity = Vector3(0, 0, 0)
+color = Color(0.8039216, 0.94509804, 1, 1)
+turbulence_enabled = true
+turbulence_noise_strength = 1.5
+turbulence_noise_scale = 3.0
+turbulence_influence_min = 0.01
+turbulence_influence_max = 0.02
+collision_mode = 2
+collision_use_scale = true
+
+[sub_resource type="Image" id="Image_u5uks"]
+data = {
+"data": PackedByteArray("AACgwAAAAMAAAIA/AAAAwAAAwEAAAADA"),
+"format": "RGFloat",
+"height": 1,
+"mipmaps": false,
+"width": 3
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_fg56x"]
+image = SubResource("Image_u5uks")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_4mamh"]
+particle_flag_disable_z = true
+emission_shape = 4
+emission_point_texture = SubResource("ImageTexture_fg56x")
+emission_point_count = 3
+direction = Vector3(6.123234e-17, -1, 0)
+spread = 3.0
+initial_velocity_min = 48.0
+initial_velocity_max = 58.0
+gravity = Vector3(0, 0, 0)
+turbulence_enabled = true
+turbulence_noise_strength = 1.5
+turbulence_noise_scale = 3.0
+turbulence_influence_min = 0.01
+turbulence_influence_max = 0.02
+collision_mode = 2
+collision_use_scale = true
+
+[sub_resource type="Gradient" id="Gradient_ohaku"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.33333334, 0.6666667)
+colors = PackedColorArray(1, 1, 1, 1, 0.8039216, 0.94509804, 1, 1, 0.5254902, 0.827451, 0.9607843, 0.8666667)
+metadata/ramp = "palette"
+metadata/ramp_at = PackedFloat32Array(1, 0.855, 0.71)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_vix22"]
+gradient = SubResource("Gradient_ohaku")
+
+[sub_resource type="Curve" id="Curve_cuc35"]
+_limits = [0.0, 8.0, 0.0, 1.0]
+_data = [Vector2(0, 0.5), 0.0, 1.0, 1, 1, Vector2(1, 1.5), 1.0, 0.0, 1, 1]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_mit0r"]
+curve = SubResource("Curve_cuc35")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_aqodm"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(10, 0.5, 0)
+direction = Vector3(6.123234e-17, -1, 0)
+spread = 0.0
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_mit0r")
+color_ramp = SubResource("GradientTexture1D_vix22")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_iykn1"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(10, 0.5, 0)
+direction = Vector3(6.123234e-17, -1, 0)
+spread = 30.0
+initial_velocity_min = 12.0
+initial_velocity_max = 22.0
+gravity = Vector3(0, 0, 0)
+color = Color(0.8039216, 0.94509804, 1, 1)
+
+[node name="Bubbles" type="Node2D" unique_id=897623652]
+script = ExtResource("1_fhgrk")
+effect_id = "water/bubbles"
+source = "src/fx/water/bubbles.js@6ba609c5b2ee85100e075a515c75264678ec1911"
+duration = 4.0
+loop = true
+canvas_size = Vector2i(104, 112)
+origin = Vector2i(52, 104)
+bg = "ground"
+ramps = {
+"palette": PackedColorArray(0.039215688, 0.08627451, 0.1882353, 1, 0.07058824, 0.1882353, 0.3882353, 1, 0.105882354, 0.33333334, 0.5882353, 1, 0.16470589, 0.49803922, 0.76862746, 1, 0.27058825, 0.6627451, 0.8901961, 1, 0.5254902, 0.827451, 0.9607843, 1, 0.8039216, 0.94509804, 1, 1, 1, 1, 1, 1)
+}
+palette_extra = PackedColorArray()
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1713822240]
+libraries/ = SubResource("AnimationLibrary_dw1py")
+
+[node name="Prop" type="Sprite2D" parent="." unique_id=384116280]
+z_index = -2
+material = SubResource("CanvasItemMaterial_vjg1l")
+position = Vector2(-52, -104)
+texture = ExtResource("2_i35yr")
+centered = false
+
+[node name="Floor" type="LightOccluder2D" parent="." unique_id=904086290]
+occluder = SubResource("OccluderPolygon2D_amfag")
+occluder_light_mask = 0
+
+[node name="Water" type="ColorRect" parent="." unique_id=1258565785]
+z_index = -2
+material = SubResource("ShaderMaterial_ds1qj")
+offset_left = -48.0
+offset_top = -98.0
+offset_right = 48.0
+offset_bottom = 2.0
+mouse_filter = 2
+
+[node name="Surface" type="ColorRect" parent="." unique_id=1136824241]
+z_index = 1
+material = SubResource("ShaderMaterial_ct0wi")
+offset_left = -48.0
+offset_top = -98.0
+offset_right = 48.0
+offset_bottom = 2.0
+mouse_filter = 2
+
+[node name="Light" type="ColorRect" parent="." unique_id=957596032]
+z_index = 2
+material = SubResource("ShaderMaterial_3r3mb")
+offset_left = -56.0
+offset_top = -106.0
+offset_right = 56.0
+offset_bottom = 10.0
+mouse_filter = 2
+
+[node name="Specks" type="GPUParticles2D" parent="." unique_id=1671772691]
+z_index = 1
+material = SubResource("ShaderMaterial_oq80c")
+position = Vector2(0, -43)
+amount = 26
+texture = ExtResource("6_qguud")
+lifetime = 4.0
+preprocess = 4.0
+use_fixed_seed = true
+seed = 75110
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+process_material = SubResource("ParticleProcessMaterial_3d801")
+
+[node name="Tiny" type="GPUParticles2D" parent="." unique_id=1731903604]
+z_index = 1
+material = SubResource("ShaderMaterial_oq80c")
+amount = 9
+texture = ExtResource("6_qguud")
+lifetime = 2.6
+preprocess = 2.6
+use_fixed_seed = true
+seed = 22244
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_yf061")
+
+[node name="Small" type="GPUParticles2D" parent="." unique_id=423982722]
+z_index = 1
+material = SubResource("ShaderMaterial_oq80c")
+amount = 11
+texture = ExtResource("7_4hgtg")
+lifetime = 2.6
+preprocess = 2.6
+use_fixed_seed = true
+seed = 452351
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_bjxd3")
+
+[node name="SmallShine" type="GPUParticles2D" parent="." unique_id=497420607]
+z_index = 1
+material = SubResource("ShaderMaterial_oq80c")
+position = Vector2(-0.5, -0.5)
+amount = 11
+texture = ExtResource("6_qguud")
+lifetime = 2.6
+preprocess = 2.6
+use_fixed_seed = true
+seed = 452351
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_xy43k")
+
+[node name="Big" type="GPUParticles2D" parent="." unique_id=1489725840]
+z_index = 1
+material = SubResource("ShaderMaterial_oq80c")
+amount = 4
+texture = ExtResource("8_rs7pl")
+lifetime = 2.1
+preprocess = 2.1
+use_fixed_seed = true
+seed = 205532
+fixed_fps = 60
+collision_base_size = 4.0
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_fsbwp")
+
+[node name="BigBody" type="GPUParticles2D" parent="." unique_id=625824331]
+z_index = 1
+material = SubResource("ShaderMaterial_wge0q")
+amount = 4
+texture = ExtResource("9_jel3c")
+lifetime = 2.1
+preprocess = 2.1
+use_fixed_seed = true
+seed = 205532
+fixed_fps = 60
+collision_base_size = 4.0
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_hb26n")
+
+[node name="BigLit" type="GPUParticles2D" parent="." unique_id=1471941476]
+z_index = 1
+material = SubResource("ShaderMaterial_oq80c")
+position = Vector2(-1, -1)
+amount = 4
+texture = ExtResource("6_qguud")
+lifetime = 2.1
+preprocess = 2.1
+use_fixed_seed = true
+seed = 205532
+fixed_fps = 60
+collision_base_size = 4.0
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_2sypl")
+
+[node name="BigShine" type="GPUParticles2D" parent="." unique_id=1102393890]
+z_index = 1
+material = SubResource("ShaderMaterial_oq80c")
+position = Vector2(-1, -2)
+amount = 4
+texture = ExtResource("6_qguud")
+lifetime = 2.1
+preprocess = 2.1
+use_fixed_seed = true
+seed = 205532
+fixed_fps = 60
+collision_base_size = 4.0
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_mhmxl")
+
+[node name="Bigger" type="GPUParticles2D" parent="." unique_id=433162127]
+z_index = 1
+material = SubResource("ShaderMaterial_oq80c")
+amount = 3
+texture = ExtResource("10_yljup")
+lifetime = 2.1
+preprocess = 2.1
+use_fixed_seed = true
+seed = 550043
+fixed_fps = 60
+collision_base_size = 4.0
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_qc7te")
+
+[node name="BiggerBody" type="GPUParticles2D" parent="." unique_id=37719796]
+z_index = 1
+material = SubResource("ShaderMaterial_wge0q")
+amount = 3
+texture = ExtResource("11_27i5d")
+lifetime = 2.1
+preprocess = 2.1
+use_fixed_seed = true
+seed = 550043
+fixed_fps = 60
+collision_base_size = 4.0
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_lfy3u")
+
+[node name="BiggerLit" type="GPUParticles2D" parent="." unique_id=58244606]
+z_index = 1
+material = SubResource("ShaderMaterial_oq80c")
+position = Vector2(-1, -1)
+amount = 3
+texture = ExtResource("6_qguud")
+lifetime = 2.1
+preprocess = 2.1
+use_fixed_seed = true
+seed = 550043
+fixed_fps = 60
+collision_base_size = 4.0
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_grreq")
+
+[node name="BiggerShine" type="GPUParticles2D" parent="." unique_id=1267069449]
+z_index = 1
+material = SubResource("ShaderMaterial_oq80c")
+position = Vector2(-1, -2)
+amount = 3
+texture = ExtResource("6_qguud")
+lifetime = 2.1
+preprocess = 2.1
+use_fixed_seed = true
+seed = 550043
+fixed_fps = 60
+collision_base_size = 4.0
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_4mamh")
+
+[node name="Pops" type="GPUParticles2D" parent="." unique_id=1658607085]
+z_index = 1
+material = SubResource("ShaderMaterial_oq80c")
+position = Vector2(0, -91.5)
+amount = 3
+texture = ExtResource("12_odbi8")
+lifetime = 0.3
+preprocess = 0.3
+use_fixed_seed = true
+seed = 885104
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+process_material = SubResource("ParticleProcessMaterial_aqodm")
+
+[node name="PopFlecks" type="GPUParticles2D" parent="." unique_id=213576961]
+z_index = 1
+material = SubResource("ShaderMaterial_oq80c")
+position = Vector2(0, -93)
+amount = 4
+texture = ExtResource("6_qguud")
+lifetime = 0.25
+preprocess = 0.25
+use_fixed_seed = true
+seed = 741499
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+process_material = SubResource("ParticleProcessMaterial_iykn1")

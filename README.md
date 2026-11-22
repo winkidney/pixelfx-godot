@@ -82,6 +82,44 @@ You can also copy `godot/skills/pixelfx-godot` into `~/.claude/skills/`. Then as
 - "Make five takes on a coin pickup sparkle and show me the best two."
 - "Merge the latest pixelfx and port whatever changed."
 
+## a second port: native particles
+
+`godot-particle/` is a separate Godot project where the same 244 effects are rebuilt from Godot's own tools: GPU
+particles first, then canvas shaders, lines, sprites and an AnimationPlayer for what particles can't do. Each effect is
+an ordinary scene (`addons/pixelfx_particles/fx/<category>/<name>.tscn`) you can open and tweak in the editor, and it
+runs on the GPU in the Compatibility renderer (desktop, mobile, web). It keeps the pixel look: colours snap to the
+effect's own ramps, alpha dithers, light adds.
+
+It isn't a pixel copy. It is judged against the original frame by frame (`./pfxp compare`: how much it covers, where,
+in which colours, moving how) and by eye, side by side. The knight, the straw target, critters and still props reuse
+the original's pixels; fire, smoke, light, magic, rings, slashes, bolts and weather are made here.
+
+```gdscript
+var fx := PixelFxParticles2D.new()
+fx.effect = "ice/frost-nova"
+fx.palette_preset = "arcane"
+fx.position = hero.position
+add_child(fx)
+```
+
+`PixelFxParticlesAct2D` plays the acted-out version. [godot-particle/docs/AUTHORING.md](godot-particle/docs/AUTHORING.md)
+explains how an effect is built; `cd godot-particle && ./pfxp help` lists the tools.
+
+How close and how fast, on an RTX 4070 SUPER with a Ryzen 9 7900X3D (Compatibility renderer, 1280×720, vsync off,
+median of two runs; `./pfx perf`, `./pfxp perf`, `python3 godot-particle/port/perf_report.py`):
+
+| | pixel LIVE | pixel BAKED | particles |
+|---|---|---|---|
+| similarity to the original (`./pfxp compare`) | 1.0 | 1.0 | 0.954 effects, 0.920 acts |
+| one effect, ms a frame (mean of 244) | 9.75 | 0.28 | 0.42 |
+| 64 at once, ms a frame | 997 | 0.45 | 52.7 |
+
+Particles run about 20 times faster than LIVE (geometric mean: ×21.0 for one, ×20.3 for 64), and stay live: they
+recolour, flip and react while they play. BAKED replays textures and is cheaper still at runtime, but it renders every
+frame on first show (about 2 s of extra work per effect over its first play) and keeps every frame in video memory.
+With 64 at once, 6 short impacts and UI effects run slower as particles than LIVE: each instance renders into its own
+pixel view.
+
 ## how the port works
 
 - **The original stays, untouched.** The JavaScript library (`src/`, `tools/`, `docs/`, `gallery/`, `skills/pixelfx/`) is

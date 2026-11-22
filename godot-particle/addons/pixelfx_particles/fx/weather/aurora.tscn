@@ -1,0 +1,291 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://addons/pixelfx_particles/core/pfx_effect.gd" id="1_dhve5"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/fx/weather/_star.gdshader" id="2_0buka"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/fx/weather/_stars.gdshader" id="3_iejr6"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/fx/weather/_star_light.gdshader" id="4_0h5rv"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/fx/weather/_aurora.gdshader" id="5_jmp12"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/fx/weather/aurora/_field_16_308.res" id="6_dicpc"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/fx/weather/_aurora_light.gdshader" id="7_4emwx"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/fx/weather/_ray.gdshader" id="8_eqham"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/fx/weather/_rays.gdshader" id="9_or3u1"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/fx/weather/aurora/_rays.res" id="10_bufde"]
+
+[sub_resource type="Animation" id="Animation_w7e3c"]
+length = 12.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Stars:process_material:shader_parameter/t")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 12),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 12.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Curtains:material:shader_parameter/t")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 12),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 12.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Hems:material:shader_parameter/t")
+tracks/2/interp = 1
+tracks/2/loop_wrap = false
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 12),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 12.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CurtainsLight:material:shader_parameter/t")
+tracks/3/interp = 1
+tracks/3/loop_wrap = false
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 12),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 12.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Rays:process_material:shader_parameter/t")
+tracks/4/interp = 1
+tracks/4/loop_wrap = false
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 12),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 12.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3dyqt"]
+_data = {
+&"fx": SubResource("Animation_w7e3c")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sype6"]
+resource_name = "Stars"
+shader = ExtResource("2_0buka")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = null
+shader_parameter/quad = Vector2(8, 8)
+shader_parameter/dim = Color(0.5294118, 0.36078432, 0.8, 1)
+shader_parameter/steady = PackedColorArray(0.9098039, 0.8509804, 1, 1, 1, 1, 1, 1)
+shader_parameter/spark = Color(0.92941177, 0.88235295, 1, 1)
+shader_parameter/spark_tip = Color(0.6117647, 0.38431373, 0.9098039, 1)
+shader_parameter/white = Color(1, 1, 1, 1)
+
+[sub_resource type="Gradient" id="Gradient_7jt6x"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_vl1cq"]
+gradient = SubResource("Gradient_7jt6x")
+width = 8
+height = 8
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qm74k"]
+shader = ExtResource("3_iejr6")
+shader_parameter/t = null
+shader_parameter/seed = 3
+shader_parameter/D = 12.0
+shader_parameter/ylen = 175.0
+shader_parameter/cut = 0.95
+shader_parameter/sel = 0.9
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_s3hd3"]
+shader = ExtResource("4_0h5rv")
+shader_parameter/t = null
+shader_parameter/quad = Vector2(24, 24)
+shader_parameter/steady_glow = Color(0.8235294, 0.7058824, 1, 1)
+shader_parameter/steady_k = 0.25
+shader_parameter/spark = Color(0.92941177, 0.88235295, 1, 1)
+shader_parameter/spark_k = 0.35
+shader_parameter/strength = null
+
+[sub_resource type="Gradient" id="Gradient_cc3cv"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_5dehh"]
+gradient = SubResource("Gradient_cc3cv")
+width = 24
+height = 24
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3hn5o"]
+shader = ExtResource("5_jmp12")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = true
+shader_parameter/t = null
+shader_parameter/size = Vector2(320, 180)
+shader_parameter/center = Vector2(0, -90)
+shader_parameter/F = ExtResource("6_dicpc")
+shader_parameter/G = PackedColorArray(0.03137255, 0.101960786, 0.11764706, 1, 0.050980393, 0.22745098, 0.21176471, 1, 0.07450981, 0.4, 0.30588236, 1, 0.12156863, 0.627451, 0.41568628, 1, 0.24705882, 0.84705883, 0.5568628, 1, 0.6039216, 0.96862745, 0.7490196, 1, 0.9019608, 1, 0.9411765, 1)
+shader_parameter/U = PackedColorArray(0.07058824, 0.043137256, 0.16470589, 1, 0.14901961, 0.08627451, 0.30980393, 1, 0.25490198, 0.1254902, 0.5411765, 1, 0.41568628, 0.20392157, 0.7529412, 1, 0.6117647, 0.38431373, 0.9098039, 1, 0.8235294, 0.7058824, 1, 1, 0.9647059, 0.93333334, 1, 1)
+shader_parameter/GM = PackedColorArray(0.050980393, 0.07058824, 0.14117648, 1, 0.09803922, 0.15686275, 0.25882354, 1, 0.16470589, 0.2627451, 0.42352942, 1, 0.26666668, 0.41568628, 0.58431375, 1, 0.42745098, 0.6156863, 0.73333335, 1, 0.7137255, 0.8352941, 0.8745098, 1, 0.93333334, 0.9647059, 0.96862745, 1)
+shader_parameter/dither = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mxdly"]
+shader = ExtResource("5_jmp12")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = null
+shader_parameter/t = null
+shader_parameter/size = Vector2(320, 180)
+shader_parameter/center = Vector2(0, -90)
+shader_parameter/F = ExtResource("6_dicpc")
+shader_parameter/G = PackedColorArray(0.03137255, 0.101960786, 0.11764706, 1, 0.050980393, 0.22745098, 0.21176471, 1, 0.07450981, 0.4, 0.30588236, 1, 0.12156863, 0.627451, 0.41568628, 1, 0.24705882, 0.84705883, 0.5568628, 1, 0.6039216, 0.96862745, 0.7490196, 1, 0.9019608, 1, 0.9411765, 1)
+shader_parameter/U = PackedColorArray(0.07058824, 0.043137256, 0.16470589, 1, 0.14901961, 0.08627451, 0.30980393, 1, 0.25490198, 0.1254902, 0.5411765, 1, 0.41568628, 0.20392157, 0.7529412, 1, 0.6117647, 0.38431373, 0.9098039, 1, 0.8235294, 0.7058824, 1, 1, 0.9647059, 0.93333334, 1, 1)
+shader_parameter/GM = PackedColorArray(0.050980393, 0.07058824, 0.14117648, 1, 0.09803922, 0.15686275, 0.25882354, 1, 0.16470589, 0.2627451, 0.42352942, 1, 0.26666668, 0.41568628, 0.58431375, 1, 0.42745098, 0.6156863, 0.73333335, 1, 0.7137255, 0.8352941, 0.8745098, 1, 0.93333334, 0.9647059, 0.96862745, 1)
+shader_parameter/dither = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mvlpe"]
+shader = ExtResource("7_4emwx")
+shader_parameter/t = null
+shader_parameter/size = Vector2(320, 180)
+shader_parameter/center = Vector2(0, -90)
+shader_parameter/F = ExtResource("6_dicpc")
+shader_parameter/G = PackedColorArray(0.03137255, 0.101960786, 0.11764706, 1, 0.050980393, 0.22745098, 0.21176471, 1, 0.07450981, 0.4, 0.30588236, 1, 0.12156863, 0.627451, 0.41568628, 1, 0.24705882, 0.84705883, 0.5568628, 1, 0.6039216, 0.96862745, 0.7490196, 1, 0.9019608, 1, 0.9411765, 1)
+shader_parameter/U = PackedColorArray(0.07058824, 0.043137256, 0.16470589, 1, 0.14901961, 0.08627451, 0.30980393, 1, 0.25490198, 0.1254902, 0.5411765, 1, 0.41568628, 0.20392157, 0.7529412, 1, 0.6117647, 0.38431373, 0.9098039, 1, 0.8235294, 0.7058824, 1, 1, 0.9647059, 0.93333334, 1, 1)
+shader_parameter/GM = PackedColorArray(0.050980393, 0.07058824, 0.14117648, 1, 0.09803922, 0.15686275, 0.25882354, 1, 0.16470589, 0.2627451, 0.42352942, 1, 0.26666668, 0.41568628, 0.58431375, 1, 0.42745098, 0.6156863, 0.73333335, 1, 0.7137255, 0.8352941, 0.8745098, 1, 0.93333334, 0.9647059, 0.96862745, 1)
+shader_parameter/strength = null
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iuh0q"]
+resource_name = "Rays"
+shader = ExtResource("8_eqham")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = true
+shader_parameter/quad = Vector2(224, 224)
+shader_parameter/low = Color(0.6039216, 0.96862745, 0.7490196, 1)
+shader_parameter/mid = Color(0.7137255, 0.8352941, 0.8745098, 1)
+shader_parameter/high = Color(0.8235294, 0.7058824, 1, 1)
+shader_parameter/foot = Color(0.9019608, 1, 0.9411765, 1)
+
+[sub_resource type="Gradient" id="Gradient_8a386"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_liqo1"]
+gradient = SubResource("Gradient_8a386")
+width = 224
+height = 224
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fo12y"]
+shader = ExtResource("9_or3u1")
+shader_parameter/t = null
+shader_parameter/data = ExtResource("10_bufde")
+shader_parameter/frames = 360.0
+
+[node name="Aurora" type="Node2D" unique_id=1351379829]
+script = ExtResource("1_dhve5")
+effect_id = "weather/aurora"
+source = "src/fx/weather/aurora.js@64b81a2be72cb56f49bc9c37ab228f54322d64f2"
+duration = 12.0
+loop = true
+canvas_size = Vector2i(320, 180)
+origin = Vector2i(160, 180)
+bg = "sky"
+ramps = {
+"palette": PackedColorArray(0.03137255, 0.101960786, 0.11764706, 1, 0.050980393, 0.22745098, 0.21176471, 1, 0.07450981, 0.4, 0.30588236, 1, 0.12156863, 0.627451, 0.41568628, 1, 0.24705882, 0.84705883, 0.5568628, 1, 0.6039216, 0.96862745, 0.7490196, 1, 0.9019608, 1, 0.9411765, 1),
+"upper": PackedColorArray(0.07058824, 0.043137256, 0.16470589, 1, 0.14901961, 0.08627451, 0.30980393, 1, 0.25490198, 0.1254902, 0.5411765, 1, 0.41568628, 0.20392157, 0.7529412, 1, 0.6117647, 0.38431373, 0.9098039, 1, 0.8235294, 0.7058824, 1, 1, 0.9647059, 0.93333334, 1, 1)
+}
+palette_extra = PackedColorArray(1, 1, 1, 1, 0.5294118, 0.36078432, 0.8, 1, 0.9098039, 0.8509804, 1, 1, 0.92941177, 0.88235295, 1, 1, 0.050980393, 0.07058824, 0.14117648, 1, 0.09803922, 0.15686275, 0.25882354, 1, 0.16470589, 0.2627451, 0.42352942, 1, 0.26666668, 0.41568628, 0.58431375, 1, 0.42745098, 0.6156863, 0.73333335, 1, 0.7137255, 0.8352941, 0.8745098, 1, 0.93333334, 0.9647059, 0.96862745, 1)
+palette_override = PackedColorArray()
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1976796749]
+libraries/ = SubResource("AnimationLibrary_3dyqt")
+
+[node name="Stars" type="GPUParticles2D" parent="." unique_id=2142664354]
+z_index = 1
+material = SubResource("ShaderMaterial_sype6")
+amount = 150
+texture = SubResource("GradientTexture2D_vl1cq")
+lifetime = 12.0
+preprocess = 0.016666666666666666
+explosiveness = 1.0
+use_fixed_seed = true
+seed = 753655
+fixed_fps = 60
+interpolate = false
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+local_coords = true
+draw_order = 0
+process_material = SubResource("ShaderMaterial_qm74k")
+
+[node name="StarsLight" type="GPUParticles2D" parent="." unique_id=1969256461]
+z_index = 2
+material = SubResource("ShaderMaterial_s3hd3")
+amount = 150
+texture = SubResource("GradientTexture2D_5dehh")
+lifetime = 12.0
+preprocess = 0.016666666666666666
+explosiveness = 1.0
+use_fixed_seed = true
+seed = 753655
+fixed_fps = 60
+interpolate = false
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+local_coords = true
+draw_order = 0
+process_material = SubResource("ShaderMaterial_qm74k")
+
+[node name="Curtains" type="ColorRect" parent="." unique_id=490747801]
+z_index = 1
+material = SubResource("ShaderMaterial_3hn5o")
+offset_left = -160.0
+offset_top = -180.0
+offset_right = 160.0
+mouse_filter = 2
+
+[node name="Hems" type="ColorRect" parent="." unique_id=1913053071]
+z_index = 1
+material = SubResource("ShaderMaterial_mxdly")
+offset_left = -160.0
+offset_top = -180.0
+offset_right = 160.0
+mouse_filter = 2
+
+[node name="CurtainsLight" type="ColorRect" parent="." unique_id=1372090953]
+z_index = 2
+material = SubResource("ShaderMaterial_mvlpe")
+offset_left = -160.0
+offset_top = -180.0
+offset_right = 160.0
+mouse_filter = 2
+
+[node name="Rays" type="GPUParticles2D" parent="." unique_id=1139950038]
+z_index = 1
+material = SubResource("ShaderMaterial_iuh0q")
+amount = 65
+texture = SubResource("GradientTexture2D_liqo1")
+lifetime = 12.0
+preprocess = 0.016666666666666666
+explosiveness = 1.0
+use_fixed_seed = true
+seed = 765846
+fixed_fps = 60
+interpolate = false
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+local_coords = true
+draw_order = 0
+process_material = SubResource("ShaderMaterial_fo12y")

@@ -1,0 +1,1438 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://addons/pixelfx_particles/core/pfx_effect.gd" id="1_g1xve"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/shaders/dither.gdshader" id="2_s4xnf"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/fx/status/bleeding/_pool.res" id="3_tfwvq"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/shaders/ring_light.gdshader" id="4_o6jl3"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/shaders/actor.gdshader" id="5_qqju0"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/actor/stock/hero2.png" id="6_d32q3"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/fx/status/bleeding/_wounds.res" id="7_kqrg2"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/fx/status/bleeding/_bead0.res" id="8_8md6g"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/fx/status/bleeding/_drop0.res" id="9_ipp23"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/fx/status/bleeding/_splat0.res" id="10_jhbve"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/textures/dot1.png" id="11_76g37"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/fx/status/bleeding/_bead1.res" id="12_sonmp"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/fx/status/bleeding/_drop1.res" id="13_ydh00"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/fx/status/bleeding/_splat1.res" id="14_4oif2"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/fx/status/bleeding/_bead2.res" id="15_w575p"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/fx/status/bleeding/_drop2.res" id="16_ostfl"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/fx/status/bleeding/_splat2.res" id="17_drffk"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/fx/status/bleeding/_bead3.res" id="18_2ocl0"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/fx/status/bleeding/_drop3.res" id="19_riasn"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/fx/status/bleeding/_splat3.res" id="20_ioo2a"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/fx/status/bleeding/_bead4.res" id="21_s68o0"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/fx/status/bleeding/_drop4.res" id="22_fn5j3"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/fx/status/bleeding/_splat4.res" id="23_v1wiy"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/fx/status/bleeding/_bead5.res" id="24_8b0b6"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/fx/status/bleeding/_drop5.res" id="25_ttv23"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/fx/status/bleeding/_splat5.res" id="26_fidaj"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/fx/status/bleeding/_bead6.res" id="27_e83g4"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/fx/status/bleeding/_drop6.res" id="28_miqbi"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/fx/status/bleeding/_splat6.res" id="29_6sysv"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/textures/streak3.png" id="30_d3f07"]
+
+[sub_resource type="Animation" id="Animation_6d0cc"]
+length = 2.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PoolLight:material:shader_parameter/alpha")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.23333333, 0.43333334, 0.8, 1.1666666, 1.2, 1.3, 1.4333333, 1.6333333, 2, 2.3666666, 2.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.1, 0.08681280184142556, 0.07572962883474393, 0.06706777783026387, 0.06163048815913465, 0.060376142502059804, 0.1, 0.08681280184142556, 0.07572962883474393, 0.06706777783026387, 0.06163048815913465, 0.060376142502059804, 0.1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Actor:material:shader_parameter/flash")
+tracks/1/interp = 0
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.032333333, 0.06566667, 0.099, 0.13233334, 1.199, 1.2323333, 1.2656667, 1.299, 1.3323333, 2.399),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0.26, 0.1877777777777778, 0.11555555555555555, 0.04333333333333333, 0.0, 0.26, 0.18777777777777754, 0.11555555555555558, 0.04333333333333312, 0.0, 0.26]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Bead0:visible")
+tracks/2/interp = 0
+tracks/2/loop_wrap = false
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.499, 2.399),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Bead0:frame")
+tracks/3/interp = 0
+tracks/3/loop_wrap = false
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.199, 0.26566666, 0.399, 2.399),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Drop0:visible")
+tracks/4/interp = 0
+tracks/4/loop_wrap = false
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.499, 0.66566664, 2.399),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [false, true, false, false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Drop0:position")
+tracks/5/interp = 0
+tracks/5/loop_wrap = false
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.5656667, 0.599, 0.63233334),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(-4, -10), Vector2(-4, -8), Vector2(-4, -6), Vector2(-4, -2)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Drop0:frame")
+tracks/6/interp = 0
+tracks/6/loop_wrap = false
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.599, 0.63233334),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 1]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Splat0:visible")
+tracks/7/interp = 0
+tracks/7/loop_wrap = false
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.66566664, 2.399),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Splat0:frame")
+tracks/8/interp = 0
+tracks/8/loop_wrap = false
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 0.699, 0.73233336, 0.96566665, 1.0323334, 1.6656667, 2.3656666),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 5]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Splat0:modulate:a")
+tracks/9/interp = 0
+tracks/9/loop_wrap = false
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 2.199, 2.2323334, 2.2656667, 2.299, 2.3323333, 2.3656666),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [1.0, 0.9993043854003095, 0.980943252767774, 0.9402873085447555, 0.8808921082868093, 0.8063132075494899, 0.7201061618883549]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Crown0:emitting")
+tracks/10/interp = 0
+tracks/10/loop_wrap = false
+tracks/10/keys = {
+"times": PackedFloat32Array(0, 0.6513472),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Bead1:visible")
+tracks/11/interp = 0
+tracks/11/loop_wrap = false
+tracks/11/keys = {
+"times": PackedFloat32Array(0, 0.799, 1.299, 2.399),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [false, true, false, false]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("Bead1:frame")
+tracks/12/interp = 0
+tracks/12/loop_wrap = false
+tracks/12/keys = {
+"times": PackedFloat32Array(0, 0.799, 0.999, 1.0656667, 1.199, 2.399),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [3, 0, 1, 2, 3, 3]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("Drop1:visible")
+tracks/13/interp = 0
+tracks/13/loop_wrap = false
+tracks/13/keys = {
+"times": PackedFloat32Array(0, 1.299, 1.4656667, 2.399),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [false, true, false, false]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("Drop1:position")
+tracks/14/interp = 0
+tracks/14/loop_wrap = false
+tracks/14/keys = {
+"times": PackedFloat32Array(0, 1.3656666, 1.399, 1.4323334),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(-4, -10), Vector2(-4, -8), Vector2(-4, -6), Vector2(-4, -2)]
+}
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("Drop1:frame")
+tracks/15/interp = 0
+tracks/15/loop_wrap = false
+tracks/15/keys = {
+"times": PackedFloat32Array(0, 1.399, 1.4323334),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 1]
+}
+tracks/16/type = "value"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("Splat1:visible")
+tracks/16/interp = 0
+tracks/16/loop_wrap = false
+tracks/16/keys = {
+"times": PackedFloat32Array(0, 0.799, 1.4656667, 2.399),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [true, false, true, true]
+}
+tracks/17/type = "value"
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/path = NodePath("Splat1:frame")
+tracks/17/interp = 0
+tracks/17/loop_wrap = false
+tracks/17/keys = {
+"times": PackedFloat32Array(0, 0.06566667, 1.4656667, 1.499, 1.5323334, 1.7656667, 1.8323333, 2.399),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [4, 5, 0, 1, 2, 3, 4, 4]
+}
+tracks/18/type = "value"
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/path = NodePath("Splat1:modulate:a")
+tracks/18/interp = 0
+tracks/18/loop_wrap = false
+tracks/18/keys = {
+"times": PackedFloat32Array(0, 0.599, 0.63233334, 0.66566664, 0.699, 0.73233336, 0.76566666, 1.4656667, 2.399),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [1.0, 0.9993043854003095, 0.980943252767774, 0.9402873085447555, 0.8808921082868093, 0.806313207549491, 0.7201061618883549, 1.0, 1.0]
+}
+tracks/19/type = "value"
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/path = NodePath("Crown1:emitting")
+tracks/19/interp = 0
+tracks/19/loop_wrap = false
+tracks/19/keys = {
+"times": PackedFloat32Array(0, 1.4513472),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/20/type = "value"
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/path = NodePath("Bead2:visible")
+tracks/20/interp = 0
+tracks/20/loop_wrap = false
+tracks/20/keys = {
+"times": PackedFloat32Array(0, 1.599, 2.099, 2.399),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [false, true, false, false]
+}
+tracks/21/type = "value"
+tracks/21/imported = false
+tracks/21/enabled = true
+tracks/21/path = NodePath("Bead2:frame")
+tracks/21/interp = 0
+tracks/21/loop_wrap = false
+tracks/21/keys = {
+"times": PackedFloat32Array(0, 1.599, 1.799, 1.8656666, 1.999, 2.399),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [3, 0, 1, 2, 3, 3]
+}
+tracks/22/type = "value"
+tracks/22/imported = false
+tracks/22/enabled = true
+tracks/22/path = NodePath("Drop2:visible")
+tracks/22/interp = 0
+tracks/22/loop_wrap = false
+tracks/22/keys = {
+"times": PackedFloat32Array(0, 2.099, 2.2656667, 2.399),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [false, true, false, false]
+}
+tracks/23/type = "value"
+tracks/23/imported = false
+tracks/23/enabled = true
+tracks/23/path = NodePath("Drop2:position")
+tracks/23/interp = 0
+tracks/23/loop_wrap = false
+tracks/23/keys = {
+"times": PackedFloat32Array(0, 2.1656666, 2.199, 2.2323334),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(-4, -10), Vector2(-4, -8), Vector2(-4, -6), Vector2(-4, -2)]
+}
+tracks/24/type = "value"
+tracks/24/imported = false
+tracks/24/enabled = true
+tracks/24/path = NodePath("Drop2:frame")
+tracks/24/interp = 0
+tracks/24/loop_wrap = false
+tracks/24/keys = {
+"times": PackedFloat32Array(0, 2.199, 2.2323334),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 1]
+}
+tracks/25/type = "value"
+tracks/25/imported = false
+tracks/25/enabled = true
+tracks/25/path = NodePath("Splat2:visible")
+tracks/25/interp = 0
+tracks/25/loop_wrap = false
+tracks/25/keys = {
+"times": PackedFloat32Array(0, 1.599, 2.2656667, 2.399),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [true, false, true, true]
+}
+tracks/26/type = "value"
+tracks/26/imported = false
+tracks/26/enabled = true
+tracks/26/path = NodePath("Splat2:frame")
+tracks/26/interp = 0
+tracks/26/loop_wrap = false
+tracks/26/keys = {
+"times": PackedFloat32Array(0, 0.16566667, 0.23233333, 0.8656667, 2.2656667, 2.299, 2.3323333, 2.399),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [2, 3, 4, 5, 0, 1, 2, 2]
+}
+tracks/27/type = "value"
+tracks/27/imported = false
+tracks/27/enabled = true
+tracks/27/path = NodePath("Splat2:modulate:a")
+tracks/27/interp = 0
+tracks/27/loop_wrap = false
+tracks/27/keys = {
+"times": PackedFloat32Array(0, 1.399, 1.4323334, 1.4656667, 1.499, 1.5323334, 1.5656667, 2.2656667, 2.399),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [1.0, 0.9993043854003095, 0.980943252767774, 0.9402873085447555, 0.8808921082868093, 0.8063132075494899, 0.7201061618883549, 1.0, 1.0]
+}
+tracks/28/type = "value"
+tracks/28/imported = false
+tracks/28/enabled = true
+tracks/28/path = NodePath("Crown2:emitting")
+tracks/28/interp = 0
+tracks/28/loop_wrap = false
+tracks/28/keys = {
+"times": PackedFloat32Array(0, 2.2513473),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/29/type = "value"
+tracks/29/imported = false
+tracks/29/enabled = true
+tracks/29/path = NodePath("Bead3:visible")
+tracks/29/interp = 0
+tracks/29/loop_wrap = false
+tracks/29/keys = {
+"times": PackedFloat32Array(0, 0.43233332, 1.1656667, 2.399),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [false, true, false, false]
+}
+tracks/30/type = "value"
+tracks/30/imported = false
+tracks/30/enabled = true
+tracks/30/path = NodePath("Bead3:frame")
+tracks/30/interp = 0
+tracks/30/loop_wrap = false
+tracks/30/keys = {
+"times": PackedFloat32Array(0, 0.43233332, 0.699, 0.799, 0.999, 2.399),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [3, 0, 1, 2, 3, 3]
+}
+tracks/31/type = "value"
+tracks/31/imported = false
+tracks/31/enabled = true
+tracks/31/path = NodePath("Drop3:visible")
+tracks/31/interp = 0
+tracks/31/loop_wrap = false
+tracks/31/keys = {
+"times": PackedFloat32Array(0, 1.1656667, 1.3656666, 2.399),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [false, true, false, false]
+}
+tracks/32/type = "value"
+tracks/32/imported = false
+tracks/32/enabled = true
+tracks/32/path = NodePath("Drop3:position")
+tracks/32/interp = 0
+tracks/32/loop_wrap = false
+tracks/32/keys = {
+"times": PackedFloat32Array(0, 1.2323333, 1.2656667, 1.299, 1.3323333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(2, -12), Vector2(2, -10), Vector2(2, -8), Vector2(2, -4), Vector2(2, 0)]
+}
+tracks/33/type = "value"
+tracks/33/imported = false
+tracks/33/enabled = true
+tracks/33/path = NodePath("Drop3:frame")
+tracks/33/interp = 0
+tracks/33/loop_wrap = false
+tracks/33/keys = {
+"times": PackedFloat32Array(0, 1.2656667, 1.3323333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 1]
+}
+tracks/34/type = "value"
+tracks/34/imported = false
+tracks/34/enabled = true
+tracks/34/path = NodePath("Splat3:visible")
+tracks/34/interp = 0
+tracks/34/loop_wrap = false
+tracks/34/keys = {
+"times": PackedFloat32Array(0, 0.43233332, 1.3656666, 2.399),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [true, false, true, true]
+}
+tracks/35/type = "value"
+tracks/35/imported = false
+tracks/35/enabled = true
+tracks/35/path = NodePath("Splat3:frame")
+tracks/35/interp = 0
+tracks/35/loop_wrap = false
+tracks/35/keys = {
+"times": PackedFloat32Array(0, 1.3656666, 1.399, 1.4323334, 1.6656667, 1.699, 2.3656666, 2.399),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [5, 0, 1, 2, 3, 4, 5, 5]
+}
+tracks/36/type = "value"
+tracks/36/imported = false
+tracks/36/enabled = true
+tracks/36/path = NodePath("Splat3:modulate:a")
+tracks/36/interp = 0
+tracks/36/loop_wrap = false
+tracks/36/keys = {
+"times": PackedFloat32Array(0, 2.399),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [1.0, 1.0]
+}
+tracks/37/type = "value"
+tracks/37/imported = false
+tracks/37/enabled = true
+tracks/37/path = NodePath("Crown3:emitting")
+tracks/37/interp = 0
+tracks/37/loop_wrap = false
+tracks/37/keys = {
+"times": PackedFloat32Array(0, 1.3329673),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/38/type = "value"
+tracks/38/imported = false
+tracks/38/enabled = true
+tracks/38/path = NodePath("Bead4:visible")
+tracks/38/interp = 0
+tracks/38/loop_wrap = false
+tracks/38/keys = {
+"times": PackedFloat32Array(0, 1.6323333, 2.3656666, 2.399),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [false, true, false, false]
+}
+tracks/39/type = "value"
+tracks/39/imported = false
+tracks/39/enabled = true
+tracks/39/path = NodePath("Bead4:frame")
+tracks/39/interp = 0
+tracks/39/loop_wrap = false
+tracks/39/keys = {
+"times": PackedFloat32Array(0, 1.6323333, 1.899, 1.999, 2.199, 2.399),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [3, 0, 1, 2, 3, 3]
+}
+tracks/40/type = "value"
+tracks/40/imported = false
+tracks/40/enabled = true
+tracks/40/path = NodePath("Drop4:visible")
+tracks/40/interp = 0
+tracks/40/loop_wrap = false
+tracks/40/keys = {
+"times": PackedFloat32Array(0, 0.16566667, 2.299, 2.3656666, 2.399),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [true, false, false, true, true]
+}
+tracks/41/type = "value"
+tracks/41/imported = false
+tracks/41/enabled = true
+tracks/41/path = NodePath("Drop4:position")
+tracks/41/interp = 0
+tracks/41/loop_wrap = false
+tracks/41/keys = {
+"times": PackedFloat32Array(0, 0.032333333, 0.06566667, 0.099, 0.13233334, 2.3656666, 2.399),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(2, -12), Vector2(2, -10), Vector2(2, -8), Vector2(2, -4), Vector2(2, 0), Vector2(2, -12), Vector2(2, -12)]
+}
+tracks/42/type = "value"
+tracks/42/imported = false
+tracks/42/enabled = true
+tracks/42/path = NodePath("Drop4:frame")
+tracks/42/interp = 0
+tracks/42/loop_wrap = false
+tracks/42/keys = {
+"times": PackedFloat32Array(0, 0.06566667, 2.3656666, 2.399),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 0, 0]
+}
+tracks/43/type = "value"
+tracks/43/imported = false
+tracks/43/enabled = true
+tracks/43/path = NodePath("Splat4:visible")
+tracks/43/interp = 0
+tracks/43/loop_wrap = false
+tracks/43/keys = {
+"times": PackedFloat32Array(0, 0.16566667, 1.6323333, 2.399),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [false, true, false, false]
+}
+tracks/44/type = "value"
+tracks/44/imported = false
+tracks/44/enabled = true
+tracks/44/path = NodePath("Splat4:frame")
+tracks/44/interp = 0
+tracks/44/loop_wrap = false
+tracks/44/keys = {
+"times": PackedFloat32Array(0, 0.199, 0.23233333, 0.46566668, 0.499, 1.1656667, 1.599),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 5]
+}
+tracks/45/type = "value"
+tracks/45/imported = false
+tracks/45/enabled = true
+tracks/45/path = NodePath("Splat4:modulate:a")
+tracks/45/interp = 0
+tracks/45/loop_wrap = false
+tracks/45/keys = {
+"times": PackedFloat32Array(0, 1.599),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [1.0, 1.0]
+}
+tracks/46/type = "value"
+tracks/46/imported = false
+tracks/46/enabled = true
+tracks/46/path = NodePath("Crown4:emitting")
+tracks/46/interp = 0
+tracks/46/loop_wrap = false
+tracks/46/keys = {
+"times": PackedFloat32Array(0, 0.13296732),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/47/type = "value"
+tracks/47/imported = false
+tracks/47/enabled = true
+tracks/47/path = NodePath("Bead5:visible")
+tracks/47/interp = 0
+tracks/47/loop_wrap = false
+tracks/47/keys = {
+"times": PackedFloat32Array(0, 0.8656667, 1.599, 2.399),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [false, true, false, false]
+}
+tracks/48/type = "value"
+tracks/48/imported = false
+tracks/48/enabled = true
+tracks/48/path = NodePath("Bead5:frame")
+tracks/48/interp = 0
+tracks/48/loop_wrap = false
+tracks/48/keys = {
+"times": PackedFloat32Array(0, 0.8656667, 1.1323333, 1.2323333, 1.399, 2.399),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [3, 0, 1, 2, 3, 3]
+}
+tracks/49/type = "value"
+tracks/49/imported = false
+tracks/49/enabled = true
+tracks/49/path = NodePath("Drop5:visible")
+tracks/49/interp = 0
+tracks/49/loop_wrap = false
+tracks/49/keys = {
+"times": PackedFloat32Array(0, 1.599, 1.7323333, 2.399),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [false, true, false, false]
+}
+tracks/50/type = "value"
+tracks/50/imported = false
+tracks/50/enabled = true
+tracks/50/path = NodePath("Drop5:position")
+tracks/50/interp = 0
+tracks/50/loop_wrap = false
+tracks/50/keys = {
+"times": PackedFloat32Array(0, 1.6323333, 1.6656667, 1.699),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(6, -9), Vector2(6, -8), Vector2(6, -6), Vector2(6, -3)]
+}
+tracks/51/type = "value"
+tracks/51/imported = false
+tracks/51/enabled = true
+tracks/51/path = NodePath("Drop5:frame")
+tracks/51/interp = 0
+tracks/51/loop_wrap = false
+tracks/51/keys = {
+"times": PackedFloat32Array(0, 1.699),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+tracks/52/type = "value"
+tracks/52/imported = false
+tracks/52/enabled = true
+tracks/52/path = NodePath("Splat5:visible")
+tracks/52/interp = 0
+tracks/52/loop_wrap = false
+tracks/52/keys = {
+"times": PackedFloat32Array(0, 0.8656667, 1.7323333, 2.399),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [true, false, true, true]
+}
+tracks/53/type = "value"
+tracks/53/imported = false
+tracks/53/enabled = true
+tracks/53/path = NodePath("Splat5:frame")
+tracks/53/interp = 0
+tracks/53/loop_wrap = false
+tracks/53/keys = {
+"times": PackedFloat32Array(0, 0.33233333, 1.7323333, 1.799, 1.8323333, 2.0323334, 2.099, 2.399),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [4, 5, 0, 1, 2, 3, 4, 4]
+}
+tracks/54/type = "value"
+tracks/54/imported = false
+tracks/54/enabled = true
+tracks/54/path = NodePath("Splat5:modulate:a")
+tracks/54/interp = 0
+tracks/54/loop_wrap = false
+tracks/54/keys = {
+"times": PackedFloat32Array(0, 2.399),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [1.0, 1.0]
+}
+tracks/55/type = "value"
+tracks/55/imported = false
+tracks/55/enabled = true
+tracks/55/path = NodePath("Crown5:emitting")
+tracks/55/interp = 0
+tracks/55/loop_wrap = false
+tracks/55/keys = {
+"times": PackedFloat32Array(0, 1.7320712),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/56/type = "value"
+tracks/56/imported = false
+tracks/56/enabled = true
+tracks/56/path = NodePath("Bead6:visible")
+tracks/56/interp = 0
+tracks/56/loop_wrap = false
+tracks/56/keys = {
+"times": PackedFloat32Array(0, 0.399, 2.0656667, 2.399),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [true, false, true, true]
+}
+tracks/57/type = "value"
+tracks/57/imported = false
+tracks/57/enabled = true
+tracks/57/path = NodePath("Bead6:frame")
+tracks/57/interp = 0
+tracks/57/loop_wrap = false
+tracks/57/keys = {
+"times": PackedFloat32Array(0, 0.032333333, 0.199, 2.0656667, 2.3323333, 2.399),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [1, 2, 3, 0, 1, 1]
+}
+tracks/58/type = "value"
+tracks/58/imported = false
+tracks/58/enabled = true
+tracks/58/path = NodePath("Drop6:visible")
+tracks/58/interp = 0
+tracks/58/loop_wrap = false
+tracks/58/keys = {
+"times": PackedFloat32Array(0, 0.399, 0.5323333, 2.399),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [false, true, false, false]
+}
+tracks/59/type = "value"
+tracks/59/imported = false
+tracks/59/enabled = true
+tracks/59/path = NodePath("Drop6:position")
+tracks/59/interp = 0
+tracks/59/loop_wrap = false
+tracks/59/keys = {
+"times": PackedFloat32Array(0, 0.43233332, 0.46566668, 0.499),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(6, -9), Vector2(6, -8), Vector2(6, -6), Vector2(6, -3)]
+}
+tracks/60/type = "value"
+tracks/60/imported = false
+tracks/60/enabled = true
+tracks/60/path = NodePath("Drop6:frame")
+tracks/60/interp = 0
+tracks/60/loop_wrap = false
+tracks/60/keys = {
+"times": PackedFloat32Array(0, 0.499),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+tracks/61/type = "value"
+tracks/61/imported = false
+tracks/61/enabled = true
+tracks/61/path = NodePath("Splat6:visible")
+tracks/61/interp = 0
+tracks/61/loop_wrap = false
+tracks/61/keys = {
+"times": PackedFloat32Array(0, 0.5323333, 2.0656667, 2.399),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [false, true, false, false]
+}
+tracks/62/type = "value"
+tracks/62/imported = false
+tracks/62/enabled = true
+tracks/62/path = NodePath("Splat6:frame")
+tracks/62/interp = 0
+tracks/62/loop_wrap = false
+tracks/62/keys = {
+"times": PackedFloat32Array(0, 0.599, 0.63233334, 0.8323333, 0.899, 1.5323334, 2.0323334),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 5]
+}
+tracks/63/type = "value"
+tracks/63/imported = false
+tracks/63/enabled = true
+tracks/63/path = NodePath("Splat6:modulate:a")
+tracks/63/interp = 0
+tracks/63/loop_wrap = false
+tracks/63/keys = {
+"times": PackedFloat32Array(0, 2.0323334),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [1.0, 1.0]
+}
+tracks/64/type = "value"
+tracks/64/imported = false
+tracks/64/enabled = true
+tracks/64/path = NodePath("Crown6:emitting")
+tracks/64/interp = 0
+tracks/64/loop_wrap = false
+tracks/64/keys = {
+"times": PackedFloat32Array(0, 0.5320712),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/65/type = "value"
+tracks/65/imported = false
+tracks/65/enabled = true
+tracks/65/path = NodePath("Spurt0:emitting")
+tracks/65/interp = 0
+tracks/65/loop_wrap = false
+tracks/65/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/66/type = "value"
+tracks/66/imported = false
+tracks/66/enabled = true
+tracks/66/path = NodePath("Spurt1:emitting")
+tracks/66/interp = 0
+tracks/66/loop_wrap = false
+tracks/66/keys = {
+"times": PackedFloat32Array(0, 1.199),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/67/type = "value"
+tracks/67/imported = false
+tracks/67/enabled = true
+tracks/67/path = NodePath("WoundLight:material:shader_parameter/alpha")
+tracks/67/interp = 1
+tracks/67/loop_wrap = false
+tracks/67/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.13333334, 1.1666666, 1.2, 1.3, 1.3333334, 2.3666666, 2.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.25, 0.04166666666666666, 0.0, 0.0, 0.25, 0.04166666666666646, 0.0, 0.0, 0.25]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kdeol"]
+_data = {
+&"fx": SubResource("Animation_6d0cc")
+}
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_o7bbk"]
+polygon = PackedVector2Array(-4096, -1, 4096, -1, 4096, 63, -4096, 63)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_f2ubq"]
+resource_name = "Dither"
+shader = ExtResource("2_s4xnf")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = null
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o4fj8"]
+shader = ExtResource("4_o6jl3")
+shader_parameter/size = Vector2(24, 24)
+shader_parameter/radius = 8.0
+shader_parameter/thickness = null
+shader_parameter/squash = null
+shader_parameter/color = Color(0.78039217, 0.11764706, 0.2, 1)
+shader_parameter/strength = null
+shader_parameter/alpha = 0.06
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lji8c"]
+shader = ExtResource("5_qqju0")
+shader_parameter/flash_color = Color(0.9490196, 0.21960784, 0.2901961, 1)
+shader_parameter/flash = null
+shader_parameter/tint_color = null
+shader_parameter/tint = null
+
+[sub_resource type="Gradient" id="Gradient_plxfr"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.33333334, 0.6666667)
+colors = PackedColorArray(0.9490196, 0.21960784, 0.2901961, 1, 0.78039217, 0.11764706, 0.2, 1, 0.78039217, 0.11764706, 0.2, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_u6ojd"]
+gradient = SubResource("Gradient_plxfr")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_bmlid"]
+particle_flag_disable_z = true
+direction = Vector3(6.123234e-17, -1, 0)
+spread = 28.0
+initial_velocity_min = 45.0
+initial_velocity_max = 80.0
+gravity = Vector3(0, 900, 0)
+color_initial_ramp = SubResource("GradientTexture1D_u6ojd")
+
+[sub_resource type="Gradient" id="Gradient_c2n06"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.33333334, 0.6666667)
+colors = PackedColorArray(0.9490196, 0.21960784, 0.2901961, 1, 0.78039217, 0.11764706, 0.2, 1, 0.78039217, 0.11764706, 0.2, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_a51tq"]
+gradient = SubResource("Gradient_c2n06")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_0dbcs"]
+particle_flag_disable_z = true
+direction = Vector3(6.123234e-17, -1, 0)
+spread = 28.0
+initial_velocity_min = 45.0
+initial_velocity_max = 80.0
+gravity = Vector3(0, 900, 0)
+color_initial_ramp = SubResource("GradientTexture1D_a51tq")
+
+[sub_resource type="Gradient" id="Gradient_gx6ai"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.33333334, 0.6666667)
+colors = PackedColorArray(0.9490196, 0.21960784, 0.2901961, 1, 0.78039217, 0.11764706, 0.2, 1, 0.78039217, 0.11764706, 0.2, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_3h6si"]
+gradient = SubResource("Gradient_gx6ai")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_hg3qd"]
+particle_flag_disable_z = true
+direction = Vector3(6.123234e-17, -1, 0)
+spread = 28.0
+initial_velocity_min = 45.0
+initial_velocity_max = 80.0
+gravity = Vector3(0, 900, 0)
+color_initial_ramp = SubResource("GradientTexture1D_3h6si")
+
+[sub_resource type="Gradient" id="Gradient_s5tfn"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.33333334, 0.6666667)
+colors = PackedColorArray(0.9490196, 0.21960784, 0.2901961, 1, 0.78039217, 0.11764706, 0.2, 1, 0.78039217, 0.11764706, 0.2, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_rdiyd"]
+gradient = SubResource("Gradient_s5tfn")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_m8w2g"]
+particle_flag_disable_z = true
+direction = Vector3(6.123234e-17, -1, 0)
+spread = 28.0
+initial_velocity_min = 45.0
+initial_velocity_max = 80.0
+gravity = Vector3(0, 900, 0)
+color_initial_ramp = SubResource("GradientTexture1D_rdiyd")
+
+[sub_resource type="Gradient" id="Gradient_0o5ql"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.33333334, 0.6666667)
+colors = PackedColorArray(0.9490196, 0.21960784, 0.2901961, 1, 0.78039217, 0.11764706, 0.2, 1, 0.78039217, 0.11764706, 0.2, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_6tyn3"]
+gradient = SubResource("Gradient_0o5ql")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_rdc2j"]
+particle_flag_disable_z = true
+direction = Vector3(6.123234e-17, -1, 0)
+spread = 28.0
+initial_velocity_min = 45.0
+initial_velocity_max = 80.0
+gravity = Vector3(0, 900, 0)
+color_initial_ramp = SubResource("GradientTexture1D_6tyn3")
+
+[sub_resource type="Gradient" id="Gradient_l8d1r"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.33333334, 0.6666667)
+colors = PackedColorArray(0.9490196, 0.21960784, 0.2901961, 1, 0.78039217, 0.11764706, 0.2, 1, 0.78039217, 0.11764706, 0.2, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_4rsgj"]
+gradient = SubResource("Gradient_l8d1r")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jsqtb"]
+particle_flag_disable_z = true
+direction = Vector3(6.123234e-17, -1, 0)
+spread = 28.0
+initial_velocity_min = 45.0
+initial_velocity_max = 80.0
+gravity = Vector3(0, 900, 0)
+color_initial_ramp = SubResource("GradientTexture1D_4rsgj")
+
+[sub_resource type="Gradient" id="Gradient_5hg6c"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.33333334, 0.6666667)
+colors = PackedColorArray(0.9490196, 0.21960784, 0.2901961, 1, 0.78039217, 0.11764706, 0.2, 1, 0.78039217, 0.11764706, 0.2, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_uqtkg"]
+gradient = SubResource("Gradient_5hg6c")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_cxyif"]
+particle_flag_disable_z = true
+direction = Vector3(6.123234e-17, -1, 0)
+spread = 28.0
+initial_velocity_min = 45.0
+initial_velocity_max = 80.0
+gravity = Vector3(0, 900, 0)
+color_initial_ramp = SubResource("GradientTexture1D_uqtkg")
+
+[sub_resource type="Gradient" id="Gradient_2ohow"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.25, 0.5, 0.75)
+colors = PackedColorArray(1, 0.5411765, 0.47843137, 1, 0.9490196, 0.21960784, 0.2901961, 1, 0.78039217, 0.11764706, 0.2, 1, 0.5764706, 0.07450981, 0.15294118, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_2sjaw"]
+gradient = SubResource("Gradient_2ohow")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ve5va"]
+particle_flag_align_y = true
+particle_flag_disable_z = true
+particle_flag_damping_as_friction = true
+direction = Vector3(-0.52991927, -0.8480481, 0)
+spread = 24.0
+initial_velocity_min = 28.0
+initial_velocity_max = 66.0
+gravity = Vector3(0, 558, 0)
+damping_min = 0.4915302
+damping_max = 0.4915302
+color_initial_ramp = SubResource("GradientTexture1D_2sjaw")
+collision_mode = 2
+collision_use_scale = true
+
+[sub_resource type="Gradient" id="Gradient_be2px"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.25, 0.5, 0.75)
+colors = PackedColorArray(1, 0.5411765, 0.47843137, 1, 0.9490196, 0.21960784, 0.2901961, 1, 0.78039217, 0.11764706, 0.2, 1, 0.5764706, 0.07450981, 0.15294118, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_3coh1"]
+gradient = SubResource("Gradient_be2px")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_luvde"]
+particle_flag_align_y = true
+particle_flag_disable_z = true
+particle_flag_damping_as_friction = true
+direction = Vector3(-0.52991927, -0.8480481, 0)
+spread = 24.0
+initial_velocity_min = 28.0
+initial_velocity_max = 66.0
+gravity = Vector3(0, 558, 0)
+damping_min = 0.4915302
+damping_max = 0.4915302
+color_initial_ramp = SubResource("GradientTexture1D_3coh1")
+collision_mode = 2
+collision_use_scale = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jv0mw"]
+shader = ExtResource("4_o6jl3")
+shader_parameter/size = Vector2(20, 20)
+shader_parameter/radius = 6.0
+shader_parameter/thickness = null
+shader_parameter/squash = null
+shader_parameter/color = Color(0.9490196, 0.21960784, 0.2901961, 1)
+shader_parameter/strength = null
+shader_parameter/alpha = 0.0
+
+[node name="Bleeding" type="Node2D" unique_id=1016497691]
+script = ExtResource("1_g1xve")
+effect_id = "status/bleeding"
+source = "src/fx/status/bleeding.js@5c01160f6e1795dc12704834c34654d1644cef2f"
+duration = 2.4
+loop = true
+canvas_size = Vector2i(60, 56)
+origin = Vector2i(30, 46)
+bg = "ground"
+actor = 2
+ramps = {
+"palette": PackedColorArray(0.20784314, 0.02745098, 0.06666667, 1, 0.36862746, 0.047058824, 0.105882354, 1, 0.5764706, 0.07450981, 0.15294118, 1, 0.78039217, 0.11764706, 0.2, 1, 0.9490196, 0.21960784, 0.2901961, 1, 1, 0.5411765, 0.47843137, 1)
+}
+palette_extra = PackedColorArray()
+palette_override = PackedColorArray()
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2134308545]
+libraries/ = SubResource("AnimationLibrary_kdeol")
+
+[node name="Floor" type="LightOccluder2D" parent="." unique_id=2037561443]
+occluder = SubResource("OccluderPolygon2D_o7bbk")
+occluder_light_mask = 0
+
+[node name="Pool" type="Sprite2D" parent="." unique_id=999126516]
+z_index = -2
+material = SubResource("ShaderMaterial_f2ubq")
+position = Vector2(-7, -1)
+texture = ExtResource("3_tfwvq")
+centered = false
+
+[node name="PoolLight" type="ColorRect" parent="." unique_id=1338981281]
+z_index = 2
+material = SubResource("ShaderMaterial_o4fj8")
+offset_left = -11.5
+offset_top = -13.0
+offset_right = 12.5
+offset_bottom = 11.0
+mouse_filter = 2
+
+[node name="Actor" type="Sprite2D" parent="." unique_id=1955594532]
+material = SubResource("ShaderMaterial_lji8c")
+texture = ExtResource("6_d32q3")
+centered = false
+offset = Vector2(-12, -38)
+
+[node name="Wounds" type="Sprite2D" parent="." unique_id=1730180999]
+z_index = 1
+material = SubResource("ShaderMaterial_f2ubq")
+position = Vector2(-4, -19)
+texture = ExtResource("7_kqrg2")
+centered = false
+
+[node name="Bead0" type="Sprite2D" parent="." unique_id=526816361]
+z_index = 1
+material = SubResource("ShaderMaterial_f2ubq")
+position = Vector2(-5, -13)
+texture = ExtResource("8_8md6g")
+centered = false
+hframes = 4
+
+[node name="Drop0" type="Sprite2D" parent="." unique_id=2084787296]
+z_index = 1
+material = SubResource("ShaderMaterial_f2ubq")
+position = Vector2(0, -5)
+texture = ExtResource("9_ipp23")
+centered = false
+offset = Vector2(0, -5)
+hframes = 6
+
+[node name="Splat0" type="Sprite2D" parent="." unique_id=1231114752]
+z_index = 1
+material = SubResource("ShaderMaterial_f2ubq")
+position = Vector2(-6, -1)
+texture = ExtResource("10_jhbve")
+centered = false
+hframes = 6
+
+[node name="Crown0" type="GPUParticles2D" parent="." unique_id=1658686198]
+z_index = 1
+material = SubResource("ShaderMaterial_f2ubq")
+position = Vector2(-3.5, -1.5)
+emitting = false
+amount = 3
+texture = ExtResource("11_76g37")
+lifetime = 0.16
+one_shot = true
+explosiveness = 1.0
+use_fixed_seed = true
+seed = 989941
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+process_material = SubResource("ParticleProcessMaterial_bmlid")
+
+[node name="Bead1" type="Sprite2D" parent="." unique_id=2118760646]
+z_index = 1
+material = SubResource("ShaderMaterial_f2ubq")
+position = Vector2(-5, -13)
+texture = ExtResource("12_sonmp")
+centered = false
+hframes = 4
+
+[node name="Drop1" type="Sprite2D" parent="." unique_id=1995061748]
+z_index = 1
+material = SubResource("ShaderMaterial_f2ubq")
+position = Vector2(0, -5)
+texture = ExtResource("13_ydh00")
+centered = false
+offset = Vector2(0, -5)
+hframes = 6
+
+[node name="Splat1" type="Sprite2D" parent="." unique_id=1975505273]
+z_index = 1
+material = SubResource("ShaderMaterial_f2ubq")
+position = Vector2(-5, -1)
+texture = ExtResource("14_4oif2")
+centered = false
+hframes = 6
+
+[node name="Crown1" type="GPUParticles2D" parent="." unique_id=1993179690]
+z_index = 1
+material = SubResource("ShaderMaterial_f2ubq")
+position = Vector2(-3.5, -1.5)
+emitting = false
+amount = 2
+texture = ExtResource("11_76g37")
+lifetime = 0.16
+one_shot = true
+explosiveness = 1.0
+use_fixed_seed = true
+seed = 989943
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+process_material = SubResource("ParticleProcessMaterial_0dbcs")
+
+[node name="Bead2" type="Sprite2D" parent="." unique_id=1285360980]
+z_index = 1
+material = SubResource("ShaderMaterial_f2ubq")
+position = Vector2(-5, -13)
+texture = ExtResource("15_w575p")
+centered = false
+hframes = 4
+
+[node name="Drop2" type="Sprite2D" parent="." unique_id=483591713]
+z_index = 1
+material = SubResource("ShaderMaterial_f2ubq")
+position = Vector2(0, -5)
+texture = ExtResource("16_ostfl")
+centered = false
+offset = Vector2(0, -5)
+hframes = 6
+
+[node name="Splat2" type="Sprite2D" parent="." unique_id=572417819]
+z_index = 1
+material = SubResource("ShaderMaterial_f2ubq")
+position = Vector2(-6, -1)
+texture = ExtResource("17_drffk")
+centered = false
+hframes = 6
+
+[node name="Crown2" type="GPUParticles2D" parent="." unique_id=118070565]
+z_index = 1
+material = SubResource("ShaderMaterial_f2ubq")
+position = Vector2(-3.5, -1.5)
+emitting = false
+amount = 3
+texture = ExtResource("11_76g37")
+lifetime = 0.16
+one_shot = true
+explosiveness = 1.0
+use_fixed_seed = true
+seed = 989945
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+process_material = SubResource("ParticleProcessMaterial_hg3qd")
+
+[node name="Bead3" type="Sprite2D" parent="." unique_id=1425423697]
+z_index = 1
+material = SubResource("ShaderMaterial_f2ubq")
+position = Vector2(1, -15)
+texture = ExtResource("18_2ocl0")
+centered = false
+hframes = 4
+
+[node name="Drop3" type="Sprite2D" parent="." unique_id=1186772556]
+z_index = 1
+material = SubResource("ShaderMaterial_f2ubq")
+position = Vector2(0, -5)
+texture = ExtResource("19_riasn")
+centered = false
+offset = Vector2(0, -5)
+hframes = 6
+
+[node name="Splat3" type="Sprite2D" parent="." unique_id=660617642]
+z_index = 1
+material = SubResource("ShaderMaterial_f2ubq")
+position = Vector2(0, -1)
+texture = ExtResource("20_ioo2a")
+centered = false
+hframes = 6
+
+[node name="Crown3" type="GPUParticles2D" parent="." unique_id=866186379]
+z_index = 1
+material = SubResource("ShaderMaterial_f2ubq")
+position = Vector2(2.5, -1.5)
+emitting = false
+amount = 3
+texture = ExtResource("11_76g37")
+lifetime = 0.16
+one_shot = true
+explosiveness = 1.0
+use_fixed_seed = true
+seed = 989947
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+process_material = SubResource("ParticleProcessMaterial_m8w2g")
+
+[node name="Bead4" type="Sprite2D" parent="." unique_id=1058349958]
+z_index = 1
+material = SubResource("ShaderMaterial_f2ubq")
+position = Vector2(1, -15)
+texture = ExtResource("21_s68o0")
+centered = false
+hframes = 4
+
+[node name="Drop4" type="Sprite2D" parent="." unique_id=492734512]
+z_index = 1
+material = SubResource("ShaderMaterial_f2ubq")
+position = Vector2(0, -5)
+texture = ExtResource("22_fn5j3")
+centered = false
+offset = Vector2(0, -5)
+hframes = 6
+
+[node name="Splat4" type="Sprite2D" parent="." unique_id=2045977170]
+z_index = 1
+material = SubResource("ShaderMaterial_f2ubq")
+position = Vector2(1, -1)
+texture = ExtResource("23_v1wiy")
+centered = false
+hframes = 6
+
+[node name="Crown4" type="GPUParticles2D" parent="." unique_id=1526062060]
+z_index = 1
+material = SubResource("ShaderMaterial_f2ubq")
+position = Vector2(2.5, -1.5)
+emitting = false
+amount = 2
+texture = ExtResource("11_76g37")
+lifetime = 0.16
+one_shot = true
+explosiveness = 1.0
+use_fixed_seed = true
+seed = 989949
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+process_material = SubResource("ParticleProcessMaterial_rdc2j")
+
+[node name="Bead5" type="Sprite2D" parent="." unique_id=718690726]
+z_index = 1
+material = SubResource("ShaderMaterial_f2ubq")
+position = Vector2(5, -12)
+texture = ExtResource("24_8b0b6")
+centered = false
+hframes = 4
+
+[node name="Drop5" type="Sprite2D" parent="." unique_id=127118775]
+z_index = 1
+material = SubResource("ShaderMaterial_f2ubq")
+position = Vector2(0, -5)
+texture = ExtResource("25_ttv23")
+centered = false
+offset = Vector2(0, -5)
+hframes = 6
+
+[node name="Splat5" type="Sprite2D" parent="." unique_id=1594107159]
+z_index = 1
+material = SubResource("ShaderMaterial_f2ubq")
+position = Vector2(4, -1)
+texture = ExtResource("26_fidaj")
+centered = false
+hframes = 6
+
+[node name="Crown5" type="GPUParticles2D" parent="." unique_id=768989875]
+z_index = 1
+material = SubResource("ShaderMaterial_f2ubq")
+position = Vector2(6.5, -1.5)
+emitting = false
+amount = 3
+texture = ExtResource("11_76g37")
+lifetime = 0.16
+one_shot = true
+explosiveness = 1.0
+use_fixed_seed = true
+seed = 989951
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+process_material = SubResource("ParticleProcessMaterial_jsqtb")
+
+[node name="Bead6" type="Sprite2D" parent="." unique_id=746901745]
+z_index = 1
+material = SubResource("ShaderMaterial_f2ubq")
+position = Vector2(5, -12)
+texture = ExtResource("27_e83g4")
+centered = false
+hframes = 4
+
+[node name="Drop6" type="Sprite2D" parent="." unique_id=73867729]
+z_index = 1
+material = SubResource("ShaderMaterial_f2ubq")
+position = Vector2(0, -5)
+texture = ExtResource("28_miqbi")
+centered = false
+offset = Vector2(0, -5)
+hframes = 6
+
+[node name="Splat6" type="Sprite2D" parent="." unique_id=1403605692]
+z_index = 1
+material = SubResource("ShaderMaterial_f2ubq")
+position = Vector2(5, -1)
+texture = ExtResource("29_6sysv")
+centered = false
+hframes = 6
+
+[node name="Crown6" type="GPUParticles2D" parent="." unique_id=757735251]
+z_index = 1
+material = SubResource("ShaderMaterial_f2ubq")
+position = Vector2(6.5, -1.5)
+emitting = false
+amount = 2
+texture = ExtResource("11_76g37")
+lifetime = 0.16
+one_shot = true
+explosiveness = 1.0
+use_fixed_seed = true
+seed = 989953
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+process_material = SubResource("ParticleProcessMaterial_cxyif")
+
+[node name="Spurt0" type="GPUParticles2D" parent="." unique_id=1554651541]
+z_index = 1
+material = SubResource("ShaderMaterial_f2ubq")
+position = Vector2(-3.5, -16)
+amount = 7
+texture = ExtResource("30_d3f07")
+lifetime = 0.45
+one_shot = true
+explosiveness = 0.82
+use_fixed_seed = true
+seed = 992897
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+process_material = SubResource("ParticleProcessMaterial_ve5va")
+
+[node name="Spurt1" type="GPUParticles2D" parent="." unique_id=221553494]
+z_index = 1
+material = SubResource("ShaderMaterial_f2ubq")
+position = Vector2(-3.5, -16)
+emitting = false
+amount = 7
+texture = ExtResource("30_d3f07")
+lifetime = 0.45
+one_shot = true
+explosiveness = 0.82
+use_fixed_seed = true
+seed = 992899
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+process_material = SubResource("ParticleProcessMaterial_luvde")
+
+[node name="WoundLight" type="ColorRect" parent="." unique_id=267280351]
+z_index = 2
+material = SubResource("ShaderMaterial_jv0mw")
+offset_left = -13.5
+offset_top = -26.0
+offset_right = 6.5
+offset_bottom = -6.0
+mouse_filter = 2

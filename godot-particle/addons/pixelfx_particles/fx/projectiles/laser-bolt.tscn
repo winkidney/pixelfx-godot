@@ -1,0 +1,310 @@
+[gd_scene format=4]
+
+[ext_resource type="Script" path="res://addons/pixelfx_particles/core/pfx_effect.gd" id="1_rqdlx"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/shaders/dither.gdshader" id="2_g8dpc"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/textures/streak6.png" id="3_wnrsh"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/shaders/light.gdshader" id="4_lfd8j"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/textures/glow8.png" id="5_it8kc"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/fx/projectiles/_laser-bolt_body.gdshader" id="6_fcjh5"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/fx/projectiles/_sparkle.gdshader" id="7_klys8"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/shaders/ring_light.gdshader" id="8_8lb2y"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/fx/projectiles/_glowline.gdshader" id="9_oy0uu"]
+
+[sub_resource type="Animation" id="Animation_1p7ct"]
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body:material:shader_parameter/t")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Body:material:shader_parameter/fr")
+tracks/1/interp = 0
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.030333333, 0.063666664, 0.097, 0.13033333, 0.16366667, 0.197, 0.23033333, 0.26366666, 0.297, 0.33033332, 0.36366665, 0.397, 0.43033335, 0.46366668, 0.497),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0, 13.0, 14.0, 15.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Glint:material:shader_parameter/arm")
+tracks/2/interp = 0
+tracks/2/loop_wrap = false
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.13033333, 0.26366666, 0.397, 0.497),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [5.0, 4.0, 5.0, 4.0, 4.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("GlintLight:material:shader_parameter/radius")
+tracks/3/interp = 0
+tracks/3/loop_wrap = false
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.13033333, 0.26366666, 0.397, 0.497),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [14.0, 12.0, 14.0, 12.0, 12.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Pool:material:shader_parameter/alpha")
+tracks/4/interp = 1
+tracks/4/loop_wrap = false
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.033333335, 0.06666667, 0.1, 0.13333334, 0.16666667, 0.2, 0.23333333, 0.26666668, 0.3, 0.33333334, 0.36666667, 0.4, 0.43333334, 0.46666667, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.375, 0.46789310318467425, 0.4993152369210342, 0.44847315653655917, 0.3490110386477801, 0.2667468245269452, 0.2561179354631058, 0.324157919615525, 0.42584208038447496, 0.4938820645368942, 0.4832531754730549, 0.4009889613522201, 0.3015268434634409, 0.2506847630789658, 0.28210689681532575, 0.37499999999999994]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_llbhr"]
+_data = {
+&"fx": SubResource("Animation_1p7ct")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kgoo7"]
+resource_name = "Dither"
+shader = ExtResource("2_g8dpc")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = null
+
+[sub_resource type="Gradient" id="Gradient_psppi"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.3, 0.6, 0.85)
+colors = PackedColorArray(1, 0.5411765, 0.5803922, 1, 1, 0.3019608, 0.36862746, 1, 0.84705883, 0.14117648, 0.22745098, 1, 0.84705883, 0.14117648, 0.22745098, 0.5)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_jaklh"]
+gradient = SubResource("Gradient_psppi")
+
+[sub_resource type="Curve" id="Curve_qikhw"]
+_limits = [0.0, 8.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, -0.45, 1, 1, Vector2(1, 0.55), -0.45, 0.0, 1, 1]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_sjniy"]
+curve = SubResource("Curve_qikhw")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_25ovv"]
+lifetime_randomness = 0.4
+particle_flag_align_y = true
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(0.5, 0.6, 0)
+direction = Vector3(-1, 1.2246469e-16, 0)
+spread = 1.6
+initial_velocity_min = 150.0
+initial_velocity_max = 230.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.65
+scale_max = 1.2
+scale_curve = SubResource("CurveTexture_sjniy")
+color_ramp = SubResource("GradientTexture1D_jaklh")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jl5rd"]
+resource_name = "Light"
+shader = ExtResource("4_lfd8j")
+shader_parameter/strength = null
+shader_parameter/steps = null
+
+[sub_resource type="Gradient" id="Gradient_wk4io"]
+offsets = PackedFloat32Array(0, 0.2, 0.4)
+colors = PackedColorArray(1, 0.3019608, 0.36862746, 0.3, 1, 0.3019608, 0.36862746, 0.15, 1, 0.3019608, 0.36862746, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_fhjm5"]
+gradient = SubResource("Gradient_wk4io")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ayclp"]
+lifetime_randomness = 0.4
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(0.5, 0.6, 0)
+direction = Vector3(-1, 1.2246469e-16, 0)
+spread = 1.6
+initial_velocity_min = 150.0
+initial_velocity_max = 230.0
+gravity = Vector3(0, 0, 0)
+color_ramp = SubResource("GradientTexture1D_fhjm5")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4rnx2"]
+shader = ExtResource("6_fcjh5")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = null
+shader_parameter/size = Vector2(56, 16)
+shader_parameter/center = Vector2(-18, 0)
+shader_parameter/t = 0.0
+shader_parameter/fr = 0.0
+shader_parameter/len = 40.0
+shader_parameter/cols = PackedVector4Array(0.16470589, 0.023529412, 0.0627451, 1, 0.36078432, 0.050980393, 0.10980392, 1, 0.6039216, 0.078431375, 0.15686275, 1, 0.84705883, 0.14117648, 0.22745098, 1, 1, 0.3019608, 0.36862746, 1, 1, 0.5411765, 0.5803922, 1, 1, 0.8156863, 0.83137256, 1, 1, 1, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_84k6d"]
+shader = ExtResource("7_klys8")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = null
+shader_parameter/size = Vector2(23, 23)
+shader_parameter/arm = 4.0
+shader_parameter/c = Color(1, 0.8156863, 0.83137256, 1)
+shader_parameter/tip = Color(1, 0.3019608, 0.36862746, 1)
+shader_parameter/heart = Color(1, 1, 1, 1)
+shader_parameter/alpha = null
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7w3qc"]
+shader = ExtResource("8_8lb2y")
+shader_parameter/size = Vector2(28, 28)
+shader_parameter/radius = 12.0
+shader_parameter/thickness = null
+shader_parameter/squash = null
+shader_parameter/color = Color(1, 0.8156863, 0.83137256, 1)
+shader_parameter/strength = null
+shader_parameter/alpha = 0.5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jdnn2"]
+shader = ExtResource("9_oy0uu")
+shader_parameter/size = Vector2(64, 22)
+shader_parameter/center = Vector2(-20, 1)
+shader_parameter/a = Vector2(1, 0.5)
+shader_parameter/b = Vector2(-40, 0.5)
+shader_parameter/radius = 9.0
+shader_parameter/color = Color(0.84705883, 0.14117648, 0.22745098, 1)
+shader_parameter/k = 0.4
+shader_parameter/alpha = null
+shader_parameter/strength = null
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x2uo2"]
+shader = ExtResource("8_8lb2y")
+shader_parameter/size = Vector2(44, 44)
+shader_parameter/radius = 20.0
+shader_parameter/thickness = null
+shader_parameter/squash = null
+shader_parameter/color = Color(0.84705883, 0.14117648, 0.22745098, 1)
+shader_parameter/strength = null
+shader_parameter/alpha = 0.5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_urv50"]
+shader = ExtResource("8_8lb2y")
+shader_parameter/size = Vector2(16, 16)
+shader_parameter/radius = 6.0
+shader_parameter/thickness = null
+shader_parameter/squash = null
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/strength = null
+shader_parameter/alpha = 0.25
+
+[node name="LaserBolt" type="Node2D" unique_id=326145017]
+script = ExtResource("1_rqdlx")
+effect_id = "projectiles/laser-bolt"
+source = "src/fx/projectiles/laser-bolt.js@a503d9efc797355af967151e4edf957b3d00f280"
+duration = 0.5
+loop = true
+canvas_size = Vector2i(128, 32)
+origin = Vector2i(108, 16)
+bg = "sky"
+ramps = {
+"palette": PackedColorArray(0.16470589, 0.023529412, 0.0627451, 1, 0.36078432, 0.050980393, 0.10980392, 1, 0.6039216, 0.078431375, 0.15686275, 1, 0.84705883, 0.14117648, 0.22745098, 1, 1, 0.3019608, 0.36862746, 1, 1, 0.5411765, 0.5803922, 1, 1, 0.8156863, 0.83137256, 1, 1, 1, 1, 1)
+}
+palette_extra = PackedColorArray()
+palette_override = PackedColorArray()
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1860926741]
+libraries/ = SubResource("AnimationLibrary_llbhr")
+
+[node name="Dashes" type="GPUParticles2D" parent="." unique_id=1404985713]
+z_index = 1
+material = SubResource("ShaderMaterial_kgoo7")
+position = Vector2(-32, 0.5)
+amount = 14
+texture = ExtResource("3_wnrsh")
+lifetime = 0.3
+preprocess = 0.3
+use_fixed_seed = true
+seed = 32529
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+process_material = SubResource("ParticleProcessMaterial_25ovv")
+
+[node name="DashLight" type="GPUParticles2D" parent="." unique_id=105992604]
+z_index = 2
+material = SubResource("ShaderMaterial_jl5rd")
+position = Vector2(-32, 0.5)
+amount = 14
+texture = ExtResource("5_it8kc")
+lifetime = 0.3
+preprocess = 0.3
+use_fixed_seed = true
+seed = 479680
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+process_material = SubResource("ParticleProcessMaterial_ayclp")
+
+[node name="Body" type="ColorRect" parent="." unique_id=1138556600]
+z_index = 1
+material = SubResource("ShaderMaterial_4rnx2")
+offset_left = -46.0
+offset_top = -8.0
+offset_right = 10.0
+offset_bottom = 8.0
+mouse_filter = 2
+
+[node name="Glint" type="ColorRect" parent="." unique_id=1571862428]
+z_index = 1
+material = SubResource("ShaderMaterial_84k6d")
+offset_left = -10.0
+offset_top = -11.0
+offset_right = 13.0
+offset_bottom = 12.0
+mouse_filter = 2
+
+[node name="GlintLight" type="ColorRect" parent="." unique_id=1802745200]
+z_index = 2
+material = SubResource("ShaderMaterial_7w3qc")
+offset_left = -13.0
+offset_top = -13.5
+offset_right = 15.0
+offset_bottom = 14.5
+mouse_filter = 2
+
+[node name="Beam" type="ColorRect" parent="." unique_id=1005560200]
+z_index = 2
+material = SubResource("ShaderMaterial_jdnn2")
+offset_left = -52.0
+offset_top = -10.0
+offset_right = 12.0
+offset_bottom = 12.0
+mouse_filter = 2
+
+[node name="Pool" type="ColorRect" parent="." unique_id=1601922083]
+z_index = 2
+material = SubResource("ShaderMaterial_x2uo2")
+offset_left = -24.0
+offset_top = -21.5
+offset_right = 20.0
+offset_bottom = 22.5
+mouse_filter = 2
+
+[node name="Hot" type="ColorRect" parent="." unique_id=511110687]
+z_index = 2
+material = SubResource("ShaderMaterial_urv50")
+offset_left = -7.0
+offset_top = -7.5
+offset_right = 9.0
+offset_bottom = 8.5
+mouse_filter = 2

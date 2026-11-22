@@ -1,0 +1,296 @@
+[gd_scene format=4]
+
+[ext_resource type="Script" path="res://addons/pixelfx_particles/core/pfx_effect.gd" id="1_c28yq"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/fx/projectiles/_energy-disc_spark.gdshader" id="2_3m1to"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/textures/streak8.png" id="3_jxuo5"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/fx/projectiles/_energy-disc_wake.gdshader" id="4_ckal6"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/shaders/dither.gdshader" id="5_fe0or"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/fx/projectiles/arrow/eddy.res" id="6_4g0nw"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/fx/projectiles/arrow/arrow.res" id="7_2on88"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/fx/projectiles/_sparkle.gdshader" id="8_g5mgm"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/shaders/ring_light.gdshader" id="9_wjvs7"]
+
+[sub_resource type="Animation" id="Animation_1jxi1"]
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Arrow:frame")
+tracks/0/interp = 0
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.030333333, 0.063666664, 0.097, 0.13033333, 0.16366667, 0.26366666, 0.33033332, 0.397, 0.43033335, 0.46366668, 0.53033334, 0.56366664),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [1, 0, 1, 2, 0, 2, 1, 2, 0, 1, 0, 2, 1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Glint:position")
+tracks/1/interp = 0
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.030333333, 0.063666664, 0.097, 0.13033333, 0.16366667, 0.197, 0.23033333, 0.26366666, 0.297, 0.33033332, 0.36366665, 0.397, 0.43033335, 0.46366668, 0.497, 0.53033334, 0.56366664, 0.597),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(-16, -12), Vector2(-15, -12), Vector2(-13, -12), Vector2(-11, -12), Vector2(-9, -12), Vector2(-8, -12), Vector2(-6, -12), Vector2(-4, -12), Vector2(-2, -12), Vector2(-16, -12), Vector2(-15, -12), Vector2(-13, -12), Vector2(-11, -12), Vector2(-9, -12), Vector2(-8, -12), Vector2(-6, -12), Vector2(-4, -12), Vector2(-2, -12), Vector2(-16, -12)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Glint:material:shader_parameter/arm")
+tracks/2/interp = 0
+tracks/2/loop_wrap = false
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.030333333, 0.063666664, 0.097, 0.297, 0.33033332, 0.36366665, 0.397, 0.597),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [1.0, 3.0, 2.0, 0.0, 1.0, 3.0, 2.0, 0.0, 1.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("GlintLight:position")
+tracks/3/interp = 0
+tracks/3/loop_wrap = false
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.030333333, 0.063666664, 0.097, 0.13033333, 0.16366667, 0.197, 0.23033333, 0.26366666, 0.297, 0.33033332, 0.36366665, 0.397, 0.43033335, 0.46366668, 0.497, 0.53033334, 0.56366664, 0.597),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(-16.5, -12.5), Vector2(-15.5, -12.5), Vector2(-13.5, -12.5), Vector2(-11.5, -12.5), Vector2(-9.5, -12.5), Vector2(-8.5, -12.5), Vector2(-6.5, -12.5), Vector2(-4.5, -12.5), Vector2(-2.5, -12.5), Vector2(-16.5, -12.5), Vector2(-15.5, -12.5), Vector2(-13.5, -12.5), Vector2(-11.5, -12.5), Vector2(-9.5, -12.5), Vector2(-8.5, -12.5), Vector2(-6.5, -12.5), Vector2(-4.5, -12.5), Vector2(-2.5, -12.5), Vector2(-16.5, -12.5)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("GlintLight:material:shader_parameter/radius")
+tracks/4/interp = 0
+tracks/4/loop_wrap = false
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.030333333, 0.063666664, 0.097, 0.33033332, 0.36366665, 0.397, 0.597),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [6.0, 10.0, 8.0, 6.0, 10.0, 8.0, 6.0, 6.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("GlintLight:material:shader_parameter/alpha")
+tracks/5/interp = 0
+tracks/5/loop_wrap = false
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.097, 0.297, 0.397, 0.597),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0.25, 0.0, 0.25, 0.0, 0.25]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_b5veg"]
+_data = {
+&"fx": SubResource("Animation_1jxi1")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cjuy0"]
+shader = ExtResource("2_3m1to")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = null
+shader_parameter/s0 = Color(0.77725494, 0.827451, 0.92784315, 1)
+shader_parameter/s1 = Color(0.72156864, 0.78431374, 0.9098039, 1)
+shader_parameter/s2 = Color(0.4709804, 0.49666667, 0.61333334, 1)
+shader_parameter/s3 = Color(0.72156864, 0.78431374, 0.9098039, 1)
+shader_parameter/th0 = 0.75
+shader_parameter/th1 = 0.4
+shader_parameter/head_from = -1.0
+shader_parameter/tail_k = null
+shader_parameter/fade_tail = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cefis"]
+shader = ExtResource("4_ckal6")
+shader_parameter/seed = null
+shader_parameter/life_min = null
+shader_parameter/life_max = null
+shader_parameter/spawn_r = 0.0
+shader_parameter/spawn_at = Vector2(0, 0)
+shader_parameter/ang_min = null
+shader_parameter/ang_max = null
+shader_parameter/mode = 1.0
+shader_parameter/spawn_box = null
+shader_parameter/mirror = null
+shader_parameter/ahead = 1.0
+shader_parameter/len_range = Vector2(8, 16)
+shader_parameter/len_a = null
+shader_parameter/len_b = null
+shader_parameter/th0 = null
+shader_parameter/th1 = null
+shader_parameter/v_min = null
+shader_parameter/v_max = null
+shader_parameter/V = 0.0
+shader_parameter/k = 0.0001
+shader_parameter/g = null
+shader_parameter/stretch = null
+shader_parameter/max_len = null
+shader_parameter/tex_len = null
+shader_parameter/glow = null
+shader_parameter/glow_k = null
+shader_parameter/s0 = null
+shader_parameter/s1 = null
+shader_parameter/s2 = null
+shader_parameter/slots = 9.0
+shader_parameter/slot_a = PackedVector4Array(0.2151182, 3.1415927, 210.31735, 8.692416, 0.22978525, 3.1415927, 225.61473, 12.508605, 0.24379738, 3.1415927, 196.29608, 15.161244, 0.24458106, 3.1415927, 173.80579, 9.870945, 0.18677886, 3.1415927, 167.48123, 11.012111, 0.1771925, 3.1415927, 203.5286, 11.479769, 0.19607128, 3.1415927, 224.7962, 10.357295, 0.15196575, 3.1415927, 182.48376, 14.834481, 0.251913, 3.1415927, 188.70927, 10.779415)
+shader_parameter/slot_b = PackedVector4Array(-3, 5.4165764, 0, 0, -3, 5.262254, 0, 0, -30, 5.832879, 0, 0, -30, -3.722708, 0, 0, -30, 5.985369, 0, 0, -3, -4.8494873, 0, 0, -30, -4.5037966, 0, 0, -3, -4.7936316, 0, 0, -3, 4.29169, 0, 0)
+shader_parameter/ang_add = null
+shader_parameter/clip_x = -78.0
+shader_parameter/clip_y = null
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_f88jw"]
+resource_name = "Dither"
+shader = ExtResource("5_fe0or")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = null
+
+[sub_resource type="Curve" id="Curve_jiv54"]
+_data = [Vector2(0, 1), 0.0, -1.0, 1, 1, Vector2(1, 0), -1.0, 0.0, 1, 1]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_gju01"]
+curve = SubResource("Curve_jiv54")
+
+[sub_resource type="Image" id="Image_8i2fn"]
+data = {
+"data": PackedByteArray("AAAAAM3MDMAAAAAAZmZmwAAAAADNzAxAAAAAAGZmZkA="),
+"format": "RGFloat",
+"height": 1,
+"mipmaps": false,
+"width": 4
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_bcks6"]
+image = SubResource("Image_8i2fn")
+
+[sub_resource type="Curve" id="Curve_jvbx4"]
+_limits = [0.0, 8.0, 0.0, 1.0]
+_data = [Vector2(0, 0.75), 0.0, 0.75, 1, 1, Vector2(1, 1.5), 0.75, 0.0, 1, 1]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_7lufv"]
+curve = SubResource("Curve_jvbx4")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_pkxfj"]
+lifetime_randomness = 0.4
+particle_flag_disable_z = true
+emission_shape = 4
+emission_point_texture = SubResource("ImageTexture_bcks6")
+emission_point_count = 4
+angle_max = 360.0
+direction = Vector3(-1, 1.2246469e-16, 0)
+spread = 0.0
+initial_velocity_min = 100.0
+initial_velocity_max = 150.0
+angular_velocity_min = -1700.0
+angular_velocity_max = -1700.0
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_7lufv")
+color = Color(0.72156864, 0.78431374, 0.9098039, 1)
+alpha_curve = SubResource("CurveTexture_gju01")
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_b7514"]
+resource_name = "Prop"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hfimg"]
+shader = ExtResource("8_g5mgm")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = null
+shader_parameter/size = Vector2(23, 23)
+shader_parameter/arm = 0.0
+shader_parameter/c = Color(1, 1, 1, 1)
+shader_parameter/tip = Color(0.8745098, 0.90588236, 0.9490196, 1)
+shader_parameter/heart = Color(1, 1, 1, 1)
+shader_parameter/alpha = null
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_w82sm"]
+shader = ExtResource("9_wjvs7")
+shader_parameter/size = Vector2(24, 24)
+shader_parameter/radius = 10.0
+shader_parameter/thickness = null
+shader_parameter/squash = null
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/strength = null
+shader_parameter/alpha = 0.0
+
+[node name="Arrow" type="Node2D" unique_id=1495105140]
+script = ExtResource("1_c28yq")
+effect_id = "projectiles/arrow"
+source = "src/fx/projectiles/arrow.js@943676edad93d3bea42e4d6f1eb2533e590b7ea2"
+duration = 0.6
+loop = true
+canvas_size = Vector2i(112, 32)
+origin = Vector2i(92, 16)
+bg = "sky"
+ramps = {
+"palette": PackedColorArray(0.47843137, 0.12156863, 0.17254902, 1, 0.72156864, 0.19607843, 0.23529412, 1, 0.9098039, 0.8862745, 0.8392157, 1, 1, 1, 1, 1),
+"steel": PackedColorArray(0.18039216, 0.21176471, 0.28235295, 1, 0.3529412, 0.4, 0.5019608, 1, 0.6039216, 0.6509804, 0.7294118, 1, 0.8745098, 0.90588236, 0.9490196, 1),
+"wood": PackedColorArray(0.22745098, 0.14117648, 0.078431375, 1, 0.43137255, 0.26666668, 0.13333334, 1, 0.65882355, 0.44705883, 0.23529412, 1, 0.84705883, 0.65882355, 0.40784314, 1)
+}
+palette_extra = PackedColorArray(0.77725494, 0.827451, 0.92784315, 1, 0.72156864, 0.78431374, 0.9098039, 1, 0.4709804, 0.49666667, 0.61333334, 1)
+palette_override = PackedColorArray()
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=379012822]
+libraries/ = SubResource("AnimationLibrary_b5veg")
+
+[node name="Air" type="GPUParticles2D" parent="." unique_id=966936280]
+z_index = 1
+material = SubResource("ShaderMaterial_cjuy0")
+amount = 9
+texture = ExtResource("3_jxuo5")
+lifetime = 0.6
+preprocess = 0.6
+use_fixed_seed = true
+seed = 314081
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+local_coords = true
+process_material = SubResource("ShaderMaterial_cefis")
+
+[node name="Eddies" type="GPUParticles2D" parent="." unique_id=215658537]
+z_index = 1
+material = SubResource("ShaderMaterial_f88jw")
+position = Vector2(-38, 0.5)
+amount = 6
+texture = ExtResource("6_4g0nw")
+lifetime = 0.25
+preprocess = 0.25
+use_fixed_seed = true
+seed = 138414
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+process_material = SubResource("ParticleProcessMaterial_pkxfj")
+
+[node name="Arrow" type="Sprite2D" parent="." unique_id=272911104]
+z_index = 1
+material = SubResource("CanvasItemMaterial_b7514")
+texture = ExtResource("7_2on88")
+centered = false
+offset = Vector2(-36, -3)
+hframes = 3
+
+[node name="Glint" type="ColorRect" parent="." unique_id=1176628541]
+z_index = 1
+material = SubResource("ShaderMaterial_hfimg")
+offset_left = -16.0
+offset_top = -12.0
+offset_right = 7.0
+offset_bottom = 11.0
+mouse_filter = 2
+
+[node name="GlintLight" type="ColorRect" parent="." unique_id=549622517]
+z_index = 2
+material = SubResource("ShaderMaterial_w82sm")
+offset_left = -17.0
+offset_top = -13.0
+offset_right = 7.0
+offset_bottom = 11.0
+mouse_filter = 2

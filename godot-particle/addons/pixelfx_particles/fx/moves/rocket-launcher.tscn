@@ -1,0 +1,138 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://addons/pixelfx_particles/core/pfx_effect.gd" id="1_02ub4"]
+[ext_resource type="PackedScene" path="res://addons/pixelfx_particles/fx/projectiles/muzzle-shotgun.tscn" id="2_aijvu"]
+[ext_resource type="PackedScene" path="res://addons/pixelfx_particles/fx/projectiles/rocket.tscn" id="3_atm6w"]
+[ext_resource type="PackedScene" path="res://addons/pixelfx_particles/fx/explosions/small-explosion.tscn" id="4_1o3cs"]
+
+[sub_resource type="Animation" id="Animation_wfgty"]
+length = 6.56
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MuzzleShotgun1:visible")
+tracks/0/interp = 0
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.599),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MuzzleShotgun1")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.599),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Rocket2:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = false
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.6, 0.6164706, 0.6329412, 0.64941174, 0.66588235, 0.68235296, 0.6988235, 0.7152941, 0.73176473, 0.7647059, 0.79764706, 0.8305882, 0.8635294, 0.8964706, 0.92941177, 0.96235293, 0.9952941, 1.0282353, 1.0611764, 1.0941176, 1.1270589, 1.16),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(44, -21), Vector2(44, -21), Vector2(44.75661, -21), Vector2(46.14002, -21), Vector2(47.93147, -21), Vector2(50.05289, -21), Vector2(52.45917, -21), Vector2(55.119873, -21), Vector2(58.012638, -21), Vector2(61.120163, -21), Vector2(67.926155, -21), Vector2(75.451744, -21), Vector2(83.63373, -21), Vector2(92.42313, -21), Vector2(101.78055, -21), Vector2(111.67338, -21), Vector2(122.07409, -21), Vector2(132.95897, -21), Vector2(144.30739, -21), Vector2(156.10112, -21), Vector2(168.32394, -21), Vector2(180.96129, -21), Vector2(194, -21)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Rocket2:visible")
+tracks/3/interp = 0
+tracks/3/loop_wrap = false
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.599, 1.159),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Rocket2")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.599),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play"
+}]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("SmallExplosion3:visible")
+tracks/5/interp = 0
+tracks/5/loop_wrap = false
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 1.159),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/6/type = "method"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("SmallExplosion3")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(1.159),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1uqlc"]
+_data = {
+&"fx": SubResource("Animation_wfgty")
+}
+
+[node name="RocketLauncher" type="Node2D" unique_id=1252418805]
+script = ExtResource("1_02ub4")
+effect_id = "moves/rocket-launcher"
+source = "src/fx/moves/rocket-launcher.js@2ac031c97efbfeb715d2b796911b3c0e86bcea23"
+duration = 6.56
+canvas_size = Vector2i(480, 244)
+origin = Vector2i(178, 198)
+bg = "ground"
+actor = 2
+palette_extra = PackedColorArray()
+palette_override = PackedColorArray()
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1609916463]
+callback_mode_method = 1
+libraries/ = SubResource("AnimationLibrary_1uqlc")
+
+[node name="MuzzleShotgun1" parent="." unique_id=1917221890 instance=ExtResource("2_aijvu")]
+visible = false
+position = Vector2(34, 5)
+autoplay = false
+show_actor = false
+
+[node name="Rocket2" parent="." unique_id=76626631 instance=ExtResource("3_atm6w")]
+visible = false
+position = Vector2(44, -21)
+autoplay = false
+show_actor = false
+
+[node name="SmallExplosion3" parent="." unique_id=1753112504 instance=ExtResource("4_1o3cs")]
+visible = false
+position = Vector2(200, 0)
+autoplay = false
+show_actor = false

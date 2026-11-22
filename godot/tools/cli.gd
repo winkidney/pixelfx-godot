@@ -11,6 +11,8 @@
 #   ./pfx parity [ids] --acts             the same for acts: body, target, freezes and shakes
 #   ./pfx test                            core unit tests against the JS fixtures
 #   ./pfx bench [ids]                     how long a frame takes to render LIVE (median and worst, ms)
+#   ./pfx perf [ids] --mode live|baked     runtime cost on the real GPU, one and a crowd (needs a display)
+#   ./pfx export meta|actors [ids] --out DIR   what the particle port takes from this one (godot-particle/)
 #
 # Outputs go to godot/records/ (git-ignored). Ids are "category/name"; a category or a pattern ("fire/*") works too.
 extends SceneTree
@@ -26,8 +28,29 @@ var pos := PackedStringArray()
 
 
 func _initialize() -> void:
+	var args := OS.get_cmdline_user_args()
+	if args.size() and args[0] == "perf":
+		quit(await cmd_perf(args.slice(1)))
+		return
 	var code: Variant = main()
 	quit(code if code is int else 1)
+
+
+## ./pfx perf [ids] --mode live|baked [--stress N] [--loop-secs S] [--out PATH]: needs a real display (./pfx runs it
+## with one). Waits on frames, so it runs here rather than through main().
+func cmd_perf(args: PackedStringArray) -> int:
+	var f := {}
+	var want := PackedStringArray()
+	var i := 0
+	while i < args.size():
+		if args[i].begins_with("--") and i + 1 < args.size():
+			f[args[i].substr(2)] = args[i + 1]
+			i += 2
+		else:
+			want.append(args[i])
+			i += 1
+	var list := Lib.allIds() if want.is_empty() else Lib.resolveIds(want)
+	return await load("res://tools/lib/perf.gd").new().run(self, list, f)
 
 
 func main() -> int:
@@ -60,6 +83,7 @@ func main() -> int:
 		"sheets": return load("res://tools/lib/sheets.gd").new().run(ids_or_all(), flags)
 		"new": return load("res://tools/lib/newfx.gd").new().run(pos, flags)
 		"index": return load("res://tools/lib/index.gd").new().run()
+		"export": return load("res://tools/lib/export_particle.gd").new().run(pos, flags)
 		"help": return help()
 	printerr("unknown command: ", cmd)
 	return help(1)

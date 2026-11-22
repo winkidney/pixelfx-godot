@@ -1,0 +1,2223 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://addons/pixelfx_particles/core/pfx_effect.gd" id="1_y3ymm"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/fx/lightning/_fern.gdshader" id="2_17c3e"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/fx/lightning/_fern_light.gdshader" id="3_wqu78"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/shaders/dither.gdshader" id="4_f7glf"]
+[ext_resource type="Script" path="res://addons/pixelfx_particles/fx/lightning/_volt.gd" id="5_wqh3h"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/shaders/light.gdshader" id="6_2nn5q"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/shaders/ring.gdshader" id="7_06pro"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/shaders/ring_light.gdshader" id="8_501f6"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/textures/disc7.png" id="9_bmsaf"]
+
+[sub_resource type="Animation" id="Animation_uhobe"]
+length = 0.9
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Fern:material:shader_parameter/t")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.9]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FernLight:material:shader_parameter/t")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.9]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Arc:k")
+tracks/2/interp = 0
+tracks/2/loop_wrap = false
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.082333334, 0.115666665, 0.149, 0.18233334, 0.21566667, 0.249, 0.28233334, 0.31566668),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [1.0, 0.7, 1.0, 0.7, 0.55, 0.3972222222222223, 0.24444444444444452, 0.09166666666666677, -0.06111111111111102]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Arc:up_to")
+tracks/3/interp = 0
+tracks/3/loop_wrap = false
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.015666667, 0.049, 0.31566668),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0.0, 0.6666666666666666, 1.0, 1.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Arc:hero")
+tracks/4/interp = 0
+tracks/4/loop_wrap = false
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.049, 0.082333334, 0.31566668),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [false, true, false, false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Arc:thick")
+tracks/5/interp = 0
+tracks/5/loop_wrap = false
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.082333334, 0.31566668),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0.95, 0.7, 0.7]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Arc:visible")
+tracks/6/interp = 0
+tracks/6/loop_wrap = false
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.319),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("HeartWhite:material:shader_parameter/alpha")
+tracks/7/interp = 0
+tracks/7/loop_wrap = false
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.049, 0.12),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0.0, 0.4, 0.0]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Knot0:visible")
+tracks/8/interp = 0
+tracks/8/loop_wrap = false
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 0.049, 0.449),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Knot0:from")
+tracks/9/interp = 0
+tracks/9/loop_wrap = false
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 0.015666667, 0.049, 0.082333334, 0.115666665, 0.149, 0.18233334, 0.21566667, 0.249, 0.28233334, 0.31566668, 0.349, 0.38233334, 0.41566667, 0.449),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(-2.6862714, 1.6763906), Vector2(-1.0644971, -0.963732), Vector2(-1.7889497, 0.24253988), Vector2(1.8989594, 1.6787118), Vector2(3.0440538, -1.3776176), Vector2(-1.1001455, 0.63224095), Vector2(1.1029304, 1.1584021), Vector2(-2.0748856, -0.8380379), Vector2(0.36652586, -1.8433106), Vector2(-0.33154523, -0.6595584), Vector2(-0.86323285, -1.0472465), Vector2(0.3875764, 0.77802825), Vector2(-0.6041819, -0.14119662), Vector2(0.5356638, 0.33833957), Vector2(-0.8337134, 0.16877897)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Knot0:to")
+tracks/10/interp = 0
+tracks/10/loop_wrap = false
+tracks/10/keys = {
+"times": PackedFloat32Array(0, 0.015666667, 0.049, 0.082333334, 0.115666665, 0.149, 0.18233334, 0.21566667, 0.249, 0.28233334, 0.31566668, 0.349, 0.38233334, 0.41566667, 0.449),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(-5.2941914, 2.1250877), Vector2(-4.700963, 0.6209244), Vector2(-4.1887407, 1.217251), Vector2(5.590878, -2.7776167), Vector2(5.5567937, 3.5400834), Vector2(-0.5158268, 4.363155), Vector2(3.2798512, 3.8265824), Vector2(-0.6876791, -3.4280796), Vector2(1.2876446, -3.5533087), Vector2(-1.8680171, -2.1671798), Vector2(-0.39319867, -2.6320937), Vector2(1.652454, 3.3385642), Vector2(-2.5149138, 0.0320519), Vector2(3.1767507, 0.41111895), Vector2(-1.9684286, 2.125604)]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Knot0:k")
+tracks/11/interp = 0
+tracks/11/loop_wrap = false
+tracks/11/keys = {
+"times": PackedFloat32Array(0, 0.015666667, 0.049, 0.082333334, 0.115666665, 0.149, 0.18233334, 0.21566667, 0.249, 0.28233334, 0.31566668, 0.349, 0.38233334, 0.41566667, 0.449),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [1.09375, 1.03125, 0.96875, 0.90625, 0.84375, 0.78125, 0.71875, 0.65625, 0.59375, 0.53125, 0.46875000000000006, 0.40625, 0.34375, 0.28125, 0.21874999999999994]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("Knot1:visible")
+tracks/12/interp = 0
+tracks/12/loop_wrap = false
+tracks/12/keys = {
+"times": PackedFloat32Array(0, 0.049, 0.449),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("Knot1:from")
+tracks/13/interp = 0
+tracks/13/loop_wrap = false
+tracks/13/keys = {
+"times": PackedFloat32Array(0, 0.015666667, 0.049, 0.082333334, 0.115666665, 0.149, 0.18233334, 0.21566667, 0.249, 0.28233334, 0.31566668, 0.349, 0.38233334, 0.41566667, 0.449),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(-0.5871669, -0.9316229), Vector2(-2.0605078, 1.634666), Vector2(-0.46802363, -0.8294304), Vector2(-1.3810993, 2.8815968), Vector2(2.038244, 0.4774403), Vector2(0.97173023, 1.2092686), Vector2(-0.49459967, 1.3217555), Vector2(-1.3032811, -1.9212837), Vector2(1.1007885, 0.8249568), Vector2(0.6605945, 0.6265922), Vector2(-1.3133433, -1.1402622), Vector2(0.46349967, -0.95795906), Vector2(-1.0061486, -0.7423654), Vector2(-0.40518788, -1.2122829), Vector2(0.7908281, -0.03232519)]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("Knot1:to")
+tracks/14/interp = 0
+tracks/14/loop_wrap = false
+tracks/14/keys = {
+"times": PackedFloat32Array(0, 0.015666667, 0.049, 0.082333334, 0.115666665, 0.149, 0.18233334, 0.21566667, 0.249, 0.28233334, 0.31566668, 0.349, 0.38233334, 0.41566667, 0.449),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(-4.8361692, -3.3865812), Vector2(-1.6421542, 5.6435575), Vector2(2.563448, -4.4219484), Vector2(-0.31827697, 5.041135), Vector2(0.8769057, 5.4467196), Vector2(-1.6050881, 3.727379), Vector2(-1.6890097, 3.355115), Vector2(1.4834584, -3.1483843), Vector2(4.7061324, -0.24029922), Vector2(4.7020826, 1.0084647), Vector2(-0.056645982, -4.1170015), Vector2(3.5853312, -0.53844), Vector2(-1.7609273, -2.1917024), Vector2(0.60005116, -2.0103939), Vector2(1.1261907, 1.4443481)]
+}
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("Knot1:k")
+tracks/15/interp = 0
+tracks/15/loop_wrap = false
+tracks/15/keys = {
+"times": PackedFloat32Array(0, 0.015666667, 0.049, 0.082333334, 0.115666665, 0.149, 0.18233334, 0.21566667, 0.249, 0.28233334, 0.31566668, 0.349, 0.38233334, 0.41566667, 0.449),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [1.09375, 1.03125, 0.96875, 0.90625, 0.84375, 0.78125, 0.71875, 0.65625, 0.59375, 0.53125, 0.46875000000000006, 0.40625, 0.34375, 0.28125, 0.21874999999999994]
+}
+tracks/16/type = "value"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("Knot2:visible")
+tracks/16/interp = 0
+tracks/16/loop_wrap = false
+tracks/16/keys = {
+"times": PackedFloat32Array(0, 0.049, 0.449),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/17/type = "value"
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/path = NodePath("Knot2:from")
+tracks/17/interp = 0
+tracks/17/loop_wrap = false
+tracks/17/keys = {
+"times": PackedFloat32Array(0, 0.015666667, 0.049, 0.082333334, 0.115666665, 0.149, 0.18233334, 0.21566667, 0.249, 0.28233334, 0.31566668, 0.349, 0.38233334, 0.41566667, 0.449),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(2.8816502, 2.0316505), Vector2(1.7475092, 2.6120696), Vector2(0.5753986, -2.5728242), Vector2(-0.6206217, 0.06289963), Vector2(1.4833614, -1.8039821), Vector2(-1.4996057, -1.4744549), Vector2(-0.71698326, -0.5387162), Vector2(0.4897542, -2.23187), Vector2(-0.23926221, -1.8802248), Vector2(-1.0651289, 1.2489015), Vector2(-0.27927417, -0.71359324), Vector2(-0.62218803, 1.1881882), Vector2(-1.2550929, 1.2212003), Vector2(1.5450631, 0.46850082), Vector2(-1.2214824, 0.63059866)]
+}
+tracks/18/type = "value"
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/path = NodePath("Knot2:to")
+tracks/18/interp = 0
+tracks/18/loop_wrap = false
+tracks/18/keys = {
+"times": PackedFloat32Array(0, 0.015666667, 0.049, 0.082333334, 0.115666665, 0.149, 0.18233334, 0.21566667, 0.249, 0.28233334, 0.31566668, 0.349, 0.38233334, 0.41566667, 0.449),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(5.1754856, 4.317253), Vector2(1.4123396, 4.681944), Vector2(4.680081, -2.1909313), Vector2(-5.351673, 0.9083997), Vector2(0.21564448, -4.074195), Vector2(-5.3862367, -2.1415794), Vector2(-2.2548888, -3.9361894), Vector2(-2.9813488, -4.578424), Vector2(1.0155791, -4.20605), Vector2(1.8564726, 3.5600398), Vector2(1.9069306, -3.6078384), Vector2(-3.3277082, 0.48257023), Vector2(-0.2572137, 2.97517), Vector2(2.4664702, -1.7990954), Vector2(-1.7306927, -0.092894696)]
+}
+tracks/19/type = "value"
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/path = NodePath("Knot2:k")
+tracks/19/interp = 0
+tracks/19/loop_wrap = false
+tracks/19/keys = {
+"times": PackedFloat32Array(0, 0.015666667, 0.049, 0.082333334, 0.115666665, 0.149, 0.18233334, 0.21566667, 0.249, 0.28233334, 0.31566668, 0.349, 0.38233334, 0.41566667, 0.449),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [1.09375, 1.03125, 0.96875, 0.90625, 0.84375, 0.78125, 0.71875, 0.65625, 0.59375, 0.53125, 0.46875000000000006, 0.40625, 0.34375, 0.28125, 0.21874999999999994]
+}
+tracks/20/type = "value"
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/path = NodePath("Knot3:visible")
+tracks/20/interp = 0
+tracks/20/loop_wrap = false
+tracks/20/keys = {
+"times": PackedFloat32Array(0, 0.049, 0.449),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/21/type = "value"
+tracks/21/imported = false
+tracks/21/enabled = true
+tracks/21/path = NodePath("Knot3:from")
+tracks/21/interp = 0
+tracks/21/loop_wrap = false
+tracks/21/keys = {
+"times": PackedFloat32Array(0, 0.015666667, 0.049, 0.082333334, 0.115666665, 0.149, 0.18233334, 0.21566667, 0.249, 0.28233334, 0.31566668, 0.349, 0.38233334, 0.41566667, 0.449),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(-0.63182306, -1.5111243), Vector2(1.3170719, -2.4653661), Vector2(0.7099761, -0.3584484), Vector2(-3.4929187, 0.8077269), Vector2(-2.604032, 2.1348045), Vector2(2.643449, -1.3460855), Vector2(-2.0582385, 0.9286506), Vector2(-1.4826446, 0.63736707), Vector2(0.41816372, 0.6164096), Vector2(-1.8897084, 0.917051), Vector2(-1.4620253, -0.47310042), Vector2(1.5518715, -0.7502394), Vector2(-1.6956192, 0.4371442), Vector2(-1.5618892, 0.061565094), Vector2(-0.96647716, -0.35535166)]
+}
+tracks/22/type = "value"
+tracks/22/imported = false
+tracks/22/enabled = true
+tracks/22/path = NodePath("Knot3:to")
+tracks/22/interp = 0
+tracks/22/loop_wrap = false
+tracks/22/keys = {
+"times": PackedFloat32Array(0, 0.015666667, 0.049, 0.082333334, 0.115666665, 0.149, 0.18233334, 0.21566667, 0.249, 0.28233334, 0.31566668, 0.349, 0.38233334, 0.41566667, 0.449),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(-2.0322046, -5.5508766), Vector2(1.0930883, -5.3510475), Vector2(4.157937, 2.3218503), Vector2(-3.987404, 2.2574737), Vector2(-3.8779156, 3.1296105), Vector2(3.5132039, -1.2052509), Vector2(-4.1052227, -3.3211446), Vector2(-4.715353, 2.7156827), Vector2(4.353343, 1.2297591), Vector2(-3.4144, -0.83688384), Vector2(-3.0959322, 2.956515), Vector2(2.0917585, -2.3750587), Vector2(-3.0150733, 2.1200354), Vector2(-1.9737818, 0.32396603), Vector2(-1.8723639, -2.0548563)]
+}
+tracks/23/type = "value"
+tracks/23/imported = false
+tracks/23/enabled = true
+tracks/23/path = NodePath("Knot3:k")
+tracks/23/interp = 0
+tracks/23/loop_wrap = false
+tracks/23/keys = {
+"times": PackedFloat32Array(0, 0.015666667, 0.049, 0.082333334, 0.115666665, 0.149, 0.18233334, 0.21566667, 0.249, 0.28233334, 0.31566668, 0.349, 0.38233334, 0.41566667, 0.449),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [1.09375, 1.03125, 0.96875, 0.90625, 0.84375, 0.78125, 0.71875, 0.65625, 0.59375, 0.53125, 0.46875000000000006, 0.40625, 0.34375, 0.28125, 0.21874999999999994]
+}
+tracks/24/type = "value"
+tracks/24/imported = false
+tracks/24/enabled = true
+tracks/24/path = NodePath("Knot4:visible")
+tracks/24/interp = 0
+tracks/24/loop_wrap = false
+tracks/24/keys = {
+"times": PackedFloat32Array(0, 0.049, 0.449),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/25/type = "value"
+tracks/25/imported = false
+tracks/25/enabled = true
+tracks/25/path = NodePath("Knot4:from")
+tracks/25/interp = 0
+tracks/25/loop_wrap = false
+tracks/25/keys = {
+"times": PackedFloat32Array(0, 0.015666667, 0.049, 0.082333334, 0.115666665, 0.149, 0.18233334, 0.21566667, 0.249, 0.28233334, 0.31566668, 0.349, 0.38233334, 0.41566667, 0.449),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(1.6671956, 2.5075145), Vector2(3.6892772, -0.36728132), Vector2(2.2790744, 0.40980637), Vector2(1.7089454, 1.2078686), Vector2(-1.9432635, -1.0031204), Vector2(-0.3354169, -0.54882497), Vector2(-0.79578686, 2.0040324), Vector2(0.62550116, 0.27303928), Vector2(-1.8154511, -1.3530053), Vector2(-1.9321612, 0.7555812), Vector2(0.35564917, 0.5538452), Vector2(0.83436316, -0.07217658), Vector2(-0.07302104, -1.8725528), Vector2(-0.6167793, -1.2990495), Vector2(-0.7305682, 0.481348)]
+}
+tracks/26/type = "value"
+tracks/26/imported = false
+tracks/26/enabled = true
+tracks/26/path = NodePath("Knot4:to")
+tracks/26/interp = 0
+tracks/26/loop_wrap = false
+tracks/26/keys = {
+"times": PackedFloat32Array(0, 0.015666667, 0.049, 0.082333334, 0.115666665, 0.149, 0.18233334, 0.21566667, 0.249, 0.28233334, 0.31566668, 0.349, 0.38233334, 0.41566667, 0.449),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(7.327852, -0.78468937), Vector2(4.2920823, -4.634663), Vector2(5.0325446, -0.7006382), Vector2(3.5967255, 4.2702494), Vector2(-6.2077665, -0.6934557), Vector2(-4.9260545, -1.974906), Vector2(-2.479734, 3.5067277), Vector2(2.975881, 3.7813947), Vector2(-3.7646313, 0.7452209), Vector2(-3.1528757, 0.5318447), Vector2(2.7229636, 0.83687323), Vector2(2.6757166, -1.4479162), Vector2(-1.869346, -2.9961996), Vector2(1.3771679, -2.2523715), Vector2(-1.805996, -0.37046406)]
+}
+tracks/27/type = "value"
+tracks/27/imported = false
+tracks/27/enabled = true
+tracks/27/path = NodePath("Knot4:k")
+tracks/27/interp = 0
+tracks/27/loop_wrap = false
+tracks/27/keys = {
+"times": PackedFloat32Array(0, 0.015666667, 0.049, 0.082333334, 0.115666665, 0.149, 0.18233334, 0.21566667, 0.249, 0.28233334, 0.31566668, 0.349, 0.38233334, 0.41566667, 0.449),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [1.09375, 1.03125, 0.96875, 0.90625, 0.84375, 0.78125, 0.71875, 0.65625, 0.59375, 0.53125, 0.46875000000000006, 0.40625, 0.34375, 0.28125, 0.21874999999999994]
+}
+tracks/28/type = "value"
+tracks/28/imported = false
+tracks/28/enabled = true
+tracks/28/path = NodePath("Knot5:visible")
+tracks/28/interp = 0
+tracks/28/loop_wrap = false
+tracks/28/keys = {
+"times": PackedFloat32Array(0, 0.049, 0.449),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/29/type = "value"
+tracks/29/imported = false
+tracks/29/enabled = true
+tracks/29/path = NodePath("Knot5:from")
+tracks/29/interp = 0
+tracks/29/loop_wrap = false
+tracks/29/keys = {
+"times": PackedFloat32Array(0, 0.015666667, 0.049, 0.082333334, 0.115666665, 0.149, 0.18233334, 0.21566667, 0.249, 0.28233334, 0.31566668, 0.349, 0.38233334, 0.41566667, 0.449),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(1.167854, 0.3774467), Vector2(-1.6015167, -0.835551), Vector2(0.40867433, 0.3964576), Vector2(2.1217413, 0.69837403), Vector2(-2.715902, 0.8633839), Vector2(-1.1139485, 1.3092332), Vector2(0.89911103, -2.153284), Vector2(0.099740185, -1.5069346), Vector2(-2.4655032, -0.4762048), Vector2(0.6363698, -2.0500429), Vector2(-0.2755394, 1.1118151), Vector2(1.8305347, -0.87150973), Vector2(1.0618657, 0.4944755), Vector2(0.96741694, 0.67192453), Vector2(-0.8625158, 0.12347974)]
+}
+tracks/30/type = "value"
+tracks/30/imported = false
+tracks/30/enabled = true
+tracks/30/path = NodePath("Knot5:to")
+tracks/30/interp = 0
+tracks/30/loop_wrap = false
+tracks/30/keys = {
+"times": PackedFloat32Array(0, 0.015666667, 0.049, 0.082333334, 0.115666665, 0.149, 0.18233334, 0.21566667, 0.249, 0.28233334, 0.31566668, 0.349, 0.38233334, 0.41566667, 0.449),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(3.4350622, 7.4469943), Vector2(-3.4750073, -3.5782185), Vector2(0.43941075, 6.5890617), Vector2(6.0870986, 0.6267961), Vector2(-3.750388, 0.98116374), Vector2(-2.2763577, 4.042126), Vector2(4.79053, -0.24995703), Vector2(-0.69053376, -3.2824957), Vector2(-2.6225774, 1.9324548), Vector2(4.119148, -0.5976539), Vector2(-2.7891273, 1.261704), Vector2(3.496438, -1.2796347), Vector2(0.5101713, 3.1062512), Vector2(1.2373897, 2.2975295), Vector2(-2.4085035, -0.051513225)]
+}
+tracks/31/type = "value"
+tracks/31/imported = false
+tracks/31/enabled = true
+tracks/31/path = NodePath("Knot5:k")
+tracks/31/interp = 0
+tracks/31/loop_wrap = false
+tracks/31/keys = {
+"times": PackedFloat32Array(0, 0.015666667, 0.049, 0.082333334, 0.115666665, 0.149, 0.18233334, 0.21566667, 0.249, 0.28233334, 0.31566668, 0.349, 0.38233334, 0.41566667, 0.449),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [1.09375, 1.03125, 0.96875, 0.90625, 0.84375, 0.78125, 0.71875, 0.65625, 0.59375, 0.53125, 0.46875000000000006, 0.40625, 0.34375, 0.28125, 0.21874999999999994]
+}
+tracks/32/type = "value"
+tracks/32/imported = false
+tracks/32/enabled = true
+tracks/32/path = NodePath("Knot6:visible")
+tracks/32/interp = 0
+tracks/32/loop_wrap = false
+tracks/32/keys = {
+"times": PackedFloat32Array(0, 0.049, 0.38233334, 0.449),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [false, true, false, false]
+}
+tracks/33/type = "value"
+tracks/33/imported = false
+tracks/33/enabled = true
+tracks/33/path = NodePath("Knot6:from")
+tracks/33/interp = 0
+tracks/33/loop_wrap = false
+tracks/33/keys = {
+"times": PackedFloat32Array(0, 0.015666667, 0.049, 0.082333334, 0.115666665, 0.149, 0.18233334, 0.21566667, 0.249, 0.28233334, 0.31566668, 0.349, 0.38233334, 0.41566667, 0.449),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(-2.5821323, -0.54149914), Vector2(0.23421848, -3.7030694), Vector2(-2.4194553, 1.7086957), Vector2(-0.3666374, 0.78319895), Vector2(-0.5154001, 0.7008714), Vector2(1.2554054, 0.56897414), Vector2(-1.4021226, 0.47175345), Vector2(-2.4482982, 1.5178574), Vector2(1.0148277, 0.050143156), Vector2(0.35210115, -0.60843664), Vector2(-0.29041147, 0.54999405), Vector2(1.6183707, 1.1475226), Vector2(0.08471955, 0.49443796), Vector2(0.2160002, -1.4826283), Vector2(1.0715185, -0.3866727)]
+}
+tracks/34/type = "value"
+tracks/34/imported = false
+tracks/34/enabled = true
+tracks/34/path = NodePath("Knot6:to")
+tracks/34/interp = 0
+tracks/34/loop_wrap = false
+tracks/34/keys = {
+"times": PackedFloat32Array(0, 0.015666667, 0.049, 0.082333334, 0.115666665, 0.149, 0.18233334, 0.21566667, 0.249, 0.28233334, 0.31566668, 0.349, 0.38233334, 0.41566667, 0.449),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(-2.4469874, -6.219), Vector2(-2.8102458, -4.5193), Vector2(-1.9103225, 6.7073026), Vector2(-4.8667884, 3.7145436), Vector2(1.3161472, 4.330297), Vector2(3.8687654, -3.6386557), Vector2(-4.1590257, -4.1224713), Vector2(-0.44761154, 3.2643518), Vector2(4.4720263, -2.321906), Vector2(0.9158406, -3.9844115), Vector2(-2.556742, 0.8990379), Vector2(3.6168187, -2.0166907), Vector2(0.06260078, 2.6671305), Vector2(1.4119567, -2.0644472), Vector2(0.6538202, -2.051386)]
+}
+tracks/35/type = "value"
+tracks/35/imported = false
+tracks/35/enabled = true
+tracks/35/path = NodePath("Knot6:k")
+tracks/35/interp = 0
+tracks/35/loop_wrap = false
+tracks/35/keys = {
+"times": PackedFloat32Array(0, 0.015666667, 0.049, 0.082333334, 0.115666665, 0.149, 0.18233334, 0.21566667, 0.249, 0.28233334, 0.31566668, 0.349, 0.38233334, 0.41566667, 0.449),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [1.09375, 1.03125, 0.96875, 0.90625, 0.84375, 0.78125, 0.71875, 0.65625, 0.59375, 0.53125, 0.46875000000000006, 0.40625, 0.34375, 0.28125, 0.21874999999999994]
+}
+tracks/36/type = "value"
+tracks/36/imported = false
+tracks/36/enabled = true
+tracks/36/path = NodePath("Knot7:visible")
+tracks/36/interp = 0
+tracks/36/loop_wrap = false
+tracks/36/keys = {
+"times": PackedFloat32Array(0, 0.049, 0.31566668, 0.449),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [false, true, false, false]
+}
+tracks/37/type = "value"
+tracks/37/imported = false
+tracks/37/enabled = true
+tracks/37/path = NodePath("Knot7:from")
+tracks/37/interp = 0
+tracks/37/loop_wrap = false
+tracks/37/keys = {
+"times": PackedFloat32Array(0, 0.015666667, 0.049, 0.082333334, 0.115666665, 0.149, 0.18233334, 0.21566667, 0.249, 0.28233334, 0.31566668, 0.349, 0.38233334, 0.41566667, 0.449),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(-0.25606441, -1.4743248), Vector2(0.9376117, 0.10703246), Vector2(-1.6512865, -0.13937496), Vector2(2.8679035, -0.50875837), Vector2(0.93869275, -0.19184367), Vector2(-2.814981, -0.4530157), Vector2(-1.4907291, -1.5400496), Vector2(0.76662225, -0.4050972), Vector2(-1.650963, -0.66469884), Vector2(0.8308869, 1.0217448), Vector2(1.2696661, 0.36366525), Vector2(-0.3457518, -1.203078), Vector2(-0.79050547, -0.46738264), Vector2(0.044011477, 1.3017904), Vector2(-1.2676873, -0.59847987)]
+}
+tracks/38/type = "value"
+tracks/38/imported = false
+tracks/38/enabled = true
+tracks/38/path = NodePath("Knot7:to")
+tracks/38/interp = 0
+tracks/38/loop_wrap = false
+tracks/38/keys = {
+"times": PackedFloat32Array(0, 0.015666667, 0.049, 0.082333334, 0.115666665, 0.149, 0.18233334, 0.21566667, 0.249, 0.28233334, 0.31566668, 0.349, 0.38233334, 0.41566667, 0.449),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(6.545176, -5.2518616), Vector2(6.120434, 4.8372116), Vector2(-4.3860183, 4.76716), Vector2(3.8254695, 4.893381), Vector2(1.3445804, -3.9758155), Vector2(-3.9355166, 4.9485946), Vector2(0.46837714, -6.075106), Vector2(2.9952226, 1.8002574), Vector2(-4.5081396, -0.59579), Vector2(1.562135, 4.548886), Vector2(2.5701005, -0.28727373), Vector2(0.5215055, -2.2686467), Vector2(-2.6613383, -0.110299714), Vector2(-1.2626153, 1.4660996), Vector2(-0.8443139, -2.0274134)]
+}
+tracks/39/type = "value"
+tracks/39/imported = false
+tracks/39/enabled = true
+tracks/39/path = NodePath("Knot7:k")
+tracks/39/interp = 0
+tracks/39/loop_wrap = false
+tracks/39/keys = {
+"times": PackedFloat32Array(0, 0.015666667, 0.049, 0.082333334, 0.115666665, 0.149, 0.18233334, 0.21566667, 0.249, 0.28233334, 0.31566668, 0.349, 0.38233334, 0.41566667, 0.449),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [1.09375, 1.03125, 0.96875, 0.90625, 0.84375, 0.78125, 0.71875, 0.65625, 0.59375, 0.53125, 0.46875000000000006, 0.40625, 0.34375, 0.28125, 0.21874999999999994]
+}
+tracks/40/type = "value"
+tracks/40/imported = false
+tracks/40/enabled = true
+tracks/40/path = NodePath("Knot8:visible")
+tracks/40/interp = 0
+tracks/40/loop_wrap = false
+tracks/40/keys = {
+"times": PackedFloat32Array(0, 0.049, 0.21566667, 0.449),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [false, true, false, false]
+}
+tracks/41/type = "value"
+tracks/41/imported = false
+tracks/41/enabled = true
+tracks/41/path = NodePath("Knot8:from")
+tracks/41/interp = 0
+tracks/41/loop_wrap = false
+tracks/41/keys = {
+"times": PackedFloat32Array(0, 0.015666667, 0.049, 0.082333334, 0.115666665, 0.149, 0.18233334, 0.21566667, 0.249, 0.28233334, 0.31566668, 0.349, 0.38233334, 0.41566667, 0.449),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(2.0708437, 3.62604), Vector2(4.03493, 0.43183315), Vector2(-0.05834291, -0.70005774), Vector2(-2.9399626, 0.63089603), Vector2(-0.49780032, -0.3267607), Vector2(1.0862999, 0.5526353), Vector2(0.827012, -2.290856), Vector2(-2.685367, 0.22492754), Vector2(-0.49754292, -1.5837581), Vector2(-0.6659262, 0.8805167), Vector2(0.7199443, 0.2878817), Vector2(-0.63917243, 1.6625025), Vector2(-0.08552798, -1.5195624), Vector2(0.52427834, -0.10016115), Vector2(-0.13501984, 1.273943)]
+}
+tracks/42/type = "value"
+tracks/42/imported = false
+tracks/42/enabled = true
+tracks/42/path = NodePath("Knot8:to")
+tracks/42/interp = 0
+tracks/42/loop_wrap = false
+tracks/42/keys = {
+"times": PackedFloat32Array(0, 0.015666667, 0.049, 0.082333334, 0.115666665, 0.149, 0.18233334, 0.21566667, 0.249, 0.28233334, 0.31566668, 0.349, 0.38233334, 0.41566667, 0.449),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(-4.6426644, 6.313854), Vector2(6.496824, 1.7096562), Vector2(0.5652331, -7.246035), Vector2(-7.248096, -0.40366223), Vector2(-4.075573, -1.5151703), Vector2(6.1429267, -1.3369452), Vector2(0.15837194, -5.815593), Vector2(-5.266058, -1.702747), Vector2(-2.3811722, -3.8938909), Vector2(-0.8799652, 3.431765), Vector2(3.8744714, -1.5764725), Vector2(-0.3354177, 3.5029454), Vector2(0.173642, -3.6950982), Vector2(1.6476502, 1.0684189), Vector2(-0.3225304, 2.1137285)]
+}
+tracks/43/type = "value"
+tracks/43/imported = false
+tracks/43/enabled = true
+tracks/43/path = NodePath("Knot8:k")
+tracks/43/interp = 0
+tracks/43/loop_wrap = false
+tracks/43/keys = {
+"times": PackedFloat32Array(0, 0.015666667, 0.049, 0.082333334, 0.115666665, 0.149, 0.18233334, 0.21566667, 0.249, 0.28233334, 0.31566668, 0.349, 0.38233334, 0.41566667, 0.449),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [1.09375, 1.03125, 0.96875, 0.90625, 0.84375, 0.78125, 0.71875, 0.65625, 0.59375, 0.53125, 0.46875000000000006, 0.40625, 0.34375, 0.28125, 0.21874999999999994]
+}
+tracks/44/type = "value"
+tracks/44/imported = false
+tracks/44/enabled = true
+tracks/44/path = NodePath("Knot9:visible")
+tracks/44/interp = 0
+tracks/44/loop_wrap = false
+tracks/44/keys = {
+"times": PackedFloat32Array(0, 0.049, 0.149, 0.449),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [false, true, false, false]
+}
+tracks/45/type = "value"
+tracks/45/imported = false
+tracks/45/enabled = true
+tracks/45/path = NodePath("Knot9:from")
+tracks/45/interp = 0
+tracks/45/loop_wrap = false
+tracks/45/keys = {
+"times": PackedFloat32Array(0, 0.015666667, 0.049, 0.082333334, 0.115666665, 0.149, 0.18233334, 0.21566667, 0.249, 0.28233334, 0.31566668, 0.349, 0.38233334, 0.41566667, 0.449),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(2.7579672, 2.443007), Vector2(-1.193427, -0.96051043), Vector2(2.8082101, -2.3727725), Vector2(2.256017, 1.0902661), Vector2(-0.63467455, 0.5505353), Vector2(-0.8791904, 1.9249245), Vector2(-2.2562108, -1.3438151), Vector2(0.4312947, 0.6539426), Vector2(-0.53723407, -1.3616912), Vector2(-1.06989, -0.995751), Vector2(-0.94893235, -1.1348797), Vector2(-1.9476244, -0.06763481), Vector2(-1.7887925, 0.0490003), Vector2(1.2672757, 0.79839), Vector2(-0.20052736, 1.0569296)]
+}
+tracks/46/type = "value"
+tracks/46/imported = false
+tracks/46/enabled = true
+tracks/46/path = NodePath("Knot9:to")
+tracks/46/interp = 0
+tracks/46/loop_wrap = false
+tracks/46/keys = {
+"times": PackedFloat32Array(0, 0.015666667, 0.049, 0.082333334, 0.115666665, 0.149, 0.18233334, 0.21566667, 0.249, 0.28233334, 0.31566668, 0.349, 0.38233334, 0.41566667, 0.449),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(7.3540893, 4.0644865), Vector2(-4.0319977, -2.1764927), Vector2(7.7943425, -0.084981866), Vector2(4.984033, -2.2858176), Vector2(-3.0278184, 3.9067638), Vector2(-3.8013248, 0.17500994), Vector2(-1.3586746, -4.823664), Vector2(0.8336529, 3.8844292), Vector2(1.5261744, -4.4440465), Vector2(-1.7676197, -4.546623), Vector2(-2.6370363, 0.44231576), Vector2(-1.8090439, 2.5159366), Vector2(-3.0861895, 2.0849814), Vector2(0.25030312, 2.179282), Vector2(-2.2940981, 0.952607)]
+}
+tracks/47/type = "value"
+tracks/47/imported = false
+tracks/47/enabled = true
+tracks/47/path = NodePath("Knot9:k")
+tracks/47/interp = 0
+tracks/47/loop_wrap = false
+tracks/47/keys = {
+"times": PackedFloat32Array(0, 0.015666667, 0.049, 0.082333334, 0.115666665, 0.149, 0.18233334, 0.21566667, 0.249, 0.28233334, 0.31566668, 0.349, 0.38233334, 0.41566667, 0.449),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [1.09375, 1.03125, 0.96875, 0.90625, 0.84375, 0.78125, 0.71875, 0.65625, 0.59375, 0.53125, 0.46875000000000006, 0.40625, 0.34375, 0.28125, 0.21874999999999994]
+}
+tracks/48/type = "value"
+tracks/48/imported = false
+tracks/48/enabled = true
+tracks/48/path = NodePath("Knot10:visible")
+tracks/48/interp = 0
+tracks/48/loop_wrap = false
+tracks/48/keys = {
+"times": PackedFloat32Array(0, 0.049, 0.082333334, 0.449),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [false, true, false, false]
+}
+tracks/49/type = "value"
+tracks/49/imported = false
+tracks/49/enabled = true
+tracks/49/path = NodePath("Knot10:from")
+tracks/49/interp = 0
+tracks/49/loop_wrap = false
+tracks/49/keys = {
+"times": PackedFloat32Array(0, 0.015666667, 0.049, 0.082333334, 0.115666665, 0.149, 0.18233334, 0.21566667, 0.249, 0.28233334, 0.31566668, 0.349, 0.38233334, 0.41566667, 0.449),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(0.55453104, -0.036860395), Vector2(1.152364, 0.20194344), Vector2(-0.28367314, -1.1336209), Vector2(-0.5227879, -1.062045), Vector2(-1.4020357, -0.64079607), Vector2(0.18151574, -2.5491319), Vector2(0.61344194, 0.29652587), Vector2(-0.38440162, -0.35562754), Vector2(-2.1933186, 1.544487), Vector2(-0.102122515, -2.2550287), Vector2(1.6774536, 1.220073), Vector2(1.8680588, 0.93544173), Vector2(0.13789187, 0.77720886), Vector2(0.5133744, -1.055815), Vector2(0.45678538, 0.47956857)]
+}
+tracks/50/type = "value"
+tracks/50/imported = false
+tracks/50/enabled = true
+tracks/50/path = NodePath("Knot10:to")
+tracks/50/interp = 0
+tracks/50/loop_wrap = false
+tracks/50/keys = {
+"times": PackedFloat32Array(0, 0.015666667, 0.049, 0.082333334, 0.115666665, 0.149, 0.18233334, 0.21566667, 0.249, 0.28233334, 0.31566668, 0.349, 0.38233334, 0.41566667, 0.449),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(5.283622, 4.4296756), Vector2(7.1278806, -3.9903758), Vector2(-3.9910629, -5.795607), Vector2(3.1062696, -4.6008387), Vector2(-6.514613, -2.505744), Vector2(2.7180984, -5.869248), Vector2(1.0570375, 5.874245), Vector2(-2.674269, -3.1763375), Vector2(-2.8965874, 2.829671), Vector2(2.1767719, -2.0753741), Vector2(2.2674775, 3.403208), Vector2(2.5544174, 1.0808785), Vector2(-2.2753675, 1.6781238), Vector2(1.9345268, -0.60790646), Vector2(2.4445877, 0.17985402)]
+}
+tracks/51/type = "value"
+tracks/51/imported = false
+tracks/51/enabled = true
+tracks/51/path = NodePath("Knot10:k")
+tracks/51/interp = 0
+tracks/51/loop_wrap = false
+tracks/51/keys = {
+"times": PackedFloat32Array(0, 0.015666667, 0.049, 0.082333334, 0.115666665, 0.149, 0.18233334, 0.21566667, 0.249, 0.28233334, 0.31566668, 0.349, 0.38233334, 0.41566667, 0.449),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [1.09375, 1.03125, 0.96875, 0.90625, 0.84375, 0.78125, 0.71875, 0.65625, 0.59375, 0.53125, 0.46875000000000006, 0.40625, 0.34375, 0.28125, 0.21874999999999994]
+}
+tracks/52/type = "value"
+tracks/52/imported = false
+tracks/52/enabled = true
+tracks/52/path = NodePath("HeartOut:material:shader_parameter/radius")
+tracks/52/interp = 0
+tracks/52/loop_wrap = false
+tracks/52/keys = {
+"times": PackedFloat32Array(0, 0.049, 0.082333334, 0.115666665, 0.149, 0.18233334, 0.21566667, 0.249, 0.28233334, 0.31566668, 0.349, 0.38233334, 0.41566667, 0.449),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0.0, 3.875, 3.625, 3.375, 3.125, 2.875, 2.625, 2.375, 2.125, 1.8750000000000002, 1.625, 1.375, 1.125, 0.0]
+}
+tracks/53/type = "value"
+tracks/53/imported = false
+tracks/53/enabled = true
+tracks/53/path = NodePath("Heart:material:shader_parameter/radius")
+tracks/53/interp = 0
+tracks/53/loop_wrap = false
+tracks/53/keys = {
+"times": PackedFloat32Array(0, 0.049, 0.082333334, 0.115666665, 0.149, 0.18233334, 0.21566667, 0.249, 0.28233334, 0.31566668, 0.349, 0.38233334, 0.41566667, 0.449),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0.0, 2.416666666666667, 2.25, 2.0833333333333335, 1.9166666666666667, 1.75, 1.5833333333333333, 1.4166666666666667, 1.25, 1.0833333333333335, 0.9166666666666667, 0.75, 0.5833333333333333, 0.0]
+}
+tracks/54/type = "value"
+tracks/54/imported = false
+tracks/54/enabled = true
+tracks/54/path = NodePath("HeartLight:material:shader_parameter/alpha")
+tracks/54/interp = 0
+tracks/54/loop_wrap = false
+tracks/54/keys = {
+"times": PackedFloat32Array(0, 0.049, 0.082333334, 0.115666665, 0.149, 0.18233334, 0.21566667, 0.249, 0.28233334, 0.31566668, 0.349, 0.38233334, 0.41566667, 0.449),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0.0, 0.5270833333333333, 0.48125000000000007, 0.43541666666666673, 0.3895833333333334, 0.34375, 0.29791666666666666, 0.2520833333333334, 0.20625000000000002, 0.1604166666666667, 0.11458333333333336, 0.06875, 0.022916666666666648, 0.0]
+}
+tracks/55/type = "value"
+tracks/55/imported = false
+tracks/55/enabled = true
+tracks/55/path = NodePath("Flare:material:shader_parameter/radius")
+tracks/55/interp = 1
+tracks/55/loop_wrap = false
+tracks/55/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.35),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [60.0, 60.0, 33.0]
+}
+tracks/56/type = "value"
+tracks/56/imported = false
+tracks/56/enabled = true
+tracks/56/path = NodePath("Flare:material:shader_parameter/alpha")
+tracks/56/interp = 1
+tracks/56/loop_wrap = false
+tracks/56/keys = {
+"times": PackedFloat32Array(0, 0.049, 0.05, 0.083333336, 0.11666667, 0.15, 0.18333334, 0.21666667, 0.25, 0.28333333, 0.31666666, 0.35),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, 0.7, 0.5530864197530863, 0.42345679012345677, 0.31111111111111106, 0.2160493827160494, 0.13827160493827156, 0.07777777777777774, 0.03456790123456789, 0.008641975308641964, 0.0]
+}
+tracks/57/type = "value"
+tracks/57/imported = false
+tracks/57/enabled = true
+tracks/57/path = NodePath("FlareWhite:material:shader_parameter/radius")
+tracks/57/interp = 1
+tracks/57/loop_wrap = false
+tracks/57/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.12),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [14.0, 14.0, 7.700000000000001]
+}
+tracks/58/type = "value"
+tracks/58/imported = false
+tracks/58/enabled = true
+tracks/58/path = NodePath("FlareWhite:material:shader_parameter/alpha")
+tracks/58/interp = 1
+tracks/58/loop_wrap = false
+tracks/58/keys = {
+"times": PackedFloat32Array(0, 0.049, 0.05, 0.083333336, 0.11666667, 0.12),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, 0.5, 0.13718820861678005, 0.0011337868480725648, 0.0]
+}
+tracks/59/type = "value"
+tracks/59/imported = false
+tracks/59/enabled = true
+tracks/59/path = NodePath("Strobe:material:shader_parameter/radius")
+tracks/59/interp = 0
+tracks/59/loop_wrap = false
+tracks/59/keys = {
+"times": PackedFloat32Array(0, 0.015666667, 0.049, 0.082333334, 0.115666665, 0.149, 0.18233334, 0.21566667, 0.249, 0.28233334, 0.31566668, 0.349, 0.38233334, 0.41566667, 0.449, 0.48233333, 0.51566666, 0.549, 0.5823333, 0.6156667, 0.649, 0.68233335, 0.71566665, 0.749, 0.7823333, 0.8156667, 0.849, 0.88233334),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [40.0, 38.431372549019606, 36.86274509803922, 35.294117647058826, 33.72549019607843, 32.15686274509804, 30.588235294117645, 29.019607843137255, 27.450980392156865, 25.882352941176467, 24.31372549019608, 22.745098039215684, 21.17647058823529, 19.6078431372549, 18.03921568627451, 16.470588235294116, 14.901960784313726, 13.333333333333336, 11.764705882352938, 10.196078431372548, 8.627450980392158, 7.058823529411766, 5.490196078431375, 3.9215686274509753, 2.3529411764705843, 0.7843137254901933, 0.0, 0.0]
+}
+tracks/60/type = "value"
+tracks/60/imported = false
+tracks/60/enabled = true
+tracks/60/path = NodePath("Strobe:material:shader_parameter/alpha")
+tracks/60/interp = 0
+tracks/60/loop_wrap = false
+tracks/60/keys = {
+"times": PackedFloat32Array(0, 0.049, 0.082333334, 0.115666665, 0.149, 0.18233334, 0.21566667, 0.249, 0.28233334, 0.31566668, 0.349, 0.38233334, 0.41566667, 0.449, 0.48233333, 0.51566666, 0.549, 0.5823333, 0.6156667, 0.649, 0.68233335, 0.71566665, 0.749, 0.7823333, 0.8156667, 0.849, 0.88233334),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0.0, 0.4140199865831955, 0.24532224666749253, 0.2966582835901997, 0.1757810709175648, 0.21256494873345658, 0.12595264111862692, 0.15230944129803398, 0.09024901101095986, 0.10913448358604193, 0.06466624213767141, 0.07819827455270029, 0.04633538722878769, 0.056031512149855335, 0.03320075573698726, 0.04014833283416705, 0.023789381020263744, 0.02876753754301842, 0.017045836360188815, 0.020612841377679672, 0.01221387546699244, 0.01476974624699845, 0.008751624195549139, 0.010582985635204099, 0.0062708127544861105, 0.00758304056697638, 0.004493233681334766]
+}
+tracks/61/type = "value"
+tracks/61/imported = false
+tracks/61/enabled = true
+tracks/61/path = NodePath("Jink0:points")
+tracks/61/interp = 0
+tracks/61/loop_wrap = false
+tracks/61/keys = {
+"times": PackedFloat32Array(0, 0.149, 0.18233334, 0.21566667, 0.28233334, 0.31566668, 0.38233334, 0.88233334),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [PackedVector2Array(), PackedVector2Array(3.5, -0.5, 7.5, 4.5), PackedVector2Array(3.5, -0.5, 7.5, 4.5, 13.5, 5.5), PackedVector2Array(3.5, -0.5, 7.5, 4.5, 13.5, 5.5, 15.5, 3.5), PackedVector2Array(7.5, 4.5, 13.5, 5.5, 15.5, 3.5, 19.5, 3.5), PackedVector2Array(13.5, 5.5, 15.5, 3.5, 19.5, 3.5, 20.5, 1.5), PackedVector2Array(), PackedVector2Array()]
+}
+tracks/62/type = "value"
+tracks/62/imported = false
+tracks/62/enabled = true
+tracks/62/path = NodePath("JinkHead0:points")
+tracks/62/interp = 0
+tracks/62/loop_wrap = false
+tracks/62/keys = {
+"times": PackedFloat32Array(0, 0.049, 0.082333334, 0.115666665, 0.149, 0.18233334, 0.21566667, 0.249, 0.28233334, 0.31566668, 0.349, 0.38233334, 0.88233334),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [PackedVector2Array(), PackedVector2Array(2.1630867, -0.21136539, 2.5, -0.5), PackedVector2Array(3.5, -0.5, 5.5, 1.5), PackedVector2Array(3.5, -0.5, 7.5, 4.5), PackedVector2Array(7.5, 4.5, 11.5, 5.5), PackedVector2Array(13.5, 5.5, 14.5, 5.5), PackedVector2Array(15.5, 3.5, 16.5, 3.5), PackedVector2Array(15.5, 3.5, 18.5, 3.5), PackedVector2Array(19.5, 3.5, 20.5, 2.5), PackedVector2Array(20.5, 1.5, 21.5, 1.5), PackedVector2Array(20.5, 1.5, 23.5, 1.5), PackedVector2Array(), PackedVector2Array()]
+}
+tracks/63/type = "value"
+tracks/63/imported = false
+tracks/63/enabled = true
+tracks/63/path = NodePath("Jink0:default_color")
+tracks/63/interp = 0
+tracks/63/loop_wrap = false
+tracks/63/keys = {
+"times": PackedFloat32Array(0, 0.21566667, 0.38233334, 0.88233334),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Color(0.61960787, 0.84705883, 1, 1), Color(0.34509805, 0.6509804, 1, 1), Color(0.61960787, 0.84705883, 1, 1), Color(0.61960787, 0.84705883, 1, 1)]
+}
+tracks/64/type = "value"
+tracks/64/imported = false
+tracks/64/enabled = true
+tracks/64/path = NodePath("JinkHead0:default_color")
+tracks/64/interp = 0
+tracks/64/loop_wrap = false
+tracks/64/keys = {
+"times": PackedFloat32Array(0, 0.21566667, 0.38233334, 0.88233334),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Color(1, 1, 1, 1), Color(0.89411765, 0.9647059, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 1)]
+}
+tracks/65/type = "value"
+tracks/65/imported = false
+tracks/65/enabled = true
+tracks/65/path = NodePath("Jink1:points")
+tracks/65/interp = 0
+tracks/65/loop_wrap = false
+tracks/65/keys = {
+"times": PackedFloat32Array(0, 0.115666665, 0.18233334, 0.21566667, 0.28233334, 0.31566668, 0.38233334, 0.88233334),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [PackedVector2Array(), PackedVector2Array(1.5, -2.5, 10.5, -2.5), PackedVector2Array(1.5, -2.5, 10.5, -2.5, 13.5, 4.5), PackedVector2Array(1.5, -2.5, 10.5, -2.5, 13.5, 4.5, 11.5, 7.5), PackedVector2Array(10.5, -2.5, 13.5, 4.5, 11.5, 7.5, 4.5, 5.5), PackedVector2Array(13.5, 4.5, 11.5, 7.5, 4.5, 5.5, 0.5, 9.5), PackedVector2Array(), PackedVector2Array()]
+}
+tracks/66/type = "value"
+tracks/66/imported = false
+tracks/66/enabled = true
+tracks/66/path = NodePath("JinkHead1:points")
+tracks/66/interp = 0
+tracks/66/loop_wrap = false
+tracks/66/keys = {
+"times": PackedFloat32Array(0, 0.049, 0.082333334, 0.115666665, 0.149, 0.18233334, 0.21566667, 0.249, 0.28233334, 0.31566668, 0.349, 0.38233334, 0.88233334),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [PackedVector2Array(), PackedVector2Array(1.5287701, -2.6073546, 1.5, -2.5), PackedVector2Array(1.5, -2.5, 7.5, -2.5), PackedVector2Array(10.5, -2.5, 11.5, -1.5), PackedVector2Array(10.5, -2.5, 13.5, 3.5), PackedVector2Array(13.5, 4.5, 11.5, 6.5), PackedVector2Array(11.5, 7.5, 8.5, 6.5), PackedVector2Array(11.5, 7.5, 4.5, 5.5), PackedVector2Array(4.5, 5.5, 2.5, 8.5), PackedVector2Array(0.5, 9.5, 0.5, 10.5), PackedVector2Array(0.5, 9.5, 1.5, 13.5), PackedVector2Array(), PackedVector2Array()]
+}
+tracks/67/type = "value"
+tracks/67/imported = false
+tracks/67/enabled = true
+tracks/67/path = NodePath("Jink1:default_color")
+tracks/67/interp = 0
+tracks/67/loop_wrap = false
+tracks/67/keys = {
+"times": PackedFloat32Array(0, 0.21566667, 0.38233334, 0.88233334),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Color(0.61960787, 0.84705883, 1, 1), Color(0.34509805, 0.6509804, 1, 1), Color(0.61960787, 0.84705883, 1, 1), Color(0.61960787, 0.84705883, 1, 1)]
+}
+tracks/68/type = "value"
+tracks/68/imported = false
+tracks/68/enabled = true
+tracks/68/path = NodePath("JinkHead1:default_color")
+tracks/68/interp = 0
+tracks/68/loop_wrap = false
+tracks/68/keys = {
+"times": PackedFloat32Array(0, 0.21566667, 0.38233334, 0.88233334),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Color(1, 1, 1, 1), Color(0.89411765, 0.9647059, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 1)]
+}
+tracks/69/type = "value"
+tracks/69/imported = false
+tracks/69/enabled = true
+tracks/69/path = NodePath("Jink2:points")
+tracks/69/interp = 0
+tracks/69/loop_wrap = false
+tracks/69/keys = {
+"times": PackedFloat32Array(0, 0.115666665, 0.18233334, 0.21566667, 0.249, 0.88233334),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [PackedVector2Array(), PackedVector2Array(3.5, -7.5, 7.5, -10.5), PackedVector2Array(3.5, -7.5, 7.5, -10.5, 9.5, -17.5), PackedVector2Array(3.5, -7.5, 7.5, -10.5, 9.5, -17.5, 15.5, -18.5), PackedVector2Array(), PackedVector2Array()]
+}
+tracks/70/type = "value"
+tracks/70/imported = false
+tracks/70/enabled = true
+tracks/70/path = NodePath("JinkHead2:points")
+tracks/70/interp = 0
+tracks/70/loop_wrap = false
+tracks/70/keys = {
+"times": PackedFloat32Array(0, 0.049, 0.082333334, 0.115666665, 0.149, 0.18233334, 0.21566667, 0.249, 0.88233334),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [PackedVector2Array(), PackedVector2Array(1.2536906, -3.1720073, 1.5, -3.5), PackedVector2Array(3.5, -7.5, 4.5, -8.5), PackedVector2Array(7.5, -10.5, 8.5, -11.5), PackedVector2Array(7.5, -10.5, 9.5, -16.5), PackedVector2Array(9.5, -17.5, 12.5, -18.5), PackedVector2Array(15.5, -18.5, 15.5, -19.5), PackedVector2Array(), PackedVector2Array()]
+}
+tracks/71/type = "value"
+tracks/71/imported = false
+tracks/71/enabled = true
+tracks/71/path = NodePath("Jink2:default_color")
+tracks/71/interp = 0
+tracks/71/loop_wrap = false
+tracks/71/keys = {
+"times": PackedFloat32Array(0, 0.149, 0.249, 0.88233334),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Color(0.61960787, 0.84705883, 1, 1), Color(0.34509805, 0.6509804, 1, 1), Color(0.61960787, 0.84705883, 1, 1), Color(0.61960787, 0.84705883, 1, 1)]
+}
+tracks/72/type = "value"
+tracks/72/imported = false
+tracks/72/enabled = true
+tracks/72/path = NodePath("JinkHead2:default_color")
+tracks/72/interp = 0
+tracks/72/loop_wrap = false
+tracks/72/keys = {
+"times": PackedFloat32Array(0, 0.149, 0.249, 0.88233334),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Color(1, 1, 1, 1), Color(0.89411765, 0.9647059, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 1)]
+}
+tracks/73/type = "value"
+tracks/73/imported = false
+tracks/73/enabled = true
+tracks/73/path = NodePath("Jink3:points")
+tracks/73/interp = 0
+tracks/73/loop_wrap = false
+tracks/73/keys = {
+"times": PackedFloat32Array(0, 0.115666665, 0.149, 0.21566667, 0.249, 0.31566668, 0.349, 0.88233334),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [PackedVector2Array(), PackedVector2Array(4.5, -3.5, 8.5, -2.5), PackedVector2Array(4.5, -3.5, 8.5, -2.5, 9.5, 0.5), PackedVector2Array(4.5, -3.5, 8.5, -2.5, 9.5, 0.5, 5.5, 4.5), PackedVector2Array(8.5, -2.5, 9.5, 0.5, 5.5, 4.5, 5.5, 8.5), PackedVector2Array(9.5, 0.5, 5.5, 4.5, 5.5, 8.5, 8.5, 10.5), PackedVector2Array(), PackedVector2Array()]
+}
+tracks/74/type = "value"
+tracks/74/imported = false
+tracks/74/enabled = true
+tracks/74/path = NodePath("JinkHead3:points")
+tracks/74/interp = 0
+tracks/74/loop_wrap = false
+tracks/74/keys = {
+"times": PackedFloat32Array(0, 0.049, 0.082333334, 0.115666665, 0.149, 0.18233334, 0.21566667, 0.249, 0.28233334, 0.31566668, 0.349, 0.88233334),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [PackedVector2Array(), PackedVector2Array(1.8517199, -1.6219494, 1.5, -1.5), PackedVector2Array(4.5, -3.5, 5.5, -3.5), PackedVector2Array(8.5, -2.5, 8.5, -1.5), PackedVector2Array(9.5, 0.5, 9.5, 1.5), PackedVector2Array(9.5, 0.5, 6.5, 3.5), PackedVector2Array(5.5, 4.5, 5.5, 6.5), PackedVector2Array(5.5, 8.5, 6.5, 9.5), PackedVector2Array(5.5, 8.5, 8.5, 10.5), PackedVector2Array(8.5, 10.5, 11.5, 11.5), PackedVector2Array(), PackedVector2Array()]
+}
+tracks/75/type = "value"
+tracks/75/imported = false
+tracks/75/enabled = true
+tracks/75/path = NodePath("Jink3:default_color")
+tracks/75/interp = 0
+tracks/75/loop_wrap = false
+tracks/75/keys = {
+"times": PackedFloat32Array(0, 0.18233334, 0.349, 0.88233334),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Color(0.61960787, 0.84705883, 1, 1), Color(0.34509805, 0.6509804, 1, 1), Color(0.61960787, 0.84705883, 1, 1), Color(0.61960787, 0.84705883, 1, 1)]
+}
+tracks/76/type = "value"
+tracks/76/imported = false
+tracks/76/enabled = true
+tracks/76/path = NodePath("JinkHead3:default_color")
+tracks/76/interp = 0
+tracks/76/loop_wrap = false
+tracks/76/keys = {
+"times": PackedFloat32Array(0, 0.18233334, 0.349, 0.88233334),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Color(1, 1, 1, 1), Color(0.89411765, 0.9647059, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 1)]
+}
+tracks/77/type = "value"
+tracks/77/imported = false
+tracks/77/enabled = true
+tracks/77/path = NodePath("Jink4:points")
+tracks/77/interp = 0
+tracks/77/loop_wrap = false
+tracks/77/keys = {
+"times": PackedFloat32Array(0, 0.115666665, 0.18233334, 0.21566667, 0.28233334, 0.31566668, 0.349, 0.88233334),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [PackedVector2Array(), PackedVector2Array(3.5, 0.5, 9.5, -6.5), PackedVector2Array(3.5, 0.5, 9.5, -6.5, 5.5, -13.5), PackedVector2Array(3.5, 0.5, 9.5, -6.5, 5.5, -13.5, 8.5, -19.5), PackedVector2Array(9.5, -6.5, 5.5, -13.5, 8.5, -19.5, 13.5, -18.5), PackedVector2Array(5.5, -13.5, 8.5, -19.5, 13.5, -18.5, 15.5, -21.5), PackedVector2Array(), PackedVector2Array()]
+}
+tracks/78/type = "value"
+tracks/78/imported = false
+tracks/78/enabled = true
+tracks/78/path = NodePath("JinkHead4:points")
+tracks/78/interp = 0
+tracks/78/loop_wrap = false
+tracks/78/keys = {
+"times": PackedFloat32Array(0, 0.049, 0.082333334, 0.115666665, 0.149, 0.18233334, 0.21566667, 0.249, 0.28233334, 0.31566668, 0.349, 0.88233334),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [PackedVector2Array(), PackedVector2Array(3.3853798, 0.52151084, 3.5, 0.5), PackedVector2Array(3.5, 0.5, 7.5, -4.5), PackedVector2Array(9.5, -6.5, 8.5, -8.5), PackedVector2Array(9.5, -6.5, 5.5, -13.5), PackedVector2Array(5.5, -13.5, 7.5, -17.5), PackedVector2Array(8.5, -19.5, 9.5, -19.5), PackedVector2Array(8.5, -19.5, 13.5, -19.5), PackedVector2Array(13.5, -18.5, 15.5, -20.5), PackedVector2Array(15.5, -21.5, 17.5, -21.5), PackedVector2Array(), PackedVector2Array()]
+}
+tracks/79/type = "value"
+tracks/79/imported = false
+tracks/79/enabled = true
+tracks/79/path = NodePath("Jink4:default_color")
+tracks/79/interp = 0
+tracks/79/loop_wrap = false
+tracks/79/keys = {
+"times": PackedFloat32Array(0, 0.18233334, 0.349, 0.88233334),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Color(0.61960787, 0.84705883, 1, 1), Color(0.34509805, 0.6509804, 1, 1), Color(0.61960787, 0.84705883, 1, 1), Color(0.61960787, 0.84705883, 1, 1)]
+}
+tracks/80/type = "value"
+tracks/80/imported = false
+tracks/80/enabled = true
+tracks/80/path = NodePath("JinkHead4:default_color")
+tracks/80/interp = 0
+tracks/80/loop_wrap = false
+tracks/80/keys = {
+"times": PackedFloat32Array(0, 0.18233334, 0.349, 0.88233334),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Color(1, 1, 1, 1), Color(0.89411765, 0.9647059, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 1)]
+}
+tracks/81/type = "value"
+tracks/81/imported = false
+tracks/81/enabled = true
+tracks/81/path = NodePath("Jink5:points")
+tracks/81/interp = 0
+tracks/81/loop_wrap = false
+tracks/81/keys = {
+"times": PackedFloat32Array(0, 0.115666665, 0.149, 0.21566667, 0.249, 0.88233334),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [PackedVector2Array(), PackedVector2Array(3.5, 3.5, 9.5, 1.5), PackedVector2Array(3.5, 3.5, 9.5, 1.5, 13.5, -5.5), PackedVector2Array(3.5, 3.5, 9.5, 1.5, 13.5, -5.5, 20.5, -5.5), PackedVector2Array(), PackedVector2Array()]
+}
+tracks/82/type = "value"
+tracks/82/imported = false
+tracks/82/enabled = true
+tracks/82/path = NodePath("JinkHead5:points")
+tracks/82/interp = 0
+tracks/82/loop_wrap = false
+tracks/82/keys = {
+"times": PackedFloat32Array(0, 0.049, 0.082333334, 0.115666665, 0.149, 0.18233334, 0.21566667, 0.249, 0.88233334),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [PackedVector2Array(), PackedVector2Array(2.481113, 2.4518254, 2.5, 2.5), PackedVector2Array(3.5, 3.5, 8.5, 2.5), PackedVector2Array(9.5, 1.5, 11.5, -2.5), PackedVector2Array(13.5, -5.5, 14.5, -5.5), PackedVector2Array(13.5, -5.5, 19.5, -5.5), PackedVector2Array(20.5, -5.5, 22.5, -3.5), PackedVector2Array(), PackedVector2Array()]
+}
+tracks/83/type = "value"
+tracks/83/imported = false
+tracks/83/enabled = true
+tracks/83/path = NodePath("Jink5:default_color")
+tracks/83/interp = 0
+tracks/83/loop_wrap = false
+tracks/83/keys = {
+"times": PackedFloat32Array(0, 0.149, 0.249, 0.88233334),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Color(0.61960787, 0.84705883, 1, 1), Color(0.34509805, 0.6509804, 1, 1), Color(0.61960787, 0.84705883, 1, 1), Color(0.61960787, 0.84705883, 1, 1)]
+}
+tracks/84/type = "value"
+tracks/84/imported = false
+tracks/84/enabled = true
+tracks/84/path = NodePath("JinkHead5:default_color")
+tracks/84/interp = 0
+tracks/84/loop_wrap = false
+tracks/84/keys = {
+"times": PackedFloat32Array(0, 0.149, 0.249, 0.88233334),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Color(1, 1, 1, 1), Color(0.89411765, 0.9647059, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 1)]
+}
+tracks/85/type = "value"
+tracks/85/imported = false
+tracks/85/enabled = true
+tracks/85/path = NodePath("Jink6:points")
+tracks/85/interp = 0
+tracks/85/loop_wrap = false
+tracks/85/keys = {
+"times": PackedFloat32Array(0, 0.115666665, 0.149, 0.21566667, 0.249, 0.28233334, 0.31566668, 0.349, 0.38233334, 0.88233334),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [PackedVector2Array(), PackedVector2Array(2.5, -1.5, 8.5, 1.5), PackedVector2Array(2.5, -1.5, 8.5, 1.5, 15.5, 0.5), PackedVector2Array(2.5, -1.5, 8.5, 1.5, 15.5, 0.5, 20.5, 5.5), PackedVector2Array(8.5, 1.5, 15.5, 0.5, 20.5, 5.5, 18.5, 10.5), PackedVector2Array(15.5, 0.5, 20.5, 5.5, 18.5, 10.5, 22.5, 12.5), PackedVector2Array(20.5, 5.5, 18.5, 10.5, 22.5, 12.5, 23.5, 16.5), PackedVector2Array(18.5, 10.5, 22.5, 12.5, 23.5, 16.5, 26.5, 17.5), PackedVector2Array(), PackedVector2Array()]
+}
+tracks/86/type = "value"
+tracks/86/imported = false
+tracks/86/enabled = true
+tracks/86/path = NodePath("JinkHead6:points")
+tracks/86/interp = 0
+tracks/86/loop_wrap = false
+tracks/86/keys = {
+"times": PackedFloat32Array(0, 0.049, 0.082333334, 0.115666665, 0.149, 0.18233334, 0.21566667, 0.249, 0.28233334, 0.31566668, 0.349, 0.38233334, 0.88233334),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [PackedVector2Array(), PackedVector2Array(2.6519477, -1.7662474, 2.5, -1.5), PackedVector2Array(2.5, -1.5, 7.5, 1.5), PackedVector2Array(8.5, 1.5, 12.5, 1.5), PackedVector2Array(15.5, 0.5, 17.5, 2.5), PackedVector2Array(15.5, 0.5, 20.5, 5.5), PackedVector2Array(20.5, 5.5, 19.5, 9.5), PackedVector2Array(18.5, 10.5, 21.5, 12.5), PackedVector2Array(22.5, 12.5, 23.5, 15.5), PackedVector2Array(23.5, 16.5, 25.5, 16.5), PackedVector2Array(26.5, 17.5, 27.5, 18.5), PackedVector2Array(), PackedVector2Array()]
+}
+tracks/87/type = "value"
+tracks/87/imported = false
+tracks/87/enabled = true
+tracks/87/path = NodePath("Jink6:default_color")
+tracks/87/interp = 0
+tracks/87/loop_wrap = false
+tracks/87/keys = {
+"times": PackedFloat32Array(0, 0.21566667, 0.38233334, 0.88233334),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Color(0.61960787, 0.84705883, 1, 1), Color(0.34509805, 0.6509804, 1, 1), Color(0.61960787, 0.84705883, 1, 1), Color(0.61960787, 0.84705883, 1, 1)]
+}
+tracks/88/type = "value"
+tracks/88/imported = false
+tracks/88/enabled = true
+tracks/88/path = NodePath("JinkHead6:default_color")
+tracks/88/interp = 0
+tracks/88/loop_wrap = false
+tracks/88/keys = {
+"times": PackedFloat32Array(0, 0.21566667, 0.38233334, 0.88233334),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Color(1, 1, 1, 1), Color(0.89411765, 0.9647059, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 1)]
+}
+tracks/89/type = "value"
+tracks/89/imported = false
+tracks/89/enabled = true
+tracks/89/path = NodePath("Jink7:points")
+tracks/89/interp = 0
+tracks/89/loop_wrap = false
+tracks/89/keys = {
+"times": PackedFloat32Array(0, 0.149, 0.18233334, 0.21566667, 0.249, 0.31566668, 0.349, 0.88233334),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [PackedVector2Array(), PackedVector2Array(5.5, 4.5, 13.5, 1.5), PackedVector2Array(5.5, 4.5, 13.5, 1.5, 15.5, -4.5), PackedVector2Array(5.5, 4.5, 13.5, 1.5, 15.5, -4.5, 20.5, -3.5), PackedVector2Array(13.5, 1.5, 15.5, -4.5, 20.5, -3.5, 24.5, -6.5), PackedVector2Array(15.5, -4.5, 20.5, -3.5, 24.5, -6.5, 26.5, -10.5), PackedVector2Array(), PackedVector2Array()]
+}
+tracks/90/type = "value"
+tracks/90/imported = false
+tracks/90/enabled = true
+tracks/90/path = NodePath("JinkHead7:points")
+tracks/90/interp = 0
+tracks/90/loop_wrap = false
+tracks/90/keys = {
+"times": PackedFloat32Array(0, 0.049, 0.082333334, 0.115666665, 0.149, 0.18233334, 0.21566667, 0.249, 0.28233334, 0.31566668, 0.349, 0.88233334),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [PackedVector2Array(), PackedVector2Array(2.5736067, 2.1622744, 2.5, 2.5), PackedVector2Array(5.5, 4.5, 7.5, 3.5), PackedVector2Array(5.5, 4.5, 13.5, 1.5), PackedVector2Array(13.5, 1.5, 15.5, -3.5), PackedVector2Array(15.5, -4.5, 18.5, -3.5), PackedVector2Array(20.5, -3.5, 22.5, -4.5), PackedVector2Array(24.5, -6.5, 24.5, -7.5), PackedVector2Array(24.5, -6.5, 25.5, -10.5), PackedVector2Array(26.5, -10.5, 28.5, -10.5), PackedVector2Array(), PackedVector2Array()]
+}
+tracks/91/type = "value"
+tracks/91/imported = false
+tracks/91/enabled = true
+tracks/91/path = NodePath("Jink7:default_color")
+tracks/91/interp = 0
+tracks/91/loop_wrap = false
+tracks/91/keys = {
+"times": PackedFloat32Array(0, 0.21566667, 0.349, 0.88233334),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Color(0.61960787, 0.84705883, 1, 1), Color(0.34509805, 0.6509804, 1, 1), Color(0.61960787, 0.84705883, 1, 1), Color(0.61960787, 0.84705883, 1, 1)]
+}
+tracks/92/type = "value"
+tracks/92/imported = false
+tracks/92/enabled = true
+tracks/92/path = NodePath("JinkHead7:default_color")
+tracks/92/interp = 0
+tracks/92/loop_wrap = false
+tracks/92/keys = {
+"times": PackedFloat32Array(0, 0.21566667, 0.349, 0.88233334),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Color(1, 1, 1, 1), Color(0.89411765, 0.9647059, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 1)]
+}
+tracks/93/type = "value"
+tracks/93/imported = false
+tracks/93/enabled = true
+tracks/93/path = NodePath("Jink8:points")
+tracks/93/interp = 0
+tracks/93/loop_wrap = false
+tracks/93/keys = {
+"times": PackedFloat32Array(0, 0.115666665, 0.149, 0.21566667, 0.249, 0.28233334, 0.349, 0.38233334, 0.88233334),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [PackedVector2Array(), PackedVector2Array(2.5, 0.5, 7.5, -1.5), PackedVector2Array(2.5, 0.5, 7.5, -1.5, 8.5, -3.5), PackedVector2Array(2.5, 0.5, 7.5, -1.5, 8.5, -3.5, 7.5, -7.5), PackedVector2Array(7.5, -1.5, 8.5, -3.5, 7.5, -7.5, 5.5, -7.5), PackedVector2Array(8.5, -3.5, 7.5, -7.5, 5.5, -7.5, 4.5, -5.5), PackedVector2Array(7.5, -7.5, 5.5, -7.5, 4.5, -5.5, 1.5, -5.5), PackedVector2Array(), PackedVector2Array()]
+}
+tracks/94/type = "value"
+tracks/94/imported = false
+tracks/94/enabled = true
+tracks/94/path = NodePath("JinkHead8:points")
+tracks/94/interp = 0
+tracks/94/loop_wrap = false
+tracks/94/keys = {
+"times": PackedFloat32Array(0, 0.049, 0.082333334, 0.115666665, 0.149, 0.18233334, 0.21566667, 0.249, 0.28233334, 0.31566668, 0.349, 0.38233334, 0.88233334),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [PackedVector2Array(), PackedVector2Array(1.8481768, 0.5646796, 1.5, 0.5), PackedVector2Array(2.5, 0.5, 5.5, -0.5), PackedVector2Array(7.5, -1.5, 7.5, -1.5), PackedVector2Array(8.5, -3.5, 8.5, -4.5), PackedVector2Array(8.5, -3.5, 7.5, -6.5), PackedVector2Array(7.5, -7.5, 6.5, -7.5), PackedVector2Array(5.5, -7.5, 4.5, -6.5), PackedVector2Array(4.5, -5.5, 3.5, -5.5), PackedVector2Array(4.5, -5.5, 2.5, -5.5), PackedVector2Array(1.5, -5.5, 0.5, -6.5), PackedVector2Array(), PackedVector2Array()]
+}
+tracks/95/type = "value"
+tracks/95/imported = false
+tracks/95/enabled = true
+tracks/95/path = NodePath("Jink8:default_color")
+tracks/95/interp = 0
+tracks/95/loop_wrap = false
+tracks/95/keys = {
+"times": PackedFloat32Array(0, 0.21566667, 0.38233334, 0.88233334),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Color(0.61960787, 0.84705883, 1, 1), Color(0.34509805, 0.6509804, 1, 1), Color(0.61960787, 0.84705883, 1, 1), Color(0.61960787, 0.84705883, 1, 1)]
+}
+tracks/96/type = "value"
+tracks/96/imported = false
+tracks/96/enabled = true
+tracks/96/path = NodePath("JinkHead8:default_color")
+tracks/96/interp = 0
+tracks/96/loop_wrap = false
+tracks/96/keys = {
+"times": PackedFloat32Array(0, 0.21566667, 0.38233334, 0.88233334),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Color(1, 1, 1, 1), Color(0.89411765, 0.9647059, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 1)]
+}
+tracks/97/type = "value"
+tracks/97/imported = false
+tracks/97/enabled = true
+tracks/97/path = NodePath("Jink9:points")
+tracks/97/interp = 0
+tracks/97/loop_wrap = false
+tracks/97/keys = {
+"times": PackedFloat32Array(0, 0.149, 0.18233334, 0.249, 0.28233334, 0.31566668, 0.38233334, 0.41566667, 0.88233334),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [PackedVector2Array(), PackedVector2Array(3.5, -8.5, -3.5, -13.5), PackedVector2Array(3.5, -8.5, -3.5, -13.5, -11.5, -9.5), PackedVector2Array(3.5, -8.5, -3.5, -13.5, -11.5, -9.5, -10.5, -1.5), PackedVector2Array(-3.5, -13.5, -11.5, -9.5, -10.5, -1.5, -14.5, 2.5), PackedVector2Array(-11.5, -9.5, -10.5, -1.5, -14.5, 2.5, -20.5, 0.5), PackedVector2Array(-10.5, -1.5, -14.5, 2.5, -20.5, 0.5, -22.5, 3.5), PackedVector2Array(), PackedVector2Array()]
+}
+tracks/98/type = "value"
+tracks/98/imported = false
+tracks/98/enabled = true
+tracks/98/path = NodePath("JinkHead9:points")
+tracks/98/interp = 0
+tracks/98/loop_wrap = false
+tracks/98/keys = {
+"times": PackedFloat32Array(0, 0.049, 0.082333334, 0.115666665, 0.149, 0.18233334, 0.21566667, 0.249, 0.28233334, 0.31566668, 0.349, 0.38233334, 0.41566667, 0.88233334),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [PackedVector2Array(), PackedVector2Array(1.2678971, -3.7331405, 1.5, -3.5), PackedVector2Array(3.5, -8.5, 1.5, -9.5), PackedVector2Array(3.5, -8.5, -3.5, -13.5), PackedVector2Array(-3.5, -13.5, -8.5, -10.5), PackedVector2Array(-11.5, -9.5, -10.5, -6.5), PackedVector2Array(-11.5, -9.5, -10.5, -1.5), PackedVector2Array(-10.5, -1.5, -13.5, 1.5), PackedVector2Array(-14.5, 2.5, -17.5, 1.5), PackedVector2Array(-20.5, 0.5, -20.5, 1.5), PackedVector2Array(-20.5, 0.5, -22.5, 3.5), PackedVector2Array(-22.5, 3.5, -25.5, 3.5), PackedVector2Array(), PackedVector2Array()]
+}
+tracks/99/type = "value"
+tracks/99/imported = false
+tracks/99/enabled = true
+tracks/99/path = NodePath("Jink9:default_color")
+tracks/99/interp = 0
+tracks/99/loop_wrap = false
+tracks/99/keys = {
+"times": PackedFloat32Array(0, 0.21566667, 0.41566667, 0.88233334),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Color(0.61960787, 0.84705883, 1, 1), Color(0.34509805, 0.6509804, 1, 1), Color(0.61960787, 0.84705883, 1, 1), Color(0.61960787, 0.84705883, 1, 1)]
+}
+tracks/100/type = "value"
+tracks/100/imported = false
+tracks/100/enabled = true
+tracks/100/path = NodePath("JinkHead9:default_color")
+tracks/100/interp = 0
+tracks/100/loop_wrap = false
+tracks/100/keys = {
+"times": PackedFloat32Array(0, 0.21566667, 0.41566667, 0.88233334),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Color(1, 1, 1, 1), Color(0.89411765, 0.9647059, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 1)]
+}
+tracks/101/type = "value"
+tracks/101/imported = false
+tracks/101/enabled = true
+tracks/101/path = NodePath("Jink10:points")
+tracks/101/interp = 0
+tracks/101/loop_wrap = false
+tracks/101/keys = {
+"times": PackedFloat32Array(0, 0.149, 0.21566667, 0.249, 0.88233334),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [PackedVector2Array(), PackedVector2Array(8.5, -5.5, 19.5, -0.5), PackedVector2Array(8.5, -5.5, 19.5, -0.5, 22.5, 10.5), PackedVector2Array(), PackedVector2Array()]
+}
+tracks/102/type = "value"
+tracks/102/imported = false
+tracks/102/enabled = true
+tracks/102/path = NodePath("JinkHead10:points")
+tracks/102/interp = 0
+tracks/102/loop_wrap = false
+tracks/102/keys = {
+"times": PackedFloat32Array(0, 0.049, 0.082333334, 0.115666665, 0.149, 0.18233334, 0.21566667, 0.249, 0.88233334),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [PackedVector2Array(), PackedVector2Array(3.493309, -2.4078283, 3.5, -2.5), PackedVector2Array(8.5, -5.5, 10.5, -4.5), PackedVector2Array(8.5, -5.5, 16.5, -1.5), PackedVector2Array(19.5, -0.5, 20.5, 2.5), PackedVector2Array(19.5, -0.5, 21.5, 8.5), PackedVector2Array(22.5, 10.5, 20.5, 13.5), PackedVector2Array(), PackedVector2Array()]
+}
+tracks/103/type = "value"
+tracks/103/imported = false
+tracks/103/enabled = true
+tracks/103/path = NodePath("Jink10:default_color")
+tracks/103/interp = 0
+tracks/103/loop_wrap = false
+tracks/103/keys = {
+"times": PackedFloat32Array(0, 0.149, 0.249, 0.88233334),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Color(0.61960787, 0.84705883, 1, 1), Color(0.34509805, 0.6509804, 1, 1), Color(0.61960787, 0.84705883, 1, 1), Color(0.61960787, 0.84705883, 1, 1)]
+}
+tracks/104/type = "value"
+tracks/104/imported = false
+tracks/104/enabled = true
+tracks/104/path = NodePath("JinkHead10:default_color")
+tracks/104/interp = 0
+tracks/104/loop_wrap = false
+tracks/104/keys = {
+"times": PackedFloat32Array(0, 0.149, 0.249, 0.88233334),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Color(1, 1, 1, 1), Color(0.89411765, 0.9647059, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 1)]
+}
+tracks/105/type = "value"
+tracks/105/imported = false
+tracks/105/enabled = true
+tracks/105/path = NodePath("Jink11:points")
+tracks/105/interp = 0
+tracks/105/loop_wrap = false
+tracks/105/keys = {
+"times": PackedFloat32Array(0, 0.149, 0.18233334, 0.249, 0.28233334, 0.349, 0.88233334),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [PackedVector2Array(), PackedVector2Array(4.5, 6.5, -0.5, 12.5), PackedVector2Array(4.5, 6.5, -0.5, 12.5, 0.5, 18.5), PackedVector2Array(4.5, 6.5, -0.5, 12.5, 0.5, 18.5, -4.5, 24.5), PackedVector2Array(-0.5, 12.5, 0.5, 18.5, -4.5, 24.5, -2.5, 28.5), PackedVector2Array(), PackedVector2Array()]
+}
+tracks/106/type = "value"
+tracks/106/imported = false
+tracks/106/enabled = true
+tracks/106/path = NodePath("JinkHead11:points")
+tracks/106/interp = 0
+tracks/106/loop_wrap = false
+tracks/106/keys = {
+"times": PackedFloat32Array(0, 0.049, 0.082333334, 0.115666665, 0.149, 0.18233334, 0.21566667, 0.249, 0.28233334, 0.31566668, 0.349, 0.88233334),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [PackedVector2Array(), PackedVector2Array(1.8541559, 2.5247486, 1.5, 2.5), PackedVector2Array(4.5, 6.5, 3.5, 7.5), PackedVector2Array(4.5, 6.5, 0.5, 11.5), PackedVector2Array(-0.5, 12.5, 0.5, 16.5), PackedVector2Array(0.5, 18.5, -1.5, 20.5), PackedVector2Array(0.5, 18.5, -4.5, 23.5), PackedVector2Array(-4.5, 24.5, -3.5, 27.5), PackedVector2Array(-2.5, 28.5, -3.5, 30.5), PackedVector2Array(-2.5, 28.5, -5.5, 33.5), PackedVector2Array(), PackedVector2Array()]
+}
+tracks/107/type = "value"
+tracks/107/imported = false
+tracks/107/enabled = true
+tracks/107/path = NodePath("Jink11:default_color")
+tracks/107/interp = 0
+tracks/107/loop_wrap = false
+tracks/107/keys = {
+"times": PackedFloat32Array(0, 0.18233334, 0.349, 0.88233334),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Color(0.61960787, 0.84705883, 1, 1), Color(0.34509805, 0.6509804, 1, 1), Color(0.61960787, 0.84705883, 1, 1), Color(0.61960787, 0.84705883, 1, 1)]
+}
+tracks/108/type = "value"
+tracks/108/imported = false
+tracks/108/enabled = true
+tracks/108/path = NodePath("JinkHead11:default_color")
+tracks/108/interp = 0
+tracks/108/loop_wrap = false
+tracks/108/keys = {
+"times": PackedFloat32Array(0, 0.18233334, 0.349, 0.88233334),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Color(1, 1, 1, 1), Color(0.89411765, 0.9647059, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 1)]
+}
+tracks/109/type = "value"
+tracks/109/imported = false
+tracks/109/enabled = true
+tracks/109/path = NodePath("Jink12:points")
+tracks/109/interp = 0
+tracks/109/loop_wrap = false
+tracks/109/keys = {
+"times": PackedFloat32Array(0, 0.115666665, 0.149, 0.21566667, 0.28233334, 0.88233334),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [PackedVector2Array(), PackedVector2Array(4.5, -5.5, 1.5, -11.5), PackedVector2Array(4.5, -5.5, 1.5, -11.5, 6.5, -17.5), PackedVector2Array(4.5, -5.5, 1.5, -11.5, 6.5, -17.5, 5.5, -25.5), PackedVector2Array(), PackedVector2Array()]
+}
+tracks/110/type = "value"
+tracks/110/imported = false
+tracks/110/enabled = true
+tracks/110/path = NodePath("JinkHead12:points")
+tracks/110/interp = 0
+tracks/110/loop_wrap = false
+tracks/110/keys = {
+"times": PackedFloat32Array(0, 0.049, 0.082333334, 0.115666665, 0.149, 0.18233334, 0.21566667, 0.249, 0.28233334, 0.88233334),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [PackedVector2Array(), PackedVector2Array(2.540103, -2.940556, 2.5, -2.5), PackedVector2Array(4.5, -5.5, 3.5, -8.5), PackedVector2Array(1.5, -11.5, 3.5, -13.5), PackedVector2Array(6.5, -17.5, 6.5, -18.5), PackedVector2Array(6.5, -17.5, 5.5, -23.5), PackedVector2Array(5.5, -25.5, 7.5, -26.5), PackedVector2Array(5.5, -25.5, 10.5, -28.5), PackedVector2Array(), PackedVector2Array()]
+}
+tracks/111/type = "value"
+tracks/111/imported = false
+tracks/111/enabled = true
+tracks/111/path = NodePath("Jink12:default_color")
+tracks/111/interp = 0
+tracks/111/loop_wrap = false
+tracks/111/keys = {
+"times": PackedFloat32Array(0, 0.18233334, 0.28233334, 0.88233334),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Color(0.61960787, 0.84705883, 1, 1), Color(0.34509805, 0.6509804, 1, 1), Color(0.61960787, 0.84705883, 1, 1), Color(0.61960787, 0.84705883, 1, 1)]
+}
+tracks/112/type = "value"
+tracks/112/imported = false
+tracks/112/enabled = true
+tracks/112/path = NodePath("JinkHead12:default_color")
+tracks/112/interp = 0
+tracks/112/loop_wrap = false
+tracks/112/keys = {
+"times": PackedFloat32Array(0, 0.18233334, 0.28233334, 0.88233334),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Color(1, 1, 1, 1), Color(0.89411765, 0.9647059, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 1)]
+}
+tracks/113/type = "value"
+tracks/113/imported = false
+tracks/113/enabled = true
+tracks/113/path = NodePath("Jink13:points")
+tracks/113/interp = 0
+tracks/113/loop_wrap = false
+tracks/113/keys = {
+"times": PackedFloat32Array(0, 0.115666665, 0.149, 0.21566667, 0.249, 0.28233334, 0.31566668, 0.349, 0.88233334),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [PackedVector2Array(), PackedVector2Array(3.5, 1.5, 0.5, 12.5), PackedVector2Array(3.5, 1.5, 0.5, 12.5, -4.5, 14.5), PackedVector2Array(3.5, 1.5, 0.5, 12.5, -4.5, 14.5, -6.5, 20.5), PackedVector2Array(0.5, 12.5, -4.5, 14.5, -6.5, 20.5, -11.5, 22.5), PackedVector2Array(-4.5, 14.5, -6.5, 20.5, -11.5, 22.5, -16.5, 20.5), PackedVector2Array(-6.5, 20.5, -11.5, 22.5, -16.5, 20.5, -18.5, 17.5), PackedVector2Array(), PackedVector2Array()]
+}
+tracks/114/type = "value"
+tracks/114/imported = false
+tracks/114/enabled = true
+tracks/114/path = NodePath("JinkHead13:points")
+tracks/114/interp = 0
+tracks/114/loop_wrap = false
+tracks/114/keys = {
+"times": PackedFloat32Array(0, 0.049, 0.082333334, 0.115666665, 0.149, 0.18233334, 0.21566667, 0.249, 0.28233334, 0.31566668, 0.349, 0.88233334),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [PackedVector2Array(), PackedVector2Array(3.0828836, 1.7699838, 3.5, 1.5), PackedVector2Array(3.5, 1.5, 1.5, 8.5), PackedVector2Array(0.5, 12.5, -0.5, 13.5), PackedVector2Array(-4.5, 14.5, -5.5, 15.5), PackedVector2Array(-4.5, 14.5, -6.5, 20.5), PackedVector2Array(-6.5, 20.5, -11.5, 22.5), PackedVector2Array(-11.5, 22.5, -15.5, 20.5), PackedVector2Array(-16.5, 20.5, -17.5, 18.5), PackedVector2Array(-18.5, 17.5, -20.5, 17.5), PackedVector2Array(), PackedVector2Array()]
+}
+tracks/115/type = "value"
+tracks/115/imported = false
+tracks/115/enabled = true
+tracks/115/path = NodePath("Jink13:default_color")
+tracks/115/interp = 0
+tracks/115/loop_wrap = false
+tracks/115/keys = {
+"times": PackedFloat32Array(0, 0.18233334, 0.349, 0.88233334),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Color(0.61960787, 0.84705883, 1, 1), Color(0.34509805, 0.6509804, 1, 1), Color(0.61960787, 0.84705883, 1, 1), Color(0.61960787, 0.84705883, 1, 1)]
+}
+tracks/116/type = "value"
+tracks/116/imported = false
+tracks/116/enabled = true
+tracks/116/path = NodePath("JinkHead13:default_color")
+tracks/116/interp = 0
+tracks/116/loop_wrap = false
+tracks/116/keys = {
+"times": PackedFloat32Array(0, 0.18233334, 0.349, 0.88233334),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Color(1, 1, 1, 1), Color(0.89411765, 0.9647059, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 1)]
+}
+tracks/117/type = "value"
+tracks/117/imported = false
+tracks/117/enabled = true
+tracks/117/path = NodePath("Jink14:points")
+tracks/117/interp = 0
+tracks/117/loop_wrap = false
+tracks/117/keys = {
+"times": PackedFloat32Array(0, 0.149, 0.18233334, 0.21566667, 0.28233334, 0.88233334),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [PackedVector2Array(), PackedVector2Array(3.5, 1.5, 8.5, -2.5), PackedVector2Array(3.5, 1.5, 8.5, -2.5, 11.5, -0.5), PackedVector2Array(3.5, 1.5, 8.5, -2.5, 11.5, -0.5, 12.5, 2.5), PackedVector2Array(), PackedVector2Array()]
+}
+tracks/118/type = "value"
+tracks/118/imported = false
+tracks/118/enabled = true
+tracks/118/path = NodePath("JinkHead14:points")
+tracks/118/interp = 0
+tracks/118/loop_wrap = false
+tracks/118/keys = {
+"times": PackedFloat32Array(0, 0.049, 0.082333334, 0.115666665, 0.149, 0.18233334, 0.21566667, 0.249, 0.28233334, 0.88233334),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [PackedVector2Array(), PackedVector2Array(1.982516, 0.97548443, 1.5, 0.5), PackedVector2Array(3.5, 1.5, 5.5, 0.5), PackedVector2Array(3.5, 1.5, 8.5, -1.5), PackedVector2Array(8.5, -2.5, 10.5, -1.5), PackedVector2Array(11.5, -0.5, 11.5, 1.5), PackedVector2Array(12.5, 2.5, 11.5, 3.5), PackedVector2Array(12.5, 2.5, 9.5, 6.5), PackedVector2Array(), PackedVector2Array()]
+}
+tracks/119/type = "value"
+tracks/119/imported = false
+tracks/119/enabled = true
+tracks/119/path = NodePath("Jink14:default_color")
+tracks/119/interp = 0
+tracks/119/loop_wrap = false
+tracks/119/keys = {
+"times": PackedFloat32Array(0, 0.149, 0.28233334, 0.88233334),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Color(0.61960787, 0.84705883, 1, 1), Color(0.34509805, 0.6509804, 1, 1), Color(0.61960787, 0.84705883, 1, 1), Color(0.61960787, 0.84705883, 1, 1)]
+}
+tracks/120/type = "value"
+tracks/120/imported = false
+tracks/120/enabled = true
+tracks/120/path = NodePath("JinkHead14:default_color")
+tracks/120/interp = 0
+tracks/120/loop_wrap = false
+tracks/120/keys = {
+"times": PackedFloat32Array(0, 0.149, 0.28233334, 0.88233334),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Color(1, 1, 1, 1), Color(0.89411765, 0.9647059, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 1)]
+}
+tracks/121/type = "value"
+tracks/121/imported = false
+tracks/121/enabled = true
+tracks/121/path = NodePath("Jink15:points")
+tracks/121/interp = 0
+tracks/121/loop_wrap = false
+tracks/121/keys = {
+"times": PackedFloat32Array(0, 0.115666665, 0.149, 0.21566667, 0.249, 0.28233334, 0.31566668, 0.88233334),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [PackedVector2Array(), PackedVector2Array(-3.5, 3.5, -8.5, 4.5), PackedVector2Array(-3.5, 3.5, -8.5, 4.5, -11.5, 2.5), PackedVector2Array(-3.5, 3.5, -8.5, 4.5, -11.5, 2.5, -10.5, -3.5), PackedVector2Array(-8.5, 4.5, -11.5, 2.5, -10.5, -3.5, -12.5, -5.5), PackedVector2Array(-11.5, 2.5, -10.5, -3.5, -12.5, -5.5, -15.5, -5.5), PackedVector2Array(), PackedVector2Array()]
+}
+tracks/122/type = "value"
+tracks/122/imported = false
+tracks/122/enabled = true
+tracks/122/path = NodePath("JinkHead15:points")
+tracks/122/interp = 0
+tracks/122/loop_wrap = false
+tracks/122/keys = {
+"times": PackedFloat32Array(0, 0.049, 0.082333334, 0.115666665, 0.149, 0.18233334, 0.21566667, 0.249, 0.28233334, 0.31566668, 0.88233334),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [PackedVector2Array(), PackedVector2Array(-1.794438, 1.9489125, -1.5, 1.5), PackedVector2Array(-3.5, 3.5, -5.5, 4.5), PackedVector2Array(-8.5, 4.5, -9.5, 3.5), PackedVector2Array(-11.5, 2.5, -11.5, 0.5), PackedVector2Array(-11.5, 2.5, -10.5, -3.5), PackedVector2Array(-10.5, -3.5, -12.5, -5.5), PackedVector2Array(-12.5, -5.5, -14.5, -5.5), PackedVector2Array(-15.5, -5.5, -16.5, -3.5), PackedVector2Array(), PackedVector2Array()]
+}
+tracks/123/type = "value"
+tracks/123/imported = false
+tracks/123/enabled = true
+tracks/123/path = NodePath("Jink15:default_color")
+tracks/123/interp = 0
+tracks/123/loop_wrap = false
+tracks/123/keys = {
+"times": PackedFloat32Array(0, 0.18233334, 0.31566668, 0.88233334),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Color(0.61960787, 0.84705883, 1, 1), Color(0.34509805, 0.6509804, 1, 1), Color(0.61960787, 0.84705883, 1, 1), Color(0.61960787, 0.84705883, 1, 1)]
+}
+tracks/124/type = "value"
+tracks/124/imported = false
+tracks/124/enabled = true
+tracks/124/path = NodePath("JinkHead15:default_color")
+tracks/124/interp = 0
+tracks/124/loop_wrap = false
+tracks/124/keys = {
+"times": PackedFloat32Array(0, 0.18233334, 0.31566668, 0.88233334),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Color(1, 1, 1, 1), Color(0.89411765, 0.9647059, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 1)]
+}
+tracks/125/type = "value"
+tracks/125/imported = false
+tracks/125/enabled = true
+tracks/125/path = NodePath("Ozone:emitting")
+tracks/125/interp = 0
+tracks/125/loop_wrap = false
+tracks/125/keys = {
+"times": PackedFloat32Array(0, 0.049),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_alh5l"]
+_data = {
+&"fx": SubResource("Animation_uhobe")
+}
+
+[sub_resource type="Image" id="Image_wu1sb"]
+data = {
+"data": PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 105, 0, 0, 255, 105, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 105, 0, 0, 255, 105, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 0, 0, 255, 0, 0, 0, 0, 100, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 94, 0, 0, 255, 100, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 94, 0, 0, 255, 94, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 89, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 78, 0, 0, 255, 83, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 78, 0, 0, 255, 78, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 72, 0, 0, 255, 78, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 66, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 72, 0, 0, 255, 72, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 89, 0, 0, 255, 89, 0, 0, 255, 89, 0, 0, 255, 83, 0, 0, 255, 78, 0, 0, 255, 78, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 66, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 66, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 72, 0, 0, 255, 66, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 61, 0, 0, 255, 66, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 61, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 78, 0, 0, 255, 78, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 61, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 61, 0, 0, 255, 0, 0, 0, 0, 61, 0, 0, 255, 55, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 61, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 78, 0, 0, 255, 72, 0, 0, 255, 66, 0, 0, 255, 66, 0, 0, 255, 61, 0, 0, 255, 55, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 55, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 50, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 55, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 83, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 50, 0, 0, 255, 50, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 44, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 50, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 78, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 44, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 44, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 44, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 61, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 78, 0, 0, 255, 78, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 39, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 39, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 39, 0, 0, 255, 44, 0, 0, 255, 50, 0, 0, 255, 50, 0, 0, 255, 55, 0, 0, 255, 61, 0, 0, 255, 61, 0, 0, 255, 61, 0, 0, 255, 0, 0, 0, 0, 72, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 39, 0, 0, 255, 33, 255, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 33, 0, 0, 255, 33, 0, 0, 255, 27, 255, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 50, 0, 0, 255, 0, 0, 0, 0, 55, 0, 0, 255, 61, 0, 0, 255, 61, 0, 0, 255, 0, 0, 0, 0, 72, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 33, 0, 0, 255, 27, 255, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 27, 0, 0, 255, 27, 0, 0, 255, 27, 255, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 44, 0, 0, 255, 50, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 66, 0, 0, 255, 66, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 27, 0, 0, 255, 22, 255, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 27, 0, 0, 255, 27, 0, 0, 255, 0, 0, 0, 0, 33, 0, 0, 255, 39, 0, 0, 255, 44, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 61, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 22, 0, 0, 255, 16, 255, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 22, 0, 0, 255, 16, 255, 0, 255, 33, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 55, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 61, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 16, 0, 0, 255, 11, 255, 0, 255, 0, 0, 0, 0, 16, 0, 0, 255, 11, 255, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 50, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 61, 0, 0, 255, 61, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 11, 0, 0, 255, 11, 0, 0, 255, 5, 255, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 50, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 61, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 255, 5, 0, 0, 255, 11, 0, 0, 255, 16, 0, 0, 255, 16, 0, 0, 255, 22, 0, 0, 255, 27, 0, 0, 255, 22, 255, 0, 255, 33, 0, 0, 255, 39, 0, 0, 255, 44, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 55, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 16, 0, 0, 255, 11, 0, 0, 255, 5, 0, 0, 255, 5, 0, 0, 255, 5, 255, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 33, 0, 0, 255, 33, 0, 0, 255, 39, 0, 0, 255, 44, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 50, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 27, 0, 0, 255, 22, 0, 0, 255, 22, 0, 0, 255, 16, 255, 0, 255, 0, 0, 0, 0, 11, 0, 0, 255, 11, 0, 0, 255, 5, 255, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 50, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 44, 0, 0, 255, 39, 0, 0, 255, 39, 0, 0, 255, 33, 0, 0, 255, 27, 255, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 16, 0, 0, 255, 11, 255, 0, 255, 16, 0, 0, 255, 22, 0, 0, 255, 16, 255, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 50, 0, 0, 255, 55, 0, 0, 255, 61, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 61, 0, 0, 255, 55, 0, 0, 255, 55, 0, 0, 255, 50, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 22, 0, 0, 255, 16, 255, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 22, 0, 0, 255, 27, 0, 0, 255, 33, 0, 0, 255, 33, 0, 0, 255, 39, 0, 0, 255, 33, 255, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 61, 0, 0, 255, 0, 0, 0, 0, 66, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 66, 0, 0, 255, 61, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 27, 0, 0, 255, 22, 255, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 44, 0, 0, 255, 50, 0, 0, 255, 50, 0, 0, 255, 55, 0, 0, 255, 66, 0, 0, 255, 0, 0, 0, 0, 66, 0, 0, 255, 72, 0, 0, 255, 78, 0, 0, 255, 83, 0, 0, 255, 83, 0, 0, 255, 83, 0, 0, 255, 0, 0, 0, 0, 94, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 72, 0, 0, 255, 0, 0, 0, 0, 66, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 27, 0, 0, 255, 27, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 50, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 61, 0, 0, 255, 66, 0, 0, 255, 66, 0, 0, 255, 72, 0, 0, 255, 78, 0, 0, 255, 83, 0, 0, 255, 83, 0, 0, 255, 89, 0, 0, 255, 94, 0, 0, 255, 94, 0, 0, 255, 100, 0, 0, 255, 100, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 78, 0, 0, 255, 78, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 72, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 33, 0, 0, 255, 33, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 55, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 72, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 78, 0, 0, 255, 0, 0, 0, 0, 83, 0, 0, 255, 89, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 105, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 78, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 72, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 39, 0, 0, 255, 33, 255, 0, 255, 39, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 55, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 78, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 83, 0, 0, 255, 0, 0, 0, 0, 89, 0, 0, 255, 89, 0, 0, 255, 89, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 72, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 44, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 44, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 61, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 83, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 89, 0, 0, 255, 89, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 44, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 44, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 61, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 83, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 94, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 50, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 50, 0, 0, 255, 50, 0, 0, 255, 55, 0, 0, 255, 61, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 89, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 94, 0, 0, 255, 94, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 55, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 55, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 61, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 89, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 100, 0, 0, 255, 100, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 55, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 61, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 0, 0, 255, 105, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 61, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 66, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 111, 0, 0, 255, 111, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 66, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 72, 0, 0, 255, 78, 0, 0, 255, 78, 0, 0, 255, 78, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 117, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 72, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 78, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 117, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 78, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 78, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 83, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 89, 0, 0, 255, 83, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 94, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 105, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 117, 0, 0, 255, 117, 0, 0, 255, 111, 0, 0, 255, 111, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 117, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 117, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+"format": "RGBA8",
+"height": 61,
+"mipmaps": false,
+"width": 54
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_uevn4"]
+image = SubResource("Image_wu1sb")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gr56k"]
+shader = ExtResource("2_17c3e")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = null
+shader_parameter/size = Vector2(54, 61)
+shader_parameter/data = SubResource("ImageTexture_uevn4")
+shader_parameter/t = null
+shader_parameter/snap = null
+shader_parameter/speed = null
+shader_parameter/c1 = Color(0.16470589, 0.105882354, 0.47058824, 1)
+shader_parameter/c2 = Color(0.27450982, 0.1882353, 0.7529412, 1)
+shader_parameter/c4 = Color(0.34509805, 0.6509804, 1, 1)
+shader_parameter/c5 = Color(0.61960787, 0.84705883, 1, 1)
+shader_parameter/c6 = Color(0.89411765, 0.9647059, 1, 1)
+shader_parameter/c7 = Color(1, 1, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6dd5x"]
+shader = ExtResource("3_wqu78")
+shader_parameter/size = Vector2(54, 61)
+shader_parameter/data = SubResource("ImageTexture_uevn4")
+shader_parameter/t = null
+shader_parameter/snap = null
+shader_parameter/speed = null
+shader_parameter/reach = null
+shader_parameter/strength = null
+shader_parameter/gain = null
+shader_parameter/color = Color(0.61960787, 0.84705883, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d8blv"]
+resource_name = "Dither"
+shader = ExtResource("4_f7glf")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = null
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ek7et"]
+resource_name = "Light"
+shader = ExtResource("6_2nn5q")
+shader_parameter/strength = null
+shader_parameter/steps = null
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4lqof"]
+shader = ExtResource("7_06pro")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = null
+shader_parameter/size = Vector2(16, 16)
+shader_parameter/radius = 4.0
+shader_parameter/thickness = null
+shader_parameter/squash = null
+shader_parameter/color = Color(0.61960787, 0.84705883, 1, 1)
+shader_parameter/edge_color = null
+shader_parameter/edge = null
+shader_parameter/side = null
+shader_parameter/ragged = null
+shader_parameter/grain = null
+shader_parameter/alpha = null
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m2ndx"]
+shader = ExtResource("7_06pro")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = null
+shader_parameter/size = Vector2(12, 12)
+shader_parameter/radius = 2.5
+shader_parameter/thickness = null
+shader_parameter/squash = null
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/edge_color = null
+shader_parameter/edge = null
+shader_parameter/side = null
+shader_parameter/ragged = null
+shader_parameter/grain = null
+shader_parameter/alpha = null
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qn6sc"]
+shader = ExtResource("8_501f6")
+shader_parameter/size = Vector2(48, 48)
+shader_parameter/radius = 20.0
+shader_parameter/thickness = null
+shader_parameter/squash = null
+shader_parameter/color = Color(0.34509805, 0.6509804, 1, 1)
+shader_parameter/strength = null
+shader_parameter/alpha = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_02q7j"]
+shader = ExtResource("8_501f6")
+shader_parameter/size = Vector2(26, 26)
+shader_parameter/radius = 9.0
+shader_parameter/thickness = null
+shader_parameter/squash = null
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/strength = null
+shader_parameter/alpha = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vulh3"]
+shader = ExtResource("8_501f6")
+shader_parameter/size = Vector2(128, 128)
+shader_parameter/radius = 60.0
+shader_parameter/thickness = null
+shader_parameter/squash = null
+shader_parameter/color = Color(0.34509805, 0.6509804, 1, 1)
+shader_parameter/strength = null
+shader_parameter/alpha = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5f158"]
+shader = ExtResource("8_501f6")
+shader_parameter/size = Vector2(36, 36)
+shader_parameter/radius = 14.0
+shader_parameter/thickness = null
+shader_parameter/squash = null
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/strength = null
+shader_parameter/alpha = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j26ot"]
+shader = ExtResource("8_501f6")
+shader_parameter/size = Vector2(88, 88)
+shader_parameter/radius = 40.0
+shader_parameter/thickness = null
+shader_parameter/squash = null
+shader_parameter/color = Color(0.3529412, 0.38431373, 0.9411765, 1)
+shader_parameter/strength = null
+shader_parameter/alpha = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_02ofi"]
+resource_name = "Soft"
+shader = ExtResource("4_f7glf")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = true
+
+[sub_resource type="Gradient" id="Gradient_3w02b"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.08, 0.6, 0.95)
+colors = PackedColorArray(0.39450982, 0.4752941, 0.65137255, 0, 0.39450982, 0.4752941, 0.65137255, 0.45, 0.30588236, 0.2901961, 0.36862746, 0.3, 0.30588236, 0.2901961, 0.36862746, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ljnhw"]
+gradient = SubResource("Gradient_3w02b")
+
+[sub_resource type="Curve" id="Curve_5afhm"]
+_limits = [0.0, 8.0, 0.0, 1.0]
+_data = [Vector2(0, 0.7), 0.0, 0.75, 1, 1, Vector2(0.4, 1), 0.75, 0.3333334, 1, 1, Vector2(1, 1.2), 0.3333334, 0.0, 1, 1]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_rpyqi"]
+curve = SubResource("Curve_5afhm")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_eoy3v"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(4, 3, 0)
+direction = Vector3(6.123234e-17, -1, 0)
+spread = 30.0
+initial_velocity_min = 8.0
+initial_velocity_max = 16.0
+gravity = Vector3(0, 0, 0)
+damping_min = 6.0
+damping_max = 10.0
+scale_min = 0.8
+scale_max = 1.1
+scale_curve = SubResource("CurveTexture_rpyqi")
+color_ramp = SubResource("GradientTexture1D_ljnhw")
+
+[node name="ZapHit" type="Node2D" unique_id=1049451909]
+script = ExtResource("1_y3ymm")
+effect_id = "lightning/zap-hit"
+source = "src/fx/lightning/zap-hit.js@cf5a8d0dcc8f77e70291697c63068c2a6e35cdde"
+duration = 0.9
+canvas_size = Vector2i(144, 112)
+origin = Vector2i(76, 56)
+ramps = {
+"palette": PackedColorArray(0.07058824, 0.039215688, 0.2, 1, 0.16470589, 0.105882354, 0.47058824, 1, 0.27450982, 0.1882353, 0.7529412, 1, 0.3529412, 0.38431373, 0.9411765, 1, 0.34509805, 0.6509804, 1, 1, 0.61960787, 0.84705883, 1, 1, 0.89411765, 0.9647059, 1, 1, 1, 1, 1, 1)
+}
+palette_extra = PackedColorArray(0.39450982, 0.4752941, 0.65137255, 1, 0.30588236, 0.2901961, 0.36862746, 1)
+palette_override = PackedColorArray()
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1988162369]
+libraries/ = SubResource("AnimationLibrary_alh5l")
+
+[node name="Fern" type="ColorRect" parent="." unique_id=176262619]
+z_index = -2
+material = SubResource("ShaderMaterial_gr56k")
+offset_left = -24.0
+offset_top = -30.0
+offset_right = 30.0
+offset_bottom = 31.0
+mouse_filter = 2
+
+[node name="FernLight" type="ColorRect" parent="." unique_id=148270945]
+z_index = 2
+material = SubResource("ShaderMaterial_6dd5x")
+offset_left = -24.0
+offset_top = -30.0
+offset_right = 30.0
+offset_bottom = 31.0
+mouse_filter = 2
+
+[node name="Arc" type="Node2D" parent="." unique_id=1871286015]
+z_index = 1
+material = SubResource("ShaderMaterial_d8blv")
+script = ExtResource("5_wqh3h")
+from = Vector2(-66, -12)
+to = Vector2(0, 0)
+jag = 0.22
+bolt_seed = 59467
+rate = 30.0
+thick = 0.95
+head = 2.0
+colors = PackedColorArray(0.07058824, 0.039215688, 0.2, 1, 0.16470589, 0.105882354, 0.47058824, 1, 0.27450982, 0.1882353, 0.7529412, 1, 0.3529412, 0.38431373, 0.9411765, 1, 0.34509805, 0.6509804, 1, 1, 0.61960787, 0.84705883, 1, 1, 0.89411765, 0.9647059, 1, 1, 1, 1, 1, 1)
+
+[node name="Light" type="Node2D" parent="Arc" unique_id=1393302676]
+z_index = 1
+texture_filter = 2
+material = SubResource("ShaderMaterial_ek7et")
+
+[node name="Knot0" type="Node2D" parent="." unique_id=1016520850]
+visible = false
+z_index = 1
+material = SubResource("ShaderMaterial_d8blv")
+script = ExtResource("5_wqh3h")
+to = Vector2(4, 0)
+jag = 0.5
+forks = 0.0
+bolt_seed = 90913
+rate = 30.0
+style = 1
+light = 0.25
+colors = PackedColorArray(0.07058824, 0.039215688, 0.2, 1, 0.16470589, 0.105882354, 0.47058824, 1, 0.27450982, 0.1882353, 0.7529412, 1, 0.3529412, 0.38431373, 0.9411765, 1, 0.34509805, 0.6509804, 1, 1, 0.61960787, 0.84705883, 1, 1, 0.89411765, 0.9647059, 1, 1, 1, 1, 1, 1)
+
+[node name="Light" type="Node2D" parent="Knot0" unique_id=642265388]
+z_index = 1
+texture_filter = 2
+material = SubResource("ShaderMaterial_ek7et")
+
+[node name="Knot1" type="Node2D" parent="." unique_id=1439737175]
+visible = false
+z_index = 1
+material = SubResource("ShaderMaterial_d8blv")
+script = ExtResource("5_wqh3h")
+to = Vector2(4, 0)
+jag = 0.5
+forks = 0.0
+bolt_seed = 90914
+rate = 30.0
+style = 1
+light = 0.25
+colors = PackedColorArray(0.07058824, 0.039215688, 0.2, 1, 0.16470589, 0.105882354, 0.47058824, 1, 0.27450982, 0.1882353, 0.7529412, 1, 0.3529412, 0.38431373, 0.9411765, 1, 0.34509805, 0.6509804, 1, 1, 0.61960787, 0.84705883, 1, 1, 0.89411765, 0.9647059, 1, 1, 1, 1, 1, 1)
+
+[node name="Light" type="Node2D" parent="Knot1" unique_id=1822760253]
+z_index = 1
+texture_filter = 2
+material = SubResource("ShaderMaterial_ek7et")
+
+[node name="Knot2" type="Node2D" parent="." unique_id=38603000]
+visible = false
+z_index = 1
+material = SubResource("ShaderMaterial_d8blv")
+script = ExtResource("5_wqh3h")
+to = Vector2(4, 0)
+jag = 0.5
+forks = 0.0
+bolt_seed = 90915
+rate = 30.0
+style = 1
+light = 0.25
+colors = PackedColorArray(0.07058824, 0.039215688, 0.2, 1, 0.16470589, 0.105882354, 0.47058824, 1, 0.27450982, 0.1882353, 0.7529412, 1, 0.3529412, 0.38431373, 0.9411765, 1, 0.34509805, 0.6509804, 1, 1, 0.61960787, 0.84705883, 1, 1, 0.89411765, 0.9647059, 1, 1, 1, 1, 1, 1)
+
+[node name="Light" type="Node2D" parent="Knot2" unique_id=1993752086]
+z_index = 1
+texture_filter = 2
+material = SubResource("ShaderMaterial_ek7et")
+
+[node name="Knot3" type="Node2D" parent="." unique_id=1170943665]
+visible = false
+z_index = 1
+material = SubResource("ShaderMaterial_d8blv")
+script = ExtResource("5_wqh3h")
+to = Vector2(4, 0)
+jag = 0.5
+forks = 0.0
+bolt_seed = 90916
+rate = 30.0
+style = 1
+light = 0.25
+colors = PackedColorArray(0.07058824, 0.039215688, 0.2, 1, 0.16470589, 0.105882354, 0.47058824, 1, 0.27450982, 0.1882353, 0.7529412, 1, 0.3529412, 0.38431373, 0.9411765, 1, 0.34509805, 0.6509804, 1, 1, 0.61960787, 0.84705883, 1, 1, 0.89411765, 0.9647059, 1, 1, 1, 1, 1, 1)
+
+[node name="Light" type="Node2D" parent="Knot3" unique_id=373079775]
+z_index = 1
+texture_filter = 2
+material = SubResource("ShaderMaterial_ek7et")
+
+[node name="Knot4" type="Node2D" parent="." unique_id=389867435]
+visible = false
+z_index = 1
+material = SubResource("ShaderMaterial_d8blv")
+script = ExtResource("5_wqh3h")
+to = Vector2(4, 0)
+jag = 0.5
+forks = 0.0
+bolt_seed = 90917
+rate = 30.0
+style = 1
+light = 0.25
+colors = PackedColorArray(0.07058824, 0.039215688, 0.2, 1, 0.16470589, 0.105882354, 0.47058824, 1, 0.27450982, 0.1882353, 0.7529412, 1, 0.3529412, 0.38431373, 0.9411765, 1, 0.34509805, 0.6509804, 1, 1, 0.61960787, 0.84705883, 1, 1, 0.89411765, 0.9647059, 1, 1, 1, 1, 1, 1)
+
+[node name="Light" type="Node2D" parent="Knot4" unique_id=880014656]
+z_index = 1
+texture_filter = 2
+material = SubResource("ShaderMaterial_ek7et")
+
+[node name="Knot5" type="Node2D" parent="." unique_id=1612603737]
+visible = false
+z_index = 1
+material = SubResource("ShaderMaterial_d8blv")
+script = ExtResource("5_wqh3h")
+to = Vector2(4, 0)
+jag = 0.5
+forks = 0.0
+bolt_seed = 90918
+rate = 30.0
+style = 1
+light = 0.25
+colors = PackedColorArray(0.07058824, 0.039215688, 0.2, 1, 0.16470589, 0.105882354, 0.47058824, 1, 0.27450982, 0.1882353, 0.7529412, 1, 0.3529412, 0.38431373, 0.9411765, 1, 0.34509805, 0.6509804, 1, 1, 0.61960787, 0.84705883, 1, 1, 0.89411765, 0.9647059, 1, 1, 1, 1, 1, 1)
+
+[node name="Light" type="Node2D" parent="Knot5" unique_id=311459893]
+z_index = 1
+texture_filter = 2
+material = SubResource("ShaderMaterial_ek7et")
+
+[node name="Knot6" type="Node2D" parent="." unique_id=29362638]
+visible = false
+z_index = 1
+material = SubResource("ShaderMaterial_d8blv")
+script = ExtResource("5_wqh3h")
+to = Vector2(4, 0)
+jag = 0.5
+forks = 0.0
+bolt_seed = 90919
+rate = 30.0
+style = 1
+light = 0.25
+colors = PackedColorArray(0.07058824, 0.039215688, 0.2, 1, 0.16470589, 0.105882354, 0.47058824, 1, 0.27450982, 0.1882353, 0.7529412, 1, 0.3529412, 0.38431373, 0.9411765, 1, 0.34509805, 0.6509804, 1, 1, 0.61960787, 0.84705883, 1, 1, 0.89411765, 0.9647059, 1, 1, 1, 1, 1, 1)
+
+[node name="Light" type="Node2D" parent="Knot6" unique_id=801765101]
+z_index = 1
+texture_filter = 2
+material = SubResource("ShaderMaterial_ek7et")
+
+[node name="Knot7" type="Node2D" parent="." unique_id=1024313939]
+visible = false
+z_index = 1
+material = SubResource("ShaderMaterial_d8blv")
+script = ExtResource("5_wqh3h")
+to = Vector2(4, 0)
+jag = 0.5
+forks = 0.0
+bolt_seed = 90920
+rate = 30.0
+style = 1
+light = 0.25
+colors = PackedColorArray(0.07058824, 0.039215688, 0.2, 1, 0.16470589, 0.105882354, 0.47058824, 1, 0.27450982, 0.1882353, 0.7529412, 1, 0.3529412, 0.38431373, 0.9411765, 1, 0.34509805, 0.6509804, 1, 1, 0.61960787, 0.84705883, 1, 1, 0.89411765, 0.9647059, 1, 1, 1, 1, 1, 1)
+
+[node name="Light" type="Node2D" parent="Knot7" unique_id=853199086]
+z_index = 1
+texture_filter = 2
+material = SubResource("ShaderMaterial_ek7et")
+
+[node name="Knot8" type="Node2D" parent="." unique_id=8812806]
+visible = false
+z_index = 1
+material = SubResource("ShaderMaterial_d8blv")
+script = ExtResource("5_wqh3h")
+to = Vector2(4, 0)
+jag = 0.5
+forks = 0.0
+bolt_seed = 90921
+rate = 30.0
+style = 1
+light = 0.25
+colors = PackedColorArray(0.07058824, 0.039215688, 0.2, 1, 0.16470589, 0.105882354, 0.47058824, 1, 0.27450982, 0.1882353, 0.7529412, 1, 0.3529412, 0.38431373, 0.9411765, 1, 0.34509805, 0.6509804, 1, 1, 0.61960787, 0.84705883, 1, 1, 0.89411765, 0.9647059, 1, 1, 1, 1, 1, 1)
+
+[node name="Light" type="Node2D" parent="Knot8" unique_id=1601704038]
+z_index = 1
+texture_filter = 2
+material = SubResource("ShaderMaterial_ek7et")
+
+[node name="Knot9" type="Node2D" parent="." unique_id=67615122]
+visible = false
+z_index = 1
+material = SubResource("ShaderMaterial_d8blv")
+script = ExtResource("5_wqh3h")
+to = Vector2(4, 0)
+jag = 0.5
+forks = 0.0
+bolt_seed = 90922
+rate = 30.0
+style = 1
+light = 0.25
+colors = PackedColorArray(0.07058824, 0.039215688, 0.2, 1, 0.16470589, 0.105882354, 0.47058824, 1, 0.27450982, 0.1882353, 0.7529412, 1, 0.3529412, 0.38431373, 0.9411765, 1, 0.34509805, 0.6509804, 1, 1, 0.61960787, 0.84705883, 1, 1, 0.89411765, 0.9647059, 1, 1, 1, 1, 1, 1)
+
+[node name="Light" type="Node2D" parent="Knot9" unique_id=1172928738]
+z_index = 1
+texture_filter = 2
+material = SubResource("ShaderMaterial_ek7et")
+
+[node name="Knot10" type="Node2D" parent="." unique_id=1588299715]
+visible = false
+z_index = 1
+material = SubResource("ShaderMaterial_d8blv")
+script = ExtResource("5_wqh3h")
+to = Vector2(4, 0)
+jag = 0.5
+forks = 0.0
+bolt_seed = 96434
+rate = 30.0
+style = 1
+light = 0.25
+colors = PackedColorArray(0.07058824, 0.039215688, 0.2, 1, 0.16470589, 0.105882354, 0.47058824, 1, 0.27450982, 0.1882353, 0.7529412, 1, 0.3529412, 0.38431373, 0.9411765, 1, 0.34509805, 0.6509804, 1, 1, 0.61960787, 0.84705883, 1, 1, 0.89411765, 0.9647059, 1, 1, 1, 1, 1, 1)
+
+[node name="Light" type="Node2D" parent="Knot10" unique_id=1585748720]
+z_index = 1
+texture_filter = 2
+material = SubResource("ShaderMaterial_ek7et")
+
+[node name="HeartOut" type="ColorRect" parent="." unique_id=231392871]
+z_index = 1
+material = SubResource("ShaderMaterial_4lqof")
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+mouse_filter = 2
+
+[node name="Heart" type="ColorRect" parent="." unique_id=986408082]
+z_index = 1
+material = SubResource("ShaderMaterial_m2ndx")
+offset_left = -6.0
+offset_top = -6.0
+offset_right = 6.0
+offset_bottom = 6.0
+mouse_filter = 2
+
+[node name="HeartLight" type="ColorRect" parent="." unique_id=1486764434]
+z_index = 2
+material = SubResource("ShaderMaterial_qn6sc")
+offset_left = -24.0
+offset_top = -24.0
+offset_right = 24.0
+offset_bottom = 24.0
+mouse_filter = 2
+
+[node name="HeartWhite" type="ColorRect" parent="." unique_id=1341168494]
+z_index = 2
+material = SubResource("ShaderMaterial_02q7j")
+offset_left = -13.0
+offset_top = -13.0
+offset_right = 13.0
+offset_bottom = 13.0
+mouse_filter = 2
+
+[node name="Flare" type="ColorRect" parent="." unique_id=1700368420]
+z_index = 2
+material = SubResource("ShaderMaterial_vulh3")
+offset_left = -64.0
+offset_top = -64.0
+offset_right = 64.0
+offset_bottom = 64.0
+mouse_filter = 2
+
+[node name="FlareWhite" type="ColorRect" parent="." unique_id=195825815]
+z_index = 2
+material = SubResource("ShaderMaterial_5f158")
+offset_left = -18.0
+offset_top = -18.0
+offset_right = 18.0
+offset_bottom = 18.0
+mouse_filter = 2
+
+[node name="Strobe" type="ColorRect" parent="." unique_id=1975829626]
+z_index = 2
+material = SubResource("ShaderMaterial_j26ot")
+offset_left = -44.0
+offset_top = -44.0
+offset_right = 44.0
+offset_bottom = 44.0
+mouse_filter = 2
+
+[node name="Jink0" type="Line2D" parent="." unique_id=1431474842]
+z_index = 1
+material = SubResource("ShaderMaterial_d8blv")
+width = 1.0
+default_color = Color(0.61960787, 0.84705883, 1, 1)
+
+[node name="JinkHead0" type="Line2D" parent="." unique_id=971259151]
+z_index = 1
+material = SubResource("ShaderMaterial_d8blv")
+width = 1.0
+
+[node name="Jink1" type="Line2D" parent="." unique_id=2081999044]
+z_index = 1
+material = SubResource("ShaderMaterial_d8blv")
+width = 1.0
+default_color = Color(0.61960787, 0.84705883, 1, 1)
+
+[node name="JinkHead1" type="Line2D" parent="." unique_id=297984921]
+z_index = 1
+material = SubResource("ShaderMaterial_d8blv")
+width = 1.0
+
+[node name="Jink2" type="Line2D" parent="." unique_id=1176772857]
+z_index = 1
+material = SubResource("ShaderMaterial_d8blv")
+width = 1.0
+default_color = Color(0.61960787, 0.84705883, 1, 1)
+
+[node name="JinkHead2" type="Line2D" parent="." unique_id=149379549]
+z_index = 1
+material = SubResource("ShaderMaterial_d8blv")
+width = 1.0
+
+[node name="Jink3" type="Line2D" parent="." unique_id=95199723]
+z_index = 1
+material = SubResource("ShaderMaterial_d8blv")
+width = 1.0
+default_color = Color(0.61960787, 0.84705883, 1, 1)
+
+[node name="JinkHead3" type="Line2D" parent="." unique_id=1433079848]
+z_index = 1
+material = SubResource("ShaderMaterial_d8blv")
+width = 1.0
+
+[node name="Jink4" type="Line2D" parent="." unique_id=1437829525]
+z_index = 1
+material = SubResource("ShaderMaterial_d8blv")
+width = 1.0
+default_color = Color(0.61960787, 0.84705883, 1, 1)
+
+[node name="JinkHead4" type="Line2D" parent="." unique_id=1847771255]
+z_index = 1
+material = SubResource("ShaderMaterial_d8blv")
+width = 1.0
+
+[node name="Jink5" type="Line2D" parent="." unique_id=2012375138]
+z_index = 1
+material = SubResource("ShaderMaterial_d8blv")
+width = 1.0
+default_color = Color(0.61960787, 0.84705883, 1, 1)
+
+[node name="JinkHead5" type="Line2D" parent="." unique_id=204361881]
+z_index = 1
+material = SubResource("ShaderMaterial_d8blv")
+width = 1.0
+
+[node name="Jink6" type="Line2D" parent="." unique_id=1152712455]
+z_index = 1
+material = SubResource("ShaderMaterial_d8blv")
+width = 1.0
+default_color = Color(0.61960787, 0.84705883, 1, 1)
+
+[node name="JinkHead6" type="Line2D" parent="." unique_id=329658266]
+z_index = 1
+material = SubResource("ShaderMaterial_d8blv")
+width = 1.0
+
+[node name="Jink7" type="Line2D" parent="." unique_id=1813379372]
+z_index = 1
+material = SubResource("ShaderMaterial_d8blv")
+width = 1.0
+default_color = Color(0.61960787, 0.84705883, 1, 1)
+
+[node name="JinkHead7" type="Line2D" parent="." unique_id=77317038]
+z_index = 1
+material = SubResource("ShaderMaterial_d8blv")
+width = 1.0
+
+[node name="Jink8" type="Line2D" parent="." unique_id=878126154]
+z_index = 1
+material = SubResource("ShaderMaterial_d8blv")
+width = 1.0
+default_color = Color(0.61960787, 0.84705883, 1, 1)
+
+[node name="JinkHead8" type="Line2D" parent="." unique_id=1332655899]
+z_index = 1
+material = SubResource("ShaderMaterial_d8blv")
+width = 1.0
+
+[node name="Jink9" type="Line2D" parent="." unique_id=283149925]
+z_index = 1
+material = SubResource("ShaderMaterial_d8blv")
+width = 1.0
+default_color = Color(0.61960787, 0.84705883, 1, 1)
+
+[node name="JinkHead9" type="Line2D" parent="." unique_id=134299773]
+z_index = 1
+material = SubResource("ShaderMaterial_d8blv")
+width = 1.0
+
+[node name="Jink10" type="Line2D" parent="." unique_id=1756869750]
+z_index = 1
+material = SubResource("ShaderMaterial_d8blv")
+width = 1.0
+default_color = Color(0.61960787, 0.84705883, 1, 1)
+
+[node name="JinkHead10" type="Line2D" parent="." unique_id=1732752619]
+z_index = 1
+material = SubResource("ShaderMaterial_d8blv")
+width = 1.0
+
+[node name="Jink11" type="Line2D" parent="." unique_id=2143803749]
+z_index = 1
+material = SubResource("ShaderMaterial_d8blv")
+width = 1.0
+default_color = Color(0.61960787, 0.84705883, 1, 1)
+
+[node name="JinkHead11" type="Line2D" parent="." unique_id=1519513456]
+z_index = 1
+material = SubResource("ShaderMaterial_d8blv")
+width = 1.0
+
+[node name="Jink12" type="Line2D" parent="." unique_id=1579492015]
+z_index = 1
+material = SubResource("ShaderMaterial_d8blv")
+width = 1.0
+default_color = Color(0.61960787, 0.84705883, 1, 1)
+
+[node name="JinkHead12" type="Line2D" parent="." unique_id=555063918]
+z_index = 1
+material = SubResource("ShaderMaterial_d8blv")
+width = 1.0
+
+[node name="Jink13" type="Line2D" parent="." unique_id=931963446]
+z_index = 1
+material = SubResource("ShaderMaterial_d8blv")
+width = 1.0
+default_color = Color(0.61960787, 0.84705883, 1, 1)
+
+[node name="JinkHead13" type="Line2D" parent="." unique_id=2119194650]
+z_index = 1
+material = SubResource("ShaderMaterial_d8blv")
+width = 1.0
+
+[node name="Jink14" type="Line2D" parent="." unique_id=935001345]
+z_index = 1
+material = SubResource("ShaderMaterial_d8blv")
+width = 1.0
+default_color = Color(0.61960787, 0.84705883, 1, 1)
+
+[node name="JinkHead14" type="Line2D" parent="." unique_id=2002826234]
+z_index = 1
+material = SubResource("ShaderMaterial_d8blv")
+width = 1.0
+
+[node name="Jink15" type="Line2D" parent="." unique_id=1692350656]
+z_index = 1
+material = SubResource("ShaderMaterial_d8blv")
+width = 1.0
+default_color = Color(0.61960787, 0.84705883, 1, 1)
+
+[node name="JinkHead15" type="Line2D" parent="." unique_id=52150773]
+z_index = 1
+material = SubResource("ShaderMaterial_d8blv")
+width = 1.0
+
+[node name="Ozone" type="GPUParticles2D" parent="." unique_id=684149843]
+z_index = 1
+material = SubResource("ShaderMaterial_02ofi")
+emitting = false
+amount = 3
+texture = ExtResource("9_bmsaf")
+lifetime = 0.7
+one_shot = true
+explosiveness = 1.0
+use_fixed_seed = true
+seed = 424634
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+process_material = SubResource("ParticleProcessMaterial_eoy3v")

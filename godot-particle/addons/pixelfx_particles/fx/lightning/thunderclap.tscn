@@ -1,0 +1,2995 @@
+[gd_scene format=4]
+
+[ext_resource type="Script" path="res://addons/pixelfx_particles/core/pfx_effect.gd" id="1_rhuje"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/fx/lightning/_scorch.gdshader" id="2_v2342"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/fx/lightning/_band.gdshader" id="3_bu8xq"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/fx/lightning/_shock_actor.gdshader" id="4_itdmr"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/actor/stock/hero2.png" id="5_t8cfk"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/shaders/dither.gdshader" id="6_ek5a1"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/textures/streak4.png" id="7_qwlqp"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/shaders/ring_light.gdshader" id="8_6ogdg"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/fx/lightning/_flare.gdshader" id="9_vl224"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/shaders/ring.gdshader" id="10_lm5px"]
+[ext_resource type="Script" path="res://addons/pixelfx_particles/fx/lightning/_volt.gd" id="11_awwf5"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/shaders/light.gdshader" id="12_7o3ev"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/textures/streak3.png" id="13_mr13k"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/textures/spark7.png" id="14_ekmum"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/textures/disc9.png" id="15_uvyck"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/textures/dot1.png" id="16_46oam"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/textures/disc13.png" id="17_cv8bs"]
+
+[sub_resource type="Animation" id="Animation_nqskk"]
+length = 1.9
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Scorch0:material:shader_parameter/heat")
+tracks/0/interp = 0
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.115666665, 0.149, 0.18233334, 0.21566667, 0.249, 0.28233334, 0.31566668, 0.349, 0.38233334, 0.41566667, 0.449, 0.48233333, 0.51566666, 0.549, 0.5823333, 0.6156667, 0.649, 0.68233335, 0.71566665, 0.749, 0.7823333, 0.8156667, 0.849, 0.88233334, 0.91566664, 0.949, 0.98233336, 1.0156667, 1.049, 1.0823333, 1.1156666, 1.149, 1.1823334, 1.2156667, 1.8823333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0.0, 0.9803479554338574, 0.9413163412073625, 0.9026547446932838, 0.8643716194413418, 0.8264759039682524, 0.7889770674992282, 0.7518851618371876, 0.7152108804418916, 0.6789656260421503, 0.6431615884107721, 0.6078118343255331, 0.5729304122497392, 0.5385324749346296, 0.5046344240321445, 0.4712540819960439, 0.438410898167711, 0.40612619817811785, 0.37442348893608224, 0.34332883596207864, 0.3128713363808108, 0.2830837206776164, 0.25400313134073566, 0.2256721502401343, 0.1981401854035034, 0.17146539393700577, 0.14571743588102337, 0.12098157715020341, 0.09736511351131089, 0.0750080967881637, 0.0541028739909943, 0.03493444832857247, 0.01798251846546466, 0.004311147518834355, 0.0, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Scorch0:material:shader_parameter/fade")
+tracks/1/interp = 0
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.115666665, 1.4156667, 1.449, 1.4823333, 1.5156667, 1.549, 1.5823333, 1.6156666, 1.649, 1.6823334, 1.7156667, 1.749, 1.7823334, 1.8156667, 1.849, 1.8823333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0.0, 1.0, 0.9843519788650104, 0.9406594523192604, 0.8737997256515774, 0.7886501041507896, 0.6900878931057257, 0.5829903978052123, 0.4722349235380786, 0.36269877559315133, 0.2592592592592594, 0.16679367982522975, 0.09017934257989146, 0.03429355281207136, 0.0040136158105980035, 0.0, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Scorch2:material:shader_parameter/heat")
+tracks/2/interp = 0
+tracks/2/loop_wrap = false
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.149, 0.18233334, 0.21566667, 0.249, 0.28233334, 0.31566668, 0.349, 0.38233334, 0.41566667, 0.449, 0.48233333, 0.51566666, 0.549, 0.5823333, 0.6156667, 0.649, 0.68233335, 0.71566665, 0.749, 0.7823333, 0.8156667, 0.849, 0.88233334, 0.91566664, 0.949, 0.98233336, 1.0156667, 1.049, 1.0823333, 1.1156666, 1.149, 1.1823334, 1.2156667, 1.249, 1.8823333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0.0, 0.9803479554338574, 0.9413163412073625, 0.9026547446932838, 0.8643716194413418, 0.8264759039682524, 0.7889770674992282, 0.7518851618371876, 0.7152108804418916, 0.6789656260421503, 0.6431615884107721, 0.6078118343255331, 0.5729304122497392, 0.5385324749346296, 0.5046344240321445, 0.4712540819960439, 0.438410898167711, 0.40612619817811785, 0.37442348893608224, 0.3433288359620785, 0.3128713363808108, 0.2830837206776164, 0.25400313134073566, 0.2256721502401343, 0.1981401854035034, 0.17146539393700577, 0.14571743588102337, 0.12098157715020331, 0.09736511351131097, 0.07500809678816361, 0.05410287399099437, 0.034934448328572336, 0.01798251846546466, 0.0043111475188343145, 0.0, 0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Scorch2:material:shader_parameter/fade")
+tracks/3/interp = 0
+tracks/3/loop_wrap = false
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.149, 1.4156667, 1.449, 1.4823333, 1.5156667, 1.549, 1.5823333, 1.6156666, 1.649, 1.6823334, 1.7156667, 1.749, 1.7823334, 1.8156667, 1.849, 1.8823333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0.0, 1.0, 0.9843519788650104, 0.9406594523192604, 0.8737997256515774, 0.7886501041507896, 0.6900878931057257, 0.5829903978052123, 0.4722349235380786, 0.36269877559315133, 0.2592592592592594, 0.16679367982522975, 0.09017934257989146, 0.03429355281207136, 0.0040136158105980035, 0.0, 0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Scorch4:material:shader_parameter/heat")
+tracks/4/interp = 0
+tracks/4/loop_wrap = false
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.18233334, 0.21566667, 0.249, 0.28233334, 0.31566668, 0.349, 0.38233334, 0.41566667, 0.449, 0.48233333, 0.51566666, 0.549, 0.5823333, 0.6156667, 0.649, 0.68233335, 0.71566665, 0.749, 0.7823333, 0.8156667, 0.849, 0.88233334, 0.91566664, 0.949, 0.98233336, 1.0156667, 1.049, 1.0823333, 1.1156666, 1.149, 1.1823334, 1.2156667, 1.249, 1.2823334, 1.8823333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0.0, 0.9803479554338574, 0.9413163412073625, 0.9026547446932838, 0.8643716194413418, 0.8264759039682524, 0.7889770674992282, 0.7518851618371875, 0.7152108804418916, 0.6789656260421503, 0.6431615884107721, 0.6078118343255331, 0.5729304122497392, 0.5385324749346296, 0.5046344240321445, 0.4712540819960439, 0.438410898167711, 0.40612619817811785, 0.3744234889360821, 0.3433288359620785, 0.3128713363808108, 0.2830837206776164, 0.25400313134073566, 0.2256721502401343, 0.1981401854035034, 0.17146539393700577, 0.1457174358810233, 0.12098157715020341, 0.09736511351131089, 0.0750080967881637, 0.0541028739909943, 0.03493444832857247, 0.01798251846546466, 0.004311147518834355, 0.0, 0.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Scorch4:material:shader_parameter/fade")
+tracks/5/interp = 0
+tracks/5/loop_wrap = false
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.18233334, 1.4156667, 1.449, 1.4823333, 1.5156667, 1.549, 1.5823333, 1.6156666, 1.649, 1.6823334, 1.7156667, 1.749, 1.7823334, 1.8156667, 1.849, 1.8823333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0.0, 1.0, 0.9843519788650104, 0.9406594523192604, 0.8737997256515774, 0.7886501041507896, 0.6900878931057257, 0.5829903978052123, 0.4722349235380786, 0.36269877559315133, 0.2592592592592594, 0.16679367982522975, 0.09017934257989146, 0.03429355281207136, 0.0040136158105980035, 0.0, 0.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Scorch6:material:shader_parameter/heat")
+tracks/6/interp = 0
+tracks/6/loop_wrap = false
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.115666665, 0.149, 0.18233334, 0.21566667, 0.249, 0.28233334, 0.31566668, 0.349, 0.38233334, 0.41566667, 0.449, 0.48233333, 0.51566666, 0.549, 0.5823333, 0.6156667, 0.649, 0.68233335, 0.71566665, 0.749, 0.7823333, 0.8156667, 0.849, 0.88233334, 0.91566664, 0.949, 0.98233336, 1.0156667, 1.049, 1.0823333, 1.1156666, 1.149, 1.1823334, 1.2156667, 1.8823333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0.0, 0.9803479554338574, 0.9413163412073625, 0.9026547446932838, 0.8643716194413418, 0.8264759039682524, 0.7889770674992282, 0.7518851618371876, 0.7152108804418916, 0.6789656260421503, 0.6431615884107721, 0.6078118343255331, 0.5729304122497392, 0.5385324749346296, 0.5046344240321445, 0.4712540819960439, 0.438410898167711, 0.40612619817811785, 0.37442348893608224, 0.34332883596207864, 0.3128713363808108, 0.2830837206776164, 0.25400313134073566, 0.2256721502401343, 0.1981401854035034, 0.17146539393700577, 0.14571743588102337, 0.12098157715020341, 0.09736511351131089, 0.0750080967881637, 0.0541028739909943, 0.03493444832857247, 0.01798251846546466, 0.004311147518834355, 0.0, 0.0]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Scorch6:material:shader_parameter/fade")
+tracks/7/interp = 0
+tracks/7/loop_wrap = false
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.115666665, 1.4156667, 1.449, 1.4823333, 1.5156667, 1.549, 1.5823333, 1.6156666, 1.649, 1.6823334, 1.7156667, 1.749, 1.7823334, 1.8156667, 1.849, 1.8823333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0.0, 1.0, 0.9843519788650104, 0.9406594523192604, 0.8737997256515774, 0.7886501041507896, 0.6900878931057257, 0.5829903978052123, 0.4722349235380786, 0.36269877559315133, 0.2592592592592594, 0.16679367982522975, 0.09017934257989146, 0.03429355281207136, 0.0040136158105980035, 0.0, 0.0]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Actor:material:shader_parameter/flash")
+tracks/8/interp = 0
+tracks/8/loop_wrap = false
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 0.119, 0.189),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0.0, 1.0, 0.0]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Actor:material:shader_parameter/flash_color")
+tracks/9/interp = 0
+tracks/9/loop_wrap = false
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 0.154),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Color(1, 1, 1, 1), Color(0.89411765, 0.9647059, 1, 1)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Rush:emitting")
+tracks/10/interp = 0
+tracks/10/loop_wrap = false
+tracks/10/keys = {
+"times": PackedFloat32Array(0, 0.119),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("ClapLight:material:shader_parameter/radius")
+tracks/11/interp = 1
+tracks/11/loop_wrap = false
+tracks/11/keys = {
+"times": PackedFloat32Array(0, 0.12, 0.57),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [100.0, 100.0, 55.00000000000001]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("ClapLight:material:shader_parameter/alpha")
+tracks/12/interp = 1
+tracks/12/loop_wrap = false
+tracks/12/keys = {
+"times": PackedFloat32Array(0, 0.119, 0.12, 0.15333334, 0.18666667, 0.22, 0.25333333, 0.28666666, 0.32, 0.35333332, 0.38666666, 0.42, 0.45333335, 0.48666668, 0.52, 0.55333334, 0.57),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, 0.65, 0.5572702331961591, 0.47167352537722906, 0.3932098765432099, 0.32187928669410154, 0.257681755829904, 0.20061728395061731, 0.15068587105624145, 0.10788751714677643, 0.07222222222222224, 0.04368998628257889, 0.022290809327846377, 0.008024691358024683, 0.0008916323731138518, 0.0]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("ClapWhite:material:shader_parameter/radius")
+tracks/13/interp = 1
+tracks/13/loop_wrap = false
+tracks/13/keys = {
+"times": PackedFloat32Array(0, 0.12, 0.19),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [26.0, 26.0, 14.3]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("ClapWhite:material:shader_parameter/alpha")
+tracks/14/interp = 1
+tracks/14/loop_wrap = false
+tracks/14/keys = {
+"times": PackedFloat32Array(0, 0.119, 0.12, 0.15333334, 0.18666667, 0.19),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, 0.5, 0.13718820861678005, 0.0011337868480725648, 0.0]
+}
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("Flare:material:shader_parameter/reach")
+tracks/15/interp = 0
+tracks/15/loop_wrap = false
+tracks/15/keys = {
+"times": PackedFloat32Array(0, 0.115666665, 0.149, 0.18233334, 0.21566667, 0.249, 0.28233334, 0.31566668, 1.8823333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0.0, 39.94883913475512, 30.332058876087785, 21.521098093596354, 13.645944892707524, 6.9152661830168505, 1.7516715504353904, 0.0, 0.0]
+}
+tracks/16/type = "value"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("Flare:material:shader_parameter/k")
+tracks/16/interp = 0
+tracks/16/loop_wrap = false
+tracks/16/keys = {
+"times": PackedFloat32Array(0, 0.015666667, 0.049, 0.082333334, 0.115666665, 0.149, 0.18233334, 0.21566667, 0.249, 0.28233334, 0.31566668, 0.349, 0.38233334, 0.41566667, 0.449, 0.48233333, 0.51566666, 0.549, 0.5823333, 0.6156667, 0.649, 0.68233335, 0.71566665, 0.749, 0.7823333, 0.8156667, 0.849, 0.88233334, 0.91566664, 0.949, 0.98233336, 1.0156667, 1.049, 1.0823333, 1.1156666, 1.149, 1.1823334, 1.2156667, 1.249, 1.2823334, 1.3156667, 1.349, 1.3823333, 1.4156667, 1.449, 1.4823333, 1.5156667, 1.549, 1.5823333, 1.6156666, 1.649, 1.6823334, 1.7156667, 1.749, 1.7823334, 1.8156667, 1.849, 1.8823333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [1.6, 1.4333333333333333, 1.2666666666666666, 1.0999999999999999, 0.9333333333333333, 0.7666666666666667, 0.5999999999999999, 0.43333333333333335, 0.2666666666666667, 0.10000000000000009, -0.06666666666666643, -0.23333333333333317, -0.40000000000000013, -0.5666666666666667, -0.7333333333333334, -0.8999999999999999, -1.0666666666666664, -1.233333333333333, -1.4, -1.5666666666666664, -1.733333333333333, -1.8999999999999995, -2.0666666666666664, -2.2333333333333334, -2.4, -2.566666666666667, -2.7333333333333334, -2.9, -3.0666666666666664, -3.2333333333333334, -3.3999999999999995, -3.5666666666666673, -3.7333333333333334, -3.9000000000000004, -4.0666666666666655, -4.233333333333334, -4.4, -4.566666666666666, -4.7333333333333325, -4.9, -5.066666666666666, -5.2333333333333325, -5.399999999999999, -5.566666666666667, -5.733333333333333, -5.8999999999999995, -6.066666666666667, -6.233333333333333, -6.3999999999999995, -6.5666666666666655, -6.733333333333334, -6.9, -7.066666666666666, -7.2333333333333325, -7.4, -7.566666666666666, -7.7333333333333325, -7.899999999999999]
+}
+tracks/17/type = "value"
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/path = NodePath("Core:material:shader_parameter/radius")
+tracks/17/interp = 0
+tracks/17/loop_wrap = false
+tracks/17/keys = {
+"times": PackedFloat32Array(0, 0.115666665, 0.149, 0.18233334, 1.8823333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0.0, 10.666666666666668, 7.333333333333334, 0.0, 0.0]
+}
+tracks/18/type = "value"
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/path = NodePath("CoreLight:material:shader_parameter/alpha")
+tracks/18/interp = 0
+tracks/18/loop_wrap = false
+tracks/18/keys = {
+"times": PackedFloat32Array(0, 0.115666665, 0.149, 0.18233334, 0.21566667, 0.249, 0.28233334, 0.31566668, 1.8823333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0.0, 0.2986666666666667, 0.24533333333333335, 0.19199999999999995, 0.1386666666666667, 0.08533333333333336, 0.03200000000000003, 0.0, 0.0]
+}
+tracks/19/type = "value"
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/path = NodePath("Bolt0:visible")
+tracks/19/interp = 0
+tracks/19/loop_wrap = false
+tracks/19/keys = {
+"times": PackedFloat32Array(0, 0.115666665, 0.31566668),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/20/type = "value"
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/path = NodePath("Bolt0:k")
+tracks/20/interp = 0
+tracks/20/loop_wrap = false
+tracks/20/keys = {
+"times": PackedFloat32Array(0, 0.149, 0.18233334, 0.21566667, 0.249, 0.28233334),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [1.0, 0.7, 0.95, 0.5, 0.8, 0.3]
+}
+tracks/21/type = "value"
+tracks/21/imported = false
+tracks/21/enabled = true
+tracks/21/path = NodePath("Bolt0:hero")
+tracks/21/interp = 0
+tracks/21/loop_wrap = false
+tracks/21/keys = {
+"times": PackedFloat32Array(0, 0.149, 0.28233334),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, false]
+}
+tracks/22/type = "value"
+tracks/22/imported = false
+tracks/22/enabled = true
+tracks/22/path = NodePath("Bolt0:thick")
+tracks/22/interp = 0
+tracks/22/loop_wrap = false
+tracks/22/keys = {
+"times": PackedFloat32Array(0, 0.149, 0.28233334),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [1.0, 0.8, 0.8]
+}
+tracks/23/type = "value"
+tracks/23/imported = false
+tracks/23/enabled = true
+tracks/23/path = NodePath("Bolt0:step")
+tracks/23/interp = 0
+tracks/23/loop_wrap = false
+tracks/23/keys = {
+"times": PackedFloat32Array(0, 0.18233334, 0.249, 0.28233334),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 2]
+}
+tracks/24/type = "value"
+tracks/24/imported = false
+tracks/24/enabled = true
+tracks/24/path = NodePath("Spot0:material:shader_parameter/radius")
+tracks/24/interp = 0
+tracks/24/loop_wrap = false
+tracks/24/keys = {
+"times": PackedFloat32Array(0, 0.115666665, 0.149, 0.18233334, 0.21566667, 0.249, 0.28233334, 0.31566668),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0.0, 4.0, 3.0999999999999996, 3.8499999999999996, 2.5, 3.4000000000000004, 1.9, 0.0]
+}
+tracks/25/type = "value"
+tracks/25/imported = false
+tracks/25/enabled = true
+tracks/25/path = NodePath("SpotLight0:material:shader_parameter/alpha")
+tracks/25/interp = 0
+tracks/25/loop_wrap = false
+tracks/25/keys = {
+"times": PackedFloat32Array(0, 0.115666665, 0.149, 0.18233334, 0.21566667, 0.249, 0.28233334, 0.31566668),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0.0, 0.5, 0.35, 0.475, 0.25, 0.4, 0.15, 0.0]
+}
+tracks/26/type = "value"
+tracks/26/imported = false
+tracks/26/enabled = true
+tracks/26/path = NodePath("SpotPx0:visible")
+tracks/26/interp = 0
+tracks/26/loop_wrap = false
+tracks/26/keys = {
+"times": PackedFloat32Array(0, 0.115666665, 0.31566668),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/27/type = "value"
+tracks/27/imported = false
+tracks/27/enabled = true
+tracks/27/path = NodePath("Land0:material:shader_parameter/radius")
+tracks/27/interp = 1
+tracks/27/loop_wrap = false
+tracks/27/keys = {
+"times": PackedFloat32Array(0, 0.11666667, 0.36666667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [46.0, 46.0, 25.3]
+}
+tracks/28/type = "value"
+tracks/28/imported = false
+tracks/28/enabled = true
+tracks/28/path = NodePath("Land0:material:shader_parameter/alpha")
+tracks/28/interp = 1
+tracks/28/loop_wrap = false
+tracks/28/keys = {
+"times": PackedFloat32Array(0, 0.115666665, 0.11666667, 0.15, 0.18333334, 0.21666667, 0.25, 0.28333333, 0.31666666, 0.35, 0.36666667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, 0.7, 0.5257777777777778, 0.37644444444444447, 0.252, 0.15244444444444444, 0.07777777777777779, 0.027999999999999987, 0.0031111111111111096, 0.0]
+}
+tracks/29/type = "value"
+tracks/29/imported = false
+tracks/29/enabled = true
+tracks/29/path = NodePath("LandSparks0:emitting")
+tracks/29/interp = 0
+tracks/29/loop_wrap = false
+tracks/29/keys = {
+"times": PackedFloat32Array(0, 0.115666665),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/30/type = "value"
+tracks/30/imported = false
+tracks/30/enabled = true
+tracks/30/path = NodePath("HotSparks0:emitting")
+tracks/30/interp = 0
+tracks/30/loop_wrap = false
+tracks/30/keys = {
+"times": PackedFloat32Array(0, 0.115666665),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/31/type = "value"
+tracks/31/imported = false
+tracks/31/enabled = true
+tracks/31/path = NodePath("Bolt1:visible")
+tracks/31/interp = 0
+tracks/31/loop_wrap = false
+tracks/31/keys = {
+"times": PackedFloat32Array(0, 0.115666665, 0.31566668),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/32/type = "value"
+tracks/32/imported = false
+tracks/32/enabled = true
+tracks/32/path = NodePath("Bolt1:k")
+tracks/32/interp = 0
+tracks/32/loop_wrap = false
+tracks/32/keys = {
+"times": PackedFloat32Array(0, 0.149, 0.18233334, 0.21566667, 0.249, 0.28233334),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [1.0, 0.7, 0.95, 0.5, 0.8, 0.3]
+}
+tracks/33/type = "value"
+tracks/33/imported = false
+tracks/33/enabled = true
+tracks/33/path = NodePath("Bolt1:hero")
+tracks/33/interp = 0
+tracks/33/loop_wrap = false
+tracks/33/keys = {
+"times": PackedFloat32Array(0, 0.149, 0.28233334),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, false]
+}
+tracks/34/type = "value"
+tracks/34/imported = false
+tracks/34/enabled = true
+tracks/34/path = NodePath("Bolt1:thick")
+tracks/34/interp = 0
+tracks/34/loop_wrap = false
+tracks/34/keys = {
+"times": PackedFloat32Array(0, 0.149, 0.28233334),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [1.0, 0.8, 0.8]
+}
+tracks/35/type = "value"
+tracks/35/imported = false
+tracks/35/enabled = true
+tracks/35/path = NodePath("Bolt1:step")
+tracks/35/interp = 0
+tracks/35/loop_wrap = false
+tracks/35/keys = {
+"times": PackedFloat32Array(0, 0.18233334, 0.249, 0.28233334),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [10, 11, 12, 12]
+}
+tracks/36/type = "value"
+tracks/36/imported = false
+tracks/36/enabled = true
+tracks/36/path = NodePath("Glint1:visible")
+tracks/36/interp = 0
+tracks/36/loop_wrap = false
+tracks/36/keys = {
+"times": PackedFloat32Array(0, 0.115666665, 0.18233334),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/37/type = "value"
+tracks/37/imported = false
+tracks/37/enabled = true
+tracks/37/path = NodePath("Bolt2:visible")
+tracks/37/interp = 0
+tracks/37/loop_wrap = false
+tracks/37/keys = {
+"times": PackedFloat32Array(0, 0.149, 0.349),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/38/type = "value"
+tracks/38/imported = false
+tracks/38/enabled = true
+tracks/38/path = NodePath("Bolt2:k")
+tracks/38/interp = 0
+tracks/38/loop_wrap = false
+tracks/38/keys = {
+"times": PackedFloat32Array(0, 0.18233334, 0.21566667, 0.249, 0.28233334, 0.31566668),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [1.0, 0.7, 0.95, 0.5, 0.8, 0.3]
+}
+tracks/39/type = "value"
+tracks/39/imported = false
+tracks/39/enabled = true
+tracks/39/path = NodePath("Bolt2:hero")
+tracks/39/interp = 0
+tracks/39/loop_wrap = false
+tracks/39/keys = {
+"times": PackedFloat32Array(0, 0.18233334, 0.31566668),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, false]
+}
+tracks/40/type = "value"
+tracks/40/imported = false
+tracks/40/enabled = true
+tracks/40/path = NodePath("Bolt2:thick")
+tracks/40/interp = 0
+tracks/40/loop_wrap = false
+tracks/40/keys = {
+"times": PackedFloat32Array(0, 0.18233334, 0.31566668),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [1.0, 0.8, 0.8]
+}
+tracks/41/type = "value"
+tracks/41/imported = false
+tracks/41/enabled = true
+tracks/41/path = NodePath("Bolt2:step")
+tracks/41/interp = 0
+tracks/41/loop_wrap = false
+tracks/41/keys = {
+"times": PackedFloat32Array(0, 0.21566667, 0.28233334, 0.31566668),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [20, 21, 22, 22]
+}
+tracks/42/type = "value"
+tracks/42/imported = false
+tracks/42/enabled = true
+tracks/42/path = NodePath("Spot2:material:shader_parameter/radius")
+tracks/42/interp = 0
+tracks/42/loop_wrap = false
+tracks/42/keys = {
+"times": PackedFloat32Array(0, 0.149, 0.18233334, 0.21566667, 0.249, 0.28233334, 0.31566668, 0.349),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0.0, 4.0, 3.0999999999999996, 3.8499999999999996, 2.5, 3.4000000000000004, 1.9, 0.0]
+}
+tracks/43/type = "value"
+tracks/43/imported = false
+tracks/43/enabled = true
+tracks/43/path = NodePath("SpotLight2:material:shader_parameter/alpha")
+tracks/43/interp = 0
+tracks/43/loop_wrap = false
+tracks/43/keys = {
+"times": PackedFloat32Array(0, 0.149, 0.18233334, 0.21566667, 0.249, 0.28233334, 0.31566668, 0.349),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0.0, 0.5, 0.35, 0.475, 0.25, 0.4, 0.15, 0.0]
+}
+tracks/44/type = "value"
+tracks/44/imported = false
+tracks/44/enabled = true
+tracks/44/path = NodePath("SpotPx2:visible")
+tracks/44/interp = 0
+tracks/44/loop_wrap = false
+tracks/44/keys = {
+"times": PackedFloat32Array(0, 0.149, 0.349),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/45/type = "value"
+tracks/45/imported = false
+tracks/45/enabled = true
+tracks/45/path = NodePath("Land2:material:shader_parameter/radius")
+tracks/45/interp = 1
+tracks/45/loop_wrap = false
+tracks/45/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [46.0, 46.0, 25.3]
+}
+tracks/46/type = "value"
+tracks/46/imported = false
+tracks/46/enabled = true
+tracks/46/path = NodePath("Land2:material:shader_parameter/alpha")
+tracks/46/interp = 1
+tracks/46/loop_wrap = false
+tracks/46/keys = {
+"times": PackedFloat32Array(0, 0.149, 0.15, 0.18333334, 0.21666667, 0.25, 0.28333333, 0.31666666, 0.35, 0.38333333, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, 0.7, 0.5257777777777778, 0.37644444444444447, 0.252, 0.15244444444444444, 0.07777777777777779, 0.027999999999999987, 0.0031111111111111096, 0.0]
+}
+tracks/47/type = "value"
+tracks/47/imported = false
+tracks/47/enabled = true
+tracks/47/path = NodePath("LandSparks2:emitting")
+tracks/47/interp = 0
+tracks/47/loop_wrap = false
+tracks/47/keys = {
+"times": PackedFloat32Array(0, 0.149),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/48/type = "value"
+tracks/48/imported = false
+tracks/48/enabled = true
+tracks/48/path = NodePath("HotSparks2:emitting")
+tracks/48/interp = 0
+tracks/48/loop_wrap = false
+tracks/48/keys = {
+"times": PackedFloat32Array(0, 0.149),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/49/type = "value"
+tracks/49/imported = false
+tracks/49/enabled = true
+tracks/49/path = NodePath("Bolt3:visible")
+tracks/49/interp = 0
+tracks/49/loop_wrap = false
+tracks/49/keys = {
+"times": PackedFloat32Array(0, 0.115666665, 0.31566668),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/50/type = "value"
+tracks/50/imported = false
+tracks/50/enabled = true
+tracks/50/path = NodePath("Bolt3:k")
+tracks/50/interp = 0
+tracks/50/loop_wrap = false
+tracks/50/keys = {
+"times": PackedFloat32Array(0, 0.149, 0.18233334, 0.21566667, 0.249, 0.28233334),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [1.0, 0.7, 0.95, 0.5, 0.8, 0.3]
+}
+tracks/51/type = "value"
+tracks/51/imported = false
+tracks/51/enabled = true
+tracks/51/path = NodePath("Bolt3:hero")
+tracks/51/interp = 0
+tracks/51/loop_wrap = false
+tracks/51/keys = {
+"times": PackedFloat32Array(0, 0.149, 0.28233334),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, false]
+}
+tracks/52/type = "value"
+tracks/52/imported = false
+tracks/52/enabled = true
+tracks/52/path = NodePath("Bolt3:thick")
+tracks/52/interp = 0
+tracks/52/loop_wrap = false
+tracks/52/keys = {
+"times": PackedFloat32Array(0, 0.149, 0.28233334),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [1.0, 0.8, 0.8]
+}
+tracks/53/type = "value"
+tracks/53/imported = false
+tracks/53/enabled = true
+tracks/53/path = NodePath("Bolt3:step")
+tracks/53/interp = 0
+tracks/53/loop_wrap = false
+tracks/53/keys = {
+"times": PackedFloat32Array(0, 0.18233334, 0.249, 0.28233334),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [30, 31, 32, 32]
+}
+tracks/54/type = "value"
+tracks/54/imported = false
+tracks/54/enabled = true
+tracks/54/path = NodePath("Glint3:visible")
+tracks/54/interp = 0
+tracks/54/loop_wrap = false
+tracks/54/keys = {
+"times": PackedFloat32Array(0, 0.115666665, 0.18233334),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/55/type = "value"
+tracks/55/imported = false
+tracks/55/enabled = true
+tracks/55/path = NodePath("Bolt4:visible")
+tracks/55/interp = 0
+tracks/55/loop_wrap = false
+tracks/55/keys = {
+"times": PackedFloat32Array(0, 0.18233334, 0.38233334),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/56/type = "value"
+tracks/56/imported = false
+tracks/56/enabled = true
+tracks/56/path = NodePath("Bolt4:k")
+tracks/56/interp = 0
+tracks/56/loop_wrap = false
+tracks/56/keys = {
+"times": PackedFloat32Array(0, 0.21566667, 0.249, 0.28233334, 0.31566668, 0.349),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [1.0, 0.7, 0.95, 0.5, 0.8, 0.3]
+}
+tracks/57/type = "value"
+tracks/57/imported = false
+tracks/57/enabled = true
+tracks/57/path = NodePath("Bolt4:hero")
+tracks/57/interp = 0
+tracks/57/loop_wrap = false
+tracks/57/keys = {
+"times": PackedFloat32Array(0, 0.21566667, 0.349),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, false]
+}
+tracks/58/type = "value"
+tracks/58/imported = false
+tracks/58/enabled = true
+tracks/58/path = NodePath("Bolt4:thick")
+tracks/58/interp = 0
+tracks/58/loop_wrap = false
+tracks/58/keys = {
+"times": PackedFloat32Array(0, 0.21566667, 0.349),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [1.0, 0.8, 0.8]
+}
+tracks/59/type = "value"
+tracks/59/imported = false
+tracks/59/enabled = true
+tracks/59/path = NodePath("Bolt4:step")
+tracks/59/interp = 0
+tracks/59/loop_wrap = false
+tracks/59/keys = {
+"times": PackedFloat32Array(0, 0.249, 0.31566668, 0.349),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [40, 41, 42, 42]
+}
+tracks/60/type = "value"
+tracks/60/imported = false
+tracks/60/enabled = true
+tracks/60/path = NodePath("Spot4:material:shader_parameter/radius")
+tracks/60/interp = 0
+tracks/60/loop_wrap = false
+tracks/60/keys = {
+"times": PackedFloat32Array(0, 0.18233334, 0.21566667, 0.249, 0.28233334, 0.31566668, 0.349, 0.38233334),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0.0, 4.0, 3.0999999999999996, 3.8499999999999996, 2.5, 3.4000000000000004, 1.9, 0.0]
+}
+tracks/61/type = "value"
+tracks/61/imported = false
+tracks/61/enabled = true
+tracks/61/path = NodePath("SpotLight4:material:shader_parameter/alpha")
+tracks/61/interp = 0
+tracks/61/loop_wrap = false
+tracks/61/keys = {
+"times": PackedFloat32Array(0, 0.18233334, 0.21566667, 0.249, 0.28233334, 0.31566668, 0.349, 0.38233334),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0.0, 0.5, 0.35, 0.475, 0.25, 0.4, 0.15, 0.0]
+}
+tracks/62/type = "value"
+tracks/62/imported = false
+tracks/62/enabled = true
+tracks/62/path = NodePath("SpotPx4:visible")
+tracks/62/interp = 0
+tracks/62/loop_wrap = false
+tracks/62/keys = {
+"times": PackedFloat32Array(0, 0.18233334, 0.38233334),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/63/type = "value"
+tracks/63/imported = false
+tracks/63/enabled = true
+tracks/63/path = NodePath("Land4:material:shader_parameter/radius")
+tracks/63/interp = 1
+tracks/63/loop_wrap = false
+tracks/63/keys = {
+"times": PackedFloat32Array(0, 0.18333334, 0.43333334),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [46.0, 46.0, 25.3]
+}
+tracks/64/type = "value"
+tracks/64/imported = false
+tracks/64/enabled = true
+tracks/64/path = NodePath("Land4:material:shader_parameter/alpha")
+tracks/64/interp = 1
+tracks/64/loop_wrap = false
+tracks/64/keys = {
+"times": PackedFloat32Array(0, 0.18233334, 0.18333334, 0.21666667, 0.25, 0.28333333, 0.31666666, 0.35, 0.38333333, 0.41666666, 0.43333334),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, 0.7, 0.5257777777777778, 0.37644444444444447, 0.252, 0.15244444444444444, 0.07777777777777779, 0.027999999999999987, 0.0031111111111111096, 0.0]
+}
+tracks/65/type = "value"
+tracks/65/imported = false
+tracks/65/enabled = true
+tracks/65/path = NodePath("LandSparks4:emitting")
+tracks/65/interp = 0
+tracks/65/loop_wrap = false
+tracks/65/keys = {
+"times": PackedFloat32Array(0, 0.18233334),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/66/type = "value"
+tracks/66/imported = false
+tracks/66/enabled = true
+tracks/66/path = NodePath("HotSparks4:emitting")
+tracks/66/interp = 0
+tracks/66/loop_wrap = false
+tracks/66/keys = {
+"times": PackedFloat32Array(0, 0.18233334),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/67/type = "value"
+tracks/67/imported = false
+tracks/67/enabled = true
+tracks/67/path = NodePath("Bolt5:visible")
+tracks/67/interp = 0
+tracks/67/loop_wrap = false
+tracks/67/keys = {
+"times": PackedFloat32Array(0, 0.149, 0.349),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/68/type = "value"
+tracks/68/imported = false
+tracks/68/enabled = true
+tracks/68/path = NodePath("Bolt5:k")
+tracks/68/interp = 0
+tracks/68/loop_wrap = false
+tracks/68/keys = {
+"times": PackedFloat32Array(0, 0.18233334, 0.21566667, 0.249, 0.28233334, 0.31566668),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [1.0, 0.7, 0.95, 0.5, 0.8, 0.3]
+}
+tracks/69/type = "value"
+tracks/69/imported = false
+tracks/69/enabled = true
+tracks/69/path = NodePath("Bolt5:hero")
+tracks/69/interp = 0
+tracks/69/loop_wrap = false
+tracks/69/keys = {
+"times": PackedFloat32Array(0, 0.18233334, 0.31566668),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, false]
+}
+tracks/70/type = "value"
+tracks/70/imported = false
+tracks/70/enabled = true
+tracks/70/path = NodePath("Bolt5:thick")
+tracks/70/interp = 0
+tracks/70/loop_wrap = false
+tracks/70/keys = {
+"times": PackedFloat32Array(0, 0.18233334, 0.31566668),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [1.0, 0.8, 0.8]
+}
+tracks/71/type = "value"
+tracks/71/imported = false
+tracks/71/enabled = true
+tracks/71/path = NodePath("Bolt5:step")
+tracks/71/interp = 0
+tracks/71/loop_wrap = false
+tracks/71/keys = {
+"times": PackedFloat32Array(0, 0.21566667, 0.28233334, 0.31566668),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [50, 51, 52, 52]
+}
+tracks/72/type = "value"
+tracks/72/imported = false
+tracks/72/enabled = true
+tracks/72/path = NodePath("Glint5:visible")
+tracks/72/interp = 0
+tracks/72/loop_wrap = false
+tracks/72/keys = {
+"times": PackedFloat32Array(0, 0.149, 0.21566667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/73/type = "value"
+tracks/73/imported = false
+tracks/73/enabled = true
+tracks/73/path = NodePath("Bolt6:visible")
+tracks/73/interp = 0
+tracks/73/loop_wrap = false
+tracks/73/keys = {
+"times": PackedFloat32Array(0, 0.115666665, 0.31566668),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/74/type = "value"
+tracks/74/imported = false
+tracks/74/enabled = true
+tracks/74/path = NodePath("Bolt6:k")
+tracks/74/interp = 0
+tracks/74/loop_wrap = false
+tracks/74/keys = {
+"times": PackedFloat32Array(0, 0.149, 0.18233334, 0.21566667, 0.249, 0.28233334),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [1.0, 0.7, 0.95, 0.5, 0.8, 0.3]
+}
+tracks/75/type = "value"
+tracks/75/imported = false
+tracks/75/enabled = true
+tracks/75/path = NodePath("Bolt6:hero")
+tracks/75/interp = 0
+tracks/75/loop_wrap = false
+tracks/75/keys = {
+"times": PackedFloat32Array(0, 0.149, 0.28233334),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, false]
+}
+tracks/76/type = "value"
+tracks/76/imported = false
+tracks/76/enabled = true
+tracks/76/path = NodePath("Bolt6:thick")
+tracks/76/interp = 0
+tracks/76/loop_wrap = false
+tracks/76/keys = {
+"times": PackedFloat32Array(0, 0.149, 0.28233334),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [1.0, 0.8, 0.8]
+}
+tracks/77/type = "value"
+tracks/77/imported = false
+tracks/77/enabled = true
+tracks/77/path = NodePath("Bolt6:step")
+tracks/77/interp = 0
+tracks/77/loop_wrap = false
+tracks/77/keys = {
+"times": PackedFloat32Array(0, 0.18233334, 0.249, 0.28233334),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [60, 61, 62, 62]
+}
+tracks/78/type = "value"
+tracks/78/imported = false
+tracks/78/enabled = true
+tracks/78/path = NodePath("Spot6:material:shader_parameter/radius")
+tracks/78/interp = 0
+tracks/78/loop_wrap = false
+tracks/78/keys = {
+"times": PackedFloat32Array(0, 0.115666665, 0.149, 0.18233334, 0.21566667, 0.249, 0.28233334, 0.31566668),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0.0, 4.0, 3.0999999999999996, 3.8499999999999996, 2.5, 3.4000000000000004, 1.9, 0.0]
+}
+tracks/79/type = "value"
+tracks/79/imported = false
+tracks/79/enabled = true
+tracks/79/path = NodePath("SpotLight6:material:shader_parameter/alpha")
+tracks/79/interp = 0
+tracks/79/loop_wrap = false
+tracks/79/keys = {
+"times": PackedFloat32Array(0, 0.115666665, 0.149, 0.18233334, 0.21566667, 0.249, 0.28233334, 0.31566668),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0.0, 0.5, 0.35, 0.475, 0.25, 0.4, 0.15, 0.0]
+}
+tracks/80/type = "value"
+tracks/80/imported = false
+tracks/80/enabled = true
+tracks/80/path = NodePath("SpotPx6:visible")
+tracks/80/interp = 0
+tracks/80/loop_wrap = false
+tracks/80/keys = {
+"times": PackedFloat32Array(0, 0.115666665, 0.31566668),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/81/type = "value"
+tracks/81/imported = false
+tracks/81/enabled = true
+tracks/81/path = NodePath("Land6:material:shader_parameter/radius")
+tracks/81/interp = 1
+tracks/81/loop_wrap = false
+tracks/81/keys = {
+"times": PackedFloat32Array(0, 0.11666667, 0.36666667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [46.0, 46.0, 25.3]
+}
+tracks/82/type = "value"
+tracks/82/imported = false
+tracks/82/enabled = true
+tracks/82/path = NodePath("Land6:material:shader_parameter/alpha")
+tracks/82/interp = 1
+tracks/82/loop_wrap = false
+tracks/82/keys = {
+"times": PackedFloat32Array(0, 0.115666665, 0.11666667, 0.15, 0.18333334, 0.21666667, 0.25, 0.28333333, 0.31666666, 0.35, 0.36666667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, 0.7, 0.5257777777777778, 0.37644444444444447, 0.252, 0.15244444444444444, 0.07777777777777779, 0.027999999999999987, 0.0031111111111111096, 0.0]
+}
+tracks/83/type = "value"
+tracks/83/imported = false
+tracks/83/enabled = true
+tracks/83/path = NodePath("LandSparks6:emitting")
+tracks/83/interp = 0
+tracks/83/loop_wrap = false
+tracks/83/keys = {
+"times": PackedFloat32Array(0, 0.115666665),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/84/type = "value"
+tracks/84/imported = false
+tracks/84/enabled = true
+tracks/84/path = NodePath("HotSparks6:emitting")
+tracks/84/interp = 0
+tracks/84/loop_wrap = false
+tracks/84/keys = {
+"times": PackedFloat32Array(0, 0.115666665),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/85/type = "value"
+tracks/85/imported = false
+tracks/85/enabled = true
+tracks/85/path = NodePath("Bolt7:visible")
+tracks/85/interp = 0
+tracks/85/loop_wrap = false
+tracks/85/keys = {
+"times": PackedFloat32Array(0, 0.149, 0.349),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/86/type = "value"
+tracks/86/imported = false
+tracks/86/enabled = true
+tracks/86/path = NodePath("Bolt7:k")
+tracks/86/interp = 0
+tracks/86/loop_wrap = false
+tracks/86/keys = {
+"times": PackedFloat32Array(0, 0.18233334, 0.21566667, 0.249, 0.28233334, 0.31566668),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [1.0, 0.7, 0.95, 0.5, 0.8, 0.3]
+}
+tracks/87/type = "value"
+tracks/87/imported = false
+tracks/87/enabled = true
+tracks/87/path = NodePath("Bolt7:hero")
+tracks/87/interp = 0
+tracks/87/loop_wrap = false
+tracks/87/keys = {
+"times": PackedFloat32Array(0, 0.18233334, 0.31566668),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, false]
+}
+tracks/88/type = "value"
+tracks/88/imported = false
+tracks/88/enabled = true
+tracks/88/path = NodePath("Bolt7:thick")
+tracks/88/interp = 0
+tracks/88/loop_wrap = false
+tracks/88/keys = {
+"times": PackedFloat32Array(0, 0.18233334, 0.31566668),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [1.0, 0.8, 0.8]
+}
+tracks/89/type = "value"
+tracks/89/imported = false
+tracks/89/enabled = true
+tracks/89/path = NodePath("Bolt7:step")
+tracks/89/interp = 0
+tracks/89/loop_wrap = false
+tracks/89/keys = {
+"times": PackedFloat32Array(0, 0.21566667, 0.28233334, 0.31566668),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [70, 71, 72, 72]
+}
+tracks/90/type = "value"
+tracks/90/imported = false
+tracks/90/enabled = true
+tracks/90/path = NodePath("Glint7:visible")
+tracks/90/interp = 0
+tracks/90/loop_wrap = false
+tracks/90/keys = {
+"times": PackedFloat32Array(0, 0.149, 0.21566667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/91/type = "value"
+tracks/91/imported = false
+tracks/91/enabled = true
+tracks/91/path = NodePath("BandFar:material:shader_parameter/radius")
+tracks/91/interp = 0
+tracks/91/loop_wrap = false
+tracks/91/keys = {
+"times": PackedFloat32Array(0, 0.115666665, 0.149, 0.18233334, 0.21566667, 0.249, 0.28233334, 0.31566668, 0.349, 0.38233334, 0.41566667, 0.449, 0.48233333, 0.51566666, 0.549, 0.5823333, 0.6156667, 1.8823333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0.0, 15.477020444444435, 32.449251555555534, 47.10041600000001, 59.60118044444445, 70.12221155555555, 78.834176, 85.90774044444444, 91.51357155555556, 95.822336, 99.00470044444444, 101.23133155555556, 102.67289600000001, 103.50006044444444, 103.88349155555555, 103.99385600000001, 0.0, 0.0]
+}
+tracks/92/type = "value"
+tracks/92/imported = false
+tracks/92/enabled = true
+tracks/92/path = NodePath("BandFar:material:shader_parameter/thickness")
+tracks/92/interp = 0
+tracks/92/loop_wrap = false
+tracks/92/keys = {
+"times": PackedFloat32Array(0, 0.015666667, 0.049, 0.082333334, 0.115666665, 0.149, 0.18233334, 0.21566667, 0.249, 0.28233334, 0.31566668, 0.349, 0.38233334, 0.41566667, 0.449, 0.48233333, 0.51566666, 0.549, 1.8823333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [19.84, 18.773333333333333, 17.706666666666667, 16.64, 15.573333333333334, 14.506666666666668, 13.44, 12.373333333333333, 11.306666666666667, 10.24, 9.173333333333334, 8.106666666666667, 7.039999999999999, 5.973333333333333, 4.906666666666666, 3.84, 2.7733333333333334, 2.0, 2.0]
+}
+tracks/93/type = "value"
+tracks/93/imported = false
+tracks/93/enabled = true
+tracks/93/path = NodePath("BandFar:material:shader_parameter/k")
+tracks/93/interp = 0
+tracks/93/loop_wrap = false
+tracks/93/keys = {
+"times": PackedFloat32Array(0, 0.015666667, 0.049, 0.082333334, 0.115666665, 0.149, 0.18233334, 0.21566667, 0.249, 0.28233334, 0.31566668, 0.349, 0.38233334, 0.41566667, 0.449, 0.48233333, 0.51566666, 0.549, 0.5823333, 0.6156667, 0.649, 0.68233335, 0.71566665, 0.749, 0.7823333, 0.8156667, 0.849, 0.88233334, 0.91566664, 0.949, 0.98233336, 1.0156667, 1.049, 1.0823333, 1.1156666, 1.149, 1.1823334, 1.2156667, 1.249, 1.2823334, 1.3156667, 1.349, 1.3823333, 1.4156667, 1.449, 1.4823333, 1.5156667, 1.549, 1.5823333, 1.6156666, 1.649, 1.6823334, 1.7156667, 1.749, 1.7823334, 1.8156667, 1.849, 1.8823333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [1.49, 1.4233333333333333, 1.3566666666666667, 1.29, 1.2233333333333334, 1.1566666666666667, 1.0899999999999999, 1.0233333333333334, 0.9566666666666667, 0.89, 0.8233333333333334, 0.7566666666666667, 0.69, 0.6233333333333333, 0.5566666666666666, 0.49, 0.42333333333333334, 0.3566666666666667, 0.29000000000000004, 0.22333333333333338, 0.15666666666666673, 0.09000000000000008, 0.023333333333333428, -0.043333333333333446, -0.1100000000000001, -0.17666666666666675, -0.2433333333333334, -0.31000000000000005, -0.3766666666666667, -0.44333333333333336, -0.51, -0.5766666666666669, -0.6433333333333333, -0.7100000000000002, -0.7766666666666664, -0.8433333333333337, -0.9100000000000001, -0.9766666666666666, -1.043333333333333, -1.1100000000000003, -1.1766666666666667, -1.2433333333333332, -1.3099999999999996, -1.376666666666667, -1.4433333333333334, -1.5099999999999998, -1.576666666666667, -1.6433333333333335, -1.71, -1.7766666666666664, -1.8433333333333337, -1.9100000000000001, -1.9766666666666666, -2.043333333333333, -2.1100000000000003, -2.1766666666666667, -2.243333333333333, -2.3099999999999996]
+}
+tracks/94/type = "value"
+tracks/94/imported = false
+tracks/94/enabled = true
+tracks/94/path = NodePath("BandFar:material:shader_parameter/c0")
+tracks/94/interp = 0
+tracks/94/loop_wrap = false
+tracks/94/keys = {
+"times": PackedFloat32Array(0, 0.18233334, 1.8823333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Color(1, 1, 1, 1), Color(0.89411765, 0.9647059, 1, 1), Color(0.89411765, 0.9647059, 1, 1)]
+}
+tracks/95/type = "value"
+tracks/95/imported = false
+tracks/95/enabled = true
+tracks/95/path = NodePath("BandNear:material:shader_parameter/radius")
+tracks/95/interp = 0
+tracks/95/loop_wrap = false
+tracks/95/keys = {
+"times": PackedFloat32Array(0, 0.115666665, 0.149, 0.18233334, 0.21566667, 0.249, 0.28233334, 0.31566668, 0.349, 0.38233334, 0.41566667, 0.449, 0.48233333, 0.51566666, 0.549, 0.5823333, 0.6156667, 1.8823333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0.0, 15.477020444444435, 32.449251555555534, 47.10041600000001, 59.60118044444445, 70.12221155555555, 78.834176, 85.90774044444444, 91.51357155555556, 95.822336, 99.00470044444444, 101.23133155555556, 102.67289600000001, 103.50006044444444, 103.88349155555555, 103.99385600000001, 0.0, 0.0]
+}
+tracks/96/type = "value"
+tracks/96/imported = false
+tracks/96/enabled = true
+tracks/96/path = NodePath("BandNear:material:shader_parameter/thickness")
+tracks/96/interp = 0
+tracks/96/loop_wrap = false
+tracks/96/keys = {
+"times": PackedFloat32Array(0, 0.015666667, 0.049, 0.082333334, 0.115666665, 0.149, 0.18233334, 0.21566667, 0.249, 0.28233334, 0.31566668, 0.349, 0.38233334, 0.41566667, 0.449, 0.48233333, 0.51566666, 0.549, 1.8823333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [19.84, 18.773333333333333, 17.706666666666667, 16.64, 15.573333333333334, 14.506666666666668, 13.44, 12.373333333333333, 11.306666666666667, 10.24, 9.173333333333334, 8.106666666666667, 7.039999999999999, 5.973333333333333, 4.906666666666666, 3.84, 2.7733333333333334, 2.0, 2.0]
+}
+tracks/97/type = "value"
+tracks/97/imported = false
+tracks/97/enabled = true
+tracks/97/path = NodePath("BandNear:material:shader_parameter/k")
+tracks/97/interp = 0
+tracks/97/loop_wrap = false
+tracks/97/keys = {
+"times": PackedFloat32Array(0, 0.015666667, 0.049, 0.082333334, 0.115666665, 0.149, 0.18233334, 0.21566667, 0.249, 0.28233334, 0.31566668, 0.349, 0.38233334, 0.41566667, 0.449, 0.48233333, 0.51566666, 0.549, 0.5823333, 0.6156667, 0.649, 0.68233335, 0.71566665, 0.749, 0.7823333, 0.8156667, 0.849, 0.88233334, 0.91566664, 0.949, 0.98233336, 1.0156667, 1.049, 1.0823333, 1.1156666, 1.149, 1.1823334, 1.2156667, 1.249, 1.2823334, 1.3156667, 1.349, 1.3823333, 1.4156667, 1.449, 1.4823333, 1.5156667, 1.549, 1.5823333, 1.6156666, 1.649, 1.6823334, 1.7156667, 1.749, 1.7823334, 1.8156667, 1.849, 1.8823333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [1.49, 1.4233333333333333, 1.3566666666666667, 1.29, 1.2233333333333334, 1.1566666666666667, 1.0899999999999999, 1.0233333333333334, 0.9566666666666667, 0.89, 0.8233333333333334, 0.7566666666666667, 0.69, 0.6233333333333333, 0.5566666666666666, 0.49, 0.42333333333333334, 0.3566666666666667, 0.29000000000000004, 0.22333333333333338, 0.15666666666666673, 0.09000000000000008, 0.023333333333333428, -0.043333333333333446, -0.1100000000000001, -0.17666666666666675, -0.2433333333333334, -0.31000000000000005, -0.3766666666666667, -0.44333333333333336, -0.51, -0.5766666666666669, -0.6433333333333333, -0.7100000000000002, -0.7766666666666664, -0.8433333333333337, -0.9100000000000001, -0.9766666666666666, -1.043333333333333, -1.1100000000000003, -1.1766666666666667, -1.2433333333333332, -1.3099999999999996, -1.376666666666667, -1.4433333333333334, -1.5099999999999998, -1.576666666666667, -1.6433333333333335, -1.71, -1.7766666666666664, -1.8433333333333337, -1.9100000000000001, -1.9766666666666666, -2.043333333333333, -2.1100000000000003, -2.1766666666666667, -2.243333333333333, -2.3099999999999996]
+}
+tracks/98/type = "value"
+tracks/98/imported = false
+tracks/98/enabled = true
+tracks/98/path = NodePath("BandNear:material:shader_parameter/c0")
+tracks/98/interp = 0
+tracks/98/loop_wrap = false
+tracks/98/keys = {
+"times": PackedFloat32Array(0, 0.18233334, 1.8823333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Color(1, 1, 1, 1), Color(0.89411765, 0.9647059, 1, 1), Color(0.89411765, 0.9647059, 1, 1)]
+}
+tracks/99/type = "value"
+tracks/99/imported = false
+tracks/99/enabled = true
+tracks/99/path = NodePath("FrontLightL:position")
+tracks/99/interp = 0
+tracks/99/loop_wrap = false
+tracks/99/keys = {
+"times": PackedFloat32Array(0, 0.115666665, 0.149, 0.18233334, 0.21566667, 0.249, 0.28233334, 0.31566668, 0.349, 0.38233334, 0.41566667, 0.449, 0.48233333, 0.51566666, 0.549, 0.5823333, 0.6156667, 1.8823333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(-32, -35), Vector2(-47.47702, -35), Vector2(-64.44925, -35), Vector2(-79.10042, -35), Vector2(-91.60118, -35), Vector2(-102.122215, -35), Vector2(-110.834175, -35), Vector2(-117.90774, -35), Vector2(-123.51357, -35), Vector2(-127.822334, -35), Vector2(-131.0047, -35), Vector2(-133.23132, -35), Vector2(-134.6729, -35), Vector2(-135.50006, -35), Vector2(-135.88348, -35), Vector2(-135.99387, -35), Vector2(-136, -35), Vector2(-136, -35)]
+}
+tracks/100/type = "value"
+tracks/100/imported = false
+tracks/100/enabled = true
+tracks/100/path = NodePath("FrontLightR:position")
+tracks/100/interp = 0
+tracks/100/loop_wrap = false
+tracks/100/keys = {
+"times": PackedFloat32Array(0, 0.115666665, 0.149, 0.18233334, 0.21566667, 0.249, 0.28233334, 0.31566668, 0.349, 0.38233334, 0.41566667, 0.449, 0.48233333, 0.51566666, 0.549, 0.5823333, 0.6156667, 1.8823333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(-32, -35), Vector2(-16.52298, -35), Vector2(0.44925308, -35), Vector2(15.100414, -35), Vector2(27.601181, -35), Vector2(38.122215, -35), Vector2(46.834175, -35), Vector2(53.907738, -35), Vector2(59.513573, -35), Vector2(63.822334, -35), Vector2(67.0047, -35), Vector2(69.23133, -35), Vector2(70.6729, -35), Vector2(71.50006, -35), Vector2(71.88349, -35), Vector2(71.99386, -35), Vector2(72, -35), Vector2(72, -35)]
+}
+tracks/101/type = "value"
+tracks/101/imported = false
+tracks/101/enabled = true
+tracks/101/path = NodePath("FrontLightL:material:shader_parameter/alpha")
+tracks/101/interp = 0
+tracks/101/loop_wrap = false
+tracks/101/keys = {
+"times": PackedFloat32Array(0, 0.115666665, 0.149, 0.18233334, 0.21566667, 0.249, 0.28233334, 0.31566668, 0.349, 0.38233334, 0.41566667, 0.449, 0.48233333, 0.51566666, 0.549, 0.5823333, 0.6156667, 1.8823333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0.0, 0.43800000000000006, 0.40800000000000003, 0.378, 0.348, 0.318, 0.28800000000000003, 0.258, 0.22800000000000004, 0.19799999999999998, 0.16799999999999998, 0.13799999999999998, 0.108, 0.078, 0.04800000000000001, 0.018000000000000016, 0.0, 0.0]
+}
+tracks/102/type = "value"
+tracks/102/imported = false
+tracks/102/enabled = true
+tracks/102/path = NodePath("FrontLightR:material:shader_parameter/alpha")
+tracks/102/interp = 0
+tracks/102/loop_wrap = false
+tracks/102/keys = {
+"times": PackedFloat32Array(0, 0.115666665, 0.149, 0.18233334, 0.21566667, 0.249, 0.28233334, 0.31566668, 0.349, 0.38233334, 0.41566667, 0.449, 0.48233333, 0.51566666, 0.549, 0.5823333, 0.6156667, 1.8823333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0.0, 0.43800000000000006, 0.40800000000000003, 0.378, 0.348, 0.318, 0.28800000000000003, 0.258, 0.22800000000000004, 0.19799999999999998, 0.16799999999999998, 0.13799999999999998, 0.108, 0.078, 0.04800000000000001, 0.018000000000000016, 0.0, 0.0]
+}
+tracks/103/type = "value"
+tracks/103/imported = false
+tracks/103/enabled = true
+tracks/103/path = NodePath("AirRing:material:shader_parameter/radius")
+tracks/103/interp = 0
+tracks/103/loop_wrap = false
+tracks/103/keys = {
+"times": PackedFloat32Array(0, 0.115666665, 0.149, 0.18233334, 0.21566667, 0.249, 0.28233334, 0.31566668, 0.349, 0.38233334, 1.8823333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0.0, 16.765488292115514, 34.85581348303242, 48.0910332271279, 57.229757750467805, 63.03059727911799, 66.25216203914428, 67.65306225661254, 67.99190815758863, 0.0, 0.0]
+}
+tracks/104/type = "value"
+tracks/104/imported = false
+tracks/104/enabled = true
+tracks/104/path = NodePath("AirRing:material:shader_parameter/thickness")
+tracks/104/interp = 0
+tracks/104/loop_wrap = false
+tracks/104/keys = {
+"times": PackedFloat32Array(0, 0.015666667, 0.049, 0.082333334, 0.115666665, 0.149, 0.18233334, 0.21566667, 0.249, 1.8823333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [2.923076923076923, 2.6666666666666665, 2.41025641025641, 2.1538461538461537, 1.8974358974358974, 1.641025641025641, 1.3846153846153846, 1.1282051282051282, 1.0, 1.0]
+}
+tracks/105/type = "value"
+tracks/105/imported = false
+tracks/105/enabled = true
+tracks/105/path = NodePath("AirRing:material:shader_parameter/k")
+tracks/105/interp = 0
+tracks/105/loop_wrap = false
+tracks/105/keys = {
+"times": PackedFloat32Array(0, 0.015666667, 0.049, 0.082333334, 0.115666665, 0.149, 0.18233334, 0.21566667, 0.249, 0.28233334, 0.31566668, 0.349, 0.38233334, 0.41566667, 0.449, 0.48233333, 0.51566666, 0.549, 0.5823333, 0.6156667, 0.649, 0.68233335, 0.71566665, 0.749, 0.7823333, 0.8156667, 0.849, 0.88233334, 0.91566664, 0.949, 0.98233336, 1.0156667, 1.049, 1.0823333, 1.1156666, 1.149, 1.1823334, 1.2156667, 1.249, 1.2823334, 1.3156667, 1.349, 1.3823333, 1.4156667, 1.449, 1.4823333, 1.5156667, 1.549, 1.5823333, 1.6156666, 1.649, 1.6823334, 1.7156667, 1.749, 1.7823334, 1.8156667, 1.849, 1.8823333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [1.2423076923076923, 1.1333333333333333, 1.0243589743589743, 0.9153846153846154, 0.8064102564102564, 0.6974358974358974, 0.5884615384615384, 0.47948717948717945, 0.37051282051282053, 0.2615384615384615, 0.15256410256410258, 0.04358974358974377, -0.06538461538461549, -0.1743589743589743, -0.2833333333333333, -0.39230769230769214, -0.5012820512820512, -0.6102564102564102, -0.719230769230769, -0.828205128205128, -0.9371794871794868, -1.046153846153846, -1.1551282051282046, -1.264102564102564, -1.373076923076923, -1.4820512820512821, -1.5910256410256407, -1.6999999999999997, -1.8089743589743588, -1.9179487179487178, -2.026923076923077, -2.135897435897436, -2.2448717948717944, -2.353846153846154, -2.462820512820512, -2.5717948717948724, -2.680769230769231, -2.7897435897435896, -2.898717948717948, -3.007692307692308, -3.1166666666666667, -3.2256410256410253, -3.334615384615384, -3.4435897435897442, -3.552564102564103, -3.6615384615384614, -3.770512820512821, -3.8794871794871795, -3.988461538461538, -4.097435897435897, -4.206410256410257, -4.315384615384615, -4.424358974358974, -4.533333333333332, -4.642307692307693, -4.751282051282051, -4.86025641025641, -4.9692307692307685]
+}
+tracks/106/type = "value"
+tracks/106/imported = false
+tracks/106/enabled = true
+tracks/106/path = NodePath("AirRing:material:shader_parameter/c0")
+tracks/106/interp = 0
+tracks/106/loop_wrap = false
+tracks/106/keys = {
+"times": PackedFloat32Array(0, 0.18233334, 0.28233334, 1.8823333),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Color(0.61960787, 0.84705883, 1, 1), Color(0.34509805, 0.6509804, 1, 1), Color(0.3529412, 0.38431373, 0.9411765, 1), Color(0.3529412, 0.38431373, 0.9411765, 1)]
+}
+tracks/107/type = "value"
+tracks/107/imported = false
+tracks/107/enabled = true
+tracks/107/path = NodePath("AirRing:material:shader_parameter/c1")
+tracks/107/interp = 0
+tracks/107/loop_wrap = false
+tracks/107/keys = {
+"times": PackedFloat32Array(0, 0.18233334, 0.28233334, 1.8823333),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Color(0.61960787, 0.84705883, 1, 1), Color(0.34509805, 0.6509804, 1, 1), Color(0.3529412, 0.38431373, 0.9411765, 1), Color(0.3529412, 0.38431373, 0.9411765, 1)]
+}
+tracks/108/type = "value"
+tracks/108/imported = false
+tracks/108/enabled = true
+tracks/108/path = NodePath("AirRing:material:shader_parameter/c2")
+tracks/108/interp = 0
+tracks/108/loop_wrap = false
+tracks/108/keys = {
+"times": PackedFloat32Array(0, 0.18233334, 0.28233334, 1.8823333),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Color(0.61960787, 0.84705883, 1, 1), Color(0.34509805, 0.6509804, 1, 1), Color(0.3529412, 0.38431373, 0.9411765, 1), Color(0.3529412, 0.38431373, 0.9411765, 1)]
+}
+tracks/109/type = "value"
+tracks/109/imported = false
+tracks/109/enabled = true
+tracks/109/path = NodePath("AirRing:material:shader_parameter/c3")
+tracks/109/interp = 0
+tracks/109/loop_wrap = false
+tracks/109/keys = {
+"times": PackedFloat32Array(0, 0.18233334, 0.28233334, 1.8823333),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Color(0.61960787, 0.84705883, 1, 1), Color(0.34509805, 0.6509804, 1, 1), Color(0.3529412, 0.38431373, 0.9411765, 1), Color(0.3529412, 0.38431373, 0.9411765, 1)]
+}
+tracks/110/type = "value"
+tracks/110/imported = false
+tracks/110/enabled = true
+tracks/110/path = NodePath("DustL:position")
+tracks/110/interp = 1
+tracks/110/loop_wrap = false
+tracks/110/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.13333334, 0.16666667, 0.2, 0.23333333, 0.26666668, 0.3, 0.33333334, 0.36666667, 0.4, 0.43333334, 0.46666667, 0.5, 0.53333336, 0.56666666, 0.6333333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, -2), Vector2(0, -2), Vector2(-15.47702, -2), Vector2(-32.449253, -2), Vector2(-47.100414, -2), Vector2(-59.60118, -2), Vector2(-70.122215, -2), Vector2(-78.834175, -2), Vector2(-85.90774, -2), Vector2(-91.51357, -2), Vector2(-95.822334, -2), Vector2(-99.0047, -2), Vector2(-101.23133, -2), Vector2(-102.6729, -2), Vector2(-103.50006, -2), Vector2(-103.88349, -2), Vector2(-104, -2)]
+}
+tracks/111/type = "value"
+tracks/111/imported = false
+tracks/111/enabled = true
+tracks/111/path = NodePath("GritL:position")
+tracks/111/interp = 1
+tracks/111/loop_wrap = false
+tracks/111/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.13333334, 0.16666667, 0.2, 0.23333333, 0.26666668, 0.3, 0.33333334, 0.36666667, 0.4, 0.43333334, 0.46666667, 0.5, 0.53333336, 0.56666666, 0.6333333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, -2), Vector2(0, -2), Vector2(-15.47702, -2), Vector2(-32.449253, -2), Vector2(-47.100414, -2), Vector2(-59.60118, -2), Vector2(-70.122215, -2), Vector2(-78.834175, -2), Vector2(-85.90774, -2), Vector2(-91.51357, -2), Vector2(-95.822334, -2), Vector2(-99.0047, -2), Vector2(-101.23133, -2), Vector2(-102.6729, -2), Vector2(-103.50006, -2), Vector2(-103.88349, -2), Vector2(-104, -2)]
+}
+tracks/112/type = "value"
+tracks/112/imported = false
+tracks/112/enabled = true
+tracks/112/path = NodePath("DustL:emitting")
+tracks/112/interp = 0
+tracks/112/loop_wrap = false
+tracks/112/keys = {
+"times": PackedFloat32Array(0, 0.119, 0.619),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/113/type = "value"
+tracks/113/imported = false
+tracks/113/enabled = true
+tracks/113/path = NodePath("GritL:emitting")
+tracks/113/interp = 0
+tracks/113/loop_wrap = false
+tracks/113/keys = {
+"times": PackedFloat32Array(0, 0.119, 0.619),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/114/type = "value"
+tracks/114/imported = false
+tracks/114/enabled = true
+tracks/114/path = NodePath("DustR:position")
+tracks/114/interp = 1
+tracks/114/loop_wrap = false
+tracks/114/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.13333334, 0.16666667, 0.2, 0.23333333, 0.26666668, 0.3, 0.33333334, 0.36666667, 0.4, 0.43333334, 0.46666667, 0.5, 0.53333336, 0.56666666, 0.6333333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, -2), Vector2(0, -2), Vector2(15.47702, -2), Vector2(32.449253, -2), Vector2(47.100414, -2), Vector2(59.60118, -2), Vector2(70.122215, -2), Vector2(78.834175, -2), Vector2(85.90774, -2), Vector2(91.51357, -2), Vector2(95.822334, -2), Vector2(99.0047, -2), Vector2(101.23133, -2), Vector2(102.6729, -2), Vector2(103.50006, -2), Vector2(103.88349, -2), Vector2(104, -2)]
+}
+tracks/115/type = "value"
+tracks/115/imported = false
+tracks/115/enabled = true
+tracks/115/path = NodePath("GritR:position")
+tracks/115/interp = 1
+tracks/115/loop_wrap = false
+tracks/115/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.13333334, 0.16666667, 0.2, 0.23333333, 0.26666668, 0.3, 0.33333334, 0.36666667, 0.4, 0.43333334, 0.46666667, 0.5, 0.53333336, 0.56666666, 0.6333333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, -2), Vector2(0, -2), Vector2(15.47702, -2), Vector2(32.449253, -2), Vector2(47.100414, -2), Vector2(59.60118, -2), Vector2(70.122215, -2), Vector2(78.834175, -2), Vector2(85.90774, -2), Vector2(91.51357, -2), Vector2(95.822334, -2), Vector2(99.0047, -2), Vector2(101.23133, -2), Vector2(102.6729, -2), Vector2(103.50006, -2), Vector2(103.88349, -2), Vector2(104, -2)]
+}
+tracks/116/type = "value"
+tracks/116/imported = false
+tracks/116/enabled = true
+tracks/116/path = NodePath("DustR:emitting")
+tracks/116/interp = 0
+tracks/116/loop_wrap = false
+tracks/116/keys = {
+"times": PackedFloat32Array(0, 0.119, 0.619),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/117/type = "value"
+tracks/117/imported = false
+tracks/117/enabled = true
+tracks/117/path = NodePath("GritR:emitting")
+tracks/117/interp = 0
+tracks/117/loop_wrap = false
+tracks/117/keys = {
+"times": PackedFloat32Array(0, 0.119, 0.619),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/118/type = "value"
+tracks/118/imported = false
+tracks/118/enabled = true
+tracks/118/path = NodePath("Spray:emitting")
+tracks/118/interp = 0
+tracks/118/loop_wrap = false
+tracks/118/keys = {
+"times": PackedFloat32Array(0, 0.119),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/119/type = "value"
+tracks/119/imported = false
+tracks/119/enabled = true
+tracks/119/path = NodePath("Smoke:emitting")
+tracks/119/interp = 0
+tracks/119/loop_wrap = false
+tracks/119/keys = {
+"times": PackedFloat32Array(0, 0.119),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/120/type = "value"
+tracks/120/imported = false
+tracks/120/enabled = true
+tracks/120/path = NodePath("Hum:visible")
+tracks/120/interp = 0
+tracks/120/loop_wrap = false
+tracks/120/keys = {
+"times": PackedFloat32Array(0, 0.31566668, 0.349, 0.38233334, 0.549, 0.5823333, 0.7823333, 0.8156667, 0.849, 0.88233334, 1.0156667, 1.8823333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, true, false, true, false, true, false, true, false, true, false, false]
+}
+tracks/121/type = "value"
+tracks/121/imported = false
+tracks/121/enabled = true
+tracks/121/path = NodePath("Hum:from")
+tracks/121/interp = 0
+tracks/121/loop_wrap = false
+tracks/121/keys = {
+"times": PackedFloat32Array(0, 0.015666667, 0.049, 0.082333334, 0.115666665, 0.149, 0.18233334, 0.21566667, 0.249, 0.28233334, 0.31566668, 0.349, 0.38233334, 0.41566667, 0.449, 0.48233333, 0.51566666, 0.549, 0.5823333, 0.6156667, 0.649, 0.68233335, 0.71566665, 0.749, 0.7823333, 0.8156667, 0.849, 0.88233334, 0.91566664, 0.949, 0.98233336, 1.0156667, 1.049, 1.0823333, 1.1156666, 1.149, 1.1823334, 1.2156667, 1.249, 1.2823334, 1.3156667, 1.349, 1.3823333, 1.4156667, 1.449, 1.4823333, 1.5156667, 1.549, 1.5823333, 1.6156666, 1.649, 1.6823334, 1.7156667, 1.749, 1.7823334, 1.8156667, 1.849, 1.8823333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(11.097324, -31.435476), Vector2(2.8618126, -33.61832), Vector2(0.24892616, -32.666744), Vector2(7.767641, -7.6017265), Vector2(-7.179699, -25.164124), Vector2(-11.857139, -5.274868), Vector2(-4.4073067, -17.023117), Vector2(-11.559376, -25.213474), Vector2(13.816099, -11.121532), Vector2(-5.2200193, -14.74531), Vector2(-10.85778, -28.193502), Vector2(11.662159, -25.17957), Vector2(-4.5923758, -28.49037), Vector2(1.5850468, -14.606007), Vector2(-4.0774, -9.482876), Vector2(-12.657728, -17.940922), Vector2(9.854681, -13.515921), Vector2(10.690689, -24.363781), Vector2(13.179676, -33.00254), Vector2(-8.220278, -16.087952), Vector2(-7.440957, -22.751951), Vector2(5.27606, -20.302929), Vector2(10.000912, -4.018461), Vector2(-9.011686, -17.917141), Vector2(-3.1703463, -25.336649), Vector2(13.018328, -27.549007), Vector2(-2.6640053, -18.195683), Vector2(0.28380203, -5.836239), Vector2(-10.600071, -27.610096), Vector2(-2.8788872, -5.072258), Vector2(-13.436141, -5.5296288), Vector2(-3.366868, -22.187958), Vector2(12.70229, -22.406366), Vector2(-9.085254, -21.663622), Vector2(-11.619833, -6.215622), Vector2(-4.140995, -6.150894), Vector2(-13.754156, -22.071949), Vector2(-5.32423, -4.5810947), Vector2(-1.8845396, -15.222462), Vector2(-6.3772545, -16.146103), Vector2(0.27375317, -19.827719), Vector2(8.85597, -18.511662), Vector2(-1.2727861, -24.855898), Vector2(0.17510605, -19.704544), Vector2(7.2122326, -22.345018), Vector2(-12.632649, -22.575645), Vector2(-4.3452435, -28.884), Vector2(0.8229914, -20.627771), Vector2(-4.7895813, -22.810848), Vector2(-2.9804373, -32.21518), Vector2(-13.532071, -31.627674), Vector2(-13.416282, -13.958849), Vector2(4.1312675, -33.770813), Vector2(-12.905777, -13.993538), Vector2(-4.383299, -28.514164), Vector2(-3.3579855, -20.657036), Vector2(1.7517853, -14.507641), Vector2(7.5832176, -4.739973)]
+}
+tracks/122/type = "value"
+tracks/122/imported = false
+tracks/122/enabled = true
+tracks/122/path = NodePath("Hum:to")
+tracks/122/interp = 0
+tracks/122/loop_wrap = false
+tracks/122/keys = {
+"times": PackedFloat32Array(0, 0.015666667, 0.049, 0.082333334, 0.115666665, 0.149, 0.18233334, 0.21566667, 0.249, 0.28233334, 0.31566668, 0.349, 0.38233334, 0.41566667, 0.449, 0.48233333, 0.51566666, 0.549, 0.5823333, 0.6156667, 0.649, 0.68233335, 0.71566665, 0.749, 0.7823333, 0.8156667, 0.849, 0.88233334, 0.91566664, 0.949, 0.98233336, 1.0156667, 1.049, 1.0823333, 1.1156666, 1.149, 1.1823334, 1.2156667, 1.249, 1.2823334, 1.3156667, 1.349, 1.3823333, 1.4156667, 1.449, 1.4823333, 1.5156667, 1.549, 1.5823333, 1.6156666, 1.649, 1.6823334, 1.7156667, 1.749, 1.7823334, 1.8156667, 1.849, 1.8823333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(20.07291, -35.998367), Vector2(-7.5202937, -37.64526), Vector2(-8.973798, -32.72405), Vector2(20.00122, -8.179102), Vector2(-9.672647, -35.878963), Vector2(-5.1841164, -3.9468398), Vector2(-14.717513, -14.596604), Vector2(-13.792235, -18.23767), Vector2(20.177193, -7.5777917), Vector2(-10.365257, -6.923577), Vector2(-10.4582205, -17.94511), Vector2(17.477724, -27.935575), Vector2(-4.132292, -37.30626), Vector2(-5.2435727, -9.324373), Vector2(-2.341826, -0.7375017), Vector2(-0.1891471, -14.685023), Vector2(4.937014, -19.75912), Vector2(19.158033, -24.632803), Vector2(10.171157, -44.78861), Vector2(2.51915, -12.757763), Vector2(-16.07007, -28.499071), Vector2(16.513464, -16.941046), Vector2(11.8779955, -12.507766), Vector2(-6.1599936, -29.809679), Vector2(-11.178655, -21.35495), Vector2(4.0685477, -29.998503), Vector2(-11.504589, -20.079657), Vector2(-5.77219, -1.4230405), Vector2(-16.201864, -18.330584), Vector2(6.6551976, 2.948414), Vector2(-19.586796, -14.971071), Vector2(-3.3449957, -30.1735), Vector2(23.993027, -23.300842), Vector2(-5.0993066, -15.577652), Vector2(-12.96005, 0.008260949), Vector2(-9.773923, 0.20375273), Vector2(-14.761926, -10.88642), Vector2(4.391781, -4.120603), Vector2(7.1049523, -16.542124), Vector2(1.1745787, -26.119825), Vector2(7.5411744, -11.289415), Vector2(-1.0457753, -25.807774), Vector2(-7.6493587, -33.738914), Vector2(-9.794123, -15.258352), Vector2(8.745368, -12.125958), Vector2(-23.837725, -21.91553), Vector2(-10.746682, -21.748932), Vector2(-5.323123, -25.466703), Vector2(-0.28521553, -28.21704), Vector2(-12.772597, -38.687992), Vector2(-22.794287, -32.38841), Vector2(-2.541599, -9.248517), Vector2(9.887769, -37.13599), Vector2(-1.4447894, -13.57139), Vector2(3.8399105, -33.77103), Vector2(-8.78915, -28.634552), Vector2(5.303914, -24.427525), Vector2(1.4320302, -13.3874035)]
+}
+tracks/123/type = "value"
+tracks/123/imported = false
+tracks/123/enabled = true
+tracks/123/path = NodePath("Hum:k")
+tracks/123/interp = 0
+tracks/123/loop_wrap = false
+tracks/123/keys = {
+"times": PackedFloat32Array(0, 0.015666667, 0.049, 0.082333334, 0.115666665, 0.149, 0.18233334, 0.21566667, 0.249, 0.28233334, 0.31566668, 0.349, 0.38233334, 0.41566667, 0.449, 0.48233333, 0.51566666, 0.549, 0.5823333, 0.6156667, 0.649, 0.68233335, 0.71566665, 0.749, 0.7823333, 0.8156667, 0.849, 0.88233334, 0.91566664, 0.949, 0.98233336, 1.0156667, 1.049, 1.0823333, 1.1156666, 1.149, 1.1823334, 1.2156667, 1.249, 1.2823334, 1.3156667, 1.349, 1.3823333, 1.4156667, 1.449, 1.4823333, 1.5156667, 1.549, 1.5823333, 1.6156666, 1.649, 1.6823334, 1.7156667, 1.749, 1.7823334, 1.8156667, 1.849, 1.8823333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [1.3385714285714287, 1.2980952380952382, 1.2576190476190476, 1.2171428571428573, 1.1766666666666667, 1.1361904761904764, 1.0957142857142859, 1.0552380952380953, 1.0147619047619048, 0.9742857142857143, 0.9338095238095239, 0.8933333333333333, 0.8528571428571428, 0.8123809523809523, 0.7719047619047619, 0.7314285714285714, 0.6909523809523809, 0.6504761904761904, 0.61, 0.5695238095238095, 0.529047619047619, 0.48857142857142866, 0.4480952380952382, 0.40761904761904755, 0.367142857142857, 0.32666666666666655, 0.2861904761904762, 0.24571428571428558, 0.20523809523809525, 0.1647619047619046, 0.1242857142857143, 0.08380952380952368, 0.043333333333333356, 0.002857142857142836, -0.037619047619047497, -0.07809523809523838, -0.11857142857142872, -0.15904761904761908, -0.1995238095238094, -0.2400000000000003, -0.28047619047619066, -0.320952380952381, -0.3614285714285713, -0.4019047619047622, -0.44238095238095254, -0.4828571428571429, -0.5233333333333338, -0.5638095238095241, -0.6042857142857144, -0.6447619047619048, -0.6852380952380956, -0.725714285714286, -0.7661904761904761, -0.8066666666666664, -0.8471428571428575, -0.8876190476190479, -0.9280952380952382, -0.9685714285714285]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5casv"]
+_data = {
+&"fx": SubResource("Animation_nqskk")
+}
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_j2bgd"]
+polygon = PackedVector2Array(-4096, 0, 4096, 0, 4096, 64, -4096, 64)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6l55b"]
+shader = ExtResource("2_v2342")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = null
+shader_parameter/size = Vector2(20, 8)
+shader_parameter/center = Vector2(-34, 0)
+shader_parameter/rx = 9.0
+shader_parameter/ry = 2.5
+shader_parameter/heat = 0.0
+shader_parameter/fade = 0.0
+shader_parameter/fire = PackedVector4Array(1, 1, 1, 1, 1, 0.9529412, 0.6509804, 1, 1, 0.8862745, 0.41960785, 1, 1, 0.7607843, 0.23921569, 1, 1, 0.5411765, 0.16470589, 1, 0.9490196, 0.3372549, 0.11372549, 1, 0.7882353, 0.15686275, 0.12156863, 1, 0.5411765, 0.12156863, 0.09019608, 1, 0.2901961, 0.09019608, 0.07058824, 1)
+shader_parameter/soot = Color(0.06666667, 0.047058824, 0.08627451, 1)
+shader_parameter/soot2 = Color(0.10980392, 0.08235294, 0.13333334, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4rw4r"]
+shader = ExtResource("2_v2342")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = null
+shader_parameter/size = Vector2(20, 8)
+shader_parameter/center = Vector2(35, 0)
+shader_parameter/rx = 9.0
+shader_parameter/ry = 2.5
+shader_parameter/heat = 0.0
+shader_parameter/fade = 0.0
+shader_parameter/fire = PackedVector4Array(1, 1, 1, 1, 1, 0.9529412, 0.6509804, 1, 1, 0.8862745, 0.41960785, 1, 1, 0.7607843, 0.23921569, 1, 1, 0.5411765, 0.16470589, 1, 0.9490196, 0.3372549, 0.11372549, 1, 0.7882353, 0.15686275, 0.12156863, 1, 0.5411765, 0.12156863, 0.09019608, 1, 0.2901961, 0.09019608, 0.07058824, 1)
+shader_parameter/soot = Color(0.06666667, 0.047058824, 0.08627451, 1)
+shader_parameter/soot2 = Color(0.10980392, 0.08235294, 0.13333334, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_131fi"]
+shader = ExtResource("2_v2342")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = null
+shader_parameter/size = Vector2(20, 8)
+shader_parameter/center = Vector2(-36, 0)
+shader_parameter/rx = 9.0
+shader_parameter/ry = 2.5
+shader_parameter/heat = 0.0
+shader_parameter/fade = 0.0
+shader_parameter/fire = PackedVector4Array(1, 1, 1, 1, 1, 0.9529412, 0.6509804, 1, 1, 0.8862745, 0.41960785, 1, 1, 0.7607843, 0.23921569, 1, 1, 0.5411765, 0.16470589, 1, 0.9490196, 0.3372549, 0.11372549, 1, 0.7882353, 0.15686275, 0.12156863, 1, 0.5411765, 0.12156863, 0.09019608, 1, 0.2901961, 0.09019608, 0.07058824, 1)
+shader_parameter/soot = Color(0.06666667, 0.047058824, 0.08627451, 1)
+shader_parameter/soot2 = Color(0.10980392, 0.08235294, 0.13333334, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5538c"]
+shader = ExtResource("2_v2342")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = null
+shader_parameter/size = Vector2(20, 8)
+shader_parameter/center = Vector2(40, 0)
+shader_parameter/rx = 9.0
+shader_parameter/ry = 2.5
+shader_parameter/heat = 0.0
+shader_parameter/fade = 0.0
+shader_parameter/fire = PackedVector4Array(1, 1, 1, 1, 1, 0.9529412, 0.6509804, 1, 1, 0.8862745, 0.41960785, 1, 1, 0.7607843, 0.23921569, 1, 1, 0.5411765, 0.16470589, 1, 0.9490196, 0.3372549, 0.11372549, 1, 0.7882353, 0.15686275, 0.12156863, 1, 0.5411765, 0.12156863, 0.09019608, 1, 0.2901961, 0.09019608, 0.07058824, 1)
+shader_parameter/soot = Color(0.06666667, 0.047058824, 0.08627451, 1)
+shader_parameter/soot2 = Color(0.10980392, 0.08235294, 0.13333334, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tyt5f"]
+shader = ExtResource("3_bu8xq")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = null
+shader_parameter/size = Vector2(216, 44)
+shader_parameter/radius = 0.0
+shader_parameter/thickness = 16.0
+shader_parameter/squash = 0.18
+shader_parameter/c0 = Color(1, 1, 1, 1)
+shader_parameter/c1 = Color(0.34509805, 0.6509804, 1, 1)
+shader_parameter/c2 = Color(0.27450982, 0.1882353, 0.7529412, 1)
+shader_parameter/c3 = Color(0.16470589, 0.105882354, 0.47058824, 1)
+shader_parameter/k = null
+shader_parameter/even = null
+shader_parameter/side = 1.0
+shader_parameter/clip = null
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_265ba"]
+shader = ExtResource("3_bu8xq")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = null
+shader_parameter/size = Vector2(216, 44)
+shader_parameter/radius = 0.0
+shader_parameter/thickness = 16.0
+shader_parameter/squash = 0.18
+shader_parameter/c0 = Color(1, 1, 1, 1)
+shader_parameter/c1 = Color(0.34509805, 0.6509804, 1, 1)
+shader_parameter/c2 = Color(0.27450982, 0.1882353, 0.7529412, 1)
+shader_parameter/c3 = Color(0.16470589, 0.105882354, 0.47058824, 1)
+shader_parameter/k = null
+shader_parameter/even = null
+shader_parameter/side = -1.0
+shader_parameter/clip = null
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vpmst"]
+shader = ExtResource("4_itdmr")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = null
+shader_parameter/jolt = null
+shader_parameter/lift = null
+shader_parameter/ramp = PackedColorArray(0.16470589, 0.105882354, 0.47058824, 1, 0.27450982, 0.1882353, 0.7529412, 1, 0.3529412, 0.38431373, 0.9411765, 1, 0.34509805, 0.6509804, 1, 1, 0.61960787, 0.84705883, 1, 1, 0.89411765, 0.9647059, 1, 1, 1, 1, 1, 1)
+shader_parameter/flash = null
+shader_parameter/flash_color = null
+shader_parameter/light_at = null
+shader_parameter/light_r = null
+shader_parameter/light_hot = null
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oncsc"]
+resource_name = "Dither"
+shader = ExtResource("6_ek5a1")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = null
+
+[sub_resource type="Gradient" id="Gradient_vtj20"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.5)
+colors = PackedColorArray(0.89411765, 0.9647059, 1, 1, 0.61960787, 0.84705883, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_bvcd8"]
+gradient = SubResource("Gradient_vtj20")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_nepnj"]
+particle_flag_align_y = true
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 0.0
+emission_ring_radius = 30.0
+emission_ring_inner_radius = 16.0
+emission_ring_cone_angle = 90.0
+direction = Vector3(6.123234e-17, -1, 0)
+spread = 0.0
+radial_velocity_min = -320.0
+radial_velocity_max = -200.0
+gravity = Vector3(0, 0, 0)
+color_initial_ramp = SubResource("GradientTexture1D_bvcd8")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_syc8y"]
+shader = ExtResource("8_6ogdg")
+shader_parameter/size = Vector2(208, 208)
+shader_parameter/radius = 100.0
+shader_parameter/thickness = null
+shader_parameter/squash = null
+shader_parameter/color = Color(0.34509805, 0.6509804, 1, 1)
+shader_parameter/strength = null
+shader_parameter/alpha = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rn7m4"]
+shader = ExtResource("8_6ogdg")
+shader_parameter/size = Vector2(60, 60)
+shader_parameter/radius = 26.0
+shader_parameter/thickness = null
+shader_parameter/squash = null
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/strength = null
+shader_parameter/alpha = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7h0jt"]
+shader = ExtResource("9_vl224")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = null
+shader_parameter/size = Vector2(97, 97)
+shader_parameter/reach = 0.0
+shader_parameter/k = 1.0
+shader_parameter/c6 = Color(0.89411765, 0.9647059, 1, 1)
+shader_parameter/c5 = Color(0.61960787, 0.84705883, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4s0gu"]
+shader = ExtResource("10_lm5px")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = null
+shader_parameter/size = Vector2(30, 30)
+shader_parameter/radius = 0.0
+shader_parameter/thickness = null
+shader_parameter/squash = null
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/edge_color = null
+shader_parameter/edge = null
+shader_parameter/side = null
+shader_parameter/ragged = null
+shader_parameter/grain = null
+shader_parameter/alpha = null
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7btul"]
+shader = ExtResource("8_6ogdg")
+shader_parameter/size = Vector2(96, 96)
+shader_parameter/radius = 44.0
+shader_parameter/thickness = null
+shader_parameter/squash = null
+shader_parameter/color = Color(0.61960787, 0.84705883, 1, 1)
+shader_parameter/strength = null
+shader_parameter/alpha = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g08x5"]
+resource_name = "Light"
+shader = ExtResource("12_7o3ev")
+shader_parameter/strength = null
+shader_parameter/steps = null
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_173m7"]
+shader = ExtResource("10_lm5px")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = null
+shader_parameter/size = Vector2(16, 16)
+shader_parameter/radius = 0.0
+shader_parameter/thickness = null
+shader_parameter/squash = null
+shader_parameter/color = Color(0.61960787, 0.84705883, 1, 1)
+shader_parameter/edge_color = null
+shader_parameter/edge = null
+shader_parameter/side = null
+shader_parameter/ragged = null
+shader_parameter/grain = null
+shader_parameter/alpha = null
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tmptg"]
+shader = ExtResource("8_6ogdg")
+shader_parameter/size = Vector2(48, 48)
+shader_parameter/radius = 20.0
+shader_parameter/thickness = null
+shader_parameter/squash = null
+shader_parameter/color = Color(0.61960787, 0.84705883, 1, 1)
+shader_parameter/strength = null
+shader_parameter/alpha = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wwr30"]
+shader = ExtResource("8_6ogdg")
+shader_parameter/size = Vector2(100, 100)
+shader_parameter/radius = 46.0
+shader_parameter/thickness = null
+shader_parameter/squash = null
+shader_parameter/color = Color(0.34509805, 0.6509804, 1, 1)
+shader_parameter/strength = null
+shader_parameter/alpha = 0.0
+
+[sub_resource type="Gradient" id="Gradient_cebtt"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.3, 0.55, 0.85)
+colors = PackedColorArray(1, 1, 1, 1, 0.78431374, 0.972549, 1, 1, 0.49803922, 0.9529412, 1, 1, 0.101960786, 0.72156864, 0.9019608, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_aduoc"]
+gradient = SubResource("Gradient_cebtt")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_x62kq"]
+particle_flag_align_y = true
+particle_flag_disable_z = true
+direction = Vector3(6.123234e-17, -1, 0)
+spread = 69.0
+initial_velocity_min = 70.0
+initial_velocity_max = 240.0
+gravity = Vector3(0, 427, 0)
+damping_min = 200.0
+damping_max = 300.0
+color_ramp = SubResource("GradientTexture1D_aduoc")
+collision_mode = 1
+collision_friction = 0.3
+collision_bounce = 0.45
+collision_use_scale = true
+
+[sub_resource type="Gradient" id="Gradient_58una"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.4, 0.7, 0.85)
+colors = PackedColorArray(1, 0.9529412, 0.6509804, 1, 1, 0.8862745, 0.41960785, 1, 1, 0.5411765, 0.16470589, 1, 0.9490196, 0.3372549, 0.11372549, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_72j58"]
+gradient = SubResource("Gradient_58una")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_i62kv"]
+particle_flag_align_y = true
+particle_flag_disable_z = true
+direction = Vector3(6.123234e-17, -1, 0)
+spread = 30.0
+initial_velocity_min = 60.0
+initial_velocity_max = 180.0
+gravity = Vector3(0, 427, 0)
+damping_min = 90.0
+damping_max = 180.0
+color_ramp = SubResource("GradientTexture1D_72j58")
+collision_mode = 1
+collision_friction = 0.3
+collision_bounce = 0.45
+collision_use_scale = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6gxj7"]
+shader = ExtResource("10_lm5px")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = null
+shader_parameter/size = Vector2(16, 16)
+shader_parameter/radius = 0.0
+shader_parameter/thickness = null
+shader_parameter/squash = null
+shader_parameter/color = Color(0.61960787, 0.84705883, 1, 1)
+shader_parameter/edge_color = null
+shader_parameter/edge = null
+shader_parameter/side = null
+shader_parameter/ragged = null
+shader_parameter/grain = null
+shader_parameter/alpha = null
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i4k1j"]
+shader = ExtResource("8_6ogdg")
+shader_parameter/size = Vector2(48, 48)
+shader_parameter/radius = 20.0
+shader_parameter/thickness = null
+shader_parameter/squash = null
+shader_parameter/color = Color(0.61960787, 0.84705883, 1, 1)
+shader_parameter/strength = null
+shader_parameter/alpha = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_addbl"]
+shader = ExtResource("8_6ogdg")
+shader_parameter/size = Vector2(100, 100)
+shader_parameter/radius = 46.0
+shader_parameter/thickness = null
+shader_parameter/squash = null
+shader_parameter/color = Color(0.34509805, 0.6509804, 1, 1)
+shader_parameter/strength = null
+shader_parameter/alpha = 0.0
+
+[sub_resource type="Gradient" id="Gradient_h5v5a"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.3, 0.55, 0.85)
+colors = PackedColorArray(1, 1, 1, 1, 0.78431374, 0.972549, 1, 1, 0.49803922, 0.9529412, 1, 1, 0.101960786, 0.72156864, 0.9019608, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_o85td"]
+gradient = SubResource("Gradient_h5v5a")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2ql4i"]
+particle_flag_align_y = true
+particle_flag_disable_z = true
+direction = Vector3(6.123234e-17, -1, 0)
+spread = 69.0
+initial_velocity_min = 70.0
+initial_velocity_max = 240.0
+gravity = Vector3(0, 427, 0)
+damping_min = 200.0
+damping_max = 300.0
+color_ramp = SubResource("GradientTexture1D_o85td")
+collision_mode = 1
+collision_friction = 0.3
+collision_bounce = 0.45
+collision_use_scale = true
+
+[sub_resource type="Gradient" id="Gradient_newih"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.4, 0.7, 0.85)
+colors = PackedColorArray(1, 0.9529412, 0.6509804, 1, 1, 0.8862745, 0.41960785, 1, 1, 0.5411765, 0.16470589, 1, 0.9490196, 0.3372549, 0.11372549, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ioqem"]
+gradient = SubResource("Gradient_newih")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_khxqo"]
+particle_flag_align_y = true
+particle_flag_disable_z = true
+direction = Vector3(6.123234e-17, -1, 0)
+spread = 30.0
+initial_velocity_min = 60.0
+initial_velocity_max = 180.0
+gravity = Vector3(0, 427, 0)
+damping_min = 90.0
+damping_max = 180.0
+color_ramp = SubResource("GradientTexture1D_ioqem")
+collision_mode = 1
+collision_friction = 0.3
+collision_bounce = 0.45
+collision_use_scale = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cpgf0"]
+shader = ExtResource("10_lm5px")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = null
+shader_parameter/size = Vector2(16, 16)
+shader_parameter/radius = 0.0
+shader_parameter/thickness = null
+shader_parameter/squash = null
+shader_parameter/color = Color(0.61960787, 0.84705883, 1, 1)
+shader_parameter/edge_color = null
+shader_parameter/edge = null
+shader_parameter/side = null
+shader_parameter/ragged = null
+shader_parameter/grain = null
+shader_parameter/alpha = null
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k1cia"]
+shader = ExtResource("8_6ogdg")
+shader_parameter/size = Vector2(48, 48)
+shader_parameter/radius = 20.0
+shader_parameter/thickness = null
+shader_parameter/squash = null
+shader_parameter/color = Color(0.61960787, 0.84705883, 1, 1)
+shader_parameter/strength = null
+shader_parameter/alpha = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5m0c7"]
+shader = ExtResource("8_6ogdg")
+shader_parameter/size = Vector2(100, 100)
+shader_parameter/radius = 46.0
+shader_parameter/thickness = null
+shader_parameter/squash = null
+shader_parameter/color = Color(0.34509805, 0.6509804, 1, 1)
+shader_parameter/strength = null
+shader_parameter/alpha = 0.0
+
+[sub_resource type="Gradient" id="Gradient_f5irx"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.3, 0.55, 0.85)
+colors = PackedColorArray(1, 1, 1, 1, 0.78431374, 0.972549, 1, 1, 0.49803922, 0.9529412, 1, 1, 0.101960786, 0.72156864, 0.9019608, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_x8tso"]
+gradient = SubResource("Gradient_f5irx")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_y37qk"]
+particle_flag_align_y = true
+particle_flag_disable_z = true
+direction = Vector3(6.123234e-17, -1, 0)
+spread = 69.0
+initial_velocity_min = 70.0
+initial_velocity_max = 240.0
+gravity = Vector3(0, 427, 0)
+damping_min = 200.0
+damping_max = 300.0
+color_ramp = SubResource("GradientTexture1D_x8tso")
+collision_mode = 1
+collision_friction = 0.3
+collision_bounce = 0.45
+collision_use_scale = true
+
+[sub_resource type="Gradient" id="Gradient_of1cn"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.4, 0.7, 0.85)
+colors = PackedColorArray(1, 0.9529412, 0.6509804, 1, 1, 0.8862745, 0.41960785, 1, 1, 0.5411765, 0.16470589, 1, 0.9490196, 0.3372549, 0.11372549, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ptd7x"]
+gradient = SubResource("Gradient_of1cn")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_pqahc"]
+particle_flag_align_y = true
+particle_flag_disable_z = true
+direction = Vector3(6.123234e-17, -1, 0)
+spread = 30.0
+initial_velocity_min = 60.0
+initial_velocity_max = 180.0
+gravity = Vector3(0, 427, 0)
+damping_min = 90.0
+damping_max = 180.0
+color_ramp = SubResource("GradientTexture1D_ptd7x")
+collision_mode = 1
+collision_friction = 0.3
+collision_bounce = 0.45
+collision_use_scale = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fnisd"]
+shader = ExtResource("10_lm5px")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = null
+shader_parameter/size = Vector2(16, 16)
+shader_parameter/radius = 0.0
+shader_parameter/thickness = null
+shader_parameter/squash = null
+shader_parameter/color = Color(0.61960787, 0.84705883, 1, 1)
+shader_parameter/edge_color = null
+shader_parameter/edge = null
+shader_parameter/side = null
+shader_parameter/ragged = null
+shader_parameter/grain = null
+shader_parameter/alpha = null
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_usk0b"]
+shader = ExtResource("8_6ogdg")
+shader_parameter/size = Vector2(48, 48)
+shader_parameter/radius = 20.0
+shader_parameter/thickness = null
+shader_parameter/squash = null
+shader_parameter/color = Color(0.61960787, 0.84705883, 1, 1)
+shader_parameter/strength = null
+shader_parameter/alpha = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0wi8n"]
+shader = ExtResource("8_6ogdg")
+shader_parameter/size = Vector2(100, 100)
+shader_parameter/radius = 46.0
+shader_parameter/thickness = null
+shader_parameter/squash = null
+shader_parameter/color = Color(0.34509805, 0.6509804, 1, 1)
+shader_parameter/strength = null
+shader_parameter/alpha = 0.0
+
+[sub_resource type="Gradient" id="Gradient_qm1yg"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.3, 0.55, 0.85)
+colors = PackedColorArray(1, 1, 1, 1, 0.78431374, 0.972549, 1, 1, 0.49803922, 0.9529412, 1, 1, 0.101960786, 0.72156864, 0.9019608, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_60p2p"]
+gradient = SubResource("Gradient_qm1yg")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_78c3p"]
+particle_flag_align_y = true
+particle_flag_disable_z = true
+direction = Vector3(6.123234e-17, -1, 0)
+spread = 69.0
+initial_velocity_min = 70.0
+initial_velocity_max = 240.0
+gravity = Vector3(0, 427, 0)
+damping_min = 200.0
+damping_max = 300.0
+color_ramp = SubResource("GradientTexture1D_60p2p")
+collision_mode = 1
+collision_friction = 0.3
+collision_bounce = 0.45
+collision_use_scale = true
+
+[sub_resource type="Gradient" id="Gradient_laf0g"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.4, 0.7, 0.85)
+colors = PackedColorArray(1, 0.9529412, 0.6509804, 1, 1, 0.8862745, 0.41960785, 1, 1, 0.5411765, 0.16470589, 1, 0.9490196, 0.3372549, 0.11372549, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_2xscb"]
+gradient = SubResource("Gradient_laf0g")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fqu28"]
+particle_flag_align_y = true
+particle_flag_disable_z = true
+direction = Vector3(6.123234e-17, -1, 0)
+spread = 30.0
+initial_velocity_min = 60.0
+initial_velocity_max = 180.0
+gravity = Vector3(0, 427, 0)
+damping_min = 90.0
+damping_max = 180.0
+color_ramp = SubResource("GradientTexture1D_2xscb")
+collision_mode = 1
+collision_friction = 0.3
+collision_bounce = 0.45
+collision_use_scale = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_guvem"]
+shader = ExtResource("3_bu8xq")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = null
+shader_parameter/size = Vector2(144, 144)
+shader_parameter/radius = 0.0
+shader_parameter/thickness = 2.0
+shader_parameter/squash = null
+shader_parameter/c0 = Color(0.61960787, 0.84705883, 1, 1)
+shader_parameter/c1 = Color(0.61960787, 0.84705883, 1, 1)
+shader_parameter/c2 = Color(0.61960787, 0.84705883, 1, 1)
+shader_parameter/c3 = Color(0.61960787, 0.84705883, 1, 1)
+shader_parameter/k = null
+shader_parameter/even = true
+shader_parameter/side = null
+shader_parameter/clip = 21.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_swijp"]
+shader = ExtResource("8_6ogdg")
+shader_parameter/size = Vector2(64, 64)
+shader_parameter/radius = 28.0
+shader_parameter/thickness = null
+shader_parameter/squash = null
+shader_parameter/color = Color(0.34509805, 0.6509804, 1, 1)
+shader_parameter/strength = null
+shader_parameter/alpha = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2smp2"]
+shader = ExtResource("8_6ogdg")
+shader_parameter/size = Vector2(64, 64)
+shader_parameter/radius = 28.0
+shader_parameter/thickness = null
+shader_parameter/squash = null
+shader_parameter/color = Color(0.34509805, 0.6509804, 1, 1)
+shader_parameter/strength = null
+shader_parameter/alpha = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kc4hg"]
+resource_name = "Soft"
+shader = ExtResource("6_ek5a1")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = true
+
+[sub_resource type="Gradient" id="Gradient_us1lc"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.06, 0.55, 0.95)
+colors = PackedColorArray(0.43137255, 0.3882353, 0.50980395, 0, 0.43137255, 0.3882353, 0.50980395, 0.6, 0.3647059, 0.3372549, 0.3764706, 0.4, 0.2627451, 0.23921569, 0.28235295, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_inxh8"]
+gradient = SubResource("Gradient_us1lc")
+
+[sub_resource type="Curve" id="Curve_2lpci"]
+_limits = [0.0, 8.0, 0.0, 1.0]
+_data = [Vector2(0, 0.7), 0.0, 0.75, 1, 1, Vector2(0.4, 1), 0.75, 0.4999999, 1, 1, Vector2(1, 1.3), 0.4999999, 0.0, 1, 1]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_ac8i4"]
+curve = SubResource("Curve_2lpci")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8aal1"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(3, 1.5, 0)
+direction = Vector3(-0.9396926, -0.34202015, 0)
+spread = 20.0
+initial_velocity_min = 10.0
+initial_velocity_max = 40.0
+gravity = Vector3(0, -12, 0)
+damping_min = 15.0
+damping_max = 25.0
+scale_min = 0.6
+scale_max = 1.2
+scale_curve = SubResource("CurveTexture_ac8i4")
+color_ramp = SubResource("GradientTexture1D_inxh8")
+
+[sub_resource type="Gradient" id="Gradient_oc04j"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.33333334, 0.6666667)
+colors = PackedColorArray(0.39607844, 0.35686275, 0.47843137, 1, 0.2901961, 0.25882354, 0.3882353, 1, 0.20392157, 0.1764706, 0.27058825, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_fhvo5"]
+gradient = SubResource("Gradient_oc04j")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1qf5n"]
+particle_flag_disable_z = true
+direction = Vector3(-0.25881904, -0.9659258, 0)
+spread = 15.0
+initial_velocity_min = 60.0
+initial_velocity_max = 180.0
+gravity = Vector3(0, 950, 0)
+color_initial_ramp = SubResource("GradientTexture1D_fhvo5")
+collision_mode = 1
+collision_friction = 0.8
+collision_bounce = 0.25
+collision_use_scale = true
+
+[sub_resource type="Gradient" id="Gradient_hel4e"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.06, 0.55, 0.95)
+colors = PackedColorArray(0.43137255, 0.3882353, 0.50980395, 0, 0.43137255, 0.3882353, 0.50980395, 0.6, 0.3647059, 0.3372549, 0.3764706, 0.4, 0.2627451, 0.23921569, 0.28235295, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_txfcq"]
+gradient = SubResource("Gradient_hel4e")
+
+[sub_resource type="Curve" id="Curve_dtdtk"]
+_limits = [0.0, 8.0, 0.0, 1.0]
+_data = [Vector2(0, 0.7), 0.0, 0.75, 1, 1, Vector2(0.4, 1), 0.75, 0.4999999, 1, 1, Vector2(1, 1.3), 0.4999999, 0.0, 1, 1]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_3pjy0"]
+curve = SubResource("Curve_dtdtk")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_6b2r6"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(3, 1.5, 0)
+direction = Vector3(0.9396926, -0.34202015, 0)
+spread = 20.0
+initial_velocity_min = 10.0
+initial_velocity_max = 40.0
+gravity = Vector3(0, -12, 0)
+damping_min = 15.0
+damping_max = 25.0
+scale_min = 0.6
+scale_max = 1.2
+scale_curve = SubResource("CurveTexture_3pjy0")
+color_ramp = SubResource("GradientTexture1D_txfcq")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vwpg8"]
+particle_flag_disable_z = true
+direction = Vector3(0.25881904, -0.9659258, 0)
+spread = 15.0
+initial_velocity_min = 60.0
+initial_velocity_max = 180.0
+gravity = Vector3(0, 950, 0)
+color_initial_ramp = SubResource("GradientTexture1D_fhvo5")
+collision_mode = 1
+collision_friction = 0.8
+collision_bounce = 0.25
+collision_use_scale = true
+
+[sub_resource type="Gradient" id="Gradient_rxo12"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.3, 0.55, 0.85)
+colors = PackedColorArray(1, 1, 1, 1, 0.78431374, 0.972549, 1, 1, 0.49803922, 0.9529412, 1, 1, 0.101960786, 0.72156864, 0.9019608, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_xhh0x"]
+gradient = SubResource("Gradient_rxo12")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_xxumn"]
+particle_flag_align_y = true
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 6.0
+direction = Vector3(6.123234e-17, -1, 0)
+spread = 180.0
+initial_velocity_min = 170.0
+initial_velocity_max = 380.0
+gravity = Vector3(0, 380, 0)
+damping_min = 350.0
+damping_max = 550.0
+color_ramp = SubResource("GradientTexture1D_xhh0x")
+collision_mode = 1
+collision_friction = 0.3
+collision_bounce = 0.45
+collision_use_scale = true
+
+[sub_resource type="Gradient" id="Gradient_q1mw6"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.06, 0.55, 0.95)
+colors = PackedColorArray(0.35333335, 0.42862746, 0.58000004, 0, 0.35333335, 0.42862746, 0.58000004, 0.4, 0.3647059, 0.3372549, 0.3764706, 0.3, 0.2627451, 0.23921569, 0.28235295, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_wrk3i"]
+gradient = SubResource("Gradient_q1mw6")
+
+[sub_resource type="Curve" id="Curve_se3to"]
+_limits = [0.0, 8.0, 0.0, 1.0]
+_data = [Vector2(0, 0.65), 0.0, 0.87500006, 1, 1, Vector2(0.4, 1), 0.87500006, 0.4999999, 1, 1, Vector2(1, 1.3), 0.4999999, 0.0, 1, 1]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_jho32"]
+curve = SubResource("Curve_se3to")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8mn73"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(8, 6, 0)
+direction = Vector3(6.123234e-17, -1, 0)
+spread = 50.0
+initial_velocity_min = 10.0
+initial_velocity_max = 30.0
+gravity = Vector3(0, -16, 0)
+damping_min = 6.0
+damping_max = 12.0
+scale_min = 0.6
+scale_curve = SubResource("CurveTexture_jho32")
+color_ramp = SubResource("GradientTexture1D_wrk3i")
+
+[node name="Thunderclap" type="Node2D" unique_id=108883338]
+script = ExtResource("1_rhuje")
+effect_id = "lightning/thunderclap"
+source = "src/fx/lightning/thunderclap.js@6fac4bbf932c9ad91d01085d257b97fcdd309c09"
+duration = 1.9
+canvas_size = Vector2i(288, 156)
+origin = Vector2i(144, 124)
+bg = "ground"
+actor = 2
+ramps = {
+"palette": PackedColorArray(0.07058824, 0.039215688, 0.2, 1, 0.16470589, 0.105882354, 0.47058824, 1, 0.27450982, 0.1882353, 0.7529412, 1, 0.3529412, 0.38431373, 0.9411765, 1, 0.34509805, 0.6509804, 1, 1, 0.61960787, 0.84705883, 1, 1, 0.89411765, 0.9647059, 1, 1, 1, 1, 1, 1),
+"sparks": PackedColorArray(1, 1, 1, 1, 0.78431374, 0.972549, 1, 1, 0.49803922, 0.9529412, 1, 1, 0.101960786, 0.72156864, 0.9019608, 1)
+}
+palette_extra = PackedColorArray(0.06666667, 0.047058824, 0.08627451, 1, 0.10980392, 0.08235294, 0.13333334, 1, 1, 0.9529412, 0.6509804, 1, 1, 0.8862745, 0.41960785, 1, 1, 0.7607843, 0.23921569, 1, 1, 0.5411765, 0.16470589, 1, 0.9490196, 0.3372549, 0.11372549, 1, 0.7882353, 0.15686275, 0.12156863, 1, 0.5411765, 0.12156863, 0.09019608, 1, 0.2901961, 0.09019608, 0.07058824, 1, 0.39607844, 0.35686275, 0.47843137, 1, 0.2901961, 0.25882354, 0.3882353, 1, 0.20392157, 0.1764706, 0.27058825, 1, 0.43137255, 0.3882353, 0.50980395, 1, 0.3647059, 0.3372549, 0.3764706, 1, 0.2627451, 0.23921569, 0.28235295, 1, 0.35333335, 0.42862746, 0.58000004, 1)
+palette_override = PackedColorArray()
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=246975171]
+libraries/ = SubResource("AnimationLibrary_5casv")
+
+[node name="Floor" type="LightOccluder2D" parent="." unique_id=295775829]
+occluder = SubResource("OccluderPolygon2D_j2bgd")
+occluder_light_mask = 0
+
+[node name="Scorch0" type="ColorRect" parent="." unique_id=1688313082]
+z_index = -2
+material = SubResource("ShaderMaterial_6l55b")
+offset_left = -44.0
+offset_top = -4.0
+offset_right = -24.0
+offset_bottom = 4.0
+mouse_filter = 2
+
+[node name="Scorch2" type="ColorRect" parent="." unique_id=2085063389]
+z_index = -2
+material = SubResource("ShaderMaterial_4rw4r")
+offset_left = 25.0
+offset_top = -4.0
+offset_right = 45.0
+offset_bottom = 4.0
+mouse_filter = 2
+
+[node name="Scorch4" type="ColorRect" parent="." unique_id=887254936]
+z_index = -2
+material = SubResource("ShaderMaterial_131fi")
+offset_left = -46.0
+offset_top = -4.0
+offset_right = -26.0
+offset_bottom = 4.0
+mouse_filter = 2
+
+[node name="Scorch6" type="ColorRect" parent="." unique_id=173265027]
+z_index = -2
+material = SubResource("ShaderMaterial_5538c")
+offset_left = 30.0
+offset_top = -4.0
+offset_right = 50.0
+offset_bottom = 4.0
+mouse_filter = 2
+
+[node name="BandFar" type="ColorRect" parent="." unique_id=919945177]
+z_index = -2
+material = SubResource("ShaderMaterial_tyt5f")
+offset_left = -108.0
+offset_top = -22.0
+offset_right = 108.0
+offset_bottom = 22.0
+mouse_filter = 2
+
+[node name="BandNear" type="ColorRect" parent="." unique_id=1776267905]
+z_index = 1
+material = SubResource("ShaderMaterial_265ba")
+offset_left = -108.0
+offset_top = -22.0
+offset_right = 108.0
+offset_bottom = 22.0
+mouse_filter = 2
+
+[node name="Actor" type="Sprite2D" parent="." unique_id=446430223]
+material = SubResource("ShaderMaterial_vpmst")
+texture = ExtResource("5_t8cfk")
+centered = false
+offset = Vector2(-12, -38)
+
+[node name="Rush" type="GPUParticles2D" parent="." unique_id=1392849286]
+z_index = 1
+material = SubResource("ShaderMaterial_oncsc")
+position = Vector2(0, -22)
+amount = 6
+texture = ExtResource("7_qwlqp")
+lifetime = 0.09
+use_fixed_seed = true
+seed = 53095
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+process_material = SubResource("ParticleProcessMaterial_nepnj")
+
+[node name="ClapLight" type="ColorRect" parent="." unique_id=1761893520]
+z_index = 2
+material = SubResource("ShaderMaterial_syc8y")
+offset_left = -104.0
+offset_top = -136.0
+offset_right = 104.0
+offset_bottom = 72.0
+mouse_filter = 2
+
+[node name="ClapWhite" type="ColorRect" parent="." unique_id=212624693]
+z_index = 2
+material = SubResource("ShaderMaterial_rn7m4")
+offset_left = -30.0
+offset_top = -52.0
+offset_right = 30.0
+offset_bottom = 8.0
+mouse_filter = 2
+
+[node name="Flare" type="ColorRect" parent="." unique_id=866612663]
+z_index = 1
+material = SubResource("ShaderMaterial_7h0jt")
+offset_left = -48.0
+offset_top = -70.0
+offset_right = 49.0
+offset_bottom = 27.0
+mouse_filter = 2
+
+[node name="Core" type="ColorRect" parent="." unique_id=1268031000]
+z_index = 1
+material = SubResource("ShaderMaterial_4s0gu")
+offset_left = -15.0
+offset_top = -37.0
+offset_right = 15.0
+offset_bottom = -7.0
+mouse_filter = 2
+
+[node name="CoreLight" type="ColorRect" parent="." unique_id=1976531363]
+z_index = 2
+material = SubResource("ShaderMaterial_7btul")
+offset_left = -48.0
+offset_top = -70.0
+offset_right = 48.0
+offset_bottom = 26.0
+mouse_filter = 2
+
+[node name="Bolt0" type="Node2D" parent="." unique_id=678777593]
+visible = false
+z_index = 1
+material = SubResource("ShaderMaterial_oncsc")
+script = ExtResource("11_awwf5")
+from = Vector2(0, -22)
+to = Vector2(-34, 0)
+jag = 0.25
+forks = 0.5
+bolt_seed = 19763
+rate = 0.0
+colors = PackedColorArray(0.07058824, 0.039215688, 0.2, 1, 0.16470589, 0.105882354, 0.47058824, 1, 0.27450982, 0.1882353, 0.7529412, 1, 0.3529412, 0.38431373, 0.9411765, 1, 0.34509805, 0.6509804, 1, 1, 0.61960787, 0.84705883, 1, 1, 0.89411765, 0.9647059, 1, 1, 1, 1, 1, 1)
+
+[node name="Light" type="Node2D" parent="Bolt0" unique_id=1682890399]
+z_index = 1
+texture_filter = 2
+material = SubResource("ShaderMaterial_g08x5")
+
+[node name="Spot0" type="ColorRect" parent="." unique_id=618667017]
+z_index = 1
+material = SubResource("ShaderMaterial_173m7")
+offset_left = -42.0
+offset_top = -9.0
+offset_right = -26.0
+offset_bottom = 7.0
+mouse_filter = 2
+
+[node name="SpotPx0" type="ColorRect" parent="." unique_id=1616543351]
+visible = false
+z_index = 1
+material = SubResource("ShaderMaterial_oncsc")
+offset_left = -34.0
+offset_top = -1.0
+offset_right = -33.0
+mouse_filter = 2
+
+[node name="SpotLight0" type="ColorRect" parent="." unique_id=2125621621]
+z_index = 2
+material = SubResource("ShaderMaterial_tmptg")
+offset_left = -58.0
+offset_top = -27.0
+offset_right = -10.0
+offset_bottom = 21.0
+mouse_filter = 2
+
+[node name="Land0" type="ColorRect" parent="." unique_id=1288460411]
+z_index = 2
+material = SubResource("ShaderMaterial_wwr30")
+offset_left = -84.0
+offset_top = -54.0
+offset_right = 16.0
+offset_bottom = 46.0
+mouse_filter = 2
+
+[node name="LandSparks0" type="GPUParticles2D" parent="." unique_id=1354329510]
+z_index = 1
+material = SubResource("ShaderMaterial_oncsc")
+position = Vector2(-34, -1)
+emitting = false
+amount = 12
+texture = ExtResource("13_mr13k")
+lifetime = 0.4
+one_shot = true
+explosiveness = 1.0
+randomness = 0.5
+use_fixed_seed = true
+seed = 422067
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+process_material = SubResource("ParticleProcessMaterial_x62kq")
+
+[node name="HotSparks0" type="GPUParticles2D" parent="." unique_id=1626816091]
+z_index = 1
+material = SubResource("ShaderMaterial_oncsc")
+position = Vector2(-34, -1)
+emitting = false
+amount = 5
+texture = ExtResource("13_mr13k")
+lifetime = 0.8
+one_shot = true
+explosiveness = 1.0
+randomness = 0.5
+use_fixed_seed = true
+seed = 407869
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+process_material = SubResource("ParticleProcessMaterial_i62kv")
+
+[node name="Bolt1" type="Node2D" parent="." unique_id=516575618]
+visible = false
+z_index = 1
+material = SubResource("ShaderMaterial_oncsc")
+script = ExtResource("11_awwf5")
+from = Vector2(0, -22)
+to = Vector2(-22, -75.264915)
+jag = 0.25
+forks = 0.8
+bolt_seed = 19764
+rate = 0.0
+colors = PackedColorArray(0.07058824, 0.039215688, 0.2, 1, 0.16470589, 0.105882354, 0.47058824, 1, 0.27450982, 0.1882353, 0.7529412, 1, 0.3529412, 0.38431373, 0.9411765, 1, 0.34509805, 0.6509804, 1, 1, 0.61960787, 0.84705883, 1, 1, 0.89411765, 0.9647059, 1, 1, 1, 1, 1, 1)
+
+[node name="Light" type="Node2D" parent="Bolt1" unique_id=691953322]
+z_index = 1
+texture_filter = 2
+material = SubResource("ShaderMaterial_g08x5")
+
+[node name="Glint1" type="Sprite2D" parent="." unique_id=538043841]
+visible = false
+modulate = Color(0.89411765, 0.9647059, 1, 1)
+z_index = 1
+material = SubResource("ShaderMaterial_oncsc")
+position = Vector2(-22, -75.264915)
+texture = ExtResource("14_ekmum")
+
+[node name="Bolt2" type="Node2D" parent="." unique_id=575551148]
+visible = false
+z_index = 1
+material = SubResource("ShaderMaterial_oncsc")
+script = ExtResource("11_awwf5")
+from = Vector2(0, -22)
+to = Vector2(35, 0)
+jag = 0.25
+forks = 0.5
+bolt_seed = 19765
+rate = 0.0
+colors = PackedColorArray(0.07058824, 0.039215688, 0.2, 1, 0.16470589, 0.105882354, 0.47058824, 1, 0.27450982, 0.1882353, 0.7529412, 1, 0.3529412, 0.38431373, 0.9411765, 1, 0.34509805, 0.6509804, 1, 1, 0.61960787, 0.84705883, 1, 1, 0.89411765, 0.9647059, 1, 1, 1, 1, 1, 1)
+
+[node name="Light" type="Node2D" parent="Bolt2" unique_id=1102057535]
+z_index = 1
+texture_filter = 2
+material = SubResource("ShaderMaterial_g08x5")
+
+[node name="Spot2" type="ColorRect" parent="." unique_id=546524402]
+z_index = 1
+material = SubResource("ShaderMaterial_6gxj7")
+offset_left = 27.0
+offset_top = -9.0
+offset_right = 43.0
+offset_bottom = 7.0
+mouse_filter = 2
+
+[node name="SpotPx2" type="ColorRect" parent="." unique_id=477684087]
+visible = false
+z_index = 1
+material = SubResource("ShaderMaterial_oncsc")
+offset_left = 35.0
+offset_top = -1.0
+offset_right = 36.0
+mouse_filter = 2
+
+[node name="SpotLight2" type="ColorRect" parent="." unique_id=1244162988]
+z_index = 2
+material = SubResource("ShaderMaterial_i4k1j")
+offset_left = 11.0
+offset_top = -27.0
+offset_right = 59.0
+offset_bottom = 21.0
+mouse_filter = 2
+
+[node name="Land2" type="ColorRect" parent="." unique_id=1283027450]
+z_index = 2
+material = SubResource("ShaderMaterial_addbl")
+offset_left = -15.0
+offset_top = -54.0
+offset_right = 85.0
+offset_bottom = 46.0
+mouse_filter = 2
+
+[node name="LandSparks2" type="GPUParticles2D" parent="." unique_id=665624951]
+z_index = 1
+material = SubResource("ShaderMaterial_oncsc")
+position = Vector2(35, -1)
+emitting = false
+amount = 12
+texture = ExtResource("13_mr13k")
+lifetime = 0.4
+one_shot = true
+explosiveness = 1.0
+randomness = 0.5
+use_fixed_seed = true
+seed = 422071
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+process_material = SubResource("ParticleProcessMaterial_2ql4i")
+
+[node name="HotSparks2" type="GPUParticles2D" parent="." unique_id=1722200326]
+z_index = 1
+material = SubResource("ShaderMaterial_oncsc")
+position = Vector2(35, -1)
+emitting = false
+amount = 5
+texture = ExtResource("13_mr13k")
+lifetime = 0.8
+one_shot = true
+explosiveness = 1.0
+randomness = 0.5
+use_fixed_seed = true
+seed = 407873
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+process_material = SubResource("ParticleProcessMaterial_khxqo")
+
+[node name="Bolt3" type="Node2D" parent="." unique_id=1703432992]
+visible = false
+z_index = 1
+material = SubResource("ShaderMaterial_oncsc")
+script = ExtResource("11_awwf5")
+from = Vector2(0, -22)
+to = Vector2(40, -51.502277)
+jag = 0.25
+forks = 0.8
+bolt_seed = 19766
+rate = 0.0
+colors = PackedColorArray(0.07058824, 0.039215688, 0.2, 1, 0.16470589, 0.105882354, 0.47058824, 1, 0.27450982, 0.1882353, 0.7529412, 1, 0.3529412, 0.38431373, 0.9411765, 1, 0.34509805, 0.6509804, 1, 1, 0.61960787, 0.84705883, 1, 1, 0.89411765, 0.9647059, 1, 1, 1, 1, 1, 1)
+
+[node name="Light" type="Node2D" parent="Bolt3" unique_id=1200935311]
+z_index = 1
+texture_filter = 2
+material = SubResource("ShaderMaterial_g08x5")
+
+[node name="Glint3" type="Sprite2D" parent="." unique_id=912742941]
+visible = false
+modulate = Color(0.89411765, 0.9647059, 1, 1)
+z_index = 1
+material = SubResource("ShaderMaterial_oncsc")
+position = Vector2(40, -51.502277)
+texture = ExtResource("14_ekmum")
+
+[node name="Bolt4" type="Node2D" parent="." unique_id=1803736712]
+visible = false
+z_index = 1
+material = SubResource("ShaderMaterial_oncsc")
+script = ExtResource("11_awwf5")
+from = Vector2(0, -22)
+to = Vector2(-36, 0)
+jag = 0.25
+forks = 0.5
+bolt_seed = 19767
+rate = 0.0
+colors = PackedColorArray(0.07058824, 0.039215688, 0.2, 1, 0.16470589, 0.105882354, 0.47058824, 1, 0.27450982, 0.1882353, 0.7529412, 1, 0.3529412, 0.38431373, 0.9411765, 1, 0.34509805, 0.6509804, 1, 1, 0.61960787, 0.84705883, 1, 1, 0.89411765, 0.9647059, 1, 1, 1, 1, 1, 1)
+
+[node name="Light" type="Node2D" parent="Bolt4" unique_id=32742448]
+z_index = 1
+texture_filter = 2
+material = SubResource("ShaderMaterial_g08x5")
+
+[node name="Spot4" type="ColorRect" parent="." unique_id=741791586]
+z_index = 1
+material = SubResource("ShaderMaterial_cpgf0")
+offset_left = -44.0
+offset_top = -9.0
+offset_right = -28.0
+offset_bottom = 7.0
+mouse_filter = 2
+
+[node name="SpotPx4" type="ColorRect" parent="." unique_id=1552763816]
+visible = false
+z_index = 1
+material = SubResource("ShaderMaterial_oncsc")
+offset_left = -36.0
+offset_top = -1.0
+offset_right = -35.0
+mouse_filter = 2
+
+[node name="SpotLight4" type="ColorRect" parent="." unique_id=1272822481]
+z_index = 2
+material = SubResource("ShaderMaterial_k1cia")
+offset_left = -60.0
+offset_top = -27.0
+offset_right = -12.0
+offset_bottom = 21.0
+mouse_filter = 2
+
+[node name="Land4" type="ColorRect" parent="." unique_id=1391151728]
+z_index = 2
+material = SubResource("ShaderMaterial_5m0c7")
+offset_left = -86.0
+offset_top = -54.0
+offset_right = 14.0
+offset_bottom = 46.0
+mouse_filter = 2
+
+[node name="LandSparks4" type="GPUParticles2D" parent="." unique_id=250236126]
+z_index = 1
+material = SubResource("ShaderMaterial_oncsc")
+position = Vector2(-36, -1)
+emitting = false
+amount = 12
+texture = ExtResource("13_mr13k")
+lifetime = 0.4
+one_shot = true
+explosiveness = 1.0
+randomness = 0.5
+use_fixed_seed = true
+seed = 422075
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+process_material = SubResource("ParticleProcessMaterial_y37qk")
+
+[node name="HotSparks4" type="GPUParticles2D" parent="." unique_id=1445365318]
+z_index = 1
+material = SubResource("ShaderMaterial_oncsc")
+position = Vector2(-36, -1)
+emitting = false
+amount = 5
+texture = ExtResource("13_mr13k")
+lifetime = 0.8
+one_shot = true
+explosiveness = 1.0
+randomness = 0.5
+use_fixed_seed = true
+seed = 407877
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+process_material = SubResource("ParticleProcessMaterial_pqahc")
+
+[node name="Bolt5" type="Node2D" parent="." unique_id=247822021]
+visible = false
+z_index = 1
+material = SubResource("ShaderMaterial_oncsc")
+script = ExtResource("11_awwf5")
+from = Vector2(0, -22)
+to = Vector2(-25, -53.490856)
+jag = 0.25
+forks = 0.8
+bolt_seed = 19768
+rate = 0.0
+colors = PackedColorArray(0.07058824, 0.039215688, 0.2, 1, 0.16470589, 0.105882354, 0.47058824, 1, 0.27450982, 0.1882353, 0.7529412, 1, 0.3529412, 0.38431373, 0.9411765, 1, 0.34509805, 0.6509804, 1, 1, 0.61960787, 0.84705883, 1, 1, 0.89411765, 0.9647059, 1, 1, 1, 1, 1, 1)
+
+[node name="Light" type="Node2D" parent="Bolt5" unique_id=328923950]
+z_index = 1
+texture_filter = 2
+material = SubResource("ShaderMaterial_g08x5")
+
+[node name="Glint5" type="Sprite2D" parent="." unique_id=1877025974]
+visible = false
+modulate = Color(0.89411765, 0.9647059, 1, 1)
+z_index = 1
+material = SubResource("ShaderMaterial_oncsc")
+position = Vector2(-25, -53.490856)
+texture = ExtResource("14_ekmum")
+
+[node name="Bolt6" type="Node2D" parent="." unique_id=229969128]
+visible = false
+z_index = 1
+material = SubResource("ShaderMaterial_oncsc")
+script = ExtResource("11_awwf5")
+from = Vector2(0, -22)
+to = Vector2(40, 0)
+jag = 0.25
+forks = 0.5
+bolt_seed = 19769
+rate = 0.0
+colors = PackedColorArray(0.07058824, 0.039215688, 0.2, 1, 0.16470589, 0.105882354, 0.47058824, 1, 0.27450982, 0.1882353, 0.7529412, 1, 0.3529412, 0.38431373, 0.9411765, 1, 0.34509805, 0.6509804, 1, 1, 0.61960787, 0.84705883, 1, 1, 0.89411765, 0.9647059, 1, 1, 1, 1, 1, 1)
+
+[node name="Light" type="Node2D" parent="Bolt6" unique_id=1213299783]
+z_index = 1
+texture_filter = 2
+material = SubResource("ShaderMaterial_g08x5")
+
+[node name="Spot6" type="ColorRect" parent="." unique_id=250210511]
+z_index = 1
+material = SubResource("ShaderMaterial_fnisd")
+offset_left = 32.0
+offset_top = -9.0
+offset_right = 48.0
+offset_bottom = 7.0
+mouse_filter = 2
+
+[node name="SpotPx6" type="ColorRect" parent="." unique_id=406274981]
+visible = false
+z_index = 1
+material = SubResource("ShaderMaterial_oncsc")
+offset_left = 40.0
+offset_top = -1.0
+offset_right = 41.0
+mouse_filter = 2
+
+[node name="SpotLight6" type="ColorRect" parent="." unique_id=1396447453]
+z_index = 2
+material = SubResource("ShaderMaterial_usk0b")
+offset_left = 16.0
+offset_top = -27.0
+offset_right = 64.0
+offset_bottom = 21.0
+mouse_filter = 2
+
+[node name="Land6" type="ColorRect" parent="." unique_id=1561924208]
+z_index = 2
+material = SubResource("ShaderMaterial_0wi8n")
+offset_left = -10.0
+offset_top = -54.0
+offset_right = 90.0
+offset_bottom = 46.0
+mouse_filter = 2
+
+[node name="LandSparks6" type="GPUParticles2D" parent="." unique_id=677696979]
+z_index = 1
+material = SubResource("ShaderMaterial_oncsc")
+position = Vector2(40, -1)
+emitting = false
+amount = 12
+texture = ExtResource("13_mr13k")
+lifetime = 0.4
+one_shot = true
+explosiveness = 1.0
+randomness = 0.5
+use_fixed_seed = true
+seed = 422079
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+process_material = SubResource("ParticleProcessMaterial_78c3p")
+
+[node name="HotSparks6" type="GPUParticles2D" parent="." unique_id=1051759853]
+z_index = 1
+material = SubResource("ShaderMaterial_oncsc")
+position = Vector2(40, -1)
+emitting = false
+amount = 5
+texture = ExtResource("13_mr13k")
+lifetime = 0.8
+one_shot = true
+explosiveness = 1.0
+randomness = 0.5
+use_fixed_seed = true
+seed = 407881
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+process_material = SubResource("ParticleProcessMaterial_fqu28")
+
+[node name="Bolt7" type="Node2D" parent="." unique_id=1599163420]
+visible = false
+z_index = 1
+material = SubResource("ShaderMaterial_oncsc")
+script = ExtResource("11_awwf5")
+from = Vector2(0, -22)
+to = Vector2(21, -63.52264)
+jag = 0.25
+forks = 0.8
+bolt_seed = 19770
+rate = 0.0
+colors = PackedColorArray(0.07058824, 0.039215688, 0.2, 1, 0.16470589, 0.105882354, 0.47058824, 1, 0.27450982, 0.1882353, 0.7529412, 1, 0.3529412, 0.38431373, 0.9411765, 1, 0.34509805, 0.6509804, 1, 1, 0.61960787, 0.84705883, 1, 1, 0.89411765, 0.9647059, 1, 1, 1, 1, 1, 1)
+
+[node name="Light" type="Node2D" parent="Bolt7" unique_id=1456998116]
+z_index = 1
+texture_filter = 2
+material = SubResource("ShaderMaterial_g08x5")
+
+[node name="Glint7" type="Sprite2D" parent="." unique_id=1503160763]
+visible = false
+modulate = Color(0.89411765, 0.9647059, 1, 1)
+z_index = 1
+material = SubResource("ShaderMaterial_oncsc")
+position = Vector2(21, -63.52264)
+texture = ExtResource("14_ekmum")
+
+[node name="AirRing" type="ColorRect" parent="." unique_id=1701029028]
+z_index = 1
+material = SubResource("ShaderMaterial_guvem")
+offset_left = -72.0
+offset_top = -94.0
+offset_right = 72.0
+offset_bottom = 50.0
+mouse_filter = 2
+
+[node name="FrontLightL" type="ColorRect" parent="." unique_id=621096168]
+z_index = 2
+material = SubResource("ShaderMaterial_swijp")
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+mouse_filter = 2
+
+[node name="FrontLightR" type="ColorRect" parent="." unique_id=1592006237]
+z_index = 2
+material = SubResource("ShaderMaterial_2smp2")
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+mouse_filter = 2
+
+[node name="DustL" type="GPUParticles2D" parent="." unique_id=1247465777]
+z_index = 1
+material = SubResource("ShaderMaterial_kc4hg")
+emitting = false
+amount = 50
+texture = ExtResource("15_uvyck")
+lifetime = 1.1
+randomness = 0.4
+use_fixed_seed = true
+seed = 332091
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+process_material = SubResource("ParticleProcessMaterial_8aal1")
+
+[node name="GritL" type="GPUParticles2D" parent="." unique_id=1437015394]
+z_index = 1
+material = SubResource("ShaderMaterial_oncsc")
+emitting = false
+amount = 45
+texture = ExtResource("16_46oam")
+lifetime = 1.2
+randomness = 0.3
+use_fixed_seed = true
+seed = 771145
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+process_material = SubResource("ParticleProcessMaterial_1qf5n")
+
+[node name="DustR" type="GPUParticles2D" parent="." unique_id=1751975757]
+z_index = 1
+material = SubResource("ShaderMaterial_kc4hg")
+emitting = false
+amount = 50
+texture = ExtResource("15_uvyck")
+lifetime = 1.1
+randomness = 0.4
+use_fixed_seed = true
+seed = 332099
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+process_material = SubResource("ParticleProcessMaterial_6b2r6")
+
+[node name="GritR" type="GPUParticles2D" parent="." unique_id=1611628725]
+z_index = 1
+material = SubResource("ShaderMaterial_oncsc")
+emitting = false
+amount = 45
+texture = ExtResource("16_46oam")
+lifetime = 1.2
+randomness = 0.3
+use_fixed_seed = true
+seed = 771153
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+process_material = SubResource("ParticleProcessMaterial_vwpg8")
+
+[node name="Spray" type="GPUParticles2D" parent="." unique_id=1377177443]
+z_index = 1
+material = SubResource("ShaderMaterial_oncsc")
+position = Vector2(0, -22)
+emitting = false
+amount = 64
+texture = ExtResource("13_mr13k")
+lifetime = 0.45
+one_shot = true
+explosiveness = 1.0
+randomness = 0.6
+use_fixed_seed = true
+seed = 939503
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+process_material = SubResource("ParticleProcessMaterial_xxumn")
+
+[node name="Smoke" type="GPUParticles2D" parent="." unique_id=419323950]
+z_index = 1
+material = SubResource("ShaderMaterial_kc4hg")
+position = Vector2(0, -22)
+emitting = false
+texture = ExtResource("17_cv8bs")
+lifetime = 1.3
+one_shot = true
+explosiveness = 1.0
+randomness = 0.4
+use_fixed_seed = true
+seed = 828736
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+process_material = SubResource("ParticleProcessMaterial_8mn73")
+
+[node name="Hum" type="Node2D" parent="." unique_id=593845303]
+visible = false
+z_index = 1
+material = SubResource("ShaderMaterial_oncsc")
+script = ExtResource("11_awwf5")
+to = Vector2(1, 0)
+jag = 0.4
+forks = 0.3
+bolt_seed = 57020
+rate = 30.0
+style = 1
+light = 0.35
+colors = PackedColorArray(0.07058824, 0.039215688, 0.2, 1, 0.16470589, 0.105882354, 0.47058824, 1, 0.27450982, 0.1882353, 0.7529412, 1, 0.3529412, 0.38431373, 0.9411765, 1, 0.34509805, 0.6509804, 1, 1, 0.61960787, 0.84705883, 1, 1, 0.89411765, 0.9647059, 1, 1, 1, 1, 1, 1)
+
+[node name="Light" type="Node2D" parent="Hum" unique_id=632695049]
+z_index = 1
+texture_filter = 2
+material = SubResource("ShaderMaterial_g08x5")

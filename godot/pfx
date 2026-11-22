@@ -4,4 +4,9 @@
 set -euo pipefail
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 GODOT_BIN="${GODOT:-$(command -v godot || command -v godot4 || echo "$HOME/.local/bin/godot")}"
+if [ "${1:-}" = "perf" ]; then
+	# perf measures a real GPU: a window on the desktop, the Compatibility renderer, no vsync
+	exec "$GODOT_BIN" --no-header --path "$DIR" --rendering-method gl_compatibility --rendering-driver opengl3 \
+		--disable-vsync --resolution 1280x720 -s res://tools/cli.gd -- "$@"
+fi
 exec "$GODOT_BIN" --headless --no-header --path "$DIR" -s res://tools/cli.gd -- "$@"

@@ -2,9 +2,9 @@ name: godot
 on:
   push:
     branches: [main]
-    paths: ["godot/**", "src/**", ".github/workflows/godot.yml"]
+    paths: ["godot/**", "godot-particle/**", "src/**", ".github/workflows/godot.yml"]
   pull_request:
-    paths: ["godot/**", "src/**", ".github/workflows/godot.yml"]
+    paths: ["godot/**", "godot-particle/**", "src/**", ".github/workflows/godot.yml"]
   schedule:
     - cron: "17 3 * * *"
   workflow_dispatch:
@@ -63,4 +63,44 @@ jobs:
         with:
           name: parity-diffs
           path: godot/records/parity/
+          if-no-files-found: ignore
+
+  particles:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Godot, Xvfb, numpy, Pillow
+        run: |
+          curl -fsSL -o godot.zip "https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}-stable/Godot_v${GODOT_VERSION}-stable_linux.x86_64.zip"
+          unzip -q godot.zip -d "$HOME/godot"
+          echo "GODOT=$HOME/godot/Godot_v${GODOT_VERSION}-stable_linux.x86_64" >> "$GITHUB_ENV"
+          sudo apt-get update -q && sudo apt-get install -yq xvfb
+          pip install -q numpy pillow
+      - name: Import both projects
+        run: |
+          $GODOT --headless --path godot --import || true
+          $GODOT --headless --path godot-particle --import || true
+      - name: Scenes against the originals' meta
+        run: cd godot-particle && ./pfxp check --quiet
+      - name: Upstream sync status
+        run: node godot-particle/port/sync.mjs || true
+      - name: One effect per category through the nodes, and against the reference
+        run: |
+          ids=$(for d in godot-particle/build/fx/*/; do c=$(basename "$d"); ls "$d" | grep '\.gd$' | head -1 | sed "s|\.gd$||;s|^|$c/|"; done)
+          cd godot && ./pfx render $ids --webp --scale 1 --out res://records/gallery && cd ..
+          cd godot-particle
+          ./pfxp smoke $ids --quiet
+          ./pfxp compare $ids --min 0.45
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: particle-compare
+          path: godot-particle/records/compare/
           if-no-files-found: ignore

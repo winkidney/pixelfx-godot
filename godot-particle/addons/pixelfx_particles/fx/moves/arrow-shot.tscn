@@ -1,0 +1,105 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://addons/pixelfx_particles/core/pfx_effect.gd" id="1_lb10p"]
+[ext_resource type="PackedScene" path="res://addons/pixelfx_particles/fx/projectiles/arrow.tscn" id="2_mbgxq"]
+[ext_resource type="PackedScene" path="res://addons/pixelfx_particles/fx/impacts/hit-spark.tscn" id="3_31nn7"]
+
+[sub_resource type="Animation" id="Animation_m8ryo"]
+length = 1.9
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Arrow1:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.56, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(30, -28), Vector2(30, -28), Vector2(180, -28)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Arrow1:visible")
+tracks/1/interp = 0
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.559, 0.799),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Arrow1")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.559),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play"
+}]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("HitSpark2:visible")
+tracks/3/interp = 0
+tracks/3/loop_wrap = false
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.799),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("HitSpark2")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.799),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kx76j"]
+_data = {
+&"fx": SubResource("Animation_m8ryo")
+}
+
+[node name="ArrowShot" type="Node2D" unique_id=841483356]
+script = ExtResource("1_lb10p")
+effect_id = "moves/arrow-shot"
+source = "src/fx/moves/arrow-shot.js@e1c4ae18c7e9234709f936ed31a8790c47f35100"
+duration = 1.9
+canvas_size = Vector2i(300, 74)
+origin = Vector2i(38, 66)
+bg = "ground"
+actor = 2
+palette_extra = PackedColorArray()
+palette_override = PackedColorArray()
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1507628146]
+callback_mode_method = 1
+libraries/ = SubResource("AnimationLibrary_kx76j")
+
+[node name="Arrow1" parent="." unique_id=1495105140 instance=ExtResource("2_mbgxq")]
+visible = false
+position = Vector2(30, -28)
+autoplay = false
+show_actor = false
+
+[node name="HitSpark2" parent="." unique_id=857931885 instance=ExtResource("3_31nn7")]
+visible = false
+position = Vector2(170, -10)
+autoplay = false
+show_actor = false

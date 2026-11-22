@@ -1,0 +1,427 @@
+[gd_scene format=4]
+
+[ext_resource type="Script" path="res://addons/pixelfx_particles/core/pfx_effect.gd" id="1_oft60"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/fx/impacts/_bits.gdshader" id="2_pcgxb"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/fx/impacts/blunt-hit/_puffs_front.res" id="3_rayot"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/fx/impacts/blunt-hit/_quad26.res" id="4_om23k"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/fx/impacts/_sim.gdshader" id="5_bq2a4"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/fx/impacts/blunt-hit/_rocks.res" id="6_qx227"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/fx/impacts/blunt-hit/_quad10.res" id="7_e4m1n"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/fx/impacts/_blob.gdshader" id="8_ayhf2"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/fx/impacts/_wedges.gdshader" id="9_ia5gv"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/shaders/ring_light.gdshader" id="10_afxmw"]
+
+[sub_resource type="Animation" id="Animation_55f6i"]
+length = 0.9
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Blob:material:shader_parameter/r0")
+tracks/0/interp = 0
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.016666668),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [11.5, 13.5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Blob:material:shader_parameter/sy")
+tracks/1/interp = 0
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.016666668),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [1.1, 1.25]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Blob:material:shader_parameter/ph")
+tracks/2/interp = 0
+tracks/2/loop_wrap = false
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.016666668),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [1.248650618304504, 1.8486506183045042]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Blob:material:shader_parameter/look")
+tracks/3/interp = 0
+tracks/3/loop_wrap = false
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.016666668),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0.0, 1.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Blob:visible")
+tracks/4/interp = 0
+tracks/4/loop_wrap = false
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.05),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Wedges:material:shader_parameter/t")
+tracks/5/interp = 1
+tracks/5/loop_wrap = false
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.25]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Wedges:visible")
+tracks/6/interp = 0
+tracks/6/loop_wrap = false
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Pop:material:shader_parameter/alpha")
+tracks/7/interp = 1
+tracks/7/loop_wrap = false
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.016666668, 0.033333335, 0.05, 0.06666667, 0.083333336, 0.1, 0.11666667, 0.13333334, 0.15, 0.16666667, 0.2, 0.23333333, 0.25, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.5, 0.3787325641984832, 0.28687671036871637, 0.2172991042535391, 0.16459649390395278, 0.12467610438864811, 0.09443780141878091, 0.07153334137720409, 0.05418401161094793, 0.0410424993119494, 0.03108826201105816, 0.017836996673626197, 0.010234037857175238, 0.0, 0.0]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Light:material:shader_parameter/alpha")
+tracks/8/interp = 1
+tracks/8/loop_wrap = false
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 0.033333335, 0.06666667, 0.1, 0.11666667, 0.13333334, 0.15, 0.16666667, 0.18333334, 0.2, 0.21666667, 0.23333333, 0.25, 0.26666668, 0.28333333, 0.3, 0.31666666, 0.33333334, 0.35, 0.36666667, 0.38333333, 0.42),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.6, 0.5041666666666665, 0.4166666666666667, 0.33749999999999997, 0.3010416666666667, 0.2666666666666667, 0.234375, 0.2041666666666667, 0.1760416666666667, 0.15, 0.1260416666666667, 0.1041666666666667, 0.08437499999999999, 0.06666666666666668, 0.051041666666666693, 0.03750000000000003, 0.026041666666666675, 0.01666666666666668, 0.009375000000000017, 0.004166666666666681, 0.0010416666666666647, 0.0]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Light:material:shader_parameter/radius")
+tracks/9/interp = 1
+tracks/9/loop_wrap = false
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.42),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [48.0, 26.400000000000002, 26.400000000000002]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("LightWhite:material:shader_parameter/alpha")
+tracks/10/interp = 1
+tracks/10/loop_wrap = false
+tracks/10/keys = {
+"times": PackedFloat32Array(0, 0.016666668, 0.033333335, 0.05, 0.06666667, 0.09),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.6, 0.3482993197278911, 0.16462585034013605, 0.04897959183673469, 0.0013605442176870778, 0.0]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("LightWhite:material:shader_parameter/radius")
+tracks/11/interp = 1
+tracks/11/loop_wrap = false
+tracks/11/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.083333336, 0.09),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [16.0, 9.142857142857144, 8.8, 8.8]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("LightFloor:material:shader_parameter/alpha")
+tracks/12/interp = 1
+tracks/12/loop_wrap = false
+tracks/12/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.42),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.25, 0.19140625, 0.140625, 0.09765625, 0.0625, 0.03515625, 0.015625000000000014, 0.003906250000000007, 0.0, 0.0]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("LightFloor:material:shader_parameter/radius")
+tracks/13/interp = 1
+tracks/13/loop_wrap = false
+tracks/13/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.42),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [36.0, 19.8, 19.8]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ut77d"]
+_data = {
+&"fx": SubResource("Animation_55f6i")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jyhm7"]
+resource_name = "PuffsFront"
+shader = ExtResource("2_pcgxb")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = true
+shader_parameter/data = ExtResource("3_rayot")
+shader_parameter/kind = 30.0
+shader_parameter/quad = Vector2(26, 26)
+shader_parameter/s0 = null
+shader_parameter/s1 = null
+shader_parameter/s2 = null
+shader_parameter/s3 = null
+shader_parameter/outline_c = null
+shader_parameter/light_c = null
+shader_parameter/body_c = null
+shader_parameter/shade_c = null
+shader_parameter/smoke4 = null
+shader_parameter/big = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ik84h"]
+shader = ExtResource("5_bq2a4")
+shader_parameter/data = ExtResource("3_rayot")
+shader_parameter/kind = 30.0
+shader_parameter/floor_y = 0.0
+shader_parameter/grav = 1.0
+shader_parameter/drag = 0.0
+shader_parameter/bounce = 0.0
+shader_parameter/big = 0.0
+shader_parameter/substeps = null
+shader_parameter/warm_k = 0.55
+shader_parameter/warm_t0 = 0.03
+shader_parameter/warm_len = 0.25
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_66chx"]
+resource_name = "Rocks"
+shader = ExtResource("2_pcgxb")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = false
+shader_parameter/data = ExtResource("6_qx227")
+shader_parameter/kind = 20.0
+shader_parameter/quad = Vector2(10, 10)
+shader_parameter/s0 = null
+shader_parameter/s1 = null
+shader_parameter/s2 = null
+shader_parameter/s3 = null
+shader_parameter/outline_c = Color(0.101960786, 0.078431375, 0.13333334, 1)
+shader_parameter/light_c = Color(0.6117647, 0.5137255, 0.5137255, 1)
+shader_parameter/body_c = Color(0.43137255, 0.3529412, 0.3529412, 1)
+shader_parameter/shade_c = Color(0.27450982, 0.22352941, 0.22352941, 1)
+shader_parameter/smoke4 = null
+shader_parameter/big = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_e66fl"]
+shader = ExtResource("5_bq2a4")
+shader_parameter/data = ExtResource("6_qx227")
+shader_parameter/kind = 20.0
+shader_parameter/floor_y = 0.0
+shader_parameter/grav = 1.0
+shader_parameter/drag = 0.6
+shader_parameter/bounce = 0.28
+shader_parameter/big = 0.0
+shader_parameter/substeps = null
+shader_parameter/warm_k = null
+shader_parameter/warm_t0 = null
+shader_parameter/warm_len = null
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jais7"]
+shader = ExtResource("8_ayhf2")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = null
+shader_parameter/size = Vector2(44, 44)
+shader_parameter/r0 = 11.5
+shader_parameter/sy = 1.1
+shader_parameter/ph = 1.248650618304504
+shader_parameter/look = 0.0
+shader_parameter/white = Color(1, 1, 1, 1)
+shader_parameter/hi = Color(0.9647059, 0.91764706, 0.8235294, 1)
+shader_parameter/mid = Color(0.8627451, 0.7921569, 0.7058824, 1)
+shader_parameter/lo = Color(0.6901961, 0.6117647, 0.5647059, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4qsh7"]
+shader = ExtResource("9_ia5gv")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = null
+shader_parameter/size = Vector2(72, 72)
+shader_parameter/wa = PackedVector4Array(0.14048432, 7.275895, 4.679009, 15.171413, 0.5504764, 11.690615, 4.4564285, 14.761856, 1.488372, 11.777767, 3.860486, 14.606639, 2.2438703, 7.708344, 4.4191074, 14.000681, 2.8030694, 10.446817, 3.3345253, 15.502679, 3.4861784, 8.787304, 4.3857136, 13.876455, 4.05284, 10.657854, 3.7855966, 14.610282, 4.9003344, 11.909383, 4.094303, 13.539254, 5.6062555, 11.91105, 4.9685526, 15.752426)
+shader_parameter/wt = PackedVector4Array(0.03222154, 0.04525437, 0.13597271, 0, 0.022085745, 0.058756333, 0.104351126, 0, 0.037435956, 0.057311177, 0.1127664, 0, 0.016202373, 0.05752624, 0.10022682, 0, 0.032593124, 0.04393596, 0.09341657, 0, 0.02883376, 0.059141383, 0.11839429, 0, 0.03499368, 0.051541332, 0.120684676, 0, 0.038242158, 0.05193826, 0.122057915, 0, 0.015535832, 0.054635033, 0.09475209, 0)
+shader_parameter/count = 9.0
+shader_parameter/t = null
+shader_parameter/ink = Color(0.2901961, 0.22745098, 0.23529412, 1)
+shader_parameter/white = Color(1, 1, 1, 1)
+shader_parameter/hi = Color(0.9647059, 0.91764706, 0.8235294, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6egvo"]
+shader = ExtResource("10_afxmw")
+shader_parameter/size = Vector2(62, 62)
+shader_parameter/radius = 28.0
+shader_parameter/thickness = null
+shader_parameter/squash = null
+shader_parameter/color = Color(1, 0.7882353, 0.5411765, 1)
+shader_parameter/strength = null
+shader_parameter/alpha = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3jmp7"]
+shader = ExtResource("10_afxmw")
+shader_parameter/size = Vector2(102, 102)
+shader_parameter/radius = 48.0
+shader_parameter/thickness = null
+shader_parameter/squash = null
+shader_parameter/color = Color(1, 0.7882353, 0.5411765, 1)
+shader_parameter/strength = null
+shader_parameter/alpha = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_svolq"]
+shader = ExtResource("10_afxmw")
+shader_parameter/size = Vector2(38, 38)
+shader_parameter/radius = 16.0
+shader_parameter/thickness = null
+shader_parameter/squash = null
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/strength = null
+shader_parameter/alpha = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iglpq"]
+shader = ExtResource("10_afxmw")
+shader_parameter/size = Vector2(78, 78)
+shader_parameter/radius = 36.0
+shader_parameter/thickness = null
+shader_parameter/squash = null
+shader_parameter/color = Color(1, 0.7882353, 0.5411765, 1)
+shader_parameter/strength = null
+shader_parameter/alpha = 0.0
+
+[node name="BluntHit" type="Node2D" unique_id=72933950]
+script = ExtResource("1_oft60")
+effect_id = "impacts/blunt-hit"
+source = "src/fx/impacts/blunt-hit.js@f21317155d505cf1a7e923da26bff062a062edeb"
+duration = 0.9
+canvas_size = Vector2i(128, 88)
+origin = Vector2i(64, 72)
+bg = "ground"
+ramps = {
+"palette": PackedColorArray(0.11372549, 0.08627451, 0.1254902, 1, 0.2901961, 0.22745098, 0.23529412, 1, 0.49019608, 0.41568628, 0.4, 1, 0.6901961, 0.6117647, 0.5647059, 1, 0.8627451, 0.7921569, 0.7058824, 1, 0.9647059, 0.91764706, 0.8235294, 1, 1, 1, 1, 1)
+}
+palette_extra = PackedColorArray(0.7176471, 0.65882355, 0.6509804, 1, 0.8729412, 0.8464706, 0.84294116, 1, 0.7487059, 0.67305887, 0.638902, 1, 0.88691765, 0.8528765, 0.83750594, 1, 0.7797647, 0.6872941, 0.62682354, 1, 0.9008941, 0.8592824, 0.8320706, 1, 0.81082356, 0.70152944, 0.61474514, 1, 0.9148706, 0.86568826, 0.8266353, 1, 0.84188235, 0.7157647, 0.6026667, 1, 0.9288471, 0.87209415, 0.8212, 1, 0.8729412, 0.73, 0.5905883, 1, 0.9428235, 0.8785, 0.8157647, 1, 0.101960786, 0.078431375, 0.13333334, 1, 0.6117647, 0.5137255, 0.5137255, 1, 0.43137255, 0.3529412, 0.3529412, 1, 0.27450982, 0.22352941, 0.22352941, 1)
+palette_override = PackedColorArray()
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=78721042]
+libraries/ = SubResource("AnimationLibrary_ut77d")
+
+[node name="PuffsFront" type="GPUParticles2D" parent="." unique_id=1982332327]
+z_index = 1
+material = SubResource("ShaderMaterial_jyhm7")
+amount = 45
+texture = ExtResource("4_om23k")
+lifetime = 0.9
+one_shot = true
+explosiveness = 1.0
+use_fixed_seed = true
+seed = 939146
+fixed_fps = 60
+interpolate = false
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+local_coords = true
+process_material = SubResource("ShaderMaterial_ik84h")
+
+[node name="Rocks" type="GPUParticles2D" parent="." unique_id=878783047]
+z_index = 1
+material = SubResource("ShaderMaterial_66chx")
+amount = 5
+texture = ExtResource("7_e4m1n")
+lifetime = 0.8230315159540624
+one_shot = true
+explosiveness = 1.0
+use_fixed_seed = true
+seed = 320034
+fixed_fps = 60
+interpolate = false
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+local_coords = true
+process_material = SubResource("ShaderMaterial_e66fl")
+
+[node name="Blob" type="ColorRect" parent="." unique_id=1099075596]
+z_index = 1
+material = SubResource("ShaderMaterial_jais7")
+offset_left = -22.0
+offset_top = -44.0
+offset_right = 22.0
+mouse_filter = 2
+
+[node name="Wedges" type="ColorRect" parent="." unique_id=1628426460]
+z_index = 1
+material = SubResource("ShaderMaterial_4qsh7")
+offset_left = -36.0
+offset_top = -58.0
+offset_right = 36.0
+offset_bottom = 14.0
+mouse_filter = 2
+
+[node name="Pop" type="ColorRect" parent="." unique_id=1986624903]
+z_index = 2
+material = SubResource("ShaderMaterial_6egvo")
+offset_left = -31.0
+offset_top = -53.0
+offset_right = 31.0
+offset_bottom = 9.0
+mouse_filter = 2
+
+[node name="Light" type="ColorRect" parent="." unique_id=1918317540]
+z_index = 2
+material = SubResource("ShaderMaterial_3jmp7")
+offset_left = -51.0
+offset_top = -73.0
+offset_right = 51.0
+offset_bottom = 29.0
+mouse_filter = 2
+
+[node name="LightWhite" type="ColorRect" parent="." unique_id=984687161]
+z_index = 2
+material = SubResource("ShaderMaterial_svolq")
+offset_left = -19.0
+offset_top = -41.0
+offset_right = 19.0
+offset_bottom = -3.0
+mouse_filter = 2
+
+[node name="LightFloor" type="ColorRect" parent="." unique_id=1749675339]
+z_index = 2
+material = SubResource("ShaderMaterial_iglpq")
+offset_left = -39.0
+offset_top = -41.0
+offset_right = 39.0
+offset_bottom = 37.0
+mouse_filter = 2

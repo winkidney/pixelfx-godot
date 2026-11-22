@@ -1,0 +1,2728 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://addons/pixelfx_particles/core/pfx_effect.gd" id="1_mbbd8"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/fx/nature/_rift.gdshader" id="2_d584s"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/fx/nature/_rift_light.gdshader" id="3_dywj2"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/shaders/dither.gdshader" id="4_egfeh"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/shaders/ring_light.gdshader" id="5_a3qlu"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/textures/dot1.png" id="6_5einj"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/textures/dot2.png" id="7_2d3ot"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/textures/disc11.png" id="8_icwq2"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/textures/streak6.png" id="9_8sjni"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/textures/disc5.png" id="10_pgoaw"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/shaders/light.gdshader" id="11_tkowm"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/textures/glow8.png" id="12_gxf4m"]
+
+[sub_resource type="Animation" id="Animation_e12gu"]
+length = 3.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Rift:material:shader_parameter/open")
+tracks/0/interp = 0
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.06566667, 0.099, 0.13233334, 0.16566667, 0.199, 0.23233333, 0.26566666, 0.299, 0.33233333, 0.36566666, 0.399, 0.43233332, 0.46566668, 0.499, 0.5323333, 0.5656667, 0.599, 0.63233334, 0.66566664, 0.699, 0.73233336, 0.76566666, 0.799),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [-1.0, 2.8419229588985466, 15.813877640603572, 26.839129075852263, 36.07594582126709, 43.68259643347051, 49.817349469085, 54.638473484733026, 58.30423703703704, 60.97290868261952, 62.802756978102934, 63.95205048010975, 64.57905774526242, 64.84204733018342, 64.8992877914952, 66.720987654321, 71.60123456790124, 78.66666666666666, 87.0432098765432, 95.85679012345678, 104.23333333333332, 111.29876543209875, 116.17901234567901, 118.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Rift:material:shader_parameter/heat")
+tracks/1/interp = 0
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.032333333, 0.06566667, 0.099, 0.13233334, 0.16566667, 0.199, 0.23233333, 0.26566666, 0.299, 0.33233333, 0.36566666, 0.399, 0.43233332, 0.46566668, 0.499, 0.5323333, 0.5656667, 0.599, 0.63233334, 0.66566664, 0.699, 0.73233336, 0.76566666, 0.799, 0.8323333, 0.8656667, 0.899, 0.93233335, 0.96566665, 0.999, 1.0323334, 1.0656667, 1.099, 1.1323333, 1.1656667, 1.199, 1.2323333, 1.2656667, 1.299, 1.3323333, 1.3656666, 1.399, 1.4323334, 1.4656667, 1.499, 1.5323334, 1.5656667, 1.599, 1.6323333, 1.6656667, 1.699, 1.7323333, 1.7656667, 1.799, 1.8323333, 1.8656666, 1.899, 1.9323334, 1.9656667, 1.999, 2.0323334, 2.0656667, 2.099, 2.1323333, 2.1656666, 2.199, 2.2323334, 2.2656667, 2.299, 2.3323333, 2.3656666, 2.399, 2.4323332, 2.4656668, 2.499),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0.0, 0.031116753905308377, 0.12382340226802717, 0.2588270642456836, 0.3976183269210296, 0.501768230077185, 0.5547346515515805, 0.5706614739423695, 0.5825117492168163, 0.6148370635344536, 0.6843603516511381, 0.7900337344871893, 0.8988226702277218, 0.9767186644887409, 0.9993706611143172, 0.9596974225246981, 0.8701011944315973, 0.7585906414955335, 0.6600250624812916, 0.6052170296191566, 0.6113000745969029, 0.6763725775525931, 0.7800922322006024, 0.8900352514287975, 0.9718323629712994, 0.9999129829301757, 0.9654988325248693, 0.8793481146261225, 0.7683923934219006, 0.6673175218048697, 0.6077205016240886, 0.6082319492407188, 0.6686919810849876, 0.770200194837161, 0.8810241216223356, 0.9665191087832344, 0.9999585800285339, 0.9708890268069434, 0.8883978781915782, 0.7782726809151841, 0.6749396578984748, 0.6107017313919834, 0.6056403108512272, 0.659552584857719, 0.752341874047466, 0.8515065154363364, 0.9218652789840261, 0.937623936784192, 0.8908064267326262, 0.7932417282640399, 0.6716987499752707, 0.5582008375819631, 0.47914451381724515, 0.44706044361805686, 0.45768536816660954, 0.4929637545481952, 0.5284628154506713, 0.542244310219694, 0.5219677982123759, 0.467917008168245, 0.3913181885077405, 0.3090781394265062, 0.23725009592683058, 0.18574505353367216, 0.1560510137061525, 0.14237894067864518, 0.13529598810449855, 0.12606703377103778, 0.10988854243224751, 0.08690152286396907, 0.060951991314636016, 0.037036785875096276, 0.018822162430931037, 0.007397516557946287, 0.001680048719447213, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Rift:material:shader_parameter/jx")
+tracks/2/interp = 0
+tracks/2/loop_wrap = false
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.06566667, 0.099, 0.13233334, 0.16566667, 0.199, 0.23233333, 0.26566666, 0.299, 0.33233333, 0.36566666, 0.399, 0.43233332, 0.46566668, 0.499, 0.5323333, 0.5656667, 0.599, 0.63233334, 0.66566664, 0.699, 0.73233336, 0.76566666, 0.799, 0.8323333, 0.8656667, 0.899, 0.93233335, 0.96566665, 0.999, 1.0323334, 1.0656667, 1.099, 1.1323333, 1.1656667, 1.199, 1.2323333, 1.2656667, 1.299, 1.3323333, 1.3656666, 1.399, 1.4323334, 1.4656667, 1.499, 1.5323334, 1.5656667, 1.599, 1.6323333, 1.6656667, 1.699, 1.7323333, 1.7656667, 1.799, 1.8323333, 1.8656666, 1.899, 1.9323334, 1.9656667, 1.999, 2.0323334, 2.0656667, 2.099, 2.1656666, 2.199, 2.2323334, 2.2656667, 3.099),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0.0, 0.7660788132943895, -0.0651620126785565, -0.33457167713056024, 0.47661293578658204, -0.4443963288522761, 0.3239919424398084, -0.18302090973733387, 0.06334853715252521, 0.016972256858447558, -0.057130055407879125, 0.06596333972772037, -0.05556352611116581, 0.03701231250320303, -0.018275684118421783, 0.44415098723458435, -0.5752094829054678, 0.5141745217346395, -0.3618248496562985, 0.19457668305205594, -0.05781196213050602, -0.030609515696386997, 0.0720607707054763, -0.0781526395815366, 0.06343071223163631, -0.04068894876405372, 0.01880263241059033, 0.7741384120122616, -0.37360262263662886, 0.06742455956915427, 0.11619491232236298, -0.19010861435946932, 0.18672914054307138, -0.14171144788582823, 0.08424819022908213, -0.03323746518106998, -0.0024407535599339433, 0.02145718769064724, -0.02693373504799866, 0.023713514727110363, -0.01646477064545755, 0.008680694674929343, -0.002402134725662666, -0.0015988726430731575, 0.0034250878600802595, -0.003635616740643635, 0.002910773780452999, -0.0018401374834200184, 0.0008272065546641542, -8.008701061320924e-05, -0.0003484532402266894, 0.0005030951100350396, -0.0004716724315132415, 0.00034539880972007524, -0.000196258411088133, 6.904270747905744e-05, 1.6734178837358255e-05, -5.994137677670287e-05, 6.979836164043767e-05, -5.90738900340481e-05, 3.953306924656037e-05, -1.967065248242909e-05, 4.222997015763497e-06, -9.210321306467404e-06, 9.265217973660159e-06, -7.153663118069797e-06, 4.341226664245195e-06, -2.9589396911862016e-09]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("RiftLight:material:shader_parameter/open")
+tracks/3/interp = 0
+tracks/3/loop_wrap = false
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.06566667, 0.099, 0.13233334, 0.16566667, 0.199, 0.23233333, 0.26566666, 0.299, 0.33233333, 0.36566666, 0.399, 0.43233332, 0.46566668, 0.499, 0.5323333, 0.5656667, 0.599, 0.63233334, 0.66566664, 0.699, 0.73233336, 0.76566666, 0.799),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [-1.0, 2.8419229588985466, 15.813877640603572, 26.839129075852263, 36.07594582126709, 43.68259643347051, 49.817349469085, 54.638473484733026, 58.30423703703704, 60.97290868261952, 62.802756978102934, 63.95205048010975, 64.57905774526242, 64.84204733018342, 64.8992877914952, 66.720987654321, 71.60123456790124, 78.66666666666666, 87.0432098765432, 95.85679012345678, 104.23333333333332, 111.29876543209875, 116.17901234567901, 118.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("RiftLight:material:shader_parameter/heat")
+tracks/4/interp = 0
+tracks/4/loop_wrap = false
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.032333333, 0.06566667, 0.099, 0.13233334, 0.16566667, 0.199, 0.23233333, 0.26566666, 0.299, 0.33233333, 0.36566666, 0.399, 0.43233332, 0.46566668, 0.499, 0.5323333, 0.5656667, 0.599, 0.63233334, 0.66566664, 0.699, 0.73233336, 0.76566666, 0.799, 0.8323333, 0.8656667, 0.899, 0.93233335, 0.96566665, 0.999, 1.0323334, 1.0656667, 1.099, 1.1323333, 1.1656667, 1.199, 1.2323333, 1.2656667, 1.299, 1.3323333, 1.3656666, 1.399, 1.4323334, 1.4656667, 1.499, 1.5323334, 1.5656667, 1.599, 1.6323333, 1.6656667, 1.699, 1.7323333, 1.7656667, 1.799, 1.8323333, 1.8656666, 1.899, 1.9323334, 1.9656667, 1.999, 2.0323334, 2.0656667, 2.099, 2.1323333, 2.1656666, 2.199, 2.2323334, 2.2656667, 2.299, 2.3323333, 2.3656666, 2.399, 2.4323332, 2.4656668, 2.499),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0.0, 0.031116753905308377, 0.12382340226802717, 0.2588270642456836, 0.3976183269210296, 0.501768230077185, 0.5547346515515805, 0.5706614739423695, 0.5825117492168163, 0.6148370635344536, 0.6843603516511381, 0.7900337344871893, 0.8988226702277218, 0.9767186644887409, 0.9993706611143172, 0.9596974225246981, 0.8701011944315973, 0.7585906414955335, 0.6600250624812916, 0.6052170296191566, 0.6113000745969029, 0.6763725775525931, 0.7800922322006024, 0.8900352514287975, 0.9718323629712994, 0.9999129829301757, 0.9654988325248693, 0.8793481146261225, 0.7683923934219006, 0.6673175218048697, 0.6077205016240886, 0.6082319492407188, 0.6686919810849876, 0.770200194837161, 0.8810241216223356, 0.9665191087832344, 0.9999585800285339, 0.9708890268069434, 0.8883978781915782, 0.7782726809151841, 0.6749396578984748, 0.6107017313919834, 0.6056403108512272, 0.659552584857719, 0.752341874047466, 0.8515065154363364, 0.9218652789840261, 0.937623936784192, 0.8908064267326262, 0.7932417282640399, 0.6716987499752707, 0.5582008375819631, 0.47914451381724515, 0.44706044361805686, 0.45768536816660954, 0.4929637545481952, 0.5284628154506713, 0.542244310219694, 0.5219677982123759, 0.467917008168245, 0.3913181885077405, 0.3090781394265062, 0.23725009592683058, 0.18574505353367216, 0.1560510137061525, 0.14237894067864518, 0.13529598810449855, 0.12606703377103778, 0.10988854243224751, 0.08690152286396907, 0.060951991314636016, 0.037036785875096276, 0.018822162430931037, 0.007397516557946287, 0.001680048719447213, 0.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("RiftLight:material:shader_parameter/jx")
+tracks/5/interp = 0
+tracks/5/loop_wrap = false
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.06566667, 0.099, 0.13233334, 0.16566667, 0.199, 0.23233333, 0.26566666, 0.299, 0.33233333, 0.36566666, 0.399, 0.43233332, 0.46566668, 0.499, 0.5323333, 0.5656667, 0.599, 0.63233334, 0.66566664, 0.699, 0.73233336, 0.76566666, 0.799, 0.8323333, 0.8656667, 0.899, 0.93233335, 0.96566665, 0.999, 1.0323334, 1.0656667, 1.099, 1.1323333, 1.1656667, 1.199, 1.2323333, 1.2656667, 1.299, 1.3323333, 1.3656666, 1.399, 1.4323334, 1.4656667, 1.499, 1.5323334, 1.5656667, 1.599, 1.6323333, 1.6656667, 1.699, 1.7323333, 1.7656667, 1.799, 1.8323333, 1.8656666, 1.899, 1.9323334, 1.9656667, 1.999, 2.0323334, 2.0656667, 2.099, 2.1656666, 2.199, 2.2323334, 2.2656667, 3.099),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0.0, 0.7660788132943895, -0.0651620126785565, -0.33457167713056024, 0.47661293578658204, -0.4443963288522761, 0.3239919424398084, -0.18302090973733387, 0.06334853715252521, 0.016972256858447558, -0.057130055407879125, 0.06596333972772037, -0.05556352611116581, 0.03701231250320303, -0.018275684118421783, 0.44415098723458435, -0.5752094829054678, 0.5141745217346395, -0.3618248496562985, 0.19457668305205594, -0.05781196213050602, -0.030609515696386997, 0.0720607707054763, -0.0781526395815366, 0.06343071223163631, -0.04068894876405372, 0.01880263241059033, 0.7741384120122616, -0.37360262263662886, 0.06742455956915427, 0.11619491232236298, -0.19010861435946932, 0.18672914054307138, -0.14171144788582823, 0.08424819022908213, -0.03323746518106998, -0.0024407535599339433, 0.02145718769064724, -0.02693373504799866, 0.023713514727110363, -0.01646477064545755, 0.008680694674929343, -0.002402134725662666, -0.0015988726430731575, 0.0034250878600802595, -0.003635616740643635, 0.002910773780452999, -0.0018401374834200184, 0.0008272065546641542, -8.008701061320924e-05, -0.0003484532402266894, 0.0005030951100350396, -0.0004716724315132415, 0.00034539880972007524, -0.000196258411088133, 6.904270747905744e-05, 1.6734178837358255e-05, -5.994137677670287e-05, 6.979836164043767e-05, -5.90738900340481e-05, 3.953306924656037e-05, -1.967065248242909e-05, 4.222997015763497e-06, -9.210321306467404e-06, 9.265217973660159e-06, -7.153663118069797e-06, 4.341226664245195e-06, -2.9589396911862016e-09]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Rift:material:shader_parameter/gapk")
+tracks/6/interp = 0
+tracks/6/loop_wrap = false
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.5323333, 0.5656667, 0.599, 0.63233334, 0.66566664, 0.699, 0.73233336, 0.76566666, 0.799, 0.8323333, 0.8656667, 0.899, 0.93233335, 0.96566665, 0.999, 1.0323334, 1.0656667, 1.099, 1.1323333, 2.2323334, 2.2656667, 2.299, 2.3323333, 2.3656666, 2.399, 2.4323332, 2.4656668, 2.499, 2.5323334, 2.5656667, 2.599, 2.6323333, 2.6656666, 2.699),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0.6, 0.6033442861813846, 0.6128798531000538, 0.6278607633177805, 0.6475410793963376, 0.6711748638974981, 0.6980161793830351, 0.7273190884147213, 0.7583376535543297, 0.7903259373636333, 0.822538002404405, 0.8542279112384177, 0.8846497264274444, 0.9130575105332582, 0.9387053261176318, 0.9608472357423382, 0.9787373019691505, 0.9916295873598414, 0.9987781544761841, 1.0, 0.9872592592592594, 0.9514074074074077, 0.8960000000000007, 0.8245925925925927, 0.7407407407407411, 0.6480000000000008, 0.549925925925927, 0.4500740740740742, 0.3520000000000004, 0.2592592592592601, 0.17540740740740723, 0.1040000000000002, 0.048592592592592854, 0.012740740740740941, 0.0]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Rift:material:shader_parameter/flicker")
+tracks/7/interp = 0
+tracks/7/loop_wrap = false
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.099, 0.16566667, 0.26566666, 0.33233333, 0.43233332, 0.499, 0.599, 0.66566664, 0.76566666, 0.8323333, 0.93233335, 0.999, 1.099, 1.1656667, 1.2656667, 1.3323333, 1.4323334, 1.499, 1.599, 1.6656667, 1.7656667, 1.8323333, 1.9323334, 1.999, 2.099, 2.1656666, 2.2656667, 2.3323333, 2.4323332, 2.499, 2.599, 2.6656666, 2.7656667, 2.8323333, 2.9323332, 2.999, 3.099),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0, 13.0, 14.0, 15.0, 16.0, 17.0, 18.0, 19.0, 20.0, 21.0, 22.0, 23.0, 24.0, 25.0, 26.0, 27.0, 28.0, 29.0, 30.0, 31.0, 32.0, 33.0, 34.0, 35.0, 36.0, 37.0]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Rift:material:shader_parameter/alpha")
+tracks/8/interp = 1
+tracks/8/loop_wrap = false
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 2.5, 2.9),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [1.0, 1.0, 0.0]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Slab0:position")
+tracks/9/interp = 0
+tracks/9/loop_wrap = false
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 0.96566665, 0.999, 1.0656667, 1.099, 1.1323333, 1.1656667, 2.2323334, 2.399, 2.5323334, 2.6323333, 2.799, 3.099),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(-109, -2), Vector2(-110, -2), Vector2(-109, -2), Vector2(-110, -2), Vector2(-109, -2), Vector2(-110, -2), Vector2(-109, -2), Vector2(-109, -1), Vector2(-109, 0), Vector2(-109, 1), Vector2(-109, 2), Vector2(-109, 3), Vector2(-109, 3)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Slab0:rotation")
+tracks/10/interp = 0
+tracks/10/loop_wrap = false
+tracks/10/keys = {
+"times": PackedFloat32Array(0, 0.96566665, 0.999, 3.099),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0.054543193181355795, 0.1636295795440674, 0.2181727727254232, 0.2181727727254232]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Slab0:visible")
+tracks/11/interp = 0
+tracks/11/loop_wrap = false
+tracks/11/keys = {
+"times": PackedFloat32Array(0, 0.93233335, 2.799),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("Slab0:modulate:a")
+tracks/12/interp = 1
+tracks/12/loop_wrap = false
+tracks/12/keys = {
+"times": PackedFloat32Array(0, 2.2, 2.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [1.0, 1.0, 0.0]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("Slab1:position")
+tracks/13/interp = 0
+tracks/13/loop_wrap = false
+tracks/13/keys = {
+"times": PackedFloat32Array(0, 0.96566665, 0.999, 2.2323334, 2.399, 2.5323334, 2.6323333, 2.799, 3.099),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(-94, -2), Vector2(-96, -3), Vector2(-95, -2), Vector2(-95, -1), Vector2(-95, 0), Vector2(-95, 1), Vector2(-95, 2), Vector2(-95, 3), Vector2(-95, 3)]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("Slab1:rotation")
+tracks/14/interp = 0
+tracks/14/loop_wrap = false
+tracks/14/keys = {
+"times": PackedFloat32Array(0, 0.96566665, 0.999, 1.0323334, 3.099),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [-0.10797290007273357, -0.3239187, -0.5398645003636677, -0.45, -0.45]
+}
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("Slab1:visible")
+tracks/15/interp = 0
+tracks/15/loop_wrap = false
+tracks/15/keys = {
+"times": PackedFloat32Array(0, 0.93233335, 2.799),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/16/type = "value"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("Slab1:modulate:a")
+tracks/16/interp = 1
+tracks/16/loop_wrap = false
+tracks/16/keys = {
+"times": PackedFloat32Array(0, 2.2, 2.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [1.0, 1.0, 0.0]
+}
+tracks/17/type = "value"
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/path = NodePath("Slab2:position")
+tracks/17/interp = 0
+tracks/17/loop_wrap = false
+tracks/17/keys = {
+"times": PackedFloat32Array(0, 0.96566665, 2.2323334, 2.399, 2.5323334, 2.6323333, 2.799, 3.099),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(-82, -2), Vector2(-83, -2), Vector2(-83, -1), Vector2(-83, 0), Vector2(-83, 1), Vector2(-83, 2), Vector2(-83, 3), Vector2(-83, 3)]
+}
+tracks/18/type = "value"
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/path = NodePath("Slab2:rotation")
+tracks/18/interp = 0
+tracks/18/loop_wrap = false
+tracks/18/keys = {
+"times": PackedFloat32Array(0, 0.96566665, 0.999, 3.099),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0.09960903326670328, 0.29882709980010985, 0.44824064970016475, 0.44824064970016475]
+}
+tracks/19/type = "value"
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/path = NodePath("Slab2:visible")
+tracks/19/interp = 0
+tracks/19/loop_wrap = false
+tracks/19/keys = {
+"times": PackedFloat32Array(0, 0.93233335, 2.799),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/20/type = "value"
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/path = NodePath("Slab2:modulate:a")
+tracks/20/interp = 1
+tracks/20/loop_wrap = false
+tracks/20/keys = {
+"times": PackedFloat32Array(0, 2.2, 2.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [1.0, 1.0, 0.0]
+}
+tracks/21/type = "value"
+tracks/21/imported = false
+tracks/21/enabled = true
+tracks/21/path = NodePath("Slab3:position")
+tracks/21/interp = 0
+tracks/21/loop_wrap = false
+tracks/21/keys = {
+"times": PackedFloat32Array(0, 0.96566665, 1.0323334, 1.0656667, 2.2323334, 2.399, 2.5323334, 2.6323333, 2.799, 3.099),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(-67, -2), Vector2(-68, -4), Vector2(-68, -3), Vector2(-68, -2), Vector2(-68, -1), Vector2(-68, 0), Vector2(-68, 1), Vector2(-68, 2), Vector2(-68, 3), Vector2(-68, 3)]
+}
+tracks/22/type = "value"
+tracks/22/imported = false
+tracks/22/enabled = true
+tracks/22/path = NodePath("Slab3:rotation")
+tracks/22/interp = 0
+tracks/22/loop_wrap = false
+tracks/22/keys = {
+"times": PackedFloat32Array(0, 0.96566665, 0.999, 1.0323334, 1.0656667, 3.099),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0.116459321975708, 0.349377965927124, 0.5822966098785399, 0.8152152538299559, 0.45, 0.45]
+}
+tracks/23/type = "value"
+tracks/23/imported = false
+tracks/23/enabled = true
+tracks/23/path = NodePath("Slab3:visible")
+tracks/23/interp = 0
+tracks/23/loop_wrap = false
+tracks/23/keys = {
+"times": PackedFloat32Array(0, 0.93233335, 2.799),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/24/type = "value"
+tracks/24/imported = false
+tracks/24/enabled = true
+tracks/24/path = NodePath("Slab3:modulate:a")
+tracks/24/interp = 1
+tracks/24/loop_wrap = false
+tracks/24/keys = {
+"times": PackedFloat32Array(0, 2.2, 2.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [1.0, 1.0, 0.0]
+}
+tracks/25/type = "value"
+tracks/25/imported = false
+tracks/25/enabled = true
+tracks/25/path = NodePath("Slab4:position")
+tracks/25/interp = 0
+tracks/25/loop_wrap = false
+tracks/25/keys = {
+"times": PackedFloat32Array(0, 0.5323333, 0.5656667, 0.599, 0.63233334, 0.66566664, 0.93233335, 0.96566665, 0.999, 2.2323334, 2.399, 2.5323334, 2.6323333, 2.799, 3.099),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(-53, -2), Vector2(-53, -3), Vector2(-54, -4), Vector2(-53, -3), Vector2(-54, -2), Vector2(-53, -2), Vector2(-52, -2), Vector2(-54, -2), Vector2(-53, -2), Vector2(-53, -1), Vector2(-53, 0), Vector2(-53, 1), Vector2(-53, 2), Vector2(-53, 3), Vector2(-53, 3)]
+}
+tracks/26/type = "value"
+tracks/26/imported = false
+tracks/26/enabled = true
+tracks/26/path = NodePath("Slab4:rotation")
+tracks/26/interp = 0
+tracks/26/loop_wrap = false
+tracks/26/keys = {
+"times": PackedFloat32Array(0, 0.5323333, 0.5656667, 0.599, 0.63233334, 2.7656667, 3.099),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0.026479228337605795, 0.13239614168802896, 0.23831305503845215, 0.3442299683888753, 0.4236676534016927, 0.4236676534016927, 0.4236676534016927]
+}
+tracks/27/type = "value"
+tracks/27/imported = false
+tracks/27/enabled = true
+tracks/27/path = NodePath("Slab4:visible")
+tracks/27/interp = 0
+tracks/27/loop_wrap = false
+tracks/27/keys = {
+"times": PackedFloat32Array(0, 0.5323333, 2.799),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/28/type = "value"
+tracks/28/imported = false
+tracks/28/enabled = true
+tracks/28/path = NodePath("Slab4:modulate:a")
+tracks/28/interp = 1
+tracks/28/loop_wrap = false
+tracks/28/keys = {
+"times": PackedFloat32Array(0, 2.2, 2.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [1.0, 1.0, 0.0]
+}
+tracks/29/type = "value"
+tracks/29/imported = false
+tracks/29/enabled = true
+tracks/29/path = NodePath("Slab5:position")
+tracks/29/interp = 0
+tracks/29/loop_wrap = false
+tracks/29/keys = {
+"times": PackedFloat32Array(0, 0.5323333, 0.5656667, 0.599, 0.63233334, 0.66566664, 0.93233335, 0.96566665, 2.2323334, 2.399, 2.5323334, 2.6323333, 2.799, 3.099),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(-41, -2), Vector2(-40, -4), Vector2(-41, -5), Vector2(-40, -5), Vector2(-41, -4), Vector2(-41, -2), Vector2(-40, -2), Vector2(-41, -2), Vector2(-41, -1), Vector2(-41, 0), Vector2(-41, 1), Vector2(-41, 2), Vector2(-41, 3), Vector2(-41, 3)]
+}
+tracks/30/type = "value"
+tracks/30/imported = false
+tracks/30/enabled = true
+tracks/30/path = NodePath("Slab5:rotation")
+tracks/30/interp = 0
+tracks/30/loop_wrap = false
+tracks/30/keys = {
+"times": PackedFloat32Array(0, 0.5323333, 0.5656667, 0.599, 0.63233334, 0.66566664, 0.699, 0.93233335, 0.96566665, 0.999, 3.099),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [-0.03797353108723958, -0.1898676554361979, -0.3417617797851562, -0.4936559041341144, -0.6455500284830726, -0.7974441528320309, -0.45, -0.5128834406534831, -0.6386503219604492, -0.45, -0.45]
+}
+tracks/31/type = "value"
+tracks/31/imported = false
+tracks/31/enabled = true
+tracks/31/path = NodePath("Slab5:visible")
+tracks/31/interp = 0
+tracks/31/loop_wrap = false
+tracks/31/keys = {
+"times": PackedFloat32Array(0, 0.5323333, 2.799),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/32/type = "value"
+tracks/32/imported = false
+tracks/32/enabled = true
+tracks/32/path = NodePath("Slab5:modulate:a")
+tracks/32/interp = 1
+tracks/32/loop_wrap = false
+tracks/32/keys = {
+"times": PackedFloat32Array(0, 2.2, 2.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [1.0, 1.0, 0.0]
+}
+tracks/33/type = "value"
+tracks/33/imported = false
+tracks/33/enabled = true
+tracks/33/path = NodePath("Slab6:position")
+tracks/33/interp = 0
+tracks/33/loop_wrap = false
+tracks/33/keys = {
+"times": PackedFloat32Array(0, 0.5323333, 0.5656667, 0.599, 0.66566664, 0.699, 0.73233336, 0.93233335, 0.96566665, 2.2323334, 2.399, 2.5323334, 2.6323333, 2.799, 3.099),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(-25, -2), Vector2(-25, -5), Vector2(-26, -7), Vector2(-25, -8), Vector2(-25, -6), Vector2(-25, -4), Vector2(-25, -2), Vector2(-24, -2), Vector2(-25, -2), Vector2(-25, -1), Vector2(-25, 0), Vector2(-25, 1), Vector2(-25, 2), Vector2(-25, 3), Vector2(-25, 3)]
+}
+tracks/34/type = "value"
+tracks/34/imported = false
+tracks/34/enabled = true
+tracks/34/path = NodePath("Slab6:rotation")
+tracks/34/interp = 0
+tracks/34/loop_wrap = false
+tracks/34/keys = {
+"times": PackedFloat32Array(0, 0.5323333, 0.5656667, 0.599, 0.63233334, 0.66566664, 0.699, 0.73233336, 2.8656666, 3.099),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0.04754239718119303, 0.23771198590596515, 0.4278815746307372, 0.6180511633555094, 0.8082207520802814, 0.9983903408050535, 1.1885599295298257, 0.45, 0.45, 0.45]
+}
+tracks/35/type = "value"
+tracks/35/imported = false
+tracks/35/enabled = true
+tracks/35/path = NodePath("Slab6:visible")
+tracks/35/interp = 0
+tracks/35/loop_wrap = false
+tracks/35/keys = {
+"times": PackedFloat32Array(0, 0.5323333, 2.799),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/36/type = "value"
+tracks/36/imported = false
+tracks/36/enabled = true
+tracks/36/path = NodePath("Slab6:modulate:a")
+tracks/36/interp = 1
+tracks/36/loop_wrap = false
+tracks/36/keys = {
+"times": PackedFloat32Array(0, 2.2, 2.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [1.0, 1.0, 0.0]
+}
+tracks/37/type = "value"
+tracks/37/imported = false
+tracks/37/enabled = true
+tracks/37/path = NodePath("Slab7:position")
+tracks/37/interp = 0
+tracks/37/loop_wrap = false
+tracks/37/keys = {
+"times": PackedFloat32Array(0, 0.5323333, 0.5656667, 0.599, 0.63233334, 0.66566664, 0.93233335, 0.96566665, 0.999, 2.2323334, 2.399, 2.5323334, 2.6323333, 2.799, 3.099),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(-11, -2), Vector2(-11, -4), Vector2(-12, -5), Vector2(-10, -5), Vector2(-11, -4), Vector2(-11, -2), Vector2(-10, -2), Vector2(-11, -3), Vector2(-11, -2), Vector2(-11, -1), Vector2(-11, 0), Vector2(-11, 1), Vector2(-11, 2), Vector2(-11, 3), Vector2(-11, 3)]
+}
+tracks/38/type = "value"
+tracks/38/imported = false
+tracks/38/enabled = true
+tracks/38/path = NodePath("Slab7:rotation")
+tracks/38/interp = 0
+tracks/38/loop_wrap = false
+tracks/38/keys = {
+"times": PackedFloat32Array(0, 0.5323333, 0.5656667, 0.599, 0.63233334, 0.66566664, 0.93233335, 0.96566665, 0.999, 1.0323334, 3.099),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0.032272775967915855, 0.16136387983957928, 0.29045498, 0.419546087582906, 0.5486371914545695, 0.45, 0.5759609460830688, 0.8278828382492065, 1.0798047304153442, 0.45, 0.45]
+}
+tracks/39/type = "value"
+tracks/39/imported = false
+tracks/39/enabled = true
+tracks/39/path = NodePath("Slab7:visible")
+tracks/39/interp = 0
+tracks/39/loop_wrap = false
+tracks/39/keys = {
+"times": PackedFloat32Array(0, 0.5323333, 2.799),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/40/type = "value"
+tracks/40/imported = false
+tracks/40/enabled = true
+tracks/40/path = NodePath("Slab7:modulate:a")
+tracks/40/interp = 1
+tracks/40/loop_wrap = false
+tracks/40/keys = {
+"times": PackedFloat32Array(0, 2.2, 2.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [1.0, 1.0, 0.0]
+}
+tracks/41/type = "value"
+tracks/41/imported = false
+tracks/41/enabled = true
+tracks/41/path = NodePath("Slab8:position")
+tracks/41/interp = 0
+tracks/41/loop_wrap = false
+tracks/41/keys = {
+"times": PackedFloat32Array(0, 0.099, 0.16566667, 0.199, 0.23233333, 0.26566666, 0.299, 0.36566666, 0.399, 0.43233332, 0.46566668, 0.5656667, 0.599, 0.63233334, 0.66566664, 0.699, 0.73233336, 0.799, 0.8323333, 0.96566665, 0.999, 1.0656667, 1.099, 1.1323333, 1.1656667, 2.2323334, 2.399, 2.5323334, 2.6323333, 2.799, 3.099),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(3, -2), Vector2(2, -4), Vector2(3, -4), Vector2(2, -2), Vector2(3, -2), Vector2(2, -2), Vector2(3, -2), Vector2(2, -2), Vector2(3, -2), Vector2(2, -2), Vector2(3, -2), Vector2(2, -2), Vector2(3, -2), Vector2(2, -2), Vector2(3, -2), Vector2(2, -2), Vector2(3, -2), Vector2(2, -2), Vector2(3, -2), Vector2(2, -2), Vector2(3, -2), Vector2(2, -2), Vector2(3, -2), Vector2(2, -2), Vector2(3, -2), Vector2(3, -1), Vector2(3, 0), Vector2(3, 1), Vector2(3, 2), Vector2(3, 3), Vector2(3, 3)]
+}
+tracks/42/type = "value"
+tracks/42/imported = false
+tracks/42/enabled = true
+tracks/42/path = NodePath("Slab8:rotation")
+tracks/42/interp = 0
+tracks/42/loop_wrap = false
+tracks/42/keys = {
+"times": PackedFloat32Array(0, 0.099, 0.13233334, 0.16566667, 0.199, 0.23233333, 2.3656666, 3.099),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0.025278814633687335, 0.12639407316843668, 0.22750933170318602, 0.32862459023793533, 0.42973984877268456, 0.45, 0.45, 0.45]
+}
+tracks/43/type = "value"
+tracks/43/imported = false
+tracks/43/enabled = true
+tracks/43/path = NodePath("Slab8:visible")
+tracks/43/interp = 0
+tracks/43/loop_wrap = false
+tracks/43/keys = {
+"times": PackedFloat32Array(0, 0.06566667, 2.799),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/44/type = "value"
+tracks/44/imported = false
+tracks/44/enabled = true
+tracks/44/path = NodePath("Slab8:modulate:a")
+tracks/44/interp = 1
+tracks/44/loop_wrap = false
+tracks/44/keys = {
+"times": PackedFloat32Array(0, 2.2, 2.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [1.0, 1.0, 0.0]
+}
+tracks/45/type = "value"
+tracks/45/imported = false
+tracks/45/enabled = true
+tracks/45/path = NodePath("Slab9:position")
+tracks/45/interp = 0
+tracks/45/loop_wrap = false
+tracks/45/keys = {
+"times": PackedFloat32Array(0, 0.96566665, 0.999, 1.0323334, 1.0656667, 1.099, 1.1323333, 1.1656667, 2.2323334, 2.399, 2.5323334, 2.6323333, 2.799, 3.099),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(17, -2), Vector2(16, -3), Vector2(17, -3), Vector2(17, -2), Vector2(16, -2), Vector2(17, -2), Vector2(16, -2), Vector2(17, -2), Vector2(17, -1), Vector2(17, 0), Vector2(17, 1), Vector2(17, 2), Vector2(17, 3), Vector2(17, 3)]
+}
+tracks/46/type = "value"
+tracks/46/imported = false
+tracks/46/enabled = true
+tracks/46/path = NodePath("Slab9:rotation")
+tracks/46/interp = 0
+tracks/46/loop_wrap = false
+tracks/46/keys = {
+"times": PackedFloat32Array(0, 0.96566665, 0.999, 1.0323334, 3.099),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0.1316058874130249, 0.3948176622390747, 0.6580294370651244, 0.45, 0.45]
+}
+tracks/47/type = "value"
+tracks/47/imported = false
+tracks/47/enabled = true
+tracks/47/path = NodePath("Slab9:visible")
+tracks/47/interp = 0
+tracks/47/loop_wrap = false
+tracks/47/keys = {
+"times": PackedFloat32Array(0, 0.93233335, 2.799),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/48/type = "value"
+tracks/48/imported = false
+tracks/48/enabled = true
+tracks/48/path = NodePath("Slab9:modulate:a")
+tracks/48/interp = 1
+tracks/48/loop_wrap = false
+tracks/48/keys = {
+"times": PackedFloat32Array(0, 2.2, 2.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [1.0, 1.0, 0.0]
+}
+tracks/49/type = "value"
+tracks/49/imported = false
+tracks/49/enabled = true
+tracks/49/path = NodePath("Slab10:position")
+tracks/49/interp = 0
+tracks/49/loop_wrap = false
+tracks/49/keys = {
+"times": PackedFloat32Array(0, 0.96566665, 0.999, 1.0323334, 1.0656667, 1.099, 1.1323333, 1.1656667, 1.199, 2.2323334, 2.399, 2.5323334, 2.6323333, 2.799, 3.099),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(44, -2), Vector2(43, -3), Vector2(44, -3), Vector2(44, -2), Vector2(43, -2), Vector2(44, -2), Vector2(43, -2), Vector2(44, -2), Vector2(43, -2), Vector2(43, -1), Vector2(43, 0), Vector2(43, 1), Vector2(43, 2), Vector2(43, 3), Vector2(43, 3)]
+}
+tracks/50/type = "value"
+tracks/50/imported = false
+tracks/50/enabled = true
+tracks/50/path = NodePath("Slab10:rotation")
+tracks/50/interp = 0
+tracks/50/loop_wrap = false
+tracks/50/keys = {
+"times": PackedFloat32Array(0, 0.96566665, 0.999, 1.0323334, 3.099),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [-0.11511680285135904, -0.3453504085540771, -0.5755840142567952, -0.45, -0.45]
+}
+tracks/51/type = "value"
+tracks/51/imported = false
+tracks/51/enabled = true
+tracks/51/path = NodePath("Slab10:visible")
+tracks/51/interp = 0
+tracks/51/loop_wrap = false
+tracks/51/keys = {
+"times": PackedFloat32Array(0, 0.93233335, 2.799),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/52/type = "value"
+tracks/52/imported = false
+tracks/52/enabled = true
+tracks/52/path = NodePath("Slab10:modulate:a")
+tracks/52/interp = 1
+tracks/52/loop_wrap = false
+tracks/52/keys = {
+"times": PackedFloat32Array(0, 2.2, 2.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [1.0, 1.0, 0.0]
+}
+tracks/53/type = "value"
+tracks/53/imported = false
+tracks/53/enabled = true
+tracks/53/path = NodePath("Slab11:position")
+tracks/53/interp = 0
+tracks/53/loop_wrap = false
+tracks/53/keys = {
+"times": PackedFloat32Array(0, 0.5323333, 0.5656667, 0.599, 0.63233334, 0.66566664, 0.699, 0.96566665, 0.999, 2.2323334, 2.399, 2.5323334, 2.6323333, 2.799, 3.099),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(59, -2), Vector2(59, -5), Vector2(58, -6), Vector2(59, -6), Vector2(58, -6), Vector2(59, -4), Vector2(59, -2), Vector2(58, -2), Vector2(59, -2), Vector2(59, -1), Vector2(59, 0), Vector2(59, 1), Vector2(59, 2), Vector2(59, 3), Vector2(59, 3)]
+}
+tracks/54/type = "value"
+tracks/54/imported = false
+tracks/54/enabled = true
+tracks/54/path = NodePath("Slab11:rotation")
+tracks/54/interp = 0
+tracks/54/loop_wrap = false
+tracks/54/keys = {
+"times": PackedFloat32Array(0, 0.5323333, 0.5656667, 0.599, 0.63233334, 0.66566664, 0.699, 2.8323333, 3.099),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0.03885705471038818, 0.19428527, 0.3497134923934937, 0.5051417112350465, 0.660569930076599, 0.8159981489181516, 0.45, 0.45, 0.45]
+}
+tracks/55/type = "value"
+tracks/55/imported = false
+tracks/55/enabled = true
+tracks/55/path = NodePath("Slab11:visible")
+tracks/55/interp = 0
+tracks/55/loop_wrap = false
+tracks/55/keys = {
+"times": PackedFloat32Array(0, 0.5323333, 2.799),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/56/type = "value"
+tracks/56/imported = false
+tracks/56/enabled = true
+tracks/56/path = NodePath("Slab11:modulate:a")
+tracks/56/interp = 1
+tracks/56/loop_wrap = false
+tracks/56/keys = {
+"times": PackedFloat32Array(0, 2.2, 2.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [1.0, 1.0, 0.0]
+}
+tracks/57/type = "value"
+tracks/57/imported = false
+tracks/57/enabled = true
+tracks/57/path = NodePath("Slab12:position")
+tracks/57/interp = 0
+tracks/57/loop_wrap = false
+tracks/57/keys = {
+"times": PackedFloat32Array(0, 0.5656667, 0.599, 0.63233334, 0.66566664, 0.96566665, 0.999, 1.0656667, 1.099, 2.2323334, 2.399, 2.5323334, 2.6323333, 2.799, 3.099),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(73, -2), Vector2(72, -2), Vector2(73, -2), Vector2(72, -2), Vector2(73, -2), Vector2(72, -3), Vector2(73, -2), Vector2(72, -2), Vector2(73, -2), Vector2(73, -1), Vector2(73, 0), Vector2(73, 1), Vector2(73, 2), Vector2(73, 3), Vector2(73, 3)]
+}
+tracks/58/type = "value"
+tracks/58/imported = false
+tracks/58/enabled = true
+tracks/58/path = NodePath("Slab12:rotation")
+tracks/58/interp = 0
+tracks/58/loop_wrap = false
+tracks/58/keys = {
+"times": PackedFloat32Array(0, 0.5323333, 0.5656667, 0.599, 0.93233335, 0.96566665, 0.999, 1.0323334, 3.099),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [-0.02844998041788737, -0.14224990208943686, -0.25604982376098634, -0.2844998041788737, -0.3495591282844544, -0.47967777649561577, -0.609796424706777, -0.45, -0.45]
+}
+tracks/59/type = "value"
+tracks/59/imported = false
+tracks/59/enabled = true
+tracks/59/path = NodePath("Slab12:visible")
+tracks/59/interp = 0
+tracks/59/loop_wrap = false
+tracks/59/keys = {
+"times": PackedFloat32Array(0, 0.5323333, 2.799),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/60/type = "value"
+tracks/60/imported = false
+tracks/60/enabled = true
+tracks/60/path = NodePath("Slab12:modulate:a")
+tracks/60/interp = 1
+tracks/60/loop_wrap = false
+tracks/60/keys = {
+"times": PackedFloat32Array(0, 2.2, 2.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [1.0, 1.0, 0.0]
+}
+tracks/61/type = "value"
+tracks/61/imported = false
+tracks/61/enabled = true
+tracks/61/path = NodePath("Jolt0Warm:material:shader_parameter/alpha")
+tracks/61/interp = 1
+tracks/61/loop_wrap = false
+tracks/61/keys = {
+"times": PackedFloat32Array(0, 0.059, 0.06, 0.14333333, 0.22666667, 0.31, 0.39333335, 0.47666666, 0.56),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, 0.5, 0.34722222222222227, 0.22222222222222227, 0.125, 0.055555555555555566, 0.013888888888888883, 0.0]
+}
+tracks/62/type = "value"
+tracks/62/imported = false
+tracks/62/enabled = true
+tracks/62/path = NodePath("Jolt0Warm:material:shader_parameter/radius")
+tracks/62/interp = 1
+tracks/62/loop_wrap = false
+tracks/62/keys = {
+"times": PackedFloat32Array(0, 0.06, 0.56),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [60.0, 60.0, 33.0]
+}
+tracks/63/type = "value"
+tracks/63/imported = false
+tracks/63/enabled = true
+tracks/63/path = NodePath("Jolt0Flash:material:shader_parameter/alpha")
+tracks/63/interp = 1
+tracks/63/loop_wrap = false
+tracks/63/keys = {
+"times": PackedFloat32Array(0, 0.059, 0.06, 0.071666665, 0.083333336, 0.095, 0.10666667, 0.11833333, 0.13),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, 0.4, 0.27777777777777785, 0.17777777777777784, 0.1, 0.04444444444444446, 0.011111111111111106, 0.0]
+}
+tracks/64/type = "value"
+tracks/64/imported = false
+tracks/64/enabled = true
+tracks/64/path = NodePath("Jolt0Flash:material:shader_parameter/radius")
+tracks/64/interp = 1
+tracks/64/loop_wrap = false
+tracks/64/keys = {
+"times": PackedFloat32Array(0, 0.06, 0.13),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [26.0, 26.0, 14.3]
+}
+tracks/65/type = "value"
+tracks/65/imported = false
+tracks/65/enabled = true
+tracks/65/path = NodePath("Jolt0Grit:emitting")
+tracks/65/interp = 0
+tracks/65/loop_wrap = false
+tracks/65/keys = {
+"times": PackedFloat32Array(0, 0.059),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/66/type = "value"
+tracks/66/imported = false
+tracks/66/enabled = true
+tracks/66/path = NodePath("Jolt0Gravel:emitting")
+tracks/66/interp = 0
+tracks/66/loop_wrap = false
+tracks/66/keys = {
+"times": PackedFloat32Array(0, 0.059),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/67/type = "value"
+tracks/67/imported = false
+tracks/67/enabled = true
+tracks/67/path = NodePath("Jolt0Stones0:emitting")
+tracks/67/interp = 0
+tracks/67/loop_wrap = false
+tracks/67/keys = {
+"times": PackedFloat32Array(0, 0.059),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/68/type = "value"
+tracks/68/imported = false
+tracks/68/enabled = true
+tracks/68/path = NodePath("Jolt0Stones1:emitting")
+tracks/68/interp = 0
+tracks/68/loop_wrap = false
+tracks/68/keys = {
+"times": PackedFloat32Array(0, 0.059),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/69/type = "value"
+tracks/69/imported = false
+tracks/69/enabled = true
+tracks/69/path = NodePath("Jolt0Dust:emitting")
+tracks/69/interp = 0
+tracks/69/loop_wrap = false
+tracks/69/keys = {
+"times": PackedFloat32Array(0, 0.059),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/70/type = "value"
+tracks/70/imported = false
+tracks/70/enabled = true
+tracks/70/path = NodePath("Jolt0Sparks:emitting")
+tracks/70/interp = 0
+tracks/70/loop_wrap = false
+tracks/70/keys = {
+"times": PackedFloat32Array(0, 0.059),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/71/type = "value"
+tracks/71/imported = false
+tracks/71/enabled = true
+tracks/71/path = NodePath("Jolt1Warm:material:shader_parameter/alpha")
+tracks/71/interp = 1
+tracks/71/loop_wrap = false
+tracks/71/keys = {
+"times": PackedFloat32Array(0, 0.499, 0.5, 0.5833333, 0.6666667, 0.75, 0.8333333, 0.9166667, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, 0.4, 0.27777777777777785, 0.17777777777777784, 0.1, 0.04444444444444446, 0.011111111111111106, 0.0]
+}
+tracks/72/type = "value"
+tracks/72/imported = false
+tracks/72/enabled = true
+tracks/72/path = NodePath("Jolt1Warm:material:shader_parameter/radius")
+tracks/72/interp = 1
+tracks/72/loop_wrap = false
+tracks/72/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [60.0, 60.0, 33.0]
+}
+tracks/73/type = "value"
+tracks/73/imported = false
+tracks/73/enabled = true
+tracks/73/path = NodePath("Jolt1Flash:material:shader_parameter/alpha")
+tracks/73/interp = 1
+tracks/73/loop_wrap = false
+tracks/73/keys = {
+"times": PackedFloat32Array(0, 0.499, 0.5, 0.51166666, 0.5233333, 0.535, 0.5466667, 0.55833334, 0.57),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, 0.32000000000000006, 0.22222222222222227, 0.14222222222222228, 0.08000000000000002, 0.03555555555555557, 0.008888888888888887, 0.0]
+}
+tracks/74/type = "value"
+tracks/74/imported = false
+tracks/74/enabled = true
+tracks/74/path = NodePath("Jolt1Flash:material:shader_parameter/radius")
+tracks/74/interp = 1
+tracks/74/loop_wrap = false
+tracks/74/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.57),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [26.0, 26.0, 14.3]
+}
+tracks/75/type = "value"
+tracks/75/imported = false
+tracks/75/enabled = true
+tracks/75/path = NodePath("Jolt1Grit:emitting")
+tracks/75/interp = 0
+tracks/75/loop_wrap = false
+tracks/75/keys = {
+"times": PackedFloat32Array(0, 0.499),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/76/type = "value"
+tracks/76/imported = false
+tracks/76/enabled = true
+tracks/76/path = NodePath("Jolt1Gravel:emitting")
+tracks/76/interp = 0
+tracks/76/loop_wrap = false
+tracks/76/keys = {
+"times": PackedFloat32Array(0, 0.499),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/77/type = "value"
+tracks/77/imported = false
+tracks/77/enabled = true
+tracks/77/path = NodePath("Jolt1Stones0:emitting")
+tracks/77/interp = 0
+tracks/77/loop_wrap = false
+tracks/77/keys = {
+"times": PackedFloat32Array(0, 0.499),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/78/type = "value"
+tracks/78/imported = false
+tracks/78/enabled = true
+tracks/78/path = NodePath("Jolt1Stones1:emitting")
+tracks/78/interp = 0
+tracks/78/loop_wrap = false
+tracks/78/keys = {
+"times": PackedFloat32Array(0, 0.499),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/79/type = "value"
+tracks/79/imported = false
+tracks/79/enabled = true
+tracks/79/path = NodePath("Jolt1Dust:emitting")
+tracks/79/interp = 0
+tracks/79/loop_wrap = false
+tracks/79/keys = {
+"times": PackedFloat32Array(0, 0.499),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/80/type = "value"
+tracks/80/imported = false
+tracks/80/enabled = true
+tracks/80/path = NodePath("Jolt1Sparks:emitting")
+tracks/80/interp = 0
+tracks/80/loop_wrap = false
+tracks/80/keys = {
+"times": PackedFloat32Array(0, 0.499),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/81/type = "value"
+tracks/81/imported = false
+tracks/81/enabled = true
+tracks/81/path = NodePath("Jolt2Warm:material:shader_parameter/alpha")
+tracks/81/interp = 1
+tracks/81/loop_wrap = false
+tracks/81/keys = {
+"times": PackedFloat32Array(0, 0.919, 0.92, 1.0033333, 1.0866667, 1.17, 1.2533333, 1.3366667, 1.42),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, 0.3, 0.20833333333333334, 0.13333333333333336, 0.075, 0.03333333333333334, 0.00833333333333333, 0.0]
+}
+tracks/82/type = "value"
+tracks/82/imported = false
+tracks/82/enabled = true
+tracks/82/path = NodePath("Jolt2Warm:material:shader_parameter/radius")
+tracks/82/interp = 1
+tracks/82/loop_wrap = false
+tracks/82/keys = {
+"times": PackedFloat32Array(0, 0.92, 1.42),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [60.0, 60.0, 33.0]
+}
+tracks/83/type = "value"
+tracks/83/imported = false
+tracks/83/enabled = true
+tracks/83/path = NodePath("Jolt2Flash:material:shader_parameter/alpha")
+tracks/83/interp = 1
+tracks/83/loop_wrap = false
+tracks/83/keys = {
+"times": PackedFloat32Array(0, 0.919, 0.92, 0.9316667, 0.9433333, 0.955, 0.96666664, 0.97833335, 0.99),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, 0.24, 0.16666666666666669, 0.10666666666666669, 0.06, 0.026666666666666672, 0.006666666666666663, 0.0]
+}
+tracks/84/type = "value"
+tracks/84/imported = false
+tracks/84/enabled = true
+tracks/84/path = NodePath("Jolt2Flash:material:shader_parameter/radius")
+tracks/84/interp = 1
+tracks/84/loop_wrap = false
+tracks/84/keys = {
+"times": PackedFloat32Array(0, 0.92, 0.99),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [26.0, 26.0, 14.3]
+}
+tracks/85/type = "value"
+tracks/85/imported = false
+tracks/85/enabled = true
+tracks/85/path = NodePath("Jolt2Grit:emitting")
+tracks/85/interp = 0
+tracks/85/loop_wrap = false
+tracks/85/keys = {
+"times": PackedFloat32Array(0, 0.919),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/86/type = "value"
+tracks/86/imported = false
+tracks/86/enabled = true
+tracks/86/path = NodePath("Jolt2Gravel:emitting")
+tracks/86/interp = 0
+tracks/86/loop_wrap = false
+tracks/86/keys = {
+"times": PackedFloat32Array(0, 0.919),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/87/type = "value"
+tracks/87/imported = false
+tracks/87/enabled = true
+tracks/87/path = NodePath("Jolt2Stones0:emitting")
+tracks/87/interp = 0
+tracks/87/loop_wrap = false
+tracks/87/keys = {
+"times": PackedFloat32Array(0, 0.919),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/88/type = "value"
+tracks/88/imported = false
+tracks/88/enabled = true
+tracks/88/path = NodePath("Jolt2Stones1:emitting")
+tracks/88/interp = 0
+tracks/88/loop_wrap = false
+tracks/88/keys = {
+"times": PackedFloat32Array(0, 0.919),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/89/type = "value"
+tracks/89/imported = false
+tracks/89/enabled = true
+tracks/89/path = NodePath("Jolt2Dust:emitting")
+tracks/89/interp = 0
+tracks/89/loop_wrap = false
+tracks/89/keys = {
+"times": PackedFloat32Array(0, 0.919),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/90/type = "value"
+tracks/90/imported = false
+tracks/90/enabled = true
+tracks/90/path = NodePath("Jolt2Sparks:emitting")
+tracks/90/interp = 0
+tracks/90/loop_wrap = false
+tracks/90/keys = {
+"times": PackedFloat32Array(0, 0.919),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/91/type = "value"
+tracks/91/imported = false
+tracks/91/enabled = true
+tracks/91/path = NodePath("Breath:emitting")
+tracks/91/interp = 0
+tracks/91/loop_wrap = false
+tracks/91/keys = {
+"times": PackedFloat32Array(0, 0.059, 2.199),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/92/type = "value"
+tracks/92/imported = false
+tracks/92/enabled = true
+tracks/92/path = NodePath("Breath:process_material:emission_box_extents")
+tracks/92/interp = 1
+tracks/92/loop_wrap = false
+tracks/92/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.13333334, 0.2, 0.26666668, 0.33333334, 0.4, 0.46666667, 0.53333336, 0.6, 0.6666667, 0.73333335, 0.8, 2.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 0.5, 0), Vector3(2.841923, 0.5, 0), Vector3(26.839128, 0.5, 0), Vector3(43.6826, 0.5, 0), Vector3(54.638474, 0.5, 0), Vector3(60.972908, 0.5, 0), Vector3(63.95205, 0.5, 0), Vector3(64.84205, 0.5, 0), Vector3(66.720985, 0.5, 0), Vector3(78.666664, 0.5, 0), Vector3(95.85679, 0.5, 0), Vector3(111.29877, 0.5, 0), Vector3(118, 0.5, 0), Vector3(118, 0.5, 0)]
+}
+tracks/93/type = "value"
+tracks/93/imported = false
+tracks/93/enabled = true
+tracks/93/path = NodePath("Embers:emitting")
+tracks/93/interp = 0
+tracks/93/loop_wrap = false
+tracks/93/keys = {
+"times": PackedFloat32Array(0, 0.059, 2.199),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/94/type = "value"
+tracks/94/imported = false
+tracks/94/enabled = true
+tracks/94/path = NodePath("Embers:process_material:emission_box_extents")
+tracks/94/interp = 1
+tracks/94/loop_wrap = false
+tracks/94/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.13333334, 0.2, 0.26666668, 0.33333334, 0.4, 0.46666667, 0.53333336, 0.6, 0.6666667, 0.73333335, 0.8, 2.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 0.5, 0), Vector3(2.841923, 0.5, 0), Vector3(26.839128, 0.5, 0), Vector3(43.6826, 0.5, 0), Vector3(54.638474, 0.5, 0), Vector3(60.972908, 0.5, 0), Vector3(63.95205, 0.5, 0), Vector3(64.84205, 0.5, 0), Vector3(66.720985, 0.5, 0), Vector3(78.666664, 0.5, 0), Vector3(95.85679, 0.5, 0), Vector3(111.29877, 0.5, 0), Vector3(118, 0.5, 0), Vector3(118, 0.5, 0)]
+}
+tracks/95/type = "value"
+tracks/95/imported = false
+tracks/95/enabled = true
+tracks/95/path = NodePath("Wisps:emitting")
+tracks/95/interp = 0
+tracks/95/loop_wrap = false
+tracks/95/keys = {
+"times": PackedFloat32Array(0, 0.059, 2.199),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/96/type = "value"
+tracks/96/imported = false
+tracks/96/enabled = true
+tracks/96/path = NodePath("Wisps:process_material:emission_box_extents")
+tracks/96/interp = 1
+tracks/96/loop_wrap = false
+tracks/96/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.13333334, 0.2, 0.26666668, 0.33333334, 0.4, 0.46666667, 0.53333336, 0.6, 0.6666667, 0.73333335, 0.8, 2.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 0.5, 0), Vector3(2.841923, 0.5, 0), Vector3(26.839128, 0.5, 0), Vector3(43.6826, 0.5, 0), Vector3(54.638474, 0.5, 0), Vector3(60.972908, 0.5, 0), Vector3(63.95205, 0.5, 0), Vector3(64.84205, 0.5, 0), Vector3(66.720985, 0.5, 0), Vector3(78.666664, 0.5, 0), Vector3(95.85679, 0.5, 0), Vector3(111.29877, 0.5, 0), Vector3(118, 0.5, 0), Vector3(118, 0.5, 0)]
+}
+tracks/97/type = "value"
+tracks/97/imported = false
+tracks/97/enabled = true
+tracks/97/path = NodePath("EmberLight:emitting")
+tracks/97/interp = 0
+tracks/97/loop_wrap = false
+tracks/97/keys = {
+"times": PackedFloat32Array(0, 0.059, 2.199),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/98/type = "value"
+tracks/98/imported = false
+tracks/98/enabled = true
+tracks/98/path = NodePath("EmberLight:process_material:emission_box_extents")
+tracks/98/interp = 1
+tracks/98/loop_wrap = false
+tracks/98/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.13333334, 0.2, 0.26666668, 0.33333334, 0.4, 0.46666667, 0.53333336, 0.6, 0.6666667, 0.73333335, 0.8, 2.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 0.5, 0), Vector3(2.841923, 0.5, 0), Vector3(26.839128, 0.5, 0), Vector3(43.6826, 0.5, 0), Vector3(54.638474, 0.5, 0), Vector3(60.972908, 0.5, 0), Vector3(63.95205, 0.5, 0), Vector3(64.84205, 0.5, 0), Vector3(66.720985, 0.5, 0), Vector3(78.666664, 0.5, 0), Vector3(95.85679, 0.5, 0), Vector3(111.29877, 0.5, 0), Vector3(118, 0.5, 0), Vector3(118, 0.5, 0)]
+}
+tracks/99/type = "value"
+tracks/99/imported = false
+tracks/99/enabled = true
+tracks/99/path = NodePath("Settle:emitting")
+tracks/99/interp = 0
+tracks/99/loop_wrap = false
+tracks/99/keys = {
+"times": PackedFloat32Array(0, 0.299, 1.899),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_aedt7"]
+_data = {
+&"fx": SubResource("Animation_e12gu")
+}
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_k7b6n"]
+polygon = PackedVector2Array(-4096, 0, 4096, 0, 4096, 64, -4096, 64)
+
+[sub_resource type="Gradient" id="Gradient_7g4f0"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8)
+colors = PackedColorArray(0.2901961, 0.101960786, 0.047058824, 1, 0.65882355, 0.2509804, 0.101960786, 1, 1, 0.5411765, 0.16470589, 1, 1, 0.8235294, 0.47843137, 1, 1, 0.95686275, 0.8156863, 1)
+metadata/ramp = "glow"
+metadata/ramp_at = PackedFloat32Array(0, 0.25, 0.5, 0.75, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_5uldw"]
+gradient = SubResource("Gradient_7g4f0")
+
+[sub_resource type="Gradient" id="Gradient_fvobh"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875)
+colors = PackedColorArray(0.05490196, 0.047058824, 0.078431375, 1, 0.101960786, 0.09019608, 0.14117648, 1, 0.12941177, 0.11372549, 0.1764706, 1, 0.16862746, 0.14901961, 0.22352941, 1, 0.22745098, 0.20392157, 0.3137255, 1, 0.2901961, 0.25882354, 0.3882353, 1, 0.41568628, 0.3764706, 0.53333336, 1, 0.5568628, 0.5254902, 0.65882355, 1)
+metadata/ramp = "palette"
+metadata/ramp_at = PackedFloat32Array(0, 0.14285715, 0.2857143, 0.42857143, 0.5714286, 0.71428573, 0.85714287, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_551yj"]
+gradient = SubResource("Gradient_fvobh")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_33yky"]
+shader = ExtResource("2_d584s")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = null
+shader_parameter/size = Vector2(252, 16)
+shader_parameter/center = Vector2(0, 4)
+shader_parameter/stone = SubResource("GradientTexture1D_551yj")
+shader_parameter/glow_ramp = SubResource("GradientTexture1D_5uldw")
+shader_parameter/rift = PackedVector2Array(-118, 2, -114.30195, 2, -111.80131, 2, -109.244545, 2, -106.469635, 1, -103.5182, 0, -100.97544, 0, -98.24376, 2, -94.63194, 0, -91.79687, 0, -88.46952, 0, -85.571556, 2, -83.00617, 1, -78.56113, 1, -75.412895, 2, -72.03706, 0, -67.334305, 0, -64.3103, 0, -60.723778, 2, -56.82429, 0, -52.15442, 1, -47.35662, 1, -43.088703, 1, -39.78658, 2, -37.063118, 1, -33.107903, 2, -28.26817, 2, -24.663683, 2, -21.09226, 1, -17.16615, 0, -14.133085, 1, -11.391674, 1, -6.8381677, 0, -4.1448936, 2, 0.76910996, 1, 5.641062, 0, 9.881876, 1, 13.408448, 1, 17.582544, 2, 20.899479, 0, 24.34435, 1, 27.14184, 2, 30.893496, 0, 35.26869, 1, 38.026276, 1, 40.74986, 2, 45.113052, 0, 49.636448, 2, 52.14095, 0, 55.85625, 1, 59.60546, 2, 62.494446, 2, 67.4168, 1, 70.48793, 1, 74.07098, 0, 78.8903, 1, 82.47373, 1, 86.75261, 2, 89.8883, 2, 93.70725, 2, 96.93595, 1, 100.12317, 2, 102.734764, 1, 107.095505, 1, 109.87534, 1, 114.49541, 2, 117.95085, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/rift_count = 67.0
+shader_parameter/reach = 118.0
+shader_parameter/open = 0.0
+shader_parameter/gapk = 0.0
+shader_parameter/heat = 0.0
+shader_parameter/jx = 0.0
+shader_parameter/flicker = null
+shader_parameter/alpha = null
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4hqex"]
+shader = ExtResource("3_dywj2")
+shader_parameter/size = Vector2(268, 24)
+shader_parameter/center = Vector2(0, 1)
+shader_parameter/color = Color(1, 0.5411765, 0.16470589, 1)
+shader_parameter/rift = PackedVector2Array(-118, 2, -114.30195, 2, -111.80131, 2, -109.244545, 2, -106.469635, 1, -103.5182, 0, -100.97544, 0, -98.24376, 2, -94.63194, 0, -91.79687, 0, -88.46952, 0, -85.571556, 2, -83.00617, 1, -78.56113, 1, -75.412895, 2, -72.03706, 0, -67.334305, 0, -64.3103, 0, -60.723778, 2, -56.82429, 0, -52.15442, 1, -47.35662, 1, -43.088703, 1, -39.78658, 2, -37.063118, 1, -33.107903, 2, -28.26817, 2, -24.663683, 2, -21.09226, 1, -17.16615, 0, -14.133085, 1, -11.391674, 1, -6.8381677, 0, -4.1448936, 2, 0.76910996, 1, 5.641062, 0, 9.881876, 1, 13.408448, 1, 17.582544, 2, 20.899479, 0, 24.34435, 1, 27.14184, 2, 30.893496, 0, 35.26869, 1, 38.026276, 1, 40.74986, 2, 45.113052, 0, 49.636448, 2, 52.14095, 0, 55.85625, 1, 59.60546, 2, 62.494446, 2, 67.4168, 1, 70.48793, 1, 74.07098, 0, 78.8903, 1, 82.47373, 1, 86.75261, 2, 89.8883, 2, 93.70725, 2, 96.93595, 1, 100.12317, 2, 102.734764, 1, 107.095505, 1, 109.87534, 1, 114.49541, 2, 117.95085, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/rift_count = 67.0
+shader_parameter/reach = 118.0
+shader_parameter/open = 0.0
+shader_parameter/heat = 0.0
+shader_parameter/jx = 0.0
+shader_parameter/strength = null
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hwtwb"]
+resource_name = "Dither"
+shader = ExtResource("4_egfeh")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = null
+
+[sub_resource type="Image" id="Image_n3y5y"]
+data = {
+"data": PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 142, 134, 168, 255, 142, 134, 168, 255, 142, 134, 168, 255, 142, 134, 168, 255, 142, 134, 168, 255, 142, 134, 168, 255, 142, 134, 168, 255, 142, 134, 168, 255, 142, 134, 168, 255, 142, 134, 168, 255, 33, 29, 45, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 142, 134, 168, 255, 106, 96, 136, 255, 106, 96, 136, 255, 106, 96, 136, 255, 106, 96, 136, 255, 106, 96, 136, 255, 106, 96, 136, 255, 106, 96, 136, 255, 43, 38, 57, 255, 43, 38, 57, 255, 33, 29, 45, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 142, 134, 168, 255, 106, 96, 136, 255, 106, 96, 136, 255, 106, 96, 136, 255, 106, 96, 136, 255, 43, 38, 57, 255, 43, 38, 57, 255, 43, 38, 57, 255, 43, 38, 57, 255, 43, 38, 57, 255, 33, 29, 45, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 142, 134, 168, 255, 106, 96, 136, 255, 106, 96, 136, 255, 43, 38, 57, 255, 43, 38, 57, 255, 43, 38, 57, 255, 43, 38, 57, 255, 43, 38, 57, 255, 43, 38, 57, 255, 43, 38, 57, 255, 33, 29, 45, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+"format": "RGBA8",
+"height": 21,
+"mipmaps": false,
+"width": 21
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_f30t7"]
+image = SubResource("Image_n3y5y")
+
+[sub_resource type="Image" id="Image_twymj"]
+data = {
+"data": PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 142, 134, 168, 255, 142, 134, 168, 255, 142, 134, 168, 255, 142, 134, 168, 255, 142, 134, 168, 255, 142, 134, 168, 255, 142, 134, 168, 255, 142, 134, 168, 255, 142, 134, 168, 255, 142, 134, 168, 255, 33, 29, 45, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 142, 134, 168, 255, 106, 96, 136, 255, 106, 96, 136, 255, 106, 96, 136, 255, 106, 96, 136, 255, 106, 96, 136, 255, 106, 96, 136, 255, 106, 96, 136, 255, 43, 38, 57, 255, 43, 38, 57, 255, 33, 29, 45, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 142, 134, 168, 255, 106, 96, 136, 255, 106, 96, 136, 255, 106, 96, 136, 255, 106, 96, 136, 255, 43, 38, 57, 255, 43, 38, 57, 255, 43, 38, 57, 255, 43, 38, 57, 255, 43, 38, 57, 255, 33, 29, 45, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 142, 134, 168, 255, 106, 96, 136, 255, 106, 96, 136, 255, 43, 38, 57, 255, 43, 38, 57, 255, 43, 38, 57, 255, 43, 38, 57, 255, 43, 38, 57, 255, 43, 38, 57, 255, 43, 38, 57, 255, 33, 29, 45, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+"format": "RGBA8",
+"height": 21,
+"mipmaps": false,
+"width": 21
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_s5ies"]
+image = SubResource("Image_twymj")
+
+[sub_resource type="Image" id="Image_hxwkx"]
+data = {
+"data": PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 142, 134, 168, 255, 142, 134, 168, 255, 142, 134, 168, 255, 142, 134, 168, 255, 142, 134, 168, 255, 142, 134, 168, 255, 142, 134, 168, 255, 142, 134, 168, 255, 142, 134, 168, 255, 142, 134, 168, 255, 33, 29, 45, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 142, 134, 168, 255, 106, 96, 136, 255, 106, 96, 136, 255, 106, 96, 136, 255, 106, 96, 136, 255, 106, 96, 136, 255, 106, 96, 136, 255, 106, 96, 136, 255, 43, 38, 57, 255, 43, 38, 57, 255, 33, 29, 45, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 142, 134, 168, 255, 106, 96, 136, 255, 106, 96, 136, 255, 106, 96, 136, 255, 106, 96, 136, 255, 43, 38, 57, 255, 43, 38, 57, 255, 43, 38, 57, 255, 43, 38, 57, 255, 43, 38, 57, 255, 33, 29, 45, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 142, 134, 168, 255, 106, 96, 136, 255, 106, 96, 136, 255, 43, 38, 57, 255, 43, 38, 57, 255, 43, 38, 57, 255, 43, 38, 57, 255, 43, 38, 57, 255, 43, 38, 57, 255, 43, 38, 57, 255, 33, 29, 45, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+"format": "RGBA8",
+"height": 19,
+"mipmaps": false,
+"width": 19
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_nu3dm"]
+image = SubResource("Image_hxwkx")
+
+[sub_resource type="Image" id="Image_rfjyj"]
+data = {
+"data": PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 142, 134, 168, 255, 142, 134, 168, 255, 142, 134, 168, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 142, 134, 168, 255, 142, 134, 168, 255, 142, 134, 168, 255, 142, 134, 168, 255, 142, 134, 168, 255, 142, 134, 168, 255, 106, 96, 136, 255, 43, 38, 57, 255, 33, 29, 45, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 142, 134, 168, 255, 106, 96, 136, 255, 106, 96, 136, 255, 106, 96, 136, 255, 43, 38, 57, 255, 43, 38, 57, 255, 43, 38, 57, 255, 43, 38, 57, 255, 33, 29, 45, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 142, 134, 168, 255, 142, 134, 168, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+"format": "RGBA8",
+"height": 19,
+"mipmaps": false,
+"width": 19
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_6tug6"]
+image = SubResource("Image_rfjyj")
+
+[sub_resource type="Image" id="Image_t86st"]
+data = {
+"data": PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 142, 134, 168, 255, 142, 134, 168, 255, 142, 134, 168, 255, 142, 134, 168, 255, 142, 134, 168, 255, 142, 134, 168, 255, 142, 134, 168, 255, 142, 134, 168, 255, 142, 134, 168, 255, 142, 134, 168, 255, 33, 29, 45, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 142, 134, 168, 255, 106, 96, 136, 255, 106, 96, 136, 255, 106, 96, 136, 255, 106, 96, 136, 255, 106, 96, 136, 255, 106, 96, 136, 255, 106, 96, 136, 255, 43, 38, 57, 255, 43, 38, 57, 255, 33, 29, 45, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 142, 134, 168, 255, 106, 96, 136, 255, 106, 96, 136, 255, 106, 96, 136, 255, 106, 96, 136, 255, 43, 38, 57, 255, 43, 38, 57, 255, 43, 38, 57, 255, 43, 38, 57, 255, 43, 38, 57, 255, 33, 29, 45, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 142, 134, 168, 255, 106, 96, 136, 255, 106, 96, 136, 255, 43, 38, 57, 255, 43, 38, 57, 255, 43, 38, 57, 255, 43, 38, 57, 255, 43, 38, 57, 255, 43, 38, 57, 255, 43, 38, 57, 255, 33, 29, 45, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+"format": "RGBA8",
+"height": 19,
+"mipmaps": false,
+"width": 19
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_t5ud6"]
+image = SubResource("Image_t86st")
+
+[sub_resource type="Image" id="Image_dropb"]
+data = {
+"data": PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 142, 134, 168, 255, 142, 134, 168, 255, 142, 134, 168, 255, 142, 134, 168, 255, 142, 134, 168, 255, 142, 134, 168, 255, 142, 134, 168, 255, 142, 134, 168, 255, 142, 134, 168, 255, 142, 134, 168, 255, 33, 29, 45, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 142, 134, 168, 255, 106, 96, 136, 255, 106, 96, 136, 255, 106, 96, 136, 255, 106, 96, 136, 255, 106, 96, 136, 255, 106, 96, 136, 255, 106, 96, 136, 255, 43, 38, 57, 255, 43, 38, 57, 255, 33, 29, 45, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 142, 134, 168, 255, 106, 96, 136, 255, 106, 96, 136, 255, 106, 96, 136, 255, 106, 96, 136, 255, 43, 38, 57, 255, 43, 38, 57, 255, 43, 38, 57, 255, 43, 38, 57, 255, 43, 38, 57, 255, 33, 29, 45, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 142, 134, 168, 255, 106, 96, 136, 255, 106, 96, 136, 255, 43, 38, 57, 255, 43, 38, 57, 255, 43, 38, 57, 255, 43, 38, 57, 255, 43, 38, 57, 255, 43, 38, 57, 255, 43, 38, 57, 255, 33, 29, 45, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+"format": "RGBA8",
+"height": 21,
+"mipmaps": false,
+"width": 21
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_vp6vy"]
+image = SubResource("Image_dropb")
+
+[sub_resource type="Image" id="Image_sipfn"]
+data = {
+"data": PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 142, 134, 168, 255, 142, 134, 168, 255, 142, 134, 168, 255, 142, 134, 168, 255, 142, 134, 168, 255, 142, 134, 168, 255, 142, 134, 168, 255, 142, 134, 168, 255, 142, 134, 168, 255, 142, 134, 168, 255, 33, 29, 45, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 142, 134, 168, 255, 106, 96, 136, 255, 106, 96, 136, 255, 106, 96, 136, 255, 106, 96, 136, 255, 106, 96, 136, 255, 106, 96, 136, 255, 106, 96, 136, 255, 43, 38, 57, 255, 43, 38, 57, 255, 33, 29, 45, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 142, 134, 168, 255, 106, 96, 136, 255, 106, 96, 136, 255, 106, 96, 136, 255, 106, 96, 136, 255, 43, 38, 57, 255, 43, 38, 57, 255, 43, 38, 57, 255, 43, 38, 57, 255, 43, 38, 57, 255, 33, 29, 45, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 142, 134, 168, 255, 106, 96, 136, 255, 106, 96, 136, 255, 43, 38, 57, 255, 43, 38, 57, 255, 43, 38, 57, 255, 43, 38, 57, 255, 43, 38, 57, 255, 43, 38, 57, 255, 43, 38, 57, 255, 33, 29, 45, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+"format": "RGBA8",
+"height": 19,
+"mipmaps": false,
+"width": 19
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_v5y42"]
+image = SubResource("Image_sipfn")
+
+[sub_resource type="Image" id="Image_k83dv"]
+data = {
+"data": PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 142, 134, 168, 255, 142, 134, 168, 255, 142, 134, 168, 255, 142, 134, 168, 255, 142, 134, 168, 255, 142, 134, 168, 255, 142, 134, 168, 255, 33, 29, 45, 255, 33, 29, 45, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 142, 134, 168, 255, 106, 96, 136, 255, 106, 96, 136, 255, 106, 96, 136, 255, 43, 38, 57, 255, 43, 38, 57, 255, 43, 38, 57, 255, 43, 38, 57, 255, 33, 29, 45, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 142, 134, 168, 255, 142, 134, 168, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+"format": "RGBA8",
+"height": 17,
+"mipmaps": false,
+"width": 17
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_7bk02"]
+image = SubResource("Image_k83dv")
+
+[sub_resource type="Image" id="Image_xujv4"]
+data = {
+"data": PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 142, 134, 168, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 142, 134, 168, 255, 142, 134, 168, 255, 142, 134, 168, 255, 142, 134, 168, 255, 142, 134, 168, 255, 142, 134, 168, 255, 142, 134, 168, 255, 33, 29, 45, 255, 33, 29, 45, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 142, 134, 168, 255, 106, 96, 136, 255, 106, 96, 136, 255, 106, 96, 136, 255, 43, 38, 57, 255, 43, 38, 57, 255, 43, 38, 57, 255, 43, 38, 57, 255, 33, 29, 45, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 142, 134, 168, 255, 142, 134, 168, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+"format": "RGBA8",
+"height": 19,
+"mipmaps": false,
+"width": 19
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_hf6ti"]
+image = SubResource("Image_xujv4")
+
+[sub_resource type="Image" id="Image_bcld5"]
+data = {
+"data": PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 142, 134, 168, 255, 142, 134, 168, 255, 142, 134, 168, 255, 142, 134, 168, 255, 142, 134, 168, 255, 142, 134, 168, 255, 142, 134, 168, 255, 142, 134, 168, 255, 142, 134, 168, 255, 142, 134, 168, 255, 33, 29, 45, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 142, 134, 168, 255, 106, 96, 136, 255, 106, 96, 136, 255, 106, 96, 136, 255, 106, 96, 136, 255, 106, 96, 136, 255, 106, 96, 136, 255, 106, 96, 136, 255, 43, 38, 57, 255, 43, 38, 57, 255, 43, 38, 57, 255, 33, 29, 45, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 142, 134, 168, 255, 106, 96, 136, 255, 106, 96, 136, 255, 106, 96, 136, 255, 106, 96, 136, 255, 43, 38, 57, 255, 43, 38, 57, 255, 43, 38, 57, 255, 43, 38, 57, 255, 43, 38, 57, 255, 43, 38, 57, 255, 33, 29, 45, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 142, 134, 168, 255, 106, 96, 136, 255, 106, 96, 136, 255, 43, 38, 57, 255, 43, 38, 57, 255, 43, 38, 57, 255, 43, 38, 57, 255, 43, 38, 57, 255, 43, 38, 57, 255, 43, 38, 57, 255, 43, 38, 57, 255, 33, 29, 45, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+"format": "RGBA8",
+"height": 21,
+"mipmaps": false,
+"width": 21
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_guskx"]
+image = SubResource("Image_bcld5")
+
+[sub_resource type="Image" id="Image_wglba"]
+data = {
+"data": PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 142, 134, 168, 255, 142, 134, 168, 255, 142, 134, 168, 255, 142, 134, 168, 255, 142, 134, 168, 255, 142, 134, 168, 255, 142, 134, 168, 255, 142, 134, 168, 255, 142, 134, 168, 255, 33, 29, 45, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 142, 134, 168, 255, 106, 96, 136, 255, 106, 96, 136, 255, 106, 96, 136, 255, 106, 96, 136, 255, 106, 96, 136, 255, 106, 96, 136, 255, 106, 96, 136, 255, 43, 38, 57, 255, 43, 38, 57, 255, 33, 29, 45, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 142, 134, 168, 255, 106, 96, 136, 255, 106, 96, 136, 255, 106, 96, 136, 255, 106, 96, 136, 255, 43, 38, 57, 255, 43, 38, 57, 255, 43, 38, 57, 255, 43, 38, 57, 255, 43, 38, 57, 255, 33, 29, 45, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 142, 134, 168, 255, 142, 134, 168, 255, 142, 134, 168, 255, 43, 38, 57, 255, 43, 38, 57, 255, 43, 38, 57, 255, 43, 38, 57, 255, 43, 38, 57, 255, 43, 38, 57, 255, 43, 38, 57, 255, 33, 29, 45, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+"format": "RGBA8",
+"height": 19,
+"mipmaps": false,
+"width": 19
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_u2fgi"]
+image = SubResource("Image_wglba")
+
+[sub_resource type="Image" id="Image_nsqf6"]
+data = {
+"data": PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 142, 134, 168, 255, 142, 134, 168, 255, 142, 134, 168, 255, 142, 134, 168, 255, 142, 134, 168, 255, 142, 134, 168, 255, 142, 134, 168, 255, 142, 134, 168, 255, 142, 134, 168, 255, 33, 29, 45, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 142, 134, 168, 255, 106, 96, 136, 255, 106, 96, 136, 255, 106, 96, 136, 255, 106, 96, 136, 255, 106, 96, 136, 255, 106, 96, 136, 255, 106, 96, 136, 255, 43, 38, 57, 255, 43, 38, 57, 255, 33, 29, 45, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 142, 134, 168, 255, 106, 96, 136, 255, 106, 96, 136, 255, 106, 96, 136, 255, 106, 96, 136, 255, 43, 38, 57, 255, 43, 38, 57, 255, 43, 38, 57, 255, 43, 38, 57, 255, 43, 38, 57, 255, 33, 29, 45, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 142, 134, 168, 255, 142, 134, 168, 255, 106, 96, 136, 255, 43, 38, 57, 255, 43, 38, 57, 255, 43, 38, 57, 255, 43, 38, 57, 255, 43, 38, 57, 255, 43, 38, 57, 255, 43, 38, 57, 255, 33, 29, 45, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 14, 12, 20, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+"format": "RGBA8",
+"height": 19,
+"mipmaps": false,
+"width": 19
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_jvy1y"]
+image = SubResource("Image_nsqf6")
+
+[sub_resource type="Image" id="Image_qlrnq"]
+data = {
+"data": PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 142, 134, 168, 255, 142, 134, 168, 255, 142, 134, 168, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 142, 134, 168, 255, 142, 134, 168, 255, 142, 134, 168, 255, 142, 134, 168, 255, 142, 134, 168, 255, 142, 134, 168, 255, 106, 96, 136, 255, 43, 38, 57, 255, 33, 29, 45, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 142, 134, 168, 255, 106, 96, 136, 255, 106, 96, 136, 255, 106, 96, 136, 255, 43, 38, 57, 255, 43, 38, 57, 255, 43, 38, 57, 255, 43, 38, 57, 255, 33, 29, 45, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 142, 134, 168, 255, 142, 134, 168, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+"format": "RGBA8",
+"height": 19,
+"mipmaps": false,
+"width": 19
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_j7iaf"]
+image = SubResource("Image_qlrnq")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m4jmg"]
+shader = ExtResource("5_a3qlu")
+shader_parameter/size = Vector2(128, 128)
+shader_parameter/radius = 60.0
+shader_parameter/thickness = null
+shader_parameter/squash = null
+shader_parameter/color = Color(1, 0.5411765, 0.16470589, 1)
+shader_parameter/strength = null
+shader_parameter/alpha = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6bgky"]
+shader = ExtResource("5_a3qlu")
+shader_parameter/size = Vector2(60, 60)
+shader_parameter/radius = 26.0
+shader_parameter/thickness = null
+shader_parameter/squash = null
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/strength = null
+shader_parameter/alpha = 0.0
+
+[sub_resource type="Gradient" id="Gradient_sudy6"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.25, 0.5, 0.75)
+colors = PackedColorArray(0.5568628, 0.5254902, 0.65882355, 1, 0.41568628, 0.3764706, 0.53333336, 1, 0.2901961, 0.25882354, 0.3882353, 1, 0.22745098, 0.20392157, 0.3137255, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_6iqo6"]
+gradient = SubResource("Gradient_sudy6")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_uen0u"]
+lifetime_randomness = 0.4
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(10.431705, 0.5, 0)
+direction = Vector3(6.123234e-17, -1, 0)
+spread = 34.0
+initial_velocity_min = 40.0
+initial_velocity_max = 200.0
+gravity = Vector3(0, 950, 0)
+color_initial_ramp = SubResource("GradientTexture1D_6iqo6")
+collision_mode = 1
+collision_friction = 1.0
+collision_bounce = 0.15
+collision_use_scale = true
+
+[sub_resource type="Gradient" id="Gradient_hwig5"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.25, 0.5, 0.75)
+colors = PackedColorArray(0.5568628, 0.5254902, 0.65882355, 1, 0.41568628, 0.3764706, 0.53333336, 1, 0.2901961, 0.25882354, 0.3882353, 1, 0.22745098, 0.20392157, 0.3137255, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_p3bp8"]
+gradient = SubResource("Gradient_hwig5")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ecdyh"]
+lifetime_randomness = 0.4
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(10.431705, 0.5, 0)
+direction = Vector3(6.123234e-17, -1, 0)
+spread = 34.0
+initial_velocity_min = 40.0
+initial_velocity_max = 200.0
+gravity = Vector3(0, 950, 0)
+color_initial_ramp = SubResource("GradientTexture1D_p3bp8")
+collision_mode = 1
+collision_friction = 1.0
+collision_bounce = 0.15
+collision_use_scale = true
+
+[sub_resource type="Image" id="Image_v5gk4"]
+data = {
+"data": PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 142, 134, 168, 255, 58, 52, 80, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 74, 66, 99, 255, 33, 29, 45, 255, 33, 29, 45, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+"format": "RGBA8",
+"height": 11,
+"mipmaps": false,
+"width": 11
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_igkke"]
+image = SubResource("Image_v5gk4")
+
+[sub_resource type="Curve" id="Curve_ils8h"]
+_data = [Vector2(0, 1), 0.0, 0.0, 1, 1, Vector2(0.75, 1), 0.0, -4.0, 1, 1, Vector2(1, 0), -4.0, 0.0, 1, 1]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_qmtpe"]
+curve = SubResource("Curve_ils8h")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_aoln2"]
+lifetime_randomness = 0.3
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(8.345365, 0.5, 0)
+angle_max = 360.0
+direction = Vector3(6.123234e-17, -1, 0)
+spread = 52.0
+initial_velocity_min = 100.0
+initial_velocity_max = 230.0
+angular_velocity_min = -800.0
+angular_velocity_max = 800.0
+gravity = Vector3(0, 950, 0)
+damping_min = 30.0
+damping_max = 60.0
+alpha_curve = SubResource("CurveTexture_qmtpe")
+collision_mode = 1
+collision_friction = 0.8
+collision_bounce = 0.3
+collision_use_scale = true
+
+[sub_resource type="Image" id="Image_4cvy7"]
+data = {
+"data": PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 142, 134, 168, 255, 142, 134, 168, 255, 58, 52, 80, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 142, 134, 168, 255, 106, 96, 136, 255, 58, 52, 80, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 58, 52, 80, 255, 58, 52, 80, 255, 43, 38, 57, 255, 43, 38, 57, 255, 33, 29, 45, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 58, 52, 80, 255, 43, 38, 57, 255, 43, 38, 57, 255, 33, 29, 45, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 33, 29, 45, 255, 33, 29, 45, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+"format": "RGBA8",
+"height": 13,
+"mipmaps": false,
+"width": 13
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_iu5uy"]
+image = SubResource("Image_4cvy7")
+
+[sub_resource type="Curve" id="Curve_kxa6p"]
+_data = [Vector2(0, 1), 0.0, 0.0, 1, 1, Vector2(0.75, 1), 0.0, -4.0, 1, 1, Vector2(1, 0), -4.0, 0.0, 1, 1]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_inpxi"]
+curve = SubResource("Curve_kxa6p")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_xoy65"]
+lifetime_randomness = 0.3
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(8.345365, 0.5, 0)
+angle_max = 360.0
+direction = Vector3(6.123234e-17, -1, 0)
+spread = 52.0
+initial_velocity_min = 100.0
+initial_velocity_max = 230.0
+angular_velocity_min = -800.0
+angular_velocity_max = 800.0
+gravity = Vector3(0, 950, 0)
+damping_min = 30.0
+damping_max = 60.0
+alpha_curve = SubResource("CurveTexture_inpxi")
+collision_mode = 1
+collision_friction = 0.8
+collision_bounce = 0.3
+collision_use_scale = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4j6uy"]
+resource_name = "Soft"
+shader = ExtResource("4_egfeh")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = true
+
+[sub_resource type="Gradient" id="Gradient_cf1yw"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.05, 0.3, 0.55, 0.8, 0.95)
+colors = PackedColorArray(0.46901962, 0.4329412, 0.55215687, 0, 0.46901962, 0.4329412, 0.55215687, 0.7, 0.4325098, 0.399451, 0.4906667, 0.55, 0.2998039, 0.27235293, 0.34696078, 0.4, 0.2627451, 0.23921569, 0.28235295, 0.2, 0.2627451, 0.23921569, 0.28235295, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_bnf7j"]
+gradient = SubResource("Gradient_cf1yw")
+
+[sub_resource type="Curve" id="Curve_ddb15"]
+_limits = [0.0, 8.0, 0.0, 1.0]
+_data = [Vector2(0, 0.6), 0.0, 1.3333331, 1, 1, Vector2(0.3, 1), 1.3333331, 0.71428573, 1, 1, Vector2(1, 1.5), 0.71428573, 0.0, 1, 1]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_yh4ve"]
+curve = SubResource("Curve_ddb15")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_xb4qg"]
+lifetime_randomness = 0.35
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(9.3885355, 1.5, 0)
+direction = Vector3(6.123234e-17, -1, 0)
+spread = 40.0
+initial_velocity_min = 15.0
+initial_velocity_max = 55.0
+gravity = Vector3(0, -18, 0)
+damping_min = 15.0
+damping_max = 30.0
+scale_min = 0.8
+scale_max = 1.3
+scale_curve = SubResource("CurveTexture_yh4ve")
+color_ramp = SubResource("GradientTexture1D_bnf7j")
+
+[sub_resource type="Gradient" id="Gradient_jbipk"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.25, 0.5, 0.75)
+colors = PackedColorArray(1, 0.95686275, 0.8156863, 1, 1, 0.8235294, 0.47843137, 1, 1, 0.5411765, 0.16470589, 1, 0.65882355, 0.2509804, 0.101960786, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ymplx"]
+gradient = SubResource("Gradient_jbipk")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_c0a84"]
+lifetime_randomness = 0.5
+particle_flag_align_y = true
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(7.302194, 0.5, 0)
+direction = Vector3(6.123234e-17, -1, 0)
+spread = 57.0
+initial_velocity_min = 120.0
+initial_velocity_max = 300.0
+gravity = Vector3(0, 430, 0)
+damping_min = 250.0
+damping_max = 400.0
+color_ramp = SubResource("GradientTexture1D_ymplx")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_w4110"]
+shader = ExtResource("5_a3qlu")
+shader_parameter/size = Vector2(128, 128)
+shader_parameter/radius = 60.0
+shader_parameter/thickness = null
+shader_parameter/squash = null
+shader_parameter/color = Color(1, 0.5411765, 0.16470589, 1)
+shader_parameter/strength = null
+shader_parameter/alpha = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4dodn"]
+shader = ExtResource("5_a3qlu")
+shader_parameter/size = Vector2(60, 60)
+shader_parameter/radius = 26.0
+shader_parameter/thickness = null
+shader_parameter/squash = null
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/strength = null
+shader_parameter/alpha = 0.0
+
+[sub_resource type="Gradient" id="Gradient_wdub0"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.25, 0.5, 0.75)
+colors = PackedColorArray(0.5568628, 0.5254902, 0.65882355, 1, 0.41568628, 0.3764706, 0.53333336, 1, 0.2901961, 0.25882354, 0.3882353, 1, 0.22745098, 0.20392157, 0.3137255, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_yq341"]
+gradient = SubResource("Gradient_wdub0")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8pej4"]
+lifetime_randomness = 0.4
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(74.901245, 0.5, 0)
+direction = Vector3(6.123234e-17, -1, 0)
+spread = 34.0
+initial_velocity_min = 32.0
+initial_velocity_max = 160.0
+gravity = Vector3(0, 950, 0)
+color_initial_ramp = SubResource("GradientTexture1D_yq341")
+collision_mode = 1
+collision_friction = 1.0
+collision_bounce = 0.15
+collision_use_scale = true
+
+[sub_resource type="Gradient" id="Gradient_ravs3"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.25, 0.5, 0.75)
+colors = PackedColorArray(0.5568628, 0.5254902, 0.65882355, 1, 0.41568628, 0.3764706, 0.53333336, 1, 0.2901961, 0.25882354, 0.3882353, 1, 0.22745098, 0.20392157, 0.3137255, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_v1fyb"]
+gradient = SubResource("Gradient_ravs3")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_inrxo"]
+lifetime_randomness = 0.4
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(74.901245, 0.5, 0)
+direction = Vector3(6.123234e-17, -1, 0)
+spread = 34.0
+initial_velocity_min = 32.0
+initial_velocity_max = 160.0
+gravity = Vector3(0, 950, 0)
+color_initial_ramp = SubResource("GradientTexture1D_v1fyb")
+collision_mode = 1
+collision_friction = 1.0
+collision_bounce = 0.15
+collision_use_scale = true
+
+[sub_resource type="Image" id="Image_67rcn"]
+data = {
+"data": PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 74, 66, 99, 255, 58, 52, 80, 255, 58, 52, 80, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 33, 29, 45, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+"format": "RGBA8",
+"height": 11,
+"mipmaps": false,
+"width": 11
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_btk5q"]
+image = SubResource("Image_67rcn")
+
+[sub_resource type="Curve" id="Curve_jtyjy"]
+_data = [Vector2(0, 1), 0.0, 0.0, 1, 1, Vector2(0.75, 1), 0.0, -4.0, 1, 1, Vector2(1, 0), -4.0, 0.0, 1, 1]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_rlel1"]
+curve = SubResource("Curve_jtyjy")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_k8h8n"]
+lifetime_randomness = 0.3
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(59.920998, 0.5, 0)
+angle_max = 360.0
+direction = Vector3(6.123234e-17, -1, 0)
+spread = 52.0
+initial_velocity_min = 80.0
+initial_velocity_max = 184.0
+angular_velocity_min = -800.0
+angular_velocity_max = 800.0
+gravity = Vector3(0, 950, 0)
+damping_min = 30.0
+damping_max = 60.0
+alpha_curve = SubResource("CurveTexture_rlel1")
+collision_mode = 1
+collision_friction = 0.8
+collision_bounce = 0.3
+collision_use_scale = true
+
+[sub_resource type="Image" id="Image_y2bke"]
+data = {
+"data": PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 74, 66, 99, 255, 74, 66, 99, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 142, 134, 168, 255, 74, 66, 99, 255, 74, 66, 99, 255, 33, 29, 45, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 142, 134, 168, 255, 106, 96, 136, 255, 43, 38, 57, 255, 43, 38, 57, 255, 33, 29, 45, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 58, 52, 80, 255, 58, 52, 80, 255, 43, 38, 57, 255, 43, 38, 57, 255, 33, 29, 45, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 58, 52, 80, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+"format": "RGBA8",
+"height": 13,
+"mipmaps": false,
+"width": 13
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_cw0oi"]
+image = SubResource("Image_y2bke")
+
+[sub_resource type="Curve" id="Curve_pksi8"]
+_data = [Vector2(0, 1), 0.0, 0.0, 1, 1, Vector2(0.75, 1), 0.0, -4.0, 1, 1, Vector2(1, 0), -4.0, 0.0, 1, 1]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_aur2f"]
+curve = SubResource("Curve_pksi8")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ojunc"]
+lifetime_randomness = 0.3
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(59.920998, 0.5, 0)
+angle_max = 360.0
+direction = Vector3(6.123234e-17, -1, 0)
+spread = 52.0
+initial_velocity_min = 80.0
+initial_velocity_max = 184.0
+angular_velocity_min = -800.0
+angular_velocity_max = 800.0
+gravity = Vector3(0, 950, 0)
+damping_min = 30.0
+damping_max = 60.0
+alpha_curve = SubResource("CurveTexture_aur2f")
+collision_mode = 1
+collision_friction = 0.8
+collision_bounce = 0.3
+collision_use_scale = true
+
+[sub_resource type="Curve" id="Curve_4u1mg"]
+_limits = [0.0, 8.0, 0.0, 1.0]
+_data = [Vector2(0, 0.6), 0.0, 1.3333331, 1, 1, Vector2(0.3, 1), 1.3333331, 0.71428573, 1, 1, Vector2(1, 1.5), 0.71428573, 0.0, 1, 1]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_2r6s4"]
+curve = SubResource("Curve_4u1mg")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_bvxq5"]
+lifetime_randomness = 0.35
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(67.411125, 1.5, 0)
+direction = Vector3(6.123234e-17, -1, 0)
+spread = 40.0
+initial_velocity_min = 12.0
+initial_velocity_max = 44.0
+gravity = Vector3(0, -18, 0)
+damping_min = 15.0
+damping_max = 30.0
+scale_min = 0.64
+scale_max = 1.04
+scale_curve = SubResource("CurveTexture_2r6s4")
+color_ramp = SubResource("GradientTexture1D_bnf7j")
+
+[sub_resource type="Gradient" id="Gradient_6vixr"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.25, 0.5, 0.75)
+colors = PackedColorArray(1, 0.95686275, 0.8156863, 1, 1, 0.8235294, 0.47843137, 1, 1, 0.5411765, 0.16470589, 1, 0.65882355, 0.2509804, 0.101960786, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_hpuio"]
+gradient = SubResource("Gradient_6vixr")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3ukxu"]
+lifetime_randomness = 0.5
+particle_flag_align_y = true
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(52.430874, 0.5, 0)
+direction = Vector3(6.123234e-17, -1, 0)
+spread = 57.0
+initial_velocity_min = 120.0
+initial_velocity_max = 300.0
+gravity = Vector3(0, 430, 0)
+damping_min = 250.0
+damping_max = 400.0
+color_ramp = SubResource("GradientTexture1D_hpuio")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0lk18"]
+shader = ExtResource("5_a3qlu")
+shader_parameter/size = Vector2(128, 128)
+shader_parameter/radius = 60.0
+shader_parameter/thickness = null
+shader_parameter/squash = null
+shader_parameter/color = Color(1, 0.5411765, 0.16470589, 1)
+shader_parameter/strength = null
+shader_parameter/alpha = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_e227j"]
+shader = ExtResource("5_a3qlu")
+shader_parameter/size = Vector2(60, 60)
+shader_parameter/radius = 26.0
+shader_parameter/thickness = null
+shader_parameter/squash = null
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/strength = null
+shader_parameter/alpha = 0.0
+
+[sub_resource type="Gradient" id="Gradient_pklmv"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.25, 0.5, 0.75)
+colors = PackedColorArray(0.5568628, 0.5254902, 0.65882355, 1, 0.41568628, 0.3764706, 0.53333336, 1, 0.2901961, 0.25882354, 0.3882353, 1, 0.22745098, 0.20392157, 0.3137255, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_hht3l"]
+gradient = SubResource("Gradient_pklmv")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1lerh"]
+lifetime_randomness = 0.4
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(128, 0.5, 0)
+direction = Vector3(6.123234e-17, -1, 0)
+spread = 34.0
+initial_velocity_min = 24.0
+initial_velocity_max = 120.0
+gravity = Vector3(0, 950, 0)
+color_initial_ramp = SubResource("GradientTexture1D_hht3l")
+collision_mode = 1
+collision_friction = 1.0
+collision_bounce = 0.15
+collision_use_scale = true
+
+[sub_resource type="Gradient" id="Gradient_egbc6"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.25, 0.5, 0.75)
+colors = PackedColorArray(0.5568628, 0.5254902, 0.65882355, 1, 0.41568628, 0.3764706, 0.53333336, 1, 0.2901961, 0.25882354, 0.3882353, 1, 0.22745098, 0.20392157, 0.3137255, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_70ufg"]
+gradient = SubResource("Gradient_egbc6")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wdwq1"]
+lifetime_randomness = 0.4
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(128, 0.5, 0)
+direction = Vector3(6.123234e-17, -1, 0)
+spread = 34.0
+initial_velocity_min = 24.0
+initial_velocity_max = 120.0
+gravity = Vector3(0, 950, 0)
+color_initial_ramp = SubResource("GradientTexture1D_70ufg")
+collision_mode = 1
+collision_friction = 1.0
+collision_bounce = 0.15
+collision_use_scale = true
+
+[sub_resource type="Image" id="Image_v5ven"]
+data = {
+"data": PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 142, 134, 168, 255, 142, 134, 168, 255, 58, 52, 80, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 142, 134, 168, 255, 43, 38, 57, 255, 33, 29, 45, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+"format": "RGBA8",
+"height": 11,
+"mipmaps": false,
+"width": 11
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_dyw5l"]
+image = SubResource("Image_v5ven")
+
+[sub_resource type="Curve" id="Curve_cny4s"]
+_data = [Vector2(0, 1), 0.0, 0.0, 1, 1, Vector2(0.75, 1), 0.0, -4.0, 1, 1, Vector2(1, 0), -4.0, 0.0, 1, 1]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_fqfdk"]
+curve = SubResource("Curve_cny4s")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_lj1nn"]
+lifetime_randomness = 0.3
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(102.4, 0.5, 0)
+angle_max = 360.0
+direction = Vector3(6.123234e-17, -1, 0)
+spread = 52.0
+initial_velocity_min = 60.0
+initial_velocity_max = 138.0
+angular_velocity_min = -800.0
+angular_velocity_max = 800.0
+gravity = Vector3(0, 950, 0)
+damping_min = 30.0
+damping_max = 60.0
+alpha_curve = SubResource("CurveTexture_fqfdk")
+collision_mode = 1
+collision_friction = 0.8
+collision_bounce = 0.3
+collision_use_scale = true
+
+[sub_resource type="Image" id="Image_cy005"]
+data = {
+"data": PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 74, 66, 99, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 142, 134, 168, 255, 74, 66, 99, 255, 74, 66, 99, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 74, 66, 99, 255, 43, 38, 57, 255, 43, 38, 57, 255, 33, 29, 45, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 74, 66, 99, 255, 33, 29, 45, 255, 33, 29, 45, 255, 33, 29, 45, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 74, 66, 99, 255, 14, 12, 20, 255, 14, 12, 20, 255, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 20, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+"format": "RGBA8",
+"height": 13,
+"mipmaps": false,
+"width": 13
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_r5ftp"]
+image = SubResource("Image_cy005")
+
+[sub_resource type="Curve" id="Curve_7pbd5"]
+_data = [Vector2(0, 1), 0.0, 0.0, 1, 1, Vector2(0.75, 1), 0.0, -4.0, 1, 1, Vector2(1, 0), -4.0, 0.0, 1, 1]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_lirll"]
+curve = SubResource("Curve_7pbd5")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_rjia1"]
+lifetime_randomness = 0.3
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(102.4, 0.5, 0)
+angle_max = 360.0
+direction = Vector3(6.123234e-17, -1, 0)
+spread = 52.0
+initial_velocity_min = 60.0
+initial_velocity_max = 138.0
+angular_velocity_min = -800.0
+angular_velocity_max = 800.0
+gravity = Vector3(0, 950, 0)
+damping_min = 30.0
+damping_max = 60.0
+alpha_curve = SubResource("CurveTexture_lirll")
+collision_mode = 1
+collision_friction = 0.8
+collision_bounce = 0.3
+collision_use_scale = true
+
+[sub_resource type="Curve" id="Curve_jbte0"]
+_limits = [0.0, 8.0, 0.0, 1.0]
+_data = [Vector2(0, 0.6), 0.0, 1.3333331, 1, 1, Vector2(0.3, 1), 1.3333331, 0.71428573, 1, 1, Vector2(1, 1.5), 0.71428573, 0.0, 1, 1]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_am388"]
+curve = SubResource("Curve_jbte0")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_k1h21"]
+lifetime_randomness = 0.35
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(115.2, 1.5, 0)
+direction = Vector3(6.123234e-17, -1, 0)
+spread = 40.0
+initial_velocity_min = 9.0
+initial_velocity_max = 33.0
+gravity = Vector3(0, -18, 0)
+damping_min = 15.0
+damping_max = 30.0
+scale_min = 0.48
+scale_max = 0.78
+scale_curve = SubResource("CurveTexture_am388")
+color_ramp = SubResource("GradientTexture1D_bnf7j")
+
+[sub_resource type="Gradient" id="Gradient_huv1r"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.25, 0.5, 0.75)
+colors = PackedColorArray(1, 0.95686275, 0.8156863, 1, 1, 0.8235294, 0.47843137, 1, 1, 0.5411765, 0.16470589, 1, 0.65882355, 0.2509804, 0.101960786, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_g6spa"]
+gradient = SubResource("Gradient_huv1r")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_r1qc5"]
+lifetime_randomness = 0.5
+particle_flag_align_y = true
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(89.6, 0.5, 0)
+direction = Vector3(6.123234e-17, -1, 0)
+spread = 57.0
+initial_velocity_min = 120.0
+initial_velocity_max = 300.0
+gravity = Vector3(0, 430, 0)
+damping_min = 250.0
+damping_max = 400.0
+color_ramp = SubResource("GradientTexture1D_g6spa")
+
+[sub_resource type="Gradient" id="Gradient_w38sw"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.5)
+colors = PackedColorArray(0.41568628, 0.3764706, 0.53333336, 1, 0.2901961, 0.25882354, 0.3882353, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_7ssq6"]
+gradient = SubResource("Gradient_w38sw")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wogqw"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(1, 0.5, 0)
+direction = Vector3(6.123234e-17, -1, 0)
+spread = 20.0
+initial_velocity_min = 20.0
+initial_velocity_max = 70.0
+gravity = Vector3(0, 950, 0)
+color_initial_ramp = SubResource("GradientTexture1D_7ssq6")
+collision_mode = 1
+collision_friction = 1.0
+collision_bounce = 0.1
+collision_use_scale = true
+
+[sub_resource type="Curve" id="Curve_ajifb"]
+_data = [Vector2(0, 1), 0.0, 0.0, 1, 1, Vector2(0.7, 1), 0.0, -3.3333333, 1, 1, Vector2(1, 0), -3.3333333, 0.0, 1, 1]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_8wg68"]
+curve = SubResource("Curve_ajifb")
+
+[sub_resource type="Gradient" id="Gradient_sjclm"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.33333334, 0.6666667)
+colors = PackedColorArray(1, 0.95686275, 0.8156863, 1, 1, 0.8235294, 0.47843137, 1, 1, 0.5411765, 0.16470589, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_7jjap"]
+gradient = SubResource("Gradient_sjclm")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_famtf"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(1, 0.5, 0)
+direction = Vector3(6.123234e-17, -1, 0)
+spread = 20.0
+initial_velocity_min = 20.0
+initial_velocity_max = 45.0
+gravity = Vector3(0, -20, 0)
+damping_min = 15.0
+damping_max = 30.0
+color_ramp = SubResource("GradientTexture1D_7jjap")
+alpha_curve = SubResource("CurveTexture_8wg68")
+turbulence_enabled = true
+turbulence_noise_strength = 3.0
+turbulence_noise_scale = 3.0
+turbulence_influence_min = 0.02
+turbulence_influence_max = 0.03
+
+[sub_resource type="Gradient" id="Gradient_a6sf0"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.33333334, 0.6666667)
+colors = PackedColorArray(0.33686274, 0.3054902, 0.41156864, 0.6, 0.33686274, 0.3054902, 0.41156864, 0.4, 0.33686274, 0.3054902, 0.41156864, 0.2)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ggu3r"]
+gradient = SubResource("Gradient_a6sf0")
+
+[sub_resource type="Curve" id="Curve_afiq1"]
+_limits = [0.0, 8.0, 0.0, 1.0]
+_data = [Vector2(0, 0.6), 0.0, 0.6999999, 1, 1, Vector2(1, 1.3), 0.6999999, 0.0, 1, 1]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_gd0jx"]
+curve = SubResource("Curve_afiq1")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_sqw04"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(1, 0.5, 0)
+direction = Vector3(6.123234e-17, -1, 0)
+spread = 40.0
+initial_velocity_min = 4.0
+initial_velocity_max = 14.0
+gravity = Vector3(0, 0, 0)
+damping_min = 10.0
+damping_max = 20.0
+scale_curve = SubResource("CurveTexture_gd0jx")
+color_ramp = SubResource("GradientTexture1D_ggu3r")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_po6a4"]
+resource_name = "Light"
+shader = ExtResource("11_tkowm")
+shader_parameter/strength = null
+shader_parameter/steps = null
+
+[sub_resource type="Curve" id="Curve_sp4dx"]
+_data = [Vector2(0, 1), 0.0, 0.0, 1, 1, Vector2(0.7, 1), 0.0, -3.3333333, 1, 1, Vector2(1, 0), -3.3333333, 0.0, 1, 1]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_wdcbl"]
+curve = SubResource("Curve_sp4dx")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_c12dt"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(1, 0.5, 0)
+direction = Vector3(6.123234e-17, -1, 0)
+spread = 20.0
+initial_velocity_min = 20.0
+initial_velocity_max = 45.0
+gravity = Vector3(0, -20, 0)
+damping_min = 15.0
+damping_max = 30.0
+color = Color(1, 0.8235294, 0.47843137, 0.5)
+alpha_curve = SubResource("CurveTexture_wdcbl")
+turbulence_enabled = true
+turbulence_noise_strength = 3.0
+turbulence_noise_scale = 3.0
+turbulence_influence_min = 0.02
+turbulence_influence_max = 0.03
+
+[sub_resource type="Gradient" id="Gradient_d37m0"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.33333334, 0.6666667)
+colors = PackedColorArray(0.33686274, 0.3054902, 0.41156864, 0.6, 0.33686274, 0.3054902, 0.41156864, 0.4, 0.33686274, 0.3054902, 0.41156864, 0.2)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_sdpdf"]
+gradient = SubResource("Gradient_d37m0")
+
+[sub_resource type="Curve" id="Curve_53nm2"]
+_limits = [0.0, 8.0, 0.0, 1.0]
+_data = [Vector2(0, 0.6), 0.0, 0.6, 1, 1, Vector2(1, 1.2), 0.6, 0.0, 1, 1]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_you5s"]
+curve = SubResource("Curve_53nm2")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_becxj"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(106.2, 0.5, 0)
+direction = Vector3(6.123234e-17, -1, 0)
+spread = 80.0
+initial_velocity_min = 10.0
+initial_velocity_max = 40.0
+gravity = Vector3(0, 0, 0)
+damping_min = 30.0
+damping_max = 60.0
+scale_curve = SubResource("CurveTexture_you5s")
+color_ramp = SubResource("GradientTexture1D_sdpdf")
+
+[node name="Quake" type="Node2D" unique_id=1611788806]
+script = ExtResource("1_mbbd8")
+effect_id = "nature/quake"
+source = "src/fx/nature/quake.js@6fc162d3ec14caca1b85916579ee36b633ad3383"
+duration = 3.1
+canvas_size = Vector2i(288, 104)
+origin = Vector2i(144, 88)
+bg = "ground"
+ramps = {
+"glow": PackedColorArray(0.2901961, 0.101960786, 0.047058824, 1, 0.65882355, 0.2509804, 0.101960786, 1, 1, 0.5411765, 0.16470589, 1, 1, 0.8235294, 0.47843137, 1, 1, 0.95686275, 0.8156863, 1),
+"palette": PackedColorArray(0.05490196, 0.047058824, 0.078431375, 1, 0.101960786, 0.09019608, 0.14117648, 1, 0.12941177, 0.11372549, 0.1764706, 1, 0.16862746, 0.14901961, 0.22352941, 1, 0.22745098, 0.20392157, 0.3137255, 1, 0.2901961, 0.25882354, 0.3882353, 1, 0.41568628, 0.3764706, 0.53333336, 1, 0.5568628, 0.5254902, 0.65882355, 1)
+}
+palette_extra = PackedColorArray(0.46901962, 0.4329412, 0.55215687, 1, 0.4325098, 0.399451, 0.4906667, 1, 0.2998039, 0.27235293, 0.34696078, 1, 0.2627451, 0.23921569, 0.28235295, 1, 0.33686274, 0.3054902, 0.41156864, 1)
+palette_override = PackedColorArray()
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1664894713]
+libraries/ = SubResource("AnimationLibrary_aedt7")
+
+[node name="Floor" type="LightOccluder2D" parent="." unique_id=1486168569]
+occluder = SubResource("OccluderPolygon2D_k7b6n")
+occluder_light_mask = 0
+
+[node name="Rift" type="ColorRect" parent="." unique_id=1708678509]
+z_index = -2
+material = SubResource("ShaderMaterial_33yky")
+offset_left = -126.0
+offset_top = -4.0
+offset_right = 126.0
+offset_bottom = 12.0
+mouse_filter = 2
+
+[node name="RiftLight" type="ColorRect" parent="." unique_id=106572503]
+z_index = 2
+material = SubResource("ShaderMaterial_4hqex")
+offset_left = -134.0
+offset_top = -11.0
+offset_right = 134.0
+offset_bottom = 13.0
+mouse_filter = 2
+
+[node name="Slab0" type="Sprite2D" parent="." unique_id=2058801929]
+visible = false
+z_index = 1
+material = SubResource("ShaderMaterial_hwtwb")
+position = Vector2(-109.40516, -1.5)
+texture = SubResource("ImageTexture_f30t7")
+
+[node name="Slab1" type="Sprite2D" parent="." unique_id=903681935]
+visible = false
+z_index = 1
+material = SubResource("ShaderMaterial_hwtwb")
+position = Vector2(-95.25797, -1.5)
+texture = SubResource("ImageTexture_s5ies")
+
+[node name="Slab2" type="Sprite2D" parent="." unique_id=371700911]
+visible = false
+z_index = 1
+material = SubResource("ShaderMaterial_hwtwb")
+position = Vector2(-82.86546, -1.5)
+texture = SubResource("ImageTexture_nu3dm")
+
+[node name="Slab3" type="Sprite2D" parent="." unique_id=1219032128]
+visible = false
+z_index = 1
+material = SubResource("ShaderMaterial_hwtwb")
+position = Vector2(-68.00665, -1.5)
+texture = SubResource("ImageTexture_6tug6")
+
+[node name="Slab4" type="Sprite2D" parent="." unique_id=1947494518]
+visible = false
+z_index = 1
+material = SubResource("ShaderMaterial_hwtwb")
+position = Vector2(-53.16934, -1.5)
+texture = SubResource("ImageTexture_t5ud6")
+
+[node name="Slab5" type="Sprite2D" parent="." unique_id=1987631863]
+visible = false
+z_index = 1
+material = SubResource("ShaderMaterial_hwtwb")
+position = Vector2(-40.766445, -1.5)
+texture = SubResource("ImageTexture_vp6vy")
+
+[node name="Slab6" type="Sprite2D" parent="." unique_id=429567146]
+visible = false
+z_index = 1
+material = SubResource("ShaderMaterial_hwtwb")
+position = Vector2(-25.055914, -1.5)
+texture = SubResource("ImageTexture_v5y42")
+
+[node name="Slab7" type="Sprite2D" parent="." unique_id=1900099344]
+visible = false
+z_index = 1
+material = SubResource("ShaderMaterial_hwtwb")
+position = Vector2(-10.947576, -1.5)
+texture = SubResource("ImageTexture_7bk02")
+
+[node name="Slab8" type="Sprite2D" parent="." unique_id=1400671493]
+visible = false
+z_index = 1
+material = SubResource("ShaderMaterial_hwtwb")
+position = Vector2(2.5487256, -1.5)
+texture = SubResource("ImageTexture_hf6ti")
+
+[node name="Slab9" type="Sprite2D" parent="." unique_id=441154918]
+visible = false
+z_index = 1
+material = SubResource("ShaderMaterial_hwtwb")
+position = Vector2(16.616404, -1.5)
+texture = SubResource("ImageTexture_guskx")
+
+[node name="Slab10" type="Sprite2D" parent="." unique_id=129656582]
+visible = false
+z_index = 1
+material = SubResource("ShaderMaterial_hwtwb")
+position = Vector2(43.45245, -1.5)
+texture = SubResource("ImageTexture_u2fgi")
+
+[node name="Slab11" type="Sprite2D" parent="." unique_id=621799522]
+visible = false
+z_index = 1
+material = SubResource("ShaderMaterial_hwtwb")
+position = Vector2(58.69808, -1.5)
+texture = SubResource("ImageTexture_jvy1y")
+
+[node name="Slab12" type="Sprite2D" parent="." unique_id=1819249549]
+visible = false
+z_index = 1
+material = SubResource("ShaderMaterial_hwtwb")
+position = Vector2(72.65979, -1.5)
+texture = SubResource("ImageTexture_j7iaf")
+
+[node name="Jolt0Warm" type="ColorRect" parent="." unique_id=389613504]
+z_index = 2
+material = SubResource("ShaderMaterial_m4jmg")
+offset_left = -64.0
+offset_top = -66.0
+offset_right = 64.0
+offset_bottom = 62.0
+mouse_filter = 2
+
+[node name="Jolt0Flash" type="ColorRect" parent="." unique_id=2108861845]
+z_index = 2
+material = SubResource("ShaderMaterial_6bgky")
+offset_left = -30.0
+offset_top = -32.0
+offset_right = 30.0
+offset_bottom = 28.0
+mouse_filter = 2
+
+[node name="Jolt0Grit" type="GPUParticles2D" parent="." unique_id=402922708]
+z_index = 1
+material = SubResource("ShaderMaterial_hwtwb")
+position = Vector2(0, -1)
+emitting = false
+amount = 45
+texture = ExtResource("6_5einj")
+one_shot = true
+explosiveness = 1.0
+use_fixed_seed = true
+seed = 570662
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+process_material = SubResource("ParticleProcessMaterial_uen0u")
+
+[node name="Jolt0Gravel" type="GPUParticles2D" parent="." unique_id=1518341041]
+z_index = 1
+material = SubResource("ShaderMaterial_hwtwb")
+position = Vector2(0, -1)
+emitting = false
+amount = 24
+texture = ExtResource("7_2d3ot")
+one_shot = true
+explosiveness = 1.0
+use_fixed_seed = true
+seed = 425277
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+process_material = SubResource("ParticleProcessMaterial_ecdyh")
+
+[node name="Jolt0Stones0" type="GPUParticles2D" parent="." unique_id=1945997088]
+z_index = 1
+material = SubResource("ShaderMaterial_hwtwb")
+position = Vector2(0, -2)
+emitting = false
+amount = 4
+texture = SubResource("ImageTexture_igkke")
+lifetime = 1.5
+one_shot = true
+explosiveness = 1.0
+use_fixed_seed = true
+seed = 55539
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+process_material = SubResource("ParticleProcessMaterial_aoln2")
+
+[node name="Jolt0Stones1" type="GPUParticles2D" parent="." unique_id=822939367]
+z_index = 1
+material = SubResource("ShaderMaterial_hwtwb")
+position = Vector2(0, -2)
+emitting = false
+amount = 4
+texture = SubResource("ImageTexture_iu5uy")
+lifetime = 1.5
+one_shot = true
+explosiveness = 1.0
+use_fixed_seed = true
+seed = 55541
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+process_material = SubResource("ParticleProcessMaterial_xoy65")
+
+[node name="Jolt0Dust" type="GPUParticles2D" parent="." unique_id=1685239178]
+z_index = 1
+material = SubResource("ShaderMaterial_4j6uy")
+position = Vector2(0, -3)
+emitting = false
+amount = 14
+texture = ExtResource("8_icwq2")
+lifetime = 1.6
+one_shot = true
+explosiveness = 0.85
+use_fixed_seed = true
+seed = 466452
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+process_material = SubResource("ParticleProcessMaterial_xb4qg")
+
+[node name="Jolt0Sparks" type="GPUParticles2D" parent="." unique_id=1328001397]
+z_index = 1
+material = SubResource("ShaderMaterial_hwtwb")
+position = Vector2(0, -1)
+emitting = false
+amount = 10
+texture = ExtResource("9_8sjni")
+lifetime = 0.3
+one_shot = true
+explosiveness = 1.0
+use_fixed_seed = true
+seed = 672603
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+process_material = SubResource("ParticleProcessMaterial_c0a84")
+
+[node name="Jolt1Warm" type="ColorRect" parent="." unique_id=1949244577]
+z_index = 2
+material = SubResource("ShaderMaterial_w4110")
+offset_left = -64.0
+offset_top = -66.0
+offset_right = 64.0
+offset_bottom = 62.0
+mouse_filter = 2
+
+[node name="Jolt1Flash" type="ColorRect" parent="." unique_id=1325924496]
+z_index = 2
+material = SubResource("ShaderMaterial_4dodn")
+offset_left = -30.0
+offset_top = -32.0
+offset_right = 30.0
+offset_bottom = 28.0
+mouse_filter = 2
+
+[node name="Jolt1Grit" type="GPUParticles2D" parent="." unique_id=1916480367]
+z_index = 1
+material = SubResource("ShaderMaterial_hwtwb")
+position = Vector2(0, -1)
+emitting = false
+amount = 36
+texture = ExtResource("6_5einj")
+one_shot = true
+explosiveness = 1.0
+use_fixed_seed = true
+seed = 756586
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+process_material = SubResource("ParticleProcessMaterial_8pej4")
+
+[node name="Jolt1Gravel" type="GPUParticles2D" parent="." unique_id=602701635]
+z_index = 1
+material = SubResource("ShaderMaterial_hwtwb")
+position = Vector2(0, -1)
+emitting = false
+amount = 19
+texture = ExtResource("7_2d3ot")
+one_shot = true
+explosiveness = 1.0
+use_fixed_seed = true
+seed = 889379
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+process_material = SubResource("ParticleProcessMaterial_inrxo")
+
+[node name="Jolt1Stones0" type="GPUParticles2D" parent="." unique_id=650526128]
+z_index = 1
+material = SubResource("ShaderMaterial_hwtwb")
+position = Vector2(0, -2)
+emitting = false
+amount = 4
+texture = SubResource("ImageTexture_btk5q")
+lifetime = 1.5
+one_shot = true
+explosiveness = 1.0
+use_fixed_seed = true
+seed = 826558
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+process_material = SubResource("ParticleProcessMaterial_k8h8n")
+
+[node name="Jolt1Stones1" type="GPUParticles2D" parent="." unique_id=944695634]
+z_index = 1
+material = SubResource("ShaderMaterial_hwtwb")
+position = Vector2(0, -2)
+emitting = false
+amount = 4
+texture = SubResource("ImageTexture_cw0oi")
+lifetime = 1.5
+one_shot = true
+explosiveness = 1.0
+use_fixed_seed = true
+seed = 826560
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+process_material = SubResource("ParticleProcessMaterial_ojunc")
+
+[node name="Jolt1Dust" type="GPUParticles2D" parent="." unique_id=1257846566]
+z_index = 1
+material = SubResource("ShaderMaterial_4j6uy")
+position = Vector2(0, -3)
+emitting = false
+amount = 12
+texture = ExtResource("8_icwq2")
+lifetime = 1.6
+one_shot = true
+explosiveness = 0.85
+use_fixed_seed = true
+seed = 652376
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+process_material = SubResource("ParticleProcessMaterial_bvxq5")
+
+[node name="Jolt1Sparks" type="GPUParticles2D" parent="." unique_id=1362810505]
+z_index = 1
+material = SubResource("ShaderMaterial_hwtwb")
+position = Vector2(0, -1)
+emitting = false
+texture = ExtResource("9_8sjni")
+lifetime = 0.3
+one_shot = true
+explosiveness = 1.0
+use_fixed_seed = true
+seed = 136702
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+process_material = SubResource("ParticleProcessMaterial_3ukxu")
+
+[node name="Jolt2Warm" type="ColorRect" parent="." unique_id=675882836]
+z_index = 2
+material = SubResource("ShaderMaterial_0lk18")
+offset_left = -64.0
+offset_top = -66.0
+offset_right = 64.0
+offset_bottom = 62.0
+mouse_filter = 2
+
+[node name="Jolt2Flash" type="ColorRect" parent="." unique_id=709059124]
+z_index = 2
+material = SubResource("ShaderMaterial_e227j")
+offset_left = -30.0
+offset_top = -32.0
+offset_right = 30.0
+offset_bottom = 28.0
+mouse_filter = 2
+
+[node name="Jolt2Grit" type="GPUParticles2D" parent="." unique_id=1128174483]
+z_index = 1
+material = SubResource("ShaderMaterial_hwtwb")
+position = Vector2(0, -1)
+emitting = false
+amount = 27
+texture = ExtResource("6_5einj")
+one_shot = true
+explosiveness = 1.0
+use_fixed_seed = true
+seed = 942510
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+process_material = SubResource("ParticleProcessMaterial_1lerh")
+
+[node name="Jolt2Gravel" type="GPUParticles2D" parent="." unique_id=1746225871]
+z_index = 1
+material = SubResource("ShaderMaterial_hwtwb")
+position = Vector2(0, -1)
+emitting = false
+amount = 14
+texture = ExtResource("7_2d3ot")
+one_shot = true
+explosiveness = 1.0
+use_fixed_seed = true
+seed = 399067
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+process_material = SubResource("ParticleProcessMaterial_wdwq1")
+
+[node name="Jolt2Stones0" type="GPUParticles2D" parent="." unique_id=1456214720]
+z_index = 1
+material = SubResource("ShaderMaterial_hwtwb")
+position = Vector2(0, -2)
+emitting = false
+amount = 3
+texture = SubResource("ImageTexture_dyw5l")
+lifetime = 1.5
+one_shot = true
+explosiveness = 1.0
+use_fixed_seed = true
+seed = 597574
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+process_material = SubResource("ParticleProcessMaterial_lj1nn")
+
+[node name="Jolt2Stones1" type="GPUParticles2D" parent="." unique_id=1748754522]
+z_index = 1
+material = SubResource("ShaderMaterial_hwtwb")
+position = Vector2(0, -2)
+emitting = false
+amount = 3
+texture = SubResource("ImageTexture_r5ftp")
+lifetime = 1.5
+one_shot = true
+explosiveness = 1.0
+use_fixed_seed = true
+seed = 597576
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+process_material = SubResource("ParticleProcessMaterial_rjia1")
+
+[node name="Jolt2Dust" type="GPUParticles2D" parent="." unique_id=1946215819]
+z_index = 1
+material = SubResource("ShaderMaterial_4j6uy")
+position = Vector2(0, -3)
+emitting = false
+amount = 9
+texture = ExtResource("8_icwq2")
+lifetime = 1.6
+one_shot = true
+explosiveness = 0.85
+use_fixed_seed = true
+seed = 838300
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+process_material = SubResource("ParticleProcessMaterial_k1h21")
+
+[node name="Jolt2Sparks" type="GPUParticles2D" parent="." unique_id=190134911]
+z_index = 1
+material = SubResource("ShaderMaterial_hwtwb")
+position = Vector2(0, -1)
+emitting = false
+amount = 6
+texture = ExtResource("9_8sjni")
+lifetime = 0.3
+one_shot = true
+explosiveness = 1.0
+use_fixed_seed = true
+seed = 646393
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+process_material = SubResource("ParticleProcessMaterial_r1qc5")
+
+[node name="Breath" type="GPUParticles2D" parent="." unique_id=70783405]
+z_index = 1
+material = SubResource("ShaderMaterial_hwtwb")
+position = Vector2(0, -1)
+emitting = false
+amount = 22
+texture = ExtResource("6_5einj")
+lifetime = 0.65
+use_fixed_seed = true
+seed = 789618
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+process_material = SubResource("ParticleProcessMaterial_wogqw")
+
+[node name="Embers" type="GPUParticles2D" parent="." unique_id=1958296366]
+z_index = 1
+material = SubResource("ShaderMaterial_hwtwb")
+position = Vector2(0, -1)
+emitting = false
+amount = 10
+texture = ExtResource("6_5einj")
+lifetime = 0.9
+use_fixed_seed = true
+seed = 162347
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+process_material = SubResource("ParticleProcessMaterial_famtf")
+
+[node name="Wisps" type="GPUParticles2D" parent="." unique_id=1822601187]
+z_index = 1
+material = SubResource("ShaderMaterial_4j6uy")
+position = Vector2(0, -1)
+emitting = false
+amount = 5
+texture = ExtResource("10_pgoaw")
+lifetime = 0.65
+use_fixed_seed = true
+seed = 504745
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+process_material = SubResource("ParticleProcessMaterial_sqw04")
+
+[node name="EmberLight" type="GPUParticles2D" parent="." unique_id=1305533141]
+z_index = 2
+material = SubResource("ShaderMaterial_po6a4")
+position = Vector2(0, -1)
+emitting = false
+amount = 10
+texture = ExtResource("12_gxf4m")
+lifetime = 0.9
+use_fixed_seed = true
+seed = 162347
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+process_material = SubResource("ParticleProcessMaterial_c12dt")
+
+[node name="Settle" type="GPUParticles2D" parent="." unique_id=1345239611]
+z_index = 1
+material = SubResource("ShaderMaterial_4j6uy")
+position = Vector2(0, -1)
+emitting = false
+amount = 12
+texture = ExtResource("10_pgoaw")
+lifetime = 0.55
+use_fixed_seed = true
+seed = 277445
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+process_material = SubResource("ParticleProcessMaterial_becxj")

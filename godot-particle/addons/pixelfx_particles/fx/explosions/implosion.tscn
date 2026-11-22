@@ -1,0 +1,2091 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://addons/pixelfx_particles/core/pfx_effect.gd" id="1_c8b7n"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/shaders/ring.gdshader" id="2_xmx3o"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/shaders/ring_light.gdshader" id="3_rc4o5"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/shaders/dither.gdshader" id="4_flhda"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/textures/streak4.png" id="5_t5qxh"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/textures/disc9.png" id="6_vkoeo"]
+[ext_resource type="Shader" path="res://addons/pixelfx_particles/shaders/light.gdshader" id="7_ul03v"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/textures/glow8.png" id="8_yspft"]
+[ext_resource type="Texture2D" path="res://addons/pixelfx_particles/textures/plus3.png" id="9_bx6rj"]
+
+[sub_resource type="Animation" id="Animation_7uero"]
+length = 1.65
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Void:material:shader_parameter/radius")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.11666667, 0.18333334, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.53333336, 0.56666666, 0.6, 0.6333333, 0.6666667, 0.7, 0.71666664, 0.73333335, 0.75, 0.76666665, 0.78333336, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [67.0, 66.80150462962962, 66.22974537037038, 65.046875, 63.625, 61.640625, 59.0, 55.609375, 51.375, 48.03703703703704, 44.25462962962963, 40.000000000000014, 35.245370370370374, 29.962962962962976, 24.12500000000002, 20.98900462962964, 17.70370370370373, 14.265625, 10.671296296296283, 6.917245370370374, 3.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Void:material:shader_parameter/alpha")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.35, 0.7]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("VoidEdge:material:shader_parameter/radius")
+tracks/2/interp = 1
+tracks/2/loop_wrap = false
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.11666667, 0.18333334, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.53333336, 0.56666666, 0.6, 0.6333333, 0.6666667, 0.7, 0.73333335, 0.75, 0.76666665, 0.78333336, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [68.0, 67.80150462962962, 67.22974537037038, 66.046875, 64.625, 62.640625, 60.0, 56.609375, 52.375, 49.03703703703704, 45.25462962962963, 41.000000000000014, 36.245370370370374, 30.962962962962976, 25.12500000000002, 18.70370370370373, 15.265625, 11.671296296296283, 7.917245370370374, 4.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("VoidEdge:material:shader_parameter/alpha")
+tracks/3/interp = 1
+tracks/3/loop_wrap = false
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.5, 1.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("VoidEdge:material:shader_parameter/color")
+tracks/4/interp = 0
+tracks/4/loop_wrap = false
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.399),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Color(0.41568628, 0.26666668, 0.7529412, 1), Color(0.627451, 0.5019608, 0.9411765, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("VoidGlow:material:shader_parameter/radius")
+tracks/5/interp = 1
+tracks/5/loop_wrap = false
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.11666667, 0.18333334, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.53333336, 0.56666666, 0.6, 0.6333333, 0.6666667, 0.7, 0.71666664, 0.73333335, 0.75, 0.76666665, 0.78333336, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [67.0, 66.80150462962962, 66.22974537037038, 65.046875, 63.625, 61.640625, 59.0, 55.609375, 51.375, 48.03703703703704, 44.25462962962963, 40.000000000000014, 35.245370370370374, 29.962962962962976, 24.12500000000002, 20.98900462962964, 17.70370370370373, 14.265625, 10.671296296296283, 6.917245370370374, 3.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("VoidGlow:material:shader_parameter/alpha")
+tracks/6/interp = 1
+tracks/6/loop_wrap = false
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.18, 0.48]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Void:visible")
+tracks/7/interp = 0
+tracks/7/loop_wrap = false
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.799),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("VoidGlow:visible")
+tracks/8/interp = 0
+tracks/8/loop_wrap = false
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 0.799),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("VoidEdge:visible")
+tracks/9/interp = 0
+tracks/9/loop_wrap = false
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 0.799),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Pull0:material:shader_parameter/radius")
+tracks/10/interp = 1
+tracks/10/loop_wrap = false
+tracks/10/keys = {
+"times": PackedFloat32Array(0, 0.017, 0.034, 0.051, 0.068, 0.085, 0.102, 0.119, 0.136, 0.153, 0.17, 0.187, 0.204, 0.221, 0.238, 0.255, 0.272, 0.289, 0.306, 0.323, 0.34),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [72.0, 71.825, 71.3, 70.425, 69.2, 67.625, 65.7, 63.425000000000004, 60.8, 57.824999999999996, 54.5, 50.825, 46.800000000000004, 42.42499999999999, 37.7, 32.625, 27.199999999999992, 21.425000000000004, 15.299999999999997, 8.825000000000003, 2.0]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Pull0:material:shader_parameter/alpha")
+tracks/11/interp = 1
+tracks/11/loop_wrap = false
+tracks/11/keys = {
+"times": PackedFloat32Array(0, 0.34),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.4, 1.0]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("Pull0:material:shader_parameter/thickness")
+tracks/12/interp = 0
+tracks/12/loop_wrap = false
+tracks/12/keys = {
+"times": PackedFloat32Array(0, 0.237),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [1.0, 2.0]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("Pull0:material:shader_parameter/color")
+tracks/13/interp = 0
+tracks/13/loop_wrap = false
+tracks/13/keys = {
+"times": PackedFloat32Array(0, 0.203),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Color(0.41568628, 0.26666668, 0.7529412, 1), Color(0.84705883, 0.78431374, 1, 1)]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("Pull0:visible")
+tracks/14/interp = 0
+tracks/14/loop_wrap = false
+tracks/14/keys = {
+"times": PackedFloat32Array(0, 0.339),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("Pull1:material:shader_parameter/radius")
+tracks/15/interp = 1
+tracks/15/loop_wrap = false
+tracks/15/keys = {
+"times": PackedFloat32Array(0, 0.17, 0.187, 0.204, 0.221, 0.238, 0.255, 0.272, 0.289, 0.306, 0.323, 0.34, 0.357, 0.374, 0.391, 0.408, 0.425, 0.442, 0.459, 0.476, 0.493, 0.51),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [64.0, 64.0, 63.845000000000006, 63.38, 62.605000000000004, 61.519999999999996, 60.125, 58.42, 56.405, 54.08, 51.445, 48.5, 45.245, 41.68, 37.80499999999999, 33.620000000000005, 29.125, 24.319999999999993, 19.205000000000005, 13.779999999999998, 8.045000000000002, 2.0]
+}
+tracks/16/type = "value"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("Pull1:material:shader_parameter/alpha")
+tracks/16/interp = 1
+tracks/16/loop_wrap = false
+tracks/16/keys = {
+"times": PackedFloat32Array(0, 0.17, 0.51),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.4, 0.4, 1.0]
+}
+tracks/17/type = "value"
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/path = NodePath("Pull1:material:shader_parameter/thickness")
+tracks/17/interp = 0
+tracks/17/loop_wrap = false
+tracks/17/keys = {
+"times": PackedFloat32Array(0, 0.407),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [1.0, 2.0]
+}
+tracks/18/type = "value"
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/path = NodePath("Pull1:material:shader_parameter/color")
+tracks/18/interp = 0
+tracks/18/loop_wrap = false
+tracks/18/keys = {
+"times": PackedFloat32Array(0, 0.373),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Color(0.41568628, 0.26666668, 0.7529412, 1), Color(0.84705883, 0.78431374, 1, 1)]
+}
+tracks/19/type = "value"
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/path = NodePath("Pull1:visible")
+tracks/19/interp = 0
+tracks/19/loop_wrap = false
+tracks/19/keys = {
+"times": PackedFloat32Array(0, 0.17, 0.509),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/20/type = "value"
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/path = NodePath("Pull2:material:shader_parameter/radius")
+tracks/20/interp = 1
+tracks/20/loop_wrap = false
+tracks/20/keys = {
+"times": PackedFloat32Array(0, 0.34, 0.357, 0.374, 0.391, 0.408, 0.425, 0.442, 0.459, 0.476, 0.493, 0.51, 0.527, 0.544, 0.561, 0.578, 0.595, 0.612, 0.629, 0.646, 0.663, 0.68),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [56.0, 56.0, 55.865, 55.46, 54.785000000000004, 53.839999999999996, 52.625, 51.14, 49.385000000000005, 47.36, 45.065, 42.5, 39.665, 36.56, 33.184999999999995, 29.54, 25.625, 21.439999999999994, 16.985000000000007, 12.259999999999998, 7.2650000000000015, 2.0]
+}
+tracks/21/type = "value"
+tracks/21/imported = false
+tracks/21/enabled = true
+tracks/21/path = NodePath("Pull2:material:shader_parameter/alpha")
+tracks/21/interp = 1
+tracks/21/loop_wrap = false
+tracks/21/keys = {
+"times": PackedFloat32Array(0, 0.34, 0.68),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.4, 0.4, 1.0]
+}
+tracks/22/type = "value"
+tracks/22/imported = false
+tracks/22/enabled = true
+tracks/22/path = NodePath("Pull2:material:shader_parameter/thickness")
+tracks/22/interp = 0
+tracks/22/loop_wrap = false
+tracks/22/keys = {
+"times": PackedFloat32Array(0, 0.577),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [1.0, 2.0]
+}
+tracks/23/type = "value"
+tracks/23/imported = false
+tracks/23/enabled = true
+tracks/23/path = NodePath("Pull2:material:shader_parameter/color")
+tracks/23/interp = 0
+tracks/23/loop_wrap = false
+tracks/23/keys = {
+"times": PackedFloat32Array(0, 0.543),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Color(0.41568628, 0.26666668, 0.7529412, 1), Color(0.84705883, 0.78431374, 1, 1)]
+}
+tracks/24/type = "value"
+tracks/24/imported = false
+tracks/24/enabled = true
+tracks/24/path = NodePath("Pull2:visible")
+tracks/24/interp = 0
+tracks/24/loop_wrap = false
+tracks/24/keys = {
+"times": PackedFloat32Array(0, 0.34, 0.679),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/25/type = "value"
+tracks/25/imported = false
+tracks/25/enabled = true
+tracks/25/path = NodePath("Pull3:material:shader_parameter/radius")
+tracks/25/interp = 1
+tracks/25/loop_wrap = false
+tracks/25/keys = {
+"times": PackedFloat32Array(0, 0.51, 0.527, 0.544, 0.561, 0.578, 0.595, 0.612, 0.629, 0.646, 0.663, 0.68, 0.697, 0.714, 0.731, 0.748, 0.765, 0.782, 0.799, 0.816, 0.833, 0.85),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [48.0, 48.0, 47.885000000000005, 47.54, 46.965, 46.16, 45.125, 43.86, 42.365, 40.64, 38.685, 36.5, 34.085, 31.44, 28.564999999999994, 25.46, 22.125, 18.559999999999995, 14.765000000000004, 10.739999999999998, 6.485000000000001, 2.0]
+}
+tracks/26/type = "value"
+tracks/26/imported = false
+tracks/26/enabled = true
+tracks/26/path = NodePath("Pull3:material:shader_parameter/alpha")
+tracks/26/interp = 1
+tracks/26/loop_wrap = false
+tracks/26/keys = {
+"times": PackedFloat32Array(0, 0.51, 0.85),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.4, 0.4, 1.0]
+}
+tracks/27/type = "value"
+tracks/27/imported = false
+tracks/27/enabled = true
+tracks/27/path = NodePath("Pull3:material:shader_parameter/thickness")
+tracks/27/interp = 0
+tracks/27/loop_wrap = false
+tracks/27/keys = {
+"times": PackedFloat32Array(0, 0.747),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [1.0, 2.0]
+}
+tracks/28/type = "value"
+tracks/28/imported = false
+tracks/28/enabled = true
+tracks/28/path = NodePath("Pull3:material:shader_parameter/color")
+tracks/28/interp = 0
+tracks/28/loop_wrap = false
+tracks/28/keys = {
+"times": PackedFloat32Array(0, 0.713),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Color(0.41568628, 0.26666668, 0.7529412, 1), Color(0.84705883, 0.78431374, 1, 1)]
+}
+tracks/29/type = "value"
+tracks/29/imported = false
+tracks/29/enabled = true
+tracks/29/path = NodePath("Pull3:visible")
+tracks/29/interp = 0
+tracks/29/loop_wrap = false
+tracks/29/keys = {
+"times": PackedFloat32Array(0, 0.51, 0.849),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/30/type = "value"
+tracks/30/imported = false
+tracks/30/enabled = true
+tracks/30/path = NodePath("CoreVoid:material:shader_parameter/radius")
+tracks/30/interp = 1
+tracks/30/loop_wrap = false
+tracks/30/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.81666666, 1.0333333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [4.5, 5.3203125, 6.03125, 6.6328125, 7.125, 7.5078125, 7.78125, 7.9453125, 8.0, 7.9453125, 7.78125, 7.5078125, 7.125000000000001, 6.6328125, 6.031250000000001, 5.3203125, 4.5, 5.1, 5.1]
+}
+tracks/31/type = "value"
+tracks/31/imported = false
+tracks/31/enabled = true
+tracks/31/path = NodePath("CoreRim:material:shader_parameter/radius")
+tracks/31/interp = 1
+tracks/31/loop_wrap = false
+tracks/31/keys = {
+"times": PackedFloat32Array(0, 0.033333335, 0.06666667, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.73333335, 0.76666665, 0.8, 0.81666666, 1.0333333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [2.2, 2.759027777777778, 3.269444444444444, 3.73125, 4.332812499999999, 4.825, 5.2078125, 5.48125, 5.6453125, 5.7, 5.6453125, 5.48125, 5.2078125, 4.825000000000001, 4.3328125, 3.731250000000001, 3.2694444444444466, 2.759027777777777, 2.2, 2.8, 2.8]
+}
+tracks/32/type = "value"
+tracks/32/imported = false
+tracks/32/enabled = true
+tracks/32/path = NodePath("Core:material:shader_parameter/radius")
+tracks/32/interp = 1
+tracks/32/loop_wrap = false
+tracks/32/keys = {
+"times": PackedFloat32Array(0, 0.016666668, 0.033333335, 0.06666667, 0.1, 0.13333334, 0.16666667, 0.2, 0.23333333, 0.28333333, 0.33333334, 0.38333333, 0.43333334, 0.48333332, 0.53333336, 0.5833333, 0.6166667, 0.65, 0.68333334, 0.71666664, 0.75, 0.76666665, 0.78333336, 0.8, 0.81666666, 1.0333333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [1.0, 1.2855902777777777, 1.5590277777777777, 2.069444444444444, 2.53125, 2.9444444444444446, 3.3090277777777777, 3.625, 3.892361111111111, 4.202256944444445, 4.402777777777779, 4.493923611111111, 4.475694444444445, 4.348090277777778, 4.111111111111111, 3.7647569444444446, 3.4730902777777777, 3.1328125, 2.7439236111111116, 2.3064236111111116, 1.8203125, 1.5590277777777772, 1.2855902777777783, 1.0, 1.6, 1.6]
+}
+tracks/33/type = "value"
+tracks/33/imported = false
+tracks/33/enabled = true
+tracks/33/path = NodePath("CoreVoid:position")
+tracks/33/interp = 0
+tracks/33/loop_wrap = false
+tracks/33/keys = {
+"times": PackedFloat32Array(0, 0.8156667, 0.8323333, 0.849, 0.88233334, 0.899, 0.93233335, 0.949, 0.98233336, 0.999, 1.0323334),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(-11, -11), Vector2(-12, -11), Vector2(-10, -11), Vector2(-12, -11), Vector2(-10, -11), Vector2(-12, -11), Vector2(-10, -11), Vector2(-12, -11), Vector2(-10, -11), Vector2(-12, -11), Vector2(-10, -11)]
+}
+tracks/34/type = "value"
+tracks/34/imported = false
+tracks/34/enabled = true
+tracks/34/path = NodePath("CoreVoid:visible")
+tracks/34/interp = 0
+tracks/34/loop_wrap = false
+tracks/34/keys = {
+"times": PackedFloat32Array(0, 1.019),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/35/type = "value"
+tracks/35/imported = false
+tracks/35/enabled = true
+tracks/35/path = NodePath("CoreRim:position")
+tracks/35/interp = 0
+tracks/35/loop_wrap = false
+tracks/35/keys = {
+"times": PackedFloat32Array(0, 0.8156667, 0.8323333, 0.849, 0.88233334, 0.899, 0.93233335, 0.949, 0.98233336, 0.999, 1.0323334),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(-9, -9), Vector2(-10, -9), Vector2(-8, -9), Vector2(-10, -9), Vector2(-8, -9), Vector2(-10, -9), Vector2(-8, -9), Vector2(-10, -9), Vector2(-8, -9), Vector2(-10, -9), Vector2(-8, -9)]
+}
+tracks/36/type = "value"
+tracks/36/imported = false
+tracks/36/enabled = true
+tracks/36/path = NodePath("CoreRim:visible")
+tracks/36/interp = 0
+tracks/36/loop_wrap = false
+tracks/36/keys = {
+"times": PackedFloat32Array(0, 1.019),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/37/type = "value"
+tracks/37/imported = false
+tracks/37/enabled = true
+tracks/37/path = NodePath("Core:position")
+tracks/37/interp = 0
+tracks/37/loop_wrap = false
+tracks/37/keys = {
+"times": PackedFloat32Array(0, 0.8156667, 0.8323333, 0.849, 0.88233334, 0.899, 0.93233335, 0.949, 0.98233336, 0.999, 1.0323334),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(-8, -8), Vector2(-9, -8), Vector2(-7, -8), Vector2(-9, -8), Vector2(-7, -8), Vector2(-9, -8), Vector2(-7, -8), Vector2(-9, -8), Vector2(-7, -8), Vector2(-9, -8), Vector2(-7, -8)]
+}
+tracks/38/type = "value"
+tracks/38/imported = false
+tracks/38/enabled = true
+tracks/38/path = NodePath("Core:visible")
+tracks/38/interp = 0
+tracks/38/loop_wrap = false
+tracks/38/keys = {
+"times": PackedFloat32Array(0, 1.019),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/39/type = "value"
+tracks/39/imported = false
+tracks/39/enabled = true
+tracks/39/path = NodePath("CoreLight:material:shader_parameter/radius")
+tracks/39/interp = 1
+tracks/39/loop_wrap = false
+tracks/39/keys = {
+"times": PackedFloat32Array(0, 0.8, 1.0333333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [10.0, 36.0, 36.0]
+}
+tracks/40/type = "value"
+tracks/40/imported = false
+tracks/40/enabled = true
+tracks/40/path = NodePath("CoreLight:material:shader_parameter/alpha")
+tracks/40/interp = 1
+tracks/40/loop_wrap = false
+tracks/40/keys = {
+"times": PackedFloat32Array(0, 0.8, 1.0333333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.3, 0.8, 0.8]
+}
+tracks/41/type = "value"
+tracks/41/imported = false
+tracks/41/enabled = true
+tracks/41/path = NodePath("StillLight:material:shader_parameter/alpha")
+tracks/41/interp = 1
+tracks/41/loop_wrap = false
+tracks/41/keys = {
+"times": PackedFloat32Array(0, 0.8, 0.81666666, 0.8333333, 0.85, 0.8666667, 0.8833333, 0.9, 0.9166667, 0.93333334, 0.95, 0.96666664, 0.98333335, 1, 1.0166667, 1.0333333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, 0.20924946944810563, 0.34752502925921425, 0.534045835168675, 0.5973255184080971, 0.47918503003636687, 0.2882421902296768, 0.20004896532827604, 0.29568979958261765, 0.487232951049565, 0.5985745296169075, 0.5273476014278276, 0.3390378757795567, 0.20677644599832143, 0.2521638606701564]
+}
+tracks/42/type = "value"
+tracks/42/imported = false
+tracks/42/enabled = true
+tracks/42/path = NodePath("CoreLight:visible")
+tracks/42/interp = 0
+tracks/42/loop_wrap = false
+tracks/42/keys = {
+"times": PackedFloat32Array(0, 1.019),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/43/type = "value"
+tracks/43/imported = false
+tracks/43/enabled = true
+tracks/43/path = NodePath("StillLight:visible")
+tracks/43/interp = 0
+tracks/43/loop_wrap = false
+tracks/43/keys = {
+"times": PackedFloat32Array(0, 0.799, 1.019),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/44/type = "value"
+tracks/44/imported = false
+tracks/44/enabled = true
+tracks/44/path = NodePath("Streaks0:emitting")
+tracks/44/interp = 0
+tracks/44/loop_wrap = false
+tracks/44/keys = {
+"times": PackedFloat32Array(0, 0.539),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/45/type = "value"
+tracks/45/imported = false
+tracks/45/enabled = true
+tracks/45/path = NodePath("Streaks0:amount_ratio")
+tracks/45/interp = 0
+tracks/45/loop_wrap = false
+tracks/45/keys = {
+"times": PackedFloat32Array(0, 0.199, 0.399),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0.34, 0.67, 1.0]
+}
+tracks/46/type = "value"
+tracks/46/imported = false
+tracks/46/enabled = true
+tracks/46/path = NodePath("Streaks1:emitting")
+tracks/46/interp = 0
+tracks/46/loop_wrap = false
+tracks/46/keys = {
+"times": PackedFloat32Array(0, 0.539),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/47/type = "value"
+tracks/47/imported = false
+tracks/47/enabled = true
+tracks/47/path = NodePath("Streaks1:amount_ratio")
+tracks/47/interp = 0
+tracks/47/loop_wrap = false
+tracks/47/keys = {
+"times": PackedFloat32Array(0, 0.199, 0.399),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0.34, 0.67, 1.0]
+}
+tracks/48/type = "value"
+tracks/48/imported = false
+tracks/48/enabled = true
+tracks/48/path = NodePath("Streaks2:emitting")
+tracks/48/interp = 0
+tracks/48/loop_wrap = false
+tracks/48/keys = {
+"times": PackedFloat32Array(0, 0.539),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/49/type = "value"
+tracks/49/imported = false
+tracks/49/enabled = true
+tracks/49/path = NodePath("Streaks2:amount_ratio")
+tracks/49/interp = 0
+tracks/49/loop_wrap = false
+tracks/49/keys = {
+"times": PackedFloat32Array(0, 0.199, 0.399),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0.34, 0.67, 1.0]
+}
+tracks/50/type = "value"
+tracks/50/imported = false
+tracks/50/enabled = true
+tracks/50/path = NodePath("Grit0:emitting")
+tracks/50/interp = 0
+tracks/50/loop_wrap = false
+tracks/50/keys = {
+"times": PackedFloat32Array(0, 0.399),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/51/type = "value"
+tracks/51/imported = false
+tracks/51/enabled = true
+tracks/51/path = NodePath("Grit1:emitting")
+tracks/51/interp = 0
+tracks/51/loop_wrap = false
+tracks/51/keys = {
+"times": PackedFloat32Array(0, 0.399),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/52/type = "value"
+tracks/52/imported = false
+tracks/52/enabled = true
+tracks/52/path = NodePath("Grit2:emitting")
+tracks/52/interp = 0
+tracks/52/loop_wrap = false
+tracks/52/keys = {
+"times": PackedFloat32Array(0, 0.399),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/53/type = "value"
+tracks/53/imported = false
+tracks/53/enabled = true
+tracks/53/path = NodePath("Vapour:emitting")
+tracks/53/interp = 0
+tracks/53/loop_wrap = false
+tracks/53/keys = {
+"times": PackedFloat32Array(0, 0.019, 0.539),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/54/type = "value"
+tracks/54/imported = false
+tracks/54/enabled = true
+tracks/54/path = NodePath("Pop:material:shader_parameter/radius")
+tracks/54/interp = 1
+tracks/54/loop_wrap = false
+tracks/54/keys = {
+"times": PackedFloat32Array(0, 1.02, 1.06),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [7.0, 7.0, 1.0]
+}
+tracks/55/type = "value"
+tracks/55/imported = false
+tracks/55/enabled = true
+tracks/55/path = NodePath("Pop:visible")
+tracks/55/interp = 0
+tracks/55/loop_wrap = false
+tracks/55/keys = {
+"times": PackedFloat32Array(0, 1.019, 1.059),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/56/type = "value"
+tracks/56/imported = false
+tracks/56/enabled = true
+tracks/56/path = NodePath("Flare0:points")
+tracks/56/interp = 1
+tracks/56/loop_wrap = false
+tracks/56/keys = {
+"times": PackedFloat32Array(0, 1.02, 1.035909, 1.0518181, 1.0677273, 1.0836364, 1.0995455, 1.1154546, 1.1313636, 1.1472727, 1.1631818, 1.1790909, 1.195),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [PackedVector2Array(-26.16295, -26.16295, -23.982704, -23.982704, -21.80246, -21.80246, -19.622213, -19.622213, -17.441967, -17.441967, -15.261722, -15.261722, -13.081475, -13.081475, -10.90123, -10.90123, -8.7209835, -8.7209835, -6.540737, -6.540737, -4.3604927, -4.3604927, -2.1802444, -2.1802444, 0, 0, 2.1802464, 2.1802464, 4.360491, 4.360491, 6.540739, 6.540739, 8.7209835, 8.7209835, 10.901228, 10.901228, 13.081476, 13.081476, 15.261721, 15.261721, 17.441965, 17.441965, 19.622213, 19.622213, 21.802462, 21.802462, 23.982702, 23.982702, 26.16295, 26.16295), PackedVector2Array(-26.16295, -26.16295, -23.982704, -23.982704, -21.80246, -21.80246, -19.622213, -19.622213, -17.441967, -17.441967, -15.261722, -15.261722, -13.081475, -13.081475, -10.90123, -10.90123, -8.7209835, -8.7209835, -6.540737, -6.540737, -4.3604927, -4.3604927, -2.1802444, -2.1802444, 0, 0, 2.1802464, 2.1802464, 4.360491, 4.360491, 6.540739, 6.540739, 8.7209835, 8.7209835, 10.901228, 10.901228, 13.081476, 13.081476, 15.261721, 15.261721, 17.441965, 17.441965, 19.622213, 19.622213, 21.802462, 21.802462, 23.982702, 23.982702, 26.16295, 26.16295), PackedVector2Array(-23.977348, -23.977348, -21.979237, -21.979237, -19.981123, -19.981123, -17.983011, -17.983011, -15.984899, -15.984899, -13.986787, -13.986787, -11.988674, -11.988674, -9.990562, -9.990562, -7.992449, -7.992449, -5.994337, -5.994337, -3.9962254, -3.9962254, -1.9981117, -1.9981117, 0, 0, 1.9981136, 1.9981136, 3.9962234, 3.9962234, 5.994337, 5.994337, 7.9924507, 7.9924507, 9.990562, 9.990562, 11.988674, 11.988674, 13.986786, 13.986786, 15.984898, 15.984898, 17.98301, 17.98301, 19.981125, 19.981125, 21.979237, 21.979237, 23.977348, 23.977348), PackedVector2Array(-21.791744, -21.791744, -19.975765, -19.975765, -18.159786, -18.159786, -16.343807, -16.343807, -14.527829, -14.527829, -12.711851, -12.711851, -10.895872, -10.895872, -9.079894, -9.079894, -7.263914, -7.263914, -5.447937, -5.447937, -3.631958, -3.631958, -1.815979, -1.815979, 0, 0, 1.815979, 1.815979, 3.631956, 3.631956, 5.447937, 5.447937, 7.263916, 7.263916, 9.079893, 9.079893, 10.89587, 10.89587, 12.711853, 12.711853, 14.527828, 14.527828, 16.343807, 16.343807, 18.159786, 18.159786, 19.975765, 19.975765, 21.791744, 21.791744), PackedVector2Array(-19.606142, -19.606142, -17.972298, -17.972298, -16.338451, -16.338451, -14.704607, -14.704607, -13.070761, -13.070761, -11.436916, -11.436916, -9.803071, -9.803071, -8.169227, -8.169227, -6.5353804, -6.5353804, -4.901535, -4.901535, -3.2676907, -3.2676907, -1.6338444, -1.6338444, 0, 0, 1.6338463, 1.6338463, 3.2676888, 3.2676888, 4.901535, 4.901535, 6.5353813, 6.5353813, 8.169226, 8.169226, 9.803072, 9.803072, 11.436916, 11.436916, 13.070761, 13.070761, 14.704607, 14.704607, 16.338453, 16.338453, 17.972296, 17.972296, 19.606142, 19.606142), PackedVector2Array(-17.42054, -17.42054, -15.968828, -15.968828, -14.517117, -14.517117, -13.065405, -13.065405, -11.613693, -11.613693, -10.161982, -10.161982, -8.71027, -8.71027, -7.2585583, -7.2585583, -5.8068466, -5.8068466, -4.355135, -4.355135, -2.9034233, -2.9034233, -1.4517117, -1.4517117, 0, 0, 1.4517117, 1.4517117, 2.9034233, 2.9034233, 4.355135, 4.355135, 5.8068466, 5.8068466, 7.2585583, 7.2585583, 8.71027, 8.71027, 10.161982, 10.161982, 11.613693, 11.613693, 13.065405, 13.065405, 14.517117, 14.517117, 15.968826, 15.968826, 17.42054, 17.42054), PackedVector2Array(-15.234937, -15.234937, -13.965359, -13.965359, -12.695781, -12.695781, -11.426203, -11.426203, -10.156624, -10.156624, -8.887047, -8.887047, -7.6174684, -7.6174684, -6.347891, -6.347891, -5.078312, -5.078312, -3.808734, -3.808734, -2.539156, -2.539156, -1.269578, -1.269578, 0, 0, 1.269578, 1.269578, 2.539155, 2.539155, 3.808734, 3.808734, 5.078313, 5.078313, 6.34789, 6.34789, 7.617469, 7.617469, 8.887048, 8.887048, 10.156625, 10.156625, 11.426202, 11.426202, 12.695781, 12.695781, 13.965358, 13.965358, 15.234937, 15.234937), PackedVector2Array(-13.049335, -13.049335, -11.96189, -11.96189, -10.874445, -10.874445, -9.787001, -9.787001, -8.699556, -8.699556, -7.612112, -7.612112, -6.5246673, -6.5246673, -5.437223, -5.437223, -4.349778, -4.349778, -3.2623339, -3.2623339, -2.1748896, -2.1748896, -1.0874443, -1.0874443, 0, 0, 1.0874453, 1.0874453, 2.1748886, 2.1748886, 3.2623339, 3.2623339, 4.349778, 4.349778, 5.4372225, 5.4372225, 6.524667, 6.524667, 7.612113, 7.612113, 8.699555, 8.699555, 9.787002, 9.787002, 10.874446, 10.874446, 11.96189, 11.96189, 13.049335, 13.049335), PackedVector2Array(-10.863731, -10.863731, -9.958421, -9.958421, -9.053109, -9.053109, -8.147799, -8.147799, -7.2424874, -7.2424874, -6.337177, -6.337177, -5.4318657, -5.4318657, -4.526555, -4.526555, -3.6212435, -3.6212435, -2.7159328, -2.7159328, -1.8106222, -1.8106222, -0.90531063, -0.90531063, 0, 0, 0.9053116, 0.9053116, 1.8106213, 1.8106213, 2.7159328, 2.7159328, 3.6212444, 3.6212444, 4.526554, 4.526554, 5.4318657, 5.4318657, 6.3371773, 6.3371773, 7.242487, 7.242487, 8.147799, 8.147799, 9.05311, 9.05311, 9.95842, 9.95842, 10.863731, 10.863731), PackedVector2Array(-8.678128, -8.678128, -7.954951, -7.954951, -7.2317734, -7.2317734, -6.5085964, -6.5085964, -5.7854185, -5.7854185, -5.0622416, -5.0622416, -4.339064, -4.339064, -3.6158872, -3.6158872, -2.8927093, -2.8927093, -2.1695318, -2.1695318, -1.4463549, -1.4463549, -0.72317696, -0.72317696, 0, 0, 0.7231779, 0.7231779, 1.4463539, 1.4463539, 2.1695318, 2.1695318, 2.8927097, 2.8927097, 3.6158867, 3.6158867, 4.3390646, 4.3390646, 5.0622416, 5.0622416, 5.7854185, 5.7854185, 6.5085964, 6.5085964, 7.2317743, 7.2317743, 7.9549513, 7.9549513, 8.678128, 8.678128), PackedVector2Array(-6.4925256, -6.4925256, -5.951482, -5.951482, -5.410438, -5.410438, -4.8693943, -4.8693943, -4.32835, -4.32835, -3.7873065, -3.7873065, -3.2462628, -3.2462628, -2.705219, -2.705219, -2.164175, -2.164175, -1.6231313, -1.6231313, -1.0820875, -1.0820875, -0.54104376, -0.54104376, 0, 0, 0.54104424, 0.54104424, 1.0820875, 1.0820875, 1.6231313, 1.6231313, 2.1641755, 2.1641755, 2.7052188, 2.7052188, 3.246263, 3.246263, 3.7873073, 3.7873073, 4.3283505, 4.3283505, 4.869394, 4.869394, 5.410438, 5.410438, 5.9514813, 5.9514813, 6.4925256, 6.4925256), PackedVector2Array(-4.306923, -4.306923, -3.9480126, -3.9480126, -3.5891023, -3.5891023, -3.2301922, -3.2301922, -2.8712819, -2.8712819, -2.5123718, -2.5123718, -2.1534615, -2.1534615, -1.7945514, -1.7945514, -1.4356408, -1.4356408, -1.0767307, -1.0767307, -0.71782064, -0.71782064, -0.35891008, -0.35891008, 0, 0, 0.35891056, 0.35891056, 0.71782017, 0.71782017, 1.0767307, 1.0767307, 1.4356413, 1.4356413, 1.7945509, 1.7945509, 2.1534615, 2.1534615, 2.512372, 2.512372, 2.8712816, 2.8712816, 3.2301922, 3.2301922, 3.5891027, 3.5891027, 3.9480124, 3.9480124, 4.306923, 4.306923), PackedVector2Array(-2.1213202, -2.1213202, -1.9445436, -1.9445436, -1.7677668, -1.7677668, -1.5909902, -1.5909902, -1.4142134, -1.4142134, -1.2374368, -1.2374368, -1.0606601, -1.0606601, -0.8838835, -0.8838835, -0.7071067, -0.7071067, -0.53033006, -0.53033006, -0.3535534, -0.3535534, -0.17677665, -0.17677665, 0, 0, 0.17677689, 0.17677689, 0.3535533, 0.3535533, 0.5303302, 0.5303302, 0.7071068, 0.7071068, 0.88388324, 0.88388324, 1.0606601, 1.0606601, 1.237437, 1.237437, 1.4142134, 1.4142134, 1.5909901, 1.5909901, 1.767767, 1.767767, 1.9445434, 1.9445434, 2.1213202, 2.1213202)]
+}
+tracks/57/type = "value"
+tracks/57/imported = false
+tracks/57/enabled = true
+tracks/57/path = NodePath("Flare0:visible")
+tracks/57/interp = 0
+tracks/57/loop_wrap = false
+tracks/57/keys = {
+"times": PackedFloat32Array(0, 1.019, 1.194),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/58/type = "value"
+tracks/58/imported = false
+tracks/58/enabled = true
+tracks/58/path = NodePath("Flare1:points")
+tracks/58/interp = 1
+tracks/58/loop_wrap = false
+tracks/58/keys = {
+"times": PackedFloat32Array(0, 1.02, 1.035909, 1.0518181, 1.0677273, 1.0836364, 1.0995455, 1.1154546, 1.1313636, 1.1472727, 1.1631818, 1.1790909, 1.195),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [PackedVector2Array(26.16295, -26.16295, 23.982704, -23.982704, 21.80246, -21.80246, 19.622213, -19.622213, 17.441967, -17.441967, 15.261722, -15.261722, 13.081475, -13.081475, 10.90123, -10.90123, 8.7209835, -8.7209835, 6.540737, -6.540737, 4.3604927, -4.3604927, 2.1802444, -2.1802444, 0, 0, -2.1802464, 2.1802464, -4.360491, 4.360491, -6.540739, 6.540739, -8.7209835, 8.7209835, -10.901228, 10.901228, -13.081476, 13.081476, -15.261721, 15.261721, -17.441965, 17.441965, -19.622213, 19.622213, -21.802462, 21.802462, -23.982702, 23.982702, -26.16295, 26.16295), PackedVector2Array(26.16295, -26.16295, 23.982704, -23.982704, 21.80246, -21.80246, 19.622213, -19.622213, 17.441967, -17.441967, 15.261722, -15.261722, 13.081475, -13.081475, 10.90123, -10.90123, 8.7209835, -8.7209835, 6.540737, -6.540737, 4.3604927, -4.3604927, 2.1802444, -2.1802444, 0, 0, -2.1802464, 2.1802464, -4.360491, 4.360491, -6.540739, 6.540739, -8.7209835, 8.7209835, -10.901228, 10.901228, -13.081476, 13.081476, -15.261721, 15.261721, -17.441965, 17.441965, -19.622213, 19.622213, -21.802462, 21.802462, -23.982702, 23.982702, -26.16295, 26.16295), PackedVector2Array(23.977348, -23.977348, 21.979237, -21.979237, 19.981123, -19.981123, 17.983011, -17.983011, 15.984899, -15.984899, 13.986787, -13.986787, 11.988674, -11.988674, 9.990562, -9.990562, 7.992449, -7.992449, 5.994337, -5.994337, 3.9962254, -3.9962254, 1.9981117, -1.9981117, 0, 0, -1.9981136, 1.9981136, -3.9962234, 3.9962234, -5.994337, 5.994337, -7.9924507, 7.9924507, -9.990562, 9.990562, -11.988674, 11.988674, -13.986786, 13.986786, -15.984898, 15.984898, -17.98301, 17.98301, -19.981125, 19.981125, -21.979237, 21.979237, -23.977348, 23.977348), PackedVector2Array(21.791744, -21.791744, 19.975765, -19.975765, 18.159786, -18.159786, 16.343807, -16.343807, 14.527829, -14.527829, 12.711851, -12.711851, 10.895872, -10.895872, 9.079894, -9.079894, 7.263914, -7.263914, 5.447937, -5.447937, 3.631958, -3.631958, 1.815979, -1.815979, 0, 0, -1.815979, 1.815979, -3.631956, 3.631956, -5.447937, 5.447937, -7.263916, 7.263916, -9.079893, 9.079893, -10.89587, 10.89587, -12.711853, 12.711853, -14.527828, 14.527828, -16.343807, 16.343807, -18.159786, 18.159786, -19.975765, 19.975765, -21.791744, 21.791744), PackedVector2Array(19.606142, -19.606142, 17.972298, -17.972298, 16.338451, -16.338451, 14.704607, -14.704607, 13.070761, -13.070761, 11.436916, -11.436916, 9.803071, -9.803071, 8.169227, -8.169227, 6.5353804, -6.5353804, 4.901535, -4.901535, 3.2676907, -3.2676907, 1.6338444, -1.6338444, 0, 0, -1.6338463, 1.6338463, -3.2676888, 3.2676888, -4.901535, 4.901535, -6.5353813, 6.5353813, -8.169226, 8.169226, -9.803072, 9.803072, -11.436916, 11.436916, -13.070761, 13.070761, -14.704607, 14.704607, -16.338453, 16.338453, -17.972296, 17.972296, -19.606142, 19.606142), PackedVector2Array(17.42054, -17.42054, 15.968828, -15.968828, 14.517117, -14.517117, 13.065405, -13.065405, 11.613693, -11.613693, 10.161982, -10.161982, 8.71027, -8.71027, 7.2585583, -7.2585583, 5.8068466, -5.8068466, 4.355135, -4.355135, 2.9034233, -2.9034233, 1.4517117, -1.4517117, 0, 0, -1.4517117, 1.4517117, -2.9034233, 2.9034233, -4.355135, 4.355135, -5.8068466, 5.8068466, -7.2585583, 7.2585583, -8.71027, 8.71027, -10.161982, 10.161982, -11.613693, 11.613693, -13.065405, 13.065405, -14.517117, 14.517117, -15.968826, 15.968826, -17.42054, 17.42054), PackedVector2Array(15.234937, -15.234937, 13.965359, -13.965359, 12.695781, -12.695781, 11.426203, -11.426203, 10.156624, -10.156624, 8.887047, -8.887047, 7.6174684, -7.6174684, 6.347891, -6.347891, 5.078312, -5.078312, 3.808734, -3.808734, 2.539156, -2.539156, 1.269578, -1.269578, 0, 0, -1.269578, 1.269578, -2.539155, 2.539155, -3.808734, 3.808734, -5.078313, 5.078313, -6.34789, 6.34789, -7.617469, 7.617469, -8.887048, 8.887048, -10.156625, 10.156625, -11.426202, 11.426202, -12.695781, 12.695781, -13.965358, 13.965358, -15.234937, 15.234937), PackedVector2Array(13.049335, -13.049335, 11.96189, -11.96189, 10.874445, -10.874445, 9.787001, -9.787001, 8.699556, -8.699556, 7.612112, -7.612112, 6.5246673, -6.5246673, 5.437223, -5.437223, 4.349778, -4.349778, 3.2623339, -3.2623339, 2.1748896, -2.1748896, 1.0874443, -1.0874443, 0, 0, -1.0874453, 1.0874453, -2.1748886, 2.1748886, -3.2623339, 3.2623339, -4.349778, 4.349778, -5.4372225, 5.4372225, -6.524667, 6.524667, -7.612113, 7.612113, -8.699555, 8.699555, -9.787002, 9.787002, -10.874446, 10.874446, -11.96189, 11.96189, -13.049335, 13.049335), PackedVector2Array(10.863731, -10.863731, 9.958421, -9.958421, 9.053109, -9.053109, 8.147799, -8.147799, 7.2424874, -7.2424874, 6.337177, -6.337177, 5.4318657, -5.4318657, 4.526555, -4.526555, 3.6212435, -3.6212435, 2.7159328, -2.7159328, 1.8106222, -1.8106222, 0.90531063, -0.90531063, 0, 0, -0.9053116, 0.9053116, -1.8106213, 1.8106213, -2.7159328, 2.7159328, -3.6212444, 3.6212444, -4.526554, 4.526554, -5.4318657, 5.4318657, -6.3371773, 6.3371773, -7.242487, 7.242487, -8.147799, 8.147799, -9.05311, 9.05311, -9.95842, 9.95842, -10.863731, 10.863731), PackedVector2Array(8.678128, -8.678128, 7.954951, -7.954951, 7.2317734, -7.2317734, 6.5085964, -6.5085964, 5.7854185, -5.7854185, 5.0622416, -5.0622416, 4.339064, -4.339064, 3.6158872, -3.6158872, 2.8927093, -2.8927093, 2.1695318, -2.1695318, 1.4463549, -1.4463549, 0.72317696, -0.72317696, 0, 0, -0.7231779, 0.7231779, -1.4463539, 1.4463539, -2.1695318, 2.1695318, -2.8927097, 2.8927097, -3.6158867, 3.6158867, -4.3390646, 4.3390646, -5.0622416, 5.0622416, -5.7854185, 5.7854185, -6.5085964, 6.5085964, -7.2317743, 7.2317743, -7.9549513, 7.9549513, -8.678128, 8.678128), PackedVector2Array(6.4925256, -6.4925256, 5.951482, -5.951482, 5.410438, -5.410438, 4.8693943, -4.8693943, 4.32835, -4.32835, 3.7873065, -3.7873065, 3.2462628, -3.2462628, 2.705219, -2.705219, 2.164175, -2.164175, 1.6231313, -1.6231313, 1.0820875, -1.0820875, 0.54104376, -0.54104376, 0, 0, -0.54104424, 0.54104424, -1.0820875, 1.0820875, -1.6231313, 1.6231313, -2.1641755, 2.1641755, -2.7052188, 2.7052188, -3.246263, 3.246263, -3.7873073, 3.7873073, -4.3283505, 4.3283505, -4.869394, 4.869394, -5.410438, 5.410438, -5.9514813, 5.9514813, -6.4925256, 6.4925256), PackedVector2Array(4.306923, -4.306923, 3.9480126, -3.9480126, 3.5891023, -3.5891023, 3.2301922, -3.2301922, 2.8712819, -2.8712819, 2.5123718, -2.5123718, 2.1534615, -2.1534615, 1.7945514, -1.7945514, 1.4356408, -1.4356408, 1.0767307, -1.0767307, 0.71782064, -0.71782064, 0.35891008, -0.35891008, 0, 0, -0.35891056, 0.35891056, -0.71782017, 0.71782017, -1.0767307, 1.0767307, -1.4356413, 1.4356413, -1.7945509, 1.7945509, -2.1534615, 2.1534615, -2.512372, 2.512372, -2.8712816, 2.8712816, -3.2301922, 3.2301922, -3.5891027, 3.5891027, -3.9480124, 3.9480124, -4.306923, 4.306923), PackedVector2Array(2.1213202, -2.1213202, 1.9445436, -1.9445436, 1.7677668, -1.7677668, 1.5909902, -1.5909902, 1.4142134, -1.4142134, 1.2374368, -1.2374368, 1.0606601, -1.0606601, 0.8838835, -0.8838835, 0.7071067, -0.7071067, 0.53033006, -0.53033006, 0.3535534, -0.3535534, 0.17677665, -0.17677665, 0, 0, -0.17677689, 0.17677689, -0.3535533, 0.3535533, -0.5303302, 0.5303302, -0.7071068, 0.7071068, -0.88388324, 0.88388324, -1.0606601, 1.0606601, -1.237437, 1.237437, -1.4142134, 1.4142134, -1.5909901, 1.5909901, -1.767767, 1.767767, -1.9445434, 1.9445434, -2.1213202, 2.1213202)]
+}
+tracks/59/type = "value"
+tracks/59/imported = false
+tracks/59/enabled = true
+tracks/59/path = NodePath("Flare1:visible")
+tracks/59/interp = 0
+tracks/59/loop_wrap = false
+tracks/59/keys = {
+"times": PackedFloat32Array(0, 1.019, 1.194),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/60/type = "value"
+tracks/60/imported = false
+tracks/60/enabled = true
+tracks/60/path = NodePath("Flare2:points")
+tracks/60/interp = 1
+tracks/60/loop_wrap = false
+tracks/60/keys = {
+"times": PackedFloat32Array(0, 1.02, 1.035909, 1.0518181, 1.0677273, 1.0836364, 1.0995455, 1.1154546, 1.1313636, 1.1472727, 1.1631818, 1.1790909, 1.195),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [PackedVector2Array(-1.0195185e-15, -16.65, -9.345587e-16, -15.2625, -8.495987e-16, -13.875, -7.646389e-16, -12.487499, -6.79679e-16, -11.099999, -5.9471914e-16, -9.7125, -5.0975925e-16, -8.325, -4.247994e-16, -6.9375, -3.3983947e-16, -5.549999, -2.5487963e-16, -4.1625004, -1.6991979e-16, -2.7750006, -8.495984e-17, -1.3874998, 0, 0, 8.4959946e-17, 1.3875008, 1.6991968e-16, 2.7749996, 2.5487963e-16, 4.1625004, 3.3983957e-16, 5.550001, 4.247993e-16, 6.9375, 5.0975925e-16, 8.324999, 5.947192e-16, 9.7125, 6.7967893e-16, 11.099998, 7.646389e-16, 12.487499, 8.495988e-16, 13.875, 9.345586e-16, 15.262499, 1.0195185e-15, 16.65), PackedVector2Array(-1.0195185e-15, -16.65, -9.345587e-16, -15.2625, -8.495987e-16, -13.875, -7.646389e-16, -12.487499, -6.79679e-16, -11.099999, -5.9471914e-16, -9.7125, -5.0975925e-16, -8.325, -4.247994e-16, -6.9375, -3.3983947e-16, -5.549999, -2.5487963e-16, -4.1625004, -1.6991979e-16, -2.7750006, -8.495984e-17, -1.3874998, 0, 0, 8.4959946e-17, 1.3875008, 1.6991968e-16, 2.7749996, 2.5487963e-16, 4.1625004, 3.3983957e-16, 5.550001, 4.247993e-16, 6.9375, 5.0975925e-16, 8.324999, 5.947192e-16, 9.7125, 6.7967893e-16, 11.099998, 7.646389e-16, 12.487499, 8.495988e-16, 13.875, 9.345586e-16, 15.262499, 1.0195185e-15, 16.65), PackedVector2Array(-9.343499e-16, -15.259091, -8.5648737e-16, -13.9875, -7.7862487e-16, -12.71591, -7.0076243e-16, -11.444319, -6.228999e-16, -10.172728, -5.4503743e-16, -8.901136, -4.6717493e-16, -7.6295457, -3.893125e-16, -6.357955, -3.1144994e-16, -5.086364, -2.3358744e-16, -3.8147726, -1.55725e-16, -2.5431824, -7.7862445e-17, -1.2715902, 0, 0, 7.786255e-17, 1.2715921, 1.5572489e-16, 2.5431814, 2.3358744e-16, 3.8147726, 3.1145e-16, 5.086364, 3.8931244e-16, 6.357955, 4.67175e-16, 7.629546, 5.4503743e-16, 8.901137, 6.228999e-16, 10.172727, 7.0076243e-16, 11.444318, 7.78625e-16, 12.715911, 8.564874e-16, 13.9875, 9.343499e-16, 15.259091), PackedVector2Array(-8.491813e-16, -13.868182, -7.784162e-16, -12.712501, -7.076511e-16, -11.556818, -6.36886e-16, -10.401136, -5.661208e-16, -9.245455, -4.9535577e-16, -8.089773, -4.2459064e-16, -6.934091, -3.5382557e-16, -5.77841, -2.830604e-16, -4.6227274, -2.1229531e-16, -3.4670458, -1.415302e-16, -2.3113642, -7.07651e-17, -1.1556816, 0, 0, 7.07651e-17, 1.1556826, 1.4153015e-16, 2.3113623, 2.1229531e-16, 3.4670458, 2.8306046e-16, 4.6227274, 3.5382551e-16, 5.778409, 4.2459067e-16, 6.9340906, 4.953558e-16, 8.089774, 5.661209e-16, 9.245454, 6.368859e-16, 10.401137, 7.076511e-16, 11.556819, 7.7841613e-16, 12.712501, 8.491813e-16, 13.868182), PackedVector2Array(-7.6401265e-16, -12.477273, -7.0034495e-16, -11.4375, -6.366772e-16, -10.397728, -5.730095e-16, -9.357955, -5.0934177e-16, -8.318182, -4.4567406e-16, -7.2784095, -3.8200633e-16, -6.2386365, -3.1833865e-16, -5.198864, -2.5467088e-16, -4.159091, -1.9100318e-16, -3.119318, -1.2733547e-16, -2.079546, -6.366771e-17, -1.039772, 0, 0, 6.366776e-17, 1.039773, 1.2733536e-16, 2.079545, 1.9100312e-16, 3.119318, 2.5467088e-16, 4.159091, 3.1833854e-16, 5.198863, 3.820063e-16, 6.238637, 4.4567406e-16, 7.278409, 5.093417e-16, 8.318181, 5.730095e-16, 9.357955, 6.3667724e-16, 10.397729, 7.003449e-16, 11.437499, 7.6401265e-16, 12.477273), PackedVector2Array(-6.78844e-16, -11.086364, -6.222737e-16, -10.1625, -5.6570334e-16, -9.238636, -5.0913303e-16, -8.314773, -4.5256266e-16, -7.390909, -3.9599235e-16, -6.467046, -3.39422e-16, -5.543182, -2.828517e-16, -4.6193185, -2.262813e-16, -3.6954546, -1.6971099e-16, -2.7715912, -1.1314068e-16, -1.8477278, -5.657031e-17, -0.9238634, 0, 0, 5.6570366e-17, 0.92386436, 1.1314063e-16, 1.8477268, 1.6971099e-16, 2.7715912, 2.262814e-16, 3.6954546, 2.8285167e-16, 4.619318, 3.3942204e-16, 5.5431814, 3.959924e-16, 6.467046, 4.5256266e-16, 7.3909082, 5.0913303e-16, 8.314773, 5.657034e-16, 9.238637, 6.2227365e-16, 10.162499, 6.78844e-16, 11.086364), PackedVector2Array(-5.936754e-16, -9.695455, -5.442024e-16, -8.8875, -4.947295e-16, -8.079546, -4.4525653e-16, -7.271591, -3.9578358e-16, -6.4636364, -3.4631064e-16, -5.655682, -2.968377e-16, -4.8477273, -2.4736475e-16, -4.039773, -1.9789178e-16, -3.2318182, -1.4841886e-16, -2.4238634, -9.894589e-17, -1.6159096, -4.9472918e-17, -0.8079548, 0, 0, 4.947297e-17, 0.8079548, 9.894589e-17, 1.6159086, 1.4841886e-16, 2.4238634, 1.9789183e-16, 3.2318182, 2.473647e-16, 4.039772, 2.9683767e-16, 4.847728, 3.4631064e-16, 5.6556826, 3.957836e-16, 6.4636354, 4.452566e-16, 7.27159, 4.9472955e-16, 8.079545, 5.442024e-16, 8.8875, 5.936754e-16, 9.695455), PackedVector2Array(-5.0850675e-16, -8.304545, -4.661312e-16, -7.6125, -4.2375563e-16, -6.9204545, -3.8138008e-16, -6.228409, -3.390045e-16, -5.5363636, -2.9662893e-16, -4.8443184, -2.5425338e-16, -4.1522727, -2.1187783e-16, -3.4602275, -1.6950225e-16, -2.7681818, -1.2712668e-16, -2.0761366, -8.4751126e-17, -1.3840909, -4.2375576e-17, -0.6920452, 0, 0, 4.2375576e-17, 0.69204617, 8.47511e-17, 1.3840904, 1.2712668e-16, 2.0761366, 1.6950225e-16, 2.7681818, 2.1187777e-16, 3.460227, 2.542534e-16, 4.152272, 2.9662898e-16, 4.8443184, 3.390045e-16, 5.5363636, 3.8138003e-16, 6.228409, 4.237556e-16, 6.920455, 4.661312e-16, 7.612499, 5.0850675e-16, 8.304545), PackedVector2Array(-4.2333815e-16, -6.913636, -3.8805997e-16, -6.3374996, -3.5278178e-16, -5.7613635, -3.175036e-16, -5.1852274, -2.8222542e-16, -4.609091, -2.4694727e-16, -4.032954, -2.1166907e-16, -3.456818, -1.763909e-16, -2.880682, -1.411127e-16, -2.3045454, -1.0583454e-16, -1.7284088, -7.055636e-17, -1.1522727, -3.527818e-17, -0.5761361, 0, 0, 3.5278208e-17, 0.5761366, 7.0556336e-17, 1.1522722, 1.0583452e-16, 1.7284088, 1.4111275e-16, 2.3045454, 1.7639088e-16, 2.880681, 2.1166906e-16, 3.4568186, 2.469473e-16, 4.032955, 2.8222542e-16, 4.609091, 3.175036e-16, 5.1852274, 3.5278178e-16, 5.761364, 3.8805997e-16, 6.3374996, 4.2333815e-16, 6.913636), PackedVector2Array(-3.3816954e-16, -5.5227275, -3.0998875e-16, -5.0625, -2.8180794e-16, -4.602273, -2.5362715e-16, -4.1420455, -2.2544634e-16, -3.6818182, -1.9726557e-16, -3.221591, -1.6908477e-16, -2.7613637, -1.4090398e-16, -2.3011365, -1.1272317e-16, -1.840909, -8.4542385e-17, -1.380682, -5.63616e-17, -0.9204545, -2.8180786e-17, -0.460227, 0, 0, 2.8180813e-17, 0.4602275, 5.636157e-17, 0.9204545, 8.4542385e-17, 1.380682, 1.127232e-16, 1.8409095, 1.4090398e-16, 2.301136, 1.6908477e-16, 2.7613635, 1.9726556e-16, 3.2215915, 2.2544634e-16, 3.6818185, 2.5362718e-16, 4.1420455, 2.8180797e-16, 4.6022735, 3.0998875e-16, 5.0624995, 3.3816954e-16, 5.5227275), PackedVector2Array(-2.530009e-16, -4.1318183, -2.319175e-16, -3.7875001, -2.1083408e-16, -3.443182, -1.8975068e-16, -3.0988636, -1.6866726e-16, -2.7545455, -1.4758387e-16, -2.4102273, -1.2650045e-16, -2.0659091, -1.0541705e-16, -1.721591, -8.433363e-17, -1.3772726, -6.3250227e-17, -1.0329547, -4.2166822e-17, -0.68863654, -2.1083391e-17, -0.34431815, 0, 0, 2.1083418e-17, 0.3443184, 4.216681e-17, 0.6886363, 6.3250227e-17, 1.0329547, 8.4333644e-17, 1.3772731, 1.05417035e-16, 1.721591, 1.2650045e-16, 2.065909, 1.4758387e-16, 2.4102273, 1.6866726e-16, 2.7545452, 1.8975068e-16, 3.0988636, 2.1083412e-16, 3.443182, 2.3191746e-16, 3.7875, 2.530009e-16, 4.1318183), PackedVector2Array(-1.6783229e-16, -2.740909, -1.5384626e-16, -2.5125, -1.3986024e-16, -2.284091, -1.2587422e-16, -2.0556817, -1.1188818e-16, -1.8272727, -9.7902166e-17, -1.5988637, -8.391614e-17, -1.3704545, -6.993012e-17, -1.1420455, -5.594409e-17, -0.9136363, -4.1958068e-17, -0.6852274, -2.7972045e-17, -0.45681834, -1.3986023e-17, -0.22840905, 0, 0, 1.3986036e-17, 0.22840929, 2.7972045e-17, 0.4568181, 4.1958068e-17, 0.6852274, 5.5944104e-17, 0.91363645, 6.99301e-17, 1.1420453, 8.391615e-17, 1.3704543, 9.790217e-17, 1.5988636, 1.118882e-16, 1.8272724, 1.2587422e-16, 2.0556817, 1.3986024e-16, 2.284091, 1.5384626e-16, 2.5124998, 1.6783229e-16, 2.740909), PackedVector2Array(-8.2663666e-17, -1.35, -7.5775025e-17, -1.2375001, -6.888639e-17, -1.125, -6.199775e-17, -1.0125, -5.510911e-17, -0.9, -4.8220474e-17, -0.7875, -4.1331833e-17, -0.675, -3.4443195e-17, -0.56250006, -2.7554554e-17, -0.45, -2.0665916e-17, -0.33749998, -1.3777282e-17, -0.22500002, -6.8886344e-18, -0.11249995, 0, 0, 6.888641e-18, 0.11250007, 1.37772754e-17, 0.2249999, 2.0665916e-17, 0.33749998, 2.7554557e-17, 0.45000005, 3.4443192e-17, 0.5625, 4.1331833e-17, 0.6750001, 4.8220474e-17, 0.7875, 5.5109102e-17, 0.9, 6.1997756e-17, 1.0124999, 6.88864e-17, 1.1250001, 7.5775025e-17, 1.2375001, 8.2663666e-17, 1.35)]
+}
+tracks/61/type = "value"
+tracks/61/imported = false
+tracks/61/enabled = true
+tracks/61/path = NodePath("Flare2:visible")
+tracks/61/interp = 0
+tracks/61/loop_wrap = false
+tracks/61/keys = {
+"times": PackedFloat32Array(0, 1.019, 1.194),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/62/type = "value"
+tracks/62/imported = false
+tracks/62/enabled = true
+tracks/62/path = NodePath("Flare3:points")
+tracks/62/interp = 1
+tracks/62/loop_wrap = false
+tracks/62/keys = {
+"times": PackedFloat32Array(0, 1.02, 1.035909, 1.0518181, 1.0677273, 1.0836364, 1.0995455, 1.1154546, 1.1313636, 1.1472727, 1.1631818, 1.1790909, 1.195),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [PackedVector2Array(16.65, -2.039037e-15, 15.2625, -1.8691173e-15, 13.875, -1.6991974e-15, 12.487499, -1.5292778e-15, 11.099999, -1.359358e-15, 9.7125, -1.1894383e-15, 8.325, -1.0195185e-15, 6.9375, -8.495988e-16, 5.549999, -6.7967893e-16, 4.1625004, -5.0975925e-16, 2.7750006, -3.3983957e-16, 1.3874998, -1.6991968e-16, 0, 0, -1.3875008, 1.6991989e-16, -2.7749996, 3.3983936e-16, -4.1625004, 5.0975925e-16, -5.550001, 6.7967914e-16, -6.9375, 8.495986e-16, -8.324999, 1.0195185e-15, -9.7125, 1.1894384e-15, -11.099998, 1.3593579e-15, -12.487499, 1.5292778e-15, -13.875, 1.6991976e-15, -15.262499, 1.8691171e-15, -16.65, 2.039037e-15), PackedVector2Array(16.65, -2.039037e-15, 15.2625, -1.8691173e-15, 13.875, -1.6991974e-15, 12.487499, -1.5292778e-15, 11.099999, -1.359358e-15, 9.7125, -1.1894383e-15, 8.325, -1.0195185e-15, 6.9375, -8.495988e-16, 5.549999, -6.7967893e-16, 4.1625004, -5.0975925e-16, 2.7750006, -3.3983957e-16, 1.3874998, -1.6991968e-16, 0, 0, -1.3875008, 1.6991989e-16, -2.7749996, 3.3983936e-16, -4.1625004, 5.0975925e-16, -5.550001, 6.7967914e-16, -6.9375, 8.495986e-16, -8.324999, 1.0195185e-15, -9.7125, 1.1894384e-15, -11.099998, 1.3593579e-15, -12.487499, 1.5292778e-15, -13.875, 1.6991976e-15, -15.262499, 1.8691171e-15, -16.65, 2.039037e-15), PackedVector2Array(15.259091, -1.8686997e-15, 13.9875, -1.7129747e-15, 12.71591, -1.5572497e-15, 11.444319, -1.4015249e-15, 10.172728, -1.2457998e-15, 8.901136, -1.0900749e-15, 7.6295457, -9.343499e-16, 6.357955, -7.78625e-16, 5.086364, -6.228999e-16, 3.8147726, -4.671749e-16, 2.5431824, -3.1145e-16, 1.2715902, -1.5572489e-16, 0, 0, -1.2715921, 1.557251e-16, -2.5431814, 3.1144978e-16, -3.8147726, 4.671749e-16, -5.086364, 6.229e-16, -6.357955, 7.7862487e-16, -7.629546, 9.3435e-16, -8.901137, 1.0900749e-15, -10.172727, 1.2457998e-15, -11.444318, 1.4015249e-15, -12.715911, 1.55725e-15, -13.9875, 1.7129748e-15, -15.259091, 1.8686997e-15), PackedVector2Array(13.868182, -1.6983626e-15, 12.712501, -1.5568324e-15, 11.556818, -1.4153022e-15, 10.401136, -1.273772e-15, 9.245455, -1.1322416e-15, 8.089773, -9.907115e-16, 6.934091, -8.491813e-16, 5.77841, -7.0765113e-16, 4.6227274, -5.661208e-16, 3.4670458, -4.2459062e-16, 2.3113642, -2.830604e-16, 1.1556816, -1.415302e-16, 0, 0, -1.1556826, 1.415302e-16, -2.3113623, 2.830603e-16, -3.4670458, 4.2459062e-16, -4.6227274, 5.6612093e-16, -5.778409, 7.0765103e-16, -6.9340906, 8.4918134e-16, -8.089774, 9.907117e-16, -9.245454, 1.1322418e-15, -10.401137, 1.2737719e-15, -11.556819, 1.4153022e-15, -12.712501, 1.5568323e-15, -13.868182, 1.6983626e-15), PackedVector2Array(12.477273, -1.5280253e-15, 11.4375, -1.4006899e-15, 10.397728, -1.2733544e-15, 9.357955, -1.146019e-15, 8.318182, -1.0186835e-15, 7.2784095, -8.913481e-16, 6.2386365, -7.6401265e-16, 5.198864, -6.366773e-16, 4.159091, -5.0934177e-16, 3.119318, -3.8200635e-16, 2.079546, -2.5467094e-16, 1.039772, -1.2733542e-16, 0, 0, -1.039773, 1.2733552e-16, -2.079545, 2.5467073e-16, -3.119318, 3.8200625e-16, -4.159091, 5.0934177e-16, -5.198863, 6.366771e-16, -6.238637, 7.640126e-16, -7.278409, 8.913481e-16, -8.318181, 1.0186834e-15, -9.357955, 1.146019e-15, -10.397729, 1.2733545e-15, -11.437499, 1.4006898e-15, -12.477273, 1.5280253e-15), PackedVector2Array(11.086364, -1.357688e-15, 10.1625, -1.2445474e-15, 9.238636, -1.1314067e-15, 8.314773, -1.0182661e-15, 7.390909, -9.051253e-16, 6.467046, -7.919847e-16, 5.543182, -6.78844e-16, 4.6193185, -5.657034e-16, 3.6954546, -4.525626e-16, 2.7715912, -3.3942198e-16, 1.8477278, -2.2628136e-16, 0.9238634, -1.1314063e-16, 0, 0, -0.92386436, 1.1314073e-16, -1.8477268, 2.2628125e-16, -2.7715912, 3.3942198e-16, -3.6954546, 4.525628e-16, -4.619318, 5.6570334e-16, -5.5431814, 6.788441e-16, -6.467046, 7.919848e-16, -7.3909082, 9.051253e-16, -8.314773, 1.0182661e-15, -9.238637, 1.1314068e-15, -10.162499, 1.2445473e-15, -11.086364, 1.357688e-15), PackedVector2Array(9.695455, -1.1873508e-15, 8.8875, -1.0884048e-15, 8.079546, -9.89459e-16, 7.271591, -8.905131e-16, 6.4636364, -7.9156717e-16, 5.655682, -6.926213e-16, 4.8477273, -5.936754e-16, 4.039773, -4.947295e-16, 3.2318182, -3.9578356e-16, 2.4238634, -2.9683772e-16, 1.6159096, -1.9789178e-16, 0.8079548, -9.8945836e-17, 0, 0, -0.8079548, 9.894594e-17, -1.6159086, 1.9789178e-16, -2.4238634, 2.9683772e-16, -3.2318182, 3.9578366e-16, -4.039772, 4.947294e-16, -4.847728, 5.9367533e-16, -5.6556826, 6.926213e-16, -6.4636354, 7.915672e-16, -7.27159, 8.905132e-16, -8.079545, 9.894591e-16, -8.8875, 1.0884048e-15, -9.695455, 1.1873508e-15), PackedVector2Array(8.304545, -1.0170135e-15, 7.6125, -9.322624e-16, 6.9204545, -8.4751126e-16, 6.228409, -7.6276016e-16, 5.5363636, -6.78009e-16, 4.8443184, -5.9325785e-16, 4.1522727, -5.0850675e-16, 3.4602275, -4.2375565e-16, 2.7681818, -3.390045e-16, 2.0761366, -2.5425335e-16, 1.3840909, -1.6950225e-16, 0.6920452, -8.475115e-17, 0, 0, -0.69204617, 8.475115e-17, -1.3840904, 1.695022e-16, -2.0761366, 2.5425335e-16, -2.7681818, 3.390045e-16, -3.460227, 4.2375555e-16, -4.152272, 5.085068e-16, -4.8443184, 5.9325796e-16, -5.5363636, 6.78009e-16, -6.228409, 7.6276005e-16, -6.920455, 8.475112e-16, -7.612499, 9.322624e-16, -8.304545, 1.0170135e-15), PackedVector2Array(6.913636, -8.466763e-16, 6.3374996, -7.7611993e-16, 5.7613635, -7.0556357e-16, 5.1852274, -6.350072e-16, 4.609091, -5.6445084e-16, 4.032954, -4.9389454e-16, 3.456818, -4.2333815e-16, 2.880682, -3.527818e-16, 2.3045454, -2.822254e-16, 1.7284088, -2.1166909e-16, 1.1522727, -1.4111272e-16, 0.5761361, -7.055636e-17, 0, 0, -0.5761366, 7.0556415e-17, -1.1522722, 1.4111267e-16, -1.7284088, 2.1166903e-16, -2.3045454, 2.822255e-16, -2.880681, 3.5278176e-16, -3.4568186, 4.2333812e-16, -4.032955, 4.938946e-16, -4.609091, 5.6445084e-16, -5.1852274, 6.350072e-16, -5.761364, 7.0556357e-16, -6.3374996, 7.7611993e-16, -6.913636, 8.466763e-16), PackedVector2Array(5.5227275, -6.763391e-16, 5.0625, -6.199775e-16, 4.602273, -5.636159e-16, 4.1420455, -5.072543e-16, 3.6818182, -4.508927e-16, 3.221591, -3.9453114e-16, 2.7613637, -3.3816954e-16, 2.3011365, -2.8180797e-16, 1.840909, -2.2544634e-16, 1.380682, -1.6908477e-16, 0.9204545, -1.127232e-16, 0.460227, -5.636157e-17, 0, 0, -0.4602275, 5.6361625e-17, -0.9204545, 1.1272314e-16, -1.380682, 1.6908477e-16, -1.8409095, 2.254464e-16, -2.301136, 2.8180797e-16, -2.7613635, 3.3816954e-16, -3.2215915, 3.945311e-16, -3.6818185, 4.508927e-16, -4.1420455, 5.0725436e-16, -4.6022735, 5.6361593e-16, -5.0624995, 6.199775e-16, -5.5227275, 6.763391e-16), PackedVector2Array(4.1318183, -5.060018e-16, 3.7875001, -4.63835e-16, 3.443182, -4.2166817e-16, 3.0988636, -3.7950136e-16, 2.7545455, -3.3733452e-16, 2.4102273, -2.9516774e-16, 2.0659091, -2.530009e-16, 1.721591, -2.108341e-16, 1.3772726, -1.6866726e-16, 1.0329547, -1.2650045e-16, 0.68863654, -8.4333644e-17, 0.34431815, -4.2166782e-17, 0, 0, -0.3443184, 4.2166835e-17, -0.6886363, 8.433362e-17, -1.0329547, 1.2650045e-16, -1.3772731, 1.6866729e-16, -1.721591, 2.1083407e-16, -2.065909, 2.530009e-16, -2.4102273, 2.9516774e-16, -2.7545452, 3.3733452e-16, -3.0988636, 3.7950136e-16, -3.443182, 4.2166825e-16, -3.7875, 4.638349e-16, -4.1318183, 5.060018e-16), PackedVector2Array(2.740909, -3.3566457e-16, 2.5125, -3.0769253e-16, 2.284091, -2.7972048e-16, 2.0556817, -2.5174844e-16, 1.8272727, -2.2377636e-16, 1.5988637, -1.9580433e-16, 1.3704545, -1.6783229e-16, 1.1420455, -1.3986024e-16, 0.9136363, -1.1188818e-16, 0.6852274, -8.3916136e-17, 0.45681834, -5.594409e-17, 0.22840905, -2.7972045e-17, 0, 0, -0.22840929, 2.7972072e-17, -0.4568181, 5.594409e-17, -0.6852274, 8.3916136e-17, -0.91363645, 1.1188821e-16, -1.1420453, 1.398602e-16, -1.3704543, 1.678323e-16, -1.5988636, 1.9580434e-16, -1.8272724, 2.237764e-16, -2.0556817, 2.5174844e-16, -2.284091, 2.7972048e-16, -2.5124998, 3.0769253e-16, -2.740909, 3.3566457e-16), PackedVector2Array(1.35, -1.6532733e-16, 1.2375001, -1.5155005e-16, 1.125, -1.3777278e-16, 1.0125, -1.239955e-16, 0.9, -1.1021822e-16, 0.7875, -9.644095e-17, 0.675, -8.2663666e-17, 0.56250006, -6.888639e-17, 0.45, -5.510911e-17, 0.33749998, -4.1331833e-17, 0.22500002, -2.7554564e-17, 0.11249995, -1.3777269e-17, 0, 0, -0.11250007, 1.3777282e-17, -0.2249999, 2.7554551e-17, -0.33749998, 4.1331833e-17, -0.45000005, 5.5109115e-17, -0.5625, 6.8886384e-17, -0.6750001, 8.2663666e-17, -0.7875, 9.644095e-17, -0.9, 1.10218203e-16, -1.0124999, 1.2399551e-16, -1.1250001, 1.377728e-16, -1.2375001, 1.5155005e-16, -1.35, 1.6532733e-16)]
+}
+tracks/63/type = "value"
+tracks/63/imported = false
+tracks/63/enabled = true
+tracks/63/path = NodePath("Flare3:visible")
+tracks/63/interp = 0
+tracks/63/loop_wrap = false
+tracks/63/keys = {
+"times": PackedFloat32Array(0, 1.019, 1.194),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/64/type = "value"
+tracks/64/imported = false
+tracks/64/enabled = true
+tracks/64/path = NodePath("PopRing:material:shader_parameter/radius")
+tracks/64/interp = 1
+tracks/64/loop_wrap = false
+tracks/64/keys = {
+"times": PackedFloat32Array(0, 1.02, 1.0366666, 1.0533333, 1.07, 1.0866667, 1.1033334, 1.12, 1.1366667, 1.1533333, 1.17, 1.1866666, 1.2033334, 1.22, 1.2366667, 1.2533333, 1.27, 1.2866666, 1.3033333, 1.3366667, 1.37, 1.4033333, 1.4533334, 1.52),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [4.0, 4.0, 11.156074074074077, 17.835259259259253, 24.053999999999995, 29.82874074074073, 35.17592592592592, 40.11199999999999, 44.653407407407414, 48.816592592592585, 52.618, 56.07407407407407, 59.20125925925926, 62.016000000000005, 64.53474074074074, 66.77392592592594, 68.75, 70.47940740740741, 71.97859259259259, 74.35207407407408, 76.002, 77.05992592592592, 77.8245925925926, 78.0]
+}
+tracks/65/type = "value"
+tracks/65/imported = false
+tracks/65/enabled = true
+tracks/65/path = NodePath("PopRing:material:shader_parameter/thickness")
+tracks/65/interp = 1
+tracks/65/loop_wrap = false
+tracks/65/keys = {
+"times": PackedFloat32Array(0, 1.02, 1.32, 1.52),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [2.5, 2.5, 1.0, 1.0]
+}
+tracks/66/type = "value"
+tracks/66/imported = false
+tracks/66/enabled = true
+tracks/66/path = NodePath("PopRing:material:shader_parameter/alpha")
+tracks/66/interp = 1
+tracks/66/loop_wrap = false
+tracks/66/keys = {
+"times": PackedFloat32Array(0, 1.0866667, 1.1033334, 1.52),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [1.0, 1.0, 0.9833333333333333, 0.1499999999999999]
+}
+tracks/67/type = "value"
+tracks/67/imported = false
+tracks/67/enabled = true
+tracks/67/path = NodePath("PopRing:material:shader_parameter/color")
+tracks/67/interp = 0
+tracks/67/loop_wrap = false
+tracks/67/keys = {
+"times": PackedFloat32Array(0, 1.119),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Color(1, 1, 1, 1), Color(0.84705883, 0.78431374, 1, 1)]
+}
+tracks/68/type = "value"
+tracks/68/imported = false
+tracks/68/enabled = true
+tracks/68/path = NodePath("PopRing2:material:shader_parameter/radius")
+tracks/68/interp = 1
+tracks/68/loop_wrap = false
+tracks/68/keys = {
+"times": PackedFloat32Array(0, 1.02, 1.0366666, 1.0533333, 1.07, 1.0866667, 1.1033334, 1.12, 1.1366667, 1.1533333, 1.17, 1.1866666, 1.2033334, 1.22, 1.2366667, 1.27, 1.3033333, 1.3533334, 1.52),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [2.0, 2.0, 7.342731851851847, 12.187188148148142, 16.557760000000002, 20.478838518518515, 23.974814814814813, 27.070079999999997, 29.78902518518518, 32.15604148148148, 34.195519999999995, 35.931851851851846, 37.38942814814815, 38.592639999999996, 39.56587851851852, 40.92, 41.646921481481485, 41.98814814814815, 42.0]
+}
+tracks/69/type = "value"
+tracks/69/imported = false
+tracks/69/enabled = true
+tracks/69/path = NodePath("PopRing2:material:shader_parameter/alpha")
+tracks/69/interp = 1
+tracks/69/loop_wrap = false
+tracks/69/keys = {
+"times": PackedFloat32Array(0, 1.02, 1.52),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [1.0, 1.0, 0.0]
+}
+tracks/70/type = "value"
+tracks/70/imported = false
+tracks/70/enabled = true
+tracks/70/path = NodePath("PopRing:visible")
+tracks/70/interp = 0
+tracks/70/loop_wrap = false
+tracks/70/keys = {
+"times": PackedFloat32Array(0, 1.019, 1.519),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/71/type = "value"
+tracks/71/imported = false
+tracks/71/enabled = true
+tracks/71/path = NodePath("PopRing2:visible")
+tracks/71/interp = 0
+tracks/71/loop_wrap = false
+tracks/71/keys = {
+"times": PackedFloat32Array(0, 1.019, 1.519),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/72/type = "value"
+tracks/72/imported = false
+tracks/72/enabled = true
+tracks/72/path = NodePath("Sparkle0:points")
+tracks/72/interp = 0
+tracks/72/loop_wrap = false
+tracks/72/keys = {
+"times": PackedFloat32Array(0, 1.0523334, 1.119, 1.1856667, 1.2523333, 1.319),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [PackedVector2Array(-5.5, 0, -4.4, 0, -3.3, 0, -2.1999998, 0, -1.0999999, 0, 0, 0, 1.1000004, 0, 2.1999998, 0, 3.3000002, 0, 4.3999996, 0, 5.5, 0), PackedVector2Array(-4.5, 0, -3.6, 0, -2.6999998, 0, -1.8, 0, -0.89999986, 0, 0, 0, 0.9000001, 0, 1.7999997, 0, 2.7000003, 0, 3.5999994, 0, 4.5, 0), PackedVector2Array(-3.5, 0, -2.8, 0, -2.1, 0, -1.3999999, 0, -0.70000005, 0, 0, 0, 0.7000003, 0, 1.4000001, 0, 2.1, 0, 2.7999997, 0, 3.5, 0), PackedVector2Array(-2.5, 0, -2, 0, -1.5, 0, -1, 0, -0.5, 0, 0, 0, 0.5, 0, 1, 0, 1.5, 0, 2, 0, 2.5, 0), PackedVector2Array(-1.5, 0, -1.2, 0, -0.9, 0, -0.59999996, 0, -0.29999995, 0, 0, 0, 0.30000007, 0, 0.5999999, 0, 0.9000001, 0, 1.1999998, 0, 1.5, 0), PackedVector2Array(-0.5, 0, -0.4, 0, -0.3, 0, -0.19999999, 0, -0.099999994, 0, 0, 0, 0.100000024, 0, 0.19999999, 0, 0.3, 0, 0.39999998, 0, 0.5, 0)]
+}
+tracks/73/type = "value"
+tracks/73/imported = false
+tracks/73/enabled = true
+tracks/73/path = NodePath("Sparkle0:position")
+tracks/73/interp = 1
+tracks/73/loop_wrap = false
+tracks/73/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.5, 0.5)]
+}
+tracks/74/type = "value"
+tracks/74/imported = false
+tracks/74/enabled = true
+tracks/74/path = NodePath("Sparkle0:visible")
+tracks/74/interp = 0
+tracks/74/loop_wrap = false
+tracks/74/keys = {
+"times": PackedFloat32Array(0, 1.019, 1.299),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/75/type = "value"
+tracks/75/imported = false
+tracks/75/enabled = true
+tracks/75/path = NodePath("Sparkle1:points")
+tracks/75/interp = 0
+tracks/75/loop_wrap = false
+tracks/75/keys = {
+"times": PackedFloat32Array(0, 1.0523334, 1.119, 1.1856667, 1.2523333, 1.319),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [PackedVector2Array(0, -5.5, 0, -4.4, 0, -3.3, 0, -2.1999998, 0, -1.0999999, 0, 0, 0, 1.1000004, 0, 2.1999998, 0, 3.3000002, 0, 4.3999996, 0, 5.5), PackedVector2Array(0, -4.5, 0, -3.6, 0, -2.6999998, 0, -1.8, 0, -0.89999986, 0, 0, 0, 0.9000001, 0, 1.7999997, 0, 2.7000003, 0, 3.5999994, 0, 4.5), PackedVector2Array(0, -3.5, 0, -2.8, 0, -2.1, 0, -1.3999999, 0, -0.70000005, 0, 0, 0, 0.7000003, 0, 1.4000001, 0, 2.1, 0, 2.7999997, 0, 3.5), PackedVector2Array(0, -2.5, 0, -2, 0, -1.5, 0, -1, 0, -0.5, 0, 0, 0, 0.5, 0, 1, 0, 1.5, 0, 2, 0, 2.5), PackedVector2Array(0, -1.5, 0, -1.2, 0, -0.9, 0, -0.59999996, 0, -0.29999995, 0, 0, 0, 0.30000007, 0, 0.5999999, 0, 0.9000001, 0, 1.1999998, 0, 1.5), PackedVector2Array(0, -0.5, 0, -0.4, 0, -0.3, 0, -0.19999999, 0, -0.099999994, 0, 0, 0, 0.100000024, 0, 0.19999999, 0, 0.3, 0, 0.39999998, 0, 0.5)]
+}
+tracks/76/type = "value"
+tracks/76/imported = false
+tracks/76/enabled = true
+tracks/76/path = NodePath("Sparkle1:position")
+tracks/76/interp = 1
+tracks/76/loop_wrap = false
+tracks/76/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.5, 0.5)]
+}
+tracks/77/type = "value"
+tracks/77/imported = false
+tracks/77/enabled = true
+tracks/77/path = NodePath("Sparkle1:visible")
+tracks/77/interp = 0
+tracks/77/loop_wrap = false
+tracks/77/keys = {
+"times": PackedFloat32Array(0, 1.019, 1.299),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/78/type = "value"
+tracks/78/imported = false
+tracks/78/enabled = true
+tracks/78/path = NodePath("PopLight:material:shader_parameter/alpha")
+tracks/78/interp = 1
+tracks/78/loop_wrap = false
+tracks/78/keys = {
+"times": PackedFloat32Array(0, 1.019, 1.02, 1.0533333, 1.0866667, 1.12, 1.1533333, 1.1866666, 1.22, 1.2533333, 1.2866666, 1.32, 1.3533334, 1.3866667, 1.42),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, 1.0, 0.8402777777777777, 0.6944444444444445, 0.5625, 0.44444444444444453, 0.3402777777777777, 0.25, 0.17361111111111108, 0.11111111111111113, 0.0625, 0.027777777777777766, 0.006944444444444451, 0.0]
+}
+tracks/79/type = "value"
+tracks/79/imported = false
+tracks/79/enabled = true
+tracks/79/path = NodePath("PopLight:material:shader_parameter/radius")
+tracks/79/interp = 1
+tracks/79/loop_wrap = false
+tracks/79/keys = {
+"times": PackedFloat32Array(0, 1.02, 1.42),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [90.0, 90.0, 49.50000000000001]
+}
+tracks/80/type = "value"
+tracks/80/imported = false
+tracks/80/enabled = true
+tracks/80/path = NodePath("PopWhite:material:shader_parameter/alpha")
+tracks/80/interp = 1
+tracks/80/loop_wrap = false
+tracks/80/keys = {
+"times": PackedFloat32Array(0, 1.019, 1.02, 1.06, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, 0.9, 0.2, 0.0]
+}
+tracks/81/type = "value"
+tracks/81/imported = false
+tracks/81/enabled = true
+tracks/81/path = NodePath("PopWhite:material:shader_parameter/radius")
+tracks/81/interp = 1
+tracks/81/loop_wrap = false
+tracks/81/keys = {
+"times": PackedFloat32Array(0, 1.02, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [30.0, 30.0, 17.0]
+}
+tracks/82/type = "value"
+tracks/82/imported = false
+tracks/82/enabled = true
+tracks/82/path = NodePath("SparkleLight:material:shader_parameter/alpha")
+tracks/82/interp = 1
+tracks/82/loop_wrap = false
+tracks/82/keys = {
+"times": PackedFloat32Array(0, 1.019, 1.02, 1.32),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, 0.6, 0.0]
+}
+tracks/83/type = "value"
+tracks/83/imported = false
+tracks/83/enabled = true
+tracks/83/path = NodePath("Motes:emitting")
+tracks/83/interp = 0
+tracks/83/loop_wrap = false
+tracks/83/keys = {
+"times": PackedFloat32Array(0, 1.019),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/84/type = "value"
+tracks/84/imported = false
+tracks/84/enabled = true
+tracks/84/path = NodePath("MotesLight:emitting")
+tracks/84/interp = 0
+tracks/84/loop_wrap = false
+tracks/84/keys = {
+"times": PackedFloat32Array(0, 1.019),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/85/type = "value"
+tracks/85/imported = false
+tracks/85/enabled = true
+tracks/85/path = NodePath("Stars:emitting")
+tracks/85/interp = 0
+tracks/85/loop_wrap = false
+tracks/85/keys = {
+"times": PackedFloat32Array(0, 1.019),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/86/type = "value"
+tracks/86/imported = false
+tracks/86/enabled = true
+tracks/86/path = NodePath("StarsLight:emitting")
+tracks/86/interp = 0
+tracks/86/loop_wrap = false
+tracks/86/keys = {
+"times": PackedFloat32Array(0, 1.019),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_s3ed0"]
+_data = {
+&"fx": SubResource("Animation_7uero")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ol834"]
+shader = ExtResource("2_xmx3o")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = true
+shader_parameter/size = Vector2(144, 144)
+shader_parameter/radius = 67.0
+shader_parameter/thickness = null
+shader_parameter/squash = null
+shader_parameter/color = Color(0.019607844, 0.015686275, 0.039215688, 1)
+shader_parameter/edge_color = null
+shader_parameter/edge = null
+shader_parameter/side = null
+shader_parameter/ragged = null
+shader_parameter/grain = null
+shader_parameter/alpha = 0.35
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wpeuu"]
+shader = ExtResource("3_rc4o5")
+shader_parameter/size = Vector2(152, 152)
+shader_parameter/radius = 67.0
+shader_parameter/thickness = 5.0
+shader_parameter/squash = null
+shader_parameter/color = Color(0.627451, 0.5019608, 0.9411765, 1)
+shader_parameter/strength = null
+shader_parameter/alpha = 0.18
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kwota"]
+shader = ExtResource("2_xmx3o")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = null
+shader_parameter/size = Vector2(144, 144)
+shader_parameter/radius = 68.0
+shader_parameter/thickness = 1.0
+shader_parameter/squash = null
+shader_parameter/color = Color(0.41568628, 0.26666668, 0.7529412, 1)
+shader_parameter/edge_color = null
+shader_parameter/edge = null
+shader_parameter/side = null
+shader_parameter/ragged = null
+shader_parameter/grain = null
+shader_parameter/alpha = 0.5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ekyh6"]
+shader = ExtResource("2_xmx3o")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = null
+shader_parameter/size = Vector2(152, 152)
+shader_parameter/radius = 72.0
+shader_parameter/thickness = 1.0
+shader_parameter/squash = null
+shader_parameter/color = Color(0.41568628, 0.26666668, 0.7529412, 1)
+shader_parameter/edge_color = null
+shader_parameter/edge = null
+shader_parameter/side = null
+shader_parameter/ragged = null
+shader_parameter/grain = null
+shader_parameter/alpha = 0.4
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fch2c"]
+shader = ExtResource("2_xmx3o")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = null
+shader_parameter/size = Vector2(152, 152)
+shader_parameter/radius = 64.0
+shader_parameter/thickness = 1.0
+shader_parameter/squash = null
+shader_parameter/color = Color(0.41568628, 0.26666668, 0.7529412, 1)
+shader_parameter/edge_color = null
+shader_parameter/edge = null
+shader_parameter/side = null
+shader_parameter/ragged = null
+shader_parameter/grain = null
+shader_parameter/alpha = 0.4
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dkww1"]
+shader = ExtResource("2_xmx3o")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = null
+shader_parameter/size = Vector2(152, 152)
+shader_parameter/radius = 56.0
+shader_parameter/thickness = 1.0
+shader_parameter/squash = null
+shader_parameter/color = Color(0.41568628, 0.26666668, 0.7529412, 1)
+shader_parameter/edge_color = null
+shader_parameter/edge = null
+shader_parameter/side = null
+shader_parameter/ragged = null
+shader_parameter/grain = null
+shader_parameter/alpha = 0.4
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hlsv0"]
+shader = ExtResource("2_xmx3o")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = null
+shader_parameter/size = Vector2(152, 152)
+shader_parameter/radius = 48.0
+shader_parameter/thickness = 1.0
+shader_parameter/squash = null
+shader_parameter/color = Color(0.41568628, 0.26666668, 0.7529412, 1)
+shader_parameter/edge_color = null
+shader_parameter/edge = null
+shader_parameter/side = null
+shader_parameter/ragged = null
+shader_parameter/grain = null
+shader_parameter/alpha = 0.4
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pr7fh"]
+shader = ExtResource("2_xmx3o")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = true
+shader_parameter/size = Vector2(22, 22)
+shader_parameter/radius = 4.5
+shader_parameter/thickness = null
+shader_parameter/squash = null
+shader_parameter/color = Color(0.019607844, 0.015686275, 0.039215688, 1)
+shader_parameter/edge_color = null
+shader_parameter/edge = null
+shader_parameter/side = null
+shader_parameter/ragged = null
+shader_parameter/grain = null
+shader_parameter/alpha = 0.85
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3y7bg"]
+shader = ExtResource("2_xmx3o")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = null
+shader_parameter/size = Vector2(18, 18)
+shader_parameter/radius = 2.2
+shader_parameter/thickness = null
+shader_parameter/squash = null
+shader_parameter/color = Color(0.627451, 0.5019608, 0.9411765, 1)
+shader_parameter/edge_color = null
+shader_parameter/edge = null
+shader_parameter/side = null
+shader_parameter/ragged = null
+shader_parameter/grain = null
+shader_parameter/alpha = null
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5tjjb"]
+shader = ExtResource("2_xmx3o")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = null
+shader_parameter/size = Vector2(16, 16)
+shader_parameter/radius = 1.0
+shader_parameter/thickness = null
+shader_parameter/squash = null
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/edge_color = null
+shader_parameter/edge = null
+shader_parameter/side = null
+shader_parameter/ragged = null
+shader_parameter/grain = null
+shader_parameter/alpha = null
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rn1kt"]
+shader = ExtResource("3_rc4o5")
+shader_parameter/size = Vector2(80, 80)
+shader_parameter/radius = 10.0
+shader_parameter/thickness = null
+shader_parameter/squash = null
+shader_parameter/color = Color(0.627451, 0.5019608, 0.9411765, 1)
+shader_parameter/strength = null
+shader_parameter/alpha = 0.3
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vixqn"]
+shader = ExtResource("3_rc4o5")
+shader_parameter/size = Vector2(24, 24)
+shader_parameter/radius = 8.0
+shader_parameter/thickness = null
+shader_parameter/squash = null
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/strength = null
+shader_parameter/alpha = 0.4
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wwpxi"]
+resource_name = "Dither"
+shader = ExtResource("4_flhda")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = null
+
+[sub_resource type="Image" id="Image_a741h"]
+data = {
+"data": PackedByteArray(160, 128, 240, 127, 160, 128, 240, 255, 216, 200, 255, 255, 216, 200, 255, 255, 216, 200, 255, 255, 255, 255, 255, 255),
+"format": "RGBA8",
+"height": 6,
+"mipmaps": false,
+"width": 1
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_d3o3m"]
+image = SubResource("Image_a741h")
+
+[sub_resource type="Gradient" id="Gradient_4e0uh"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.5)
+colors = PackedColorArray(1, 1, 1, 1, 0.9235294, 0.89215684, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_cd6y1"]
+gradient = SubResource("Gradient_4e0uh")
+
+[sub_resource type="Image" id="Image_yv7bn"]
+data = {
+"data": PackedByteArray(188, 81, 127, 191, 127, 64, 149, 189, 95, 166, 125, 191, 223, 110, 10, 190, 140, 7, 117, 191, 12, 71, 148, 190, 132, 107, 114, 191, 220, 138, 164, 190, 88, 159, 107, 191, 59, 46, 200, 190, 214, 43, 94, 191, 142, 94, 254, 190, 141, 238, 75, 191, 51, 192, 26, 191, 248, 36, 64, 191, 9, 42, 41, 191, 186, 150, 36, 191, 240, 19, 68, 191, 111, 217, 33, 191, 90, 88, 70, 191, 79, 123, 245, 190, 37, 168, 96, 191, 47, 53, 223, 190, 105, 100, 102, 191, 105, 225, 181, 190, 138, 77, 111, 191, 231, 180, 142, 190, 228, 218, 117, 191, 110, 194, 53, 190, 89, 239, 123, 191, 214, 228, 9, 189, 218, 218, 127, 191, 70, 78, 200, 61, 202, 197, 126, 191, 56, 56, 34, 62, 109, 196, 124, 191, 255, 121, 137, 62, 86, 153, 118, 191, 103, 238, 192, 62, 37, 33, 109, 191, 43, 44, 225, 62, 236, 233, 101, 191, 83, 184, 10, 63, 83, 40, 87, 191, 38, 76, 33, 63, 81, 203, 70, 191, 121, 240, 44, 63, 247, 192, 60, 191, 168, 85, 65, 63, 123, 205, 39, 191, 137, 179, 76, 63, 68, 187, 25, 191, 235, 114, 90, 63, 20, 122, 5, 191, 17, 157, 103, 63, 223, 23, 218, 190, 98, 55, 114, 63, 215, 188, 165, 190, 71, 75, 118, 63, 88, 165, 139, 190, 89, 254, 124, 63, 105, 121, 28, 190, 88, 169, 127, 63, 13, 145, 82, 189, 68, 94, 127, 63, 220, 202, 143, 61, 207, 30, 126, 63, 14, 185, 247, 61, 150, 167, 121, 63, 159, 147, 98, 62, 192, 128, 112, 63, 78, 111, 175, 62, 197, 32, 104, 63, 243, 228, 215, 62, 4, 255, 92, 63, 56, 55, 1, 63, 246, 123, 80, 63, 148, 143, 20, 63, 47, 130, 65, 63, 32, 154, 39, 63, 214, 58, 46, 63, 48, 144, 59, 63, 143, 76, 27, 63, 190, 131, 75, 63, 21, 166, 244, 62, 68, 226, 96, 63, 255, 1, 217, 62, 72, 222, 103, 63, 247, 132, 168, 62, 108, 188, 113, 63, 232, 28, 117, 62, 204, 142, 120, 63, 220, 250, 2, 62, 172, 229, 125, 63, 191, 81, 54, 61, 12, 191, 127, 63, 64, 79, 171, 189, 83, 26, 127, 63, 134, 228, 23, 190, 2, 43, 125, 63, 218, 189, 84, 190, 14, 106, 122, 63, 134, 41, 186, 190, 115, 122, 110, 63, 137, 128, 209, 190, 116, 150, 105, 63, 214, 14, 250, 190, 56, 100, 95, 63, 209, 3, 18, 191, 113, 70, 82, 63, 99, 34, 49, 191, 157, 210, 56, 63, 123, 9, 65, 191, 23, 37, 40, 63, 172, 92, 75, 191, 181, 127, 27, 63, 144, 228, 85, 191, 135, 169, 12, 63, 186, 89, 105, 191, 143, 142, 210, 62, 87, 18, 110, 191, 151, 59, 188, 62, 208, 235, 117, 191, 24, 64, 142, 62, 171, 184, 124, 191, 60, 92, 35, 62, 67, 251, 127, 191, 23, 251, 68, 60),
+"format": "RGFloat",
+"height": 1,
+"mipmaps": false,
+"width": 64
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_4vf8n"]
+image = SubResource("Image_yv7bn")
+
+[sub_resource type="Image" id="Image_3yw2k"]
+data = {
+"data": PackedByteArray(163, 141, 39, 66, 167, 228, 67, 64, 46, 117, 38, 66, 133, 177, 181, 64, 244, 204, 32, 66, 64, 157, 66, 65, 143, 22, 31, 66, 65, 246, 87, 65, 146, 160, 26, 66, 87, 94, 131, 65, 196, 204, 17, 66, 13, 238, 166, 65, 141, 212, 5, 66, 67, 28, 203, 65, 134, 48, 252, 65, 44, 7, 222, 65, 212, 5, 216, 65, 22, 173, 0, 66, 98, 109, 212, 65, 251, 41, 2, 66, 236, 24, 161, 65, 88, 110, 19, 66, 231, 122, 146, 65, 229, 49, 23, 66, 218, 183, 110, 65, 227, 10, 29, 66, 111, 77, 59, 65, 166, 87, 33, 66, 48, 143, 238, 64, 18, 85, 37, 66, 89, 252, 180, 63, 159, 231, 39, 66, 94, 115, 131, 192, 205, 49, 39, 66, 202, 233, 212, 192, 232, 224, 37, 66, 31, 112, 52, 193, 160, 212, 33, 66, 231, 56, 125, 193, 192, 157, 27, 66, 252, 196, 147, 193, 131, 225, 22, 66, 237, 17, 182, 193, 118, 50, 13, 66, 242, 179, 211, 193, 109, 117, 2, 66, 159, 251, 226, 193, 68, 189, 247, 65, 108, 192, 253, 193, 177, 61, 220, 65, 210, 85, 6, 194, 201, 197, 201, 65, 106, 91, 15, 194, 58, 48, 175, 65, 19, 255, 23, 194, 170, 31, 143, 65, 88, 244, 30, 194, 218, 135, 89, 65, 103, 161, 33, 194, 4, 73, 55, 65, 234, 6, 38, 194, 90, 95, 205, 64, 34, 199, 39, 194, 49, 47, 10, 64, 221, 149, 39, 194, 65, 186, 60, 192, 56, 196, 38, 194, 113, 145, 162, 192, 250, 213, 35, 194, 224, 176, 20, 193, 126, 212, 29, 194, 22, 66, 102, 193, 129, 85, 24, 194, 63, 174, 141, 193, 91, 7, 17, 194, 122, 152, 169, 193, 89, 209, 8, 194, 114, 252, 194, 193, 222, 250, 253, 193, 74, 250, 219, 193, 57, 173, 228, 193, 63, 45, 246, 193, 124, 212, 203, 193, 117, 142, 5, 194, 254, 140, 160, 193, 125, 148, 19, 194, 79, 105, 142, 193, 223, 41, 24, 194, 132, 46, 93, 193, 167, 163, 30, 194, 248, 218, 32, 193, 182, 29, 35, 194, 65, 233, 171, 192, 185, 158, 38, 194, 75, 75, 239, 191, 96, 213, 39, 194, 4, 216, 96, 64, 70, 105, 39, 194, 240, 91, 199, 64, 57, 36, 38, 194, 151, 156, 11, 65, 153, 85, 36, 194, 128, 86, 116, 65, 91, 128, 28, 194, 90, 124, 137, 65, 188, 74, 25, 194, 188, 25, 164, 65, 197, 153, 18, 194, 2, 165, 191, 65, 58, 254, 9, 194, 34, 125, 232, 65, 110, 148, 242, 193, 113, 92, 253, 65, 174, 176, 220, 193, 209, 116, 5, 66, 158, 23, 204, 193, 254, 93, 12, 66, 129, 158, 184, 193, 226, 34, 25, 66, 142, 45, 138, 193, 9, 60, 28, 66, 54, 14, 119, 193, 192, 98, 33, 66, 32, 180, 58, 193, 48, 217, 37, 66, 15, 105, 214, 192, 228, 252, 39, 66, 199, 68, 1, 191),
+"format": "RGFloat",
+"height": 1,
+"mipmaps": false,
+"width": 64
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_ig0o5"]
+image = SubResource("Image_3yw2k")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_xw1ko"]
+particle_flag_align_y = true
+particle_flag_disable_z = true
+emission_shape = 5
+emission_point_texture = SubResource("ImageTexture_ig0o5")
+emission_normal_texture = SubResource("ImageTexture_4vf8n")
+emission_point_count = 64
+spread = 0.0
+initial_velocity_min = 99.47369
+initial_velocity_max = 121.57895
+gravity = Vector3(0, 0, 0)
+radial_accel_min = -1163.4349
+radial_accel_max = -1163.4349
+color_initial_ramp = SubResource("GradientTexture1D_cd6y1")
+
+[sub_resource type="Gradient" id="Gradient_sq3eo"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.5)
+colors = PackedColorArray(1, 1, 1, 1, 0.9235294, 0.89215684, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_evei8"]
+gradient = SubResource("Gradient_sq3eo")
+
+[sub_resource type="Image" id="Image_w3smr"]
+data = {
+"data": PackedByteArray(22, 242, 127, 191, 155, 203, 168, 188, 228, 174, 125, 191, 69, 116, 9, 190, 171, 239, 121, 191, 231, 141, 93, 190, 218, 91, 111, 191, 5, 150, 181, 190, 84, 238, 105, 191, 230, 246, 207, 190, 255, 161, 93, 191, 227, 30, 0, 191, 148, 51, 71, 191, 81, 203, 32, 191, 125, 120, 67, 191, 57, 79, 37, 191, 88, 109, 47, 191, 162, 113, 58, 191, 9, 53, 20, 191, 93, 188, 80, 191, 163, 166, 246, 190, 32, 86, 96, 191, 219, 153, 211, 190, 64, 29, 105, 191, 121, 139, 188, 190, 137, 2, 110, 191, 255, 32, 131, 190, 51, 118, 119, 191, 206, 149, 14, 190, 144, 129, 125, 191, 95, 37, 35, 187, 204, 255, 127, 191, 62, 23, 159, 60, 164, 243, 127, 191, 217, 44, 49, 62, 147, 35, 124, 191, 160, 47, 136, 62, 38, 199, 118, 191, 49, 90, 173, 62, 81, 225, 112, 191, 63, 87, 217, 62, 81, 202, 103, 191, 19, 122, 1, 63, 224, 215, 92, 191, 97, 121, 30, 63, 86, 13, 73, 191, 32, 109, 52, 63, 72, 156, 53, 191, 156, 235, 56, 63, 74, 8, 49, 191, 101, 145, 78, 63, 202, 54, 23, 191, 89, 238, 94, 63, 60, 178, 251, 190, 87, 252, 98, 63, 214, 193, 236, 190, 125, 225, 111, 63, 46, 207, 178, 190, 209, 236, 117, 63, 39, 57, 142, 190, 64, 106, 124, 63, 27, 197, 42, 190, 38, 255, 127, 63, 86, 21, 167, 187, 195, 248, 127, 63, 67, 123, 115, 60, 138, 203, 125, 63, 158, 27, 6, 62, 155, 213, 117, 63, 80, 217, 142, 62, 220, 154, 109, 63, 183, 147, 190, 62, 209, 24, 99, 63, 130, 84, 236, 62, 51, 75, 90, 63, 0, 187, 5, 63, 240, 105, 71, 63, 225, 135, 32, 63, 243, 76, 69, 63, 254, 30, 35, 63, 0, 168, 35, 63, 92, 219, 68, 63, 237, 160, 20, 63, 153, 111, 80, 63, 127, 37, 12, 63, 42, 59, 86, 63, 108, 55, 226, 62, 76, 168, 101, 63, 76, 80, 161, 62, 62, 246, 114, 63, 135, 241, 114, 62, 222, 176, 120, 63, 185, 148, 42, 62, 75, 108, 124, 63, 88, 212, 29, 61, 84, 207, 127, 63, 154, 106, 93, 189, 45, 160, 127, 63, 218, 9, 19, 190, 217, 88, 125, 63, 10, 92, 80, 190, 251, 164, 122, 63, 253, 93, 162, 190, 80, 201, 114, 63, 89, 71, 203, 190, 89, 245, 106, 63, 239, 157, 247, 190, 250, 17, 96, 63, 174, 226, 15, 191, 236, 188, 83, 63, 162, 70, 43, 191, 179, 67, 62, 63, 207, 59, 60, 191, 93, 129, 45, 63, 222, 11, 76, 191, 137, 153, 26, 63, 148, 109, 85, 191, 208, 93, 13, 63, 252, 4, 100, 191, 244, 191, 232, 62, 143, 124, 115, 191, 27, 30, 158, 62, 119, 165, 119, 191, 42, 186, 129, 62, 215, 152, 126, 191, 76, 30, 214, 61, 209, 23, 127, 191, 119, 61, 172, 61),
+"format": "RGFloat",
+"height": 1,
+"mipmaps": false,
+"width": 64
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_efb3u"]
+image = SubResource("Image_w3smr")
+
+[sub_resource type="Image" id="Image_re1d4"]
+data = {
+"data": PackedByteArray(245, 242, 111, 66, 225, 62, 158, 63, 246, 211, 109, 66, 1, 221, 0, 65, 176, 80, 106, 66, 9, 181, 79, 65, 28, 102, 96, 66, 165, 60, 170, 65, 111, 79, 91, 66, 120, 247, 194, 65, 223, 199, 79, 66, 234, 57, 240, 65, 91, 192, 58, 66, 156, 190, 22, 66, 245, 64, 55, 66, 69, 250, 26, 66, 130, 118, 36, 66, 136, 202, 46, 66, 184, 241, 10, 66, 151, 176, 67, 66, 57, 60, 231, 65, 190, 80, 82, 66, 61, 96, 198, 65, 108, 139, 90, 66, 193, 194, 176, 65, 96, 34, 95, 66, 222, 221, 117, 65, 208, 254, 103, 66, 113, 172, 5, 65, 119, 169, 109, 66, 9, 243, 24, 62, 207, 255, 111, 66, 202, 37, 149, 191, 106, 244, 111, 66, 11, 26, 38, 193, 90, 97, 108, 66, 76, 89, 127, 193, 180, 90, 103, 66, 142, 132, 162, 193, 60, 211, 97, 66, 203, 193, 203, 193, 172, 77, 89, 66, 228, 196, 242, 193, 98, 10, 79, 66, 203, 145, 20, 194, 129, 124, 60, 66, 78, 38, 41, 194, 132, 66, 42, 66, 226, 92, 45, 194, 197, 247, 37, 66, 79, 168, 65, 194, 93, 195, 13, 66, 115, 255, 80, 194, 24, 247, 235, 65, 146, 204, 84, 194, 185, 245, 221, 65, 101, 227, 96, 194, 59, 162, 167, 65, 4, 142, 102, 194, 149, 85, 133, 65, 156, 163, 108, 194, 201, 24, 32, 65, 52, 255, 111, 194, 1, 164, 156, 62, 55, 249, 111, 194, 143, 67, 100, 191, 209, 238, 109, 194, 200, 115, 251, 192, 65, 120, 102, 194, 187, 235, 133, 193, 46, 193, 94, 194, 124, 170, 178, 193, 68, 231, 84, 194, 58, 143, 221, 193, 128, 166, 76, 194, 160, 190, 250, 193, 81, 243, 58, 194, 99, 127, 22, 194, 36, 248, 56, 194, 14, 237, 24, 194, 128, 109, 25, 194, 166, 141, 56, 194, 222, 86, 11, 194, 159, 104, 67, 194, 39, 99, 3, 194, 119, 215, 72, 194, 245, 19, 212, 193, 199, 77, 87, 194, 71, 59, 151, 193, 218, 198, 99, 194, 111, 194, 99, 193, 208, 37, 105, 194, 109, 235, 31, 193, 134, 165, 108, 194, 18, 247, 19, 192, 95, 210, 111, 194, 240, 147, 79, 64, 42, 166, 111, 194, 60, 217, 9, 65, 75, 131, 109, 194, 73, 86, 67, 65, 171, 250, 106, 194, 29, 56, 152, 65, 187, 156, 99, 194, 227, 146, 190, 65, 3, 70, 92, 194, 16, 36, 232, 65, 218, 16, 82, 194, 131, 228, 6, 66, 29, 129, 70, 194, 56, 146, 32, 66, 120, 95, 50, 194, 18, 120, 48, 66, 71, 169, 34, 194, 32, 75, 63, 66, 240, 239, 16, 194, 187, 22, 72, 66, 243, 135, 4, 194, 172, 196, 85, 66, 245, 51, 218, 193, 198, 68, 100, 66, 57, 60, 148, 193, 32, 43, 104, 66, 15, 61, 115, 193, 74, 175, 110, 66, 103, 188, 200, 192, 84, 38, 111, 66, 160, 121, 161, 192),
+"format": "RGFloat",
+"height": 1,
+"mipmaps": false,
+"width": 64
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_4n4du"]
+image = SubResource("Image_re1d4")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_6myoi"]
+particle_flag_align_y = true
+particle_flag_disable_z = true
+emission_shape = 5
+emission_point_texture = SubResource("ImageTexture_4n4du")
+emission_normal_texture = SubResource("ImageTexture_efb3u")
+emission_point_count = 64
+spread = 0.0
+initial_velocity_min = 142.10527
+initial_velocity_max = 173.6842
+gravity = Vector3(0, 0, 0)
+radial_accel_min = -1662.0498
+radial_accel_max = -1662.0498
+color_initial_ramp = SubResource("GradientTexture1D_evei8")
+
+[sub_resource type="Gradient" id="Gradient_gv0gb"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.5)
+colors = PackedColorArray(1, 1, 1, 1, 0.9235294, 0.89215684, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_40dc0"]
+gradient = SubResource("Gradient_gv0gb")
+
+[sub_resource type="Image" id="Image_pbnwe"]
+data = {
+"data": PackedByteArray(97, 249, 127, 191, 125, 221, 104, 188, 171, 237, 125, 191, 229, 1, 2, 190, 27, 57, 121, 191, 25, 14, 106, 190, 227, 85, 114, 191, 30, 10, 165, 190, 230, 120, 99, 191, 191, 225, 234, 190, 84, 36, 87, 191, 133, 190, 10, 191, 87, 194, 84, 191, 5, 95, 14, 191, 1, 146, 57, 191, 215, 89, 48, 191, 0, 247, 37, 191, 30, 234, 66, 191, 144, 9, 16, 191, 123, 162, 83, 191, 207, 235, 13, 191, 66, 15, 85, 191, 93, 134, 234, 190, 120, 144, 99, 191, 23, 140, 165, 190, 184, 63, 114, 191, 243, 133, 83, 190, 145, 122, 122, 191, 249, 175, 222, 189, 110, 123, 126, 191, 144, 40, 199, 189, 99, 201, 126, 191, 251, 241, 19, 61, 61, 213, 127, 191, 90, 6, 9, 62, 155, 178, 125, 191, 157, 116, 140, 62, 206, 45, 118, 191, 116, 164, 163, 62, 126, 146, 114, 191, 99, 106, 207, 62, 130, 13, 106, 191, 85, 145, 252, 62, 60, 175, 94, 191, 60, 107, 18, 63, 123, 254, 81, 191, 228, 114, 42, 63, 123, 1, 63, 191, 20, 196, 57, 63, 22, 37, 48, 191, 6, 226, 73, 63, 22, 106, 29, 191, 80, 0, 97, 63, 121, 55, 244, 190, 34, 171, 107, 63, 177, 246, 199, 190, 123, 156, 111, 63, 208, 63, 180, 190, 3, 85, 120, 63, 40, 191, 120, 190, 93, 11, 124, 63, 194, 80, 51, 190, 100, 122, 127, 63, 116, 181, 130, 189, 45, 179, 127, 63, 216, 68, 70, 61, 186, 250, 125, 63, 77, 103, 0, 62, 203, 124, 118, 63, 35, 70, 138, 62, 18, 105, 109, 63, 73, 139, 191, 62, 75, 203, 97, 63, 148, 69, 241, 62, 165, 150, 95, 63, 81, 90, 249, 62, 55, 81, 84, 63, 130, 7, 15, 63, 3, 92, 59, 63, 240, 114, 46, 63, 244, 32, 36, 63, 144, 118, 68, 63, 69, 143, 15, 63, 131, 245, 83, 63, 180, 92, 8, 63, 218, 168, 88, 63, 150, 58, 196, 62, 184, 115, 108, 63, 201, 86, 183, 62, 68, 6, 111, 63, 19, 242, 126, 62, 88, 240, 119, 63, 181, 114, 62, 62, 147, 136, 123, 63, 181, 241, 92, 61, 150, 160, 127, 63, 155, 211, 62, 189, 215, 184, 127, 63, 190, 0, 231, 189, 198, 93, 126, 63, 138, 205, 145, 190, 132, 102, 117, 63, 45, 136, 156, 190, 25, 190, 115, 63, 223, 240, 234, 190, 255, 116, 99, 63, 169, 93, 246, 190, 43, 106, 96, 63, 185, 252, 27, 191, 216, 252, 74, 63, 167, 209, 45, 191, 174, 241, 59, 63, 171, 94, 60, 191, 133, 91, 45, 63, 179, 186, 73, 191, 120, 156, 29, 63, 172, 95, 96, 191, 228, 131, 246, 62, 36, 113, 104, 191, 246, 137, 214, 62, 224, 130, 114, 191, 242, 0, 164, 62, 12, 235, 121, 191, 72, 225, 93, 62, 30, 146, 123, 191, 156, 168, 61, 62, 64, 255, 127, 191, 157, 239, 156, 59),
+"format": "RGFloat",
+"height": 1,
+"mipmaps": false,
+"width": 64
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_u785m"]
+image = SubResource("Image_pbnwe")
+
+[sub_resource type="Image" id="Image_e6qg2"]
+data = {
+"data": PackedByteArray(247, 251, 155, 66, 248, 230, 141, 63, 212, 188, 154, 66, 79, 114, 30, 65, 204, 222, 151, 66, 151, 160, 142, 65, 86, 172, 147, 66, 85, 36, 201, 65, 172, 157, 138, 66, 144, 33, 15, 66, 35, 26, 131, 66, 50, 24, 41, 66, 109, 166, 129, 66, 206, 131, 45, 66, 241, 41, 98, 66, 126, 237, 86, 66, 8, 69, 74, 66, 85, 141, 109, 66, 168, 139, 47, 66, 3, 247, 128, 66, 100, 247, 44, 66, 76, 213, 129, 66, 225, 233, 14, 66, 9, 172, 138, 66, 188, 194, 201, 65, 212, 158, 147, 66, 160, 229, 128, 65, 176, 162, 152, 66, 60, 179, 7, 65, 55, 19, 155, 66, 112, 185, 242, 64, 184, 66, 155, 66, 234, 78, 52, 192, 241, 229, 155, 66, 190, 255, 38, 193, 214, 152, 154, 66, 31, 46, 171, 193, 234, 3, 150, 66, 109, 112, 199, 193, 69, 209, 147, 66, 169, 201, 252, 193, 59, 160, 142, 66, 144, 232, 25, 194, 201, 178, 135, 66, 177, 114, 50, 194, 38, 238, 127, 66, 6, 188, 79, 194, 206, 201, 104, 66, 248, 102, 98, 194, 51, 173, 86, 66, 119, 11, 118, 194, 75, 217, 63, 66, 49, 28, 137, 194, 206, 209, 20, 66, 73, 156, 143, 194, 168, 180, 243, 65, 91, 3, 146, 194, 198, 173, 219, 65, 206, 83, 151, 194, 124, 148, 151, 65, 237, 150, 153, 194, 108, 138, 90, 65, 149, 174, 155, 194, 37, 77, 159, 64, 47, 209, 155, 194, 231, 163, 113, 192, 201, 196, 154, 194, 230, 125, 28, 193, 12, 52, 150, 194, 123, 133, 168, 193, 7, 172, 144, 194, 193, 113, 233, 193, 226, 151, 137, 194, 102, 6, 19, 194, 205, 63, 136, 194, 9, 243, 23, 194, 126, 97, 129, 194, 38, 81, 46, 194, 36, 88, 100, 194, 20, 156, 84, 194, 41, 8, 72, 194, 128, 112, 111, 194, 156, 246, 46, 194, 156, 41, 129, 194, 251, 48, 38, 194, 229, 6, 132, 194, 103, 39, 239, 193, 132, 22, 144, 194, 197, 113, 223, 193, 209, 167, 145, 194, 132, 91, 155, 193, 118, 22, 151, 194, 205, 27, 104, 193, 58, 71, 153, 194, 74, 163, 134, 192, 219, 197, 155, 194, 229, 145, 104, 64, 163, 212, 155, 194, 116, 196, 12, 65, 37, 1, 155, 194, 128, 178, 177, 65, 120, 138, 149, 194, 247, 197, 190, 65, 215, 135, 148, 194, 200, 42, 15, 66, 75, 155, 138, 194, 19, 33, 22, 66, 178, 192, 136, 194, 1, 28, 62, 66, 39, 100, 119, 194, 132, 215, 83, 66, 140, 14, 101, 194, 96, 147, 101, 66, 138, 71, 83, 194, 138, 219, 117, 66, 178, 22, 64, 194, 77, 186, 136, 66, 95, 56, 22, 194, 242, 164, 141, 66, 18, 188, 2, 194, 192, 199, 147, 66, 39, 225, 199, 193, 59, 75, 152, 66, 72, 53, 135, 193, 10, 77, 153, 66, 126, 37, 103, 193, 139, 255, 155, 66, 7, 68, 191, 190),
+"format": "RGFloat",
+"height": 1,
+"mipmaps": false,
+"width": 64
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_lh51y"]
+image = SubResource("Image_e6qg2")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_aphtt"]
+particle_flag_align_y = true
+particle_flag_disable_z = true
+emission_shape = 5
+emission_point_texture = SubResource("ImageTexture_lh51y")
+emission_normal_texture = SubResource("ImageTexture_u785m")
+emission_point_count = 64
+spread = 0.0
+initial_velocity_min = 184.73685
+initial_velocity_max = 225.78947
+gravity = Vector3(0, 0, 0)
+radial_accel_min = -2160.6648
+radial_accel_max = -2160.6648
+color_initial_ramp = SubResource("GradientTexture1D_40dc0")
+
+[sub_resource type="Gradient" id="Gradient_lv5ed"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8)
+colors = PackedColorArray(0.22745098, 0.14117648, 0.4392157, 1, 0.41568628, 0.26666668, 0.7529412, 1, 0.627451, 0.5019608, 0.9411765, 1, 0.2901961, 0.26666668, 0.34509805, 1, 0.43137255, 0.40784314, 0.5019608, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_b8glk"]
+gradient = SubResource("Gradient_lv5ed")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_07mty"]
+particle_flag_align_y = true
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 0.0
+emission_ring_radius = 46.0
+emission_ring_inner_radius = 40.0
+emission_ring_cone_angle = 90.0
+direction = Vector3(6.123234e-17, -1, 0)
+spread = 0.0
+orbit_velocity_min = -0.7
+orbit_velocity_max = 0.7
+gravity = Vector3(0, 0, 0)
+radial_accel_min = -521.54193
+radial_accel_max = -469.38776
+color_initial_ramp = SubResource("GradientTexture1D_b8glk")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_c7kkr"]
+particle_flag_align_y = true
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 0.0
+emission_ring_radius = 64.0
+emission_ring_inner_radius = 58.0
+emission_ring_cone_angle = 90.0
+direction = Vector3(6.123234e-17, -1, 0)
+spread = 0.0
+orbit_velocity_min = -0.7
+orbit_velocity_max = 0.7
+gravity = Vector3(0, 0, 0)
+radial_accel_min = -725.6236
+radial_accel_max = -653.0612
+color_initial_ramp = SubResource("GradientTexture1D_b8glk")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ycf78"]
+particle_flag_align_y = true
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 0.0
+emission_ring_radius = 82.0
+emission_ring_inner_radius = 76.0
+emission_ring_cone_angle = 90.0
+direction = Vector3(6.123234e-17, -1, 0)
+spread = 0.0
+orbit_velocity_min = -0.7
+orbit_velocity_max = 0.7
+gravity = Vector3(0, 0, 0)
+radial_accel_min = -929.7052
+radial_accel_max = -836.7347
+color_initial_ramp = SubResource("GradientTexture1D_b8glk")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pjrtw"]
+resource_name = "Soft"
+shader = ExtResource("4_flhda")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = true
+
+[sub_resource type="Curve" id="Curve_qwq7u"]
+_data = [Vector2(0, 1), 0.0, -1.3333331, 1, 1, Vector2(0.3, 0.6), -1.3333331, -1.0000001, 1, 1, Vector2(0.7, 0.2), -1.0000001, -0.6666667, 1, 1, Vector2(1, 0), -0.6666667, 0.0, 1, 1]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_5g6u1"]
+curve = SubResource("Curve_qwq7u")
+
+[sub_resource type="Image" id="Image_7aulg"]
+data = {
+"data": PackedByteArray(255, 46, 127, 191, 86, 110, 163, 189, 67, 108, 123, 191, 53, 197, 64, 190, 9, 208, 117, 191, 164, 255, 142, 190, 8, 54, 116, 191, 84, 149, 153, 190, 195, 52, 106, 191, 219, 184, 206, 190, 161, 98, 90, 191, 186, 148, 5, 191, 84, 97, 80, 191, 237, 180, 20, 191, 130, 147, 55, 191, 3, 109, 50, 191, 193, 160, 40, 191, 126, 157, 64, 191, 30, 119, 32, 191, 109, 119, 71, 191, 60, 163, 244, 190, 10, 227, 96, 191, 208, 186, 225, 190, 241, 198, 101, 191, 95, 21, 190, 190, 40, 180, 109, 191, 69, 141, 88, 190, 199, 53, 122, 191, 135, 181, 18, 190, 231, 91, 125, 191, 177, 199, 176, 189, 101, 11, 127, 191, 229, 246, 156, 58, 244, 255, 127, 191, 172, 205, 11, 62, 89, 154, 125, 191, 218, 150, 122, 62, 93, 55, 120, 191, 214, 49, 190, 62, 119, 174, 109, 191, 196, 110, 231, 62, 185, 90, 100, 191, 29, 197, 252, 62, 139, 160, 94, 191, 22, 220, 27, 63, 232, 21, 75, 191, 67, 58, 52, 63, 193, 206, 53, 191, 26, 189, 69, 63, 247, 150, 34, 191, 109, 31, 82, 63, 242, 59, 18, 191, 229, 205, 90, 63, 190, 228, 4, 191, 227, 97, 106, 63, 224, 235, 205, 190, 17, 254, 115, 63, 134, 247, 154, 190, 162, 146, 119, 63, 164, 73, 130, 190, 116, 126, 126, 63, 81, 210, 221, 189, 42, 35, 127, 63, 111, 252, 167, 189, 103, 32, 127, 63, 245, 7, 169, 61, 116, 236, 123, 63, 151, 2, 54, 62, 205, 129, 119, 63, 75, 201, 130, 62, 143, 171, 109, 63, 93, 64, 190, 62, 195, 42, 98, 63, 223, 222, 239, 62, 5, 199, 89, 63, 214, 145, 6, 63, 58, 77, 81, 63, 46, 104, 19, 63, 191, 119, 63, 63, 0, 238, 41, 63, 226, 77, 40, 63, 236, 229, 64, 63, 134, 169, 33, 63, 105, 127, 70, 63, 105, 248, 11, 63, 162, 88, 86, 63, 251, 18, 238, 62, 29, 164, 98, 63, 23, 89, 149, 62, 236, 221, 116, 63, 121, 37, 131, 62, 156, 117, 119, 63, 165, 202, 229, 61, 41, 98, 126, 63, 41, 19, 189, 61, 28, 232, 126, 63, 205, 14, 145, 189, 104, 91, 127, 63, 175, 167, 13, 190, 231, 137, 125, 63, 211, 88, 140, 190, 196, 49, 118, 63, 78, 61, 177, 190, 2, 44, 112, 63, 67, 164, 208, 190, 185, 199, 105, 63, 185, 162, 5, 191, 17, 90, 90, 63, 7, 200, 26, 191, 156, 232, 75, 63, 142, 47, 51, 191, 163, 213, 54, 63, 137, 16, 66, 191, 56, 245, 38, 63, 250, 43, 76, 191, 31, 111, 26, 63, 119, 93, 91, 191, 59, 247, 3, 63, 131, 111, 108, 191, 219, 78, 196, 62, 63, 139, 112, 191, 183, 53, 175, 62, 158, 98, 122, 191, 193, 73, 85, 62, 248, 122, 125, 191, 204, 80, 15, 62, 151, 242, 127, 191, 106, 180, 165, 60),
+"format": "RGFloat",
+"height": 1,
+"mipmaps": false,
+"width": 64
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_v67fv"]
+image = SubResource("Image_7aulg")
+
+[sub_resource type="Image" id="Image_vnhab"]
+data = {
+"data": PackedByteArray(217, 244, 100, 66, 75, 162, 146, 64, 171, 176, 146, 66, 147, 240, 96, 65, 116, 71, 119, 66, 9, 218, 143, 65, 101, 176, 137, 66, 35, 47, 173, 65, 219, 191, 77, 66, 213, 154, 181, 65, 101, 85, 61, 66, 26, 159, 231, 65, 162, 84, 115, 66, 2, 166, 45, 66, 28, 126, 15, 66, 129, 119, 11, 66, 188, 180, 31, 66, 147, 108, 54, 66, 105, 233, 63, 66, 89, 142, 110, 66, 223, 8, 223, 65, 43, 7, 77, 66, 238, 136, 183, 65, 97, 211, 58, 66, 132, 254, 233, 65, 188, 78, 146, 66, 102, 1, 104, 65, 102, 8, 134, 66, 180, 193, 50, 65, 11, 90, 154, 66, 186, 10, 195, 64, 22, 178, 140, 66, 205, 91, 143, 189, 59, 207, 105, 66, 164, 183, 19, 193, 185, 250, 133, 66, 63, 22, 134, 193, 48, 209, 132, 66, 71, 235, 234, 193, 70, 201, 146, 66, 197, 240, 15, 194, 165, 6, 142, 66, 0, 99, 200, 193, 150, 125, 48, 66, 203, 228, 39, 194, 19, 196, 90, 66, 33, 249, 48, 194, 81, 134, 50, 66, 109, 165, 26, 194, 113, 80, 254, 65, 141, 13, 114, 194, 179, 116, 40, 66, 246, 112, 80, 194, 231, 50, 253, 65, 5, 49, 62, 194, 186, 24, 167, 65, 167, 148, 136, 194, 48, 126, 173, 65, 184, 27, 130, 194, 11, 241, 136, 65, 97, 204, 142, 194, 103, 238, 248, 64, 111, 194, 110, 194, 225, 51, 157, 64, 21, 156, 152, 194, 48, 56, 202, 192, 211, 241, 79, 194, 113, 60, 22, 193, 225, 124, 105, 194, 181, 193, 118, 193, 63, 44, 98, 194, 73, 12, 181, 193, 240, 188, 55, 194, 237, 222, 194, 193, 144, 124, 75, 194, 98, 122, 251, 193, 154, 211, 100, 194, 111, 40, 33, 194, 102, 55, 23, 194, 200, 52, 6, 194, 176, 76, 70, 194, 208, 70, 99, 194, 124, 246, 21, 194, 240, 33, 56, 194, 226, 131, 40, 194, 136, 7, 129, 194, 51, 215, 213, 193, 65, 146, 75, 194, 1, 132, 166, 193, 218, 129, 136, 194, 251, 95, 113, 193, 123, 185, 99, 194, 178, 156, 224, 192, 80, 166, 120, 194, 231, 242, 202, 192, 63, 206, 136, 194, 3, 179, 160, 64, 44, 114, 141, 194, 80, 52, 43, 65, 168, 54, 153, 194, 248, 195, 129, 65, 239, 161, 99, 194, 6, 34, 171, 65, 167, 229, 103, 194, 205, 70, 1, 66, 72, 218, 144, 194, 163, 210, 214, 65, 206, 128, 47, 194, 134, 133, 18, 66, 248, 6, 65, 194, 146, 17, 67, 66, 115, 10, 71, 194, 203, 85, 102, 66, 134, 41, 70, 194, 118, 162, 119, 66, 29, 79, 59, 194, 193, 192, 136, 66, 41, 137, 36, 194, 193, 69, 91, 66, 205, 14, 182, 193, 150, 7, 106, 66, 2, 119, 170, 193, 143, 27, 152, 66, 68, 146, 129, 193, 234, 38, 100, 66, 197, 254, 0, 193, 135, 63, 101, 66, 72, 107, 148, 191),
+"format": "RGFloat",
+"height": 1,
+"mipmaps": false,
+"width": 64
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_36oae"]
+image = SubResource("Image_vnhab")
+
+[sub_resource type="Curve" id="Curve_j6o6e"]
+_limits = [0.0, 8.0, 0.0, 1.0]
+_data = [Vector2(0, 0.7), 0.0, 0.8000001, 1, 1, Vector2(1, 1.5), 0.8000001, 0.0, 1, 1]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_qlh36"]
+curve = SubResource("Curve_j6o6e")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qcasd"]
+particle_flag_disable_z = true
+particle_flag_damping_as_friction = true
+emission_shape = 5
+emission_point_texture = SubResource("ImageTexture_36oae")
+emission_normal_texture = SubResource("ImageTexture_v67fv")
+emission_point_count = 64
+spread = 0.0
+initial_velocity_min = 80.0
+initial_velocity_max = 95.0
+gravity = Vector3(0, 0, 0)
+damping_min = 1.6474603
+damping_max = 1.6474603
+scale_min = 0.7
+scale_max = 1.1
+scale_curve = SubResource("CurveTexture_qlh36")
+color = Color(0.41568628, 0.26666668, 0.7529412, 0.45)
+alpha_curve = SubResource("CurveTexture_5g6u1")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0rc05"]
+shader = ExtResource("2_xmx3o")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = null
+shader_parameter/size = Vector2(20, 20)
+shader_parameter/radius = 7.0
+shader_parameter/thickness = null
+shader_parameter/squash = null
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/edge_color = null
+shader_parameter/edge = null
+shader_parameter/side = null
+shader_parameter/ragged = null
+shader_parameter/grain = null
+shader_parameter/alpha = null
+
+[sub_resource type="Gradient" id="Gradient_kno6r"]
+offsets = PackedFloat32Array(0, 0.08, 0.15, 0.3, 0.7, 0.85, 0.92)
+colors = PackedColorArray(0.84705883, 0.78431374, 1, 0, 0.84705883, 0.78431374, 1, 0.5, 0.84705883, 0.78431374, 1, 1, 1, 1, 1, 1, 0.84705883, 0.78431374, 1, 1, 0.84705883, 0.78431374, 1, 0.5, 0.84705883, 0.78431374, 1, 0)
+
+[sub_resource type="Gradient" id="Gradient_0qrn8"]
+offsets = PackedFloat32Array(0, 0.5, 1)
+colors = PackedColorArray(0.84705883, 0.78431374, 1, 0, 0.84705883, 0.78431374, 1, 1, 0.84705883, 0.78431374, 1, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jvhr0"]
+shader = ExtResource("2_xmx3o")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = null
+shader_parameter/size = Vector2(164, 164)
+shader_parameter/radius = 4.0
+shader_parameter/thickness = 2.5
+shader_parameter/squash = null
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/edge_color = null
+shader_parameter/edge = null
+shader_parameter/side = null
+shader_parameter/ragged = null
+shader_parameter/grain = null
+shader_parameter/alpha = null
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8frut"]
+shader = ExtResource("2_xmx3o")
+shader_parameter/palette_size = null
+shader_parameter/alpha_scale = null
+shader_parameter/translucent = null
+shader_parameter/size = Vector2(92, 92)
+shader_parameter/radius = 2.0
+shader_parameter/thickness = 1.0
+shader_parameter/squash = null
+shader_parameter/color = Color(0.627451, 0.5019608, 0.9411765, 1)
+shader_parameter/edge_color = null
+shader_parameter/edge = null
+shader_parameter/side = null
+shader_parameter/ragged = null
+shader_parameter/grain = null
+shader_parameter/alpha = null
+
+[sub_resource type="Gradient" id="Gradient_u4ivh"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.2, 0.8, 1)
+colors = PackedColorArray(0.84705883, 0.78431374, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.84705883, 0.78431374, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lcwml"]
+shader = ExtResource("3_rc4o5")
+shader_parameter/size = Vector2(188, 188)
+shader_parameter/radius = 90.0
+shader_parameter/thickness = null
+shader_parameter/squash = null
+shader_parameter/color = Color(0.627451, 0.5019608, 0.9411765, 1)
+shader_parameter/strength = null
+shader_parameter/alpha = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b3q64"]
+shader = ExtResource("3_rc4o5")
+shader_parameter/size = Vector2(68, 68)
+shader_parameter/radius = 30.0
+shader_parameter/thickness = null
+shader_parameter/squash = null
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/strength = null
+shader_parameter/alpha = 0.9
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3swxb"]
+shader = ExtResource("3_rc4o5")
+shader_parameter/size = Vector2(36, 36)
+shader_parameter/radius = 14.0
+shader_parameter/thickness = null
+shader_parameter/squash = null
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/strength = null
+shader_parameter/alpha = 0.0
+
+[sub_resource type="Image" id="Image_ulk1q"]
+data = {
+"data": PackedByteArray(140, 140, 140, 153, 140, 140, 140, 153, 140, 140, 140, 255, 140, 140, 140, 255, 140, 140, 140, 255, 140, 140, 140, 255, 140, 140, 140, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255),
+"format": "RGBA8",
+"height": 12,
+"mipmaps": false,
+"width": 1
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_lc3fn"]
+image = SubResource("Image_ulk1q")
+
+[sub_resource type="Curve" id="Curve_3d326"]
+_data = [Vector2(0, 1), 0.0, 0.0, 1, 1, Vector2(0.5, 1), 0.0, -2.0, 1, 1, Vector2(1, 0), -2.0, 0.0, 1, 1]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_a6oqg"]
+curve = SubResource("Curve_3d326")
+
+[sub_resource type="Gradient" id="Gradient_qoj2k"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.33333334, 0.6666667)
+colors = PackedColorArray(1, 1, 1, 1, 0.84705883, 0.78431374, 1, 1, 0.627451, 0.5019608, 0.9411765, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_7q2wn"]
+gradient = SubResource("Gradient_qoj2k")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ru186"]
+lifetime_randomness = 0.5
+particle_flag_align_y = true
+particle_flag_disable_z = true
+particle_flag_damping_as_friction = true
+direction = Vector3(6.123234e-17, -1, 0)
+spread = 180.0
+initial_velocity_min = 120.0
+initial_velocity_max = 330.0
+gravity = Vector3(0, 0, 0)
+damping_min = 0.058235336
+damping_max = 0.058235336
+color_initial_ramp = SubResource("GradientTexture1D_7q2wn")
+alpha_curve = SubResource("CurveTexture_a6oqg")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k6idf"]
+resource_name = "Light"
+shader = ExtResource("7_ul03v")
+shader_parameter/strength = null
+shader_parameter/steps = null
+
+[sub_resource type="Curve" id="Curve_e2qjc"]
+_data = [Vector2(0, 1), 0.0, 0.0, 1, 1, Vector2(0.5, 1), 0.0, -2.0, 1, 1, Vector2(1, 0), -2.0, 0.0, 1, 1]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_nws3h"]
+curve = SubResource("Curve_e2qjc")
+
+[sub_resource type="Gradient" id="Gradient_rndmt"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.33333334, 0.6666667)
+colors = PackedColorArray(1, 1, 1, 1, 0.84705883, 0.78431374, 1, 1, 0.627451, 0.5019608, 0.9411765, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_tnltj"]
+gradient = SubResource("Gradient_rndmt")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_lmdmj"]
+lifetime_randomness = 0.5
+particle_flag_disable_z = true
+particle_flag_damping_as_friction = true
+direction = Vector3(6.123234e-17, -1, 0)
+spread = 180.0
+initial_velocity_min = 120.0
+initial_velocity_max = 330.0
+gravity = Vector3(0, 0, 0)
+damping_min = 0.17808898
+damping_max = 0.17808898
+color_initial_ramp = SubResource("GradientTexture1D_tnltj")
+alpha_curve = SubResource("CurveTexture_nws3h")
+
+[node name="Implosion" type="Node2D" unique_id=848019167]
+script = ExtResource("1_c8b7n")
+effect_id = "explosions/implosion"
+source = "src/fx/explosions/implosion.js@a5688ab93bdd3199533cc2f6f1b378f5734eef8d"
+duration = 1.65
+canvas_size = Vector2i(208, 184)
+origin = Vector2i(104, 92)
+ramps = {
+"palette": PackedColorArray(0.039215688, 0.023529412, 0.078431375, 1, 0.10980392, 0.07058824, 0.21176471, 1, 0.22745098, 0.14117648, 0.4392157, 1, 0.41568628, 0.26666668, 0.7529412, 1, 0.627451, 0.5019608, 0.9411765, 1, 0.84705883, 0.78431374, 1, 1, 1, 1, 1, 1)
+}
+palette_extra = PackedColorArray(0.019607844, 0.015686275, 0.039215688, 1, 0.9235294, 0.89215684, 1, 1, 0.2901961, 0.26666668, 0.34509805, 1, 0.43137255, 0.40784314, 0.5019608, 1)
+palette_override = PackedColorArray()
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1786327952]
+libraries/ = SubResource("AnimationLibrary_s3ed0")
+
+[node name="Void" type="ColorRect" parent="." unique_id=396959478]
+z_index = 1
+material = SubResource("ShaderMaterial_ol834")
+offset_left = -72.0
+offset_top = -72.0
+offset_right = 72.0
+offset_bottom = 72.0
+mouse_filter = 2
+
+[node name="VoidGlow" type="ColorRect" parent="." unique_id=1223126358]
+z_index = 2
+material = SubResource("ShaderMaterial_wpeuu")
+offset_left = -76.0
+offset_top = -76.0
+offset_right = 76.0
+offset_bottom = 76.0
+mouse_filter = 2
+
+[node name="VoidEdge" type="ColorRect" parent="." unique_id=337387131]
+z_index = 1
+material = SubResource("ShaderMaterial_kwota")
+offset_left = -72.0
+offset_top = -72.0
+offset_right = 72.0
+offset_bottom = 72.0
+mouse_filter = 2
+
+[node name="Pull0" type="ColorRect" parent="." unique_id=1695362273]
+visible = false
+z_index = 1
+material = SubResource("ShaderMaterial_ekyh6")
+offset_left = -76.0
+offset_top = -76.0
+offset_right = 76.0
+offset_bottom = 76.0
+mouse_filter = 2
+
+[node name="Pull1" type="ColorRect" parent="." unique_id=683569536]
+visible = false
+z_index = 1
+material = SubResource("ShaderMaterial_fch2c")
+offset_left = -76.0
+offset_top = -76.0
+offset_right = 76.0
+offset_bottom = 76.0
+mouse_filter = 2
+
+[node name="Pull2" type="ColorRect" parent="." unique_id=1712201243]
+visible = false
+z_index = 1
+material = SubResource("ShaderMaterial_dkww1")
+offset_left = -76.0
+offset_top = -76.0
+offset_right = 76.0
+offset_bottom = 76.0
+mouse_filter = 2
+
+[node name="Pull3" type="ColorRect" parent="." unique_id=878517453]
+visible = false
+z_index = 1
+material = SubResource("ShaderMaterial_hlsv0")
+offset_left = -76.0
+offset_top = -76.0
+offset_right = 76.0
+offset_bottom = 76.0
+mouse_filter = 2
+
+[node name="CoreVoid" type="ColorRect" parent="." unique_id=174954172]
+z_index = 1
+material = SubResource("ShaderMaterial_pr7fh")
+offset_left = -11.0
+offset_top = -11.0
+offset_right = 11.0
+offset_bottom = 11.0
+mouse_filter = 2
+
+[node name="CoreRim" type="ColorRect" parent="." unique_id=1260982347]
+z_index = 1
+material = SubResource("ShaderMaterial_3y7bg")
+offset_left = -9.0
+offset_top = -9.0
+offset_right = 9.0
+offset_bottom = 9.0
+mouse_filter = 2
+
+[node name="Core" type="ColorRect" parent="." unique_id=1901964805]
+z_index = 1
+material = SubResource("ShaderMaterial_5tjjb")
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+mouse_filter = 2
+
+[node name="CoreLight" type="ColorRect" parent="." unique_id=1960924012]
+z_index = 2
+material = SubResource("ShaderMaterial_rn1kt")
+offset_left = -40.0
+offset_top = -40.0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+
+[node name="StillLight" type="ColorRect" parent="." unique_id=1715850888]
+visible = false
+z_index = 2
+material = SubResource("ShaderMaterial_vixqn")
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+mouse_filter = 2
+
+[node name="Streaks0" type="GPUParticles2D" parent="." unique_id=967012394]
+z_index = 1
+material = SubResource("ShaderMaterial_wwpxi")
+amount = 18
+texture = SubResource("ImageTexture_d3o3m")
+lifetime = 0.19
+randomness = 0.5
+use_fixed_seed = true
+seed = 834450
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+process_material = SubResource("ParticleProcessMaterial_xw1ko")
+
+[node name="Streaks1" type="GPUParticles2D" parent="." unique_id=1776344650]
+z_index = 1
+material = SubResource("ShaderMaterial_wwpxi")
+amount = 18
+texture = SubResource("ImageTexture_d3o3m")
+lifetime = 0.19
+randomness = 0.5
+use_fixed_seed = true
+seed = 834452
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+process_material = SubResource("ParticleProcessMaterial_6myoi")
+
+[node name="Streaks2" type="GPUParticles2D" parent="." unique_id=151174044]
+z_index = 1
+material = SubResource("ShaderMaterial_wwpxi")
+amount = 18
+texture = SubResource("ImageTexture_d3o3m")
+lifetime = 0.19
+randomness = 0.5
+use_fixed_seed = true
+seed = 834454
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+process_material = SubResource("ParticleProcessMaterial_aphtt")
+
+[node name="Grit0" type="GPUParticles2D" parent="." unique_id=1582680936]
+z_index = 1
+material = SubResource("ShaderMaterial_wwpxi")
+amount = 26
+texture = ExtResource("5_t5qxh")
+lifetime = 0.42
+randomness = 0.3
+use_fixed_seed = true
+seed = 873149
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+process_material = SubResource("ParticleProcessMaterial_07mty")
+
+[node name="Grit1" type="GPUParticles2D" parent="." unique_id=1334453545]
+z_index = 1
+material = SubResource("ShaderMaterial_wwpxi")
+amount = 26
+texture = ExtResource("5_t5qxh")
+lifetime = 0.42
+randomness = 0.3
+use_fixed_seed = true
+seed = 873151
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+process_material = SubResource("ParticleProcessMaterial_c7kkr")
+
+[node name="Grit2" type="GPUParticles2D" parent="." unique_id=1662464818]
+z_index = 1
+material = SubResource("ShaderMaterial_wwpxi")
+amount = 26
+texture = ExtResource("5_t5qxh")
+lifetime = 0.42
+randomness = 0.3
+use_fixed_seed = true
+seed = 873153
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+process_material = SubResource("ParticleProcessMaterial_ycf78")
+
+[node name="Vapour" type="GPUParticles2D" parent="." unique_id=1035202227]
+z_index = 1
+material = SubResource("ShaderMaterial_pjrtw")
+emitting = false
+texture = ExtResource("6_vkoeo")
+lifetime = 0.55
+randomness = 0.5
+use_fixed_seed = true
+seed = 796938
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+process_material = SubResource("ParticleProcessMaterial_qcasd")
+
+[node name="Pop" type="ColorRect" parent="." unique_id=96052047]
+visible = false
+z_index = 1
+material = SubResource("ShaderMaterial_0rc05")
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+mouse_filter = 2
+
+[node name="Flare0" type="Line2D" parent="." unique_id=1089939546]
+visible = false
+z_index = 1
+material = SubResource("ShaderMaterial_wwpxi")
+points = PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+width = 1.0
+gradient = SubResource("Gradient_kno6r")
+
+[node name="Flare1" type="Line2D" parent="." unique_id=1372563193]
+visible = false
+z_index = 1
+material = SubResource("ShaderMaterial_wwpxi")
+points = PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+width = 1.0
+gradient = SubResource("Gradient_kno6r")
+
+[node name="Flare2" type="Line2D" parent="." unique_id=772240258]
+visible = false
+z_index = 1
+material = SubResource("ShaderMaterial_wwpxi")
+points = PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+width = 1.0
+gradient = SubResource("Gradient_0qrn8")
+
+[node name="Flare3" type="Line2D" parent="." unique_id=1972919364]
+visible = false
+z_index = 1
+material = SubResource("ShaderMaterial_wwpxi")
+points = PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+width = 1.0
+gradient = SubResource("Gradient_0qrn8")
+
+[node name="PopRing" type="ColorRect" parent="." unique_id=1577848102]
+visible = false
+z_index = 1
+material = SubResource("ShaderMaterial_jvhr0")
+offset_left = -82.0
+offset_top = -82.0
+offset_right = 82.0
+offset_bottom = 82.0
+mouse_filter = 2
+
+[node name="PopRing2" type="ColorRect" parent="." unique_id=457268192]
+visible = false
+z_index = 1
+material = SubResource("ShaderMaterial_8frut")
+offset_left = -46.0
+offset_top = -46.0
+offset_right = 46.0
+offset_bottom = 46.0
+mouse_filter = 2
+
+[node name="Sparkle0" type="Line2D" parent="." unique_id=1557422959]
+visible = false
+z_index = 1
+material = SubResource("ShaderMaterial_wwpxi")
+points = PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+width = 1.0
+gradient = SubResource("Gradient_u4ivh")
+
+[node name="Sparkle1" type="Line2D" parent="." unique_id=1527125374]
+visible = false
+z_index = 1
+material = SubResource("ShaderMaterial_wwpxi")
+points = PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+width = 1.0
+gradient = SubResource("Gradient_u4ivh")
+
+[node name="PopLight" type="ColorRect" parent="." unique_id=903471285]
+z_index = 2
+material = SubResource("ShaderMaterial_lcwml")
+offset_left = -94.0
+offset_top = -94.0
+offset_right = 94.0
+offset_bottom = 94.0
+mouse_filter = 2
+
+[node name="PopWhite" type="ColorRect" parent="." unique_id=1329975051]
+z_index = 2
+material = SubResource("ShaderMaterial_b3q64")
+offset_left = -34.0
+offset_top = -34.0
+offset_right = 34.0
+offset_bottom = 34.0
+mouse_filter = 2
+
+[node name="SparkleLight" type="ColorRect" parent="." unique_id=1951266515]
+z_index = 2
+material = SubResource("ShaderMaterial_3swxb")
+offset_left = -18.0
+offset_top = -18.0
+offset_right = 18.0
+offset_bottom = 18.0
+mouse_filter = 2
+
+[node name="Motes" type="GPUParticles2D" parent="." unique_id=2049004493]
+z_index = 1
+material = SubResource("ShaderMaterial_wwpxi")
+emitting = false
+amount = 20
+texture = SubResource("ImageTexture_lc3fn")
+lifetime = 0.45
+one_shot = true
+explosiveness = 1.0
+use_fixed_seed = true
+seed = 892398
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+process_material = SubResource("ParticleProcessMaterial_ru186")
+
+[node name="MotesLight" type="GPUParticles2D" parent="." unique_id=934442375]
+modulate = Color(1, 1, 1, 0.4)
+z_index = 2
+material = SubResource("ShaderMaterial_k6idf")
+emitting = false
+amount = 20
+texture = ExtResource("8_yspft")
+lifetime = 0.45
+one_shot = true
+explosiveness = 1.0
+use_fixed_seed = true
+seed = 892398
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+process_material = SubResource("ParticleProcessMaterial_ru186")
+
+[node name="Stars" type="GPUParticles2D" parent="." unique_id=248049051]
+z_index = 1
+material = SubResource("ShaderMaterial_wwpxi")
+emitting = false
+amount = 14
+texture = ExtResource("9_bx6rj")
+lifetime = 0.45
+one_shot = true
+explosiveness = 1.0
+use_fixed_seed = true
+seed = 167325
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+process_material = SubResource("ParticleProcessMaterial_lmdmj")
+
+[node name="StarsLight" type="GPUParticles2D" parent="." unique_id=1070358455]
+modulate = Color(1, 1, 1, 0.4)
+z_index = 2
+material = SubResource("ShaderMaterial_k6idf")
+emitting = false
+amount = 14
+texture = ExtResource("8_yspft")
+lifetime = 0.45
+one_shot = true
+explosiveness = 1.0
+use_fixed_seed = true
+seed = 167325
+fixed_fps = 60
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+process_material = SubResource("ParticleProcessMaterial_lmdmj")
