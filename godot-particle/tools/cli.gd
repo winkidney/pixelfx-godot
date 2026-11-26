@@ -7,6 +7,8 @@
 #   ./pfxp check [ids]                    scenes load, meta matches the original, timeline sane, seeds fixed
 #   ./pfxp smoke [ids]                    every built effect (and act) through the nodes, played to its end (xvfb-run)
 #   ./pfxp perf [ids] [--stress 64]       runtime cost on the real GPU: one instance and a crowd (needs a display)
+#   ./pfxp sfx [ids] [--preview]          every effect's sound: render, check, export addons/pixelfx_particles/sfx/
+#       [--out DIR --format ogg|wav]      ... or the same pack into any folder (python: port/sfx/make.py)
 #   ./pfxp index                          addons/pixelfx_particles/fx/registry.gd and docs/CATALOG.md
 #   ./pfxp new <id>                       a build script to start from
 #   ./pfxp list [words]                   ids, names and descriptions

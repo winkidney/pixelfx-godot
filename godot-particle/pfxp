@@ -5,10 +5,13 @@
 DIR="$(cd "$(dirname "$0")" && pwd)"
 GODOT_BIN="${GODOT:-godot}"
 # importing writes .godot/: one at a time, however many shells run pfxp at once
-if [ ! -d "$DIR/.godot/imported" ] || [ "$1" = "import" ]; then
+import_all() {
 	mkdir -p "$DIR/records"
 	touch "$DIR/records/.gdignore"   # scratch renders: nothing for Godot to import
 	flock "$DIR/records/.import.lock" "$GODOT_BIN" --headless --path "$DIR" --import >/dev/null 2>&1 || true
+}
+if [ ! -d "$DIR/.godot/imported" ] || [ "$1" = "import" ]; then
+	import_all
 	[ "$1" = "import" ] && exit 0
 fi
 # render and smoke need a real renderer: Godot under xvfb-run with the Compatibility renderer, at a fixed frame rate
@@ -19,7 +22,8 @@ display() {
 	[[ " $* " == *" --act "* ]] && fps=60
 	local log
 	log=$(mktemp)
-	xvfb-run -a -s "-screen 0 1280x800x24" "$GODOT_BIN" --no-header --path "$DIR" --rendering-driver opengl3 \
+	# the Dummy audio driver: effects play their sound, and a render or smoke run of 244 of them stays quiet
+	xvfb-run -a -s "-screen 0 1280x800x24" "$GODOT_BIN" --no-header --path "$DIR" --rendering-driver opengl3 --audio-driver Dummy \
 		--fixed-fps $fps --disable-vsync --delta-smoothing disable -s res://tools/cli.gd -- "$cmd" "$@" 2>&1 \
 		| grep -v -e "Could not set V-Sync" -e "set_use_vsync" -e "^OpenGL API" -e "^$" | tee "$log"
 	local code="${PIPESTATUS[0]}"
@@ -47,8 +51,18 @@ case "$1" in
 		;;
 	perf)
 		# runtime cost on the real GPU: a window on the desktop, the Compatibility renderer, no vsync (not Xvfb)
+		# (Dummy audio: a crowd of 64 explosions measured, not heard)
 		exec "$GODOT_BIN" --no-header --path "$DIR" --rendering-method gl_compatibility --rendering-driver opengl3 \
-			--disable-vsync --resolution 1280x720 -s res://tools/cli.gd -- "$@"
+			--audio-driver Dummy --disable-vsync --resolution 1280x720 -s res://tools/cli.gd -- "$@"
+		;;
+	sfx)
+		# every effect's sound (port/sfx/make.py): render and check the wavs, export the pack (OGG into
+		# addons/pixelfx_particles/sfx/, or --out DIR [--format wav|ogg]), then let Godot import it
+		shift
+		python3 -I "$DIR/port/sfx/make.py" "$@"
+		code=$?
+		[[ " $* " != *" --out"* ]] && import_all
+		exit $code
 		;;
 	compare)
 		shift

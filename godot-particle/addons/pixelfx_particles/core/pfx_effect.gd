@@ -12,12 +12,18 @@ extends Node2D
 ## Layers: nodes with z_index < 0 draw behind the character, the rest in front. The colour layer uses the dither
 ## material (shaders/dither.gdshader: on/off alpha, palette snap), the light layer the light material
 ## (shaders/light.gdshader: additive).
+##
+## Sound: play() starts the effect's sound (addons/pixelfx_particles/sfx/<id>/full.ogg, on the effect's own clock) on
+## an AudioStreamPlayer2D made at run time; a loop's sound loops, stop() fades it with the picture, speed 0 pauses it
+## and speed scales its pitch. play_sound("hit") plays one phase on its own. See addons/pixelfx_particles/sfx/README.md.
 
 signal finished
 
 const FADE := 0.3
 const DITHER := preload("../shaders/dither.gdshader")
 const LIGHT := preload("../shaders/light.gdshader")
+const SFX := "res://addons/pixelfx_particles/sfx/"
+const MAX_TAILS := 2   # earlier plays of a one-shot still ringing out under the new one (3 voices with it at most)
 const STAND_INS := ["", "res://addons/pixelfx_particles/actor/stock/hero1.png", "res://addons/pixelfx_particles/actor/stock/hero2.png"]
 
 @export_group("Original")
@@ -72,7 +78,37 @@ const STAND_INS := ["", "res://addons/pixelfx_particles/actor/stock/hero1.png", 
 		if is_instance_valid(_stand_in):
 			_stand_in.modulate.a = v
 
+@export_group("Sound")
+## Play the effect's sound. An effect cued inside another (a move's parts) stays quiet: the move has its own track.
+@export var sound := true:
+	set(v):
+		sound = v
+		if not v:
+			_silence()
+## The audio bus every voice of this effect plays on.
+@export var sound_bus := &"Master":
+	set(v):
+		sound_bus = v
+		for p in _voices + _tails:
+			if is_instance_valid(p):
+				p.bus = v
+@export_range(-40.0, 12.0, 0.5, "suffix:dB") var sound_volume_db := 0.0:
+	set(v):
+		sound_volume_db = v
+		for p in _voices:
+			if is_instance_valid(p):
+				p.volume_db = v
+
+## Where the sound's players go when not under this node: an effect drawn in a SubViewport (pixel view) has no audio
+## listener there, so the node showing it (PixelFxParticles2D) hosts them in the game's world, at the effect's origin.
+var sound_parent: Node
+
+static var _sfx_index := {}
+static var _sfx_loaded := false
+
 var t := 0.0
+var _voices := []   # this play's: the full track and phases; they follow speed
+var _tails := []    # earlier plays of a one-shot ringing out (stop() fades them too)
 var _stop_at := -1.0
 var _done := false
 var _unique := false
@@ -161,6 +197,8 @@ func _materials(uniform: String) -> Array[ShaderMaterial]:
 
 ## Start (or restart) from the beginning.
 func play() -> void:
+	if _stop_at >= 0.0:
+		_silence()   # still fading from stop(): that sound is over
 	t = 0.0
 	_stop_at = -1.0
 	_done = false
@@ -178,6 +216,7 @@ func play() -> void:
 	if _anim and _anim.has_animation("fx"):
 		_anim.play("fx")
 		_anim.seek(0.0, true)
+	_start_sound()
 
 
 ## Wait to be played: nothing emits, nothing left over from a previous run.
@@ -192,6 +231,7 @@ func _hold() -> void:
 		n._hold()
 	if _anim:
 		_anim.stop()
+	_silence()
 
 
 ## Let it end: emitters stop, and everything fades out over FADE seconds.
@@ -216,7 +256,11 @@ func _process(delta: float) -> void:
 	if _stop_at >= 0.0:
 		var k := 1.0 - (t - _stop_at) / FADE
 		modulate.a = clampf(k, 0.0, 1.0)
+		for p in _voices + _tails:
+			if is_instance_valid(p):
+				p.volume_db = sound_volume_db + linear_to_db(clampf(k, 0.001, 1.0))
 		if k <= 0.0:
+			_silence()
 			_finish()
 	elif not loop and t >= duration:
 		_finish()
@@ -228,6 +272,12 @@ func _finish() -> void:
 
 
 func _apply_speed() -> void:
+	for p in _voices:
+		if is_instance_valid(p):
+			# a freeze (hit-stop) does not pause the sound: the hit's crack rings on through it, and the body was
+			# made to start after the freeze (port/sfx, references/sound.md). Slowed or sped-up time bends the pitch.
+			if speed > 0.0:
+				p.pitch_scale = speed
 	if not is_inside_tree():
 		return
 	if _anim:
@@ -236,6 +286,115 @@ func _apply_speed() -> void:
 		_particles[i].speed_scale = _speeds[i] * speed
 	for n in _nested:
 		n.speed = speed
+
+
+## The effect's entry in the sound pack's index (addons/pixelfx_particles/sfx/index.json, read once): { sound: bool,
+## why (when silent), loop, duration, length (full's seconds), phases: ["hit", "tail", ...], notes }. {} if unknown.
+static func sound_info(id: String) -> Dictionary:
+	if not _sfx_loaded:
+		_sfx_loaded = true
+		if FileAccess.file_exists(SFX + "index.json"):
+			var d: Variant = JSON.parse_string(FileAccess.get_file_as_string(SFX + "index.json"))
+			if d is Dictionary:
+				_sfx_index = d
+	return _sfx_index.get(id, {})
+
+
+## Play one phase of the effect's sound on its own (sound_info(effect_id).phases: "hit", "tail", "loop", ...), e.g. at
+## the game's real moment of contact. It follows speed and stop() like the full track; a "loop" phase loops until
+## stop(). Returns its player, or null (sound off, or no such phase).
+func play_sound(phase: String) -> AudioStreamPlayer2D:
+	if not sound or not is_inside_tree() or Engine.is_editor_hint():
+		return null
+	var st := _stream(phase)
+	if st == null:
+		push_warning("PfxEffect: %s has no sound phase \"%s\"" % [effect_id, phase])
+		return null
+	return _new_voice(st)
+
+
+## Whether any of its sound is still playing (a one-shot's sound may ring on up to 1.5 s past its end).
+func is_sounding() -> bool:
+	for p in _voices + _tails:
+		if is_instance_valid(p) and p.playing:
+			return true
+	return false
+
+
+func _start_sound() -> void:
+	for p in _voices.duplicate():
+		if loop or not is_instance_valid(p) or not p.playing:
+			_drop_voice(p)
+		else:
+			# a one-shot played again: the earlier play rings out under the new one, on its own
+			_voices.erase(p)
+			_tails.append(p)
+			p.stream_paused = false
+	while _tails.size() > MAX_TAILS:
+		_drop_voice(_tails[0])
+	if not sound or Engine.is_editor_hint() or not is_inside_tree() or _is_cued():
+		return
+	if not sound_info(effect_id).get("sound", false):
+		return
+	var st := _stream("full")
+	if st:
+		_new_voice(st)
+
+
+## Cued inside another effect (a move's parts): the outer effect plays the sound.
+func _is_cued() -> bool:
+	var n := get_parent()
+	while n:
+		if n is PfxEffect:
+			return true
+		n = n.get_parent()
+	return false
+
+
+func _stream(phase: String) -> AudioStream:
+	var path := SFX + effect_id + "/" + phase + ".ogg"
+	if effect_id == "" or not ResourceLoader.exists(path):
+		return null
+	var st: AudioStream = load(path)
+	if "loop" in st and (phase == "loop" or (phase == "full" and loop)):
+		st.loop = true   # the import says so too; a file imported without the flag still loops
+	return st
+
+
+func _new_voice(st: AudioStream) -> AudioStreamPlayer2D:
+	var p := AudioStreamPlayer2D.new()
+	p.name = "_Sound"
+	p.stream = st
+	p.bus = sound_bus
+	p.volume_db = sound_volume_db
+	if speed > 0.0:
+		p.pitch_scale = speed
+	p.finished.connect(_drop_voice.bind(p))
+	# internal: never saved with a scene, never among the effect's own nodes
+	(sound_parent if is_instance_valid(sound_parent) else self).add_child(p, true, Node.INTERNAL_MODE_BACK)
+	_voices.append(p)
+	p.play()
+	return p
+
+
+func _drop_voice(p: Variant) -> void:   # untyped: it may be freed already
+	_voices.erase(p)
+	_tails.erase(p)
+	if is_instance_valid(p):
+		p.stop()
+		p.queue_free()
+
+
+## Every voice off, now.
+func _silence() -> void:
+	for p in _voices + _tails:
+		_drop_voice(p)
+
+
+func _notification(what: int) -> void:
+	# voices hosted elsewhere (sound_parent) go with the effect
+	if what == NOTIFICATION_PREDELETE:
+		_silence()
 
 
 func _apply_seed() -> void:

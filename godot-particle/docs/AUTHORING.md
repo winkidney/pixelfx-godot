@@ -177,6 +177,16 @@ After adding a PNG, run `./pfxp import` (it locks; other shells wait).
 - **Angles**: a positive particle `angle` turns the quad counter-clockwise on screen (leans it left).
 - **Spawn rates**: the original rolls its chances on 120 Hz substeps; read per 30 fps frame they come out low.
 
+## Sound
+
+Every effect has a sound function in `port/sfx/cats/<category>.py`, or stays silent on purpose. `./pfxp sfx <id>
+--preview` renders it and exports it to `addons/pixelfx_particles/sfx/`. `PfxEffect` plays it with the effect.
+`./pfxp check` fails an effect whose sound isn't exported.
+
+- Making sound, and giving a new effect sound: [`port/sfx/README.md`](../port/sfx/README.md). The rules are the
+  skill's [`references/sound.md`](../../godot/skills/pixelfx-godot/references/sound.md).
+- Using it in a game, and what's in the pack: [`addons/pixelfx_particles/sfx/README.md`](../addons/pixelfx_particles/sfx/README.md).
+
 ## Examples
 
 The pilots show each technique: `build/fx/fire/torch.gd` (props, a flame from emitters, a measured glow),

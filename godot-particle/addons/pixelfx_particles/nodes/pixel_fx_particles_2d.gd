@@ -15,6 +15,9 @@ extends Node2D
 ## pixel_view (default on) renders the effect at its native resolution in a SubViewport and scales it up by whole
 ## pixels (`zoom`), so it stays crisp in a high-resolution game. Turn it off when your game already renders at
 ## pixel scale; the effect is then an ordinary child.
+##
+## `sound` (default on) plays the effect's 8-bit sound with it, panned from this node's position; play_sound("hit")
+## plays one phase on its own. See addons/pixelfx_particles/sfx/README.md.
 
 signal finished
 
@@ -61,7 +64,24 @@ const Palettes := preload("../core/palettes.gd")
 	set(v):
 		show_actor = v
 		_reload()
+## Play the effect's sound (addons/pixelfx_particles/sfx/): a loop's loops, stop() fades it, speed 0 pauses it.
+@export var sound := true:
+	set(v):
+		sound = v
+		if _fx:
+			_fx.sound = v
+@export var sound_bus := &"Master":
+	set(v):
+		sound_bus = v
+		if _fx:
+			_fx.sound_bus = v
+@export_range(-40.0, 12.0, 0.5, "suffix:dB") var sound_volume_db := 0.0:
+	set(v):
+		sound_volume_db = v
+		if _fx:
+			_fx.sound_volume_db = v
 @export var autoplay := true
+## Free this node once the effect has finished (and its sound has rung out).
 @export var free_when_done := false
 @export var pixel_view := true:
 	set(v):
@@ -107,6 +127,10 @@ func _reload() -> void:
 	_fx.take = take
 	_fx.light = light
 	_fx.speed = speed
+	_fx.sound = sound
+	_fx.sound_bus = sound_bus
+	_fx.sound_volume_db = sound_volume_db
+	_fx.sound_parent = self   # in pixel view the effect is in a SubViewport, where 2D audio has no listener
 	_fx.finished.connect(_on_finished)
 	if pixel_view:
 		_vp = SubViewport.new()
@@ -149,13 +173,23 @@ func play() -> void:
 		_fx.play()
 
 
-## Let it end: a loop fades out; then `finished`.
+## Let it end: a loop fades out (picture and sound); then `finished`.
 func stop() -> void:
 	if _fx:
 		_fx.stop()
 
 
+## Play one phase of the effect's sound on its own ("hit", "tail", ...; PfxEffect.sound_info(effect).phases).
+func play_sound(phase: String) -> AudioStreamPlayer2D:
+	return _fx.play_sound(phase) if _fx else null
+
+
 func _on_finished() -> void:
 	finished.emit()
 	if free_when_done and not Engine.is_editor_hint():
+		# a one-shot's sound may ring on past its last frame: let it end first
+		while is_instance_valid(_fx) and _fx.is_sounding() and _fx.is_done():
+			await get_tree().process_frame
+		if is_instance_valid(_fx) and not _fx.is_done():
+			return   # played again meanwhile
 		queue_free()

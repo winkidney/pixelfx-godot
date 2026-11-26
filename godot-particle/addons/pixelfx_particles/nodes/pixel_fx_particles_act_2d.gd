@@ -24,6 +24,12 @@ const ACTS := "res://addons/pixelfx_particles/actor/acts/"
 		shake = v
 		_reload()
 @export var loop_act := false
+## Play the effect's sound when the act reaches the effect (it pauses through the hit-stops).
+@export var sound := true:
+	set(v):
+		sound = v
+		if _act:
+			_act.sound = v
 @export var pixel_view := true:
 	set(v):
 		pixel_view = v
@@ -65,6 +71,8 @@ func _reload() -> void:
 	_act.autoplay = not Engine.is_editor_hint()
 	_act.show_target = show_target
 	_act.shake = shake
+	_act.sound = sound
+	_act.sound_parent = self   # in pixel view the act is in a SubViewport, where 2D audio has no listener
 	_act.hit.connect(func(i): hit.emit(i))
 	_act.finished.connect(_on_finished)
 	var pivot := Vector2(data.pivot[0], data.pivot[1])

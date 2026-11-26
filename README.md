@@ -14,7 +14,8 @@ random numbers. A Claude Code skill comes with it. It uses the library, and make
 would: draft, render, look, refine.
 
 [catalog](godot/docs/CATALOG.md) · [use it](#use-it) · [make your own](#make-your-own) · [the skill](#the-skill) ·
-[how the port works](#how-the-port-works) · [the original JS](https://github.com/patch-gg/pixelfx)
+[native particles](#a-second-port-native-particles) · [sound](#sound) · [how the port works](#how-the-port-works) ·
+[the original JS](https://github.com/patch-gg/pixelfx)
 
 ## use it
 
@@ -119,6 +120,23 @@ recolour, flip and react while they play. BAKED replays textures and is cheaper 
 frame on first show (about 2 s of extra work per effect over its first play) and keeps every frame in video memory.
 With 64 at once, 6 short impacts and UI effects run slower as particles than LIVE: each instance renders into its own
 pixel view.
+
+## sound
+
+The particle port comes with 8-bit sound for every effect, synthesized in code the way the effects are drawn, and
+timed to each effect's own beats. 179 effects have sound. 65 are silent on purpose: a torch burning, an idle pickup
+or a status glow makes no noise of its own.
+
+- Hits sound like what they hit: water, stone, wood, flesh, metal, ice, energy. Only explosions boom.
+- There is no music, and one-shots end clean.
+- In Godot, `PixelFxParticles2D` plays an effect's sound with it (`sound = true`). `play_sound("hit")` plays a single
+  phase.
+- `cd godot-particle && ./pfxp sfx` regenerates and exports all of it in one go. Add `--out DIR --format wav` to
+  export for another engine.
+
+Using the sound: [godot-particle/addons/pixelfx_particles/sfx/README.md](godot-particle/addons/pixelfx_particles/sfx/README.md).
+Making it: [godot-particle/port/sfx/README.md](godot-particle/port/sfx/README.md). The rules behind it are in the
+skill: [references/sound.md](godot/skills/pixelfx-godot/references/sound.md).
 
 ## how the port works
 

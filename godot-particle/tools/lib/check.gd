@@ -6,11 +6,13 @@
 #   a one-shot's emitters are done by its end; a loop's continuous emitters are preprocessed (no empty first frame)
 #   the colour layer has the dither material; a light-layer item is additive
 #   budget: 4000 particles at once
+#   sound: an entry in addons/pixelfx_particles/sfx/index.json, and with sound its full.ogg and every phase it lists
 extends RefCounted
 
 const Build := preload("res://addons/pixelfx_particles/core/build.gd")
 const EFFECT := preload("res://addons/pixelfx_particles/core/pfx_effect.gd")
 const BUDGET := 4000
+const SFX := "res://addons/pixelfx_particles/sfx/"
 
 
 func run(ids: PackedStringArray, flags: Dictionary) -> int:
@@ -88,6 +90,7 @@ func check(id: String) -> Dictionary:
 				warn.append("%s: particles live on to %.2f s, past the end (%.2f s)" % [nm, end, fx.duration])
 		elif not gp.one_shot and gp.emitting and gp.preprocess <= 0.0:
 			warn.append("%s: a loop's emitter with no preprocess starts empty" % nm)
+	_check_sound(id, fx, fail)
 	if total > BUDGET:
 		warn.append("%d particles at most, over the budget of %d" % [total, BUDGET])
 	for n in fx.find_children("*", "CanvasItem", true, false):
@@ -103,6 +106,23 @@ func check(id: String) -> Dictionary:
 				fail.append("%s: its process shader reads TIME (use a uniform the animation keys)" % fx.get_path_to(ci))
 	fx.free()
 	return {"fail": fail, "warn": warn}
+
+
+func _check_sound(id: String, fx: Node, fail: Array) -> void:
+	var e: Dictionary = EFFECT.sound_info(id)
+	if e.is_empty():
+		fail.append("no entry in %sindex.json (./pfxp sfx %s)" % [SFX, id])
+		return
+	if not e.sound:
+		return
+	if bool(e.loop) != fx.loop:
+		fail.append("sound index says loop %s, the effect %s" % [e.loop, fx.loop])
+	for ph in ["full"] + Array(e.phases):
+		var path := "%s%s/%s.ogg" % [SFX, id, ph]
+		if not FileAccess.file_exists(path):
+			fail.append("no %s (./pfxp sfx %s)" % [path, id])
+		elif not ResourceLoader.exists(path):
+			fail.append("%s isn't imported (./pfxp import)" % path)
 
 
 ## When an emitter is last switched on (0 if it's never keyed).

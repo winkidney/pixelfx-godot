@@ -25,6 +25,15 @@ const GHOST_LIFE := 0.24
 @export var shake := true
 ## Time scale (0 freezes it).
 @export var speed := 1.0
+## Play the effect's sound with it (it starts at the effect's t = 0 and pauses through each hit-stop).
+@export var sound := true:
+	set(v):
+		sound = v
+		if _fx:
+			_fx.sound = v
+
+## Where the effect's sound players go (see PfxEffect.sound_parent).
+var sound_parent: Node
 
 var data := {}
 var t := 0.0
@@ -68,6 +77,8 @@ func _load() -> void:
 		_fx.autoplay = false
 		_fx.show_actor = false
 		_fx.speed = 0.0
+		_fx.sound = sound
+		_fx.sound_parent = sound_parent
 		_fx.visible = false
 		_stage.add_child(_fx)
 	var f0: Dictionary = data.frames[0]

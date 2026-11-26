@@ -210,6 +210,31 @@ What to look for, and the usual fix:
 - Actor effects wrap `o.actor`, a 24 x 38 stock character's mask and pixels.
 - Generic motifs are fine. Never recreate a specific game's sprites, characters or logos.
 
+## Sound
+
+Before you give an effect sound, read [references/sound.md](references/sound.md). In short:
+- **Decide whether it makes a sound at all.** A steady thing that makes no noise of its own stays silent: torches,
+  idle pickups, status glows. Only its strong moments (catching fire, a status setting in) and global environment
+  (rain) get sound.
+- **Sound effects, never music.** Hits carry the sound; materials over magic.
+- **Keep it simple and end clean.** No vague low bed after the main sound.
+- **Follow the effect's own beats.** Use the phases start, loop, hit, body/tail and release, and let the hit-stop hold
+  the body.
+
+`godot-particle/port/sfx/` holds the synth and every effect's sound. `./pfxp sfx` regenerates and exports all of them
+(`--out DIR --format wav|ogg` for other engines). In Godot, the nodes play the effect's sound when `sound` is on, and
+`play_sound("hit")` plays one phase.
+
+Example: someone asks "give my frost nova a sound".
+1. Decide: the frost nova is something that happens, so it gets sound.
+2. Read its beats: it slams at 0.42 and freezes at 0.66.
+3. Pick materials: ice over stone.
+4. Write `frost_nova` in `cats/ice.py`.
+5. Run `./pfxp sfx ice/frost-nova --preview` and listen.
+
+Someone asks "give my torch a sound": the answer is no. A burning torch is a steady thing with no noise of its own.
+Offer a one-shot for the moment it catches fire instead.
+
 ## 4. Port from upstream, or port an upstream change
 
 The JS original sits in the same repo (`src/fx/<category>/<name>.js`), and each `.gd` names the JS blob it was ported
